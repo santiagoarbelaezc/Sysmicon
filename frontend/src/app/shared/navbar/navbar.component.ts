@@ -19,8 +19,8 @@ export class NavbarComponent {
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
-    const scrollOffset = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    this.isScrolled.set(scrollOffset > 50);
+    const currentScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    this.isScrolled.set(currentScroll > 30);
   }
 
   toggleMobileMenu(): void {

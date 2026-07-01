@@ -142,3 +142,72 @@
 .card-cta:hover svg {
   transform: translateX(4px);
 }
+
+/* ==========================================================================
+   LIGHT THEME OVERRIDE (When inside White Section like .services-section)
+   ========================================================================== */
+
+:host-context(.services-section) .service-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+:host-context(.services-section) .service-card:hover {
+  background: #FFFFFF;
+  border-color: var(--wood-accent);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.09);
+  transform: translateY(-8px);
+}
+
+:host-context(.services-section) .card-number {
+  color: rgba(0, 0, 0, 0.08);
+}
+
+:host-context(.services-section) .service-card:hover .card-number {
+  color: var(--wood-accent);
+}
+
+:host-context(.services-section) .card-title {
+  color: #0D0D0D;
+}
+
+:host-context(.services-section) .card-subtitle {
+  color: var(--wood-accent);
+}
+
+:host-context(.services-section) .card-desc {
+  color: #555555;
+}
+
+:host-context(.services-section) .features-list {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+:host-context(.services-section) .features-list li {
+  color: #4A4A4A;
+}
+
+:host-context(.services-section) .card-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+:host-context(.services-section) .card-cta {
+  color: #0D0D0D;
+}
+
+:host-context(.services-section) .card-cta:hover {
+  color: var(--wood-accent);
+}
+
+:host-context(.services-section) .icon-box {
+  background: rgba(139, 106, 78, 0.08);
+  color: var(--wood-accent);
+  border: 1px solid rgba(139, 106, 78, 0.2);
+}
+
+:host-context(.services-section) .service-card:hover .icon-box {
+  background: var(--wood-accent);
+  color: #FFFFFF;
+  border-color: var(--wood-accent);
+}

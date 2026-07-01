@@ -8,12 +8,12 @@
 
 :root {
   /* Color Palette */
-  --bg-dark: #0D0D0D;
-  --bg-dark-secondary: #141414;
-  --bg-dark-tertiary: #1C1C1C;
+  --bg-dark: #030303;
+  --bg-dark-secondary: #080808;
+  --bg-dark-tertiary: #0C0C0C;
   --bg-light: #FAFAFA;
   --bg-light-secondary: #F0EDE8;
-  --bg-card-dark: rgba(26, 26, 26, 0.7);
+  --bg-card-dark: rgba(5, 5, 5, 0.95);
   
   --text-primary: #FFFFFF;
   --text-secondary: #B3B3B3;
@@ -33,14 +33,14 @@
   --font-sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
   
   /* Shadows & Glassmorphism */
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.15);
-  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.7);
   --shadow-gold: 0 8px 25px rgba(139, 106, 78, 0.35);
   
-  --glass-bg: rgba(13, 13, 13, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-wood-border: rgba(139, 106, 78, 0.3);
+  --glass-bg: rgba(3, 3, 3, 0.95);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-wood-border: rgba(139, 106, 78, 0.35);
 
   /* Transitions */
   --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -223,10 +223,10 @@ h1, h2, h3, h4, .font-serif {
 }
 
 .glass-card {
-  background: rgba(26, 26, 26, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(5, 5, 5, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   transition: all var(--transition-smooth);
 }

@@ -5,14 +5,14 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  background: rgba(26, 26, 26, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(5, 5, 5, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all var(--transition-smooth);
 }
 
 .test-card:hover {
   transform: translateY(-6px);
-  background: rgba(26, 26, 26, 0.7);
+  background: rgba(8, 8, 8, 0.98);
   border-color: var(--glass-wood-border);
   box-shadow: var(--shadow-lg);
 }

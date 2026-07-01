@@ -42,7 +42,7 @@ export class HeroComponent implements OnInit, OnDestroy {
     this.stopCarousel();
     this.timerId = setInterval(() => {
       this.nextSlide();
-    }, 6000);
+    }, 3500);
   }
 
   stopCarousel(): void {

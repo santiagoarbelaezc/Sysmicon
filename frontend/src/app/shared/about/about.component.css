@@ -165,10 +165,12 @@
 }
 
 .pillar-box {
-  padding: 1.25rem;
-  background: rgba(255, 255, 255, 0.02);
+  padding: 1.5rem;
+  background: rgba(5, 5, 5, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-left: 3px solid var(--wood-accent);
   border-radius: 0 8px 8px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 .pillar-title {

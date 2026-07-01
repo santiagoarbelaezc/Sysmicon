@@ -5,8 +5,8 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding-top: 5rem;
-  padding-bottom: 6rem;
+  padding-top: 8.5rem;
+  padding-bottom: 4rem;
 }
 
 /* Background Carousel */
@@ -47,9 +47,9 @@
   height: 100%;
   background: linear-gradient(
     180deg,
-    rgba(13, 13, 13, 0.75) 0%,
-    rgba(13, 13, 13, 0.55) 50%,
-    rgba(13, 13, 13, 0.96) 100%
+    rgba(3, 3, 3, 0.82) 0%,
+    rgba(3, 3, 3, 0.65) 50%,
+    rgba(3, 3, 3, 0.98) 100%
   );
   z-index: 2;
 }
@@ -76,8 +76,8 @@
   text-align: right;
   display: flex;
   flex-direction: column;
-  background: rgba(13, 13, 13, 0.7);
-  backdrop-filter: blur(12px);
+  background: rgba(3, 3, 3, 0.95);
+  backdrop-filter: blur(16px);
   padding: 0.6rem 1.25rem;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -181,16 +181,16 @@
   font-size: clamp(3rem, 7vw, 5.5rem);
   font-weight: 700;
   line-height: 1.1;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
   letter-spacing: -0.03em;
 }
 
 .hero-subtitle {
   font-size: clamp(1.1rem, 2vw, 1.35rem);
   color: var(--text-secondary);
-  line-height: 1.7;
+  line-height: 1.6;
   max-width: 720px;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   font-weight: 400;
 }
 
@@ -198,8 +198,8 @@
 .hero-actions {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 4.5rem;
+  gap: 1.2rem;
+  margin-bottom: 2.2rem;
 }
 
 @media (max-width: 600px) {
@@ -269,6 +269,9 @@
   max-width: 900px;
   padding: 1.75rem 2.5rem;
   border-radius: 12px;
+  background: rgba(3, 3, 3, 0.96) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
 }
 
 @media (max-width: 768px) {

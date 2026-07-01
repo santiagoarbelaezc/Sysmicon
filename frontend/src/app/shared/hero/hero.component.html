@@ -1,10 +1,8 @@
 <section class="hero-section">
   <!-- Elegant Background Carousel -->
   <div class="hero-carousel">
-    <div *ngFor="let slide of slides; let i = index"
-         class="slide-bg"
-         [ngClass]="{'active': currentSlide() === i}"
-         [style.background-image]="'url(' + slide.image + ')'">
+    <div *ngFor="let slide of slides; let i = index" class="slide-bg" [ngClass]="{'active': currentSlide() === i}"
+      [style.background-image]="'url(' + slide.image + ')'">
     </div>
     <div class="hero-overlay"></div>
   </div>
@@ -16,35 +14,33 @@
       <span class="slide-title font-serif">{{ slides[currentSlide()].title }}</span>
     </div>
     <div class="carousel-indicators">
-      <button *ngFor="let slide of slides; let i = index"
-              (click)="setSlide(i)"
-              [ngClass]="{'active': currentSlide() === i}"
-              class="indicator-btn"
-              [attr.aria-label]="'Ir a ' + slide.title">
+      <button *ngFor="let slide of slides; let i = index" (click)="setSlide(i)"
+        [ngClass]="{'active': currentSlide() === i}" class="indicator-btn" [attr.aria-label]="'Ir a ' + slide.title">
         <span class="progress-bar"></span>
       </button>
     </div>
   </div>
 
   <div class="container hero-content">
-    <div class="hero-badge font-sans">
-      <span class="badge-dot"></span>
-      <span>{{ brand.motto }}</span>
-    </div>
 
     <h1 class="hero-title font-serif">
       Diseñamos <span class="text-gradient font-serif">Hogares</span>
     </h1>
 
     <p class="hero-subtitle">
-      {{ brand.subtagline }}. Creamos obras residenciales de alto nivel donde la arquitectura moderna, los materiales nobles y la habitabilidad se unen en perfecta armonía.
+      {{ brand.subtagline }}. Creamos obras residenciales de alto nivel donde la arquitectura moderna, los materiales
+      nobles y la habitabilidad se unen en perfecta armonía.
     </p>
 
     <div class="hero-actions">
       <!-- Primary CTA: Crea tu diseño -->
       <a routerLink="/crea-tu-diseno" class="btn-primary">
         <span>Crea tu diseño</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14" />
+          <path d="m12 5 7 7-7 7" />
+        </svg>
       </a>
 
       <!-- Secondary CTA: Conócenos -->

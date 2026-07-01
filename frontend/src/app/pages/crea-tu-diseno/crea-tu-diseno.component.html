@@ -1,0 +1,322 @@
+<div class="config-page section-padding">
+  <div class="container">
+    
+    <!-- Header -->
+    <div class="page-header text-center" *ngIf="!isSubmitted()">
+      <div class="section-tag font-sans">
+        <span class="tag-line"></span>
+        <span>Configurador Arquitectónico</span>
+        <span class="tag-line"></span>
+      </div>
+      <h1 class="title-xl font-serif">
+        Crea tu <span class="text-accent font-serif">Diseño</span>
+      </h1>
+      <p class="subtitle mx-auto">
+        Diseña paso a paso la residencia de tus sueños. Personaliza estilo, dimensiones y materiales para calcular tu inversión estimada.
+      </p>
+
+      <!-- Stepper Progress -->
+      <div class="stepper font-sans">
+        <div class="step-item" [ngClass]="{'active': currentStep() === 1, 'completed': currentStep() > 1}" (click)="setStep(1)">
+          <span class="step-num font-serif">1</span>
+          <span class="step-lbl">Estilo</span>
+        </div>
+        <div class="step-line" [ngClass]="{'filled': currentStep() > 1}"></div>
+        
+        <div class="step-item" [ngClass]="{'active': currentStep() === 2, 'completed': currentStep() > 2}" (click)="setStep(2)">
+          <span class="step-num font-serif">2</span>
+          <span class="step-lbl">Dimensiones</span>
+        </div>
+        <div class="step-line" [ngClass]="{'filled': currentStep() > 2}"></div>
+        
+        <div class="step-item" [ngClass]="{'active': currentStep() === 3, 'completed': currentStep() > 3}" (click)="setStep(3)">
+          <span class="step-num font-serif">3</span>
+          <span class="step-lbl">Acabados</span>
+        </div>
+        <div class="step-line" [ngClass]="{'filled': currentStep() > 3}"></div>
+        
+        <div class="step-item" [ngClass]="{'active': currentStep() === 4}">
+          <span class="step-num font-serif">4</span>
+          <span class="step-lbl">Propuesta</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Config Area -->
+    <div class="config-content" *ngIf="!isSubmitted()">
+      
+      <!-- PASO 1: Selección de Estilo -->
+      <div *ngIf="currentStep() === 1" class="step-panel animate-fade">
+        <h2 class="panel-title font-serif">Paso 1: Selecciona tu línea arquitectónica</h2>
+        <p class="panel-desc">Cada estilo define la volumetría, el lenguaje de fachadas y la relación con la luz natural.</p>
+
+        <div class="grid-2 style-grid">
+          <div *ngFor="let estilo of cotizador.estilos()"
+               (click)="onSelectEstilo(estilo)"
+               [ngClass]="{'selected': cotizador.estiloSeleccionado()?.id === estilo.id}"
+               class="style-card glass-card">
+            <div class="style-img-box">
+              <img [src]="estilo.imagen" [alt]="estilo.nombre" loading="lazy">
+              <div class="check-badge" *ngIf="cotizador.estiloSeleccionado()?.id === estilo.id">✓ Seleccionado</div>
+            </div>
+            <div class="style-info">
+              <h3 class="style-name font-serif">{{ estilo.nombre }}</h3>
+              <p class="style-txt">{{ estilo.descripcion }}</p>
+              <div class="style-meta font-sans">
+                <span>Valor base ref: <strong>${{ estilo.precioBaseM2 }} / m²</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASO 2: Dimensiones y Espacios -->
+      <div *ngIf="currentStep() === 2" class="step-panel animate-fade">
+        <h2 class="panel-title font-serif">Paso 2: Define el programa de áreas y dimensiones</h2>
+        <p class="panel-desc">Ajusta los metros cuadrados constructivos y las características espaciales del proyecto.</p>
+
+        <div class="space-config grid-2">
+          <!-- Area Slider & Counters -->
+          <div class="space-form glass-card">
+            <div class="form-group">
+              <label class="form-label font-serif">Área Constructiva Total: <span class="text-accent">{{ cotizador.espacioSeleccionado().areaM2 }} m²</span></label>
+              <input type="range" min="120" max="1000" step="10" 
+                     [value]="cotizador.espacioSeleccionado().areaM2" 
+                     (input)="cotizador.updateEspacio({areaM2: +$any($event.target).value})"
+                     class="range-slider">
+              <div class="range-labels font-sans">
+                <span>120 m² (Compacto de Lujo)</span>
+                <span>500 m² (Residencial)</span>
+                <span>1000+ m² (Mansión)</span>
+              </div>
+            </div>
+
+            <div class="grid-2 form-row">
+              <div class="form-group">
+                <label class="form-label font-serif">Habitaciones Principales</label>
+                <select [value]="cotizador.espacioSeleccionado().habitaciones"
+                        (change)="cotizador.updateEspacio({habitaciones: +$any($event.target).value})"
+                        class="select-input">
+                  <option [value]="2">2 Habitaciones (Master suite + Guest)</option>
+                  <option [value]="3">3 Habitaciones</option>
+                  <option [value]="4">4 Habitaciones (Familiar premium)</option>
+                  <option [value]="5">5+ Habitaciones (Gran formato)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label font-serif">Baños y Aseos</label>
+                <select [value]="cotizador.espacioSeleccionado().banos"
+                        (change)="cotizador.updateEspacio({banos: +$any($event.target).value})"
+                        class="select-input">
+                  <option [value]="2.5">2.5 Baños</option>
+                  <option [value]="3.5">3.5 Baños</option>
+                  <option [value]="4.5">4.5 Baños (Suite c/u)</option>
+                  <option [value]="6">6+ Baños</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exterior Checkboxes -->
+          <div class="outdoor-form glass-card">
+            <h3 class="sub-title font-serif">Zonas Complementarias & Exteriores</h3>
+            <p class="sub-desc">Selecciona los espacios de recreación y ocio al aire libre:</p>
+
+            <div class="options-list">
+              <label class="checkbox-option" [ngClass]="{'active': cotizador.espacioSeleccionado().incluyePiscina}">
+                <input type="checkbox" 
+                       [checked]="cotizador.espacioSeleccionado().incluyePiscina"
+                       (change)="cotizador.updateEspacio({incluyePiscina: $any($event.target).checked})">
+                <div class="option-txt">
+                  <span class="opt-title font-serif">🏊‍♂️ Piscina Infinita con Borde Finlandés</span>
+                  <span class="opt-desc font-sans">Sistema de climatización por bomba de calor e iluminación LED subacuática.</span>
+                </div>
+              </label>
+
+              <label class="checkbox-option" [ngClass]="{'active': cotizador.espacioSeleccionado().incluyeTerraza}">
+                <input type="checkbox" 
+                       [checked]="cotizador.espacioSeleccionado().incluyeTerraza"
+                       (change)="cotizador.updateEspacio({incluyeTerraza: $any($event.target).checked})">
+                <div class="option-txt">
+                  <span class="opt-title font-serif">🌅 Terraza Gourmet & Zona de BBQ Cubierta</span>
+                  <span class="opt-desc font-sans">Pérgola bioclimática en madera y aluminio con barra de asados de lujo.</span>
+                </div>
+              </label>
+
+              <label class="checkbox-option" [ngClass]="{'active': cotizador.espacioSeleccionado().incluyeJardin}">
+                <input type="checkbox" 
+                       [checked]="cotizador.espacioSeleccionado().incluyeJardin"
+                       (change)="cotizador.updateEspacio({incluyeJardin: $any($event.target).checked})">
+                <div class="option-txt">
+                  <span class="opt-title font-serif">🌳 Paisajismo Arquitectónico & Jardín Zen</span>
+                  <span class="opt-desc font-sans">Diseño de paisajismo con árboles nativos, iluminación escénica y riego automatizado.</span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASO 3: Materiales y Acabados -->
+      <div *ngIf="currentStep() === 3" class="step-panel animate-fade">
+        <h2 class="panel-title font-serif">Paso 3: Acabados, Materialidad y Tecnología</h2>
+        <p class="panel-desc">Selecciona las especificaciones constructivas que darán carácter y confort a tu vivienda.</p>
+
+        <div class="grid-3 materials-grid">
+          <div *ngFor="let mat of cotizador.materiales()"
+               (click)="onToggleAcabado(mat.id)"
+               [ngClass]="{'active': cotizador.isAcabadoSeleccionado(mat.id)}"
+               class="mat-card glass-card">
+            <div class="mat-top">
+              <span class="mat-cat">{{ mat.categoria }}</span>
+              <span class="mat-check">{{ cotizador.isAcabadoSeleccionado(mat.id) ? '✓ Incluido' : '+ Agregar' }}</span>
+            </div>
+            <h3 class="mat-name font-serif">{{ mat.nombre }}</h3>
+            <p class="mat-desc">{{ mat.descripcion }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASO 4: Resumen y Formulario -->
+      <div *ngIf="currentStep() === 4" class="step-panel animate-fade">
+        <h2 class="panel-title font-serif">Paso 4: Resumen de Inversión y Solicitud</h2>
+        <p class="panel-desc">Revisa el desglose técnico de tu configuración y envía tu propuesta al comité de proyectos.</p>
+
+        <div class="grid-2 summary-layout">
+          <!-- Summary Box -->
+          <div class="summary-box glass-panel">
+            <h3 class="summary-title font-serif">Especificaciones de tu Diseño</h3>
+            <div class="divider-wood"></div>
+
+            <div class="summary-item">
+              <span class="lbl">Estilo Arquitectónico:</span>
+              <span class="val font-serif text-accent">{{ cotizador.estiloSeleccionado()?.nombre }}</span>
+            </div>
+
+            <div class="summary-item">
+              <span class="lbl">Área Constructiva:</span>
+              <span class="val">{{ cotizador.espacioSeleccionado().areaM2 }} m²</span>
+            </div>
+
+            <div class="summary-item">
+              <span class="lbl">Habitaciones / Baños:</span>
+              <span class="val">{{ cotizador.espacioSeleccionado().habitaciones }} Hab / {{ cotizador.espacioSeleccionado().banos }} Baños</span>
+            </div>
+
+            <div class="summary-item">
+              <span class="lbl">Exteriores Incluidos:</span>
+              <span class="val">
+                {{ cotizador.espacioSeleccionado().incluyePiscina ? 'Piscina, ' : '' }}
+                {{ cotizador.espacioSeleccionado().incluyeTerraza ? 'Terraza, ' : '' }}
+                {{ cotizador.espacioSeleccionado().incluyeJardin ? 'Jardín' : '' }}
+              </span>
+            </div>
+
+            <div class="summary-acabados">
+              <span class="lbl">Acabados Premium Seleccionados ({{ cotizador.getObjetosAcabadosSeleccionados().length }}):</span>
+              <ul class="summary-mat-list">
+                <li *ngFor="let m of cotizador.getObjetosAcabadosSeleccionados()">▪ {{ m.nombre }}</li>
+              </ul>
+            </div>
+
+            <div class="divider-wood"></div>
+
+            <div class="total-box">
+              <span class="total-lbl">Presupuesto Estimado de Construcción:</span>
+              <span class="total-val font-serif">${{ cotizador.presupuestoEstimado() | number }} USD*</span>
+              <span class="total-note">*Estimado referencial llave en mano. No incluye lote ni costos de licencia o urbanismo.</span>
+            </div>
+          </div>
+
+          <!-- Client Form -->
+          <div class="client-form-box glass-card">
+            <h3 class="form-title font-serif">Formalizar Solicitud de Propuesta</h3>
+            <p class="form-subtitle">Un arquitecto senior de Sysmicon revisará tu configuración y se pondrá en contacto en menos de 24 horas.</p>
+
+            <form (submit)="onSubmitCotizacion($event)" class="proposal-form">
+              <div class="form-group">
+                <label class="form-label font-serif">Nombre Completo *</label>
+                <input type="text" [(ngModel)]="nombre" name="nombre" required placeholder="Ej: Carlos Alberto Rodríguez" class="form-input">
+              </div>
+
+              <div class="grid-2 form-row">
+                <div class="form-group">
+                  <label class="form-label font-serif">Correo Electrónico *</label>
+                  <input type="email" [(ngModel)]="email" name="email" required placeholder="carlos@correo.com" class="form-input">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label font-serif">Teléfono / WhatsApp *</label>
+                  <input type="tel" [(ngModel)]="telefono" name="telefono" required placeholder="+57 310 000 0000" class="form-input">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label font-serif">Ciudad / Ubicación del Proyecto *</label>
+                <input type="text" [(ngModel)]="ciudad" name="ciudad" required placeholder="Ej: Medellín, Llanogrande, Bogotá..." class="form-input">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label font-serif">Notas o Requerimientos Especiales (Opcional)</label>
+                <textarea [(ngModel)]="notasAdicionales" name="notas" rows="3" placeholder="Coméntanos si ya tienes lote propio o alguna preferencia específica de diseño..." class="form-input"></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary btn-full submit-btn">
+                <span>Solicitar Propuesta Arquitectónica</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Footer Buttons -->
+      <div class="config-footer">
+        <button *ngIf="currentStep() > 1" (click)="prevStep()" class="btn-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          <span>Anterior</span>
+        </button>
+
+        <div class="spacer"></div>
+
+        <button *ngIf="currentStep() < 4" (click)="nextStep()" class="btn-primary">
+          <span>Siguiente Paso</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- PANTALLA DE ÉXITO (Submitted) -->
+    <div *ngIf="isSubmitted() && solicitudResultado()" class="success-screen glass-panel animate-fade text-center">
+      <div class="success-icon">✨</div>
+      <h2 class="title-lg font-serif">¡Propuesta Solicitada con <span class="text-accent font-serif">Éxito</span>!</h2>
+      <div class="divider-wood mx-auto"></div>
+      
+      <p class="success-txt mx-auto">
+        Estimado/a <strong>{{ solicitudResultado()?.datosCliente?.nombre }}</strong>, hemos recibido la configuración de tu residencia 
+        <strong>"{{ solicitudResultado()?.estilo?.nombre }}"</strong> de <strong>{{ solicitudResultado()?.espacio?.areaM2 }} m²</strong>.
+      </p>
+
+      <div class="ref-card glass-card mx-auto">
+        <span class="ref-lbl font-sans">Código de Referencia del Proyecto:</span>
+        <span class="ref-code font-serif">SYS-{{ currentYear }}-{{ solicitudResultado()?.espacio?.areaM2 }}M</span>
+        <div class="ref-val">Presupuesto Referencial: <strong>${{ solicitudResultado()?.presupuestoEstimado | number }} USD</strong></div>
+      </div>
+
+      <p class="success-sub">
+        Hemos enviado el dossier técnico y la confirmación de la cita a <strong>{{ solicitudResultado()?.datosCliente?.email }}</strong>. Uno de nuestros arquitectos directores te contactará vía WhatsApp/Teléfono a la brevedad.
+      </p>
+
+      <div class="success-actions">
+        <button (click)="reiniciarConfigurador()" class="btn-secondary">
+          <span>Configurar Otro Diseño</span>
+        </button>
+        <a routerLink="/" class="btn-primary">
+          <span>Volver al Inicio</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>

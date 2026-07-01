@@ -1,0 +1,47 @@
+<div class="project-card">
+  <div class="img-container">
+    <img [src]="proyecto.imagenUrl" [alt]="proyecto.titulo" loading="lazy" class="project-img">
+    
+    <!-- Top Tags -->
+    <div class="project-tags font-sans">
+      <span class="tag-cat">{{ proyecto.categoria }}</span>
+      <span class="tag-year">{{ proyecto.anio }}</span>
+    </div>
+
+    <!-- Hover Overlay Content -->
+    <div class="project-overlay">
+      <div class="overlay-content">
+        <span class="project-loc font-sans">📍 {{ proyecto.ubicacion }}</span>
+        <h3 class="project-title font-serif">{{ proyecto.titulo }}</h3>
+        <p class="project-sub font-sans">{{ proyecto.subtitulo }}</p>
+        
+        <div class="project-meta font-sans">
+          <span>Área: <strong>{{ proyecto.area }} m²</strong></span>
+        </div>
+
+        <p class="project-desc font-sans">{{ proyecto.descripcion }}</p>
+
+        <!-- Features preview -->
+        <div class="project-features font-sans">
+          <span *ngFor="let f of proyecto.caracteristicas.slice(0, 2)" class="feat-pill">▪ {{ f }}</span>
+        </div>
+
+        <a routerLink="/contacto" [queryParams]="{proyecto: proyecto.titulo}" class="overlay-btn">
+          <span>Solicitar Proyecto Similar</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Label for simple view -->
+  <div class="project-footer">
+    <div>
+      <h4 class="footer-title font-serif">{{ proyecto.titulo }}</h4>
+      <span class="footer-loc font-sans">{{ proyecto.ubicacion }}</span>
+    </div>
+    <div class="footer-area font-serif">
+      {{ proyecto.area }} <small>m²</small>
+    </div>
+  </div>
+</div>

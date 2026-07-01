@@ -1,6 +1,10 @@
 /* ==========================================================================
-   SYSMICON - ARCHITECTURAL DESIGN SYSTEM & GLOBAL STYLES
+   SYSMICON - ARCHITECTURAL DESIGN SYSTEM & GLOBAL STYLES (TAILWIND CSS v3)
    ========================================================================== */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   /* Color Palette */

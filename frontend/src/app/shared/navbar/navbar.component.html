@@ -1,14 +1,14 @@
 <header class="navbar" [ngClass]="{'scrolled': isScrolled()}">
-  <div class="container navbar-container">
+  <div class="container flex items-center justify-between">
     <!-- Logo -->
-    <a routerLink="/" class="navbar-logo" (click)="closeMobileMenu()">
+    <a routerLink="/" class="navbar-logo flex items-center gap-3 z-[1001]" (click)="closeMobileMenu()">
       <span class="logo-mark font-serif">S</span>
       <span class="logo-text font-serif">{{ brandName }}</span>
     </a>
 
     <!-- Desktop Nav Links -->
     <nav class="desktop-nav">
-      <ul class="nav-list">
+      <ul class="nav-list flex items-center gap-10">
         <li *ngFor="let link of navLinks">
           <a [routerLink]="link.path" 
              routerLinkActive="active" 
@@ -23,14 +23,14 @@
 
     <!-- Desktop CTA Button -->
     <div class="desktop-cta">
-      <a routerLink="/crea-tu-diseno" class="nav-cta-btn">
+      <a routerLink="/crea-tu-diseno" class="nav-cta-btn inline-flex items-center gap-2">
         <span>Cotizar Proyecto</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </div>
 
     <!-- Mobile Hamburger Trigger -->
-    <button class="mobile-toggle" 
+    <button class="mobile-toggle flex flex-col justify-between w-8 h-[22px] z-[1001]" 
             (click)="toggleMobileMenu()" 
             [ngClass]="{'open': isMobileMenuOpen()}"
             aria-label="Abrir menú de navegación">

@@ -1,0 +1,110 @@
+<footer class="footer-section">
+  <div class="container">
+    <!-- Top CTA Banner -->
+    <div class="footer-cta-box glass-card">
+      <div class="cta-content">
+        <h3 class="cta-title font-serif">¿Listo para dar vida a la casa de tus sueños?</h3>
+        <p class="cta-subtitle">Inicia hoy el diseño personalizado de tu hogar con la asesoría de nuestros arquitectos senior.</p>
+      </div>
+      <div class="cta-action">
+        <a routerLink="/crea-tu-diseno" class="btn-primary">
+          <span>Configurar Proyecto</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Footer Grid -->
+    <div class="footer-grid">
+      <!-- Col 1: Brand & Bio -->
+      <div class="footer-col brand-col">
+        <a routerLink="/" class="footer-logo">
+          <span class="logo-mark font-serif">S</span>
+          <span class="logo-text font-serif">{{ brand.name }}</span>
+        </a>
+        <p class="footer-bio">{{ brand.description }}</p>
+        <div class="footer-socials">
+          <a [href]="contact.instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Sysmicon" class="social-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          </a>
+          <a [href]="contact.linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Sysmicon" class="social-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a [href]="contact.facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Sysmicon" class="social-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Col 2: Quick Links -->
+      <div class="footer-col links-col">
+        <h4 class="col-title font-serif">Navegación</h4>
+        <ul class="col-list">
+          <li *ngFor="let link of navLinks">
+            <a [routerLink]="link.path" class="footer-link">{{ link.label }}</a>
+          </li>
+          <li>
+            <a routerLink="/crea-tu-diseno" class="footer-link text-accent">Cotizador Interactivo</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Contact & Hours -->
+      <div class="footer-col contact-col">
+        <h4 class="col-title font-serif">Contacto Directo</h4>
+        <ul class="contact-list">
+          <li>
+            <span class="icon">📍</span>
+            <span>{{ contact.address }}</span>
+          </li>
+          <li>
+            <span class="icon">📞</span>
+            <a [href]="'tel:' + contact.phone">{{ contact.phone }}</a>
+          </li>
+          <li>
+            <span class="icon">✉️</span>
+            <a [href]="'mailto:' + contact.email">{{ contact.email }}</a>
+          </li>
+          <li>
+            <span class="icon">📸</span>
+            <a [href]="contact.instagram" target="_blank">{{ contact.instagramHandle }}</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Newsletter -->
+      <div class="footer-col news-col">
+        <h4 class="col-title font-serif">Journal Arquitectónico</h4>
+        <p class="news-desc">Recibe tendencias de diseño contemporáneo y avances de nuestros nuevos proyectos residenciales.</p>
+        
+        <form class="newsletter-form" (submit)="subscribeNewsletter($event)" *ngIf="!isSubscribed()">
+          <div class="input-group">
+            <input type="email" 
+                   [(ngModel)]="newsletterEmail" 
+                   name="email" 
+                   placeholder="Tu correo electrónico" 
+                   required 
+                   class="news-input">
+            <button type="submit" class="news-btn" aria-label="Suscribirse">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+        </form>
+
+        <div class="subscribe-success font-sans" *ngIf="isSubscribed()">
+          <span>✓ ¡Gracias por unirte a nuestra comunidad!</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <div class="copyright">
+        &copy; {{ currentYear }} {{ brand.name }} S.A.S. Todos los derechos reservados.
+      </div>
+      <div class="legal-links">
+        <a *ngFor="let leg of legalLinks" [routerLink]="leg.path">{{ leg.label }}</a>
+      </div>
+    </div>
+  </div>
+</footer>

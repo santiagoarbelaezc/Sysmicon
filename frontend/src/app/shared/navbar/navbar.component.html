@@ -1,5 +1,5 @@
 <header class="navbar" [ngClass]="{'scrolled': isScrolled()}">
-  <div class="container navbar-container flex items-center justify-between">
+  <div class="w-full max-w-[1800px] mx-auto px-6 md:px-12 navbar-container flex items-center justify-between">
     <!-- Logo -->
     <a routerLink="/" class="navbar-logo flex items-center gap-3 z-[1001]" (click)="closeMobileMenu()">
       <span class="logo-mark font-serif">S</span>
@@ -8,7 +8,7 @@
 
     <!-- Desktop Nav Links -->
     <nav class="desktop-nav">
-      <ul class="nav-list flex items-center gap-10">
+      <ul class="nav-list flex items-center gap-16">
         <li *ngFor="let link of navLinks">
           <a [routerLink]="link.path" 
              routerLinkActive="active" 
@@ -21,8 +21,22 @@
       </ul>
     </nav>
 
-    <!-- Desktop CTA Button -->
-    <div class="desktop-cta">
+    <!-- Desktop Right Actions -->
+    <div class="desktop-actions flex items-center gap-12">
+      <!-- Language Switcher -->
+      <div class="lang-switcher flex items-center gap-2 font-sans text-sm font-semibold">
+        <button (click)="setLang('ES')" [ngClass]="{'text-wood-light font-bold': currentLang() === 'ES', 'text-white/60 hover:text-white': currentLang() !== 'ES'}" class="transition-colors py-1 px-1.5 rounded">ES</button>
+        <span class="text-white/30">/</span>
+        <button (click)="setLang('EN')" [ngClass]="{'text-wood-light font-bold': currentLang() === 'EN', 'text-white/60 hover:text-white': currentLang() !== 'EN'}" class="transition-colors py-1 px-1.5 rounded">EN</button>
+      </div>
+
+      <!-- Auth Links -->
+      <div class="auth-links flex items-center gap-8 font-sans text-sm">
+        <a routerLink="/contacto" class="font-semibold text-white/90 hover:text-wood-light transition-colors">Ingresar</a>
+        <a routerLink="/contacto" class="px-4 py-2 rounded-md border border-white/20 hover:border-wood-light hover:bg-wood-subtle text-white hover:text-wood-light transition-all font-semibold">Registrarse</a>
+      </div>
+
+      <!-- Desktop CTA Button -->
       <a routerLink="/crea-tu-diseno" class="nav-cta-btn inline-flex items-center gap-2">
         <span>Cotizar Proyecto</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -56,7 +70,18 @@
       </ul>
 
       <div class="mobile-menu-footer">
-        <a routerLink="/crea-tu-diseno" (click)="closeMobileMenu()" class="mobile-cta-btn">
+        <!-- Mobile Auth & Lang -->
+        <div class="flex items-center justify-center gap-6 my-4 font-sans text-base">
+          <a routerLink="/contacto" (click)="closeMobileMenu()" class="text-white/90 hover:text-wood-light font-semibold">Ingresar</a>
+          <a routerLink="/contacto" (click)="closeMobileMenu()" class="px-4 py-1.5 rounded-md border border-white/20 text-white font-semibold">Registrarse</a>
+        </div>
+        <div class="flex items-center justify-center gap-3 my-2 font-sans text-sm font-semibold">
+          <button (click)="setLang('ES')" [ngClass]="{'text-wood-light font-bold': currentLang() === 'ES', 'text-white/60': currentLang() !== 'ES'}">ES</button>
+          <span class="text-white/30">/</span>
+          <button (click)="setLang('EN')" [ngClass]="{'text-wood-light font-bold': currentLang() === 'EN', 'text-white/60': currentLang() !== 'EN'}">EN</button>
+        </div>
+
+        <a routerLink="/crea-tu-diseno" (click)="closeMobileMenu()" class="mobile-cta-btn mt-3">
           Cotizar Proyecto en Línea
         </a>
         <div class="mobile-socials">

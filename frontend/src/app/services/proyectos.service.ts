@@ -102,7 +102,7 @@ export class ProyectosService {
       subtitulo: 'Volumetría Pura en Concreto y Vidrio',
       categoria: 'Residencial',
       descripcion: 'Una vivienda en voladizo que parece desafiar la gravedad, suspendida sobre una ladera con vistas panorámicas de 270 grados. El uso magistral del concreto arquitectónico pulido y madera de cedro le otorga un carácter majestuoso y sobrio.',
-      imagenUrl: 'images/hero.png',
+      imagenUrl: 'images/principal.jpg',
       area: 550,
       anio: 2024,
       ubicacion: 'Alto de las Palmas, Medellín',

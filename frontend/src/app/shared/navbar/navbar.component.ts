@@ -16,6 +16,11 @@ export class NavbarComponent {
 
   readonly isScrolled = signal<boolean>(false);
   readonly isMobileMenuOpen = signal<boolean>(false);
+  readonly currentLang = signal<'ES' | 'EN'>('ES');
+
+  setLang(lang: 'ES' | 'EN'): void {
+    this.currentLang.set(lang);
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {

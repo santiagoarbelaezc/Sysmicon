@@ -11,7 +11,7 @@ export class CotizadorService {
       id: 'minimalista',
       nombre: 'Minimalista Puro',
       descripcion: 'Volumetría limpia, líneas ortogonales, grandes claros en concreto blanco y ventanales sin marcos visibles.',
-      imagen: 'images/hero.png',
+      imagen: 'images/principal.jpg',
       precioBaseM2: 1450
     },
     {

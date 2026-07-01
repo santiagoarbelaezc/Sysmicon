@@ -54,7 +54,7 @@ module.exports = {
       },
       animation: {
         'zoom-slow': 'zoomSlow 20s infinite alternate ease-in-out',
-        'progress': 'slideProgress 6s linear infinite',
+        'progress': 'slideProgress 3.5s linear infinite',
         'scroll-down': 'scrollDown 2s infinite ease-in-out',
       }
     },

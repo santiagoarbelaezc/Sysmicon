@@ -14,6 +14,7 @@ import { EstiloArquitectonico, SolicitudCotizacion } from '../../models/cotizaci
 })
 export class CreaTuDisenoComponent {
   readonly cotizador = inject(CotizadorService);
+  readonly currentYear = new Date().getFullYear();
 
   readonly currentStep = signal<number>(1);
   readonly isSubmitted = signal<boolean>(false);

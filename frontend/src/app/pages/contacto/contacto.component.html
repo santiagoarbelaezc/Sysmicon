@@ -1,0 +1,185 @@
+<div class="contacto-page section-padding">
+  <div class="container">
+    
+    <!-- Hero Header -->
+    <div class="page-header text-center" *ngIf="!isSubmitted()">
+      <div class="section-tag font-sans">
+        <span class="tag-line"></span>
+        <span>Atención Exclusiva</span>
+        <span class="tag-line"></span>
+      </div>
+      <h1 class="title-xl font-serif">
+        Iniciar una <span class="text-accent font-serif">Conversación</span>
+      </h1>
+      <p class="subtitle mx-auto">
+        Estamos listos para materializar tu visión arquitectónica. Contáctanos por nuestro canal oficial o agenda una sesión de evaluación de tu proyecto.
+      </p>
+    </div>
+
+    <!-- Main Grid -->
+    <div class="contact-grid grid-2" *ngIf="!isSubmitted()">
+      
+      <!-- Contact Info & Socials -->
+      <div class="contact-info-panel">
+        <div class="info-box glass-card">
+          <h2 class="title-md font-serif">Nuestras Oficinas & Dirección</h2>
+          <div class="divider-wood"></div>
+          
+          <ul class="info-list">
+            <li>
+              <span class="icon">📍</span>
+              <div class="txt">
+                <strong class="font-serif">Oficina Principal Medellín</strong>
+                <span>{{ contact.address }}</span>
+              </div>
+            </li>
+
+            <li>
+              <span class="icon">📞</span>
+              <div class="txt">
+                <strong class="font-serif">Atención Telefónica / WhatsApp</strong>
+                <a [href]="'tel:' + contact.phone">{{ contact.phone }}</a>
+              </div>
+            </li>
+
+            <li>
+              <span class="icon">✉️</span>
+              <div class="txt">
+                <strong class="font-serif">Correo Electrónico Oficial</strong>
+                <a [href]="'mailto:' + contact.email">{{ contact.email }}</a>
+              </div>
+            </li>
+
+            <li>
+              <span class="icon">🕒</span>
+              <div class="txt">
+                <strong class="font-serif">Horario de Consultas</strong>
+                <span>{{ contact.hours }}</span>
+              </div>
+            </li>
+          </ul>
+
+          <div class="social-box">
+            <h3 class="social-title font-serif">Conéctate en Redes</h3>
+            <p class="social-sub">Descubre el detrás de cámaras de nuestras obras y maquetajes en tiempo real:</p>
+            <div class="social-links">
+              <a [href]="contact.instagram" target="_blank" rel="noopener noreferrer" class="social-btn instagram">
+                <span>📸 Instagram</span>
+                <strong>{{ contact.instagramHandle }}</strong>
+              </a>
+              <a [href]="contact.linkedin" target="_blank" rel="noopener noreferrer" class="social-btn">
+                <span>💼 LinkedIn</span>
+                <strong>Sysmicon</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulated Interactive Map Preview -->
+        <div class="map-preview glass-card">
+          <div class="map-overlay">
+            <span class="map-badge font-sans">📍 El Poblado / Llanogrande, Medellín</span>
+            <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="map-btn">Abrir en Google Maps →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form-panel glass-panel">
+        <h2 class="form-title font-serif">Formulario de Contacto Directo</h2>
+        <p class="form-desc">Completa los datos de tu proyecto. Te garantizamos absoluta confidencialidad y una respuesta formalizada en 24 horas hábiles.</p>
+        <div class="divider-wood"></div>
+
+        <form (submit)="onSubmitContacto($event)" class="main-form">
+          <div class="form-group">
+            <label class="form-label font-serif">Nombre Completo *</label>
+            <input type="text" [(ngModel)]="nombre" name="nombre" required placeholder="Ej: Arq. Fernando Morales / Sra. Camila Gómez" class="form-input">
+          </div>
+
+          <div class="grid-2 form-row">
+            <div class="form-group">
+              <label class="form-label font-serif">Correo Electrónico *</label>
+              <input type="email" [(ngModel)]="email" name="email" required placeholder="correo@empresa.com" class="form-input">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label font-serif">Teléfono de Contacto *</label>
+              <input type="tel" [(ngModel)]="telefono" name="telefono" required placeholder="+57 310 845 9210" class="form-input">
+            </div>
+          </div>
+
+          <div class="grid-2 form-row">
+            <div class="form-group">
+              <label class="form-label font-serif">Tipo de Servicio Solicitado</label>
+              <select [(ngModel)]="tipoServicio" name="servicio" class="select-input">
+                <option value="Diseño Arquitectónico">Diseño Arquitectónico</option>
+                <option value="Construcción Integral">Construcción Integral</option>
+                <option value="Remodelación Premium">Remodelación Premium</option>
+                <option value="Asesoría y Supervisión">Asesoría & Interventoría</option>
+                <option value="Otro">Consulta General / Otro</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label font-serif">Rango de Inversión Estimado</label>
+              <select [(ngModel)]="presupuestoAprox" name="presupuesto" class="select-input">
+                <option value="$100,000 - $250,000 USD">$100,000 – $250,000 USD</option>
+                <option value="$250,000 - $500,000 USD">$250,000 – $500,000 USD</option>
+                <option value="$500,000 - $1,000,000 USD">$500,000 – $1,000,000 USD</option>
+                <option value="Más de $1,000,000 USD">Más de $1,000,000 USD (Residencia High-End)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label font-serif">Ubicación / Municipio del Terreno o Propiedad</label>
+            <input type="text" [(ngModel)]="ubicacionProyecto" name="ubicacion" placeholder="Ej: Llanogrande, Alto de las Palmas, Chía, Cartagena..." class="form-input">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label font-serif">Mensaje o Detalles del Proyecto *</label>
+            <textarea [(ngModel)]="mensaje" name="mensaje" rows="4" required placeholder="Cuéntanos cuál es tu visión, qué características valoras más en tu hogar o qué dudas técnicas tienes..." class="form-input"></textarea>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" [(ngModel)]="aceptaPoliticas" name="politicas" required>
+              <span>Acepto la política de tratamiento de datos personales y confirmo que la información proporcionada es veraz. *</span>
+            </label>
+          </div>
+
+          <button type="submit" [disabled]="!nombre.trim() || !email.includes('@') || !telefono.trim() || !aceptaPoliticas" class="btn-primary btn-full submit-btn">
+            <span>Enviar Mensaje a Sysmicon</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- PANTALLA DE ÉXITO CONTACTO -->
+    <div *ngIf="isSubmitted()" class="success-screen glass-panel animate-fade text-center">
+      <div class="success-icon">📬</div>
+      <h2 class="title-lg font-serif">¡Mensaje Recibido en <span class="text-accent font-serif">Sysmicon</span>!</h2>
+      <div class="divider-wood mx-auto"></div>
+      
+      <p class="success-txt mx-auto">
+        Muchas gracias por comunicarte con nosotros, <strong>{{ nombre }}</strong>. Hemos registrado tu interés en 
+        <strong>"{{ tipoServicio }}"</strong>.
+      </p>
+
+      <p class="success-sub">
+        Nuestro equipo de dirección técnica revisará tu mensaje y se comunicará al teléfono <strong>{{ telefono }}</strong> o al correo <strong>{{ email }}</strong> en el transcurso de las próximas horas para coordinar nuestra primera sesión de trabajo.
+      </p>
+
+      <div class="success-actions">
+        <button (click)="resetForm()" class="btn-secondary">
+          <span>Enviar Otro Mensaje</span>
+        </button>
+        <a href="https://www.instagram.com/sysmicon/" target="_blank" class="btn-primary">
+          <span>Visitar Instagram &#64;sysmicon</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>

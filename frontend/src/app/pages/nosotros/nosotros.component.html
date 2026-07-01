@@ -1,0 +1,104 @@
+<div class="nosotros-page section-padding">
+  <div class="container">
+    
+    <!-- Hero Header -->
+    <div class="page-header text-center">
+      <div class="section-tag font-sans">
+        <span class="tag-line"></span>
+        <span>Identidad & Filosofía</span>
+        <span class="tag-line"></span>
+      </div>
+      <h1 class="title-xl font-serif">
+        Diseño, rigor y <span class="text-accent font-serif">autenticidad</span>
+      </h1>
+      <p class="subtitle mx-auto">
+        En Sysmicon no solo levantamos muros; articulamos el espacio, la luz y los materiales para crear el escenario de tu vida en familia.
+      </p>
+    </div>
+
+    <!-- Story Showcase Section -->
+    <div class="story-grid grid-2">
+      <div class="story-content">
+        <h2 class="title-md font-serif">Nuestra Historia: 15 Años de Tradición Arquitectónica</h2>
+        <div class="divider-wood"></div>
+        <p class="txt">
+          Sysmicon nació con una visión clara: elevar los estándares de la arquitectura residencial en nuestra región, combinando una sensibilidad de diseño internacional con el respeto por las técnicas constructivas locales y los materiales nobles de nuestro entorno.
+        </p>
+        <p class="txt">
+          A lo largo de más de una década, hemos consolidado una metodología de trabajo que elimina la incertidumbre presupuestal habitual de la construcción tradicional. Operamos con total transparencia, integrando arquitectura, ingeniería civil, diseño interior e interventoría bajo un mismo techo.
+        </p>
+
+        <div class="stats-mini grid-2">
+          <div class="stat-box glass-card">
+            <span class="val font-serif text-accent">100%</span>
+            <span class="lbl">Proyectos Entregados a Tiempo</span>
+          </div>
+          <div class="stat-box glass-card">
+            <span class="val font-serif text-accent">10 Años</span>
+            <span class="lbl">Garantía Estructural Directa</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-visual glass-card">
+        <img src="images/about-studio.png" alt="Estudio Sysmicon" loading="lazy">
+      </div>
+    </div>
+
+    <!-- Methodology Section -->
+    <section class="methodology-section section-padding">
+      <div class="section-header text-center">
+        <h2 class="title-lg font-serif">El Ciclo Constructivo <span class="text-accent font-serif">Sysmicon</span></h2>
+        <div class="divider-wood mx-auto"></div>
+        <p class="subtitle mx-auto">Nuestra metodología paso a paso para garantizar la excelencia desde la primera línea en el plano hasta el momento de habitar tu hogar.</p>
+      </div>
+
+      <div class="grid-4 method-grid">
+        <div *ngFor="let m of pilaresMetodologia" class="method-card glass-card">
+          <span class="method-step font-serif">{{ m.etapa }}</span>
+          <h3 class="method-title font-serif">{{ m.titulo }}</h3>
+          <div class="divider-wood"></div>
+          <p class="method-desc">{{ m.desc }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leadership Team -->
+    <section class="team-section section-padding">
+      <div class="section-header text-center">
+        <div class="section-tag font-sans">
+          <span class="tag-line"></span>
+          <span>Talento Senior</span>
+          <span class="tag-line"></span>
+        </div>
+        <h2 class="title-lg font-serif">Dirección <span class="text-accent font-serif">Arquitectónica</span></h2>
+        <div class="divider-wood mx-auto"></div>
+        <p class="subtitle mx-auto">Conoce a los profesionales senior que dirigen e impulsan cada uno de nuestros proyectos residenciales.</p>
+      </div>
+
+      <div class="grid-3 team-grid">
+        <div *ngFor="let m of equipo" class="team-card glass-card">
+          <div class="team-top">
+            <div class="team-initial font-serif">{{ m.nombre.charAt(5) }}</div>
+            <span class="team-spec font-sans">{{ m.especialidad }}</span>
+          </div>
+          <h3 class="team-name font-serif">{{ m.nombre }}</h3>
+          <span class="team-role font-sans">{{ m.cargo }}</span>
+          <div class="divider-wood"></div>
+          <p class="team-bio">{{ m.bio }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <div class="team-cta text-center glass-panel">
+      <h2 class="title-md font-serif">¿Quieres conversar directamente con nuestro equipo de dirección?</h2>
+      <p class="mx-auto subtitle" style="margin-bottom: 2rem;">Agenda una sesión de exploración arquitectónica y evaluemos el potencial de tu lote.</p>
+      <a routerLink="/contacto" class="btn-primary">
+        <span>Agendar Consulta con Dirección</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+
+  </div>
+</div>

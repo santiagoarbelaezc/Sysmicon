@@ -1,0 +1,48 @@
+<section class="hero-section">
+  <!-- Background Image with Overlay -->
+  <div class="hero-bg" style="background-image: url('images/hero.png');">
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="container hero-content">
+    <div class="hero-badge font-sans">
+      <span class="badge-dot"></span>
+      <span>{{ brand.motto }}</span>
+    </div>
+
+    <h1 class="hero-title font-serif">
+      Diseñamos <span class="text-gradient font-serif">Hogares</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      {{ brand.subtagline }}. Creamos obras residenciales de alto nivel donde la arquitectura moderna, los materiales nobles y la habitabilidad se unen en perfecta armonía.
+    </p>
+
+    <div class="hero-actions">
+      <!-- Primary CTA: Crea tu diseño -->
+      <a routerLink="/crea-tu-diseno" class="btn-primary">
+        <span>Crea tu diseño</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+
+      <!-- Secondary CTA: Conócenos -->
+      <button (click)="scrollToSection('nosotros-section')" class="btn-secondary">
+        <span>Conócenos</span>
+      </button>
+    </div>
+
+    <!-- Stats Bar below -->
+    <div class="hero-stats glass-panel">
+      <div class="stat-item" *ngFor="let stat of brand.stats">
+        <span class="stat-val font-serif text-accent">{{ stat.value }}</span>
+        <span class="stat-lbl">{{ stat.label }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Down indicator -->
+  <div class="scroll-indicator" (click)="scrollToSection('nosotros-section')">
+    <span class="scroll-txt">Explorar</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>

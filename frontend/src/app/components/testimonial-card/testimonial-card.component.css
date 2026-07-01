@@ -1,0 +1,71 @@
+.test-card {
+  position: relative;
+  padding: 3rem 2.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  background: rgba(26, 26, 26, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all var(--transition-smooth);
+}
+
+.test-card:hover {
+  transform: translateY(-6px);
+  background: rgba(26, 26, 26, 0.7);
+  border-color: var(--glass-wood-border);
+  box-shadow: var(--shadow-lg);
+}
+
+.quote-icon {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  font-size: 5rem;
+  line-height: 1;
+  color: rgba(139, 106, 78, 0.15);
+  font-family: var(--font-serif);
+  pointer-events: none;
+}
+
+.stars {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+  color: var(--wood-light);
+  font-size: 1.1rem;
+}
+
+.comment {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.client-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.client-name {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.client-role {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.client-project {
+  font-size: 0.85rem;
+  color: var(--wood-light);
+  font-weight: 500;
+  display: block;
+}

@@ -9,50 +9,38 @@ export class ServiciosService {
     {
       id: 'diseno-arquitectonico',
       titulo: 'Diseño Arquitectónico',
-      subtitulo: 'Concepción Espacial y Volumétrica',
-      descripcion: 'Concepción espacial de líneas limpias y funcionalidad pura. Realizamos estudio bioclimático, análisis del entorno y maquetaje 3D para una arquitectura residencial atemporal.',
+      subtitulo: 'Concepción Espacial',
+      descripcion: 'Estudio del terreno, luz natural y maquetaje 3D para residencias atemporales.',
       icono: 'architecture',
       destacado: true,
-      caracteristicas: [
-        'Anteproyecto conceptual y maquetaje 3D interactivo',
-        'Planos constructivos de rigor técnico y detalle premium'
-      ]
+      caracteristicas: []
     },
     {
       id: 'construccion-integral',
       titulo: 'Construcción Integral',
-      subtitulo: 'Ejecución de Alta Precisión',
-      descripcion: 'Ejecución de obra con estándares superiores de ingeniería y mano de obra cualificada. Control presupuestal riguroso, cronograma estricto y garantía estructural absoluta.',
+      subtitulo: 'Ejecución de Obra',
+      descripcion: 'Ingenería de precisión, control presupuestal riguroso y entrega llave en mano.',
       icono: 'construction',
       destacado: true,
-      caracteristicas: [
-        'Dirección residente y supervisión continua de ingeniería',
-        'Entrega llave en mano con bitácora de control digital'
-      ]
+      caracteristicas: []
     },
     {
       id: 'remodelacion-premium',
       titulo: 'Remodelación de Alto Nivel',
-      subtitulo: 'Renovación y Revitalización',
-      descripcion: 'Reinventamos residencias y apartamentos de lujo para adaptarlos al estilo contemporáneo. Optimizamos distribuciones e incorporamos tecnología y acabados de vanguardia.',
+      subtitulo: 'Renovación Premium',
+      descripcion: 'Transformación arquitectónica de residencias con tecnología y acabados de vanguardia.',
       icono: 'remodel',
       destacado: false,
-      caracteristicas: [
-        'Rediseño arquitectónico de zonas sociales y cocinas gourmet',
-        'Optimización térmica, acústica e integración domótica'
-      ]
+      caracteristicas: []
     },
     {
       id: 'asesoria-supervision',
       titulo: 'Asesoría & Interventoría',
-      subtitulo: 'Respaldo Técnico y Supervisión',
-      descripcion: 'Consultoría especializada y supervisión técnica independiente en proyectos de lujo. Aseguramos el cumplimiento exacto de planos, normas sismorresistentes y estética.',
+      subtitulo: 'Supervisión Técnica',
+      descripcion: 'Auditoría, control de calidad y respaldo técnico en obras de lujo.',
       icono: 'consulting',
       destacado: false,
-      caracteristicas: [
-        'Auditoría técnica de presupuestos, contratos y materiales',
-        'Informes quincenales de avance y control en sitio'
-      ]
+      caracteristicas: []
     }
   ]);
 

@@ -1,213 +1,227 @@
 .service-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 2.5rem 2rem;
+  padding: 2.5rem 2.2rem;
   height: 100%;
   position: relative;
-  overflow: hidden;
-  background: rgba(5, 5, 5, 0.94);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: visible;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-left: 3px solid rgba(139, 106, 78, 0.45);
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.03);
   transition: all var(--transition-smooth);
+  z-index: 2;
 }
 
-.service-card::before {
-  content: '';
+@media (min-width: 640px) {
+  .service-card {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 2.5rem;
+    padding: 2.8rem 2.5rem;
+  }
+}
+
+/* Subtle Architectural Plan Outlines (Like Sobre Nosotros!) */
+.arch-plan-box-top {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: var(--wood-accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--transition-smooth);
+  top: -10px;
+  right: -10px;
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--wood-accent);
+  border-radius: 6px;
+  opacity: 0.35;
+  pointer-events: none;
+  transition: all var(--transition-smooth);
+  z-index: -1;
+}
+
+.arch-plan-box-bottom {
+  position: absolute;
+  bottom: -8px;
+  left: -8px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  opacity: 0.5;
+  pointer-events: none;
+  transition: all var(--transition-smooth);
+  z-index: -1;
+}
+
+.arch-corner-line {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 16px;
+  height: 16px;
+  border-top: 1px solid rgba(139, 106, 78, 0.4);
+  border-right: 1px solid rgba(139, 106, 78, 0.4);
+  pointer-events: none;
+}
+
+/* Alternate card shape for architectural variety */
+.service-card.card-alt {
+  border-left: 1px solid rgba(0, 0, 0, 0.07);
+  border-top: 3px solid rgba(139, 106, 78, 0.45);
+  border-radius: 0 0 8px 8px;
 }
 
 .service-card:hover {
-  transform: translateY(-8px);
-  background: rgba(8, 8, 8, 0.98);
-  border-color: var(--glass-wood-border);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-6px);
+  background: #FFFFFF;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+  border-color: rgba(139, 106, 78, 0.3);
 }
 
-.service-card:hover::before {
-  transform: scaleX(1);
+.service-card:hover .arch-plan-box-top {
+  transform: translate(4px, -4px);
+  opacity: 0.6;
 }
 
-.card-header {
+.service-card:hover .arch-plan-box-bottom {
+  transform: translate(-4px, 4px);
+  border-color: var(--wood-accent);
+  opacity: 0.4;
+}
+
+/* Left Column: Number & Icon */
+.card-left-col {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 640px) {
+  .card-left-col {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-right: 2.2rem;
+    border-bottom: none;
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+    min-width: 90px;
+  }
+}
+
+.card-number {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.12);
+  line-height: 1;
+  transition: color var(--transition-fast);
+}
+
+.service-card:hover .card-number {
+  color: var(--wood-accent);
 }
 
 .icon-box {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 12px;
-  background: var(--wood-subtle);
-  color: var(--wood-light);
-  border: 1px solid var(--glass-wood-border);
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  background: #F8F8F8;
+  color: var(--wood-dark);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   transition: all var(--transition-smooth);
 }
 
 .service-card:hover .icon-box {
-  background: var(--wood-accent);
-  color: var(--text-primary);
-  transform: rotate(5deg) scale(1.08);
+  background: var(--wood-subtle);
+  color: var(--wood-accent);
+  border-color: rgba(139, 106, 78, 0.2);
+  transform: scale(1.05);
 }
 
-.card-number {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.15);
-  transition: color var(--transition-fast);
+/* Right Column: Content & Footer */
+.card-right-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
 }
 
-.service-card:hover .card-number {
+.card-subtitle {
+  font-size: 0.72rem;
   color: var(--wood-light);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: 0.35rem;
 }
 
 .card-title {
   font-size: 1.45rem;
-  color: var(--text-primary);
-  margin-bottom: 0.35rem;
+  color: #1A1A1A;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 0.85rem;
 }
 
-.card-subtitle {
-  font-size: 0.85rem;
-  color: var(--wood-light);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.arch-divider {
+  width: 35px;
+  height: 1.5px;
+  background: rgba(139, 106, 78, 0.5);
+  margin-bottom: 1.1rem;
+  transition: width var(--transition-smooth);
+}
+
+.service-card:hover .arch-divider {
+  width: 60px;
+  background: var(--wood-accent);
 }
 
 .card-desc {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 1.75rem;
-}
-
-.features-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 2.25rem;
-  border-top: 1px solid var(--glass-border);
-  padding-top: 1.5rem;
-}
-
-.features-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-.feat-bullet {
-  color: var(--wood-accent);
+  font-size: 0.98rem;
+  color: #555555;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  font-weight: 400;
 }
 
 .card-footer {
   margin-top: auto;
-  padding-top: 1.25rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .card-cta {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #333333;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   transition: all var(--transition-fast);
+}
+
+.card-cta:hover {
+  color: var(--wood-accent);
 }
 
 .card-cta svg {
   transition: transform var(--transition-fast);
-  color: var(--wood-light);
-}
-
-.card-cta:hover {
-  color: var(--wood-light);
 }
 
 .card-cta:hover svg {
-  transform: translateX(4px);
+  transform: translateX(5px);
 }
 
-/* ==========================================================================
-   LIGHT THEME OVERRIDE (When inside White Section like .services-section)
-   ========================================================================== */
-
+/* Ensure host override is clean and subtle */
 :host-context(.services-section) .service-card {
   background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-}
-
-:host-context(.services-section) .service-card:hover {
-  background: #FFFFFF;
-  border-color: var(--wood-accent);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.09);
-  transform: translateY(-8px);
-}
-
-:host-context(.services-section) .card-number {
-  color: rgba(0, 0, 0, 0.08);
-}
-
-:host-context(.services-section) .service-card:hover .card-number {
-  color: var(--wood-accent);
-}
-
-:host-context(.services-section) .card-title {
-  color: #0D0D0D;
-}
-
-:host-context(.services-section) .card-subtitle {
-  color: var(--wood-accent);
-}
-
-:host-context(.services-section) .card-desc {
-  color: #555555;
-}
-
-:host-context(.services-section) .features-list {
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-:host-context(.services-section) .features-list li {
-  color: #4A4A4A;
-}
-
-:host-context(.services-section) .card-footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-:host-context(.services-section) .card-cta {
-  color: #0D0D0D;
-}
-
-:host-context(.services-section) .card-cta:hover {
-  color: var(--wood-accent);
-}
-
-:host-context(.services-section) .icon-box {
-  background: rgba(139, 106, 78, 0.08);
-  color: var(--wood-accent);
-  border: 1px solid rgba(139, 106, 78, 0.2);
-}
-
-:host-context(.services-section) .service-card:hover .icon-box {
-  background: var(--wood-accent);
-  color: #FFFFFF;
-  border-color: var(--wood-accent);
 }

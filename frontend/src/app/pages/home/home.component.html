@@ -6,25 +6,22 @@
   <app-about></app-about>
 
   <!-- 3. Servicios Section -->
-  <section id="servicios-section" class="services-section section-padding bg-sys-light text-sys-dark border-y border-black/10">
-    <div class="container">
-      <div class="section-header text-center">
-        <div class="section-tag font-sans">
-          <span class="tag-line"></span>
+  <section id="servicios-section" class="services-section section-padding bg-white text-[#1A1A1A] border-y border-black/10 relative overflow-hidden">
+    <div class="w-full max-w-[1750px] mx-auto px-6 md:px-16 relative z-10">
+      <div class="section-header text-center mb-20">
+        <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-black/10 bg-[#F8F8F8] font-sans text-xs font-bold tracking-widest uppercase text-wood-dark mb-4">
+          <span class="w-2 h-2 rounded-full bg-wood-accent"></span>
           <span>Nuestros Servicios</span>
-          <span class="tag-line"></span>
+          <span class="w-2 h-2 rounded-full bg-wood-accent"></span>
         </div>
-        <h2 class="title-lg font-serif">
-          Soluciones arquitectónicas de <span class="text-accent font-serif">principio a fin</span>
+        <h2 class="title-lg font-serif text-4xl md:text-5xl font-bold tracking-tight text-[#111111]">
+          Soluciones arquitectónicas de <span class="text-wood-accent">principio a fin</span>
         </h2>
-        <div class="divider-wood"></div>
-        <p class="subtitle mx-auto">
-          Ofrecemos un respaldo integral en todas las etapas del ciclo constructivo, combinando creatividad arquitectónica con rigor de ingeniería.
-        </p>
+        <div class="w-20 h-[2px] bg-wood-accent mx-auto my-6"></div>
       </div>
 
-      <!-- Services Grid -->
-      <div class="grid-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8 services-grid">
+      <!-- Services Editorial 2x2 Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 mt-8 max-w-[1550px] mx-auto services-grid">
         <app-service-card *ngFor="let s of servicios; let i = index" [servicio]="s" [index]="i"></app-service-card>
       </div>
     </div>

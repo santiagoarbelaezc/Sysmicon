@@ -24,7 +24,7 @@
       </div>
 
       <!-- Services Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8 services-grid">
+      <div class="grid-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8 services-grid">
         <app-service-card *ngFor="let s of servicios; let i = index" [servicio]="s" [index]="i"></app-service-card>
       </div>
     </div>
@@ -80,7 +80,7 @@
       </div>
 
       <!-- Projects Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 portfolio-grid">
+      <div class="grid-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 portfolio-grid">
         <app-project-card *ngFor="let p of proyectosService.proyectosFiltrados()" [proyecto]="p"></app-project-card>
       </div>
     </div>
@@ -105,7 +105,7 @@
       </div>
 
       <!-- Testimonials Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 testimonials-grid">
+      <div class="grid-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 testimonials-grid">
         <app-testimonial-card *ngFor="let t of testimonios" [testimonio]="t"></app-testimonial-card>
       </div>
     </div>

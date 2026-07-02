@@ -1,14 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AdminService } from '../../../../services/admin.service';
+import { AdminService, ReporteAdmin } from '../../../../services/admin.service';
 
 @Component({
   selector: 'app-dash-reportes',
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <div class="space-y-6 animate-fade font-sans">
+    <div class="space-y-6 animate-fade font-sans print:hidden">
       
       <!-- Encabezado de Sección -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
@@ -22,9 +22,11 @@ import { AdminService } from '../../../../services/admin.service';
       <div *ngIf="alertaDescarga()" class="p-4 rounded-xl bg-emerald-950/60 border border-emerald-800/60 text-emerald-300 text-xs flex items-center justify-between animate-fade">
         <div class="flex items-center gap-2 font-bold">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>¡Reporte "{{ alertaDescarga() }}" generado y descargado exitosamente!</span>
+          <span>¡Reporte "{{ alertaDescarga() }}" generado exitosamente!</span>
         </div>
-        <button (click)="alertaDescarga.set('')" class="text-gray-400 hover:text-white font-bold">✕</button>
+        <button (click)="alertaDescarga.set('')" class="text-gray-400 hover:text-white font-bold p-1 rounded hover:bg-white/5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
       </div>
 
       <!-- Grid Generador vs Historial -->
@@ -32,20 +34,23 @@ import { AdminService } from '../../../../services/admin.service';
         
         <!-- Generador Nuevo Reporte (Col 1-5) -->
         <div class="lg:col-span-5 bg-[#111111] border border-white/10 rounded-2xl p-6 shadow-xl space-y-5">
-          <h3 class="font-serif text-lg font-bold text-white pb-2 border-b border-white/10">Generar Nuevo Informe Ejecutivo</h3>
+          <div class="flex items-center gap-2.5 pb-2 border-b border-white/10">
+            <svg class="w-5 h-5 text-wood-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <h3 class="font-serif text-lg font-bold text-white">Generar Nuevo Informe Ejecutivo</h3>
+          </div>
           <p class="text-xs text-gray-400">Configura los parámetros del informe para exportación en formatos oficiales.</p>
 
           <form (ngSubmit)="crearReporte()" class="space-y-4 text-xs font-sans">
             <div>
               <label class="block text-gray-400 font-bold uppercase tracking-wider text-[10px] mb-1.5">Título del Documento *</label>
               <input type="text" [(ngModel)]="formTitulo" name="titulo" required placeholder="ej. Balance Cotizaciones Q3 2026"
-                     class="w-full px-3.5 py-2.5 rounded-xl bg-[#181818] border border-white/10 text-white focus:border-wood-accent focus:outline-none">
+                     class="w-full px-3.5 py-2.5 rounded-xl bg-[#181818] border border-white/10 text-white focus:border-wood-accent focus:outline-none font-bold">
             </div>
 
             <div>
               <label class="block text-gray-400 font-bold uppercase tracking-wider text-[10px] mb-1.5">Categoría / Tipo de Informe *</label>
               <select [(ngModel)]="formTipo" name="tipo"
-                      class="w-full px-3.5 py-2.5 rounded-xl bg-[#181818] border border-white/10 text-white focus:border-wood-accent focus:outline-none">
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-[#181818] border border-white/10 text-white focus:border-wood-accent focus:outline-none font-bold">
                 <option value="financiero">Financiero & Valor Cotizado</option>
                 <option value="operativo">Operativo & Gestión de Proyectos</option>
                 <option value="cad_studio">Rendimiento Studio CAD 2D</option>
@@ -56,26 +61,30 @@ import { AdminService } from '../../../../services/admin.service';
               <label class="block text-gray-400 font-bold uppercase tracking-wider text-[10px] mb-1.5">Formato de Exportación *</label>
               <div class="grid grid-cols-3 gap-3">
                 <button type="button" (click)="formFormato = 'PDF'"
-                        [ngClass]="formFormato === 'PDF' ? 'bg-wood-accent text-[#111] font-bold border-wood-accent' : 'bg-[#181818] text-gray-400 border-white/10'"
-                        class="p-2.5 rounded-xl border text-center font-bold transition-all">
-                  📄 PDF
+                        [ngClass]="formFormato === 'PDF' ? 'bg-wood-accent text-[#111] font-extrabold border-wood-accent' : 'bg-[#181818] text-gray-400 border-white/10'"
+                        class="p-2.5 rounded-xl border text-center font-bold transition-all inline-flex items-center justify-center gap-1.5 cursor-pointer">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  <span>PDF</span>
                 </button>
                 <button type="button" (click)="formFormato = 'EXCEL'"
-                        [ngClass]="formFormato === 'EXCEL' ? 'bg-wood-accent text-[#111] font-bold border-wood-accent' : 'bg-[#181818] text-gray-400 border-white/10'"
-                        class="p-2.5 rounded-xl border text-center font-bold transition-all">
-                  📊 EXCEL
+                        [ngClass]="formFormato === 'EXCEL' ? 'bg-wood-accent text-[#111] font-extrabold border-wood-accent' : 'bg-[#181818] text-gray-400 border-white/10'"
+                        class="p-2.5 rounded-xl border text-center font-bold transition-all inline-flex items-center justify-center gap-1.5 cursor-pointer">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+                  <span>EXCEL</span>
                 </button>
                 <button type="button" (click)="formFormato = 'CSV'"
-                        [ngClass]="formFormato === 'CSV' ? 'bg-wood-accent text-[#111] font-bold border-wood-accent' : 'bg-[#181818] text-gray-400 border-white/10'"
-                        class="p-2.5 rounded-xl border text-center font-bold transition-all">
-                  📑 CSV
+                        [ngClass]="formFormato === 'CSV' ? 'bg-wood-accent text-[#111] font-extrabold border-wood-accent' : 'bg-[#181818] text-gray-400 border-white/10'"
+                        class="p-2.5 rounded-xl border text-center font-bold transition-all inline-flex items-center justify-center gap-1.5 cursor-pointer">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                  <span>CSV</span>
                 </button>
               </div>
             </div>
 
             <button type="submit" 
-                    class="w-full py-3 rounded-xl bg-wood-accent hover:bg-wood-light text-[#111] font-extrabold text-xs transition-all shadow-lg scale-100 hover:scale-[1.02] cursor-pointer mt-4">
-              ⚡ Generar y Descargar Reporte
+                    class="w-full py-3 rounded-xl bg-wood-accent hover:bg-wood-light text-[#111] font-extrabold text-xs transition-all shadow-lg scale-100 hover:scale-[1.02] cursor-pointer mt-4 inline-flex items-center justify-center gap-2">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Generar y Guardar Reporte</span>
             </button>
           </form>
         </div>
@@ -83,27 +92,36 @@ import { AdminService } from '../../../../services/admin.service';
         <!-- Historial de Reportes (Col 6-12) -->
         <div class="lg:col-span-7 bg-[#111111] border border-white/10 rounded-2xl p-6 shadow-xl space-y-4">
           <div class="flex items-center justify-between pb-2 border-b border-white/10">
-            <h3 class="font-serif text-lg font-bold text-white">Archivos Generados en Nube</h3>
-            <span class="text-xs text-gray-400">{{ adminService.reportes().length }} documentos disponibles</span>
+            <h3 class="font-serif text-lg font-bold text-white flex items-center gap-2.5">
+              <svg class="w-5 h-5 text-wood-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+              <span>Archivos Generados en Nube</span>
+            </h3>
+            <span class="text-xs text-gray-400 font-bold bg-white/5 px-2.5 py-1 rounded-lg border border-white/5">{{ adminService.reportes().length }} documentos disponibles</span>
           </div>
 
           <div class="space-y-3 pt-1">
-            <div *ngFor="let rep of adminService.reportes()" class="p-4 rounded-xl bg-[#161616] border border-white/5 flex items-center justify-between gap-4 hover:border-white/20 transition-all">
+            <div *ngFor="let rep of adminService.reportes()" class="p-4 rounded-xl bg-[#161616] border border-white/5 flex items-center justify-between gap-4 hover:border-white/20 transition-all group">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-[#0A0D14] border border-white/10 flex items-center justify-center font-serif font-extrabold text-wood-light text-sm shrink-0">
-                  {{ rep.formato }}
+                <div class="w-12 h-12 rounded-xl bg-[#0A0D14] border border-white/10 flex flex-col items-center justify-center font-mono font-bold text-[10px] text-wood-light shrink-0">
+                  <svg class="w-4 h-4 mb-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  <span>{{ rep.formato }}</span>
                 </div>
                 <div>
-                  <span class="font-bold text-white text-xs block">{{ rep.titulo }}</span>
+                  <span class="font-bold text-white text-xs block group-hover:text-wood-light transition-colors">{{ rep.titulo }}</span>
                   <span class="text-[11px] text-gray-400 block mt-0.5">{{ rep.periodo }} ● Generado el {{ rep.fechaGeneracion }}</span>
                 </div>
               </div>
 
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="text-[11px] text-gray-500 font-bold bg-black/40 px-2 py-1 rounded">{{ rep.tamano }}</span>
+              <div class="flex items-center gap-2.5 shrink-0">
+                <span class="text-[10px] text-gray-400 font-bold bg-black/40 px-2 py-1 rounded border border-white/5">{{ rep.tamano }}</span>
+                <button (click)="abrirVistaPreviaImprimible(rep)" title="Imprimir Reporte Oficial"
+                        class="p-2 rounded-lg bg-white/5 hover:bg-wood-accent hover:text-[#111] text-gray-300 font-bold transition-all cursor-pointer inline-flex items-center justify-center">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                </button>
                 <button (click)="descargarReporte(rep.titulo)" title="Volver a Descargar" 
-                        class="px-3 py-1.5 rounded-lg bg-wood-accent/15 hover:bg-wood-accent text-wood-light hover:text-[#111] font-bold text-[11px] transition-all cursor-pointer flex items-center gap-1">
-                  ⬇️ Descargar
+                        class="px-3 py-2 rounded-lg bg-wood-accent/15 hover:bg-wood-accent text-wood-light hover:text-[#111] font-bold text-[11px] transition-all cursor-pointer flex items-center gap-1.5 shadow">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <span>Descargar</span>
                 </button>
               </div>
             </div>
@@ -113,12 +131,225 @@ import { AdminService } from '../../../../services/admin.service';
       </div>
 
     </div>
+
+    <!-- MODAL DE VISTA PREVIA IMPRIMIBLE -->
+    <div *ngIf="modalImpresionAbierto() && reporteSeleccionado()" class="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 animate-fade print:p-0 print:bg-white print:relative print:z-0">
+      <div class="bg-[#12141C] border border-white/15 rounded-2xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto scrollbar-thin print:border-none print:shadow-none print:bg-white print:text-black print:max-h-none print:overflow-visible">
+        
+        <!-- Header del Modal (Oculto en Impresión) -->
+        <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-6 print:hidden">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-xs text-gray-400 font-bold uppercase tracking-widest">Documento Listo Para Impresión</span>
+          </div>
+          <button (click)="cerrarVistaPreviaImprimible()" class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-white/5 font-bold transition-colors">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+
+        <!-- DOCUMENTO OFICIAL A IMPRIMIR (Con estilo corporativo de lujo) -->
+        <div class="bg-white text-black p-8 rounded-xl font-serif border border-gray-200 shadow-lg print:border-none print:shadow-none print:p-0">
+          
+          <!-- Encabezado Corporativo -->
+          <div class="flex justify-between items-start border-b-2 border-gray-900 pb-5 mb-6">
+            <div>
+              <h1 class="text-2xl font-black tracking-tight text-gray-900 font-serif">SYSMICON</h1>
+              <p class="text-[10px] text-gray-600 font-sans tracking-widest uppercase mt-0.5">Studio CAD & Intelligent Residential Simulation</p>
+              <p class="text-[9px] text-gray-500 font-sans mt-2">Llanogrande, Antioquia, Colombia</p>
+            </div>
+            <div class="text-right text-xs font-sans">
+              <span class="inline-block px-2.5 py-1 bg-gray-100 border border-gray-300 rounded font-bold text-gray-800 uppercase tracking-widest text-[9px]">
+                INFORME OFICIAL {{ reporteSeleccionado()?.formato }}
+              </span>
+              <p class="text-[10px] text-gray-600 mt-2.5"><strong>Fecha:</strong> {{ reporteSeleccionado()?.fechaGeneracion }}</p>
+              <p class="text-[10px] text-gray-600"><strong>Periodo:</strong> {{ reporteSeleccionado()?.periodo }}</p>
+            </div>
+          </div>
+
+          <!-- Título del Reporte -->
+          <div class="mb-6">
+            <span class="text-[10px] font-sans font-bold uppercase tracking-widest text-wood-light bg-gray-100 px-2 py-0.5 rounded">
+              {{ getNombreTipoReporte(reporteSeleccionado()?.tipo) }}
+            </span>
+            <h2 class="text-xl font-bold text-gray-900 mt-2">{{ reporteSeleccionado()?.titulo }}</h2>
+            <p class="text-xs text-gray-600 mt-1 italic">Consolidación de métricas comerciales calculadas y auditadas en la base de datos de Sysmicon.</p>
+          </div>
+
+          <!-- Contenido y Datos del Reporte según el tipo -->
+          <div class="space-y-6 font-sans">
+            
+            <!-- Reporte Financiero -->
+            <div *ngIf="reporteSeleccionado()?.tipo === 'financiero'" class="space-y-4">
+              <h3 class="text-xs font-bold text-gray-800 border-b border-gray-300 pb-1.5 uppercase tracking-wider">1. KPIs Financieros Globales</h3>
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="bg-gray-100 border-b border-gray-300 text-gray-700 font-bold">
+                    <th class="py-2 px-3">Métrica Financiera</th>
+                    <th class="py-2 px-3 text-right">Valor Registrado</th>
+                    <th class="py-2 px-3 text-right">Crecimiento H1</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 text-gray-800">
+                  <tr>
+                    <td class="py-2 px-3 font-medium">Volumen Total Cotizado (Pipeline)</td>
+                    <td class="py-2 px-3 text-right font-bold text-gray-900">$4,250,000 USD</td>
+                    <td class="py-2 px-3 text-right text-emerald-600">+18.4%</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 px-3 font-medium">Ticket Promedio por Residencia</td>
+                    <td class="py-2 px-3 text-right font-bold text-gray-900">$320,000 USD</td>
+                    <td class="py-2 px-3 text-right text-emerald-600">+12.1%</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 px-3 font-medium">Cotizaciones Formales Generadas</td>
+                    <td class="py-2 px-3 text-right font-bold text-gray-900">184 documentos</td>
+                    <td class="py-2 px-3 text-right text-emerald-600">+8.5%</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <h3 class="text-xs font-bold text-gray-800 border-b border-gray-300 pb-1.5 uppercase tracking-wider mt-4">2. Distribución de Inversión por Portafolio</h3>
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="bg-gray-100 border-b border-gray-300 text-gray-700 font-bold">
+                    <th class="py-2 px-3">Rango de Presupuesto</th>
+                    <th class="py-2 px-3 text-right">Porcentaje del Portafolio</th>
+                    <th class="py-2 px-3 text-right">Estado de Segmento</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 text-gray-800">
+                  <tr>
+                    <td class="py-2 px-3">$100k - $250k USD</td>
+                    <td class="py-2 px-3 text-right font-bold">35%</td>
+                    <td class="py-2 px-3 text-right text-gray-600">Estable</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 px-3">$250k - $500k USD</td>
+                    <td class="py-2 px-3 text-right font-bold">45%</td>
+                    <td class="py-2 px-3 text-right text-gray-600">Alta Demanda</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 px-3">Más de $500k USD (Luxury)</td>
+                    <td class="py-2 px-3 text-right font-bold">20%</td>
+                    <td class="py-2 px-3 text-right text-emerald-600">Crecimiento Rápido</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Reporte Operativo -->
+            <div *ngIf="reporteSeleccionado()?.tipo === 'operativo'" class="space-y-4">
+              <h3 class="text-xs font-bold text-gray-800 border-b border-gray-300 pb-1.5 uppercase tracking-wider">1. Actividad de Usuarios & Leads</h3>
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="bg-gray-100 border-b border-gray-300 text-gray-700 font-bold">
+                    <th class="py-2 px-3">Métrica Operativa</th>
+                    <th class="py-2 px-3 text-right">Total Acumulado</th>
+                    <th class="py-2 px-3 text-right">Estado Operativo</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 text-gray-800">
+                  <tr>
+                    <td class="py-2 px-3 font-medium">Usuarios Registrados en Plataforma</td>
+                    <td class="py-2 px-3 text-right font-bold text-gray-900">1,280 usuarios</td>
+                    <td class="py-2 px-3 text-right text-emerald-600">Activo / Creciente</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 px-3 font-medium">Tiempo de Decisión Promedio</td>
+                    <td class="py-2 px-3 text-right font-bold text-gray-900">18 días</td>
+                    <td class="py-2 px-3 text-right text-emerald-600">Optimizando (-4 días)</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 px-3 font-medium">Satisfacción de Propietarios</td>
+                    <td class="py-2 px-3 text-right font-bold text-gray-900">99.4%</td>
+                    <td class="py-2 px-3 text-right text-emerald-600">Excelente (5.0 / 5.0)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Reporte CAD Studio -->
+            <div *ngIf="reporteSeleccionado()?.tipo === 'cad_studio'" class="space-y-4">
+              <h3 class="text-xs font-bold text-gray-800 border-b border-gray-300 pb-1.5 uppercase tracking-wider">1. Métricas de Modelado en Nube</h3>
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="bg-gray-100 border-b border-gray-300 text-gray-700 font-bold">
+                    <th class="py-2 px-3">Categoría de Bloque CAD</th>
+                    <th class="py-2 px-3 text-right">Porcentaje de Uso</th>
+                    <th class="py-2 px-3 text-right">Total Diseños Guardados</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 text-gray-800">
+                  <tr>
+                    <td class="py-2 px-3 font-medium">Alcobas Suite</td>
+                    <td class="py-2 px-3 text-right font-bold text-gray-900">32%</td>
+                    <td class="py-2 px-3 text-right text-gray-600">132 diseños</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 px-3 font-medium">Cocinas Gourmet</td>
+                    <td class="py-2 px-3 text-right font-bold text-gray-900">24%</td>
+                    <td class="py-2 px-3 text-right text-gray-600">99 diseños</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 px-3 font-medium">Piscinas & Solárium</td>
+                    <td class="py-2 px-3 text-right font-bold text-gray-900">20%</td>
+                    <td class="py-2 px-3 text-right text-gray-600">82 diseños</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 px-3 font-medium">Zonas Sociales Altura</td>
+                    <td class="py-2 px-3 text-right font-bold text-gray-900">15%</td>
+                    <td class="py-2 px-3 text-right text-gray-600">62 diseños</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Notas del Auditor / Pie del Reporte -->
+            <div class="mt-8 pt-6 border-t border-gray-200 text-[10px] text-gray-600 space-y-2">
+              <p><strong>Nota legal y confidencialidad:</strong> Este reporte contiene información analítica comercial de la plataforma Sysmicon y es estrictamente confidencial. La visualización e impresión de este documento se rigen bajo los permisos administrativos del panel de control de Sysmicon.</p>
+              <p>Generado a través del módulo de Inteligencia Financiera. Para dudas técnicas, contacte al administrador de TI.</p>
+            </div>
+
+            <!-- Firmas Oficiales -->
+            <div class="flex justify-between items-center pt-12 text-center text-xs">
+              <div class="w-48">
+                <div class="border-b border-gray-400 h-8"></div>
+                <p class="mt-2 font-bold text-gray-900">David Jaramillo</p>
+                <p class="text-[9px] text-gray-500">Director Senior de Proyectos</p>
+              </div>
+              <div class="w-48">
+                <div class="border-b border-gray-400 h-8"></div>
+                <p class="mt-2 font-bold text-gray-900">Sistema Sysmicon Nube</p>
+                <p class="text-[9px] text-gray-500">Firma Digital de Servidor</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Botones de Acción (Ocultos en Impresión) -->
+        <div class="flex items-center justify-end gap-3 pt-6 border-t border-white/10 mt-6 print:hidden">
+          <button type="button" (click)="cerrarVistaPreviaImprimible()" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 font-bold transition-colors cursor-pointer text-xs">
+            Cerrar Vista Previa
+          </button>
+          <button type="button" (click)="imprimirReporte()" class="px-6 py-2.5 rounded-xl bg-wood-accent hover:bg-wood-light text-[#111] font-extrabold transition-all shadow-xl cursor-pointer text-xs inline-flex items-center gap-2">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            <span>Confirmar e Imprimir</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
   `
 })
 export class DashReportesComponent {
   readonly adminService = inject(AdminService);
 
   readonly alertaDescarga = signal<string>('');
+  readonly modalImpresionAbierto = signal<boolean>(false);
+  readonly reporteSeleccionado = signal<ReporteAdmin | null>(null);
+
   formTitulo = '';
   formTipo: 'financiero' | 'operativo' | 'cad_studio' = 'financiero';
   formFormato: 'PDF' | 'EXCEL' | 'CSV' = 'PDF';
@@ -138,5 +369,26 @@ export class DashReportesComponent {
     setTimeout(() => {
       this.alertaDescarga.set('');
     }, 5000);
+  }
+
+  abrirVistaPreviaImprimible(reporte: ReporteAdmin): void {
+    this.reporteSeleccionado.set(reporte);
+    this.modalImpresionAbierto.set(true);
+  }
+
+  cerrarVistaPreviaImprimible(): void {
+    this.modalImpresionAbierto.set(false);
+    this.reporteSeleccionado.set(null);
+  }
+
+  imprimirReporte(): void {
+    window.print();
+  }
+
+  getNombreTipoReporte(tipo?: string): string {
+    if (tipo === 'financiero') return 'Informe de Rendimiento Financiero';
+    if (tipo === 'operativo') return 'Informe de Rendimiento Operativo';
+    if (tipo === 'cad_studio') return 'Informe de Uso Studio CAD 2D';
+    return 'Informe Técnico';
   }
 }

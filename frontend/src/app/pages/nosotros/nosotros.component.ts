@@ -99,22 +99,26 @@ export class NosotrosComponent {
     {
       etapa: '01',
       titulo: 'Inmersión & Conceptualización',
-      desc: 'Entendemos tu estilo de vida, exploramos las fortalezas del lote y desarrollamos el anteproyecto en modelado 3D interactivo.'
+      desc: 'Entendemos tu estilo de vida, exploramos las fortalezas del lote y desarrollamos el anteproyecto en modelado 3D interactivo.',
+      img: 'images/imagen1.jpg'
     },
     {
       etapa: '02',
       titulo: 'Ingeniería & Rigor Presupuestal',
-      desc: 'Realizamos todos los estudios técnicos (suelos, cálculo estructural, bioclimática) y blindamos el presupuesto desde antes del primer ladrillo.'
+      desc: 'Realizamos todos los estudios técnicos (suelos, cálculo estructural, bioclimática) y blindamos el presupuesto desde antes del primer ladrillo.',
+      img: 'images/imagen2.jpg'
     },
     {
       etapa: '03',
       titulo: 'Ejecución Impecable',
-      desc: 'Construimos bajo dirección residente con mano de obra de élite, reportes quincenales transparentes y estricto control de calidad.'
+      desc: 'Construimos bajo dirección residente con mano de obra de élite, reportes quincenales transparentes y estricto control de calidad.',
+      img: 'images/imagen3.jpg'
     },
     {
       etapa: '04',
       titulo: 'Entrega Llave en Mano',
-      desc: 'Entregamos tu hogar perfecto, limpio, con todos los sistemas probados (domótica, hidrosanitaria) y garantía estructural de 10 años.'
+      desc: 'Entregamos tu hogar perfecto, limpio, con todos los sistemas probados (domótica, hidrosanitaria) y garantía estructural de 10 años.',
+      img: 'images/imagen4.jpg'
     }
   ];
 }

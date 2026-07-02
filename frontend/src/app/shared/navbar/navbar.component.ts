@@ -1,7 +1,8 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, HostListener, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { BRAND_CONFIG, NAV_LINKS } from '../../core/app.constants';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +12,7 @@ import { BRAND_CONFIG, NAV_LINKS } from '../../core/app.constants';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+  readonly authService = inject(AuthService);
   readonly brandName = BRAND_CONFIG.name;
   readonly navLinks = NAV_LINKS;
 

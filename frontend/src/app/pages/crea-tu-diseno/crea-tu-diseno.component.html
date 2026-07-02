@@ -1,318 +1,369 @@
-<div class="config-page section-padding">
-  <div class="container">
+<div class="config-page min-h-screen bg-[#080808] text-white py-16 font-sans">
+  <div class="w-full max-w-[1750px] mx-auto px-4 md:px-10">
     
-    <!-- Header -->
-    <div class="page-header text-center" *ngIf="!isSubmitted()">
-      <div class="section-tag font-sans">
-        <span class="tag-line"></span>
-        <span>Configurador Arquitectónico</span>
-        <span class="tag-line"></span>
+    <!-- HEADER ARQUITECTÓNICO CAD -->
+    <div class="text-center mb-8" *ngIf="!isSubmitted()">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-wood-accent/15 border border-wood-accent/30 text-wood-light font-sans text-xs font-bold tracking-widest uppercase mb-3 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Estudio CAD 2D — Diseño Libre por Bloques</span>
       </div>
-      <h1 class="title-xl font-serif">
-        Crea tu <span class="text-accent font-serif">Diseño</span>
+      <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-none">
+        Diseña tu Plano <span class="text-wood-light underline decoration-wood-accent decoration-2 underline-offset-8">2D Interactivo</span>
       </h1>
-      <p class="subtitle mx-auto">
-        Diseña paso a paso la residencia de tus sueños. Personaliza estilo, dimensiones y materiales para calcular tu inversión estimada.
+      <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto mt-4 leading-relaxed">
+        Selecciona bloques arquitectónicos de nuestro catálogo CAD, arrástralos sobre el lienzo negro, rótalos y ajusta tu distribución libremente.
       </p>
+    </div>
 
-      <!-- Stepper Progress -->
-      <div class="stepper font-sans">
-        <div class="step-item" [ngClass]="{'active': currentStep() === 1, 'completed': currentStep() > 1}" (click)="setStep(1)">
-          <span class="step-num font-serif">1</span>
-          <span class="step-lbl">Estilo</span>
-        </div>
-        <div class="step-line" [ngClass]="{'filled': currentStep() > 1}"></div>
+    <!-- PANTALLA PRINCIPAL DE ESTUDIO CAD 2D -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch mb-16" *ngIf="!isSubmitted()">
+      
+      <!-- COLUMNA IZQUIERDA: MENÚ Y CATÁLOGO DE BLOQUES (Cols 1-3) -->
+      <div class="lg:col-span-3 flex flex-col bg-[#111111] rounded-2xl border border-white/10 overflow-hidden shadow-2xl h-[700px] md:h-[760px]">
         
-        <div class="step-item" [ngClass]="{'active': currentStep() === 2, 'completed': currentStep() > 2}" (click)="setStep(2)">
-          <span class="step-num font-serif">2</span>
-          <span class="step-lbl">Dimensiones</span>
+        <!-- Cabecera del menú -->
+        <div class="p-4 border-b border-white/10 bg-[#161616] flex items-center justify-between">
+          <span class="font-serif font-bold text-base text-white flex items-center gap-2">
+            <span>📚 Categorías CAD</span>
+          </span>
+          <span class="text-[10px] bg-wood-accent/20 text-wood-light font-bold px-2 py-0.5 rounded-full border border-wood-accent/30">
+            8 Módulos
+          </span>
         </div>
-        <div class="step-line" [ngClass]="{'filled': currentStep() > 2}"></div>
+
+        <!-- Pestañas de Categorías -->
+        <div class="flex xl:grid xl:grid-cols-2 gap-1.5 p-2.5 overflow-x-auto xl:overflow-visible border-b border-white/10 bg-[#0C0C0C] scrollbar-thin">
+          <button *ngFor="let cat of categorias"
+                  (click)="setCategoria(cat.id)"
+                  [ngClass]="{'bg-wood-accent text-[#111] font-bold shadow-md scale-[1.02]': categoriaSeleccionada() === cat.id, 'bg-[#181818] text-gray-400 hover:text-white hover:bg-[#222]': categoriaSeleccionada() !== cat.id}"
+                  class="flex items-center gap-2 px-3 py-2.5 rounded-lg text-xs font-sans transition-all duration-200 cursor-pointer flex-shrink-0 text-left border border-transparent">
+            <div [ngSwitch]="cat.id" class="flex-shrink-0">
+              <svg *ngSwitchCase="'alcobas'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/></svg>
+              <svg *ngSwitchCase="'area-comun'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H6v-2a2 2 0 0 0-4 0z"/></svg>
+              <svg *ngSwitchCase="'bano'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="10" y1="5" x2="8" y2="7"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+              <svg *ngSwitchCase="'cocina'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><circle cx="15" cy="10" r="2"/><circle cx="12" cy="16" r="2"/></svg>
+              <svg *ngSwitchCase="'columnas'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M4 4h16M6 4v16M10 4v16M14 4v16M18 4v16"/></svg>
+              <svg *ngSwitchCase="'estacionamiento'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+              <svg *ngSwitchCase="'muro'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM12 3v18M3 9h9M12 15h9"/></svg>
+              <svg *ngSwitchCase="'piscina'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>
+            </div>
+            <span class="truncate">{{ cat.nombre }}</span>
+          </button>
+        </div>
+
+        <!-- Lista de Bloques en la categoría seleccionada -->
+        <div class="flex-1 overflow-y-auto p-3 space-y-3 scrollbar-thin bg-[#101010]">
+          <div class="text-[11px] text-gray-500 uppercase tracking-wider font-bold mb-1 px-1">
+            Selecciona para añadir al plano:
+          </div>
+
+          <div *ngFor="let b of getBloquesPorCategoria()" 
+               (click)="agregarBloqueAlLienzo(b)"
+               class="group relative bg-[#181818] hover:bg-[#222222] border border-white/10 hover:border-wood-accent/60 rounded-xl p-3 transition-all duration-300 cursor-pointer flex flex-col items-center justify-between gap-2 shadow-sm">
+            
+            <!-- Contenedor del bloque en blanco sobre transparente -->
+            <div class="w-full h-24 bg-[#080808] rounded-lg p-2 flex items-center justify-center border border-white/5 relative overflow-hidden group-hover:scale-105 transition-transform">
+              <img [src]="b.imagen" [alt]="b.nombre" class="max-w-full max-h-full object-contain">
+              
+              <!-- Botón rápido Añadir -->
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <span class="bg-wood-accent text-[#111] font-bold text-xs px-3 py-1.5 rounded-full shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
+                  + Añadir al Plano
+                </span>
+              </div>
+            </div>
+
+            <!-- Información del bloque -->
+            <div class="w-full text-left">
+              <div class="font-serif font-bold text-xs text-white truncate">{{ b.nombre }}</div>
+              <div class="flex items-center justify-between mt-1 text-[11px] text-gray-400 font-sans">
+                <span>📐 {{ b.areaM2 }} m²</span>
+                <span class="text-wood-light font-bold">${{ b.precioUSD / 1000 | number:'1.0-1' }}k USD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pie del catálogo -->
+        <div class="p-3 bg-[#161616] border-t border-white/10 text-center text-[11px] text-gray-400">
+          💡 <span class="text-white font-medium">Tip:</span> Haz clic en un bloque para colocarlo en el centro del lienzo.
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA: EL LIENZO NEGRO CAD 2D (Cols 4-12) -->
+      <div class="lg:col-span-9 flex flex-col bg-[#111111] rounded-2xl border border-white/10 overflow-hidden shadow-2xl h-[700px] md:h-[760px]">
         
-        <div class="step-item" [ngClass]="{'active': currentStep() === 3, 'completed': currentStep() > 3}" (click)="setStep(3)">
-          <span class="step-num font-serif">3</span>
-          <span class="step-lbl">Acabados</span>
+        <!-- BARRA SUPERIOR DE HERRAMIENTAS DEL LIENZO -->
+        <div class="p-3 bg-[#181818] border-b border-white/10 flex flex-wrap items-center justify-between gap-3">
+          
+          <!-- Lado Izquierdo: Historial, Cuadrícula y Limpiar -->
+          <div class="flex flex-wrap items-center gap-2">
+            <button (click)="deshacer()" [disabled]="historialPasos.length === 0"
+                    [ngClass]="{'opacity-40 cursor-not-allowed': historialPasos.length === 0, 'hover:bg-[#282828] text-white': historialPasos.length > 0}"
+                    title="Deshacer último cambio (Ctrl+Z)"
+                    class="px-2.5 py-1.5 rounded-lg bg-[#1F1F1F] border border-white/10 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
+              <span>↩️ Deshacer</span>
+            </button>
+
+            <button (click)="rehacer()" [disabled]="historialRehacer.length === 0"
+                    [ngClass]="{'opacity-40 cursor-not-allowed': historialRehacer.length === 0, 'hover:bg-[#282828] text-white': historialRehacer.length > 0}"
+                    title="Rehacer cambio (Ctrl+Y)"
+                    class="px-2.5 py-1.5 rounded-lg bg-[#1F1F1F] border border-white/10 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
+              <span>↪️ Rehacer</span>
+            </button>
+
+            <div class="h-4 w-[1px] bg-white/10 mx-1 hidden sm:block"></div>
+
+            <button (click)="toggleCuadricula()" 
+                    [ngClass]="{'bg-wood-accent/20 text-wood-light border-wood-accent/40': mostrarCuadricula(), 'bg-[#222] text-gray-400 border-white/10': !mostrarCuadricula()}"
+                    class="px-2.5 py-1.5 rounded-lg border text-xs font-bold flex items-center gap-1 transition-all cursor-pointer">
+              <span>📐 Cuadrícula</span>
+            </button>
+
+            <button (click)="limpiarTodoElLienzo()" *ngIf="elementosLienzo().length > 0"
+                    class="px-2.5 py-1.5 rounded-lg bg-red-950/40 hover:bg-red-900/60 text-red-300 border border-red-800/50 text-xs font-bold flex items-center gap-1 transition-all cursor-pointer">
+              <span>🗑️ Limpiar</span>
+            </button>
+          </div>
+
+          <!-- Lado Derecho: Controles del Elemento Seleccionado o Guía Rápida -->
+          <div *ngIf="bloqueSeleccionadoObj() as sel" class="flex flex-wrap items-center gap-1.5 bg-[#0C0C0C] px-3 py-1 rounded-xl border border-wood-accent/40 animate-fade">
+            <span class="text-[11px] text-wood-light font-bold truncate max-w-[130px] mr-1">🎯 {{ sel.bloque.nombre }}:</span>
+            
+            <button (click)="rotarElemento(45)" title="Rotar 45°" class="p-1.5 rounded-lg bg-[#222] hover:bg-wood-accent hover:text-[#111] text-white transition-all text-xs cursor-pointer font-bold">
+              🔄 +45°
+            </button>
+            <button (click)="rotarElemento(90)" title="Rotar 90°" class="p-1.5 rounded-lg bg-[#222] hover:bg-wood-accent hover:text-[#111] text-white transition-all text-xs cursor-pointer font-bold">
+              🔄 +90°
+            </button>
+            <button (click)="escalarElemento(0.1)" title="Agrandar (+10%)" class="p-1.5 rounded-lg bg-[#222] hover:bg-wood-accent hover:text-[#111] text-white transition-all text-xs cursor-pointer font-bold">
+              ➕
+            </button>
+            <button (click)="escalarElemento(-0.1)" title="Reducir (-10%)" class="p-1.5 rounded-lg bg-[#222] hover:bg-wood-accent hover:text-[#111] text-white transition-all text-xs cursor-pointer font-bold">
+              ➖
+            </button>
+            <button (click)="duplicarElemento()" title="Duplicar Bloque (Atajo: Ctrl+D o Ctrl+C y Ctrl+V)" class="p-1.5 rounded-lg bg-blue-950/60 hover:bg-blue-800/80 text-blue-300 border border-blue-800/40 transition-all text-xs cursor-pointer font-bold ml-1">
+              📑 Clonar
+            </button>
+            <button (click)="eliminarElemento()" title="Eliminar del plano (Atajo: Tecla Suprimir / Backspace)" class="p-1.5 rounded-lg bg-red-950/60 hover:bg-red-800/80 text-red-300 border border-red-800/40 transition-all text-xs cursor-pointer font-bold">
+              ✕
+            </button>
+          </div>
+          <div *ngIf="!bloqueSeleccionadoObj()" class="text-[11px] text-gray-400 flex items-center gap-3 font-sans">
+            <span class="hidden md:inline">💡 <strong class="text-wood-light">Atajos CAD:</strong></span>
+            <span class="bg-[#222] px-2 py-0.5 rounded text-[10px] text-gray-300 border border-white/5"><strong>Ctrl+Z</strong> Deshacer</span>
+            <span class="bg-[#222] px-2 py-0.5 rounded text-[10px] text-gray-300 border border-white/5"><strong>Ctrl+C / V</strong> Copiar y Pegar</span>
+            <span class="bg-[#222] px-2 py-0.5 rounded text-[10px] text-gray-300 border border-white/5"><strong>Supr</strong> Eliminar</span>
+            <span class="bg-[#222] px-2 py-0.5 rounded text-[10px] text-gray-300 border border-white/5 hidden lg:inline"><strong>Flechas</strong> Mover Precisión</span>
+          </div>
+
         </div>
-        <div class="step-line" [ngClass]="{'filled': currentStep() > 3}"></div>
-        
-        <div class="step-item" [ngClass]="{'active': currentStep() === 4}">
-          <span class="step-num font-serif">4</span>
-          <span class="step-lbl">Propuesta</span>
+
+        <!-- EL LIENZO CAD NEGRO INTERACTIVO (Viewport) -->
+        <div class="flex-1 relative bg-[#050505] overflow-hidden select-none cursor-crosshair"
+             [ngClass]="{'cad-grid': mostrarCuadricula()}"
+             (mousemove)="onCanvasMouseMove($event)"
+             (touchmove)="onCanvasMouseMove($event)"
+             (mouseup)="onCanvasMouseUp()"
+             (touchend)="onCanvasMouseUp()"
+             (click)="onDeseleccionarLienzo($event)">
+
+          <!-- BRÚJULA ARQUITECTÓNICA (Norte N 🧭) en esquina superior derecha -->
+          <div class="absolute top-5 right-5 z-30 pointer-events-none flex flex-col items-center justify-center p-3 rounded-xl bg-black/80 backdrop-blur-md border border-white/20 shadow-2xl">
+            <span class="font-serif font-bold text-wood-light text-base leading-none">N</span>
+            <div class="w-6 h-8 my-1 flex items-center justify-center relative">
+              <div class="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[24px] border-b-red-600 drop-shadow-[0_0_6px_rgba(239,68,68,0.8)]"></div>
+            </div>
+            <span class="text-[9px] uppercase tracking-widest text-gray-400 font-bold">Brújula CAD</span>
+          </div>
+
+          <!-- REGLA DE MEDIDAS ARQUITECTÓNICA (Escala 0m - 15m) en esquina inferior izquierda -->
+          <div class="absolute bottom-5 left-5 z-30 pointer-events-none bg-black/85 backdrop-blur-md px-4 py-2 rounded-xl border border-white/20 shadow-2xl flex flex-col items-start gap-1">
+            <div class="flex items-center justify-between w-48 text-[9px] font-bold text-gray-300 font-mono">
+              <span>0m</span>
+              <span>5m</span>
+              <span>10m</span>
+              <span>15m</span>
+            </div>
+            <div class="w-48 h-2 bg-gradient-to-r from-white via-gray-400 to-wood-accent rounded-full relative border border-white/40">
+              <div class="absolute top-0 left-0 bottom-0 w-1/3 bg-white border-r border-black"></div>
+              <div class="absolute top-0 left-1/3 bottom-0 w-1/3 bg-gray-600 border-r border-black"></div>
+            </div>
+            <span class="text-[9px] text-wood-light font-bold tracking-widest uppercase">Escala Referencial 1:100</span>
+          </div>
+
+          <!-- MENSAJE DE LIENZO VACÍO -->
+          <div *ngIf="elementosLienzo().length === 0" class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center p-6 opacity-40">
+            <div class="w-20 h-20 rounded-full border-2 border-dashed border-white/30 flex items-center justify-center text-3xl mb-3">
+              📐
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-white">Lienzo CAD 2D en Blanco</h3>
+            <p class="text-sm text-gray-400 max-w-md mt-1">
+              Elige una alcoba, sala o piscina en el menú de la izquierda y haz clic en "+ Añadir al Plano" para comenzar a diseñar.
+            </p>
+          </div>
+
+          <!-- ELEMENTOS COLOCADOS EN EL LIENZO -->
+          <div *ngFor="let el of elementosLienzo()"
+               [style.left.px]="el.x"
+               [style.top.px]="el.y"
+               [style.z-index]="el.zIndex"
+               (mousedown)="seleccionarElemento($event, el)"
+               (touchstart)="seleccionarElemento($event, el)"
+               class="absolute cursor-move transition-shadow duration-150 p-2 rounded-lg group"
+               [ngClass]="{'border border-dashed border-wood-accent z-50': selectedElementId() === el.instanceId, 'border border-transparent': selectedElementId() !== el.instanceId}">
+
+            <!-- Contenedor transformable rotado y escalado -->
+            <div [style.transform]="'rotate(' + el.rotacion + 'deg) scale(' + el.escala + ')'"
+                 class="transition-transform duration-150 transform-gpu flex flex-col items-center justify-center relative">
+              
+              <!-- Imagen del bloque blanco CAD sobre transparente -->
+              <img [src]="el.bloque.imagen" [alt]="el.bloque.nombre" 
+                   class="max-w-[180px] md:max-w-[220px] max-h-[180px] md:max-h-[220px] object-contain pointer-events-none">
+              
+              <!-- Etiqueta del bloque al pasar el mouse o seleccionar -->
+              <div class="absolute -bottom-6 whitespace-nowrap px-2 py-0.5 rounded bg-black/90 border border-white/20 text-[10px] font-bold text-white tracking-wide shadow-md pointer-events-none"
+                   [ngClass]="{'opacity-100 text-wood-light border-wood-accent': selectedElementId() === el.instanceId, 'opacity-0 group-hover:opacity-100': selectedElementId() !== el.instanceId}">
+                {{ el.bloque.nombre }} ({{ el.rotacion }}°)
+              </div>
+            </div>
+
+            <!-- Manija de rotación visual cuando está seleccionado -->
+            <div *ngIf="selectedElementId() === el.instanceId" 
+                 (click)="rotarElemento(45); $event.stopPropagation()"
+                 title="Clic para rotar 45°"
+                 class="absolute -top-3 -right-3 w-7 h-7 rounded-full bg-wood-accent text-[#111] font-bold text-xs flex items-center justify-center shadow-lg border-2 border-white cursor-pointer hover:scale-125 transition-transform z-50">
+              ↻
+            </div>
+          </div>
+
         </div>
+
+        <!-- BARRA INFERIOR DE RESUMEN EN VIVO Y BOTÓN DE COTIZACIÓN -->
+        <div class="p-4 bg-[#161616] border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          
+          <div class="flex items-center gap-6 text-sm font-sans">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-wood-accent"></span>
+              <span class="text-gray-400">Bloques:</span>
+              <strong class="text-white font-mono text-base">{{ elementosLienzo().length }}</strong>
+            </div>
+            
+            <div class="flex items-center gap-2 border-l border-white/10 pl-6">
+              <span class="text-gray-400">Área Estimada:</span>
+              <strong class="text-white font-mono text-base">{{ totalAreaM2() }} m²</strong>
+            </div>
+
+            <div class="flex items-center gap-2 border-l border-white/10 pl-6">
+              <span class="text-gray-400">Presupuesto Ref:</span>
+              <strong class="text-wood-light font-mono text-lg">${{ totalPrecioUSD() | number }} USD*</strong>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 w-full md:w-auto">
+            <button (click)="abrirCotizacion()" 
+                    class="w-full md:w-auto py-3 px-8 rounded-xl bg-gradient-to-r from-wood-accent to-[#8C6036] hover:brightness-110 text-[#111] font-sans font-bold text-xs tracking-widest uppercase shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer">
+              <span>📋 Formalizar este Plano en Propuesta</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+
+        </div>
+
       </div>
     </div>
 
-    <!-- Main Config Area -->
-    <div class="config-content" *ngIf="!isSubmitted()">
-      
-      <!-- PASO 1: Selección de Estilo -->
-      <div *ngIf="currentStep() === 1" class="step-panel animate-fade">
-        <h2 class="panel-title font-serif">Paso 1: Selecciona tu línea arquitectónica</h2>
-        <p class="panel-desc">Cada estilo define la volumetría, el lenguaje de fachadas y la relación con la luz natural.</p>
+    <!-- SECCIÓN MODAL / FORMULARIO DE FORMALIZACIÓN DE PROPUESTA -->
+    <div *ngIf="modoCotizacion() && !isSubmitted()" class="max-w-4xl mx-auto bg-[#111111] rounded-2xl border border-wood-accent/40 p-6 md:p-10 shadow-2xl animate-fade mb-20">
+      <div class="flex items-center justify-between border-b border-white/10 pb-5 mb-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-wood-light bg-wood-accent/15 px-3 py-1 rounded-full border border-wood-accent/30">Paso Final</span>
+          <h2 class="font-serif text-3xl font-bold text-white mt-2">Formalizar Solicitud con Plano 2D Personalizado</h2>
+          <p class="text-sm text-gray-400 mt-1">Un arquitecto director revisará la geometría de tu distribución de {{ totalAreaM2() }} m² y se contactará contigo.</p>
+        </div>
+        <button (click)="modoCotizacion.set(false)" class="text-gray-400 hover:text-white font-bold text-lg p-2">✕</button>
+      </div>
 
-        <div class="grid-2 style-grid">
-          <div *ngFor="let estilo of cotizador.estilos()"
-               (click)="onSelectEstilo(estilo)"
-               [ngClass]="{'selected': cotizador.estiloSeleccionado()?.id === estilo.id}"
-               class="style-card glass-card">
-            <div class="style-img-box">
-              <img [src]="estilo.imagen" [alt]="estilo.nombre" loading="lazy">
-              <div class="check-badge" *ngIf="cotizador.estiloSeleccionado()?.id === estilo.id">✓ Seleccionado</div>
-            </div>
-            <div class="style-info">
-              <h3 class="style-name font-serif">{{ estilo.nombre }}</h3>
-              <p class="style-txt">{{ estilo.descripcion }}</p>
-              <div class="style-meta font-sans">
-                <span>Valor base ref: <strong>${{ estilo.precioBaseM2 }} / m²</strong></span>
-              </div>
-            </div>
-          </div>
+      <div class="bg-[#181818] p-4 rounded-xl border border-white/5 mb-6 flex flex-wrap items-center justify-between gap-4 text-xs font-sans">
+        <div>
+          <span class="text-gray-400 block">Resumen de tu plano 2D:</span>
+          <span class="text-white font-bold">{{ elementosLienzo().length }} módulos CAD estructurados en lienzo.</span>
+        </div>
+        <div>
+          <span class="text-gray-400 block">Área construible proyectada:</span>
+          <span class="text-wood-light font-bold text-sm">{{ totalAreaM2() }} m²</span>
+        </div>
+        <div>
+          <span class="text-gray-400 block">Valor referencial estimado:</span>
+          <span class="text-emerald-400 font-bold text-sm">${{ totalPrecioUSD() | number }} USD*</span>
         </div>
       </div>
 
-      <!-- PASO 2: Dimensiones y Espacios -->
-      <div *ngIf="currentStep() === 2" class="step-panel animate-fade">
-        <h2 class="panel-title font-serif">Paso 2: Define el programa de áreas y dimensiones</h2>
-        <p class="panel-desc">Ajusta los metros cuadrados constructivos y las características espaciales del proyecto.</p>
-
-        <div class="space-config grid-2">
-          <!-- Area Slider & Counters -->
-          <div class="space-form glass-card">
-            <div class="form-group">
-              <label class="form-label font-serif">Área Constructiva Total: <span class="text-accent">{{ cotizador.espacioSeleccionado().areaM2 }} m²</span></label>
-              <input type="range" min="120" max="1000" step="10" 
-                     [value]="cotizador.espacioSeleccionado().areaM2" 
-                     (input)="cotizador.updateEspacio({areaM2: +$any($event.target).value})"
-                     class="range-slider">
-              <div class="range-labels font-sans">
-                <span>120 m² (Compacto de Lujo)</span>
-                <span>500 m² (Residencial)</span>
-                <span>1000+ m² (Mansión)</span>
-              </div>
-            </div>
-
-            <div class="grid-2 form-row">
-              <div class="form-group">
-                <label class="form-label font-serif">Habitaciones Principales</label>
-                <select [value]="cotizador.espacioSeleccionado().habitaciones"
-                        (change)="cotizador.updateEspacio({habitaciones: +$any($event.target).value})"
-                        class="select-input">
-                  <option [value]="2">2 Habitaciones (Master suite + Guest)</option>
-                  <option [value]="3">3 Habitaciones</option>
-                  <option [value]="4">4 Habitaciones (Familiar premium)</option>
-                  <option [value]="5">5+ Habitaciones (Gran formato)</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label font-serif">Baños y Aseos</label>
-                <select [value]="cotizador.espacioSeleccionado().banos"
-                        (change)="cotizador.updateEspacio({banos: +$any($event.target).value})"
-                        class="select-input">
-                  <option [value]="2.5">2.5 Baños</option>
-                  <option [value]="3.5">3.5 Baños</option>
-                  <option [value]="4.5">4.5 Baños (Suite c/u)</option>
-                  <option [value]="6">6+ Baños</option>
-                </select>
-              </div>
-            </div>
+      <form (submit)="enviarPropuesta($event)" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-gray-300 mb-1.5 font-serif">Nombre Completo *</label>
+            <input type="text" [(ngModel)]="nombre" name="nombre" required placeholder="Ej: Carlos Alberto Rodríguez" 
+                   class="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm">
           </div>
-
-          <!-- Exterior Checkboxes -->
-          <div class="outdoor-form glass-card">
-            <h3 class="sub-title font-serif">Zonas Complementarias & Exteriores</h3>
-            <p class="sub-desc">Selecciona los espacios de recreación y ocio al aire libre:</p>
-
-            <div class="options-list">
-              <label class="checkbox-option" [ngClass]="{'active': cotizador.espacioSeleccionado().incluyePiscina}">
-                <input type="checkbox" 
-                       [checked]="cotizador.espacioSeleccionado().incluyePiscina"
-                       (change)="cotizador.updateEspacio({incluyePiscina: $any($event.target).checked})">
-                <div class="option-txt">
-                  <span class="opt-title font-serif">🏊‍♂️ Piscina Infinita con Borde Finlandés</span>
-                  <span class="opt-desc font-sans">Sistema de climatización por bomba de calor e iluminación LED subacuática.</span>
-                </div>
-              </label>
-
-              <label class="checkbox-option" [ngClass]="{'active': cotizador.espacioSeleccionado().incluyeTerraza}">
-                <input type="checkbox" 
-                       [checked]="cotizador.espacioSeleccionado().incluyeTerraza"
-                       (change)="cotizador.updateEspacio({incluyeTerraza: $any($event.target).checked})">
-                <div class="option-txt">
-                  <span class="opt-title font-serif">🌅 Terraza Gourmet & Zona de BBQ Cubierta</span>
-                  <span class="opt-desc font-sans">Pérgola bioclimática en madera y aluminio con barra de asados de lujo.</span>
-                </div>
-              </label>
-
-              <label class="checkbox-option" [ngClass]="{'active': cotizador.espacioSeleccionado().incluyeJardin}">
-                <input type="checkbox" 
-                       [checked]="cotizador.espacioSeleccionado().incluyeJardin"
-                       (change)="cotizador.updateEspacio({incluyeJardin: $any($event.target).checked})">
-                <div class="option-txt">
-                  <span class="opt-title font-serif">🌳 Paisajismo Arquitectónico & Jardín Zen</span>
-                  <span class="opt-desc font-sans">Diseño de paisajismo con árboles nativos, iluminación escénica y riego automatizado.</span>
-                </div>
-              </label>
-            </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-gray-300 mb-1.5 font-serif">Correo Electrónico *</label>
+            <input type="email" [(ngModel)]="email" name="email" required placeholder="carlos@correo.com" 
+                   class="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm">
           </div>
         </div>
-      </div>
 
-      <!-- PASO 3: Materiales y Acabados -->
-      <div *ngIf="currentStep() === 3" class="step-panel animate-fade">
-        <h2 class="panel-title font-serif">Paso 3: Acabados, Materialidad y Tecnología</h2>
-        <p class="panel-desc">Selecciona las especificaciones constructivas que darán carácter y confort a tu vivienda.</p>
-
-        <div class="grid-3 materials-grid">
-          <div *ngFor="let mat of cotizador.materiales()"
-               (click)="onToggleAcabado(mat.id)"
-               [ngClass]="{'active': cotizador.isAcabadoSeleccionado(mat.id)}"
-               class="mat-card glass-card">
-            <div class="mat-top">
-              <span class="mat-cat">{{ mat.categoria }}</span>
-              <span class="mat-check">{{ cotizador.isAcabadoSeleccionado(mat.id) ? '✓ Incluido' : '+ Agregar' }}</span>
-            </div>
-            <h3 class="mat-name font-serif">{{ mat.nombre }}</h3>
-            <p class="mat-desc">{{ mat.descripcion }}</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-gray-300 mb-1.5 font-serif">Teléfono / WhatsApp *</label>
+            <input type="tel" [(ngModel)]="telefono" name="telefono" required placeholder="+57 310 000 0000" 
+                   class="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-gray-300 mb-1.5 font-serif">Ciudad de Construcción *</label>
+            <input type="text" [(ngModel)]="ciudad" name="ciudad" required placeholder="Ej: Llanogrande, Medellín, Bogotá..." 
+                   class="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm">
           </div>
         </div>
-      </div>
 
-      <!-- PASO 4: Resumen y Formulario -->
-      <div *ngIf="currentStep() === 4" class="step-panel animate-fade">
-        <h2 class="panel-title font-serif">Paso 4: Resumen de Inversión y Solicitud</h2>
-        <p class="panel-desc">Revisa el desglose técnico de tu configuración y envía tu propuesta al comité de proyectos.</p>
-
-        <div class="grid-2 summary-layout">
-          <!-- Summary Box -->
-          <div class="summary-box glass-panel">
-            <h3 class="summary-title font-serif">Especificaciones de tu Diseño</h3>
-            <div class="divider-wood"></div>
-
-            <div class="summary-item">
-              <span class="lbl">Estilo Arquitectónico:</span>
-              <span class="val font-serif text-accent">{{ cotizador.estiloSeleccionado()?.nombre }}</span>
-            </div>
-
-            <div class="summary-item">
-              <span class="lbl">Área Constructiva:</span>
-              <span class="val">{{ cotizador.espacioSeleccionado().areaM2 }} m²</span>
-            </div>
-
-            <div class="summary-item">
-              <span class="lbl">Habitaciones / Baños:</span>
-              <span class="val">{{ cotizador.espacioSeleccionado().habitaciones }} Hab / {{ cotizador.espacioSeleccionado().banos }} Baños</span>
-            </div>
-
-            <div class="summary-item">
-              <span class="lbl">Exteriores Incluidos:</span>
-              <span class="val">
-                {{ cotizador.espacioSeleccionado().incluyePiscina ? 'Piscina, ' : '' }}
-                {{ cotizador.espacioSeleccionado().incluyeTerraza ? 'Terraza, ' : '' }}
-                {{ cotizador.espacioSeleccionado().incluyeJardin ? 'Jardín' : '' }}
-              </span>
-            </div>
-
-            <div class="summary-acabados">
-              <span class="lbl">Acabados Premium Seleccionados ({{ cotizador.getObjetosAcabadosSeleccionados().length }}):</span>
-              <ul class="summary-mat-list">
-                <li *ngFor="let m of cotizador.getObjetosAcabadosSeleccionados()">▪ {{ m.nombre }}</li>
-              </ul>
-            </div>
-
-            <div class="divider-wood"></div>
-
-            <div class="total-box">
-              <span class="total-lbl">Presupuesto Estimado de Construcción:</span>
-              <span class="total-val font-serif">${{ cotizador.presupuestoEstimado() | number }} USD*</span>
-              <span class="total-note">*Estimado referencial llave en mano. No incluye lote ni costos de licencia o urbanismo.</span>
-            </div>
-          </div>
-
-          <!-- Client Form -->
-          <div class="client-form-box glass-card">
-            <h3 class="form-title font-serif">Formalizar Solicitud de Propuesta</h3>
-            <p class="form-subtitle">Un arquitecto senior de Sysmicon revisará tu configuración y se pondrá en contacto en menos de 24 horas.</p>
-
-            <form (submit)="onSubmitCotizacion($event)" class="proposal-form">
-              <div class="form-group">
-                <label class="form-label font-serif">Nombre Completo *</label>
-                <input type="text" [(ngModel)]="nombre" name="nombre" required placeholder="Ej: Carlos Alberto Rodríguez" class="form-input">
-              </div>
-
-              <div class="grid-2 form-row">
-                <div class="form-group">
-                  <label class="form-label font-serif">Correo Electrónico *</label>
-                  <input type="email" [(ngModel)]="email" name="email" required placeholder="carlos@correo.com" class="form-input">
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label font-serif">Teléfono / WhatsApp *</label>
-                  <input type="tel" [(ngModel)]="telefono" name="telefono" required placeholder="+57 310 000 0000" class="form-input">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label font-serif">Ciudad / Ubicación del Proyecto *</label>
-                <input type="text" [(ngModel)]="ciudad" name="ciudad" required placeholder="Ej: Medellín, Llanogrande, Bogotá..." class="form-input">
-              </div>
-
-              <div class="form-group">
-                <label class="form-label font-serif">Notas o Requerimientos Especiales (Opcional)</label>
-                <textarea [(ngModel)]="notasAdicionales" name="notas" rows="3" placeholder="Coméntanos si ya tienes lote propio o alguna preferencia específica de diseño..." class="form-input"></textarea>
-              </div>
-
-              <button type="submit" class="btn-primary btn-full submit-btn">
-                <span>Solicitar Propuesta Arquitectónica</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-              </button>
-            </form>
-          </div>
+        <div>
+          <label class="block text-xs font-bold uppercase text-gray-300 mb-1.5 font-serif">Notas Adicionales para el Arquitecto (Opcional)</label>
+          <textarea [(ngModel)]="notas" name="notas" rows="3" placeholder="Indícanos si ya cuentas con lote propio, orientación solar preferida o requerimientos especiales..." 
+                    class="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm"></textarea>
         </div>
-      </div>
 
-      <!-- Navigation Footer Buttons -->
-      <div class="config-footer">
-        <button *ngIf="currentStep() > 1" (click)="prevStep()" class="btn-secondary">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-          <span>Anterior</span>
+        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-wood-accent to-[#8C6036] hover:brightness-110 text-[#111] font-sans font-bold text-sm tracking-widest uppercase shadow-2xl transition-all cursor-pointer mt-4">
+          <span>🚀 Enviar mi Plano 2D y Solicitar Cita con Director Arquitectónico</span>
         </button>
-
-        <div class="spacer"></div>
-
-        <button *ngIf="currentStep() < 4" (click)="nextStep()" class="btn-primary">
-          <span>Siguiente Paso</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-        </button>
-      </div>
+      </form>
     </div>
 
-    <!-- PANTALLA DE ÉXITO (Submitted) -->
-    <div *ngIf="isSubmitted() && solicitudResultado()" class="success-screen glass-panel animate-fade text-center">
-      <div class="success-icon">✨</div>
-      <h2 class="title-lg font-serif">¡Propuesta Solicitada con <span class="text-accent font-serif">Éxito</span>!</h2>
-      <div class="divider-wood mx-auto"></div>
+    <!-- PANTALLA DE ÉXITO DE PROPUESTA -->
+    <div *ngIf="isSubmitted()" class="max-w-3xl mx-auto bg-[#111111] rounded-2xl border border-wood-accent p-8 md:p-12 text-center shadow-2xl animate-fade my-16">
+      <div class="text-5xl mb-4">✨</div>
+      <h2 class="font-serif text-3xl md:text-4xl font-bold text-white">¡Plano 2D Recibido con <span class="text-wood-light">Éxito</span>!</h2>
+      <div class="w-24 h-0.5 bg-wood-accent mx-auto my-5"></div>
       
-      <p class="success-txt mx-auto">
-        Estimado/a <strong>{{ solicitudResultado()?.datosCliente?.nombre }}</strong>, hemos recibido la configuración de tu residencia 
-        <strong>"{{ solicitudResultado()?.estilo?.nombre }}"</strong> de <strong>{{ solicitudResultado()?.espacio?.areaM2 }} m²</strong>.
+      <p class="text-gray-300 text-base leading-relaxed max-w-xl mx-auto">
+        Estimado/a <strong class="text-white">{{ nombre }}</strong>, hemos registrado tu distribución arquitectónica de 
+        <strong class="text-wood-light">{{ totalAreaM2() }} m²</strong> con <strong>{{ elementosLienzo().length }} módulos CAD</strong>.
       </p>
 
-      <div class="ref-card glass-card mx-auto">
-        <span class="ref-lbl font-sans">Código de Referencia del Proyecto:</span>
-        <span class="ref-code font-serif">SYS-{{ currentYear }}-{{ solicitudResultado()?.espacio?.areaM2 }}M</span>
-        <div class="ref-val">Presupuesto Referencial: <strong>${{ solicitudResultado()?.presupuestoEstimado | number }} USD</strong></div>
+      <div class="bg-[#181818] border border-white/10 rounded-xl p-6 max-w-md mx-auto my-6">
+        <div class="text-xs uppercase tracking-widest text-gray-400 font-bold">Código Referencial de tu Plano:</div>
+        <div class="font-serif font-bold text-2xl text-wood-light my-1">CAD-{{ currentYear }}-{{ totalAreaM2() }}M</div>
+        <div class="text-xs text-gray-400">Presupuesto estimado: <strong class="text-emerald-400">${{ totalPrecioUSD() | number }} USD*</strong></div>
       </div>
 
-      <p class="success-sub">
-        Hemos enviado el dossier técnico y la confirmación de la cita a <strong>{{ solicitudResultado()?.datosCliente?.email }}</strong>. Uno de nuestros arquitectos directores te contactará vía WhatsApp/Teléfono a la brevedad.
+      <p class="text-sm text-gray-400 max-w-lg mx-auto mb-8">
+        Hemos enviado una copia del dossier y del esquema vectorial a <strong class="text-white">{{ email }}</strong>. Uno de nuestros arquitectos senior estudiará la viabilidad técnica y se comunicará a tu WhatsApp a la brevedad.
       </p>
 
-      <div class="success-actions">
-        <button (click)="reiniciarConfigurador()" class="btn-secondary">
-          <span>Configurar Otro Diseño</span>
+      <div class="flex justify-center gap-4">
+        <button (click)="reiniciarProyecto()" class="px-6 py-3 rounded-xl bg-[#222] hover:bg-[#333] text-white font-sans text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border border-white/10">
+          <span>📐 Diseñar Otro Plano 2D</span>
         </button>
-        <a routerLink="/" class="btn-primary">
+        <a routerLink="/" class="px-6 py-3 rounded-xl bg-wood-accent hover:brightness-110 text-[#111] font-sans text-xs font-bold uppercase tracking-wider transition-all cursor-pointer">
           <span>Volver al Inicio</span>
         </a>
       </div>

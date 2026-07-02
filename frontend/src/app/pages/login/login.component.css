@@ -1,0 +1,21 @@
+/* Estilos arquitectónicos premium para Login y Registro (Inspirado en Mis Servicios & Hero) */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade {
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Efecto de foco dorado en inputs arquitectónicos */
+input:focus {
+  border-color: #DFB17E !important;
+  box-shadow: 0 0 0 3px rgba(223, 177, 126, 0.15);
+}
+
+/* Selección de texto en modo lujo */
+::selection {
+  background: #DFB17E;
+  color: #111;
+}

@@ -30,10 +30,20 @@
         <button (click)="setLang('EN')" [ngClass]="{'text-wood-light font-bold': currentLang() === 'EN', 'text-white/60 hover:text-white': currentLang() !== 'EN'}" class="transition-colors py-1 px-1.5 rounded">EN</button>
       </div>
 
-      <!-- Auth Links -->
-      <div class="auth-links flex items-center gap-8 font-sans text-sm">
-        <a routerLink="/contacto" class="font-semibold text-white/90 hover:text-wood-light transition-colors">Ingresar</a>
-        <a routerLink="/contacto" class="px-4 py-2 rounded-md border border-white/20 hover:border-wood-light hover:bg-wood-subtle text-white hover:text-wood-light transition-all font-semibold">Registrarse</a>
+      <!-- Auth Links / User Profile -->
+      <div class="auth-links flex items-center gap-6 font-sans text-sm">
+        <ng-container *ngIf="!authService.isLoggedIn()">
+          <a routerLink="/login" class="font-semibold text-white/90 hover:text-wood-light transition-colors">Ingresar</a>
+          <a routerLink="/registro" class="px-4 py-2 rounded-md border border-white/20 hover:border-wood-light hover:bg-wood-subtle text-white hover:text-wood-light transition-all font-semibold">Registrarse</a>
+        </ng-container>
+
+        <ng-container *ngIf="authService.currentUser() as user">
+          <div class="flex items-center gap-3 bg-[#161616] px-3.5 py-1.5 rounded-full border border-wood-accent/30 shadow-sm animate-fade">
+            <span class="w-6 h-6 rounded-full bg-wood-accent text-[#111] font-bold text-xs flex items-center justify-center">{{ user.nombre.charAt(0) }}</span>
+            <span class="font-bold text-wood-light truncate max-w-[120px]">{{ user.nombre }}</span>
+            <button (click)="authService.logout()" title="Cerrar sesión" class="text-gray-400 hover:text-red-400 font-bold ml-1 transition-colors cursor-pointer">✕</button>
+          </div>
+        </ng-container>
       </div>
 
       <!-- Desktop CTA Button -->
@@ -71,9 +81,22 @@
 
       <div class="mobile-menu-footer">
         <!-- Mobile Auth & Lang -->
-        <div class="flex items-center justify-center gap-6 my-4 font-sans text-base">
-          <a routerLink="/contacto" (click)="closeMobileMenu()" class="text-white/90 hover:text-wood-light font-semibold">Ingresar</a>
-          <a routerLink="/contacto" (click)="closeMobileMenu()" class="px-4 py-1.5 rounded-md border border-white/20 text-white font-semibold">Registrarse</a>
+        <div class="flex flex-col items-center justify-center gap-3 my-4 font-sans text-base">
+          <ng-container *ngIf="!authService.isLoggedIn()">
+            <div class="flex items-center gap-6">
+              <a routerLink="/login" (click)="closeMobileMenu()" class="text-white/90 hover:text-wood-light font-semibold">Ingresar</a>
+              <a routerLink="/registro" (click)="closeMobileMenu()" class="px-4 py-1.5 rounded-md border border-white/20 text-white font-semibold">Registrarse</a>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="authService.currentUser() as user">
+            <div class="flex items-center gap-3 bg-[#181818] px-4 py-2 rounded-xl border border-wood-accent/40 w-full justify-between max-w-[280px]">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-full bg-wood-accent text-[#111] font-bold text-sm flex items-center justify-center">{{ user.nombre.charAt(0) }}</span>
+                <span class="font-bold text-wood-light text-sm truncate max-w-[130px]">{{ user.nombre }}</span>
+              </div>
+              <button (click)="authService.logout(); closeMobileMenu()" class="text-xs bg-red-950/60 text-red-300 border border-red-800/40 px-3 py-1 rounded-lg">Salir</button>
+            </div>
+          </ng-container>
         </div>
         <div class="flex items-center justify-center gap-3 my-2 font-sans text-sm font-semibold">
           <button (click)="setLang('ES')" [ngClass]="{'text-wood-light font-bold': currentLang() === 'ES', 'text-white/60': currentLang() !== 'ES'}">ES</button>

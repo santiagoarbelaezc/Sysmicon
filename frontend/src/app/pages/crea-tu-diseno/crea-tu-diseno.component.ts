@@ -44,7 +44,7 @@ export class CreaTuDisenoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadingTimer = setTimeout(() => {
       this.isLoadingScreen.set(false);
-    }, 9000);
+    }, 5000);
   }
 
   ngOnDestroy(): void {
@@ -86,6 +86,10 @@ export class CreaTuDisenoComponent implements OnInit, OnDestroy {
         this.catalogoAbierto.set(true);
       }).catch(() => {});
     }
+  }
+
+  toggleCatalogo(): void {
+    this.catalogoAbierto.update(v => !v);
   }
 
   @HostListener('window:beforeunload', ['$event'])

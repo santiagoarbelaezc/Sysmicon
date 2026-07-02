@@ -1,0 +1,181 @@
+/* === PORTAFOLIO SPLIT RESPONSIVE (MÓVIL & DESKTOP ACCORDION) === */
+
+/* Carrusel Hero Móvil */
+.hero-carousel-mobile {
+  position: relative;
+  width: 100%;
+  height: 85vh;
+  overflow: hidden;
+  background: #0A0A0A;
+}
+
+.mobile-brand-header {
+  pointer-events: none;
+}
+
+.carousel-track-container {
+  height: 100%;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.carousel-track-container::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-slide {
+  scroll-snap-align: center;
+}
+
+.slide-img {
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  filter: brightness(1) !important;
+}
+
+.slide-content {
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideUpFade 0.8s forwards 0.2s;
+}
+
+@keyframes slideUpFade {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.dot-btn {
+  border: none;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+
+.dot-btn.active {
+  background: var(--wood-accent) !important;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+}
+
+/* Desktop Accordion Panels */
+.portfolio-desktop-section {
+  display: flex;
+  width: 100%;
+  height: 85vh;
+  align-items: stretch;
+  overflow: hidden;
+  background: #0A0A0A;
+}
+
+.box {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: flex 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+  min-width: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+.box:hover {
+  flex: 1.9;
+}
+
+.bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+  filter: brightness(1) !important; /* Brillo al 100% normal sin sombras */
+}
+
+.box:hover .bg-img {
+  transform: scale(1.05);
+}
+
+/* Tarjeta de Vidrio para el Contenido del Panel */
+.content {
+  background: rgba(10, 10, 10, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2.2rem 1.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+.box:hover .content {
+  background: rgba(10, 10, 10, 0.75);
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+}
+
+.content h3 {
+  margin-bottom: 8px;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  opacity: 0.9;
+  transition: all 0.5s ease;
+}
+
+.box:hover .content h3 {
+  transform: translateY(-2px);
+  color: var(--wood-light);
+}
+
+.card-logo {
+  width: 55px;
+  height: auto;
+  margin-bottom: 1.2rem;
+  opacity: 0.9;
+  transition: all 0.5s ease;
+}
+
+.box:hover .card-logo {
+  transform: scale(1.05);
+}
+
+.box .btn {
+  display: inline-block;
+  padding: 10px 24px;
+  background: var(--wood-accent);
+  color: white;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transform: translateY(15px);
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: var(--shadow-gold);
+}
+
+.box:hover .btn {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Lightbox & Gallery animations */
+.animate-fade {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}

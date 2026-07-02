@@ -40,7 +40,7 @@ import { AdminService } from '../../../../services/admin.service';
                   <span class="w-2 h-2 rounded-full bg-wood-accent inline-block"></span>
                   {{ cat.categoria }}
                 </span>
-                <span class="text-gray-400 font-bold">{{ cat.porcentaje }}% <span class="text-[10px] text-gray-500">({{ cat.totalDiseños }} diseños)</span></span>
+                <span class="text-gray-400 font-bold">{{ cat.porcentaje }}% <span class="text-[10px] text-gray-500">({{ cat.totalDisenos }} diseños)</span></span>
               </div>
               <div class="w-full h-3 bg-white/5 rounded-full overflow-hidden p-0.5 border border-white/5">
                 <div class="h-full bg-gradient-to-r from-wood-accent to-wood-light rounded-full transition-all duration-500" [style.width.%]="cat.porcentaje"></div>

@@ -59,7 +59,7 @@ import { AdminService } from '../../../../services/admin.service';
             <div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">📐</div>
           </div>
           <div class="flex items-baseline justify-between">
-            <span class="font-serif text-3xl font-extrabold text-white">{{ adminService.kpis().diseñosCADGuardados }}</span>
+            <span class="font-serif text-3xl font-extrabold text-white">{{ adminService.kpis().disenosCADGuardados }}</span>
             <span class="text-xs text-blue-400 font-bold bg-blue-950/40 px-2 py-0.5 rounded border border-blue-800/40">Activos en nube</span>
           </div>
           <p class="text-[11px] text-gray-500 mt-2">Proyectos creados en simulador</p>

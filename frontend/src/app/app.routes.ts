@@ -12,5 +12,6 @@ export const routes: Routes = [
   { path: 'contacto', component: ContactoComponent, title: 'Contacto | Sysmicon Arquitectura' },
   { path: 'login', component: LoginComponent, title: 'Acceso Privado | Portal Sysmicon' },
   { path: 'registro', component: LoginComponent, title: 'Crear Cuenta | Portal Sysmicon' },
+  { path: 'admin', loadComponent: () => import('./pages/admin/admin-layout/admin-layout.component').then(m => m.AdminLayoutComponent), title: 'Portal Directivo | Sysmicon Admin' },
   { path: '**', redirectTo: '' }
 ];

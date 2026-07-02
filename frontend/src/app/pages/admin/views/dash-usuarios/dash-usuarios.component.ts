@@ -160,7 +160,7 @@ export class DashUsuariosComponent {
     const termino = this.terminoBusqueda.toLowerCase().trim();
     const rol = this.filtroRol();
 
-    return lista.filter(u => {
+    return lista.filter((u: any) => {
       const cumpleRol = rol === 'todos' || u.rol === rol;
       const cumpleBusqueda = !termino || u.nombre.toLowerCase().includes(termino) || u.email.toLowerCase().includes(termino);
       return cumpleRol && cumpleBusqueda;

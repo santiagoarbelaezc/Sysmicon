@@ -62,7 +62,7 @@ export class AdminService {
   // 1. KPIs Generales del Dash Inicio
   readonly kpis = signal({
     totalCotizaciones: 184,
-    diseñosCADGuardados: 412,
+    disenosCADGuardados: 412,
     usuariosRegistrados: 1280,
     ingresoEstimadoUSD: 4250000,
     crecimientoMensual: '+18.4%'
@@ -100,11 +100,11 @@ export class AdminService {
   // 4. Estadísticas
   readonly estadisticas = signal({
     categoriasPopulares: [
-      { categoria: 'Alcobas Suite', porcentaje: 32, totalDiseños: 132 },
-      { categoria: 'Cocinas Gourmet', porcentaje: 24, totalDiseños: 99 },
-      { categoria: 'Piscinas & Solárium', porcentaje: 20, totalDiseños: 82 },
-      { categoria: 'Zonas Sociales Altura', porcentaje: 15, totalDiseños: 62 },
-      { categoria: 'Garajes Cubiertos', porcentaje: 9, totalDiseños: 37 }
+      { categoria: 'Alcobas Suite', porcentaje: 32, totalDisenos: 132 },
+      { categoria: 'Cocinas Gourmet', porcentaje: 24, totalDisenos: 99 },
+      { categoria: 'Piscinas & Solárium', porcentaje: 20, totalDisenos: 82 },
+      { categoria: 'Zonas Sociales Altura', porcentaje: 15, totalDisenos: 62 },
+      { categoria: 'Garajes Cubiertos', porcentaje: 9, totalDisenos: 37 }
     ],
     presupuestosPromedio: [
       { rango: '$100k - $250k USD', porcentaje: 35 },

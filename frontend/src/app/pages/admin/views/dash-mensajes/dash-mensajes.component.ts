@@ -160,7 +160,7 @@ export class DashMensajesComponent {
   textoRespuesta = '';
 
   countSinLeer(): number {
-    return this.adminService.mensajes().filter(m => !m.leido).length;
+    return this.adminService.mensajes().filter((m: any) => !m.leido).length;
   }
 
   seleccionarMensaje(m: MensajeAdmin): void {

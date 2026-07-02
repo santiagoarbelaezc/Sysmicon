@@ -283,12 +283,24 @@ export class AdminLayoutComponent {
   readonly adminService = inject(AdminService);
   readonly router = inject(Router);
 
-  readonly seccionActiva = signal<AdminSection>('inicio');
+  readonly seccionActiva = signal<AdminSection>(
+    (localStorage.getItem('sysmicon_admin_section') as AdminSection) || 'inicio'
+  );
   readonly sidebarAbierto = signal<boolean>(true);
   readonly menuMovilAbierto = signal<boolean>(false);
 
   setSeccion(seccion: AdminSection): void {
     this.seccionActiva.set(seccion);
+    localStorage.setItem('sysmicon_admin_section', seccion);
+    
+    // Forzar scroll al inicio del contenedor de contenido principal y la ventana
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      const mainContent = document.querySelector('main');
+      if (mainContent) {
+        mainContent.scrollTop = 0;
+      }
+    }, 10);
   }
 
   toggleSidebar(): void {

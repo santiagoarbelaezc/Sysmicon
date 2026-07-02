@@ -59,7 +59,7 @@
               <span>Trayectoria Histórica</span>
             </div>
             <h2 class="font-serif text-3xl md:text-4xl text-white mt-2">
-              15 años trazando la <span class="text-accent font-serif">evolución espacial</span>
+              15 años trazando la evolución espacial
             </h2>
           </div>
 
@@ -67,7 +67,7 @@
           <div class="timeline-track-outer relative overflow-hidden w-full py-16">
             <!-- La línea de planos horizontal que se desenvuelve -->
             <div class="absolute top-[50%] left-0 w-full h-[2px] bg-white/10 z-0">
-              <div class="timeline-progress-line h-full bg-wood-accent transition-all duration-[100ms] ease-out" 
+              <div class="timeline-progress-line h-full bg-white transition-all duration-[100ms] ease-out" 
                    [style.width.%]="scrollProgress"></div>
             </div>
 
@@ -86,7 +86,7 @@
                 <!-- Nodo conector animado -->
                 <div class="node-dot w-6 h-6 rounded-full bg-[#111] border-2 border-white/20 my-4 flex items-center justify-center transition-all duration-300"
                      [class.active]="scrollProgress >= (idx * 22)">
-                  <div class="w-2.5 h-2.5 rounded-full bg-wood-accent scale-0 transition-transform duration-300"
+                  <div class="w-2.5 h-2.5 rounded-full bg-white scale-0 transition-transform duration-300"
                        [class.scale-100]="scrollProgress >= (idx * 22)"></div>
                 </div>
 

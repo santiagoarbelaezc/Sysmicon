@@ -193,17 +193,11 @@
   border: 1px solid var(--glass-wood-border);
 }
 
-/* === LÍNEA DE TIEMPO INTERACTIVA CON SCROLL HORIZONTAL === */
+/* === LÍNEA DE TIEMPO INTERACTIVA CON SCROLL HORIZONTAL (MONOCROMÁTICA) === */
 
 .timeline-section-scroll {
   height: 250vh; /* Otorga suficiente scroll vertical para la traslación horizontal */
-  margin: 4rem -2rem; /* Rompe el contenedor de ancho estándar para ir full bleed */
-}
-
-@media (min-width: 768px) {
-  .timeline-section-scroll {
-    margin: 6rem calc(-50vw + 50%); /* Hace que la sección ocupe todo el ancho de la pantalla */
-  }
+  margin: 6rem 0; /* Alineado al ancho del contenido del sitio */
 }
 
 .timeline-sticky-wrapper {
@@ -215,12 +209,12 @@
   align-items: center;
 }
 
-/* Rejilla arquitectónica (Blueprint sutil) */
+/* Rejilla arquitectónica (Blueprint sutil en gris técnico) */
 .blueprint-grid {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
 .timeline-track-outer {
@@ -230,8 +224,8 @@
 .timeline-track {
   display: flex;
   will-change: transform;
-  padding-left: 5%;
-  padding-right: 20%;
+  padding-left: 2%;
+  padding-right: 15%;
 }
 
 .timeline-node {
@@ -241,17 +235,17 @@
   position: relative;
 }
 
-/* Años en gran tamaño (Formatos de Lujo) */
+/* Años en gran tamaño (Blanco y Negro) */
 .year-badge {
-  color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.06);
   transform: scale(0.95);
   transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .year-badge.active {
-  color: var(--wood-light);
+  color: #FFFFFF;
   transform: scale(1.08);
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
 /* Nodos conectores */
@@ -259,15 +253,15 @@
   background: #0D0D0D;
   position: relative;
   z-index: 5;
-  box-shadow: 0 0 0 0px rgba(212, 175, 55, 0);
+  box-shadow: 0 0 0 0px rgba(255, 255, 255, 0);
 }
 
 .node-dot.active {
-  border-color: var(--wood-accent);
-  box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.15);
+  border-color: #FFFFFF;
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.15);
 }
 
-/* Fichas técnicas de hitos */
+/* Fichas técnicas de hitos (Gris y Blanco) */
 .node-card {
   opacity: 0.4;
   transform: translateY(15px);
@@ -277,8 +271,8 @@
 .node-card.active-card {
   opacity: 1;
   transform: translateY(0);
-  border-color: rgba(212, 175, 55, 0.2);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 255, 255, 0.05);
 }
 
 .node-card h3 {

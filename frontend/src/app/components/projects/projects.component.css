@@ -66,7 +66,7 @@
 .portfolio-desktop-section {
   display: flex;
   width: 100%;
-  height: 85vh;
+  height: 95vh; /* Aumentado a 95vh */
   align-items: stretch;
   overflow: hidden;
   background: #0A0A0A;
@@ -101,76 +101,109 @@
   transform: scale(1.05);
 }
 
-/* Tarjeta de Vidrio para el Contenido del Panel */
+/* Contenedor del nombre de la casa (Limpio, sin tarjeta oscura) */
 .content {
-  background: rgba(10, 10, 10, 0.55);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 2.2rem 1.5rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: 2;
   transition: all 0.5s ease;
   pointer-events: none;
 }
 
-.box:hover .content {
-  background: rgba(10, 10, 10, 0.75);
-  border-color: rgba(212, 175, 55, 0.3);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
-}
-
 .content h3 {
-  margin-bottom: 8px;
-  font-size: 1.8rem;
+  font-size: 2.5rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-weight: 700;
+  letter-spacing: 0.25em;
+  font-weight: 300 !important; /* Letra muy delgada y elegante */
+  color: white;
   line-height: 1;
-  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  opacity: 0.9;
-  transition: all 0.5s ease;
+  /* Sombra de texto suave para lectura perfecta en fondos claros */
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.7), 0 2px 4px rgba(0, 0, 0, 0.9);
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  opacity: 0.95;
 }
 
 .box:hover .content h3 {
-  transform: translateY(-2px);
   color: var(--wood-light);
+  letter-spacing: 0.28em;
+  text-shadow: 0 6px 24px rgba(0, 0, 0, 0.9);
 }
 
-.card-logo {
-  width: 55px;
-  height: auto;
-  margin-bottom: 1.2rem;
-  opacity: 0.9;
-  transition: all 0.5s ease;
+/* Keyframes y Clases de Animación Premium para la Galería */
+.animate-backdrop-reveal {
+  animation: backdropReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.box:hover .card-logo {
-  transform: scale(1.05);
+@keyframes backdropReveal {
+  from {
+    background-color: rgba(8, 8, 8, 0);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  to {
+    background-color: rgba(8, 8, 8, 0.98);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
 }
 
-.box .btn {
-  display: inline-block;
-  padding: 10px 24px;
-  background: var(--wood-accent);
-  color: white;
-  border-radius: 999px;
-  font-weight: 800;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  transform: translateY(15px);
-  opacity: 0;
-  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-  box-shadow: var(--shadow-gold);
+.animate-slide-left-fade {
+  animation: slideLeftFade 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.box:hover .btn {
-  transform: translateY(0);
-  opacity: 1;
+@keyframes slideLeftFade {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-/* Lightbox & Gallery animations */
+.animate-slide-up-fade {
+  animation: slideUpFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Transiciones Premium para el Lightbox */
+.animate-lightbox-backdrop {
+  animation: lightboxBackdrop 0.4s ease-out forwards;
+}
+
+@keyframes lightboxBackdrop {
+  from { background-color: rgba(0, 0, 0, 0); }
+  to { background-color: rgba(0, 0, 0, 0.98); }
+}
+
+.animate-lightbox-image {
+  animation: lightboxImageReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes lightboxImageReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Lightbox & Gallery animations fallback */
 .animate-fade {
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

@@ -73,10 +73,10 @@
 </section>
 
 <!-- ===== MODAL DE GALERÍA EXPANDIDO (95vw) ===== -->
-<div *ngIf="selectedProject() as p" class="fixed inset-0 z-[99999] bg-[#080808]/98 backdrop-blur-md overflow-y-auto p-4 md:p-8 flex flex-col items-center justify-start animate-fade">
+<div *ngIf="selectedProject() as p" class="fixed inset-0 z-[99999] overflow-y-auto p-4 md:p-8 flex flex-col items-center justify-start animate-backdrop-reveal">
   
   <!-- Encabezado de la Galería -->
-  <div class="max-w-[95vw] w-full flex items-center justify-between border-b border-white/10 pb-5 mb-8 mt-4">
+  <div class="max-w-[95vw] w-full flex items-center justify-between border-b border-white/10 pb-5 mb-8 mt-4 animate-slide-up-fade">
     <div class="flex items-center gap-3">
       <img src="assets/icons/logo-sysmico.png" alt="Sysmicon" class="w-8 h-8 object-contain">
       <div>
@@ -93,7 +93,7 @@
   <div class="max-w-[95vw] w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
     
     <!-- Lado Izquierdo: Ficha del Proyecto (Cols 1-4) -->
-    <div class="lg:col-span-4 bg-[#111] border border-white/10 rounded-2xl p-6 space-y-5 font-sans lg:sticky lg:top-8">
+    <div class="lg:col-span-4 bg-[#111] border border-white/10 rounded-2xl p-6 space-y-5 font-sans lg:sticky lg:top-8 animate-slide-left-fade">
       <div>
         <span class="text-[10px] bg-wood-accent/20 text-wood-light border border-wood-accent/30 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Especificación</span>
         <h4 class="font-serif text-xl font-bold text-white mt-3">{{ p.title }}</h4>
@@ -126,7 +126,7 @@
     </div>
 
     <!-- Lado Derecho: Cuadrícula Estilo VSCO / Grid de Imágenes a Ancho Completo (Cols 5-12) -->
-    <div class="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-4">
+    <div class="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-4 animate-slide-up-fade">
       <div *ngFor="let img of p.images; let idx = index" 
            (click)="abrirLightbox(img)"
            class="group relative aspect-square rounded-xl overflow-hidden bg-[#111] border border-white/5 cursor-pointer shadow-md hover:border-wood-accent/50 transition-all duration-300">
@@ -144,14 +144,14 @@
 </div>
 
 <!-- ===== PANTALLA COMPLETA LIGHTBOX EXPANDIDA ===== -->
-<div *ngIf="activeLightboxImage() as lbImg" class="fixed inset-0 z-[100000] bg-black/98 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 select-none animate-fade" (click)="cerrarLightbox()">
+<div *ngIf="activeLightboxImage() as lbImg" class="fixed inset-0 z-[100000] flex items-center justify-center p-4 md:p-8 select-none animate-lightbox-backdrop" (click)="cerrarLightbox()">
   <!-- Botón Cerrar Lightbox -->
   <button (click)="cerrarLightbox(); $event.stopPropagation()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 flex items-center justify-center text-white text-lg transition-colors cursor-pointer z-50">
     ✕
   </button>
   
   <!-- Imagen del Lightbox (Ocupa hasta el 95vw y 90vh) -->
-  <div class="relative max-w-[95vw] max-h-[90vh] flex items-center justify-center" (click)="$event.stopPropagation()">
+  <div class="relative max-w-[95vw] max-h-[90vh] flex items-center justify-center animate-lightbox-image" (click)="$event.stopPropagation()">
     <img [src]="lbImg" alt="Vista ampliada" class="w-auto h-auto max-w-[95vw] max-h-[90vh] object-contain rounded-lg shadow-2xl border border-white/10">
     <!-- Info -->
     <div class="absolute -bottom-10 left-0 right-0 text-center text-xs text-gray-400 tracking-wider">

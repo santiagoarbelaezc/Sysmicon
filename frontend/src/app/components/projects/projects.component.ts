@@ -24,7 +24,7 @@ export class ProjectsComponent {
       id: 'casaM',
       title: 'CASA M',
       subtitle: 'Geometría minimalista integrada con materiales nobles y luz natural en el Oriente Antioqueño.',
-      img: 'assets/images/casaM/1.png',
+      img: 'images/imagen6.jpg',
       images: [
         'assets/images/casaM/1.png',
         'assets/images/casaM/2.png',

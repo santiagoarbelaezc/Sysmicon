@@ -1,19 +1,42 @@
-<div class="test-card glass-card">
-  <div class="quote-icon font-serif">“</div>
-  
-  <div class="stars">
-    <span *ngFor="let s of getStarsArray()" class="star">★</span>
+<div class="service-card testimonial-card" [ngClass]="{'card-alt': index % 2 === 1}">
+  <!-- Trazos esquineros arquitectónicos decorativos -->
+  <div class="arch-plan-box-top"></div>
+  <div class="arch-plan-box-bottom"></div>
+  <div class="arch-corner-line"></div>
+
+  <!-- Columna izquierda: Número e ícono de comillas de diseño -->
+  <div class="card-left-col">
+    <span class="card-number font-serif">0{{ index + 1 }}</span>
+    
+    <div class="icon-box">
+      <!-- Icono de comillas vectoriales elegantes -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2H5c-1.25 0-2 .75-2 2v3c0 1.25.75 2 2 2h3c0 3-2 5-5 6v4zm11 0c3 0 7-1 7-8V5c0-1.25-.75-2-2-2h-3c-1.25 0-2 .75-2 2v3c0 1.25.75 2 2 2h3c0 3-2 5-5 6v4z"/>
+      </svg>
+    </div>
   </div>
 
-  <p class="comment font-sans">{{ testimonio.comentario }}</p>
+  <!-- Columna derecha: Comentario, Estrellas y Datos del cliente -->
+  <div class="card-right-col">
+    <div>
+      <!-- Calificación en estrellas doradas -->
+      <div class="stars-container mb-2">
+        <span *ngFor="let s of getStarsArray()" class="text-amber-500 text-sm">★</span>
+      </div>
+      
+      <p class="card-desc font-sans italic">“{{ testimonio.comentario }}”</p>
+      
+      <div class="arch-divider"></div>
 
-  <div class="divider-wood"></div>
+      <h4 class="card-title font-serif text-lg mb-1">{{ testimonio.cliente }}</h4>
+    </div>
 
-  <div class="client-info">
-    <div class="client-meta">
-      <h4 class="client-name font-serif">{{ testimonio.cliente }}</h4>
-      <span class="client-role font-sans">{{ testimonio.puesto }}</span>
-      <span class="client-project font-sans">📌 {{ testimonio.proyectoNombre }}</span>
+    <div class="card-footer-test font-sans flex flex-col gap-0.5 text-xs text-gray-500 pt-3 border-t border-black/5">
+      <span class="font-bold text-gray-700">{{ testimonio.puesto }}</span>
+      <span class="text-wood-light font-medium flex items-center gap-1">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="11" r="3"/><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/></svg>
+        {{ testimonio.proyectoNombre }}
+      </span>
     </div>
   </div>
 </div>

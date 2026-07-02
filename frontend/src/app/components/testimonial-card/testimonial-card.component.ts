@@ -11,6 +11,7 @@ import { Testimonio } from '../../models/testimonio.model';
 })
 export class TestimonialCardComponent {
   @Input({ required: true }) testimonio!: Testimonio;
+  @Input() index: number = 0;
 
   getStarsArray(): number[] {
     return Array(this.testimonio.calificacion).fill(0);

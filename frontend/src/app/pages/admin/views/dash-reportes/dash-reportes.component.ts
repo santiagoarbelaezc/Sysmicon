@@ -118,7 +118,7 @@ import { AdminService, ReporteAdmin } from '../../../../services/admin.service';
                         class="p-2 rounded-lg bg-white/5 hover:bg-wood-accent hover:text-[#111] text-gray-300 font-bold transition-all cursor-pointer inline-flex items-center justify-center">
                   <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
                 </button>
-                <button (click)="descargarReporte(rep.titulo)" title="Volver a Descargar" 
+                <button (click)="descargarReporte(rep)" title="Volver a Descargar" 
                         class="px-3 py-2 rounded-lg bg-wood-accent/15 hover:bg-wood-accent text-wood-light hover:text-[#111] font-bold text-[11px] transition-all cursor-pointer flex items-center gap-1.5 shadow">
                   <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                   <span>Descargar</span>
@@ -358,17 +358,120 @@ export class DashReportesComponent {
     if (!this.formTitulo.trim()) return;
     this.adminService.generarReporte(this.formTitulo, this.formTipo, this.formFormato);
     this.alertaDescarga.set(this.formTitulo);
+    this.ejecutarDescargaReal(this.formTitulo, this.formFormato, this.formTipo);
     this.formTitulo = '';
     setTimeout(() => {
       this.alertaDescarga.set('');
     }, 5000);
   }
 
-  descargarReporte(titulo: string): void {
-    this.alertaDescarga.set(titulo);
+  descargarReporte(rep: ReporteAdmin): void {
+    this.alertaDescarga.set(rep.titulo);
+    this.ejecutarDescargaReal(rep.titulo, rep.formato, rep.tipo);
     setTimeout(() => {
       this.alertaDescarga.set('');
     }, 5000);
+  }
+
+  ejecutarDescargaReal(titulo: string, formato: 'PDF' | 'EXCEL' | 'CSV', tipo: 'financiero' | 'operativo' | 'cad_studio'): void {
+    let content = '';
+    const cleanFileName = `${titulo.toLowerCase().replace(/[^a-z0-9]+/g, '_')}`;
+
+    if (formato === 'CSV') {
+      content = "SYSMICON;REPORT OFICIAL\n";
+      content += `Titulo;${titulo}\n`;
+      content += `Tipo de Reporte;${tipo}\n`;
+      content += `Fecha;${new Date().toLocaleDateString()}\n\n`;
+      if (tipo === 'financiero') {
+        content += "Metrica;Valor;Crecimiento\n";
+        content += "Volumen Total Cotizado;$4250000 USD;+18.4%\n";
+        content += "Ticket Promedio por Residencia;$320000 USD;+12.1%\n";
+        content += "Cotizaciones Formales;184;+8.5%\n";
+      } else if (tipo === 'operativo') {
+        content += "Metrica;Total;Estado\n";
+        content += "Usuarios Registrados;1280;Activo / Creciente\n";
+        content += "Tiempo de Decision;18 dias;Optimizando (-4 dias)\n";
+        content += "Satisfaccion Propietarios;99.4%;Excelente\n";
+      } else {
+        content += "Categoria CAD;Porcentaje;Total Diseños\n";
+        content += "Alcobas Suite;32%;132\n";
+        content += "Cocinas Gourmet;24%;99\n";
+        content += "Piscinas;20%;82\n";
+        content += "Zonas Sociales;15%;62\n";
+      }
+      const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+      this.triggerBlobDownload(blob, `${cleanFileName}.csv`);
+
+    } else if (formato === 'EXCEL') {
+      content = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">`;
+      content += `<head><meta charset="utf-8"></head><body>`;
+      content += `<h2>SYSMICON - ${titulo}</h2>`;
+      content += `<p><b>Tipo:</b> ${tipo} | <b>Fecha:</b> ${new Date().toLocaleDateString()}</p>`;
+      content += `<table border="1">`;
+      if (tipo === 'financiero') {
+        content += `<tr style="background:#f2f2f2"><th>Métrica Financiera</th><th>Valor</th><th>Crecimiento</th></tr>`;
+        content += `<tr><td>Volumen Total Cotizado</td><td>$4,250,000 USD</td><td>+18.4%</td></tr>`;
+        content += `<tr><td>Ticket Promedio por Residencia</td><td>$320,000 USD</td><td>+12.1%</td></tr>`;
+        content += `<tr><td>Cotizaciones Formales</td><td>184</td><td>+8.5%</td></tr>`;
+      } else if (tipo === 'operativo') {
+        content += `<tr style="background:#f2f2f2"><th>Métrica Operativa</th><th>Total</th><th>Estado</th></tr>`;
+        content += `<tr><td>Usuarios Registrados</td><td>1,280</td><td>Activo / Creciente</td></tr>`;
+        content += `<tr><td>Tiempo de Decisión</td><td>18 días</td><td>Optimizando</td></tr>`;
+        content += `<tr><td>Satisfacción Propietarios</td><td>99.4%</td><td>Excelente</td></tr>`;
+      } else {
+        content += `<tr style="background:#f2f2f2"><th>Categoría CAD</th><th>Porcentaje</th><th>Total Diseños</th></tr>`;
+        content += `<tr><td>Alcobas Suite</td><td>32%</td><td>132</td></tr>`;
+        content += `<tr><td>Cocinas Gourmet</td><td>24%</td><td>99</td></tr>`;
+        content += `<tr><td>Piscinas</td><td>20%</td><td>82</td></tr>`;
+        content += `<tr><td>Zonas Sociales</td><td>15%</td><td>62</td></tr>`;
+      }
+      content += `</table></body></html>`;
+      const blob = new Blob([content], { type: 'application/vnd.ms-excel' });
+      this.triggerBlobDownload(blob, `${cleanFileName}.xls`);
+
+    } else {
+      content = `==================================================\n`;
+      content += `                  SYSMICON                        \n`;
+      content += `   Studio CAD & Intelligent Residential Simulation\n`;
+      content += `==================================================\n\n`;
+      content += `INFORME OFICIAL: ${titulo}\n`;
+      content += `Tipo de Reporte: ${tipo.toUpperCase()}\n`;
+      content += `Fecha de Generacion: ${new Date().toLocaleDateString()}\n`;
+      content += `--------------------------------------------------\n\n`;
+      if (tipo === 'financiero') {
+        content += `1. METRICAS FINANCIERAS GLOBAL:\n`;
+        content += `   - Volumen Total Cotizado: $4,250,000 USD (+18.4%)\n`;
+        content += `   - Ticket Promedio: $320,000 USD (+12.1%)\n`;
+        content += `   - Cotizaciones Formales: 184 documentos (+8.5%)\n`;
+      } else if (tipo === 'operativo') {
+        content += `1. ACTIVIDAD OPERATIVA DE LEADS:\n`;
+        content += `   - Usuarios Registrados: 1,280 usuarios\n`;
+        content += `   - Tiempo de Decision Promedio: 18 dias\n`;
+        content += `   - Satisfaccion Propietarios: 99.4%\n`;
+      } else {
+        content += `1. METRICAS DE DISEÑOS CAD GUARDADOS:\n`;
+        content += `   - Alcobas Suite: 32% (132 diseños)\n`;
+        content += `   - Cocinas Gourmet: 24% (99 diseños)\n`;
+        content += `   - Piscinas & Solárium: 20% (82 diseños)\n`;
+        content += `   - Zonas Sociales Altura: 15% (62 diseños)\n`;
+      }
+      content += `\n==================================================\n`;
+      content += `Firmado Digitalmente por Servidor Sysmicon Nube\n`;
+      
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8;' });
+      this.triggerBlobDownload(blob, `${cleanFileName}.txt`);
+    }
+  }
+
+  private triggerBlobDownload(blob: Blob, fileName: string): void {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   }
 
   abrirVistaPreviaImprimible(reporte: ReporteAdmin): void {

@@ -20,11 +20,14 @@ export class AppComponent implements OnInit {
   constructor(public router: Router) {}
 
   get showNavbar(): boolean {
-    return !this.router.url.includes('/admin');
+    return !this.router.url.includes('/admin') && !this.router.url.includes('/olvide-mi-contrasena');
   }
 
   get showFooter(): boolean {
-    return !this.router.url.includes('/login') && !this.router.url.includes('/registro') && !this.router.url.includes('/admin');
+    return !this.router.url.includes('/login')
+      && !this.router.url.includes('/registro')
+      && !this.router.url.includes('/admin')
+      && !this.router.url.includes('/olvide-mi-contrasena');
   }
 
   ngOnInit() {

@@ -192,3 +192,96 @@
   margin-top: 5rem;
   border: 1px solid var(--glass-wood-border);
 }
+
+/* === LÍNEA DE TIEMPO INTERACTIVA CON SCROLL HORIZONTAL === */
+
+.timeline-section-scroll {
+  height: 250vh; /* Otorga suficiente scroll vertical para la traslación horizontal */
+  margin: 4rem -2rem; /* Rompe el contenedor de ancho estándar para ir full bleed */
+}
+
+@media (min-width: 768px) {
+  .timeline-section-scroll {
+    margin: 6rem calc(-50vw + 50%); /* Hace que la sección ocupe todo el ancho de la pantalla */
+  }
+}
+
+.timeline-sticky-wrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* Rejilla arquitectónica (Blueprint sutil) */
+.blueprint-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+.timeline-track-outer {
+  width: 100%;
+}
+
+.timeline-track {
+  display: flex;
+  will-change: transform;
+  padding-left: 5%;
+  padding-right: 20%;
+}
+
+.timeline-node {
+  flex-shrink: 0;
+  width: 320px;
+  text-align: center;
+  position: relative;
+}
+
+/* Años en gran tamaño (Formatos de Lujo) */
+.year-badge {
+  color: rgba(255, 255, 255, 0.08);
+  transform: scale(0.95);
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.year-badge.active {
+  color: var(--wood-light);
+  transform: scale(1.08);
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+}
+
+/* Nodos conectores */
+.node-dot {
+  background: #0D0D0D;
+  position: relative;
+  z-index: 5;
+  box-shadow: 0 0 0 0px rgba(212, 175, 55, 0);
+}
+
+.node-dot.active {
+  border-color: var(--wood-accent);
+  box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.15);
+}
+
+/* Fichas técnicas de hitos */
+.node-card {
+  opacity: 0.4;
+  transform: translateY(15px);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.node-card.active-card {
+  opacity: 1;
+  transform: translateY(0);
+  border-color: rgba(212, 175, 55, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.05);
+}
+
+.node-card h3 {
+  letter-spacing: 0.05em;
+}
+

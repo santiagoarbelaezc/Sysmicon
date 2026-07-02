@@ -43,7 +43,9 @@ import { AdminService } from '../../../../services/admin.service';
         <div class="bg-[#111111] hover:bg-[#151515] border border-white/10 hover:border-wood-accent/40 rounded-2xl p-5 transition-all shadow-lg group">
           <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Cotizaciones Formales</span>
-            <div class="w-10 h-10 rounded-xl bg-wood-accent/15 text-wood-light flex items-center justify-center text-lg group-hover:scale-110 transition-transform">📋</div>
+            <div class="w-10 h-10 rounded-xl bg-wood-accent/15 text-wood-light flex items-center justify-center">
+              <svg class="w-5 h-5 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+            </div>
           </div>
           <div class="flex items-baseline justify-between">
             <span class="font-serif text-3xl font-extrabold text-white">{{ adminService.kpis().totalCotizaciones }}</span>
@@ -56,7 +58,9 @@ import { AdminService } from '../../../../services/admin.service';
         <div class="bg-[#111111] hover:bg-[#151515] border border-white/10 hover:border-wood-accent/40 rounded-2xl p-5 transition-all shadow-lg group">
           <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Diseños CAD 2D</span>
-            <div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">📐</div>
+            <div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center">
+              <svg class="w-5 h-5 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 0 3.4Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
+            </div>
           </div>
           <div class="flex items-baseline justify-between">
             <span class="font-serif text-3xl font-extrabold text-white">{{ adminService.kpis().disenosCADGuardados }}</span>
@@ -69,7 +73,9 @@ import { AdminService } from '../../../../services/admin.service';
         <div class="bg-[#111111] hover:bg-[#151515] border border-white/10 hover:border-wood-accent/40 rounded-2xl p-5 transition-all shadow-lg group">
           <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Comunidad Sysmicon</span>
-            <div class="w-10 h-10 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">👥</div>
+            <div class="w-10 h-10 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center">
+              <svg class="w-5 h-5 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
           </div>
           <div class="flex items-baseline justify-between">
             <span class="font-serif text-3xl font-extrabold text-white">{{ adminService.kpis().usuariosRegistrados }}</span>
@@ -82,7 +88,9 @@ import { AdminService } from '../../../../services/admin.service';
         <div class="bg-[#111111] hover:bg-[#151515] border border-white/10 hover:border-wood-accent/40 rounded-2xl p-5 transition-all shadow-lg group">
           <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Pipeline Estimado</span>
-            <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">💲</div>
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+              <svg class="w-5 h-5 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
           </div>
           <div class="flex items-baseline justify-between">
             <span class="font-serif text-2xl sm:text-3xl font-extrabold text-white">\${{ (adminService.kpis().ingresoEstimadoUSD / 1000000).toFixed(2) }}M</span>
@@ -142,7 +150,9 @@ import { AdminService } from '../../../../services/admin.service';
             <div class="space-y-4">
               
               <div class="flex items-start gap-3 p-3 rounded-xl bg-[#161616] border border-white/5">
-                <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">✨</div>
+                <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
                 <div>
                   <p class="text-xs font-bold text-white">Nuevo Lead: Dr. Fernando Hoyos</p>
                   <p class="text-[11px] text-gray-400 leading-snug">Cotizó casa en Llanogrande por $450k USD.</p>
@@ -151,7 +161,9 @@ import { AdminService } from '../../../../services/admin.service';
               </div>
 
               <div class="flex items-start gap-3 p-3 rounded-xl bg-[#161616] border border-white/5">
-                <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">📐</div>
+                <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg class="w-4 h-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18L3 3v18z"/><path d="M7 17h6l-6-6v6z"/></svg>
+                </div>
                 <div>
                   <p class="text-xs font-bold text-white">Diseño CAD Guardado #412</p>
                   <p class="text-[11px] text-gray-400 leading-snug">Arq. Mariana Vélez exportó distribución 2D.</p>
@@ -160,7 +172,9 @@ import { AdminService } from '../../../../services/admin.service';
               </div>
 
               <div class="flex items-start gap-3 p-3 rounded-xl bg-[#161616] border border-white/5">
-                <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">👤</div>
+                <div class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg class="w-4 h-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
                 <div>
                   <p class="text-xs font-bold text-white">Nuevo Propietario Registrado</p>
                   <p class="text-[11px] text-gray-400 leading-snug">Sofia Londoño creó cuenta privada.</p>

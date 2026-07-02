@@ -151,7 +151,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
           <!-- Botón Menú Móvil -->
           <div class="flex items-center gap-4">
             <button (click)="toggleMenuMovil()" class="lg:hidden text-gray-300 hover:text-white p-2 rounded-lg bg-white/5 text-lg">
-              ☰
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
             </button>
             <div class="flex items-center gap-2">
               <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Sección:</span>
@@ -163,7 +163,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
 
           <!-- Buscador Rápido Top Header -->
           <div class="hidden md:flex items-center relative max-w-xs w-full">
-            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xs">🔍</span>
+            <svg class="w-4 h-4 text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
             <input type="text" placeholder="Buscar en el portal o catálogo..." 
                    class="w-full pl-9 pr-4 py-2 rounded-xl bg-[#161616] border border-white/10 text-white text-xs placeholder-gray-500 focus:border-wood-accent focus:outline-none">
           </div>
@@ -171,8 +171,8 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
           <!-- Acciones Derecha (Notificaciones & Perfil) -->
           <div class="flex items-center gap-4">
             
-            <button (click)="setSeccion('mensajes')" title="Notificaciones" class="relative p-2.5 rounded-xl bg-[#161616] border border-white/10 text-gray-300 hover:text-white hover:border-wood-accent/50 transition-all">
-              <span>🔔</span>
+            <button (click)="setSeccion('mensajes')" title="Notificaciones" class="relative p-2.5 rounded-xl bg-[#161616] border border-white/10 text-gray-300 hover:text-white hover:border-wood-accent/50 transition-all group">
+              <svg class="w-4 h-4 text-gray-300 group-hover:text-wood-light transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
               <span *ngIf="countMensajesSinLeer() > 0" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 text-black text-[9px] font-extrabold flex items-center justify-center">
                 {{ countMensajesSinLeer() }}
               </span>
@@ -187,8 +187,8 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
                 <span class="text-xs font-bold text-white block leading-none">David Jaramillo</span>
                 <span class="text-[10px] text-wood-light uppercase tracking-wider font-bold">Director Senior</span>
               </div>
-              <button (click)="cerrarSesionAdmin()" title="Cerrar sesión o salir del Admin" class="text-gray-400 hover:text-red-400 ml-1 text-sm font-bold">
-                ✕
+              <button (click)="cerrarSesionAdmin()" title="Cerrar sesión o salir del Admin" class="text-gray-400 hover:text-red-400 ml-1 p-1 rounded hover:bg-white/5 transition-colors">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
               </button>
             </div>
 

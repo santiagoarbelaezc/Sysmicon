@@ -157,27 +157,20 @@
           <!-- Selector de Rol del Usuario con Iconos Vectoriales SVG -->
           <div>
             <label class="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1.5 font-sans">¿Cuál es tu perfil en Sysmicon? *</label>
-            <div class="grid grid-cols-3 gap-2">
+            <div class="grid grid-cols-2 gap-3">
               
               <button type="button" (click)="regRol = 'propietario'"
                       [ngClass]="{'bg-wood-accent/20 border-wood-accent text-wood-light font-bold shadow-md': regRol === 'propietario', 'bg-[#161616] border-white/10 text-gray-400 hover:border-white/25': regRol !== 'propietario'}"
-                      class="py-2 px-2 rounded-xl border text-[11px] text-center transition-all cursor-pointer flex flex-col items-center gap-1">
+                      class="py-2.5 px-3 rounded-xl border text-[11px] text-center transition-all cursor-pointer flex flex-col items-center gap-1.5">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                 <span>Propietario</span>
               </button>
 
               <button type="button" (click)="regRol = 'arquitecto'"
                       [ngClass]="{'bg-wood-accent/20 border-wood-accent text-wood-light font-bold shadow-md': regRol === 'arquitecto', 'bg-[#161616] border-white/10 text-gray-400 hover:border-white/25': regRol !== 'arquitecto'}"
-                      class="py-2 px-2 rounded-xl border text-[11px] text-center transition-all cursor-pointer flex flex-col items-center gap-1">
+                      class="py-2.5 px-3 rounded-xl border text-[11px] text-center transition-all cursor-pointer flex flex-col items-center gap-1.5">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l10 10-10 10L2 12 12 2z"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
                 <span>Arquitecto</span>
-              </button>
-
-              <button type="button" (click)="regRol = 'inversionista'"
-                      [ngClass]="{'bg-wood-accent/20 border-wood-accent text-wood-light font-bold shadow-md': regRol === 'inversionista', 'bg-[#161616] border-white/10 text-gray-400 hover:border-white/25': regRol !== 'inversionista'}"
-                      class="py-2 px-2 rounded-xl border text-[11px] text-center transition-all cursor-pointer flex flex-col items-center gap-1">
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
-                <span>Inversionista</span>
               </button>
 
             </div>

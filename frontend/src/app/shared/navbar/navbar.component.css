@@ -101,8 +101,8 @@
 }
 
 .nav-link:hover, .nav-link.active {
-  color: var(--wood-light);
-  text-shadow: 0 0 12px rgba(212, 184, 154, 0.4);
+  color: #000000;
+  text-shadow: none;
 }
 
 .link-underline {
@@ -111,13 +111,27 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--wood-light);
-  box-shadow: 0 0 8px var(--wood-light);
+  background: #000000;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
   transition: width var(--transition-smooth);
 }
 
 .nav-link:hover .link-underline, .nav-link.active .link-underline {
   width: 100%;
+}
+
+/* Cuando el navbar tiene fondo oscuro (scrolled o auth-solid), cambiamos a blanco para perfecta visibilidad */
+.navbar.scrolled .nav-link:hover,
+.navbar.scrolled .nav-link.active,
+.navbar.auth-solid .nav-link:hover,
+.navbar.auth-solid .nav-link.active {
+  color: #FFFFFF;
+}
+
+.navbar.scrolled .link-underline,
+.navbar.auth-solid .link-underline {
+  background: #FFFFFF;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
 }
 
 /* Desktop CTA Button */
@@ -229,7 +243,7 @@
 }
 
 .mobile-nav-link:hover, .mobile-nav-link.active {
-  color: var(--wood-light);
+  color: #FFFFFF;
   transform: scale(1.05);
 }
 

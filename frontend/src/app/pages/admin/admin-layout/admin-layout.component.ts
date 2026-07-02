@@ -60,7 +60,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
           <button (click)="setSeccion('inicio')"
                   [ngClass]="seccionActiva() === 'inicio' ? 'bg-wood-accent text-[#111] font-bold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
                   class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-xs transition-all cursor-pointer group">
-            <span class="text-base shrink-0">🏠</span>
+            <svg class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate">Dash Inicio</span>
           </button>
 
@@ -68,7 +68,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
           <button (click)="setSeccion('analiticas')"
                   [ngClass]="seccionActiva() === 'analiticas' ? 'bg-wood-accent text-[#111] font-bold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
                   class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-xs transition-all cursor-pointer group">
-            <span class="text-base shrink-0">📈</span>
+            <svg class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate">Analíticas</span>
           </button>
 
@@ -76,7 +76,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
           <button (click)="setSeccion('cad2')"
                   [ngClass]="seccionActiva() === 'cad2' ? 'bg-wood-accent text-[#111] font-bold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
                   class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-xs transition-all cursor-pointer group">
-            <span class="text-base shrink-0">📐</span>
+            <svg class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 0 3.4Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate flex items-center justify-between w-full">
               <span>CAD 2</span>
               <span class="bg-blue-500/20 text-blue-300 text-[9px] px-1.5 py-0.5 rounded font-bold">PRO</span>
@@ -87,7 +87,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
           <button (click)="setSeccion('estadisticas')"
                   [ngClass]="seccionActiva() === 'estadisticas' ? 'bg-wood-accent text-[#111] font-bold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
                   class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-xs transition-all cursor-pointer group">
-            <span class="text-base shrink-0">📊</span>
+            <svg class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate">Estadísticas</span>
           </button>
 
@@ -95,7 +95,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
           <button (click)="setSeccion('personalizar')"
                   [ngClass]="seccionActiva() === 'personalizar' ? 'bg-wood-accent text-[#111] font-bold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
                   class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-xs transition-all cursor-pointer group">
-            <span class="text-base shrink-0">🎨</span>
+            <svg class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate">Personalizar Sitio</span>
           </button>
 
@@ -103,7 +103,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
           <button (click)="setSeccion('usuarios')"
                   [ngClass]="seccionActiva() === 'usuarios' ? 'bg-wood-accent text-[#111] font-bold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
                   class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-xs transition-all cursor-pointer group">
-            <span class="text-base shrink-0">👥</span>
+            <svg class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate flex items-center justify-between w-full">
               <span>Usuarios</span>
               <span class="bg-white/10 text-gray-300 text-[10px] px-1.5 py-0.5 rounded">{{ adminService.usuarios().length }}</span>
@@ -114,7 +114,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
           <button (click)="setSeccion('mensajes')"
                   [ngClass]="seccionActiva() === 'mensajes' ? 'bg-wood-accent text-[#111] font-bold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
                   class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-xs transition-all cursor-pointer group">
-            <span class="text-base shrink-0">💬</span>
+            <svg class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate flex items-center justify-between w-full">
               <span>Mensajes</span>
               <span *ngIf="countMensajesSinLeer() > 0" class="bg-emerald-500 text-black text-[10px] font-extrabold px-1.5 py-0.5 rounded-full animate-bounce">{{ countMensajesSinLeer() }}</span>
@@ -125,7 +125,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
           <button (click)="setSeccion('reportes')"
                   [ngClass]="seccionActiva() === 'reportes' ? 'bg-wood-accent text-[#111] font-bold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
                   class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-xs transition-all cursor-pointer group">
-            <span class="text-base shrink-0">📑</span>
+            <svg class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate">Reportes</span>
           </button>
 
@@ -134,8 +134,8 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
         <!-- Footer Sidebar (Regresar al sitio) -->
         <div class="p-4 border-t border-white/10">
           <a routerLink="/" 
-             class="flex items-center gap-3 p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white text-xs transition-colors">
-            <span class="text-base shrink-0">🌐</span>
+             class="flex items-center gap-3 p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white text-xs transition-colors group">
+            <svg class="w-4 h-4 shrink-0 text-wood-light group-hover:rotate-12 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate font-bold">Ver Sitio Web</span>
           </a>
         </div>
@@ -230,34 +230,47 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
 
           <nav class="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
             <button (click)="setSeccion('inicio'); toggleMenuMovil()" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-3 text-gray-300 hover:bg-white/5">
-              <span>🏠</span> Dash Inicio
+              <svg class="w-4 h-4 shrink-0 text-wood-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span>Dash Inicio</span>
             </button>
             <button (click)="setSeccion('analiticas'); toggleMenuMovil()" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-3 text-gray-300 hover:bg-white/5">
-              <span>📈</span> Analíticas
+              <svg class="w-4 h-4 shrink-0 text-wood-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+              <span>Analíticas</span>
             </button>
             <button (click)="setSeccion('cad2'); toggleMenuMovil()" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold flex items-center justify-between text-gray-300 hover:bg-white/5">
-              <span class="flex items-center gap-3"><span>📐</span> CAD 2</span>
+              <span class="flex items-center gap-3">
+                <svg class="w-4 h-4 shrink-0 text-wood-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 0 3.4Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
+                <span>CAD 2</span>
+              </span>
               <span class="bg-blue-500/20 text-blue-300 text-[9px] px-1.5 py-0.5 rounded font-bold">PRO</span>
             </button>
             <button (click)="setSeccion('estadisticas'); toggleMenuMovil()" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-3 text-gray-300 hover:bg-white/5">
-              <span>📊</span> Estadísticas
+              <svg class="w-4 h-4 shrink-0 text-wood-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              <span>Estadísticas</span>
             </button>
             <button (click)="setSeccion('personalizar'); toggleMenuMovil()" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-3 text-gray-300 hover:bg-white/5">
-              <span>🎨</span> Personalizar Sitio
+              <svg class="w-4 h-4 shrink-0 text-wood-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+              <span>Personalizar Sitio</span>
             </button>
             <button (click)="setSeccion('usuarios'); toggleMenuMovil()" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-3 text-gray-300 hover:bg-white/5">
-              <span>👥</span> Usuarios
+              <svg class="w-4 h-4 shrink-0 text-wood-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>Usuarios</span>
             </button>
             <button (click)="setSeccion('mensajes'); toggleMenuMovil()" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-3 text-gray-300 hover:bg-white/5">
-              <span>💬</span> Mensajes
+              <svg class="w-4 h-4 shrink-0 text-wood-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span>Mensajes</span>
             </button>
             <button (click)="setSeccion('reportes'); toggleMenuMovil()" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-3 text-gray-300 hover:bg-white/5">
-              <span>📑</span> Reportes
+              <svg class="w-4 h-4 shrink-0 text-wood-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+              <span>Reportes</span>
             </button>
           </nav>
 
           <div class="p-4 border-t border-white/10">
-            <a routerLink="/" class="block w-full text-center py-2.5 rounded-xl bg-white/10 text-white font-bold text-xs">🌐 Regresar a Sysmicon</a>
+            <a routerLink="/" class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white/10 text-white font-bold text-xs">
+              <svg class="w-4 h-4 shrink-0 text-wood-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span>Regresar a Sysmicon</span>
+            </a>
           </div>
         </aside>
       </div>

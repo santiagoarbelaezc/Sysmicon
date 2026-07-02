@@ -1,8 +1,8 @@
 <header class="navbar" [ngClass]="{'scrolled': isScrolled() && !isAuthPage, 'auth-solid': isAuthPage}">
   <div class="w-full max-w-[1800px] mx-auto px-6 md:px-12 navbar-container flex items-center justify-between">
     <!-- Logo -->
-    <a routerLink="/" class="navbar-logo flex items-center gap-3 z-[1001]" (click)="closeMobileMenu()">
-      <span class="logo-mark font-serif">S</span>
+    <a routerLink="/" class="navbar-logo group flex items-center gap-3 z-[1001]" (click)="closeMobileMenu()">
+      <img src="assets/icons/logo-sysmico-navbar.png" alt="Sysmicon" class="w-10 h-10 md:w-11 md:h-11 object-contain transition-transform duration-300 group-hover:scale-105">
       <span class="logo-text font-serif">{{ brandName }}</span>
     </a>
 

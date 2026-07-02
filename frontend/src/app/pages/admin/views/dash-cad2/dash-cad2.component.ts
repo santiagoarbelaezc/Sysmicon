@@ -3,12 +3,21 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminService, BloqueAdmin } from '../../../../services/admin.service';
 
+interface CategoriaResumen {
+  id: string;
+  nombre: string;
+  iconoSvg: string;
+  totalBloques: number;
+  activos: number;
+  imagenMuestra: string;
+}
+
 @Component({
   selector: 'app-dash-cad2',
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <div class="space-y-6 animate-fade">
+    <div class="space-y-8 animate-fade">
       
       <!-- Encabezado y botón para añadir -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
@@ -19,7 +28,7 @@ import { AdminService, BloqueAdmin } from '../../../../services/admin.service';
             <span class="text-xs text-gray-400 font-bold">{{ adminService.bloquesCAD().length }} Bloques en catálogo</span>
           </div>
           <h2 class="font-serif text-2xl font-bold text-white tracking-tight">Gestión Arquitectónica CAD 2D</h2>
-          <p class="text-xs text-gray-400 mt-1">Administra imágenes PNG, asigna precios referenciales en USD y publica bloques en tiempo real.</p>
+          <p class="text-xs text-gray-400 mt-1">Administra imágenes PNG, asigna precios referenciales en USD y filtra por las 8 categorías del sistema.</p>
         </div>
         <button (click)="abrirModalNuevo()" 
                 class="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-gradient-to-r from-wood-accent to-wood-light hover:brightness-110 text-[#111] font-extrabold text-xs transition-all shadow-xl scale-100 hover:scale-105 cursor-pointer">
@@ -28,32 +37,89 @@ import { AdminService, BloqueAdmin } from '../../../../services/admin.service';
         </button>
       </div>
 
-      <!-- Alerta Informativa & Guía PNG -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="md:col-span-2 p-4 rounded-xl bg-[#111111] border border-white/10 text-gray-300 text-xs flex items-center gap-3.5 shadow-md">
-          <div class="w-9 h-9 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0 font-bold">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-          </div>
+      <!-- SECCIÓN 1: CATEGORÍAS AGREGADAS ACTUALMENTE -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
           <div>
-            <strong class="text-white block mb-0.5">Gestión de Imágenes PNG con Transparencia</strong>
-            <span class="text-gray-400">Puedes cargar tus propios archivos <code class="text-wood-light bg-black/40 px-1 py-0.5 rounded">.png</code> desde tu computadora o elegir desde la galería de cada categoría arquitectónica.</span>
+            <h3 class="font-serif text-base font-extrabold text-white">Categorías Agregadas en Catálogo</h3>
+            <p class="text-[11px] text-gray-400">Haz clic en cualquier tarjeta para filtrar la tabla por esa categoría arquitectónica</p>
           </div>
+          <button *ngIf="filtroCategoria() !== 'todos'" (click)="filtroCategoria.set('todos')" 
+                  class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-wood-light text-xs font-bold transition-all inline-flex items-center gap-1.5 cursor-pointer">
+            <span>✕ Mostrar todas las categorías</span>
+          </button>
         </div>
-        
-        <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-800/30 text-emerald-300 text-xs flex items-center gap-3 shadow-md">
-          <div class="w-9 h-9 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          </div>
-          <div>
-            <strong class="text-white block mb-0.5">Control de Precios USD</strong>
-            <span class="text-emerald-400/80">Los precios se actualizan y reflejan en cotizaciones al instante.</span>
-          </div>
+
+        <!-- Grid de las 8 categorías -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+          <button type="button" *ngFor="let cat of listaCategorias()"
+                  (click)="toggleFiltro(cat.id)"
+                  [ngClass]="filtroCategoria() === cat.id ? 'border-wood-accent bg-wood-accent/15 scale-[1.03] shadow-lg ring-1 ring-wood-accent' : 'border-white/10 bg-[#111] hover:border-white/30 hover:bg-[#161616]'"
+                  class="p-3 rounded-xl border flex flex-col items-center text-center gap-2 transition-all cursor-pointer group relative overflow-hidden">
+            
+            <!-- Indicador de cantidad en esquina -->
+            <span [ngClass]="cat.totalBloques > 0 ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30 font-bold' : 'bg-white/5 text-gray-500 border-white/5'"
+                  class="absolute top-2 right-2 text-[10px] px-1.5 py-0.5 rounded-full border">
+              {{ cat.totalBloques }}
+            </span>
+
+            <!-- Contenedor Imagen Muestra -->
+            <div class="w-10 h-10 rounded-lg bg-[#080808] p-1 border border-white/5 flex items-center justify-center mt-1 group-hover:scale-110 transition-transform">
+              <img [src]="cat.imagenMuestra" [alt]="cat.nombre" class="w-full h-full object-contain filter drop-shadow">
+            </div>
+
+            <!-- Nombre de categoría -->
+            <div class="w-full">
+              <span class="text-xs font-bold text-white block truncate group-hover:text-wood-light transition-colors">{{ cat.nombre }}</span>
+              <span class="text-[10px]" [ngClass]="cat.activos > 0 ? 'text-emerald-400' : 'text-gray-500'">
+                {{ cat.activos > 0 ? cat.activos + ' activos' : 'Sin agregar' }}
+              </span>
+            </div>
+
+          </button>
         </div>
       </div>
 
-      <!-- Tabla de Bloques CAD -->
+      <!-- SECCIÓN 2: BARRA DE FILTRADO RÁPIDO Y RESULTADOS -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-thin">
+          <span class="text-xs font-bold text-gray-400 uppercase tracking-wider mr-1">Filtrar:</span>
+          
+          <button (click)="filtroCategoria.set('todos')"
+                  [ngClass]="filtroCategoria() === 'todos' ? 'bg-wood-accent text-[#111] font-extrabold shadow-md' : 'bg-[#161616] text-gray-300 hover:bg-white/10 font-bold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition-all shrink-0 cursor-pointer">
+            Todas ({{ adminService.bloquesCAD().length }})
+          </button>
+
+          <button *ngFor="let cat of listaCategorias()" 
+                  (click)="filtroCategoria.set(cat.id)"
+                  [ngClass]="filtroCategoria() === cat.id ? 'bg-wood-accent text-[#111] font-extrabold shadow-md' : 'bg-[#161616] text-gray-300 hover:bg-white/10 font-bold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition-all shrink-0 cursor-pointer inline-flex items-center gap-1.5">
+            <span>{{ cat.nombre }}</span>
+            <span class="opacity-80">({{ cat.totalBloques }})</span>
+          </button>
+        </div>
+
+        <div class="text-xs text-gray-400 font-sans shrink-0">
+          Mostrando <strong class="text-white">{{ bloquesFiltrados().length }}</strong> de {{ adminService.bloquesCAD().length }} bloques
+        </div>
+      </div>
+
+      <!-- Tabla de Bloques CAD Filtrada -->
       <div class="bg-[#111111] border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
-        <div class="overflow-x-auto scrollbar-thin">
+        
+        <div *ngIf="bloquesFiltrados().length === 0" class="p-12 text-center text-gray-400">
+          <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-3 text-gray-500">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <p class="font-serif text-base font-bold text-white mb-1">No hay bloques agregados en esta categoría</p>
+          <p class="text-xs mb-4">Haz clic en el botón superior para agregar tu primera imagen PNG en esta sección.</p>
+          <button (click)="abrirModalNuevoConCategoria()" class="px-4 py-2 rounded-xl bg-wood-accent text-[#111] font-extrabold text-xs inline-flex items-center gap-1.5">
+            <span>+ Agregar Bloque en Categoría</span>
+          </button>
+        </div>
+
+        <div *ngIf="bloquesFiltrados().length > 0" class="overflow-x-auto scrollbar-thin">
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="border-b border-white/10 bg-[#161616] text-[11px] font-bold text-gray-400 uppercase tracking-wider">
@@ -66,7 +132,7 @@ import { AdminService, BloqueAdmin } from '../../../../services/admin.service';
               </tr>
             </thead>
             <tbody class="divide-y divide-white/5 text-xs font-sans">
-              <tr *ngFor="let b of adminService.bloquesCAD()" class="hover:bg-[#151515] transition-colors group">
+              <tr *ngFor="let b of bloquesFiltrados()" class="hover:bg-[#151515] transition-colors group">
                 
                 <!-- Col 1: Nombre e Imagen -->
                 <td class="py-3.5 px-5">
@@ -85,7 +151,7 @@ import { AdminService, BloqueAdmin } from '../../../../services/admin.service';
                 <!-- Col 2: Categoría -->
                 <td class="py-3.5 px-4">
                   <span class="inline-block px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-gray-300 text-[11px] uppercase font-bold tracking-wider">
-                    {{ b.categoria }}
+                    {{ getNombreCategoria(b.categoria) }}
                   </span>
                 </td>
 
@@ -165,6 +231,7 @@ import { AdminService, BloqueAdmin } from '../../../../services/admin.service';
                   <option value="estacionamiento">Estacionamiento / Garaje</option>
                   <option value="muro">Muros & Divisiones</option>
                   <option value="columnas">Columnas & Estructura</option>
+                  <option value="bano">Baños & Spa</option>
                 </select>
               </div>
             </div>
@@ -207,7 +274,7 @@ import { AdminService, BloqueAdmin } from '../../../../services/admin.service';
             <div class="space-y-3">
               <div class="flex items-center justify-between">
                 <label class="block text-gray-300 font-bold uppercase tracking-wider text-[11px]">Imagen CAD (.PNG Transparente) *</label>
-                <span class="text-[10px] text-wood-light font-bold">Soporta subida desde PC o galería</span>
+                <span class="text-[10px] text-wood-light font-bold">Soporta subida desde PC o galería de activos</span>
               </div>
 
               <!-- Selector 1: Subir archivo PNG desde el equipo -->
@@ -229,7 +296,7 @@ import { AdminService, BloqueAdmin } from '../../../../services/admin.service';
 
               <!-- Selector 2: Galería de pre-cargados según la categoría -->
               <div class="space-y-2">
-                <span class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block">O elige un modelo predeterminado para categoría "{{ formCategoria }}":</span>
+                <span class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block">O elige un modelo predeterminado en categoría "{{ getNombreCategoria(formCategoria) }}":</span>
                 <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin">
                   <button type="button" *ngFor="let preset of getPresetImages()" 
                           (click)="formImagen = preset.path"
@@ -280,18 +347,31 @@ export class DashCad2Component {
 
   readonly modalAbierto = signal<boolean>(false);
   readonly esEdicion = signal<boolean>(false);
+  readonly filtroCategoria = signal<string>('todos');
   private idEnEdicion = '';
 
   formNombre = '';
   formCategoria: BloqueAdmin['categoria'] = 'alcobas';
   formArea = 35;
   formPrecio = 55000;
-  formImagen = 'assets/images/arquitectura/alcobas/alcoba1.png';
+  formImagen = 'assets/images/arquitectura/alcobas/alcoba-principal.png';
 
-  // Opciones predeterminadas por categoría
+  // Nombres descriptivos de las 8 categorías
+  readonly nombresCategoriasMap: Record<string, string> = {
+    alcobas: 'Alcobas Suite',
+    cocina: 'Cocinas Gourmet',
+    'area-comun': 'Áreas Comunes / Salas',
+    piscina: 'Piscinas & Solárium',
+    estacionamiento: 'Estacionamientos',
+    muro: 'Muros & Divisiones',
+    columnas: 'Columnas & Estructuras',
+    bano: 'Baños & Spa'
+  };
+
+  // Opciones predeterminadas con TODAS las imágenes de la carpeta assets/images/arquitectura/
   readonly presetsMap: Record<string, Array<{ label: string; path: string }>> = {
     alcobas: [
-      { label: 'Master Suite', path: 'assets/images/arquitectura/alcobas/alcoba1.png' },
+      { label: 'Master Principal', path: 'assets/images/arquitectura/alcobas/alcoba-principal.png' },
       { label: 'Suite Doble', path: 'assets/images/arquitectura/alcobas/alcoba2.png' },
       { label: 'Alcoba 3', path: 'assets/images/arquitectura/alcobas/alcoba3.png' },
       { label: 'Alcoba 4', path: 'assets/images/arquitectura/alcobas/alcoba4.png' }
@@ -300,21 +380,65 @@ export class DashCad2Component {
       { label: 'Cocina Isla', path: 'assets/images/arquitectura/cocina/cocina1.png' }
     ],
     'area-comun': [
-      { label: 'Sala Altura', path: 'assets/images/arquitectura/area-comun/comun1.png' }
+      { label: 'Sala Altura 1', path: 'assets/images/arquitectura/area-comun/comun1.png' },
+      { label: 'Sala Altura 2', path: 'assets/images/arquitectura/area-comun/comun2.png' },
+      { label: 'Sala Altura 3', path: 'assets/images/arquitectura/area-comun/comun3.png' }
     ],
     piscina: [
-      { label: 'Piscina Infinity', path: 'assets/images/arquitectura/piscina/piscina.png' }
+      { label: 'Piscina Infinity', path: 'assets/images/arquitectura/piscina/piscina.png' },
+      { label: 'Jacuzzi Spa', path: 'assets/images/arquitectura/piscina/jacuzzi.png' }
     ],
     estacionamiento: [
-      { label: 'Garaje Doble', path: 'assets/images/arquitectura/estacionamiento/congarage.png' }
+      { label: 'Garaje Doble', path: 'assets/images/arquitectura/estacionamiento/congarage.png' },
+      { label: 'Parqueadero Abierto', path: 'assets/images/arquitectura/estacionamiento/singarage.png' }
     ],
     muro: [
-      { label: 'Muro Estructural', path: 'assets/images/arquitectura/alcobas/alcoba1.png' }
+      { label: 'Muro Contención', path: 'assets/images/arquitectura/muro/muro-contencion.png' },
+      { label: 'Muro Largo', path: 'assets/images/arquitectura/muro/muro-largo.png' },
+      { label: 'Muro Estándar', path: 'assets/images/arquitectura/muro/muro.png' }
     ],
     columnas: [
-      { label: 'Columna Concreto', path: 'assets/images/arquitectura/cocina/cocina1.png' }
+      { label: 'Columna Circular', path: 'assets/images/arquitectura/columnas/circular.png' },
+      { label: 'Columna Cuadrada', path: 'assets/images/arquitectura/columnas/cuadrada.png' },
+      { label: 'Columna Rectangular', path: 'assets/images/arquitectura/columnas/rectangular.png' }
+    ],
+    bano: [
+      { label: 'Baño Jacuzzi', path: 'assets/images/arquitectura/bano/bano1.png' },
+      { label: 'Baño Suite', path: 'assets/images/arquitectura/bano/bano2.png' }
     ]
   };
+
+  // Lista de las 8 categorías del sistema
+  readonly listaCategorias = computed<CategoriaResumen[]>(() => {
+    const todos = this.adminService.bloquesCAD();
+    const keys: Array<BloqueAdmin['categoria']> = ['alcobas', 'area-comun', 'bano', 'cocina', 'columnas', 'estacionamiento', 'muro', 'piscina'];
+    
+    return keys.map(id => {
+      const bloquesCat = todos.filter(b => b.categoria === id);
+      const activos = bloquesCat.filter(b => b.activo).length;
+      const muestra = bloquesCat.length > 0 ? bloquesCat[0].imagen : (this.presetsMap[id]?.[0]?.path || '');
+      return {
+        id,
+        nombre: this.nombresCategoriasMap[id] || id,
+        iconoSvg: '',
+        totalBloques: bloquesCat.length,
+        activos,
+        imagenMuestra: muestra
+      };
+    });
+  });
+
+  // Bloques filtrados según la categoría seleccionada
+  readonly bloquesFiltrados = computed(() => {
+    const f = this.filtroCategoria();
+    const list = this.adminService.bloquesCAD();
+    if (f === 'todos') return list;
+    return list.filter(b => b.categoria === f);
+  });
+
+  getNombreCategoria(cat: string): string {
+    return this.nombresCategoriasMap[cat] || cat;
+  }
 
   getPresetImages(): Array<{ label: string; path: string }> {
     return this.presetsMap[this.formCategoria] || this.presetsMap['alcobas'];
@@ -324,6 +448,14 @@ export class DashCad2Component {
     const presets = this.getPresetImages();
     if (presets && presets.length > 0) {
       this.formImagen = presets[0].path;
+    }
+  }
+
+  toggleFiltro(catId: string): void {
+    if (this.filtroCategoria() === catId) {
+      this.filtroCategoria.set('todos');
+    } else {
+      this.filtroCategoria.set(catId);
     }
   }
 
@@ -341,7 +473,7 @@ export class DashCad2Component {
       const file = input.files[0];
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.formImagen = e.target.result; // Base64 DataURL de la imagen cargada
+        this.formImagen = e.target.result; // Base64 DataURL
       };
       reader.readAsDataURL(file);
     }
@@ -351,11 +483,15 @@ export class DashCad2Component {
     this.esEdicion.set(false);
     this.idEnEdicion = '';
     this.formNombre = '';
-    this.formCategoria = 'alcobas';
+    this.formCategoria = (this.filtroCategoria() !== 'todos' ? this.filtroCategoria() as any : 'alcobas');
     this.formArea = 35;
     this.formPrecio = 55000;
-    this.formImagen = 'assets/images/arquitectura/alcobas/alcoba1.png';
+    this.onCategoriaChange();
     this.modalAbierto.set(true);
+  }
+
+  abrirModalNuevoConCategoria(): void {
+    this.abrirModalNuevo();
   }
 
   abrirModalEditar(bloque: BloqueAdmin): void {

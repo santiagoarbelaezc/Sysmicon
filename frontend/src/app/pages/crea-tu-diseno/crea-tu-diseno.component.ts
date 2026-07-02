@@ -37,7 +37,7 @@ export class CreaTuDisenoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadingTimer = setTimeout(() => {
       this.isLoadingScreen.set(false);
-    }, 4000);
+    }, 8000);
   }
 
   ngOnDestroy(): void {

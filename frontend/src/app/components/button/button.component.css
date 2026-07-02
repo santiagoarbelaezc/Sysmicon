@@ -37,7 +37,7 @@
   background: var(--wood-dark);
   border-color: var(--wood-light);
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(139, 106, 78, 0.45);
+  box-shadow: 0 10px 25px rgba(79, 122, 165, 0.45);
 }
 
 .btn-secondary {

@@ -8,14 +8,14 @@
   animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Efecto de foco dorado en inputs arquitectónicos */
+/* Efecto de foco azul en inputs arquitectónicos */
 input:focus {
-  border-color: #DFB17E !important;
-  box-shadow: 0 0 0 3px rgba(223, 177, 126, 0.15);
+  border-color: #4F7AA5 !important;
+  box-shadow: 0 0 0 3px rgba(79, 122, 165, 0.15);
 }
 
 /* Selección de texto en modo lujo */
 ::selection {
-  background: #DFB17E;
-  color: #111;
+  background: #4F7AA5;
+  color: #FFF;
 }

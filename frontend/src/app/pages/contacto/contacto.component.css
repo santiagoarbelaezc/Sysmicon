@@ -64,7 +64,7 @@
 
 .info-list .icon {
   font-size: 1.5rem;
-  background: rgba(139, 106, 78, 0.15);
+  background: rgba(79, 122, 165, 0.15);
   width: 48px;
   height: 48px;
   display: flex;
@@ -139,7 +139,7 @@
 }
 
 .social-btn.instagram {
-  border-color: rgba(139, 106, 78, 0.4);
+  border-color: rgba(79, 122, 165, 0.4);
 }
 
 .social-btn strong {

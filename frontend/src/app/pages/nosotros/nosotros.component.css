@@ -106,7 +106,7 @@
 .method-step {
   font-size: 3rem;
   font-weight: 700;
-  color: rgba(139, 106, 78, 0.2);
+  color: rgba(79, 122, 165, 0.2);
   line-height: 1;
   display: block;
   margin-bottom: 1rem;
@@ -161,7 +161,7 @@
   color: var(--wood-light);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: rgba(139, 106, 78, 0.15);
+  background: rgba(79, 122, 165, 0.15);
   padding: 0.35rem 0.75rem;
   border-radius: 50px;
 }

@@ -47,5 +47,5 @@
 }
 
 .animate-progress {
-  animation: loadingProgress 7.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation: loadingProgress 8.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }

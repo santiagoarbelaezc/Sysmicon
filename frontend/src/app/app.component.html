@@ -5,3 +5,28 @@
   </main>
   <app-footer *ngIf="showFooter"></app-footer>
 </div>
+
+<!-- PANTALLA DE CARGA ELEGANTE SYSMICON -->
+<div *ngIf="loadingService.isLoading()" class="fixed inset-0 bg-[#080808]/98 backdrop-blur-md flex flex-col items-center justify-center z-[999999] animate-fade">
+  <div class="flex flex-col items-center justify-center space-y-6 max-w-xs text-center select-none">
+    
+    <!-- Contenedor del Logo con Pulsación y Órbita Giratoria -->
+    <div class="relative w-32 h-32 flex items-center justify-center">
+      <!-- Círculo exterior giratorio y degradado -->
+      <div class="absolute inset-0 rounded-full border-2 border-white/5 border-t-wood-accent animate-spin" style="animation-duration: 1.5s;"></div>
+      <!-- Círculo interior de pulso de luz dorado -->
+      <div class="absolute w-24 h-24 rounded-full bg-wood-accent/10 border border-wood-accent/25 animate-ping" style="animation-duration: 2.5s;"></div>
+      <!-- Logo central -->
+      <img src="assets/icons/logo-sysmico.png" alt="Sysmicon Logo" class="w-16 h-16 object-contain relative z-10 filter drop-shadow-[0_0_15px_rgba(212,175,55,0.4)] animate-pulse" style="animation-duration: 2s;">
+    </div>
+
+    <!-- Mensaje y Subtexto -->
+    <div class="space-y-2">
+      <h3 class="font-serif text-lg font-bold text-white tracking-wide animate-pulse" style="animation-duration: 1.5s;">
+        {{ loadingService.loadingMessage() }}
+      </h3>
+      <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Studio CAD & Simulador 3D</p>
+    </div>
+
+  </div>
+</div>

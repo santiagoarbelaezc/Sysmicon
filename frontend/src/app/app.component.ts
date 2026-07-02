@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { LoadingService } from './services/loading.service';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -14,6 +15,7 @@ import { filter } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit {
   title = 'Sysmicon';
+  readonly loadingService = inject(LoadingService);
 
   constructor(public router: Router) {}
 

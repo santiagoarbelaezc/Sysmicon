@@ -1,0 +1,28 @@
+import { Injectable, signal } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LoadingService {
+  readonly isLoading = signal<boolean>(false);
+  readonly loadingMessage = signal<string>('Sincronizando con el servidor...');
+
+  show(message: string = 'Sincronizando con el servidor...'): void {
+    this.loadingMessage.set(message);
+    this.isLoading.set(true);
+  }
+
+  hide(): void {
+    this.isLoading.set(false);
+  }
+
+  showTemporarily(durationMs: number = 1500, message: string = 'Sincronizando con el servidor...'): Promise<void> {
+    this.show(message);
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        this.hide();
+        resolve();
+      }, durationMs);
+    });
+  }
+}

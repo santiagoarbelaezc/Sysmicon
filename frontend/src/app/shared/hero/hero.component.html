@@ -32,7 +32,7 @@
       nobles y la habitabilidad se unen en perfecta armonía.
     </p>
 
-    <div class="hero-actions flex flex-wrap items-center justify-center gap-4 mt-2">
+    <div class="hero-actions flex flex-wrap items-center justify-center gap-4 my-8">
       <!-- Primary CTA: Crea tu diseño -->
       <a routerLink="/crea-tu-diseno" class="btn-primary">
         <span>Crea tu diseño</span>
@@ -52,7 +52,7 @@
     <!-- Stats Bar below -->
     <div class="hero-stats glass-panel">
       <div class="stat-item" *ngFor="let stat of brand.stats">
-        <span class="stat-val font-serif text-accent">{{ stat.value }}</span>
+        <span class="stat-val font-serif text-white">{{ stat.value }}</span>
         <span class="stat-lbl">{{ stat.label }}</span>
       </div>
     </div>

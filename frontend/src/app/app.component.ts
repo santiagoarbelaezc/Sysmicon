@@ -17,8 +17,12 @@ export class AppComponent implements OnInit {
 
   constructor(public router: Router) {}
 
+  get showNavbar(): boolean {
+    return !this.router.url.includes('/admin');
+  }
+
   get showFooter(): boolean {
-    return !this.router.url.includes('/login') && !this.router.url.includes('/registro');
+    return !this.router.url.includes('/login') && !this.router.url.includes('/registro') && !this.router.url.includes('/admin');
   }
 
   ngOnInit() {

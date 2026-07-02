@@ -36,6 +36,7 @@ export class CreaTuDisenoComponent implements OnInit, OnDestroy {
   readonly currentYear = new Date().getFullYear();
   readonly isLoadingScreen = signal<boolean>(true);
   readonly isFullscreen = signal<boolean>(false);
+  readonly catalogoAbierto = signal<boolean>(true);
   readonly mostrarModalSalida = signal<boolean>(false);
   private urlSalidaPendiente: string | null = null;
   private loadingTimer: any;
@@ -76,11 +77,13 @@ export class CreaTuDisenoComponent implements OnInit, OnDestroy {
     if (!document.fullscreenElement) {
       canvasWrapper.requestFullscreen().then(() => {
         this.isFullscreen.set(true);
+        this.catalogoAbierto.set(false); // Empezar con sidebar cerrado para maximizar espacio
         document.addEventListener('fullscreenchange', this.onFullscreenChange);
       }).catch(() => {});
     } else {
       document.exitFullscreen().then(() => {
         this.isFullscreen.set(false);
+        this.catalogoAbierto.set(true);
       }).catch(() => {});
     }
   }

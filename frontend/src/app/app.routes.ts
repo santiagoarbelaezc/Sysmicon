@@ -4,10 +4,11 @@ import { CreaTuDisenoComponent } from './pages/crea-tu-diseno/crea-tu-diseno.com
 import { NosotrosComponent } from './pages/nosotros/nosotros.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
 import { LoginComponent } from './pages/login/login.component';
+import { cadDeactivateGuard } from './guards/cad-deactivate.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Sysmicon | Diseño y Construcción de Viviendas' },
-  { path: 'crea-tu-diseno', component: CreaTuDisenoComponent, title: 'Crea Tu Diseño | Cotizador Sysmicon' },
+  { path: 'crea-tu-diseno', component: CreaTuDisenoComponent, title: 'Crea Tu Diseño | Cotizador Sysmicon', canDeactivate: [cadDeactivateGuard] },
   { path: 'nosotros', component: NosotrosComponent, title: 'Nosotros | Filosofía y Arquitectura Sysmicon' },
   { path: 'contacto', component: ContactoComponent, title: 'Contacto | Sysmicon Arquitectura' },
   { path: 'login', component: LoginComponent, title: 'Acceso Privado | Portal Sysmicon' },
@@ -15,3 +16,4 @@ export const routes: Routes = [
   { path: 'admin', loadComponent: () => import('./pages/admin/admin-layout/admin-layout.component').then(m => m.AdminLayoutComponent), title: 'Portal Directivo | Sysmicon Admin' },
   { path: '**', redirectTo: '' }
 ];
+

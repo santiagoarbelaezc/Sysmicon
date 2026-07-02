@@ -1,5 +1,5 @@
 <section class="hero-section">
-  <!-- Elegant Background Carousel -->
+  <!-- Elegant Background Carousel with dream-like cross-dissolve -->
   <div class="hero-carousel">
     <div *ngFor="let slide of slides; let i = index" class="slide-bg" [ngClass]="{'active': currentSlide() === i}"
       [style.background-image]="'url(' + slide.image + ')'">

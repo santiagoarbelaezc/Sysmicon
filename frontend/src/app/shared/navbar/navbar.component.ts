@@ -1,6 +1,6 @@
 import { Component, HostListener, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { BRAND_CONFIG, NAV_LINKS } from '../../core/app.constants';
 import { AuthService } from '../../services/auth.service';
 
@@ -13,8 +13,13 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavbarComponent {
   readonly authService = inject(AuthService);
+  readonly router = inject(Router);
   readonly brandName = BRAND_CONFIG.name;
   readonly navLinks = NAV_LINKS;
+
+  get isAuthPage(): boolean {
+    return this.router.url.includes('/login') || this.router.url.includes('/registro');
+  }
 
   readonly isScrolled = signal<boolean>(false);
   readonly isMobileMenuOpen = signal<boolean>(false);

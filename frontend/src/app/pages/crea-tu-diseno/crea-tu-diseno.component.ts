@@ -1,4 +1,4 @@
-import { Component, signal, computed, HostListener } from '@angular/core';
+import { Component, signal, computed, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -29,8 +29,29 @@ export interface ElementoLienzo {
   templateUrl: './crea-tu-diseno.component.html',
   styleUrl: './crea-tu-diseno.component.css'
 })
-export class CreaTuDisenoComponent {
+export class CreaTuDisenoComponent implements OnInit, OnDestroy {
   readonly currentYear = new Date().getFullYear();
+  readonly isLoadingScreen = signal<boolean>(true);
+  private loadingTimer: any;
+
+  ngOnInit(): void {
+    this.loadingTimer = setTimeout(() => {
+      this.isLoadingScreen.set(false);
+    }, 4000);
+  }
+
+  ngOnDestroy(): void {
+    if (this.loadingTimer) {
+      clearTimeout(this.loadingTimer);
+    }
+  }
+
+  saltarCarga(): void {
+    if (this.loadingTimer) {
+      clearTimeout(this.loadingTimer);
+    }
+    this.isLoadingScreen.set(false);
+  }
 
   // Categorías de bloques con iconos arquitectónicos vectoriales SVG
   readonly categorias = [

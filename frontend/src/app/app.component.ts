@@ -28,6 +28,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Mostrar pantalla de carga elegante en el primer ingreso al sitio
+    this.loadingService.showTemporarily(2200, 'Inicializando Sysmicon Studio...');
+
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {

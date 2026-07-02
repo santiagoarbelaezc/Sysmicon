@@ -315,8 +315,8 @@ export class AdminLayoutComponent {
     return this.adminService.mensajes().filter((m: any) => !m.leido).length;
   }
 
-  cerrarSesionAdmin(): void {
-    this.authService.logout();
+  async cerrarSesionAdmin(): Promise<void> {
+    await this.authService.logout();
     this.router.navigate(['/']);
   }
 }

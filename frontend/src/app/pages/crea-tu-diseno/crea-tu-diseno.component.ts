@@ -1,7 +1,7 @@
-import { Component, signal, computed, HostListener, OnInit, OnDestroy } from '@angular/core';
+import { Component, signal, computed, HostListener, OnInit, OnDestroy, ElementRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 
 export interface BloqueCAD {
   id: string;
@@ -30,8 +30,14 @@ export interface ElementoLienzo {
   styleUrl: './crea-tu-diseno.component.css'
 })
 export class CreaTuDisenoComponent implements OnInit, OnDestroy {
+  private readonly router = inject(Router);
+  private readonly elRef = inject(ElementRef);
+
   readonly currentYear = new Date().getFullYear();
   readonly isLoadingScreen = signal<boolean>(true);
+  readonly isFullscreen = signal<boolean>(false);
+  readonly mostrarModalSalida = signal<boolean>(false);
+  private urlSalidaPendiente: string | null = null;
   private loadingTimer: any;
 
   ngOnInit(): void {
@@ -44,6 +50,11 @@ export class CreaTuDisenoComponent implements OnInit, OnDestroy {
     if (this.loadingTimer) {
       clearTimeout(this.loadingTimer);
     }
+    // Salir de pantalla completa si se destruye el componente
+    if (this.isFullscreen() && document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+    }
+    document.removeEventListener('fullscreenchange', this.onFullscreenChange);
   }
 
   saltarCarga(): void {
@@ -51,6 +62,59 @@ export class CreaTuDisenoComponent implements OnInit, OnDestroy {
       clearTimeout(this.loadingTimer);
     }
     this.isLoadingScreen.set(false);
+  }
+
+  // --- PANTALLA COMPLETA ---
+  private onFullscreenChange = () => {
+    this.isFullscreen.set(!!document.fullscreenElement);
+  };
+
+  toggleFullscreen(): void {
+    const canvasWrapper = this.elRef.nativeElement.querySelector('#cad-canvas-wrapper');
+    if (!canvasWrapper) return;
+
+    if (!document.fullscreenElement) {
+      canvasWrapper.requestFullscreen().then(() => {
+        this.isFullscreen.set(true);
+        document.addEventListener('fullscreenchange', this.onFullscreenChange);
+      }).catch(() => {});
+    } else {
+      document.exitFullscreen().then(() => {
+        this.isFullscreen.set(false);
+      }).catch(() => {});
+    }
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload(event: BeforeUnloadEvent): void {
+    if (this.elementosLienzo().length > 0 && !this.isSubmitted()) {
+      event.preventDefault();
+      event.returnValue = '';
+    }
+  }
+
+  // --- MODAL DE CONFIRMACIÓN DE SALIDA ---
+  solicitarSalida(url: string): void {
+    if (this.elementosLienzo().length > 0 && !this.isSubmitted()) {
+      this.urlSalidaPendiente = url;
+      this.mostrarModalSalida.set(true);
+    } else {
+      this.router.navigateByUrl(url);
+    }
+  }
+
+  confirmarSalida(): void {
+    this.mostrarModalSalida.set(false);
+    const url = this.urlSalidaPendiente;
+    this.urlSalidaPendiente = null;
+    if (url) {
+      this.router.navigateByUrl(url);
+    }
+  }
+
+  cancelarSalida(): void {
+    this.mostrarModalSalida.set(false);
+    this.urlSalidaPendiente = null;
   }
 
   // Categorías de bloques con iconos arquitectónicos vectoriales SVG

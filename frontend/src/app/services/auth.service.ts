@@ -1,4 +1,5 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
+import { LoadingService } from './loading.service';
 
 export interface Usuario {
   id: string;
@@ -15,6 +16,7 @@ export interface Usuario {
 })
 export class AuthService {
   private readonly USER_KEY = 'sysmicon_user_session';
+  private readonly loadingService = inject(LoadingService);
   
   readonly currentUser = signal<Usuario | null>(this.loadUserFromStorage());
   readonly isLoggedIn = computed(() => !!this.currentUser());
@@ -31,9 +33,9 @@ export class AuthService {
   }
 
   login(email: string, pass: string): Promise<boolean> {
+    this.loadingService.show('Iniciando sesión en Sysmicon...');
     return new Promise((resolve) => {
       setTimeout(() => {
-        // En demostración creamos la sesión del usuario
         const user: Usuario = {
           id: 'usr-' + Date.now(),
           nombre: email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1),
@@ -43,12 +45,14 @@ export class AuthService {
         };
         this.currentUser.set(user);
         localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+        this.loadingService.hide();
         resolve(true);
-      }, 800);
+      }, 1500);
     });
   }
 
   register(nombre: string, email: string, telefono: string, rol: 'propietario' | 'arquitecto' | 'inversionista'): Promise<boolean> {
+    this.loadingService.show('Creando tu cuenta privada...');
     return new Promise((resolve) => {
       setTimeout(() => {
         const user: Usuario = {
@@ -61,13 +65,21 @@ export class AuthService {
         };
         this.currentUser.set(user);
         localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+        this.loadingService.hide();
         resolve(true);
-      }, 1000);
+      }, 1800);
     });
   }
 
-  logout(): void {
-    this.currentUser.set(null);
-    localStorage.removeItem(this.USER_KEY);
+  logout(): Promise<void> {
+    this.loadingService.show('Cerrando tu sesión de forma segura...');
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        this.currentUser.set(null);
+        localStorage.removeItem(this.USER_KEY);
+        this.loadingService.hide();
+        resolve();
+      }, 1200);
+    });
   }
 }

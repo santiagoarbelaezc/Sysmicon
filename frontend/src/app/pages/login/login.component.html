@@ -3,8 +3,8 @@
   <!-- Contenedor Principal al 100% de ancho y exactamente h-screen (Sin scroll) -->
   <div class="w-full h-screen grid grid-cols-1 lg:grid-cols-12 relative z-10">
     
-    <!-- COLUMNA IZQUIERDA: IMAGEN 1 DEL HERO CLARA SIN CAJAS NEGRAS (Cols 1-6) -->
-    <div class="lg:col-span-6 relative overflow-hidden bg-[#0A0A0A] hidden lg:block h-screen">
+    <!-- COLUMNA IZQUIERDA: IMAGEN 1 DEL HERO CLARA SIN CAJAS NEGRAS (Cols 1-7) -->
+    <div class="lg:col-span-7 relative overflow-hidden bg-[#0A0A0A] hidden lg:block h-screen">
       
       <!-- Fondo de Imagen 1 del Hero expandido desde top 0 clara y brillante -->
       <div class="absolute inset-0 bg-cover bg-center transition-transform duration-[12000ms] hover:scale-105"
@@ -46,8 +46,8 @@
 
     </div>
 
-    <!-- COLUMNA DERECHA: ESTACIÓN DE TRABAJO Y FORMULARIO (Cols 7-12) -->
-    <div class="lg:col-span-6 h-screen px-6 sm:px-12 md:px-16 lg:px-20 flex flex-col justify-center relative bg-[#0B0B0B] overflow-hidden">
+    <!-- COLUMNA DERECHA: ESTACIÓN DE TRABAJO Y FORMULARIO (Cols 8-12 con scroll interno y separación del navbar) -->
+    <div class="lg:col-span-5 h-screen px-6 sm:px-12 md:px-16 lg:px-18 pt-28 pb-8 relative bg-[#0B0B0B] overflow-y-auto">
       
       <!-- Fondo de iluminación ambiental sutil tras el formulario -->
       <div class="absolute top-1/3 right-10 w-96 h-96 rounded-full bg-wood-accent/10 blur-[150px] pointer-events-none"></div>
@@ -56,7 +56,7 @@
       <div class="absolute top-24 right-8 w-12 h-12 border-t border-r border-wood-accent/30 pointer-events-none hidden sm:block"></div>
       <div class="absolute bottom-8 right-8 w-12 h-12 border-b border-r border-wood-accent/30 pointer-events-none hidden sm:block"></div>
 
-      <div class="max-w-md w-full mx-auto relative z-10 flex flex-col justify-center">
+      <div class="max-w-md w-full mx-auto relative z-10 min-h-full flex flex-col justify-center py-4">
         
         <!-- Encabezado del Portal -->
         <div class="mb-6">

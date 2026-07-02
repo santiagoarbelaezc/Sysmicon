@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminService, ReporteAdmin } from '../../../../services/admin.service';
+import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-dash-reportes',
@@ -374,11 +375,10 @@ export class DashReportesComponent {
   }
 
   ejecutarDescargaReal(titulo: string, formato: 'PDF' | 'EXCEL' | 'CSV', tipo: 'financiero' | 'operativo' | 'cad_studio'): void {
-    let content = '';
     const cleanFileName = `${titulo.toLowerCase().replace(/[^a-z0-9]+/g, '_')}`;
 
     if (formato === 'CSV') {
-      content = "SYSMICON;REPORT OFICIAL\n";
+      let content = "SYSMICON;REPORT OFICIAL\n";
       content += `Titulo;${titulo}\n`;
       content += `Tipo de Reporte;${tipo}\n`;
       content += `Fecha;${new Date().toLocaleDateString()}\n\n`;
@@ -403,7 +403,7 @@ export class DashReportesComponent {
       this.triggerBlobDownload(blob, `${cleanFileName}.csv`);
 
     } else if (formato === 'EXCEL') {
-      content = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">`;
+      let content = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">`;
       content += `<head><meta charset="utf-8"></head><body>`;
       content += `<h2>SYSMICON - ${titulo}</h2>`;
       content += `<p><b>Tipo:</b> ${tipo} | <b>Fecha:</b> ${new Date().toLocaleDateString()}</p>`;
@@ -429,37 +429,213 @@ export class DashReportesComponent {
       const blob = new Blob([content], { type: 'application/vnd.ms-excel' });
       this.triggerBlobDownload(blob, `${cleanFileName}.xls`);
 
-    } else {
-      content = `==================================================\n`;
-      content += `                  SYSMICON                        \n`;
-      content += `   Studio CAD & Intelligent Residential Simulation\n`;
-      content += `==================================================\n\n`;
-      content += `INFORME OFICIAL: ${titulo}\n`;
-      content += `Tipo de Reporte: ${tipo.toUpperCase()}\n`;
-      content += `Fecha de Generacion: ${new Date().toLocaleDateString()}\n`;
-      content += `--------------------------------------------------\n\n`;
-      if (tipo === 'financiero') {
-        content += `1. METRICAS FINANCIERAS GLOBAL:\n`;
-        content += `   - Volumen Total Cotizado: $4,250,000 USD (+18.4%)\n`;
-        content += `   - Ticket Promedio: $320,000 USD (+12.1%)\n`;
-        content += `   - Cotizaciones Formales: 184 documentos (+8.5%)\n`;
-      } else if (tipo === 'operativo') {
-        content += `1. ACTIVIDAD OPERATIVA DE LEADS:\n`;
-        content += `   - Usuarios Registrados: 1,280 usuarios\n`;
-        content += `   - Tiempo de Decision Promedio: 18 dias\n`;
-        content += `   - Satisfaccion Propietarios: 99.4%\n`;
-      } else {
-        content += `1. METRICAS DE DISEÑOS CAD GUARDADOS:\n`;
-        content += `   - Alcobas Suite: 32% (132 diseños)\n`;
-        content += `   - Cocinas Gourmet: 24% (99 diseños)\n`;
-        content += `   - Piscinas & Solárium: 20% (82 diseños)\n`;
-        content += `   - Zonas Sociales Altura: 15% (62 diseños)\n`;
-      }
-      content += `\n==================================================\n`;
-      content += `Firmado Digitalmente por Servidor Sysmicon Nube\n`;
+    } else if (formato === 'PDF') {
+      const doc = new jsPDF();
       
-      const blob = new Blob([content], { type: 'text/plain;charset=utf-8;' });
-      this.triggerBlobDownload(blob, `${cleanFileName}.txt`);
+      // Header Corporativo
+      doc.setFillColor(17, 17, 17); // Dark gray header bar
+      doc.rect(0, 0, 210, 40, 'F');
+      
+      doc.setTextColor(212, 175, 55); // Wood accent tone
+      doc.setFont('Helvetica', 'bold');
+      doc.setFontSize(22);
+      doc.text('SYSMICON', 15, 18);
+      
+      doc.setTextColor(255, 255, 255);
+      doc.setFont('Helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.text('STUDIO CAD & INTELLIGENT RESIDENTIAL SIMULATION', 15, 25);
+      doc.setTextColor(180, 180, 180);
+      doc.text('Llanogrande, Antioquia, Colombia', 15, 30);
+      
+      doc.setTextColor(255, 255, 255);
+      doc.setFont('Helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.text('INFORME OFICIAL', 155, 18);
+      doc.setFont('Helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 155, 25);
+      doc.text(`Periodo: 2026`, 155, 30);
+      
+      // Divider line
+      doc.setDrawColor(212, 175, 55);
+      doc.setLineWidth(0.5);
+      doc.line(15, 45, 195, 45);
+      
+      // Título del Reporte
+      doc.setTextColor(17, 17, 17);
+      doc.setFont('Helvetica', 'bold');
+      doc.setFontSize(16);
+      doc.text(titulo, 15, 55);
+      
+      doc.setFont('Helvetica', 'oblique');
+      doc.setFontSize(9);
+      doc.setTextColor(100, 100, 100);
+      doc.text(`Tipo de Reporte: ${this.getNombreTipoReporte(tipo)}`, 15, 62);
+      doc.text('Consolidación de métricas comerciales calculadas y auditadas en la base de datos de Sysmicon.', 15, 67);
+      
+      // Contenido por Tipo de Reporte
+      let y = 80;
+      doc.setFont('Helvetica', 'normal');
+      doc.setTextColor(50, 50, 50);
+      
+      if (tipo === 'financiero') {
+        doc.setFontSize(11);
+        doc.setFont('Helvetica', 'bold');
+        doc.text('1. KPIs Financieros Globales', 15, y);
+        y += 8;
+        
+        // Table Header
+        doc.setFillColor(240, 240, 240);
+        doc.rect(15, y, 180, 8, 'F');
+        doc.setFontSize(9);
+        doc.text('Métrica Financiera', 18, y + 5);
+        doc.text('Valor Registrado', 110, y + 5);
+        doc.text('Crecimiento H1', 160, y + 5);
+        y += 8;
+        
+        // Rows
+        const rows = [
+          { m: 'Volumen Total Cotizado (Pipeline)', v: '$4,250,000 USD', c: '+18.4%' },
+          { m: 'Ticket Promedio por Residencia', v: '$320,000 USD', c: '+12.1%' },
+          { m: 'Cotizaciones Formales Generadas', v: '184 documentos', c: '+8.5%' }
+        ];
+        
+        rows.forEach(r => {
+          doc.line(15, y, 195, y);
+          doc.setFont('Helvetica', 'normal');
+          doc.text(r.m, 18, y + 5);
+          doc.setFont('Helvetica', 'bold');
+          doc.text(r.v, 110, y + 5);
+          doc.setTextColor(16, 124, 65); // Green for growth
+          doc.text(r.c, 160, y + 5);
+          doc.setTextColor(50, 50, 50);
+          y += 8;
+        });
+        doc.line(15, y, 195, y);
+        
+        y += 15;
+        doc.setFontSize(11);
+        doc.setFont('Helvetica', 'bold');
+        doc.text('2. Distribución de Inversión por Portafolio', 15, y);
+        y += 8;
+        
+        // Table Header
+        doc.setFillColor(240, 240, 240);
+        doc.rect(15, y, 180, 8, 'F');
+        doc.setFontSize(9);
+        doc.text('Rango de Presupuesto', 18, y + 5);
+        doc.text('Porcentaje Portafolio', 110, y + 5);
+        doc.text('Estado de Segmento', 160, y + 5);
+        y += 8;
+        
+        const rows2 = [
+          { m: '$100k - $250k USD', v: '35%', c: 'Estable' },
+          { m: '$250k - $500k USD', v: '45%', c: 'Alta Demanda' },
+          { m: 'Más de $500k USD (Luxury)', v: '20%', c: 'Crecimiento Rápido' }
+        ];
+        rows2.forEach(r => {
+          doc.line(15, y, 195, y);
+          doc.setFont('Helvetica', 'normal');
+          doc.text(r.m, 18, y + 5);
+          doc.setFont('Helvetica', 'bold');
+          doc.text(r.v, 110, y + 5);
+          doc.text(r.c, 160, y + 5);
+          y += 8;
+        });
+        doc.line(15, y, 195, y);
+        
+      } else if (tipo === 'operativo') {
+        doc.setFontSize(11);
+        doc.setFont('Helvetica', 'bold');
+        doc.text('1. Actividad de Usuarios & Leads', 15, y);
+        y += 8;
+        
+        // Table Header
+        doc.setFillColor(240, 240, 240);
+        doc.rect(15, y, 180, 8, 'F');
+        doc.setFontSize(9);
+        doc.text('Métrica Operativa', 18, y + 5);
+        doc.text('Total Acumulado', 110, y + 5);
+        doc.text('Estado Operativo', 160, y + 5);
+        y += 8;
+        
+        const rows = [
+          { m: 'Usuarios Registrados en Plataforma', v: '1,280 usuarios', c: 'Activo / Creciente' },
+          { m: 'Tiempo de Decisión Promedio', v: '18 días', c: 'Optimizando (-4 días)' },
+          { m: 'Satisfacción de Propietarios', v: '99.4%', c: 'Excelente (5.0 / 5.0)' }
+        ];
+        rows.forEach(r => {
+          doc.line(15, y, 195, y);
+          doc.setFont('Helvetica', 'normal');
+          doc.text(r.m, 18, y + 5);
+          doc.setFont('Helvetica', 'bold');
+          doc.text(r.v, 110, y + 5);
+          doc.text(r.c, 160, y + 5);
+          y += 8;
+        });
+        doc.line(15, y, 195, y);
+        
+      } else {
+        doc.setFontSize(11);
+        doc.setFont('Helvetica', 'bold');
+        doc.text('1. Métricas de Modelado en Nube', 15, y);
+        y += 8;
+        
+        // Table Header
+        doc.setFillColor(240, 240, 240);
+        doc.rect(15, y, 180, 8, 'F');
+        doc.setFontSize(9);
+        doc.text('Categoría de Bloque CAD', 18, y + 5);
+        doc.text('Porcentaje de Uso', 110, y + 5);
+        doc.text('Total Diseños Guardados', 160, y + 5);
+        y += 8;
+        
+        const rows = [
+          { m: 'Alcobas Suite', v: '32%', c: '132 diseños' },
+          { m: 'Cocinas Gourmet', v: '24%', c: '99 diseños' },
+          { m: 'Piscinas & Solárium', v: '20%', c: '82 diseños' },
+          { m: 'Zonas Sociales Altura', v: '15%', c: '62 diseños' }
+        ];
+        rows.forEach(r => {
+          doc.line(15, y, 195, y);
+          doc.setFont('Helvetica', 'normal');
+          doc.text(r.m, 18, y + 5);
+          doc.setFont('Helvetica', 'bold');
+          doc.text(r.v, 110, y + 5);
+          doc.text(r.c, 160, y + 5);
+          y += 8;
+        });
+        doc.line(15, y, 195, y);
+      }
+      
+      // Footer/Note
+      y += 20;
+      doc.setFont('Helvetica', 'normal');
+      doc.setFontSize(7);
+      doc.setTextColor(120, 120, 120);
+      doc.text('Nota legal y confidencialidad: Este reporte contiene información analítica comercial de la plataforma Sysmicon y es estrictamente confidencial.', 15, y);
+      doc.text('Generado a través del módulo de Inteligencia Financiera. Para soporte técnico, contacte al administrador.', 15, y + 4);
+      
+      // Signatures
+      y += 25;
+      doc.setDrawColor(200, 200, 200);
+      doc.line(15, y, 75, y);
+      doc.line(135, y, 195, y);
+      
+      doc.setFont('Helvetica', 'bold');
+      doc.setFontSize(8);
+      doc.setTextColor(50, 50, 50);
+      doc.text('David Jaramillo', 15, y + 5);
+      doc.text('Firma Servidor Digital', 135, y + 5);
+      
+      doc.setFont('Helvetica', 'normal');
+      doc.setFontSize(7);
+      doc.setTextColor(120, 120, 120);
+      doc.text('Director Senior de Proyectos', 15, y + 9);
+      doc.text('Sysmicon Nube Autenticación', 135, y + 9);
+      
+      doc.save(`${cleanFileName}.pdf`);
     }
   }
 

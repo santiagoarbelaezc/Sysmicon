@@ -72,7 +72,8 @@
         <!-- Cabecera del menú -->
         <div class="p-4 border-b border-white/10 bg-[#161616] flex items-center justify-between">
           <span class="font-serif font-bold text-base text-white flex items-center gap-2">
-            <span>📚 Categorías CAD</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-wood-accent"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span>Categorías CAD</span>
           </span>
           <span class="text-[10px] bg-wood-accent/20 text-wood-light font-bold px-2 py-0.5 rounded-full border border-wood-accent/30">
             8 Módulos
@@ -125,7 +126,10 @@
             <div class="w-full text-left">
               <div class="font-serif font-bold text-xs text-white truncate">{{ b.nombre }}</div>
               <div class="flex items-center justify-between mt-1 text-[11px] text-gray-400 font-sans">
-                <span>📐 {{ b.areaM2 }} m²</span>
+                <span class="flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                  {{ b.areaM2 }} m²
+                </span>
                 <span class="text-wood-light font-bold">${{ b.precioUSD / 1000 | number:'1.0-1' }}k USD</span>
               </div>
             </div>
@@ -133,8 +137,9 @@
         </div>
 
         <!-- Pie del catálogo -->
-        <div class="p-3 bg-[#161616] border-t border-white/10 text-center text-[11px] text-gray-400">
-          💡 <span class="text-white font-medium">Tip:</span> Haz clic en un bloque para colocarlo en el centro del lienzo.
+        <div class="p-3 bg-[#161616] border-t border-white/10 text-center text-[11px] text-gray-400 flex items-center justify-center gap-1.5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-wood-accent"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span class="text-white font-medium">Tip:</span> Haz clic en un bloque para colocarlo en el centro del lienzo.
         </div>
       </div>
 
@@ -150,55 +155,68 @@
                     [ngClass]="{'opacity-40 cursor-not-allowed': historialPasos.length === 0, 'hover:bg-[#282828] text-white': historialPasos.length > 0}"
                     title="Deshacer último cambio (Ctrl+Z)"
                     class="px-2.5 py-1.5 rounded-lg bg-[#1F1F1F] border border-white/10 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
-              <span>↩️ Deshacer</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/></svg>
+              <span>Deshacer</span>
             </button>
 
             <button (click)="rehacer()" [disabled]="historialRehacer.length === 0"
                     [ngClass]="{'opacity-40 cursor-not-allowed': historialRehacer.length === 0, 'hover:bg-[#282828] text-white': historialRehacer.length > 0}"
                     title="Rehacer cambio (Ctrl+Y)"
                     class="px-2.5 py-1.5 rounded-lg bg-[#1F1F1F] border border-white/10 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
-              <span>↪️ Rehacer</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5A5.5 5.5 0 0 0 4 14.5A5.5 5.5 0 0 0 9.5 20H13"/></svg>
+              <span>Rehacer</span>
             </button>
 
             <div class="h-4 w-[1px] bg-white/10 mx-1 hidden sm:block"></div>
 
             <button (click)="toggleCuadricula()" 
                     [ngClass]="{'bg-wood-accent/20 text-wood-light border-wood-accent/40': mostrarCuadricula(), 'bg-[#222] text-gray-400 border-white/10': !mostrarCuadricula()}"
-                    class="px-2.5 py-1.5 rounded-lg border text-xs font-bold flex items-center gap-1 transition-all cursor-pointer">
-              <span>📐 Cuadrícula</span>
+                    class="px-2.5 py-1.5 rounded-lg border text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+              <span>Cuadrícula</span>
             </button>
 
             <button (click)="limpiarTodoElLienzo()" *ngIf="elementosLienzo().length > 0"
-                    class="px-2.5 py-1.5 rounded-lg bg-red-950/40 hover:bg-red-900/60 text-red-300 border border-red-800/50 text-xs font-bold flex items-center gap-1 transition-all cursor-pointer">
-              <span>🗑️ Limpiar</span>
+                    class="px-2.5 py-1.5 rounded-lg bg-red-950/40 hover:bg-red-900/60 text-red-300 border border-red-800/50 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+              <span>Limpiar</span>
             </button>
           </div>
 
           <!-- Lado Derecho: Controles del Elemento Seleccionado o Guía Rápida -->
           <div *ngIf="bloqueSeleccionadoObj() as sel" class="flex flex-wrap items-center gap-1.5 bg-[#0C0C0C] px-3 py-1 rounded-xl border border-wood-accent/40 animate-fade">
-            <span class="text-[11px] text-wood-light font-bold truncate max-w-[130px] mr-1">🎯 {{ sel.bloque.nombre }}:</span>
+            <span class="text-[11px] text-wood-light font-bold truncate max-w-[130px] mr-1 flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              {{ sel.bloque.nombre }}:
+            </span>
             
-            <button (click)="rotarElemento(45)" title="Rotar 45°" class="p-1.5 rounded-lg bg-[#222] hover:bg-wood-accent hover:text-[#111] text-white transition-all text-xs cursor-pointer font-bold">
-              🔄 +45°
+            <button (click)="rotarElemento(45)" title="Rotar 45°" class="px-2 py-1.5 rounded-lg bg-[#222] hover:bg-wood-accent hover:text-[#111] text-white transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+              +45°
             </button>
-            <button (click)="rotarElemento(90)" title="Rotar 90°" class="p-1.5 rounded-lg bg-[#222] hover:bg-wood-accent hover:text-[#111] text-white transition-all text-xs cursor-pointer font-bold">
-              🔄 +90°
+            <button (click)="rotarElemento(90)" title="Rotar 90°" class="px-2 py-1.5 rounded-lg bg-[#222] hover:bg-wood-accent hover:text-[#111] text-white transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+              +90°
             </button>
-            <button (click)="escalarElemento(0.1)" title="Agrandar (+10%)" class="p-1.5 rounded-lg bg-[#222] hover:bg-wood-accent hover:text-[#111] text-white transition-all text-xs cursor-pointer font-bold">
-              ➕
+            <button (click)="escalarElemento(0.1)" title="Agrandar (+10%)" class="px-2 py-1.5 rounded-lg bg-[#222] hover:bg-wood-accent hover:text-[#111] text-white transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             </button>
-            <button (click)="escalarElemento(-0.1)" title="Reducir (-10%)" class="p-1.5 rounded-lg bg-[#222] hover:bg-wood-accent hover:text-[#111] text-white transition-all text-xs cursor-pointer font-bold">
-              ➖
+            <button (click)="escalarElemento(-0.1)" title="Reducir (-10%)" class="px-2 py-1.5 rounded-lg bg-[#222] hover:bg-wood-accent hover:text-[#111] text-white transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
             </button>
-            <button (click)="duplicarElemento()" title="Duplicar Bloque (Atajo: Ctrl+D o Ctrl+C y Ctrl+V)" class="p-1.5 rounded-lg bg-blue-950/60 hover:bg-blue-800/80 text-blue-300 border border-blue-800/40 transition-all text-xs cursor-pointer font-bold ml-1">
-              📑 Clonar
+            <button (click)="duplicarElemento()" title="Duplicar Bloque (Atajo: Ctrl+D o Ctrl+C y Ctrl+V)" class="px-2 py-1.5 rounded-lg bg-blue-950/60 hover:bg-blue-800/80 text-blue-300 border border-blue-800/40 transition-all text-xs cursor-pointer font-bold ml-1 flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Clonar
             </button>
-            <button (click)="eliminarElemento()" title="Eliminar del plano (Atajo: Tecla Suprimir / Backspace)" class="p-1.5 rounded-lg bg-red-950/60 hover:bg-red-800/80 text-red-300 border border-red-800/40 transition-all text-xs cursor-pointer font-bold">
-              ✕
+            <button (click)="eliminarElemento()" title="Eliminar del plano (Atajo: Tecla Suprimir / Backspace)" class="px-2 py-1.5 rounded-lg bg-red-950/60 hover:bg-red-800/80 text-red-300 border border-red-800/40 transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
           </div>
           <div *ngIf="!bloqueSeleccionadoObj()" class="text-[11px] text-gray-400 flex items-center gap-3 font-sans">
-            <span class="hidden md:inline">💡 <strong class="text-wood-light">Atajos CAD:</strong></span>
+            <span class="hidden md:inline flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-wood-accent"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <strong class="text-wood-light">Atajos CAD:</strong>
+            </span>
             <span class="bg-[#222] px-2 py-0.5 rounded text-[10px] text-gray-300 border border-white/5"><strong>Ctrl+Z</strong> Deshacer</span>
             <span class="bg-[#222] px-2 py-0.5 rounded text-[10px] text-gray-300 border border-white/5"><strong>Ctrl+C / V</strong> Copiar y Pegar</span>
             <span class="bg-[#222] px-2 py-0.5 rounded text-[10px] text-gray-300 border border-white/5"><strong>Supr</strong> Eliminar</span>
@@ -242,8 +260,8 @@
 
           <!-- MENSAJE DE LIENZO VACÍO -->
           <div *ngIf="elementosLienzo().length === 0" class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center p-6 opacity-40">
-            <div class="w-20 h-20 rounded-full border-2 border-dashed border-white/30 flex items-center justify-center text-3xl mb-3">
-              📐
+            <div class="w-20 h-20 rounded-full border-2 border-dashed border-white/30 flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-white/60"><path d="M15 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9z"/><polyline points="15 3 15 9 21 9"/><line x1="9" y1="14" x2="15" y2="14"/><line x1="12" y1="11" x2="12" y2="17"/></svg>
             </div>
             <h3 class="font-serif text-2xl font-bold text-white">Lienzo CAD 2D en Blanco</h3>
             <p class="text-sm text-gray-400 max-w-md mt-1">
@@ -311,7 +329,8 @@
           <div class="flex items-center gap-3 w-full md:w-auto">
             <button (click)="abrirCotizacion()" 
                     class="w-full md:w-auto py-3 px-8 rounded-xl bg-gradient-to-r from-wood-accent to-[#0F254B] hover:brightness-110 text-white font-sans font-bold text-xs tracking-widest uppercase shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer">
-              <span>📋 Formalizar este Plano en Propuesta</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              <span>Formalizar este Plano en Propuesta</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </button>
           </div>
@@ -380,15 +399,18 @@
                     class="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm"></textarea>
         </div>
 
-        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-wood-accent to-[#0F254B] hover:brightness-110 text-white font-sans font-bold text-sm tracking-widest uppercase shadow-2xl transition-all cursor-pointer mt-4">
-          <span>🚀 Enviar mi Plano 2D y Solicitar Cita con Director Arquitectónico</span>
+        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-wood-accent to-[#0F254B] hover:brightness-110 text-white font-sans font-bold text-sm tracking-widest uppercase shadow-2xl transition-all cursor-pointer mt-4 flex items-center justify-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          <span>Enviar mi Plano 2D y Solicitar Cita con Director Arquitectónico</span>
         </button>
       </form>
     </div>
 
     <!-- PANTALLA DE ÉXITO DE PROPUESTA -->
     <div *ngIf="isSubmitted()" class="max-w-3xl mx-auto bg-[#111111] rounded-2xl border border-wood-accent p-8 md:p-12 text-center shadow-2xl animate-fade my-16">
-      <div class="text-5xl mb-4">✨</div>
+      <div class="w-16 h-16 rounded-full bg-wood-accent/15 border border-wood-accent/40 flex items-center justify-center mx-auto mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-wood-light"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
       <h2 class="font-serif text-3xl md:text-4xl font-bold text-white">¡Plano 2D Recibido con <span class="text-wood-light">Éxito</span>!</h2>
       <div class="w-24 h-0.5 bg-wood-accent mx-auto my-5"></div>
       
@@ -408,8 +430,9 @@
       </p>
 
       <div class="flex justify-center gap-4">
-        <button (click)="reiniciarProyecto()" class="px-6 py-3 rounded-xl bg-[#222] hover:bg-[#333] text-white font-sans text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border border-white/10">
-          <span>📐 Diseñar Otro Plano 2D</span>
+        <button (click)="reiniciarProyecto()" class="px-6 py-3 rounded-xl bg-[#222] hover:bg-[#333] text-white font-sans text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border border-white/10 flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+          <span>Diseñar Otro Plano 2D</span>
         </button>
         <a routerLink="/" class="px-6 py-3 rounded-xl bg-wood-accent hover:brightness-110 text-[#111] font-sans text-xs font-bold uppercase tracking-wider transition-all cursor-pointer">
           <span>Volver al Inicio</span>

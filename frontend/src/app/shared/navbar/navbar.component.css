@@ -100,9 +100,10 @@
   transition: all var(--transition-fast);
 }
 
+/* Por defecto en cualquier página o con scroll, el link activo/hover es BLANCO para perfecta legibilidad en fondos oscuros */
 .nav-link:hover, .nav-link.active {
-  color: #000000;
-  text-shadow: none;
+  color: #FFFFFF;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
 }
 
 .link-underline {
@@ -111,8 +112,8 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: #000000;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  background: #FFFFFF;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
   transition: width var(--transition-smooth);
 }
 
@@ -120,18 +121,16 @@
   width: 100%;
 }
 
-/* Cuando el navbar tiene fondo oscuro (scrolled o auth-solid), cambiamos a blanco para perfecta visibilidad */
-.navbar.scrolled .nav-link:hover,
-.navbar.scrolled .nav-link.active,
-.navbar.auth-solid .nav-link:hover,
-.navbar.auth-solid .nav-link.active {
-  color: #FFFFFF;
+/* Únicamente en el Home cuando el navbar es transparente sobre el cielo claro, usamos negro */
+.navbar.home-transparent .nav-link:hover,
+.navbar.home-transparent .nav-link.active {
+  color: #000000;
+  text-shadow: none;
 }
 
-.navbar.scrolled .link-underline,
-.navbar.auth-solid .link-underline {
-  background: #FFFFFF;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+.navbar.home-transparent .link-underline {
+  background: #000000;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Desktop CTA Button */

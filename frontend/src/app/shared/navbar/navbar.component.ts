@@ -17,8 +17,12 @@ export class NavbarComponent {
   readonly brandName = BRAND_CONFIG.name;
   readonly navLinks = NAV_LINKS;
 
+  get isHomePage(): boolean {
+    return this.router.url === '/' || this.router.url === '';
+  }
+
   get isAuthPage(): boolean {
-    return this.router.url.includes('/login') || this.router.url.includes('/registro');
+    return this.router.url.includes('/login') || this.router.url.includes('/registro') || this.router.url.includes('/crea-tu-diseno');
   }
 
   readonly isScrolled = signal<boolean>(false);

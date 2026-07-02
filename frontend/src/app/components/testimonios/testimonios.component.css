@@ -1,0 +1,35 @@
+/* Testimonios - Tema Claro Arquitectónico */
+.testimonials-section {
+  background: #FAFAFA;
+  color: #0D0D0D;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.testimonials-section .title-lg {
+  color: #0D0D0D;
+}
+
+.testimonials-section .subtitle {
+  color: #555555;
+}
+
+.testimonials-section .section-tag {
+  color: var(--wood-dark);
+}
+
+.testimonials-section .tag-line {
+  background: var(--wood-accent);
+}
+
+/* Dots del Carrusel */
+.dot-indicator {
+  border: none;
+  background: rgba(0, 0, 0, 0.15);
+  transition: all var(--transition-smooth);
+}
+
+.dot-indicator.active {
+  background: var(--wood-accent) !important;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+}

@@ -3,7 +3,7 @@ import { Injectable, signal, computed } from '@angular/core';
 export interface BloqueAdmin {
   id: string;
   nombre: string;
-  categoria: 'alcobas' | 'cocina' | 'area-comun' | 'muro' | 'columnas' | 'estacionamiento' | 'piscina';
+  categoria: 'alcobas' | 'cocina' | 'area-comun' | 'muro' | 'columnas' | 'estacionamiento' | 'piscina' | 'bano';
   imagen: string;
   areaM2: number;
   precioUSD: number;
@@ -94,7 +94,10 @@ export class AdminService {
     { id: 'coc-1', nombre: 'Cocina Integral con Isla Gourmet', categoria: 'cocina', imagen: 'assets/images/arquitectura/cocina/cocina1.png', areaM2: 35, precioUSD: 58000, activo: true, fechaCreacion: '2026-02-01' },
     { id: 'com-1', nombre: 'Sala de Estar Doble Altura con Chimenea', categoria: 'area-comun', imagen: 'assets/images/arquitectura/area-comun/comun1.png', areaM2: 50, precioUSD: 72000, activo: true, fechaCreacion: '2026-02-10' },
     { id: 'est-1', nombre: 'Garaje Doble Cubierto', categoria: 'estacionamiento', imagen: 'assets/images/arquitectura/estacionamiento/congarage.png', areaM2: 40, precioUSD: 38000, activo: true, fechaCreacion: '2026-02-14' },
-    { id: 'pis-2', nombre: 'Piscina Infinity & Solárium', categoria: 'piscina', imagen: 'assets/images/arquitectura/piscina/piscina.png', areaM2: 55, precioUSD: 75000, activo: true, fechaCreacion: '2026-03-01' }
+    { id: 'pis-2', nombre: 'Piscina Infinity & Solárium', categoria: 'piscina', imagen: 'assets/images/arquitectura/piscina/piscina.png', areaM2: 55, precioUSD: 75000, activo: true, fechaCreacion: '2026-03-01' },
+    { id: 'ban-1', nombre: 'Baño Principal con Jacuzzi & Ducha', categoria: 'bano', imagen: 'assets/images/arquitectura/bano/bano1.png', areaM2: 12, precioUSD: 18000, activo: true, fechaCreacion: '2026-03-05' },
+    { id: 'mur-1', nombre: 'Muro de Contención Estructural 10m', categoria: 'muro', imagen: 'assets/images/arquitectura/muro/muro-contencion.png', areaM2: 15, precioUSD: 8500, activo: true, fechaCreacion: '2026-03-10' },
+    { id: 'col-1', nombre: 'Columna Cuadrada Concreto Arquitectónico', categoria: 'columnas', imagen: 'assets/images/arquitectura/columnas/cuadrada.png', areaM2: 5, precioUSD: 3500, activo: true, fechaCreacion: '2026-03-12' }
   ]);
 
   // 4. Estadísticas

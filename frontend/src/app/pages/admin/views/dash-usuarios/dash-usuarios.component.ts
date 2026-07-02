@@ -17,7 +17,7 @@ import { AdminService } from '../../../../services/admin.service';
           <p class="text-xs text-gray-400 mt-1">Directorio de propietarios, arquitectos senior e inversionistas con cuentas privadas en Sysmicon.</p>
         </div>
         <div class="flex items-center gap-3">
-          <span class="text-xs font-bold text-wood-light bg-wood-accent/15 px-3 py-1.5 rounded-xl border border-wood-accent/30">
+          <span class="text-xs font-bold text-wood-light bg-wood-accent/15 px-3 py-1.5 rounded-xl border border-wood-accent/30 shadow-sm">
             Total Registrados: {{ adminService.usuarios().length }}
           </span>
         </div>
@@ -28,32 +28,35 @@ import { AdminService } from '../../../../services/admin.service';
         
         <!-- Buscador -->
         <div class="relative w-full sm:w-80">
-          <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500">🔍</span>
+          <svg class="w-4 h-4 text-gray-500 absolute left-3.5 top-1/2 -translate-y-1/2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
           <input type="text" [(ngModel)]="terminoBusqueda" (ngModelChange)="actualizarFiltros()" placeholder="Buscar por nombre o correo..." 
-                 class="w-full pl-10 pr-4 py-2 rounded-xl bg-[#181818] border border-white/10 text-white text-xs placeholder-gray-500 focus:border-wood-accent focus:outline-none">
+                 class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#181818] border border-white/10 text-white text-xs placeholder-gray-500 focus:border-wood-accent focus:outline-none">
         </div>
 
         <!-- Filtros de Rol -->
-        <div class="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
+        <div class="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0 scrollbar-thin">
           <button (click)="setFiltroRol('todos')"
-                  [ngClass]="filtroRol() === 'todos' ? 'bg-wood-accent text-[#111] font-bold' : 'bg-[#181818] text-gray-400 hover:text-white'"
-                  class="px-3 py-1.5 rounded-lg text-[11px] transition-all cursor-pointer whitespace-nowrap">
+                  [ngClass]="filtroRol() === 'todos' ? 'bg-wood-accent text-[#111] font-extrabold shadow-sm' : 'bg-[#181818] text-gray-400 hover:text-white'"
+                  class="px-3.5 py-2 rounded-lg text-[11px] transition-all cursor-pointer whitespace-nowrap">
             Todos
           </button>
           <button (click)="setFiltroRol('propietario')"
-                  [ngClass]="filtroRol() === 'propietario' ? 'bg-wood-accent text-[#111] font-bold' : 'bg-[#181818] text-gray-400 hover:text-white'"
-                  class="px-3 py-1.5 rounded-lg text-[11px] transition-all cursor-pointer whitespace-nowrap">
-            🏡 Propietarios
+                  [ngClass]="filtroRol() === 'propietario' ? 'bg-wood-accent text-[#111] font-extrabold shadow-sm' : 'bg-[#181818] text-gray-400 hover:text-white'"
+                  class="px-3.5 py-2 rounded-lg text-[11px] transition-all cursor-pointer whitespace-nowrap inline-flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Propietarios</span>
           </button>
           <button (click)="setFiltroRol('arquitecto')"
-                  [ngClass]="filtroRol() === 'arquitecto' ? 'bg-wood-accent text-[#111] font-bold' : 'bg-[#181818] text-gray-400 hover:text-white'"
-                  class="px-3 py-1.5 rounded-lg text-[11px] transition-all cursor-pointer whitespace-nowrap">
-            📐 Arquitectos
+                  [ngClass]="filtroRol() === 'arquitecto' ? 'bg-wood-accent text-[#111] font-extrabold shadow-sm' : 'bg-[#181818] text-gray-400 hover:text-white'"
+                  class="px-3.5 py-2 rounded-lg text-[11px] transition-all cursor-pointer whitespace-nowrap inline-flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/></svg>
+            <span>Arquitectos</span>
           </button>
           <button (click)="setFiltroRol('inversionista')"
-                  [ngClass]="filtroRol() === 'inversionista' ? 'bg-wood-accent text-[#111] font-bold' : 'bg-[#181818] text-gray-400 hover:text-white'"
-                  class="px-3 py-1.5 rounded-lg text-[11px] transition-all cursor-pointer whitespace-nowrap">
-            💲 Inversionistas
+                  [ngClass]="filtroRol() === 'inversionista' ? 'bg-wood-accent text-[#111] font-extrabold shadow-sm' : 'bg-[#181818] text-gray-400 hover:text-white'"
+                  class="px-3.5 py-2 rounded-lg text-[11px] transition-all cursor-pointer whitespace-nowrap inline-flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span>Inversionistas</span>
           </button>
         </div>
 
@@ -109,7 +112,7 @@ import { AdminService } from '../../../../services/admin.service';
                 </td>
 
                 <!-- Col 4: Fecha -->
-                <td class="py-3.5 px-4 text-gray-400">
+                <td class="py-3.5 px-4 text-gray-400 font-mono">
                   {{ u.fechaRegistro }}
                 </td>
 
@@ -128,10 +131,11 @@ import { AdminService } from '../../../../services/admin.service';
                 </td>
 
                 <!-- Col 6: Acciones -->
-                <td class="py-3.5 px-5 text-right space-x-2">
-                  <button (click)="adminService.eliminarUsuario(u.id)" title="Eliminar Usuario" 
-                          class="px-2.5 py-1.5 rounded-lg bg-red-950/40 hover:bg-red-900/80 text-red-400 text-[11px] transition-all cursor-pointer">
-                    🗑️ Suscribirse / Retirar
+                <td class="py-3.5 px-5 text-right">
+                  <button (click)="adminService.eliminarUsuario(u.id)" title="Retirar Usuario de Sysmicon" 
+                          class="px-3 py-2 rounded-xl bg-red-950/40 hover:bg-red-900/80 text-red-400 text-[11px] transition-all cursor-pointer inline-flex items-center gap-1.5 shadow">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                    <span>Retirar</span>
                   </button>
                 </td>
 
@@ -139,9 +143,9 @@ import { AdminService } from '../../../../services/admin.service';
             </tbody>
           </table>
 
-          <div *ngIf="usuariosFiltrados().length === 0" class="py-12 text-center text-gray-500">
-            <span class="text-3xl block mb-2">🔍</span>
-            No se encontraron usuarios que coincidan con la búsqueda.
+          <div *ngIf="usuariosFiltrados().length === 0" class="py-12 text-center text-gray-500 flex flex-col items-center justify-center gap-2">
+            <svg class="w-8 h-8 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <span class="text-xs text-gray-400">No se encontraron usuarios que coincidan con la búsqueda.</span>
           </div>
         </div>
       </div>

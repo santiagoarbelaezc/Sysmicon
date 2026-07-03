@@ -203,22 +203,29 @@
 
 .timeline-node {
   flex-shrink: 0;
-  width: 320px;
+  width: 260px; /* Reducido de 320px para mayor proximidad y elegancia */
   text-align: center;
   position: relative;
 }
 
-/* Años en gran tamaño (Blanco y Negro) */
+/* Años en gran tamaño (Blanco y Negro) - Reducidos */
 .year-badge {
-  color: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.05);
+  font-size: 2.2rem; /* Reducido */
   transform: scale(0.95);
   transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+@media (min-width: 768px) {
+  .year-badge {
+    font-size: 2.8rem; /* Reducido */
+  }
+}
+
 .year-badge.active {
   color: #FFFFFF;
-  transform: scale(1.08);
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transform: scale(1.04);
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
 }
 
 /* Nodos conectores */
@@ -231,24 +238,31 @@
 
 .node-dot.active {
   border-color: #FFFFFF;
-  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.12); /* Reducida la sombra */
 }
 
-/* Fichas técnicas de hitos (Gris y Blanco) */
+/* Fichas técnicas de hitos (Gris y Blanco) - Sutiles */
 .node-card {
   opacity: 0.4;
-  transform: translateY(15px);
+  transform: translateY(12px);
   border-color: rgba(255, 255, 255, 0.05);
+  padding: 1.1rem !important; /* Reducido padding */
 }
 
 .node-card.active-card {
   opacity: 1;
   transform: translateY(0);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 255, 255, 0.03);
 }
 
 .node-card h3 {
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
+  font-size: 0.88rem !important;
+}
+
+.node-card p {
+  font-size: 11px !important;
+  line-height: 1.5;
 }
 

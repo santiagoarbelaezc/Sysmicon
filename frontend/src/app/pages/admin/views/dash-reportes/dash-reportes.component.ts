@@ -15,7 +15,7 @@ import { jsPDF } from 'jspdf';
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
         <div>
           <h2 class="font-serif text-2xl font-bold text-white tracking-tight">Reportes & Inteligencia Financiera</h2>
-          <p class="text-xs text-gray-400 mt-1">Generación, consolidación y exportación de informes ejecutivos sobre proyectos y cotizaciones.</p>
+          <p class="text-sm text-gray-400 mt-1">Generación, consolidación y exportación de informes ejecutivos sobre proyectos y cotizaciones.</p>
         </div>
       </div>
 
@@ -111,13 +111,13 @@ import { jsPDF } from 'jspdf';
           <div class="space-y-3 pt-1">
             <div *ngFor="let rep of adminService.reportes()" class="p-4 rounded-lg bg-[#0C0C0C] border border-white/5 flex items-center justify-between gap-4 hover:border-white/20 transition-all group">
               <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded bg-[#030303] border border-white/10 flex flex-col items-center justify-center font-mono font-bold text-[9px] text-white shrink-0">
+                <div class="w-12 h-12 rounded bg-[#030303] border border-white/10 flex flex-col items-center justify-center font-mono font-bold text-[10px] text-white shrink-0">
                   <svg class="w-4 h-4 mb-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                   <span>{{ rep.formato }}</span>
                 </div>
                 <div>
-                  <span class="font-bold text-white text-xs block group-hover:text-gray-300 transition-colors">{{ rep.titulo }}</span>
-                  <span class="text-[11px] text-gray-400 block mt-0.5 font-mono">{{ rep.periodo }} ● {{ rep.fechaGeneracion }}</span>
+                  <span class="font-bold text-white text-sm block group-hover:text-gray-300 transition-colors">{{ rep.titulo }}</span>
+                  <span class="text-xs text-gray-400 block mt-0.5 font-mono">{{ rep.periodo }} ● {{ rep.fechaGeneracion }}</span>
                 </div>
               </div>
 

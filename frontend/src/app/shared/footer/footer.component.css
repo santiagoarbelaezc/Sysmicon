@@ -13,8 +13,71 @@
   justify-content: space-between;
   padding: 3rem 4rem;
   margin-bottom: 5rem;
-  background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(15, 37, 75, 0.3) 100%);
-  border: 1px solid var(--glass-wood-border);
+  background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(8, 8, 8, 0.98) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  border-radius: 16px;
+  position: relative;
+  transition: all var(--transition-smooth);
+}
+
+.footer-cta-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Trazos y marcos esquineros decorativos */
+.footer-cta-box .arch-plan-box-top {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 70px;
+  height: 70px;
+  border: 1px solid var(--wood-light);
+  border-radius: 6px;
+  opacity: 0.25;
+  pointer-events: none;
+  transition: all var(--transition-smooth);
+  z-index: 1;
+}
+
+.footer-cta-box .arch-plan-box-bottom {
+  position: absolute;
+  bottom: -8px;
+  left: -8px;
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  opacity: 0.4;
+  pointer-events: none;
+  transition: all var(--transition-smooth);
+  z-index: 1;
+}
+
+.footer-cta-box .arch-corner-line {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 18px;
+  height: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  border-right: 1px solid rgba(255, 255, 255, 0.25);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.footer-cta-box:hover .arch-plan-box-top {
+  transform: translate(4px, -4px);
+  opacity: 0.5;
+  border-color: var(--text-primary);
+}
+
+.footer-cta-box:hover .arch-plan-box-bottom {
+  transform: translate(-4px, 4px);
+  border-color: var(--wood-light);
+  opacity: 0.3;
 }
 
 @media (max-width: 992px) {

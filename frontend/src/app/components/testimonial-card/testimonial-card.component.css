@@ -7,7 +7,7 @@
   overflow: visible;
   background: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.07);
-  border-left: 3px solid rgba(79, 122, 165, 0.45);
+  border-left: 3px solid rgba(255, 255, 255, 0.35);
   border-radius: 0 8px 8px 0;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.03);
   transition: all var(--transition-smooth);
@@ -58,15 +58,15 @@
   right: 15px;
   width: 16px;
   height: 16px;
-  border-top: 1px solid rgba(79, 122, 165, 0.4);
-  border-right: 1px solid rgba(79, 122, 165, 0.4);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  border-right: 1px solid rgba(255, 255, 255, 0.25);
   pointer-events: none;
 }
 
 /* Forma alterna para variedad visual */
 .service-card.card-alt {
   border-left: 1px solid rgba(0, 0, 0, 0.07);
-  border-top: 3px solid rgba(79, 122, 165, 0.45);
+  border-top: 3px solid rgba(255, 255, 255, 0.35);
   border-radius: 0 0 8px 8px;
 }
 
@@ -74,7 +74,7 @@
   transform: translateY(-6px);
   background: #FFFFFF;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
-  border-color: rgba(79, 122, 165, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .service-card:hover .arch-plan-box-top {
@@ -141,7 +141,7 @@
 .service-card:hover .icon-box {
   background: var(--wood-subtle);
   color: var(--wood-accent);
-  border-color: rgba(79, 122, 165, 0.2);
+  border-color: rgba(255, 255, 255, 0.15);
   transform: scale(1.05);
 }
 
@@ -164,7 +164,7 @@
 .arch-divider {
   width: 35px;
   height: 1.5px;
-  background: rgba(79, 122, 165, 0.5);
+  background: rgba(0, 0, 0, 0.15);
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
   transition: width var(--transition-smooth);

@@ -167,15 +167,17 @@ interface CategoriaResumen {
           <span class="text-xs font-bold text-gray-400 uppercase tracking-wider mr-1">Filtrar:</span>
           
           <button (click)="filtroCategoria.set('todos')"
-                  [ngClass]="filtroCategoria() === 'todos' ? 'bg-white text-black font-extrabold shadow-md border border-white' : 'bg-[#0D0D0D] text-gray-300 hover:bg-white/10 font-bold'"
-                  class="px-3.5 py-1.5 rounded-xl text-xs transition-all shrink-0 cursor-pointer">
+                  [style.backgroundColor]="filtroCategoria() === 'todos' ? 'var(--admin-text-primary)' : 'var(--admin-bg-input)'"
+                  [style.color]="filtroCategoria() === 'todos' ? 'var(--admin-bg-primary)' : 'var(--admin-text-secondary)'"
+                  class="px-4 py-2 rounded-xl text-xs transition-all shrink-0 cursor-pointer font-extrabold shadow-sm border border-transparent hover:brightness-110">
             Todas ({{ adminService.bloquesCAD().length }})
           </button>
 
           <button *ngFor="let cat of listaCategorias()" 
                   (click)="filtroCategoria.set(cat.id)"
-                  [ngClass]="filtroCategoria() === cat.id ? 'bg-white text-black font-extrabold shadow-md border border-white' : 'bg-[#0D0D0D] text-gray-300 hover:bg-white/10 font-bold'"
-                  class="px-3.5 py-1.5 rounded-xl text-xs transition-all shrink-0 cursor-pointer inline-flex items-center gap-1.5">
+                  [style.backgroundColor]="filtroCategoria() === cat.id ? 'var(--admin-text-primary)' : 'var(--admin-bg-input)'"
+                  [style.color]="filtroCategoria() === cat.id ? 'var(--admin-bg-primary)' : 'var(--admin-text-secondary)'"
+                  class="px-4 py-2 rounded-xl text-xs transition-all shrink-0 cursor-pointer inline-flex items-center gap-1.5 font-extrabold shadow-sm border border-transparent hover:brightness-110">
             <span>{{ cat.nombre }}</span>
             <span class="opacity-80 font-mono">({{ cat.totalBloques }})</span>
           </button>

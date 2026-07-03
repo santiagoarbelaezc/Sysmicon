@@ -1,7 +1,7 @@
 import { Component, signal, inject, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -14,9 +14,15 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent implements OnInit, OnDestroy {
   private authService = inject(AuthService);
   private router = inject(Router);
+  private location = inject(Location);
+  private route = inject(ActivatedRoute);
 
   ngOnInit(): void {
     document.body.style.overflow = 'hidden';
+    // Si la URL actual es /registro, activar pestaña de registro
+    if (this.router.url.startsWith('/registro')) {
+      this.tabActiva.set('registro');
+    }
   }
 
   ngOnDestroy(): void {
@@ -46,6 +52,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.tabActiva.set(tab);
     this.errorMessage.set('');
     this.successMessage.set('');
+    // Actualizar URL sin recargar la página
+    this.location.replaceState(tab === 'registro' ? '/registro' : '/login');
   }
 
   togglePassword(): void {

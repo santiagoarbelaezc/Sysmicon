@@ -506,66 +506,119 @@
   </div>
 </div>
 
-<!-- ===== MODAL DE CONFIRMACIÓN DE SALIDA ===== -->
-<div *ngIf="mostrarModalSalida()" 
-     class="fixed inset-0 z-[99999] flex items-center justify-center p-4"
-     (click)="cancelarSalida()">
-  
-  <!-- Backdrop oscuro con blur -->
-  <div class="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
+<!-- ===== MODAL: ACCESO REQUERIDO — CAD 2D ===== -->
+<div *ngIf="mostrarModalAuth()"
+     class="fixed inset-0 z-[99999] flex items-center justify-center"
+     style="background: rgba(3,3,3,0.92); backdrop-filter: blur(18px) saturate(0.4);">
 
-  <!-- Tarjeta del Modal (Diseño Arquitectónico) -->
-  <div class="relative z-10 w-full max-w-md bg-[#030303] rounded-2xl border border-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.95)] p-8 text-center animate-fade overflow-hidden"
-       (click)="$event.stopPropagation()">
+  <!-- Tarjeta principal -->
+  <div class="relative w-full max-w-lg mx-4 overflow-hidden"
+       style="background: #080808; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 48px 120px rgba(0,0,0,0.95);">
 
-    <!-- Trazos y ejes de plano decorativos -->
-    <div class="absolute top-0 bottom-0 left-[8%] w-[1px] bg-white/[0.04] pointer-events-none"></div>
-    <div class="absolute top-0 bottom-0 right-[8%] w-[1px] bg-white/[0.04] pointer-events-none"></div>
-    <div class="absolute -top-1.5 -left-1.5 w-6 h-6 border-t border-l border-white/20 pointer-events-none"></div>
-    <div class="absolute -top-1.5 -right-1.5 w-6 h-6 border-t border-r border-white/20 pointer-events-none"></div>
-    <div class="absolute -bottom-1.5 -left-1.5 w-6 h-6 border-b border-l border-white/20 pointer-events-none"></div>
-    <div class="absolute -bottom-1.5 -right-1.5 w-6 h-6 border-b border-r border-white/20 pointer-events-none"></div>
-    <div class="absolute top-3 left-3 text-[7px] font-mono text-white/15 pointer-events-none">WARN_EXIT_CAD</div>
-    <div class="absolute top-3 right-3 text-[7px] font-mono text-white/15 pointer-events-none">EJE A-B</div>
+    <!-- Esquinas de plano arquitectónico -->
+    <div class="absolute top-0 left-0 w-8 h-8 pointer-events-none" style="border-top: 1px solid rgba(232,213,163,0.5); border-left: 1px solid rgba(232,213,163,0.5);"></div>
+    <div class="absolute top-0 right-0 w-8 h-8 pointer-events-none" style="border-top: 1px solid rgba(232,213,163,0.5); border-right: 1px solid rgba(232,213,163,0.5);"></div>
+    <div class="absolute bottom-0 left-0 w-8 h-8 pointer-events-none" style="border-bottom: 1px solid rgba(232,213,163,0.5); border-left: 1px solid rgba(232,213,163,0.5);"></div>
+    <div class="absolute bottom-0 right-0 w-8 h-8 pointer-events-none" style="border-bottom: 1px solid rgba(232,213,163,0.5); border-right: 1px solid rgba(232,213,163,0.5);"></div>
 
-    <!-- Icono de advertencia decorativo -->
-    <div class="w-16 h-16 rounded-full bg-red-500/5 border border-red-500/20 flex items-center justify-center mx-auto mb-5 z-10 relative">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-red-400">
-        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
-        <path d="M12 9v4"/>
-        <path d="M12 17h.01"/>
-      </svg>
+    <!-- Ejes de plano verticales sutiles -->
+    <div class="absolute top-0 bottom-0 left-[12%] w-[1px] pointer-events-none" style="background: rgba(255,255,255,0.025);"></div>
+    <div class="absolute top-0 bottom-0 right-[12%] w-[1px] pointer-events-none" style="background: rgba(255,255,255,0.025);"></div>
+    <div class="absolute left-0 right-0 top-[30%] h-[1px] pointer-events-none" style="background: rgba(255,255,255,0.025);"></div>
+
+    <!-- Etiqueta técnica superior -->
+    <div class="flex items-center justify-between px-6 pt-4 pb-0">
+      <span class="font-mono text-[9px] tracking-[0.2em] uppercase" style="color: rgba(232,213,163,0.4);">SYS-CAD-2D / AUTH_REQUIRED</span>
+      <span class="font-mono text-[9px] tracking-[0.15em]" style="color: rgba(255,255,255,0.15);">REV 01</span>
     </div>
 
-    <!-- Texto principal -->
-    <h3 class="font-serif text-2xl font-bold text-white mb-2 relative z-10">¿Seguro que quieres salir?</h3>
-    <p class="text-sm text-gray-400 leading-relaxed mb-1 relative z-10">
-      Tienes un plano CAD en progreso con 
-      <strong class="text-white">{{ elementosLienzo().length }} módulos</strong> y
-      <strong class="text-white"> {{ totalAreaM2() }} m²</strong> de área diseñada.
-    </p>
-    <p class="text-xs text-gray-500 mb-7 relative z-10">
-      Si sales ahora, perderás todo el trabajo no guardado.
-    </p>
+    <!-- Línea divisora dorada -->
+    <div class="mx-6 mt-3 mb-0 h-[1px]" style="background: linear-gradient(90deg, transparent, rgba(232,213,163,0.6), transparent);"></div>
 
-    <!-- Divisor decorativo -->
-    <div class="w-16 h-[1px] bg-white/10 mx-auto mb-7 relative z-10"></div>
+    <!-- Cuerpo del modal -->
+    <div class="px-10 pt-8 pb-10">
 
-    <!-- Botones de acción -->
-    <div class="flex flex-col sm:flex-row gap-3 relative z-10">
-      <!-- Cancelar: quedarse (Botón Blanco, Letra Negra) -->
-      <button (click)="cancelarSalida()"
-              class="flex-1 py-3 px-5 rounded-xl bg-white hover:bg-gray-200 text-black border border-white text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
-        Continuar diseñando
-      </button>
+      <!-- Cabecera: ícono + título -->
+      <div class="flex items-start gap-5 mb-7">
+        <!-- Ícono en marco de plano -->
+        <div class="flex-shrink-0 w-14 h-14 flex items-center justify-center relative"
+             style="border: 1px solid rgba(232,213,163,0.2); background: rgba(232,213,163,0.04);">
+          <!-- Marcas de cruz técnica en las esquinas del ícono -->
+          <div class="absolute -top-[3px] -left-[3px] w-2 h-2" style="border-top: 1px solid rgba(232,213,163,0.6); border-left: 1px solid rgba(232,213,163,0.6);"></div>
+          <div class="absolute -top-[3px] -right-[3px] w-2 h-2" style="border-top: 1px solid rgba(232,213,163,0.6); border-right: 1px solid rgba(232,213,163,0.6);"></div>
+          <div class="absolute -bottom-[3px] -left-[3px] w-2 h-2" style="border-bottom: 1px solid rgba(232,213,163,0.6); border-left: 1px solid rgba(232,213,163,0.6);"></div>
+          <div class="absolute -bottom-[3px] -right-[3px] w-2 h-2" style="border-bottom: 1px solid rgba(232,213,163,0.6); border-right: 1px solid rgba(232,213,163,0.6);"></div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8d5a3" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="1"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            <circle cx="12" cy="16" r="1" fill="#e8d5a3" stroke="none"/>
+          </svg>
+        </div>
 
-      <!-- Confirmar: salir (Botón Rojo) -->
-      <button (click)="confirmarSalida()"
-              class="flex-1 py-3 px-5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-        Sí, salir sin guardar
-      </button>
+        <!-- Título y subtítulo -->
+        <div class="flex-1 pt-1">
+          <div class="font-mono text-[9px] tracking-[0.25em] uppercase mb-1.5" style="color: rgba(232,213,163,0.5);">Acceso Restringido</div>
+          <h2 class="text-white font-bold leading-tight mb-1" style="font-size: 1.25rem; letter-spacing: -0.01em;">
+            Necesitas una cuenta<br>para usar CAD 2D
+          </h2>
+          <p class="text-xs leading-relaxed" style="color: rgba(255,255,255,0.35);">
+            El simulador de planos Sysmicon requiere registro para guardar tu trabajo y recibir una propuesta personalizada.
+          </p>
+        </div>
+      </div>
+
+      <!-- Separador con marcas de cota -->
+      <div class="flex items-center gap-3 mb-6">
+        <div class="flex-1 h-[1px]" style="background: rgba(255,255,255,0.06);"></div>
+        <div class="font-mono text-[8px] tracking-[0.2em]" style="color: rgba(255,255,255,0.2);">BENEFICIOS</div>
+        <div class="flex-1 h-[1px]" style="background: rgba(255,255,255,0.06);"></div>
+      </div>
+
+      <!-- Beneficios en formato de lista técnica -->
+      <div class="space-y-3 mb-8">
+        <div class="flex items-center gap-4">
+          <span class="font-mono text-[9px] w-6 text-right flex-shrink-0" style="color: rgba(232,213,163,0.4);">01</span>
+          <div class="flex-1 h-[1px]" style="background: rgba(255,255,255,0.05);"></div>
+          <span class="text-xs" style="color: rgba(255,255,255,0.45);">Guarda y exporta tus planos en PDF</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="font-mono text-[9px] w-6 text-right flex-shrink-0" style="color: rgba(232,213,163,0.4);">02</span>
+          <div class="flex-1 h-[1px]" style="background: rgba(255,255,255,0.05);"></div>
+          <span class="text-xs" style="color: rgba(255,255,255,0.45);">Cotización personalizada por m²</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="font-mono text-[9px] w-6 text-right flex-shrink-0" style="color: rgba(232,213,163,0.4);">03</span>
+          <div class="flex-1 h-[1px]" style="background: rgba(255,255,255,0.05);"></div>
+          <span class="text-xs" style="color: rgba(255,255,255,0.45);">Acceso al equipo de arquitectos Sysmicon</span>
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="flex flex-col gap-3">
+        <!-- CTA principal -->
+        <button (click)="irARegistro()"
+                class="w-full py-4 text-sm font-bold tracking-widest uppercase transition-all duration-200 cursor-pointer relative overflow-hidden group"
+                style="background: rgba(232,213,163,0.96); color: #080808; letter-spacing: 0.12em;">
+          <!-- Línea de brillo en hover -->
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200" style="background: rgba(255,255,255,0.15);"></div>
+          <span class="relative">Crear cuenta — Es gratis</span>
+        </button>
+
+        <!-- Secundario: continuar sin cuenta -->
+        <button (click)="cerrarModalAuth()"
+                class="w-full py-3 text-xs font-mono tracking-[0.15em] uppercase transition-all duration-200 cursor-pointer"
+                style="background: transparent; border: 1px solid rgba(255,255,255,0.07); color: rgba(255,255,255,0.28);">
+          Explorar sin cuenta
+        </button>
+      </div>
+
     </div>
+
+    <!-- Pie técnico -->
+    <div class="px-6 pb-4 flex items-center justify-between">
+      <span class="font-mono text-[8px]" style="color: rgba(255,255,255,0.12);">SYSMICON ARQUITECTURA © {{ currentYear }}</span>
+      <span class="font-mono text-[8px]" style="color: rgba(255,255,255,0.12);">CAD-2D v2.1</span>
+    </div>
+
   </div>
 </div>

@@ -2,6 +2,7 @@ import { Component, signal, computed, HostListener, OnInit, OnDestroy, ElementRe
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 export interface BloqueCAD {
   id: string;
@@ -32,16 +33,20 @@ export interface ElementoLienzo {
 export class CreaTuDisenoComponent implements OnInit, OnDestroy {
   private readonly router = inject(Router);
   private readonly elRef = inject(ElementRef);
+  private readonly authService = inject(AuthService);
 
   readonly currentYear = new Date().getFullYear();
   readonly isLoadingScreen = signal<boolean>(true);
   readonly isFullscreen = signal<boolean>(false);
   readonly catalogoAbierto = signal<boolean>(true);
-  readonly mostrarModalSalida = signal<boolean>(false);
-  private urlSalidaPendiente: string | null = null;
+  readonly mostrarModalAuth = signal<boolean>(false);
   private loadingTimer: any;
 
   ngOnInit(): void {
+    // Mostrar modal de registro inmediatamente si no hay usuario logueado
+    if (!this.authService.isLoggedIn()) {
+      this.mostrarModalAuth.set(true);
+    }
     this.loadingTimer = setTimeout(() => {
       this.isLoadingScreen.set(false);
     }, 2500);
@@ -63,6 +68,14 @@ export class CreaTuDisenoComponent implements OnInit, OnDestroy {
       clearTimeout(this.loadingTimer);
     }
     this.isLoadingScreen.set(false);
+  }
+
+  cerrarModalAuth(): void {
+    this.mostrarModalAuth.set(false);
+  }
+
+  irARegistro(): void {
+    this.router.navigate(['/registro']);
   }
 
   imprimirPlano(): void {
@@ -104,28 +117,9 @@ export class CreaTuDisenoComponent implements OnInit, OnDestroy {
     }
   }
 
-  // --- MODAL DE CONFIRMACIÓN DE SALIDA ---
+  // --- NAVEGACIÓN SIMPLE (sin modal de salida) ---
   solicitarSalida(url: string): void {
-    if (this.elementosLienzo().length > 0 && !this.isSubmitted()) {
-      this.urlSalidaPendiente = url;
-      this.mostrarModalSalida.set(true);
-    } else {
-      this.router.navigateByUrl(url);
-    }
-  }
-
-  confirmarSalida(): void {
-    this.mostrarModalSalida.set(false);
-    const url = this.urlSalidaPendiente;
-    this.urlSalidaPendiente = null;
-    if (url) {
-      this.router.navigateByUrl(url);
-    }
-  }
-
-  cancelarSalida(): void {
-    this.mostrarModalSalida.set(false);
-    this.urlSalidaPendiente = null;
+    this.router.navigateByUrl(url);
   }
 
   // Categorías de bloques con iconos arquitectónicos vectoriales SVG

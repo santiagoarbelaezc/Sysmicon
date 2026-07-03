@@ -38,30 +38,32 @@ export class ProjectsComponent {
       id: 'casaS19',
       title: 'CASA S19',
       subtitle: 'Volumetría suspendida y grandes ventanales con vista panorámica y diseño bioclimático.',
-      img: 'images/imagen1.jpg',
+      img: 'assets/images/casaS19/s19-portada.jpg',
       images: [
-        'images/imagen1.jpg',
-        'images/imagen2.jpg',
-        'images/imagen3.jpg',
-        'images/imagen4.jpg',
-        'images/imagen5.jpg',
-        'images/principal.jpg'
+        'assets/images/casaS19/S19-2.png',
+        'assets/images/casaS19/S19-3.png',
+        'assets/images/casaS19/S19-4.png',
+        'assets/images/casaS19/S19-5.png',
+        'assets/images/casaS19/S19-6.png',
+        'assets/images/casaS19/S19-7.png',
+        'assets/images/casaS19/S19-8.png',
+        'assets/images/casaS19/S19-9.png'
       ]
     },
     {
       id: 'casaS23',
       title: 'CASA S23',
       subtitle: 'Espacios fluidos que diluyen los límites entre el interior y los jardines exteriores.',
-      img: 'assets/images/casaS23/s23-portada.jpg',
+      img: 'assets/images/casaS23/S23-1.png',
       images: [
+        'assets/images/casaS23/S23-1.png',
         'assets/images/casaS23/S23-2.png',
         'assets/images/casaS23/S23-3.png',
         'assets/images/casaS23/S23-4.png',
         'assets/images/casaS23/S23-5.png',
         'assets/images/casaS23/S23-6.png',
         'assets/images/casaS23/S23-7.png',
-        'assets/images/casaS23/S23-8.png',
-        'assets/images/casaS23/S23-9.png'
+        'assets/images/casaS23/S23-8.png'
       ]
     },
     {

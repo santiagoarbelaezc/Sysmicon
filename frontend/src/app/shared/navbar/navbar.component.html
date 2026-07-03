@@ -38,12 +38,12 @@
         </ng-container>
 
         <ng-container *ngIf="authService.currentUser() as user">
-          <div class="flex items-center gap-2 bg-[#161616] px-3.5 py-1.5 rounded-full border border-wood-accent/30 shadow-sm animate-fade">
+          <a routerLink="/admin" title="Ir al Portal Admin" class="flex items-center gap-2 bg-[#161616] hover:bg-[#1f1f1f] px-3.5 py-1.5 rounded-full border border-wood-accent/30 hover:border-wood-accent shadow-sm animate-fade transition-all cursor-pointer">
             <span class="w-6 h-6 rounded-full bg-wood-accent text-[#111] font-bold text-xs flex items-center justify-center">{{ user.nombre.charAt(0) }}</span>
             <span class="font-bold text-wood-light truncate max-w-[100px]">{{ user.nombre }}</span>
-            <a routerLink="/admin" title="Ir al Portal Admin" class="bg-wood-accent/20 hover:bg-wood-accent text-wood-light hover:text-[#111] text-[10px] font-extrabold px-2 py-0.5 rounded transition-all">ADMIN</a>
-            <button (click)="authService.logout()" title="Cerrar sesión" class="text-gray-400 hover:text-red-400 font-bold ml-0.5 transition-colors cursor-pointer">✕</button>
-          </div>
+            <span class="bg-wood-accent/20 text-wood-light text-[10px] font-extrabold px-2 py-0.5 rounded">ADMIN</span>
+            <button (click)="authService.logout(); $event.stopPropagation(); $event.preventDefault()" title="Cerrar sesión" class="text-gray-400 hover:text-red-400 font-bold ml-0.5 transition-colors cursor-pointer relative z-10">✕</button>
+          </a>
         </ng-container>
       </div>
 

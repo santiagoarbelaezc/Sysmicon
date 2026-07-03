@@ -171,7 +171,7 @@ interface CategoriaResumen {
                       <span class="font-serif font-extrabold text-white text-2xl tracking-tight">{{ b.precioUSD | number:'1.0-0' }}</span>
                       <span class="text-[10px] font-mono font-extrabold text-black bg-white px-1.5 py-0.5 rounded shadow ml-1">USD</span>
                     </div>
-                    <span class="text-[11px] text-gray-500 font-mono block">~${{ (b.precioUSD / b.areaM2) | number:'1.0-0' }} / m²</span>
+                    <span class="text-[11px] text-gray-500 font-mono block">~\${{ (b.precioUSD / b.areaM2) | number:'1.0-0' }} / m²</span>
                   </div>
                 </td>
 
@@ -340,8 +340,8 @@ interface CategoriaResumen {
             <div class="flex items-center justify-end gap-3 pt-4 border-t border-white/10">
               <button type="button" (click)="cerrarModal()" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 font-bold transition-colors cursor-pointer">Cancelar</button>
               <button type="submit" class="px-6 py-2.5 rounded-xl bg-white hover:bg-gray-200 text-black font-extrabold transition-all shadow-xl cursor-pointer inline-flex items-center gap-2">
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                <span>{{ esEdicion() ? 'Guardar Cambios USD' : 'Publicar Bloque en Catálogo' }}</span>
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>{{ esEdicion() ? 'Guardar Cambios' : 'Publicar Bloque' }}</span>
               </button>
             </div>
 

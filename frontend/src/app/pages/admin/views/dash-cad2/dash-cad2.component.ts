@@ -251,7 +251,7 @@ interface CategoriaResumen {
                       <span class="font-serif font-extrabold text-white text-2xl tracking-tight">{{ b.precioUSD | number:'1.0-0' }}</span>
                       <span class="text-[10px] font-mono font-extrabold text-black bg-white px-1.5 py-0.5 rounded shadow ml-1">COP</span>
                     </div>
-                    <span class="text-[11px] text-gray-500 font-mono block">~\\${{ (b.precioUSD / b.areaM2) | number:'1.0-0' }} / m²</span>
+                    <span class="text-[11px] text-gray-500 font-mono block">COP {{ (b.precioUSD / b.areaM2) | number:'1.0-0' }} / m²</span>
                   </div>
                 </td>
 
@@ -352,7 +352,7 @@ interface CategoriaResumen {
                            class="w-full pl-3.5 pr-8 py-3 rounded-lg bg-[#030303] border border-white/10 text-white font-bold text-sm focus:border-white focus:outline-none">
                     <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 font-bold">m²</span>
                   </div>
-                  <span class="text-[11px] text-gray-400 font-mono block mt-2">Costo por metro cuadrado: <strong>\${{ (formPrecio / (formArea || 1)) | number:'1.0-0' }} / m²</strong></span>
+                  <span class="text-[11px] text-gray-400 font-mono block mt-2">Costo por metro cuadrado: <strong>COP {{ (formPrecio / (formArea || 1)) | number:'1.0-0' }} / m²</strong></span>
                 </div>
               </div>
             </div>

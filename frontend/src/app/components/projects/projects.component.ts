@@ -52,9 +52,8 @@ export class ProjectsComponent {
       id: 'casaS23',
       title: 'CASA S23',
       subtitle: 'Espacios fluidos que diluyen los límites entre el interior y los jardines exteriores.',
-      img: 'assets/images/casaS23/S23-1.png',
+      img: 'assets/images/casaS23/s23-portada.jpg',
       images: [
-        'assets/images/casaS23/S23-1.png',
         'assets/images/casaS23/S23-2.png',
         'assets/images/casaS23/S23-3.png',
         'assets/images/casaS23/S23-4.png',

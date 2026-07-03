@@ -512,15 +512,25 @@
      (click)="cancelarSalida()">
   
   <!-- Backdrop oscuro con blur -->
-  <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+  <div class="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
 
-  <!-- Tarjeta del Modal -->
-  <div class="relative z-10 w-full max-w-md bg-[#111111] rounded-2xl border border-white/15 shadow-[0_30px_80px_rgba(0,0,0,0.9)] p-8 text-center animate-fade"
+  <!-- Tarjeta del Modal (Diseño Arquitectónico) -->
+  <div class="relative z-10 w-full max-w-md bg-[#030303] rounded-2xl border border-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.95)] p-8 text-center animate-fade overflow-hidden"
        (click)="$event.stopPropagation()">
 
+    <!-- Trazos y ejes de plano decorativos -->
+    <div class="absolute top-0 bottom-0 left-[8%] w-[1px] bg-white/[0.04] pointer-events-none"></div>
+    <div class="absolute top-0 bottom-0 right-[8%] w-[1px] bg-white/[0.04] pointer-events-none"></div>
+    <div class="absolute -top-1.5 -left-1.5 w-6 h-6 border-t border-l border-white/20 pointer-events-none"></div>
+    <div class="absolute -top-1.5 -right-1.5 w-6 h-6 border-t border-r border-white/20 pointer-events-none"></div>
+    <div class="absolute -bottom-1.5 -left-1.5 w-6 h-6 border-b border-l border-white/20 pointer-events-none"></div>
+    <div class="absolute -bottom-1.5 -right-1.5 w-6 h-6 border-b border-r border-white/20 pointer-events-none"></div>
+    <div class="absolute top-3 left-3 text-[7px] font-mono text-white/15 pointer-events-none">WARN_EXIT_CAD</div>
+    <div class="absolute top-3 right-3 text-[7px] font-mono text-white/15 pointer-events-none">EJE A-B</div>
+
     <!-- Icono de advertencia decorativo -->
-    <div class="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mx-auto mb-5">
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-400">
+    <div class="w-16 h-16 rounded-full bg-red-500/5 border border-red-500/20 flex items-center justify-center mx-auto mb-5 z-10 relative">
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-red-400">
         <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
         <path d="M12 9v4"/>
         <path d="M12 17h.01"/>
@@ -528,32 +538,32 @@
     </div>
 
     <!-- Texto principal -->
-    <h3 class="font-serif text-2xl font-bold text-white mb-2">¿Seguro que quieres salir?</h3>
-    <p class="text-sm text-gray-400 leading-relaxed mb-1">
+    <h3 class="font-serif text-2xl font-bold text-white mb-2 relative z-10">¿Seguro que quieres salir?</h3>
+    <p class="text-sm text-gray-400 leading-relaxed mb-1 relative z-10">
       Tienes un plano CAD en progreso con 
-      <strong class="text-wood-light">{{ elementosLienzo().length }} módulos</strong> y
-      <strong class="text-wood-light"> {{ totalAreaM2() }} m²</strong> de área diseñada.
+      <strong class="text-white">{{ elementosLienzo().length }} módulos</strong> y
+      <strong class="text-white"> {{ totalAreaM2() }} m²</strong> de área diseñada.
     </p>
-    <p class="text-xs text-gray-500 mb-7">
+    <p class="text-xs text-gray-500 mb-7 relative z-10">
       Si sales ahora, perderás todo el trabajo no guardado.
     </p>
 
     <!-- Divisor decorativo -->
-    <div class="w-16 h-[1px] bg-wood-accent/40 mx-auto mb-7"></div>
+    <div class="w-16 h-[1px] bg-white/10 mx-auto mb-7 relative z-10"></div>
 
     <!-- Botones de acción -->
-    <div class="flex flex-col sm:flex-row gap-3">
-      <!-- Cancelar: quedarse -->
+    <div class="flex flex-col sm:flex-row gap-3 relative z-10">
+      <!-- Cancelar: quedarse (Botón Blanco, Letra Negra) -->
       <button (click)="cancelarSalida()"
-              class="flex-1 py-3 px-5 rounded-xl bg-[#1A1A1A] hover:bg-[#242424] text-white border border-white/10 text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+              class="flex-1 py-3 px-5 rounded-xl bg-white hover:bg-gray-200 text-black border border-white text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
         Continuar diseñando
       </button>
 
-      <!-- Confirmar: salir -->
+      <!-- Confirmar: salir (Botón Rojo) -->
       <button (click)="confirmarSalida()"
-              class="flex-1 py-3 px-5 rounded-xl bg-red-950/60 hover:bg-red-900/80 text-red-300 border border-red-800/60 text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              class="flex-1 py-3 px-5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
         Sí, salir sin guardar
       </button>
     </div>

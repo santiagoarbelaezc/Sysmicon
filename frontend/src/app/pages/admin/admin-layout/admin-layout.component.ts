@@ -44,91 +44,91 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
         <!-- Logo Header Sidebar -->
         <div class="h-20 border-b border-white/10 flex items-center justify-between px-4">
           <a routerLink="/" class="flex items-center gap-3 overflow-hidden">
-            <img src="assets/icons/logo-sysmico.png" alt="Sysmicon" class="w-10 h-10 object-contain shrink-0">
+            <img src="assets/icons/logo-sysmico.png" alt="Sysmicon" class="w-10 h-10 object-contain shrink-0 filter brightness-0 invert">
             <div *ngIf="sidebarAbierto()" class="flex flex-col animate-fade">
               <span class="font-serif font-extrabold text-base text-white tracking-wider">SYSMICON</span>
-              <span class="text-[9px] text-gray-400 uppercase tracking-widest font-bold">Portal Directivo</span>
+              <span class="text-[10px] text-gray-400 uppercase tracking-widest font-bold font-mono">Portal Directivo</span>
             </div>
           </a>
           <button (click)="toggleSidebar()" 
-                  class="text-gray-500 hover:text-white p-1 rounded-lg hover:bg-white/5 transition-colors text-xs cursor-pointer">
+                  class="text-gray-500 hover:text-white p-1.5 rounded-lg hover:bg-white/5 transition-colors text-xs cursor-pointer">
             {{ sidebarAbierto() ? '◀' : '▶' }}
           </button>
         </div>
 
         <!-- Menú de Navegación de 8 Secciones -->
-        <nav class="flex-1 py-6 px-3 space-y-1.5 overflow-y-auto scrollbar-thin">
+        <nav class="flex-1 py-6 px-3 space-y-2 overflow-y-auto scrollbar-thin font-sans">
           
           <!-- 1. Dash Inicio -->
           <button (click)="setSeccion('inicio')"
-                  [ngClass]="seccionActiva() === 'inicio' ? 'bg-wood-accent text-[#111] font-bold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
-                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-xs transition-all cursor-pointer group">
-            <svg class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  [ngClass]="seccionActiva() === 'inicio' ? 'bg-white text-black font-extrabold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
+                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-sm transition-all cursor-pointer group">
+            <svg class="w-[18px] h-[18px] shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate">Dash Inicio</span>
           </button>
 
           <!-- 2. Analíticas -->
           <button (click)="setSeccion('analiticas')"
-                  [ngClass]="seccionActiva() === 'analiticas' ? 'bg-wood-accent text-[#111] font-bold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
-                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-xs transition-all cursor-pointer group">
-            <svg class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                  [ngClass]="seccionActiva() === 'analiticas' ? 'bg-white text-black font-extrabold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
+                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-sm transition-all cursor-pointer group">
+            <svg class="w-[18px] h-[18px] shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate">Analíticas</span>
           </button>
 
           <!-- 3. CAD 2 -->
           <button (click)="setSeccion('cad2')"
-                  [ngClass]="seccionActiva() === 'cad2' ? 'bg-wood-accent text-[#111] font-bold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
-                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-xs transition-all cursor-pointer group">
-            <svg class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 0 3.4Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
+                  [ngClass]="seccionActiva() === 'cad2' ? 'bg-white text-black font-extrabold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
+                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-sm transition-all cursor-pointer group">
+            <svg class="w-[18px] h-[18px] shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 0 3.4Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate flex items-center justify-between w-full">
               <span>CAD 2</span>
-              <span class="bg-white/15 text-white text-[9px] px-1.5 py-0.5 rounded font-bold border border-white/10">PRO</span>
+              <span class="bg-black/15 text-[9px] px-1.5 py-0.5 rounded font-bold border border-black/10 font-mono">PRO</span>
             </span>
           </button>
 
           <!-- 4. Estadísticas -->
           <button (click)="setSeccion('estadisticas')"
-                  [ngClass]="seccionActiva() === 'estadisticas' ? 'bg-wood-accent text-[#111] font-bold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
-                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-xs transition-all cursor-pointer group">
-            <svg class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                  [ngClass]="seccionActiva() === 'estadisticas' ? 'bg-white text-black font-extrabold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
+                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-sm transition-all cursor-pointer group">
+            <svg class="w-[18px] h-[18px] shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate">Estadísticas</span>
           </button>
 
           <!-- 5. Personalizar Sitio -->
           <button (click)="setSeccion('personalizar')"
-                  [ngClass]="seccionActiva() === 'personalizar' ? 'bg-wood-accent text-[#111] font-bold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
-                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-xs transition-all cursor-pointer group">
-            <svg class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+                  [ngClass]="seccionActiva() === 'personalizar' ? 'bg-white text-black font-extrabold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
+                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-sm transition-all cursor-pointer group">
+            <svg class="w-[18px] h-[18px] shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate">Personalizar Sitio</span>
           </button>
 
           <!-- 6. Usuarios -->
           <button (click)="setSeccion('usuarios')"
-                  [ngClass]="seccionActiva() === 'usuarios' ? 'bg-wood-accent text-[#111] font-bold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
-                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-xs transition-all cursor-pointer group">
-            <svg class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  [ngClass]="seccionActiva() === 'usuarios' ? 'bg-white text-black font-extrabold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
+                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-sm transition-all cursor-pointer group">
+            <svg class="w-[18px] h-[18px] shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate flex items-center justify-between w-full">
               <span>Usuarios</span>
-              <span class="bg-white/10 text-gray-300 text-[10px] px-1.5 py-0.5 rounded">{{ adminService.usuarios().length }}</span>
+              <span class="bg-white/10 text-gray-300 text-xs px-1.5 py-0.5 rounded font-mono">{{ adminService.usuarios().length }}</span>
             </span>
           </button>
 
           <!-- 7. Mensajes -->
           <button (click)="setSeccion('mensajes')"
-                  [ngClass]="seccionActiva() === 'mensajes' ? 'bg-wood-accent text-[#111] font-bold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
-                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-xs transition-all cursor-pointer group">
-            <svg class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                  [ngClass]="seccionActiva() === 'mensajes' ? 'bg-white text-black font-extrabold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
+                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-sm transition-all cursor-pointer group">
+            <svg class="w-[18px] h-[18px] shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate flex items-center justify-between w-full">
               <span>Mensajes</span>
-              <span *ngIf="countMensajesSinLeer() > 0" class="bg-emerald-500 text-black text-[10px] font-extrabold px-1.5 py-0.5 rounded-full animate-bounce">{{ countMensajesSinLeer() }}</span>
+              <span *ngIf="countMensajesSinLeer() > 0" class="bg-white text-black text-xs font-extrabold px-1.5 py-0.5 rounded-full font-mono">{{ countMensajesSinLeer() }}</span>
             </span>
           </button>
 
           <!-- 8. Reportes -->
           <button (click)="setSeccion('reportes')"
-                  [ngClass]="seccionActiva() === 'reportes' ? 'bg-wood-accent text-[#111] font-bold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
-                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-xs transition-all cursor-pointer group">
-            <svg class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+                  [ngClass]="seccionActiva() === 'reportes' ? 'bg-white text-black font-extrabold shadow-lg scale-[1.02]' : 'text-gray-400 hover:text-white hover:bg-white/5'"
+                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-sm transition-all cursor-pointer group">
+            <svg class="w-[18px] h-[18px] shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate">Reportes</span>
           </button>
 
@@ -137,8 +137,8 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
         <!-- Footer Sidebar (Regresar al sitio) -->
         <div class="p-4 border-t border-white/10">
           <a routerLink="/" 
-             class="flex items-center gap-3 p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white text-xs transition-colors group">
-            <svg class="w-4 h-4 shrink-0 text-wood-light group-hover:rotate-12 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+             class="flex items-center gap-3 p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white text-sm transition-colors group">
+            <svg class="w-[18px] h-[18px] shrink-0 text-white group-hover:rotate-12 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate font-bold">Ver Sitio Web</span>
           </a>
         </div>

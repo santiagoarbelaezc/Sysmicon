@@ -44,7 +44,7 @@ export class CreaTuDisenoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadingTimer = setTimeout(() => {
       this.isLoadingScreen.set(false);
-    }, 2000);
+    }, 2500);
   }
 
   ngOnDestroy(): void {
@@ -63,6 +63,10 @@ export class CreaTuDisenoComponent implements OnInit, OnDestroy {
       clearTimeout(this.loadingTimer);
     }
     this.isLoadingScreen.set(false);
+  }
+
+  imprimirPlano(): void {
+    window.print();
   }
 
   // --- PANTALLA COMPLETA ---

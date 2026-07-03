@@ -49,3 +49,74 @@
 .animate-progress {
   animation: loadingProgress 8.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
+
+/* Estilos de Impresión Profesional CAD */
+@media print {
+  /* Ocultar elementos generales y de interfaz web */
+  app-navbar,
+  .navbar-section,
+  .footer-section,
+  .contact-preview-section,
+  .col-span-3, /* Columna lateral de bloques */
+  .p-3.bg-\[\#181818\], /* Barra de herramientas superior */
+  .mobile-brand-header,
+  .preview-actions,
+  button, /* Ocultar todos los botones */
+  .fixed, /* Modales e interfaces flotantes */
+  .flex.items-center.justify-end,
+  .pt-3,
+  .mt-4,
+  .bg-black\/85,
+  .bg-black\/80 {
+    display: none !important;
+  }
+
+  /* Ajustar la página y el cuerpo */
+  body, html {
+    background: #000000 !important;
+    color: #FFFFFF !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Expandir contenedor del simulador CAD */
+  .config-page {
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: 100vh !important;
+    background: #000000 !important;
+  }
+
+  /* Expandir el lienzo completo a la hoja de impresión */
+  .flex-1.relative.bg-\[\#050505\] {
+    width: 100vw !important;
+    height: 75vh !important;
+    border: none !important;
+    background: #000000 !important;
+    box-shadow: none !important;
+  }
+
+  /* Mantener visible el resumen de metrajes y presupuesto */
+  .p-4.bg-\[\#111111\] {
+    width: 100vw !important;
+    height: 25vh !important;
+    background: #000000 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-around !important;
+    padding: 2rem !important;
+  }
+
+  /* Asegurar que las etiquetas sean blancas */
+  .p-4.bg-\[\#111111\] span,
+  .p-4.bg-\[\#111111\] strong {
+    color: #FFFFFF !important;
+    font-size: 1.1rem !important;
+  }
+}

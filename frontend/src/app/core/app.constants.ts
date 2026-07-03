@@ -6,10 +6,10 @@ export const BRAND_CONFIG = {
   description: 'Empresa de arquitectura y construcción de alto nivel dedicada a crear espacios habitables extraordinarios con materiales nobles y diseño atemporal.',
   established: 2011,
   stats: [
-    { value: '15+', label: 'Años de Experiencia' },
-    { value: '140+', label: 'Hogares Diseñados' },
-    { value: '85,000', label: 'M² Construidos' },
-    { value: '99%', label: 'Satisfacción de Clientes' }
+    { value: '10', label: 'Años de Experiencia' },
+    { value: '30', label: 'Obras Diseñadas' },
+    { value: 'Todo', label: 'Colombia' },
+    { value: 'Sobrios', label: 'Diseños Elegantes' }
   ]
 };
 

@@ -13,10 +13,6 @@ import { BRAND_CONFIG } from '../../core/app.constants';
 export class NosotrosComponent {
   readonly brand = BRAND_CONFIG;
 
-  // Lógica y datos de scroll horizontal para la línea de tiempo
-  scrollProgress = 0;
-  trackTransform = 0;
-
   readonly hitos = [
     {
       year: '2011',
@@ -44,35 +40,6 @@ export class NosotrosComponent {
       desc: 'Reconocidos como el estudio de referencia residencial de alto standing en Antioquia, con más de 25 obras exclusivas habitadas y 100% de cumplimiento técnico.'
     }
   ];
-
-  @HostListener('window:scroll', [])
-  onWindowScroll(): void {
-    const section = document.querySelector('.timeline-section-scroll') as HTMLElement;
-    const track = document.querySelector('.timeline-track') as HTMLElement;
-    if (!section || !track) return;
-
-    const rect = section.getBoundingClientRect();
-    const sectionHeight = section.clientHeight;
-    const viewportHeight = window.innerHeight;
-
-    // Cuánto de la sección se ha desplazado hacia arriba de la pantalla
-    const scrolled = -rect.top;
-    const totalScrollable = sectionHeight - viewportHeight;
-
-    if (totalScrollable <= 0) return;
-
-    // Calcular progreso de 0 a 100
-    let progress = (scrolled / totalScrollable) * 100;
-    progress = Math.max(0, Math.min(100, progress));
-    this.scrollProgress = progress;
-
-    // Calcular la traslación del track
-    const trackWidth = track.scrollWidth;
-    const containerWidth = track.parentElement?.clientWidth || viewportHeight;
-    const maxTranslation = Math.max(0, trackWidth - containerWidth + 120);
-
-    this.trackTransform = -(progress / 100) * maxTranslation;
-  }
 
   readonly equipo = [
     {

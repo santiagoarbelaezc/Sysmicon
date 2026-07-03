@@ -45,66 +45,50 @@
       </div>
     </div>
 
-    <!-- LÍNEA DE TIEMPO INTERACTIVA CON SCROLL HORIZONTAL (Tema Oscuro Blueprint) -->
-    <section class="timeline-section-scroll relative w-full bg-[#080808] border-t border-b border-white/5 my-16">
-      <div class="timeline-sticky-wrapper">
-        <!-- Rejilla o cuadrícula arquitectónica sutil de fondo -->
-        <div class="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
+    <!-- LÍNEA DE TIEMPO ESTÁTICA Y DESLIZANTE NATIVA (Blanco y Negro Sutil) -->
+    <section class="timeline-section relative w-full bg-[#080808] border-t border-b border-white/5 py-12 md:py-16">
+      <!-- Rejilla o cuadrícula arquitectónica sutil de fondo -->
+      <div class="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
 
-        <div class="max-w-[95vw] mx-auto px-4 lg:px-8 h-full flex flex-col justify-center relative">
-          <!-- Título y Tag de la sección sticky -->
-          <div class="timeline-header mb-6">
-            <div class="section-tag font-sans text-left">
-              <span class="tag-line"></span>
-              <span>Trayectoria Histórica</span>
-            </div>
-            <h2 class="font-serif text-3xl md:text-4xl text-white mt-2">
-              15 años trazando la evolución espacial
-            </h2>
+      <div class="max-w-[95vw] mx-auto px-4 lg:px-8 relative z-10">
+        <!-- Título y Tag de la sección -->
+        <div class="timeline-header mb-8 text-center md:text-left">
+          <div class="section-tag font-sans text-left justify-center md:justify-start">
+            <span class="tag-line"></span>
+            <span>Trayectoria Histórica</span>
           </div>
+          <h2 class="font-serif text-2xl md:text-3xl text-white mt-2">
+            15 años trazando la evolución espacial
+          </h2>
+        </div>
 
-          <!-- Pista de la línea de tiempo -->
-          <div class="timeline-track-outer relative overflow-hidden w-full py-16">
-            <!-- La línea de planos horizontal que se desenvuelve -->
-            <div class="absolute top-[50%] left-0 w-full h-[2px] bg-white/10 z-0">
-              <div class="timeline-progress-line h-full bg-white transition-all duration-[100ms] ease-out" 
-                   [style.width.%]="scrollProgress"></div>
-            </div>
+        <!-- Pista de la línea de tiempo con scroll horizontal nativo súper fluido -->
+        <div class="timeline-track-outer relative overflow-x-auto w-full py-8 scrollbar-thin">
+          <!-- La línea de planos horizontal blanca y sutil de fondo -->
+          <div class="absolute top-[50%] left-0 w-full h-[2px] bg-white/20 z-0"></div>
 
-            <!-- La pista horizontal que se mueve con el scroll -->
-            <div class="timeline-track flex items-center gap-12 md:gap-24 relative z-10"
-                 [style.transform]="'translateX(' + trackTransform + 'px)'">
+          <!-- La pista horizontal -->
+          <div class="timeline-track flex items-center gap-12 md:gap-20 relative z-10 w-max px-4">
+            
+            <!-- Nodo de Hito Individual -->
+            <div *ngFor="let milestone of hitos" class="timeline-node flex flex-col items-center select-none">
+              <!-- Año en formato sutil y reducido -->
+              <div class="year-badge font-serif text-3xl md:text-4xl font-light active">
+                {{ milestone.year }}
+              </div>
               
-              <!-- Nodo de Hito Individual -->
-              <div *ngFor="let milestone of hitos; let idx = index" class="timeline-node flex flex-col items-center select-none">
-                <!-- Año en formato sutil y reducido -->
-                <div class="year-badge font-serif text-3xl md:text-5xl font-light transition-all duration-300"
-                     [class.active]="scrollProgress >= (idx * 22)">
-                  {{ milestone.year }}
-                </div>
-                
-                <!-- Nodo conector animado -->
-                <div class="node-dot w-4 h-4 rounded-full bg-[#111] border-2 border-white/20 my-3.5 flex items-center justify-center transition-all duration-300"
-                     [class.active]="scrollProgress >= (idx * 22)">
-                  <div class="w-1.5 h-1.5 rounded-full bg-white scale-0 transition-transform duration-300"
-                       [class.scale-100]="scrollProgress >= (idx * 22)"></div>
-                </div>
-
-                <!-- Tarjeta técnica detallada del hito -->
-                <div class="node-card bg-[#111] border border-white/10 p-4 rounded-xl max-w-[240px] md:max-w-[280px] shadow-xl text-left transition-all duration-500"
-                     [class.active-card]="scrollProgress >= (idx * 22)">
-                  <h3 class="font-serif text-sm text-white mb-1.5 font-bold">{{ milestone.titulo }}</h3>
-                  <p class="text-[11px] text-gray-400 leading-relaxed font-sans">{{ milestone.desc }}</p>
-                </div>
+              <!-- Nodo conector -->
+              <div class="node-dot w-4 h-4 rounded-full bg-[#111] border-2 border-white/40 my-3 flex items-center justify-center active">
+                <div class="w-1.5 h-1.5 rounded-full bg-white scale-100"></div>
               </div>
 
+              <!-- Tarjeta técnica detallada del hito -->
+              <div class="node-card bg-[#111] border border-white/10 p-4 rounded-xl max-w-[240px] md:max-w-[280px] shadow-xl text-left active-card">
+                <h3 class="font-serif text-sm text-white mb-1.5 font-bold">{{ milestone.titulo }}</h3>
+                <p class="text-[11px] text-gray-400 leading-relaxed font-sans">{{ milestone.desc }}</p>
+              </div>
             </div>
-          </div>
-          
-          <!-- Indicador de desplazamiento inferior -->
-          <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-[10px] uppercase tracking-widest text-gray-500 font-sans pointer-events-none animate-pulse">
-            <span>Scroll vertical para desenvolver horizontalmente</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-bounce mt-1"><polyline points="7 13 12 18 17 13"/><polyline points="7 6 12 11 17 6"/></svg>
+
           </div>
         </div>
       </div>

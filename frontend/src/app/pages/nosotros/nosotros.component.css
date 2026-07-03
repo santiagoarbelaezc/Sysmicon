@@ -166,20 +166,12 @@
   border: 1px solid var(--glass-wood-border);
 }
 
-/* === LÍNEA DE TIEMPO INTERACTIVA CON SCROLL HORIZONTAL (MONOCROMÁTICA) === */
+/* === LÍNEA DE TIEMPO ESTÁTICA CON DESPLAZAMIENTO NATIVO (MONOCROMÁTICA) === */
 
-.timeline-section-scroll {
-  height: 250vh; /* Otorga suficiente scroll vertical para la traslación horizontal */
-  margin: 6rem 0; /* Alineado al ancho del contenido del sitio */
-}
-
-.timeline-sticky-wrapper {
-  position: sticky;
-  top: 0;
-  height: 100vh;
+.timeline-section {
+  width: 100%;
+  margin: 4rem 0;
   overflow: hidden;
-  display: flex;
-  align-items: center;
 }
 
 /* Rejilla arquitectónica (Blueprint sutil en gris técnico) */
@@ -192,40 +184,49 @@
 
 .timeline-track-outer {
   width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Estilo elegante para la barra de scroll */
+.scrollbar-thin::-webkit-scrollbar {
+  height: 5px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .timeline-track {
   display: flex;
-  will-change: transform;
-  padding-left: 2%;
-  padding-right: 15%;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .timeline-node {
   flex-shrink: 0;
-  width: 260px; /* Reducido de 320px para mayor proximidad y elegancia */
+  width: 250px;
   text-align: center;
   position: relative;
 }
 
 /* Años en gran tamaño (Blanco y Negro) - Reducidos */
 .year-badge {
-  color: rgba(255, 255, 255, 0.05);
-  font-size: 2.2rem; /* Reducido */
-  transform: scale(0.95);
-  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-@media (min-width: 768px) {
-  .year-badge {
-    font-size: 2.8rem; /* Reducido */
-  }
+  color: rgba(255, 255, 255, 0.12);
+  font-size: 2rem;
+  transition: all 0.4s ease;
 }
 
 .year-badge.active {
   color: #FFFFFF;
-  transform: scale(1.04);
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
 }
 
 /* Nodos conectores */
@@ -233,32 +234,28 @@
   background: #0D0D0D;
   position: relative;
   z-index: 5;
-  box-shadow: 0 0 0 0px rgba(255, 255, 255, 0);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .node-dot.active {
   border-color: #FFFFFF;
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.12); /* Reducida la sombra */
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
 }
 
 /* Fichas técnicas de hitos (Gris y Blanco) - Sutiles */
 .node-card {
-  opacity: 0.4;
-  transform: translateY(12px);
   border-color: rgba(255, 255, 255, 0.05);
-  padding: 1.1rem !important; /* Reducido padding */
+  padding: 1rem !important;
 }
 
 .node-card.active-card {
-  opacity: 1;
-  transform: translateY(0);
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .node-card h3 {
-  letter-spacing: 0.03em;
-  font-size: 0.88rem !important;
+  letter-spacing: 0.02em;
+  font-size: 0.85rem !important;
 }
 
 .node-card p {

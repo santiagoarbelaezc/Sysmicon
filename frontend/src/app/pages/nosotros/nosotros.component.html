@@ -45,12 +45,12 @@
       </div>
     </div>
 
-    <!-- LÍNEA DE TIEMPO ESTÁTICA Y DESLIZANTE NATIVA (Blanco y Negro Sutil) -->
-    <section class="timeline-section relative w-full bg-[#080808] border-t border-b border-white/5 py-12 md:py-16">
+    <!-- LÍNEA DE TIEMPO ESTÁTICA Y DESLIZANTE NATIVA (Monocromática, Sin Fondo Diferenciado) -->
+    <section class="timeline-section relative w-full py-12 md:py-16">
       <!-- Rejilla o cuadrícula arquitectónica sutil de fondo -->
       <div class="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
 
-      <div class="max-w-[95vw] mx-auto px-4 lg:px-8 relative z-10">
+      <div class="w-full px-6 md:px-12 lg:px-16 relative z-10">
         <!-- Título y Tag de la sección -->
         <div class="timeline-header mb-8 text-center md:text-left">
           <div class="section-tag font-sans text-left justify-center md:justify-start">
@@ -94,44 +94,47 @@
       </div>
     </section>
 
-    <!-- Methodology Section (Diseño de Grilla Dividida con 2 Imágenes y Lista Limpia) -->
-    <section class="methodology-section my-16 border-t border-b border-white/5 py-12 md:py-20 bg-[#080808]">
-      <div class="max-w-[95vw] mx-auto px-4 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          
-          <!-- Lado Izquierdo: Dos imágenes sin oscurecer, con un escalonamiento elegante -->
-          <div class="lg:col-span-6 grid grid-cols-2 gap-4 h-[50vh] md:h-[65vh]">
-            <div class="rounded-2xl overflow-hidden shadow-2xl relative group border border-white/10">
-              <img src="images/imagen5.jpg" alt="Inmersión y Diseño" class="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105 filter brightness-100">
-            </div>
-            <div class="rounded-2xl overflow-hidden shadow-2xl relative group border border-white/10 mt-6 lg:mt-12">
-              <img src="images/imagen6.jpg" alt="Ejecución de Obra" class="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105 filter brightness-100">
+    <!-- Methodology Section (Diseño Nuestros Servicios con Fondo Blanco) -->
+    <section class="methodology-section py-16 md:py-24 bg-[#FAFAFA] border-t border-b border-black/5 text-gray-900">
+      <div class="container mb-12">
+        <div class="section-header text-center">
+          <div class="section-tag font-sans justify-center">
+            <span class="tag-line"></span>
+            <span>Metodología</span>
+            <span class="tag-line"></span>
+          </div>
+          <h2 class="title-lg font-serif text-gray-900">El Ciclo Constructivo <span class="text-accent font-serif">Sysmicon</span></h2>
+          <div class="divider-wood mx-auto"></div>
+          <p class="subtitle mx-auto text-gray-600 max-w-xl">Nuestra metodología paso a paso para garantizar la excelencia desde la primera línea en el plano hasta el momento de habitar tu hogar.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto px-4">
+        <div *ngFor="let m of pilaresMetodologia; let i = index" class="method-card" [class.card-alt]="i % 2 === 1">
+          <!-- Trazos esquineros decorativos arquitectónicos -->
+          <div class="arch-plan-box-top"></div>
+          <div class="arch-plan-box-bottom"></div>
+          <div class="arch-corner-line"></div>
+
+          <!-- Columna izquierda: Número e ícono de etapa -->
+          <div class="card-left-col">
+            <span class="card-number font-serif">0{{ i + 1 }}</span>
+            <div class="icon-box">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" x2="8" y1="13" y2="13"/>
+                <line x1="16" x2="8" y1="17" y2="17"/>
+              </svg>
             </div>
           </div>
 
-          <!-- Lado Derecho: Contenido de Metodología en Lista de Pasos -->
-          <div class="lg:col-span-6 space-y-8">
-            <div class="section-header text-left">
-              <div class="section-tag font-sans text-left">
-                <span class="tag-line"></span>
-                <span>Proceso Ejecutivo</span>
-              </div>
-              <h2 class="title-lg font-serif text-white mt-2">El Ciclo Constructivo <span class="text-accent font-serif">Sysmicon</span></h2>
-              <div class="divider-wood"></div>
-              <p class="subtitle text-gray-400 text-sm max-w-xl">Nuestra metodología paso a paso para garantizar la excelencia desde la primera línea en el plano hasta el momento de habitar tu hogar.</p>
-            </div>
-
-            <div class="space-y-6">
-              <div *ngFor="let m of pilaresMetodologia" class="flex gap-5 p-5 rounded-2xl border border-white/5 hover:border-white/10 bg-white/[0.02] transition-colors duration-300">
-                <span class="font-serif text-3xl text-wood-light font-bold leading-none">{{ m.etapa }}</span>
-                <div>
-                  <h3 class="font-serif text-lg text-white mb-1.5 font-bold">{{ m.titulo }}</h3>
-                  <p class="text-xs text-gray-400 leading-relaxed font-sans">{{ m.desc }}</p>
-                </div>
-              </div>
-            </div>
+          <!-- Columna derecha: Título, línea divisoria y descripción -->
+          <div class="card-right-col">
+            <h3 class="card-title font-serif">{{ m.titulo }}</h3>
+            <div class="arch-divider"></div>
+            <p class="card-desc font-sans">{{ m.desc }}</p>
           </div>
-
         </div>
       </div>
     </section>
@@ -163,13 +166,21 @@
       </div>
     </section>
 
-    <!-- Bottom CTA -->
-    <div class="team-cta text-center glass-panel">
-      <h2 class="title-md font-serif">¿Quieres conversar directamente con nuestro equipo de dirección?</h2>
-      <p class="mx-auto subtitle" style="margin-bottom: 2rem;">Agenda una sesión de exploración arquitectónica y evaluemos el potencial de tu lote.</p>
-      <a routerLink="/contacto" class="btn-primary">
+    <!-- Bottom CTA (Diseño Blanco Tipo Ficha de Servicios) -->
+    <div class="team-cta text-center relative overflow-visible bg-white text-gray-900 border border-black/5 rounded-2xl shadow-xl max-w-4xl mx-auto p-8 md:p-12 my-12">
+      <!-- Trazos esquineros decorativos arquitectónicos -->
+      <div class="arch-plan-box-top"></div>
+      <div class="arch-plan-box-bottom"></div>
+      <div class="arch-corner-line"></div>
+
+      <h2 class="title-md font-serif text-gray-900 mb-4">¿Quieres conversar directamente con nuestro equipo de dirección?</h2>
+      <p class="mx-auto text-gray-600 text-sm md:text-base max-w-xl mb-8 leading-relaxed">
+        Agenda una sesión de exploración arquitectónica y evaluemos el potencial de tu lote.
+      </p>
+      
+      <a routerLink="/contacto" class="inline-flex items-center gap-3 bg-[#111] hover:bg-wood-accent text-white py-3.5 px-8 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg active:scale-95">
         <span>Agendar Consulta con Dirección</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </div>
 

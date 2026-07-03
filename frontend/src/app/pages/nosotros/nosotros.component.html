@@ -110,34 +110,44 @@
       </div>
     </section>
 
-    <!-- Methodology Section (Premium Accordion Layout con Imágenes) -->
+    <!-- Methodology Section (Diseño de Grilla Dividida con 2 Imágenes y Lista Limpia) -->
     <section class="methodology-section my-16 border-t border-b border-white/5 py-12 md:py-20 bg-[#080808]">
-      <div class="container mb-12">
-        <div class="section-header text-center">
-          <h2 class="title-lg font-serif text-white">El Ciclo Constructivo <span class="text-accent font-serif">Sysmicon</span></h2>
-          <div class="divider-wood mx-auto"></div>
-          <p class="subtitle mx-auto text-gray-400 max-w-2xl">Nuestra metodología paso a paso para garantizar la excelencia desde la primera línea en el plano hasta el momento de habitar tu hogar.</p>
-        </div>
-      </div>
-
-      <!-- Acordeón interactivo de imágenes que aprovecha todo el ancho disponible -->
-      <div class="methodology-accordion-container flex w-full h-[65vh] items-stretch overflow-hidden bg-[#0A0A0A] border-t border-b border-white/10 relative">
-        <div *ngFor="let m of pilaresMetodologia" 
-             class="method-box group relative flex-1 flex items-center justify-center overflow-hidden cursor-pointer border-r border-white/5 transition-all duration-[900ms] ease-[cubic-bezier(0.25,1,0.5,1)] hover:flex-[2]">
+      <div class="max-w-[95vw] mx-auto px-4 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           
-          <!-- Imagen de fondo del pilar -->
-          <img [src]="m.img" [alt]="m.titulo" class="bg-img w-full h-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] filter brightness-[0.6] group-hover:scale-105 group-hover:brightness-[0.8]" />
-          
-          <!-- Sombra degradada sutil -->
-          <div class="absolute inset-0 bg-black/40 group-hover:bg-black/55 transition-colors duration-500 z-10 pointer-events-none"></div>
-
-          <!-- Contenido en tarjeta de vidrio translúcido -->
-          <div class="content absolute z-20 text-center w-[85%] max-w-[320px] pointer-events-none flex flex-col items-center p-6 rounded-2xl border border-white/10 bg-black/50 backdrop-blur-md transition-all duration-500 group-hover:border-wood-accent/40">
-            <span class="method-step font-serif text-accent text-3xl font-bold mb-2">{{ m.etapa }}</span>
-            <h3 class="font-serif text-xl font-bold tracking-wide text-white uppercase transition-all duration-500 group-hover:text-wood-light">{{ m.titulo }}</h3>
-            <div class="divider-wood my-3"></div>
-            <p class="text-xs text-gray-300 font-sans tracking-wide leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity duration-500">{{ m.desc }}</p>
+          <!-- Lado Izquierdo: Dos imágenes sin oscurecer, con un escalonamiento elegante -->
+          <div class="lg:col-span-6 grid grid-cols-2 gap-4 h-[50vh] md:h-[65vh]">
+            <div class="rounded-2xl overflow-hidden shadow-2xl relative group border border-white/10">
+              <img src="images/imagen5.jpg" alt="Inmersión y Diseño" class="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105 filter brightness-100">
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-2xl relative group border border-white/10 mt-6 lg:mt-12">
+              <img src="images/imagen6.jpg" alt="Ejecución de Obra" class="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105 filter brightness-100">
+            </div>
           </div>
+
+          <!-- Lado Derecho: Contenido de Metodología en Lista de Pasos -->
+          <div class="lg:col-span-6 space-y-8">
+            <div class="section-header text-left">
+              <div class="section-tag font-sans text-left">
+                <span class="tag-line"></span>
+                <span>Proceso Ejecutivo</span>
+              </div>
+              <h2 class="title-lg font-serif text-white mt-2">El Ciclo Constructivo <span class="text-accent font-serif">Sysmicon</span></h2>
+              <div class="divider-wood"></div>
+              <p class="subtitle text-gray-400 text-sm max-w-xl">Nuestra metodología paso a paso para garantizar la excelencia desde la primera línea en el plano hasta el momento de habitar tu hogar.</p>
+            </div>
+
+            <div class="space-y-6">
+              <div *ngFor="let m of pilaresMetodologia" class="flex gap-5 p-5 rounded-2xl border border-white/5 hover:border-white/10 bg-white/[0.02] transition-colors duration-300">
+                <span class="font-serif text-3xl text-wood-light font-bold leading-none">{{ m.etapa }}</span>
+                <div>
+                  <h3 class="font-serif text-lg text-white mb-1.5 font-bold">{{ m.titulo }}</h3>
+                  <p class="text-xs text-gray-400 leading-relaxed font-sans">{{ m.desc }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

@@ -36,7 +36,10 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
       
       <!-- SIDEBAR EN ESCRITORIO -->
       <aside [ngClass]="sidebarAbierto() ? 'w-64' : 'w-20'" 
-             class="hidden lg:flex flex-col bg-[#0A0D12] border-r border-white/10 transition-all duration-300 z-30 shrink-0 select-none">
+             class="hidden lg:flex flex-col bg-[#0D0D0D] border-r border-white/10 transition-all duration-300 z-30 shrink-0 select-none relative">
+        
+        <!-- Trazos decorativos tipo plano -->
+        <div *ngIf="sidebarAbierto()" class="absolute top-3 left-3 text-[7px] font-mono text-white/10 pointer-events-none">SYS_ADMIN_v2</div>
         
         <!-- Logo Header Sidebar -->
         <div class="h-20 border-b border-white/10 flex items-center justify-between px-4">
@@ -44,7 +47,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
             <img src="assets/icons/logo-sysmico.png" alt="Sysmicon" class="w-10 h-10 object-contain shrink-0">
             <div *ngIf="sidebarAbierto()" class="flex flex-col animate-fade">
               <span class="font-serif font-extrabold text-base text-white tracking-wider">SYSMICON</span>
-              <span class="text-[9px] text-wood-light uppercase tracking-widest font-bold">Portal Directivo</span>
+              <span class="text-[9px] text-gray-400 uppercase tracking-widest font-bold">Portal Directivo</span>
             </div>
           </a>
           <button (click)="toggleSidebar()" 
@@ -79,7 +82,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
             <svg class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 0 3.4Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
             <span *ngIf="sidebarAbierto()" class="truncate flex items-center justify-between w-full">
               <span>CAD 2</span>
-              <span class="bg-blue-500/20 text-blue-300 text-[9px] px-1.5 py-0.5 rounded font-bold">PRO</span>
+              <span class="bg-white/15 text-white text-[9px] px-1.5 py-0.5 rounded font-bold border border-white/10">PRO</span>
             </span>
           </button>
 
@@ -146,10 +149,10 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
       <div class="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         
         <!-- TOP NAVBAR ADMIN -->
-        <header class="h-20 bg-[#0A0D12]/90 backdrop-blur-md border-b border-white/10 px-6 flex items-center justify-between gap-4 shrink-0 z-20">
+        <header class="h-20 bg-[#080808]/90 backdrop-blur-md border-b border-white/10 px-6 flex items-center justify-between gap-4 shrink-0 z-20 relative">
           
           <!-- Botón Menú Móvil -->
-          <div class="flex items-center gap-4">
+          <div class="flex items-center gap-4 pt-1">
             <button (click)="toggleMenuMovil()" class="lg:hidden text-gray-300 hover:text-white p-2 rounded-lg bg-white/5 text-lg">
               <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
             </button>
@@ -180,12 +183,12 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
 
             <!-- Perfil Admin -->
             <div class="flex items-center gap-3 pl-4 border-l border-white/10">
-              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-wood-accent to-[#0F254B] p-0.5 shadow-md flex items-center justify-center font-serif font-extrabold text-white">
+              <div class="w-10 h-10 rounded-xl bg-white border border-white text-black flex items-center justify-center font-serif font-extrabold shadow-md">
                 AD
               </div>
               <div class="hidden sm:block">
                 <span class="text-xs font-bold text-white block leading-none">David Jaramillo</span>
-                <span class="text-[10px] text-wood-light uppercase tracking-wider font-bold">Director Senior</span>
+                <span class="text-[10px] text-gray-400 uppercase tracking-wider font-bold">Director Senior</span>
               </div>
               <button (click)="cerrarSesionAdmin()" title="Cerrar sesión o salir del Admin" class="text-gray-400 hover:text-red-400 ml-1 p-1 rounded hover:bg-white/5 transition-colors">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
@@ -218,7 +221,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
       <!-- DRAWER MÓVIL (SIDEBAR EN CELULARES) -->
       <div *ngIf="menuMovilAbierto()" class="fixed inset-0 z-50 lg:hidden flex animate-fade">
         <div (click)="toggleMenuMovil()" class="fixed inset-0 bg-black/80 backdrop-blur-sm"></div>
-        <aside class="w-64 bg-[#0A0D12] border-r border-white/10 z-10 flex flex-col h-full relative">
+        <aside class="w-64 bg-[#0D0D0D] border-r border-white/10 z-10 flex flex-col h-full relative">
           
           <div class="h-20 border-b border-white/10 flex items-center justify-between px-5">
             <a routerLink="/" class="flex items-center gap-3">
@@ -230,19 +233,19 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
 
           <nav class="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
             <button (click)="setSeccion('inicio'); toggleMenuMovil()" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-3 text-gray-300 hover:bg-white/5">
-              <svg class="w-4 h-4 shrink-0 text-wood-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <svg class="w-4 h-4 shrink-0 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
               <span>Dash Inicio</span>
             </button>
             <button (click)="setSeccion('analiticas'); toggleMenuMovil()" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-3 text-gray-300 hover:bg-white/5">
-              <svg class="w-4 h-4 shrink-0 text-wood-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+              <svg class="w-4 h-4 shrink-0 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
               <span>Analíticas</span>
             </button>
             <button (click)="setSeccion('cad2'); toggleMenuMovil()" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold flex items-center justify-between text-gray-300 hover:bg-white/5">
               <span class="flex items-center gap-3">
-                <svg class="w-4 h-4 shrink-0 text-wood-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 0 3.4Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
+                <svg class="w-4 h-4 shrink-0 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 0 3.4Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
                 <span>CAD 2</span>
               </span>
-              <span class="bg-blue-500/20 text-blue-300 text-[9px] px-1.5 py-0.5 rounded font-bold">PRO</span>
+              <span class="bg-white/10 text-white text-[9px] px-1.5 py-0.5 rounded font-bold border border-white/10">PRO</span>
             </button>
             <button (click)="setSeccion('estadisticas'); toggleMenuMovil()" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-3 text-gray-300 hover:bg-white/5">
               <svg class="w-4 h-4 shrink-0 text-wood-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>

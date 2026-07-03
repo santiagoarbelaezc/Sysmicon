@@ -228,7 +228,7 @@
   gap: 0.75rem;
   padding: 1rem 2.2rem;
   background: var(--wood-accent);
-  color: var(--text-primary);
+  color: #030303; /* Texto oscuro sobre botón blanco */
   font-weight: 600;
   font-size: 1rem;
   border-radius: 6px;
@@ -240,6 +240,7 @@
 .btn-primary:hover {
   background: var(--wood-dark);
   border-color: var(--wood-light);
+  color: #FFFFFF; /* Texto blanco en hover sobre fondo oscuro */
   transform: translateY(-3px);
   box-shadow: 0 12px 30px rgba(255, 255, 255, 0.15);
 }

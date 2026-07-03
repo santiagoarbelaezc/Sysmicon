@@ -234,7 +234,7 @@
 }
 
 .method-card:hover .card-number {
-  color: var(--wood-accent);
+  color: #1A1A1A;
 }
 
 .method-card .icon-box {

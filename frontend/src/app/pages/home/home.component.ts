@@ -8,6 +8,7 @@ import { ProjectCardComponent } from '../../components/project-card/project-card
 import { TestimonialCardComponent } from '../../components/testimonial-card/testimonial-card.component';
 import { ProjectsComponent } from '../../components/projects/projects.component';
 import { TestimoniosComponent } from '../../components/testimonios/testimonios.component';
+import { BannerCrearplanoComponent } from '../../components/banner-crearplano/banner-crearplano.component';
 import { ProyectosService } from '../../services/proyectos.service';
 import { ServiciosService } from '../../services/servicios.service';
 import { TestimoniosService } from '../../services/testimonios.service';
@@ -24,7 +25,8 @@ import { TestimoniosService } from '../../services/testimonios.service';
     ProjectCardComponent,
     TestimonialCardComponent,
     ProjectsComponent,
-    TestimoniosComponent
+    TestimoniosComponent,
+    BannerCrearplanoComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

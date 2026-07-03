@@ -70,14 +70,14 @@ export class ProjectsComponent {
       id: 'casaL',
       title: 'CASA L',
       subtitle: 'Estructura en concreto a la vista combinada con madera fina y acabados artesanales.',
-      img: 'images/imagen3.jpg',
+      img: 'assets/images/casaL/CasaL-portada.jpg',
       images: [
-        'images/imagen3.jpg',
-        'images/imagen4.jpg',
-        'images/imagen5.jpg',
-        'images/principal.jpg',
-        'images/imagen1.jpg',
-        'images/imagen2.jpg'
+        'assets/images/casaL/casaL-1.png',
+        'assets/images/casaL/casaL-2.png',
+        'assets/images/casaL/casaL-3.png',
+        'assets/images/casaL/casaL-4.png',
+        'assets/images/casaL/casaL-5.png',
+        'assets/images/casaL/casaL-6.png'
       ]
     }
   ];

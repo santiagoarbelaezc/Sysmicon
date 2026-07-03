@@ -312,20 +312,22 @@
 }
 
 .stat-val {
-  font-size: 2.4rem;
-  font-weight: 300; /* Letra notablemente más delgada */
+  font-size: 2.2rem;
+  font-weight: 300; /* Letra delgada y sutil */
   line-height: 1.1;
   color: #FFFFFF !important;
-  letter-spacing: -0.02em;
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
 }
 
 .stat-lbl {
-  font-size: 0.72rem; /* Más sutil */
-  color: #888888 !important; /* Más gris sutil */
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-top: 0.5rem;
-  font-weight: 300; /* Thinner */
+  font-size: 0.85rem; /* Tamaño natural similar al subtítulo */
+  color: var(--text-secondary) !important; /* Mismo color del subtítulo */
+  text-transform: none; /* Sin mayúsculas forzadas */
+  letter-spacing: normal; /* Espaciado normal */
+  margin-top: 0.4rem;
+  font-weight: 400; /* Peso idéntico al subtítulo */
+  font-family: var(--font-sans);
 }
 
 /* Scroll indicator */

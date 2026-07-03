@@ -13,7 +13,7 @@ import { AdminService } from '../../../../services/admin.service';
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-white/10">
         <div>
           <h2 class="font-serif text-2xl font-bold text-white tracking-tight">Estadísticas Arquitectónicas & Comerciales</h2>
-          <p class="text-xs text-gray-400 mt-1 font-sans">Análisis de los diseños generados por los clientes y presupuestos promedio cotizados en la plataforma.</p>
+          <p class="text-sm text-gray-400 mt-1 font-sans">Análisis de los diseños generados por los clientes y presupuestos promedio cotizados en la plataforma.</p>
         </div>
         <div class="flex items-center gap-3">
           <span class="text-xs px-3.5 py-2 rounded-xl bg-[#0D0D0D] border border-white/10 text-white font-mono inline-flex items-center gap-2 shadow">
@@ -38,7 +38,7 @@ import { AdminService } from '../../../../services/admin.service';
                 <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
                 <span>Categorías de Bloques Más Solicitadas</span>
               </h3>
-              <p class="text-xs text-gray-400 mt-0.5 font-sans">Preferencia en las distribuciones en nube</p>
+              <p class="text-sm text-gray-400 mt-0.5 font-sans">Preferencia en las distribuciones en nube</p>
             </div>
             <span class="text-xs text-white font-mono font-bold bg-white/10 px-2.5 py-1 rounded border border-white/10">412 diseños</span>
           </div>
@@ -77,7 +77,7 @@ import { AdminService } from '../../../../services/admin.service';
                   <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                   <span>Distribución de Inversión por Proyecto</span>
                 </h3>
-                <p class="text-xs text-gray-400 mt-0.5 font-sans">Presupuestos estimados en dólares (USD)</p>
+                <p class="text-sm text-gray-400 mt-0.5 font-sans">Presupuestos estimados en dólares (USD)</p>
               </div>
               <span class="text-xs text-white font-mono font-bold bg-white/10 px-2.5 py-1 rounded border border-white/15 shadow-sm">Ticket Promedio: $320k USD</span>
             </div>
@@ -122,9 +122,9 @@ import { AdminService } from '../../../../services/admin.service';
           <div class="absolute -top-1 -left-1 w-4 h-4 border-t border-l border-white/20 pointer-events-none"></div>
           <div class="absolute -bottom-1 -right-1 w-4 h-4 border-b border-r border-white/20 pointer-events-none"></div>
           <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-gray-400 block font-sans">Área Promedio Diseñada</span>
+            <span class="text-sm font-bold uppercase tracking-wider text-gray-400 block font-sans">Área Promedio Diseñada</span>
             <span class="font-serif text-3xl font-extrabold text-white mt-1 block group-hover:text-gray-300 transition-colors">340 m²</span>
-            <span class="text-[10px] text-gray-500 mt-1 block font-mono">Por residencia en Llanogrande</span>
+            <span class="text-xs text-gray-500 mt-1 block font-mono">Por residencia en Llanogrande</span>
           </div>
           <div class="w-12 h-12 rounded-lg bg-white/5 border border-white/10 text-white flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:border-white/30 transition-all shadow-md">
             <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
@@ -136,7 +136,7 @@ import { AdminService } from '../../../../services/admin.service';
           <div class="absolute -top-1 -left-1 w-4 h-4 border-t border-l border-white/20 pointer-events-none"></div>
           <div class="absolute -bottom-1 -right-1 w-4 h-4 border-b border-r border-white/20 pointer-events-none"></div>
           <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-gray-400 block font-sans">Tiempo de Decisión</span>
+            <span class="text-sm font-bold uppercase tracking-wider text-gray-400 block font-sans">Tiempo de Decisión</span>
             <span class="font-serif text-3xl font-extrabold text-white mt-1 block group-hover:text-gray-300 transition-colors">18 días</span>
             <span class="text-[10px] text-gray-400 font-bold mt-1 inline-flex items-center gap-1 font-mono">
               <svg class="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
@@ -153,7 +153,7 @@ import { AdminService } from '../../../../services/admin.service';
           <div class="absolute -top-1 -left-1 w-4 h-4 border-t border-l border-white/20 pointer-events-none"></div>
           <div class="absolute -bottom-1 -right-1 w-4 h-4 border-b border-r border-white/20 pointer-events-none"></div>
           <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-gray-400 block font-sans">Satisfacción Propietarios</span>
+            <span class="text-sm font-bold uppercase tracking-wider text-gray-400 block font-sans">Satisfacción Propietarios</span>
             <span class="font-serif text-3xl font-extrabold text-white mt-1 block group-hover:text-gray-300 transition-colors">99.4%</span>
             <span class="text-[10px] text-gray-400 font-bold mt-1 inline-flex items-center gap-1 font-mono">
               <svg class="w-3 h-3 fill-white text-white" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>

@@ -14,7 +14,7 @@ import { AdminService } from '../../../../services/admin.service';
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
         <div>
           <h2 class="font-serif text-2xl font-bold text-white tracking-tight">Comunidad & Gestión de Usuarios</h2>
-          <p class="text-xs text-gray-400 mt-1 font-sans">Directorio de propietarios, arquitectos senior e inversionistas con cuentas privadas en Sysmicon.</p>
+          <p class="text-sm text-gray-400 mt-1 font-sans">Directorio de propietarios, arquitectos senior e inversionistas con cuentas privadas en Sysmicon.</p>
         </div>
         <div class="flex items-center gap-3">
           <span class="text-xs font-mono font-bold text-white bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 shadow-sm">
@@ -94,8 +94,8 @@ import { AdminService } from '../../../../services/admin.service';
                     </div>
                     <div>
                       <span class="font-bold text-white text-sm block group-hover:text-gray-300 transition-colors">{{ u.nombre }}</span>
-                      <span class="text-gray-400 text-[11px] block">{{ u.email }}</span>
-                      <span class="text-gray-500 text-[10px] font-mono">{{ u.telefono }}</span>
+                      <span class="text-gray-400 text-xs block">{{ u.email }}</span>
+                      <span class="text-gray-500 text-xs font-mono">{{ u.telefono }}</span>
                     </div>
                   </div>
                 </td>

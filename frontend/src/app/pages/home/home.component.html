@@ -36,10 +36,29 @@
     <div class="absolute inset-0 pointer-events-none opacity-[0.03]" style="background-image: radial-gradient(#FFF 1px, transparent 1px); background-size: 32px 32px;"></div>
 
     <div class="w-full max-w-[1750px] mx-auto px-6 md:px-16 relative z-10">
-      <div class="banner-card-luxury relative">
-        <!-- Decorative corner outline -->
-        <div class="luxury-corner-tl"></div>
-        <div class="luxury-corner-br"></div>
+      <div class="banner-card-luxury relative overflow-visible">
+        <!-- Ejes de plano y cotas arquitectónicas de precisión -->
+        <div class="absolute top-0 bottom-0 left-[6%] w-[1px] bg-white/[0.06] pointer-events-none"></div>
+        <div class="absolute top-0 bottom-0 right-[6%] w-[1px] bg-white/[0.06] pointer-events-none"></div>
+        <div class="absolute left-0 right-0 top-[20%] h-[1px] bg-white/[0.04] pointer-events-none"></div>
+        <div class="absolute left-0 right-0 bottom-[20%] h-[1px] bg-white/[0.04] pointer-events-none"></div>
+        
+        <!-- Cruces técnicas de intersección de ejes -->
+        <div class="absolute top-[20%] left-[6%] -translate-x-1/2 -translate-y-1/2 text-white/30 font-mono text-xs select-none pointer-events-none">+</div>
+        <div class="absolute top-[20%] right-[6%] translate-x-1/2 -translate-y-1/2 text-white/30 font-mono text-xs select-none pointer-events-none">+</div>
+        <div class="absolute bottom-[20%] left-[6%] -translate-x-1/2 translate-y-1/2 text-white/30 font-mono text-xs select-none pointer-events-none">+</div>
+        <div class="absolute bottom-[20%] right-[6%] translate-x-1/2 translate-y-1/2 text-white/30 font-mono text-xs select-none pointer-events-none">+</div>
+        
+        <!-- Marcadores técnicos y cotas -->
+        <div class="absolute top-3 left-3 text-[9px] font-mono text-white/20 select-none pointer-events-none">SECCIÓN X-X'</div>
+        <div class="absolute bottom-3 left-3 text-[9px] font-mono text-white/20 select-none pointer-events-none">N.P.T. ±0.00m</div>
+        <div class="absolute bottom-3 right-3 text-[9px] font-mono text-white/20 select-none pointer-events-none">ESC 1:50</div>
+
+        <!-- Trazos esquineros de planos (Offset) -->
+        <div class="absolute -top-2.5 -left-2.5 w-7 h-7 border-t border-l border-white/20 pointer-events-none rounded-tl-sm"></div>
+        <div class="absolute -top-2.5 -right-2.5 w-7 h-7 border-t border-r border-white/20 pointer-events-none rounded-tr-sm"></div>
+        <div class="absolute -bottom-2.5 -left-2.5 w-7 h-7 border-b border-l border-white/20 pointer-events-none rounded-bl-sm"></div>
+        <div class="absolute -bottom-2.5 -right-2.5 w-7 h-7 border-b border-r border-white/20 pointer-events-none rounded-br-sm"></div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           <!-- Left Column: Title & Intro (Cols 1-5) -->

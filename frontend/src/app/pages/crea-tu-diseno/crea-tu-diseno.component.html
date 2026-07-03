@@ -159,7 +159,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
                   {{ b.areaM2 }} m²
                 </span>
-                <span class="text-wood-light font-bold">${{ b.precioUSD / 1000 | number:'1.0-1' }}k USD</span>
+                <span class="text-wood-light font-bold">${{ b.precioUSD / 1000 | number:'1.0-1' }}k COP</span>
               </div>
             </div>
           </div>
@@ -385,7 +385,7 @@
 
             <div class="flex items-center gap-2 border-l border-white/10 pl-6">
               <span class="text-gray-400">Presupuesto Ref:</span>
-              <strong class="text-wood-light font-mono text-lg">${{ totalPrecioUSD() | number }} USD*</strong>
+              <strong class="text-wood-light font-mono text-lg">${{ totalPrecioUSD() | number }} COP*</strong>
             </div>
           </div>
 
@@ -425,7 +425,7 @@
         </div>
         <div>
           <span class="text-gray-400 block">Valor referencial estimado:</span>
-          <span class="text-emerald-400 font-bold text-sm">${{ totalPrecioUSD() | number }} USD*</span>
+          <span class="text-emerald-400 font-bold text-sm">${{ totalPrecioUSD() | number }} COP*</span>
         </div>
       </div>
 
@@ -485,7 +485,7 @@
       <div class="bg-[#181818] border border-white/10 rounded-xl p-6 max-w-md mx-auto my-6">
         <div class="text-xs uppercase tracking-widest text-gray-400 font-bold">Código Referencial de tu Plano:</div>
         <div class="font-serif font-bold text-2xl text-wood-light my-1">CAD-{{ currentYear }}-{{ totalAreaM2() }}M</div>
-        <div class="text-xs text-gray-400">Presupuesto estimado: <strong class="text-emerald-400">${{ totalPrecioUSD() | number }} USD*</strong></div>
+        <div class="text-xs text-gray-400">Presupuesto estimado: <strong class="text-emerald-400">${{ totalPrecioUSD() | number }} COP*</strong></div>
       </div>
 
       <p class="text-sm text-gray-400 max-w-lg mx-auto mb-8">

@@ -14,7 +14,7 @@ import { AdminService, MensajeAdmin } from '../../../../services/admin.service';
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
         <div>
           <h2 class="font-serif text-2xl font-bold text-white tracking-tight">Bandeja de Cotizaciones y Contacto</h2>
-          <p class="text-xs text-gray-400 mt-1 font-sans">Gestión de consultas formales, solicitudes de cita y dudas técnicas de Studio CAD 2.</p>
+          <p class="text-sm text-gray-400 mt-1 font-sans">Gestión de consultas formales, solicitudes de cita y dudas técnicas de Studio CAD 2.</p>
         </div>
         <div class="flex items-center gap-3">
           <span class="text-xs font-mono font-bold text-white bg-white/10 px-3 py-1.5 rounded border border-white/20">
@@ -60,8 +60,8 @@ import { AdminService, MensajeAdmin } from '../../../../services/admin.service';
                 <span class="text-[10px] text-gray-500 font-mono whitespace-nowrap">{{ m.fecha.split(' ')[1] }}</span>
               </div>
 
-              <span class="text-[11px] font-bold text-gray-400 block truncate mb-1">{{ m.asunto }}</span>
-              <p class="text-[11px] text-gray-500 line-clamp-2 leading-relaxed">{{ m.contenido }}</p>
+              <span class="text-xs font-bold text-gray-400 block truncate mb-1">{{ m.asunto }}</span>
+              <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">{{ m.contenido }}</p>
 
               <div class="mt-2.5 flex items-center justify-between">
                 <span [ngClass]="{
@@ -104,7 +104,7 @@ import { AdminService, MensajeAdmin } from '../../../../services/admin.service';
               <div class="p-3.5 rounded-lg bg-[#0C0C0C] border border-white/5 my-4 flex flex-wrap items-center justify-between gap-3 text-xs">
                 <div>
                   <span class="text-gray-500 block text-[9px] uppercase font-bold">Cliente / Remitente:</span>
-                  <span class="text-white font-bold text-sm">{{ msg.remitente }}</span>
+                  <span class="text-white font-bold text-base">{{ msg.remitente }}</span>
                 </div>
                 <div>
                   <span class="text-gray-500 block text-[9px] uppercase font-bold">Correo Electrónico:</span>

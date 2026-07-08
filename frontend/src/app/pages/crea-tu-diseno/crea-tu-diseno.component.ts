@@ -43,10 +43,6 @@ export class CreaTuDisenoComponent implements OnInit, OnDestroy {
   private loadingTimer: any;
 
   ngOnInit(): void {
-    // Mostrar modal de registro inmediatamente si no hay usuario logueado
-    if (!this.authService.isLoggedIn()) {
-      this.mostrarModalAuth.set(true);
-    }
     this.loadingTimer = setTimeout(() => {
       this.isLoadingScreen.set(false);
     }, 2500);

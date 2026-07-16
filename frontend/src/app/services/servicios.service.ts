@@ -10,15 +10,14 @@ export class ServiciosService {
       id: 'diseno-arquitectonico',
       titulo: 'Diseño Arquitectónico',
       subtitulo: 'Concepción Espacial & Anteproyecto',
-      descripcion: 'Transformamos tu visión en una obra maestra atemporal. Analizamos la topografía del terreno, la orientación solar y el estilo de vida de tu familia para crear un diseño personalizado en modelado 3D CAD interactivo de ultra precisión.',
+      descripcion: 'Transformamos tu visión en una obra maestra atemporal. Analizamos la topografía del terreno, la orientation solar y el estilo de vida de tu familia para crear un diseño personalizado con recorridos virtuales inmersivos de ultra precisión.',
       icono: 'architecture',
       destacado: true,
       pilarPrincipal: true,
-      codigoCad: 'SYS-ARQ-3D',
       fase: 'Pilar 01 / Concepción y Diseño',
       imagen: '/images/project-villa.png',
       caracteristicas: [
-        'Modelado CAD 3D inmersivo con recorridos virtuales en tiempo real',
+        'Modelado arquitectónico inmersivo con recorridos virtuales en tiempo real',
         'Estudio bioclimático, lumínico y aprovechamiento óptimo de vistas',
         'Selección curada de materiales nobles: maderas nativas, piedra y concreto',
         'Planimetría ejecutiva completa para trámites de licencia y obra'
@@ -32,7 +31,6 @@ export class ServiciosService {
       icono: 'construction',
       destacado: true,
       pilarPrincipal: true,
-      codigoCad: 'SYS-OBRA-ENG',
       fase: 'Pilar 02 / Ingeniería y Ejecución',
       imagen: '/images/project-roble.png',
       caracteristicas: [
@@ -50,7 +48,6 @@ export class ServiciosService {
       icono: 'remodel',
       destacado: false,
       pilarPrincipal: false,
-      codigoCad: 'SYS-MOD-LUX',
       fase: 'Especialidad / Transformación',
       imagen: '/images/project-remodelacion.png',
       caracteristicas: [
@@ -68,7 +65,6 @@ export class ServiciosService {
       icono: 'consulting',
       destacado: false,
       pilarPrincipal: false,
-      codigoCad: 'SYS-AUD-FIN',
       fase: 'Especialidad / Auditoría Senior',
       imagen: '/images/project-loft.png',
       caracteristicas: [

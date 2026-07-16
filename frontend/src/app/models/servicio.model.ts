@@ -7,7 +7,6 @@ export interface Servicio {
   caracteristicas: string[];
   destacado?: boolean;
   imagen?: string;
-  codigoCad?: string;
   fase?: string;
   pilarPrincipal?: boolean;
 }

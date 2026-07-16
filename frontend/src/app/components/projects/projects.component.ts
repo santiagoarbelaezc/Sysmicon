@@ -79,11 +79,34 @@ export class ProjectsComponent {
         '/assets/images/casaL/casaL-5.png',
         '/assets/images/casaL/casaL-6.png'
       ]
+    },
+    {
+      id: 'casa-carmen',
+      title: 'CASA CARMEN',
+      subtitle: 'Fusión entre naturaleza y arquitectura contemporánea con espejos de agua perimetrales.',
+      img: '/images/project-villa.png',
+      images: [
+        '/assets/images/imagen1.jpg',
+        '/assets/images/imagen2.jpg',
+        '/assets/images/imagen3.jpg'
+      ]
+    },
+    {
+      id: 'edificio-gp',
+      title: 'EDIFICIO GP',
+      subtitle: 'Hito de arquitectura residencial vertical y ladrillo noble en La Aguacatala.',
+      img: '/assets/images/principal.jpg',
+      images: [
+        '/assets/images/imagen4.jpg',
+        '/assets/images/imagen5.jpg',
+        '/images/project-roble.png'
+      ]
     }
   ];
 
   currentSlide = 0;
   readonly selectedProject = signal<PortfolioItem | null>(null);
+  readonly currentImageIndex = signal<number>(0);
   readonly activeLightboxImage = signal<string | null>(null);
 
   onScroll(event: Event): void {
@@ -104,6 +127,7 @@ export class ProjectsComponent {
 
   abrirGaleria(item: PortfolioItem): void {
     this.selectedProject.set(item);
+    this.currentImageIndex.set(0);
     document.body.style.overflow = 'hidden';
   }
 
@@ -111,6 +135,24 @@ export class ProjectsComponent {
     this.selectedProject.set(null);
     this.activeLightboxImage.set(null);
     document.body.style.overflow = '';
+  }
+
+  seleccionarImagen(idx: number): void {
+    this.currentImageIndex.set(idx);
+  }
+
+  anteriorImagen(): void {
+    const sp = this.selectedProject();
+    if (!sp || !sp.images || sp.images.length === 0) return;
+    const total = sp.images.length;
+    this.currentImageIndex.update(i => (i - 1 + total) % total);
+  }
+
+  siguienteImagen(): void {
+    const sp = this.selectedProject();
+    if (!sp || !sp.images || sp.images.length === 0) return;
+    const total = sp.images.length;
+    this.currentImageIndex.update(i => (i + 1) % total);
   }
 
   abrirLightbox(img: string): void {

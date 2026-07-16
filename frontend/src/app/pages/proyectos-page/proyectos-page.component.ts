@@ -17,6 +17,7 @@ export class ProyectosPageComponent implements AfterViewInit {
 
   readonly categoriaSeleccionada = signal<string>('Todas');
   readonly selectedProject = signal<Proyecto | null>(null);
+  readonly currentImageIndex = signal<number>(0);
 
   readonly categorias = ['Todas', 'Residencial', 'Remodelación', 'Arquitectura interior', 'Oficina'];
 
@@ -29,6 +30,14 @@ export class ProyectosPageComponent implements AfterViewInit {
     return all.filter(p => p.categoria === cat);
   });
 
+  readonly modalImages = computed(() => {
+    const sp = this.selectedProject();
+    if (!sp) return [];
+    // Unir imagen principal con las adicionales eliminando duplicados exactos
+    const list = [sp.imagenUrl, ...(sp.imagenesAdicionales || [])];
+    return Array.from(new Set(list));
+  });
+
   ngAfterViewInit(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -39,12 +48,29 @@ export class ProyectosPageComponent implements AfterViewInit {
 
   abrirDossier(proyecto: Proyecto): void {
     this.selectedProject.set(proyecto);
+    this.currentImageIndex.set(0);
     document.body.style.overflow = 'hidden';
   }
 
   cerrarDossier(): void {
     this.selectedProject.set(null);
     document.body.style.overflow = '';
+  }
+
+  seleccionarImagenModal(idx: number): void {
+    this.currentImageIndex.set(idx);
+  }
+
+  anteriorImagenModal(): void {
+    const total = this.modalImages().length;
+    if (total === 0) return;
+    this.currentImageIndex.update(i => (i - 1 + total) % total);
+  }
+
+  siguienteImagenModal(): void {
+    const total = this.modalImages().length;
+    if (total === 0) return;
+    this.currentImageIndex.update(i => (i + 1) % total);
   }
 
   solicitarAsesoria(p: Proyecto): void {

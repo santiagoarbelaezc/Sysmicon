@@ -79,72 +79,171 @@
   </div>
 </section>
 
-<!-- ===== MODAL DE GALERÍA EXPANDIDO (95vw) ===== -->
-<div *ngIf="selectedProject() as p" class="fixed inset-0 z-[99999] overflow-y-auto p-4 md:p-8 flex flex-col items-center justify-start animate-backdrop-reveal">
-  
-  <!-- Encabezado de la Galería -->
-  <div class="max-w-[95vw] w-full flex items-center justify-between border-b border-white/10 pb-5 mb-8 mt-4 animate-slide-up-fade">
-    <div class="flex items-center gap-3">
-      <img src="assets/icons/logo-sysmico.png" alt="Sysmicon" class="w-8 h-8 object-contain">
-      <div>
-        <h3 class="font-serif text-2xl font-bold text-white tracking-wide uppercase">{{ p.title }}</h3>
-        <p class="text-[10px] uppercase tracking-widest text-wood-light font-bold">Bitácora Visual & Dossier Arquitectónico</p>
-      </div>
-    </div>
-    <button (click)="cerrarGaleria()" class="py-2.5 px-6 rounded-full bg-[#181818] hover:bg-[#222] border border-white/10 text-white font-sans text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2">
-      <span>✕ Cerrar</span>
-    </button>
-  </div>
-
-  <!-- Contenido y Cuadrícula a Ancho de Pantalla Completo -->
-  <div class="max-w-[95vw] w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+<!-- ===== MODAL / DOSSIER ARQUITECTÓNICO DE ALTO STANDING (98vw x 94vh) ===== -->
+<div *ngIf="selectedProject() as p" class="fixed inset-0 z-[99999] p-2 md:p-6 flex items-center justify-center bg-black/95 backdrop-blur-3xl animate-fade-in select-none">
+  <div class="w-[98vw] max-w-[1850px] h-[94vh] max-h-[1080px] bg-[#070707] border border-white/15 rounded-3xl overflow-hidden shadow-[0_0_150px_rgba(0,0,0,1)] relative flex flex-col lg:flex-row">
     
-    <!-- Lado Izquierdo: Ficha del Proyecto (Cols 1-4) -->
-    <div class="lg:col-span-4 bg-[#111] border border-white/10 rounded-2xl p-6 space-y-5 font-sans lg:sticky lg:top-8 animate-slide-left-fade">
-      <div>
-        <span class="text-[10px] bg-wood-accent/20 text-wood-light border border-wood-accent/30 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Especificación</span>
-        <h4 class="font-serif text-xl font-bold text-white mt-3">{{ p.title }}</h4>
-        <p class="text-xs text-gray-400 mt-2 leading-relaxed">{{ p.subtitle }}</p>
+    <!-- Botón cerrar flotante superior derecho -->
+    <button (click)="cerrarGaleria()" class="absolute top-6 right-6 z-50 px-6 py-3 rounded-full bg-black/90 border border-white/20 text-white font-sans text-xs font-bold tracking-[0.25em] uppercase flex items-center gap-2 hover:bg-wood-accent hover:text-black hover:border-wood-accent transition-all shadow-2xl cursor-pointer">
+      <span>Cerrar</span>
+      <span class="text-base font-black">✕</span>
+    </button>
+
+    <!-- COLUMNA IZQUIERDA (70%): DOS IMÁGENES VERTICALES + TIPOGRAFÍA VERTICAL -->
+    <div class="lg:w-[70%] h-[62vh] lg:h-full relative bg-[#050505] flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 overflow-hidden">
+      
+      <!-- Contenedor del Doble Spread Vertical -->
+      <div class="relative flex-1 w-full h-full p-6 md:p-12 flex items-center justify-center">
+        
+        <!-- Flecha Anterior (‹) -->
+        <button *ngIf="p.images && p.images.length > 1"
+                (click)="anteriorImagen(); $event.stopPropagation()" 
+                class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full bg-black/80 hover:bg-wood-accent hover:text-black border border-white/20 text-white text-3xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
+          <span class="group-hover:-translate-x-0.5 transition-transform">‹</span>
+        </button>
+
+        <!-- Grid de DOS IMÁGENES VERTICALES en Paralelo + Letra Vertical -->
+        <div class="w-full max-w-6xl h-full grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 items-center justify-center relative">
+          
+          <!-- Foto Vertical Principal (Col 1-7) -->
+          <div class="md:col-span-7 h-[46vh] md:h-[70vh] rounded-2xl overflow-hidden relative border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.95)] group bg-[#111]">
+            <img [src]="(p.images && p.images.length > 0) ? (p.images[currentImageIndex()] || p.img) : p.img" 
+                 [alt]="p.title + ' vista 1'" 
+                 class="w-full h-full object-cover filter brightness-95 group-hover:brightness-105 group-hover:scale-105 transition-all duration-[1000ms]">
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none"></div>
+            
+            <!-- Etiqueta sobre foto vertical 1 -->
+            <div class="absolute top-5 left-5 bg-black/75 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 text-[10px] font-mono tracking-[0.25em] text-wood-light uppercase">
+              VISTA PRINCIPAL • 0{{ currentImageIndex() + 1 }}
+            </div>
+
+            <!-- Letra Vertical elegante en el borde izquierdo de la imagen -->
+            <div class="absolute left-3 bottom-8 [writing-mode:vertical-rl] rotate-180 font-mono text-[9px] tracking-[0.4em] text-white/50 uppercase pl-2 border-l border-wood-accent select-none pointer-events-none">
+              SYSMICON ARCHITECTURE • RESIDENCIAL
+            </div>
+          </div>
+
+          <!-- Foto Vertical Secundaria Detalle (Col 8-11) (Se muestra en desktop para crear el look vertical elegante) -->
+          <div *ngIf="p.images && p.images.length > 1" class="hidden md:block md:col-span-4 h-[58vh] rounded-2xl overflow-hidden relative border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.95)] group bg-[#111] self-end mb-6">
+            <img [src]="p.images[(currentImageIndex() + 1) % p.images.length]" 
+                 [alt]="p.title + ' vista 2'" 
+                 class="w-full h-full object-cover filter brightness-90 group-hover:brightness-100 group-hover:scale-105 transition-all duration-[1000ms]">
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
+            
+            <div class="absolute bottom-5 left-5 text-[10px] font-mono tracking-[0.2em] text-white/80 uppercase bg-black/70 px-3 py-1 rounded backdrop-blur-md">
+              DETALLE • 0{{ ((currentImageIndex() + 1) % p.images.length) + 1 }}
+            </div>
+          </div>
+
+          <!-- Letra Vertical Monumental a la derecha del spread (Col 12) -->
+          <div class="hidden md:flex md:col-span-1 h-[70vh] items-center justify-center select-none pointer-events-none">
+            <span class="[writing-mode:vertical-rl] rotate-180 font-serif text-xs tracking-[0.5em] text-wood-light/60 uppercase font-light border-l border-white/10 pl-4 py-6">
+              S Y S M I C O N   D O S S I E R   2 0 2 6
+            </span>
+          </div>
+
+        </div>
+
+        <!-- Flecha Siguiente (›) -->
+        <button *ngIf="p.images && p.images.length > 1"
+                (click)="siguienteImagen(); $event.stopPropagation()" 
+                class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full bg-black/80 hover:bg-wood-accent hover:text-black border border-white/20 text-white text-3xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
+          <span class="group-hover:translate-x-0.5 transition-transform">›</span>
+        </button>
+
       </div>
-      
-      <div class="w-full h-[1px] bg-white/10"></div>
-      
-      <div class="space-y-3.5 text-xs text-gray-400">
-        <div class="flex justify-between">
-          <span>Ubicación:</span>
-          <strong class="text-white">Oriente Antioqueño</strong>
-        </div>
-        <div class="flex justify-between">
-          <span>Área:</span>
-          <strong class="text-white">350 m² aprox.</strong>
-        </div>
-        <div class="flex justify-between">
-          <span>Estado:</span>
-          <strong class="text-wood-light font-bold">Portafolio Premium</strong>
+
+      <!-- Tira Inferior de Miniaturas Limpias (h-24) -->
+      <div *ngIf="p.images && p.images.length > 1" class="h-24 bg-[#050505] border-t border-white/10 px-8 py-3 flex items-center justify-center gap-3.5 overflow-x-auto z-30 shrink-0">
+        <div *ngFor="let m of p.images; let idx = index" 
+             (click)="seleccionarImagen(idx)"
+             [ngClass]="{
+               'border-wood-accent scale-105 opacity-100 ring-2 ring-wood-accent/50 shadow-gold': currentImageIndex() === idx,
+               'border-white/15 opacity-40 hover:opacity-85 hover:scale-100': currentImageIndex() !== idx
+             }"
+             class="w-20 h-16 rounded-lg overflow-hidden border-2 cursor-pointer transition-all shrink-0 relative group">
+          <img [src]="m" [alt]="p.title + ' miniatura ' + idx" class="w-full h-full object-cover">
+          <div *ngIf="currentImageIndex() === idx" class="absolute bottom-0 inset-x-0 h-1 bg-wood-accent"></div>
         </div>
       </div>
 
-      <div class="w-full h-[1px] bg-white/10"></div>
-
-      <div class="bg-black/40 p-4 rounded-xl text-[11px] text-gray-500 leading-normal flex items-start gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-wood-accent shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <span>Haz clic sobre cualquier imagen para verla en pantalla completa de alta resolución.</span>
-      </div>
     </div>
 
-    <!-- Lado Derecho: Cuadrícula Estilo VSCO / Grid de Imágenes a Ancho Completo (Cols 5-12) -->
-    <div class="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-4 animate-slide-up-fade">
-      <div *ngFor="let img of p.images; let idx = index" 
-           (click)="abrirLightbox(img)"
-           class="group relative aspect-square rounded-xl overflow-hidden bg-[#111] border border-white/5 cursor-pointer shadow-md hover:border-wood-accent/50 transition-all duration-300">
-        <img [src]="img" [alt]="p.title + ' ' + (idx + 1)" class="w-full h-full object-cover filter brightness-95 group-hover:brightness-100 group-hover:scale-105 transition-transform duration-[800ms]">
-        <!-- Overlay de Hover con Ícono de Zoom -->
-        <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-          <div class="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center backdrop-blur-md transform scale-90 group-hover:scale-100 transition-transform">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+    <!-- COLUMNA DERECHA (30%): TEXTO REDUCIDO, TÍTULOS GIGANTES, LOOK CARO Y SOFISTICADO -->
+    <div class="lg:w-[30%] h-full bg-[#0a0a0a] p-8 lg:p-12 overflow-y-auto flex flex-col justify-between space-y-8 text-left">
+      <div class="space-y-8">
+        
+        <!-- Badge y Título Gigante -->
+        <div>
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-wood-accent/10 border border-wood-accent/30 text-[10px] font-mono text-wood-accent tracking-[0.3em] uppercase mb-5">
+            <span>OBRA MAESTRA</span>
+          </div>
+          <h2 class="font-serif text-5xl lg:text-6xl font-extralight text-white uppercase tracking-[0.12em] leading-[0.9] drop-shadow-lg">
+            {{ p.title }}
+          </h2>
+          <p class="font-serif italic text-base lg:text-xl text-wood-light mt-4 font-normal leading-relaxed">
+            "{{ p.subtitle }}"
+          </p>
+        </div>
+
+        <div class="w-full h-[1px] bg-gradient-to-r from-white/20 via-white/5 to-transparent"></div>
+
+        <!-- Cuadro Técnico Minimalista de Lujo (Números Grandes) -->
+        <div class="grid grid-cols-2 gap-y-6 gap-x-6 py-2">
+          <div>
+            <span class="text-white/40 font-mono text-[10px] uppercase tracking-[0.25em] block mb-1">ÁREA</span>
+            <span class="font-serif text-3xl font-light text-white tracking-wider">580 <span class="text-xs font-mono text-wood-accent">M²</span></span>
+          </div>
+          <div>
+            <span class="text-white/40 font-mono text-[10px] uppercase tracking-[0.25em] block mb-1">ENTREGA</span>
+            <span class="font-serif text-3xl font-light text-white tracking-wider">2025</span>
+          </div>
+          <div>
+            <span class="text-white/40 font-mono text-[10px] uppercase tracking-[0.25em] block mb-1">UBICACIÓN</span>
+            <span class="font-sans text-xs font-bold text-white tracking-widest uppercase">Antioquia</span>
+          </div>
+          <div>
+            <span class="text-white/40 font-mono text-[10px] uppercase tracking-[0.25em] block mb-1">SISTEMA</span>
+            <span class="font-sans text-xs font-bold text-wood-accent tracking-widest uppercase">Llave en Mano</span>
           </div>
         </div>
+
+        <div class="w-full h-[1px] bg-gradient-to-r from-white/20 via-white/5 to-transparent"></div>
+
+        <!-- Párrafo Descriptivo Reducido y Elegante -->
+        <div>
+          <p class="text-white/85 font-sans text-xs lg:text-sm leading-relaxed font-light tracking-wide">
+            Arquitectura residencial de alto nivel con voladizos estructurales sin apoyos intermedios. Integración perfecta entre concreto aparente, madera noble de teca e iluminación indirecta bioclimática.
+          </p>
+        </div>
+
+        <!-- Solo 2 Hitos Clave Concisos -->
+        <div class="space-y-3 pt-1">
+          <div class="flex items-center gap-3 text-xs text-white/90 font-sans tracking-wide bg-white/[0.02] p-3 rounded-xl border border-white/5">
+            <span class="w-2 h-2 rounded-full bg-wood-accent shrink-0"></span>
+            <span class="font-medium">Estructura y volumetría suspendida sobre el paisaje</span>
+          </div>
+          <div class="flex items-center gap-3 text-xs text-white/90 font-sans tracking-wide bg-white/[0.02] p-3 rounded-xl border border-white/5">
+            <span class="w-2 h-2 rounded-full bg-wood-accent shrink-0"></span>
+            <span class="font-medium">Acabados artesanales premium en piedra y roble ahumado</span>
+          </div>
+        </div>
+
       </div>
+
+      <!-- Botón de Asesoría VIP Inferior -->
+      <div class="pt-8 border-t border-white/10 mt-auto space-y-3">
+        <a routerLink="/cotiza-con-nosotros" [queryParams]="{proyecto: p.title}" (click)="cerrarGaleria()" class="w-full py-4 px-6 rounded-full bg-gradient-to-r from-wood-accent via-wood-light to-wood-accent text-black font-sans text-xs tracking-[0.25em] font-extrabold uppercase transition-all shadow-[0_10px_30px_rgba(217,160,102,0.3)] hover:shadow-[0_15px_40px_rgba(217,160,102,0.5)] hover:scale-[1.02] flex items-center justify-center gap-3 cursor-pointer">
+          <span>SOLICITAR ASESORÍA PRIVADA</span>
+          <span class="text-base font-black">→</span>
+        </a>
+        <div class="text-center">
+          <span class="text-[9px] font-mono text-white/40 tracking-[0.2em] uppercase">SYSMICON ARCHITECTS • MEDELLÍN</span>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -152,15 +251,11 @@
 
 <!-- ===== PANTALLA COMPLETA LIGHTBOX EXPANDIDA ===== -->
 <div *ngIf="activeLightboxImage() as lbImg" class="fixed inset-0 z-[100000] flex items-center justify-center p-4 md:p-8 select-none animate-lightbox-backdrop" (click)="cerrarLightbox()">
-  <!-- Botón Cerrar Lightbox -->
   <button (click)="cerrarLightbox(); $event.stopPropagation()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 flex items-center justify-center text-white text-lg transition-colors cursor-pointer z-50">
     ✕
   </button>
-  
-  <!-- Imagen del Lightbox (Ocupa hasta el 95vw y 90vh) -->
   <div class="relative max-w-[95vw] max-h-[90vh] flex items-center justify-center animate-lightbox-image" (click)="$event.stopPropagation()">
     <img [src]="lbImg" alt="Vista ampliada" class="w-auto h-auto max-w-[95vw] max-h-[90vh] object-contain rounded-lg shadow-2xl border border-white/10">
-    <!-- Info -->
     <div class="absolute -bottom-10 left-0 right-0 text-center text-xs text-gray-400 tracking-wider">
       <span>Sysmicon Studio — Visualizador de Renderizado HD</span>
     </div>

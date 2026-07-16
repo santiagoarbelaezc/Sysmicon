@@ -433,7 +433,7 @@ export class DashCad2Component {
   formCategoria: BloqueAdmin['categoria'] = 'alcobas';
   formArea = 35;
   formPrecio = 55000;
-  formImagen = 'assets/images/arquitectura/alcobas/alcoba-principal.png';
+  formImagen = '/assets/images/arquitectura/alcobas/alcoba-principal.png';
 
   // Signals computados para KPIs del inventario
   readonly totalBloques = computed(() => this.adminService.bloquesCAD().length);
@@ -477,40 +477,40 @@ export class DashCad2Component {
 
   readonly presetsMap: Record<string, Array<{ label: string; path: string }>> = {
     alcobas: [
-      { label: 'Master Principal', path: 'assets/images/arquitectura/alcobas/alcoba-principal.png' },
-      { label: 'Suite Doble', path: 'assets/images/arquitectura/alcobas/alcoba2.png' },
-      { label: 'Alcoba 3', path: 'assets/images/arquitectura/alcobas/alcoba3.png' },
-      { label: 'Alcoba 4', path: 'assets/images/arquitectura/alcobas/alcoba4.png' }
+      { label: 'Master Principal', path: '/assets/images/arquitectura/alcobas/alcoba-principal.png' },
+      { label: 'Suite Doble', path: '/assets/images/arquitectura/alcobas/alcoba2.png' },
+      { label: 'Alcoba 3', path: '/assets/images/arquitectura/alcobas/alcoba3.png' },
+      { label: 'Alcoba 4', path: '/assets/images/arquitectura/alcobas/alcoba4.png' }
     ],
     cocina: [
-      { label: 'Cocina Isla', path: 'assets/images/arquitectura/cocina/cocina1.png' }
+      { label: 'Cocina Isla', path: '/assets/images/arquitectura/cocina/cocina1.png' }
     ],
     'area-comun': [
-      { label: 'Sala Altura 1', path: 'assets/images/arquitectura/area-comun/comun1.png' },
-      { label: 'Sala Altura 2', path: 'assets/images/arquitectura/area-comun/comun2.png' },
-      { label: 'Sala Altura 3', path: 'assets/images/arquitectura/area-comun/comun3.png' }
+      { label: 'Sala Altura 1', path: '/assets/images/arquitectura/area-comun/comun1.png' },
+      { label: 'Sala Altura 2', path: '/assets/images/arquitectura/area-comun/comun2.png' },
+      { label: 'Sala Altura 3', path: '/assets/images/arquitectura/area-comun/comun3.png' }
     ],
     piscina: [
-      { label: 'Piscina Infinity', path: 'assets/images/arquitectura/piscina/piscina.png' },
-      { label: 'Jacuzzi Spa', path: 'assets/images/arquitectura/piscina/jacuzzi.png' }
+      { label: 'Piscina Infinity', path: '/assets/images/arquitectura/piscina/piscina.png' },
+      { label: 'Jacuzzi Spa', path: '/assets/images/arquitectura/piscina/jacuzzi.png' }
     ],
     estacionamiento: [
-      { label: 'Garaje Doble', path: 'assets/images/arquitectura/estacionamiento/congarage.png' },
-      { label: 'Parqueadero Abierto', path: 'assets/images/arquitectura/estacionamiento/singarage.png' }
+      { label: 'Garaje Doble', path: '/assets/images/arquitectura/estacionamiento/congarage.png' },
+      { label: 'Parqueadero Abierto', path: '/assets/images/arquitectura/estacionamiento/singarage.png' }
     ],
     muro: [
-      { label: 'Muro Contención', path: 'assets/images/arquitectura/muro/muro-contencion.png' },
-      { label: 'Muro Largo', path: 'assets/images/arquitectura/muro/muro-largo.png' },
-      { label: 'Muro Estándar', path: 'assets/images/arquitectura/muro/muro.png' }
+      { label: 'Muro Contención', path: '/assets/images/arquitectura/muro/muro-contencion.png' },
+      { label: 'Muro Largo', path: '/assets/images/arquitectura/muro/muro-largo.png' },
+      { label: 'Muro Estándar', path: '/assets/images/arquitectura/muro/muro.png' }
     ],
     columnas: [
-      { label: 'Columna Circular', path: 'assets/images/arquitectura/columnas/circular.png' },
-      { label: 'Columna Cuadrada', path: 'assets/images/arquitectura/columnas/cuadrada.png' },
-      { label: 'Columna Rectangular', path: 'assets/images/arquitectura/columnas/rectangular.png' }
+      { label: 'Columna Circular', path: '/assets/images/arquitectura/columnas/circular.png' },
+      { label: 'Columna Cuadrada', path: '/assets/images/arquitectura/columnas/cuadrada.png' },
+      { label: 'Columna Rectangular', path: '/assets/images/arquitectura/columnas/rectangular.png' }
     ],
     bano: [
-      { label: 'Baño Jacuzzi', path: 'assets/images/arquitectura/bano/bano1.png' },
-      { label: 'Baño Suite', path: 'assets/images/arquitectura/bano/bano2.png' }
+      { label: 'Baño Jacuzzi', path: '/assets/images/arquitectura/bano/bano1.png' },
+      { label: 'Baño Suite', path: '/assets/images/arquitectura/bano/bano2.png' }
     ]
   };
 

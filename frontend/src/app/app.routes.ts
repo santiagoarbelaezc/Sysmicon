@@ -9,6 +9,7 @@ import { OlvideContrasenaComponent } from './pages/olvide-contrasena/olvide-cont
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Sysmicon | Diseño y Construcción de Viviendas' },
+  { path: 'proyectos', component: HomeComponent, title: 'Proyectos | Portafolio Sysmicon Arquitectura' },
   { path: 'cotiza-con-nosotros', component: CotizaConNosotrosComponent, title: 'Cotiza con Nosotros | Sysmicon Arquitectura & Construcción' },
   { path: 'crea-tu-diseno', redirectTo: 'cotiza-con-nosotros', pathMatch: 'full' },
   { path: 'nosotros', component: NosotrosComponent, title: 'Nosotros | Filosofía y Arquitectura Sysmicon' },

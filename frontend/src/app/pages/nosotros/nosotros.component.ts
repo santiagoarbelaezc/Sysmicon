@@ -31,8 +31,8 @@ export class NosotrosComponent {
     },
     {
       year: '2022',
-      titulo: 'Modelado BIM & CAD Virtual',
-      desc: 'Adoptamos simulación digital tridimensional avanzada e iniciamos la concepción del primer simulador interactivo de planos 2D para optimizar la toma de decisiones.'
+      titulo: 'Metodología BIM & Precisión Ejecutiva',
+      desc: 'Adoptamos metodologías colaborativas de alta precisión e interventoría técnica digitalizada para optimizar costos y tiempos en cada obra.'
     },
     {
       year: '2026',
@@ -65,8 +65,8 @@ export class NosotrosComponent {
   readonly pilaresMetodologia = [
     {
       etapa: '01',
-      titulo: 'Inmersión & Conceptualización',
-      desc: 'Entendemos tu estilo de vida, exploramos las fortalezas del lote y desarrollamos el anteproyecto en modelado 3D interactivo.',
+      titulo: 'Inmersión & Asesoría Conceptual',
+      desc: 'Entendemos tu estilo de vida, exploramos las fortalezas del lote y conceptualizamos el anteproyecto arquitectónico con asesoría senior a la medida.',
       img: '/images/imagen1.jpg'
     },
     {

@@ -7,40 +7,39 @@
       <span class="w-2 h-2 rounded-full bg-wood-accent animate-ping"></span>
       ★ PILAR INTEGRAL SYSMICON — DISEÑO Y OBRA
     </span>
-    <span class="text-white/60 hidden sm:inline">SERVICIO 0{{ index + 1 }}</span>
+    <span class="text-white/60 hidden sm:inline">CAPACIDAD 360°</span>
   </div>
 
   <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[480px]">
-    <!-- COLUMNA IZQUIERDA: IMAGEN TIPO CATÁLOGO CON TEXTO POR CÓDIGO (Cols 1-5) -->
-    <div class="lg:col-span-5 relative overflow-hidden bg-[#0A0A0A] min-h-[340px] lg:min-h-full flex flex-col justify-center items-center p-8 group/img">
-      <!-- Imagen de fondo con Ken Burns suave -->
+    <!-- COLUMNA IZQUIERDA: IMAGEN DE PROYECTO TIPO CATÁLOGO PURA (Cols 1-5) -->
+    <div class="lg:col-span-5 relative overflow-hidden bg-[#0A0A0A] min-h-[380px] lg:min-h-full flex flex-col justify-center items-center p-8 group/img">
+      <!-- Imagen de proyecto real como fondo tipo catálogo -->
       <div *ngIf="servicio.imagen" 
-           class="absolute inset-0 bg-cover bg-center transition-transform duration-[12000ms] group-hover/img:scale-110 opacity-75"
+           class="absolute inset-0 bg-cover bg-center transition-transform duration-[12000ms] group-hover/img:scale-110 opacity-85"
            [style.background-image]="'url(\'' + servicio.imagen + '\')'">
       </div>
       
-      <!-- Gradiente sutil para legibilidad del texto de catálogo -->
-      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/85"></div>
+      <!-- Gradiente suave para que el texto resalte con máxima claridad y contraste -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/80"></div>
       
-      <!-- Trazos esquineros técnicos y fase -->
-      <div class="absolute top-6 left-6 font-mono text-[11px] text-white/70 tracking-widest pointer-events-none">
-        0{{ index + 1 }} // SYSMICON
-      </div>
-      <div class="absolute top-6 right-6 w-10 h-10 border-t border-r border-white/30 pointer-events-none"></div>
-      <div class="absolute bottom-6 left-6 w-10 h-10 border-b border-l border-white/30 pointer-events-none"></div>
-      <div class="absolute bottom-6 right-6 font-mono text-[11px] text-wood-accent font-bold uppercase tracking-wider pointer-events-none">
-        {{ servicio.fase || 'ESPECIALIDAD' }}
-      </div>
+      <!-- Trazos esquineros arquitectónicos puros (Sin números ni textos saturados) -->
+      <div class="absolute top-6 left-6 w-8 h-8 border-t border-l border-white/35 pointer-events-none"></div>
+      <div class="absolute top-6 right-6 w-8 h-8 border-t border-r border-white/35 pointer-events-none"></div>
+      <div class="absolute bottom-6 left-6 w-8 h-8 border-b border-l border-white/35 pointer-events-none"></div>
+      <div class="absolute bottom-6 right-6 w-8 h-8 border-b border-r border-white/35 pointer-events-none"></div>
 
-      <!-- TEXTO TIPO CATÁLOGO COLOCADO POR CÓDIGO SOBRE LA IMAGEN (Estilo Portafolio) -->
-      <div class="relative z-20 text-center px-4 max-w-md pointer-events-none transition-all duration-700 group-hover/img:scale-105">
-        <span class="font-mono text-[10px] md:text-xs text-wood-light uppercase tracking-[0.35em] font-bold block mb-3 opacity-90">
-          ESPECIFICACIÓN TÉCNICA
-        </span>
-        <h3 class="font-serif text-3xl md:text-4xl lg:text-5xl font-light tracking-[0.22em] text-white uppercase leading-tight drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]">
+      <!-- TEXTO TIPO CATÁLOGO EN EL CENTRO EXACTO (Editorial y limpio) -->
+      <div class="relative z-20 text-center px-4 pointer-events-none transition-all duration-700 group-hover/img:scale-[1.03]">
+        <h3 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-light tracking-[0.26em] text-white uppercase drop-shadow-[0_12px_25px_rgba(0,0,0,0.95)]">
           {{ servicio.titulo }}
         </h3>
-        <div class="w-14 h-[1.5px] bg-wood-accent mx-auto mt-5 opacity-90 transition-all duration-500 group-hover/img:w-28"></div>
+      </div>
+
+      <!-- Subtítulo de fase abajo, discreto y sin numeración -->
+      <div *ngIf="servicio.fase" class="absolute bottom-7 inset-x-0 text-center pointer-events-none z-20">
+        <span class="font-mono text-[11px] text-white/80 tracking-[0.28em] uppercase drop-shadow">
+          {{ servicio.fase }}
+        </span>
       </div>
     </div>
 

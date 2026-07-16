@@ -83,28 +83,28 @@
 }
 
 :root {
-  /* Color Palette */
-  --bg-dark: #030303;
-  --bg-dark-secondary: #080808;
-  --bg-dark-tertiary: #0C0C0C;
-  --bg-light: #FAFAFA;
-  --bg-light-secondary: #F0EDE8;
-  --bg-card-dark: rgba(5, 5, 5, 0.95);
+  /* Color Palette - General Public Site (#002345 Dark Blue, #4C7AA6 Gray Blue, #C2E1FF Pale Blue) */
+  --bg-dark: #002345;
+  --bg-dark-secondary: #001A33;
+  --bg-dark-tertiary: #242424;
+  --bg-light: #FFFFFF;
+  --bg-light-secondary: #D9D9D9;
+  --bg-card-dark: rgba(0, 35, 69, 0.95);
   
   --text-primary: #FFFFFF;
-  --text-secondary: #B3B3B3;
-  --text-muted: #737373;
-  --text-dark: #0D0D0D;
-  --text-dark-muted: #555555;
+  --text-secondary: #C2E1FF;
+  --text-muted: #D9D9D9;
+  --text-dark: #002345;
+  --text-dark-muted: #4C7AA6;
   
-  /* Grayscale Palette Accents */
-  --wood-light: #CCCCCC;
-  --wood-accent: #FFFFFF;
-  --wood-dark: #1F1F1F;
-  --wood-deep: #0F0F0F;
-  --wood-subtle: rgba(255, 255, 255, 0.1);
+  /* Palette Accents (Public Site) */
+  --wood-light: #D9D9D9;
+  --wood-accent: #C2E1FF;
+  --wood-dark: #4C7AA6;
+  --wood-deep: #002345;
+  --wood-subtle: rgba(194, 225, 255, 0.15);
 
-  /* Tema del Admin (Oscuro por defecto) */
+  /* Tema del Admin (Oscuro por defecto - PRESERVADO) */
   --admin-bg-primary: #080808;
   --admin-bg-sidebar: #0d0d0d;
   --admin-bg-card: #111111;
@@ -116,21 +116,6 @@
   --admin-accent: #e8d5a3;
   --admin-card-hover: #161616;
 
-/* Sobrescribir variables de admin en tema claro */
-.light-theme {
-  --admin-bg-primary: #f8f9fa;
-  --admin-bg-sidebar: #ffffff;
-  --admin-bg-card: #ffffff;
-  --admin-bg-input: #f1f3f5;
-  --admin-border: rgba(0, 0, 0, 0.08);
-  --admin-text-primary: #1a1a1a;
-  --admin-text-secondary: #4a5568;
-  --admin-text-muted: #718096;
-  --admin-accent: #a07840;
-  --admin-card-hover: #f1f3f5;
-}
-
-  
   /* Typography */
   --font-serif: 'Exo 2', 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-sans: 'Exo 2', 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -149,6 +134,38 @@
   --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-slow: 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Aislamiento estricto y blindado de variables para el Portal Privado (Login, Registro y Dashboard) */
+app-login,
+app-admin-layout,
+.private-portal,
+.admin-theme {
+  --bg-dark: #030303;
+  --bg-dark-secondary: #080808;
+  --bg-dark-tertiary: #0C0C0C;
+  --bg-card-dark: rgba(5, 5, 5, 0.95);
+  --wood-light: #CCCCCC;
+  --wood-accent: #FFFFFF;
+  --wood-dark: #1F1F1F;
+  --wood-deep: #0F0F0F;
+  --wood-subtle: rgba(255, 255, 255, 0.1);
+  --text-primary: #FFFFFF;
+  --text-secondary: #B3B3B3;
+}
+
+/* Sobrescribir variables de admin en tema claro */
+.light-theme {
+  --admin-bg-primary: #f8f9fa;
+  --admin-bg-sidebar: #ffffff;
+  --admin-bg-card: #ffffff;
+  --admin-bg-input: #f1f3f5;
+  --admin-border: rgba(0, 0, 0, 0.08);
+  --admin-text-primary: #1a1a1a;
+  --admin-text-secondary: #4a5568;
+  --admin-text-muted: #718096;
+  --admin-accent: #a07840;
+  --admin-card-hover: #f1f3f5;
 }
 
 /* ==========================================================================
@@ -235,18 +252,18 @@ h1, h2, h3, h4, .font-serif {
 }
 
 .text-accent {
-  color: var(--wood-light);
+  color: #C2E1FF;
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #FFFFFF 0%, #A3A3A3 100%);
+  background: linear-gradient(135deg, #FFFFFF 0%, #C2E1FF 60%, #4C7AA6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
   font-size: 1.125rem;
-  color: var(--text-secondary);
+  color: #C2E1FF;
   font-weight: 400;
   max-width: 600px;
 }

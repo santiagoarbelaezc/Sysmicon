@@ -31,6 +31,30 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
     DashMensajesComponent,
     DashReportesComponent
   ],
+  styles: [`
+    :host {
+      --bg-dark: #030303;
+      --bg-dark-secondary: #080808;
+      --bg-dark-tertiary: #0C0C0C;
+      --wood-light: #CCCCCC;
+      --wood-accent: #FFFFFF;
+      --wood-dark: #1F1F1F;
+      --wood-deep: #0F0F0F;
+      --wood-subtle: rgba(255, 255, 255, 0.1);
+      --text-primary: #FFFFFF;
+      --text-secondary: #B3B3B3;
+      --admin-bg-primary: #080808;
+      --admin-bg-sidebar: #0d0d0d;
+      --admin-bg-card: #111111;
+      --admin-bg-input: #161616;
+      --admin-border: rgba(255, 255, 255, 0.08);
+      --admin-text-primary: #ffffff;
+      --admin-text-secondary: #9ca3af;
+      --admin-text-muted: #6b7280;
+      --admin-accent: #e8d5a3;
+      --admin-card-hover: #161616;
+    }
+  `],
   template: `
     <div [class]="'min-h-screen flex overflow-hidden font-sans ' + (theme() === 'light' ? 'light-theme' : '')"
          style="background-color: var(--admin-bg-primary); color: var(--admin-text-primary);">

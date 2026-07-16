@@ -1,1 +1,15 @@
 /* Estilos específicos del componente olvide-contrasena */
+
+:host {
+  /* Aislamiento garantizado para Olvide Contraseña (Parte del flujo Portal Privado / Login) */
+  --bg-dark: #030303;
+  --bg-dark-secondary: #080808;
+  --bg-dark-tertiary: #0C0C0C;
+  --wood-light: #CCCCCC;
+  --wood-accent: #FFFFFF;
+  --wood-dark: #1F1F1F;
+  --wood-deep: #0F0F0F;
+  --wood-subtle: rgba(255, 255, 255, 0.1);
+  --text-primary: #FFFFFF;
+  --text-secondary: #B3B3B3;
+}

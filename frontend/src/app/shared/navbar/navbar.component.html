@@ -39,10 +39,10 @@
         </ng-container>
 
         <ng-container *ngIf="authService.currentUser() as user">
-          <a routerLink="/admin" title="Ir al Portal Admin" class="flex items-center gap-2 bg-[#161616] hover:bg-[#1f1f1f] px-3.5 py-1.5 rounded-full border border-wood-accent/30 hover:border-wood-accent shadow-sm animate-fade transition-all cursor-pointer">
-            <span class="w-6 h-6 rounded-full bg-wood-accent text-[#111] font-bold text-xs flex items-center justify-center">{{ user.nombre.charAt(0) }}</span>
+          <a routerLink="/admin" title="Ir al Portal Admin" class="flex items-center gap-2 bg-[#001A33] hover:bg-[#242424] px-3.5 py-1.5 rounded-full border border-wood-accent/40 hover:border-wood-accent shadow-sm animate-fade transition-all cursor-pointer">
+            <span class="w-6 h-6 rounded-full bg-wood-accent text-[#002345] font-bold text-xs flex items-center justify-center">{{ user.nombre.charAt(0) }}</span>
             <span class="font-bold text-wood-light truncate max-w-[100px]">{{ user.nombre }}</span>
-            <span class="bg-wood-accent/20 text-wood-light text-[10px] font-extrabold px-2 py-0.5 rounded">ADMIN</span>
+            <span class="bg-wood-accent/20 text-wood-accent text-[10px] font-extrabold px-2 py-0.5 rounded">ADMIN</span>
             <button (click)="authService.logout(); $event.stopPropagation(); $event.preventDefault()" title="Cerrar sesión" class="text-gray-400 hover:text-red-400 font-bold ml-0.5 transition-colors cursor-pointer relative z-10">✕</button>
           </a>
         </ng-container>
@@ -91,15 +91,15 @@
             </div>
           </ng-container>
           <ng-container *ngIf="authService.currentUser() as user">
-            <div class="flex flex-col gap-2 bg-[#181818] px-4 py-3 rounded-xl border border-wood-accent/40 w-full max-w-[280px]">
+            <div class="flex flex-col gap-2 bg-[#001A33] px-4 py-3 rounded-xl border border-wood-accent/40 w-full max-w-[280px]">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2">
-                  <span class="w-7 h-7 rounded-full bg-wood-accent text-[#111] font-bold text-sm flex items-center justify-center">{{ user.nombre.charAt(0) }}</span>
+                  <span class="w-7 h-7 rounded-full bg-wood-accent text-[#002345] font-bold text-sm flex items-center justify-center">{{ user.nombre.charAt(0) }}</span>
                   <span class="font-bold text-wood-light text-sm truncate max-w-[130px]">{{ user.nombre }}</span>
                 </div>
                 <button (click)="authService.logout(); closeMobileMenu()" class="text-xs bg-red-950/60 text-red-300 border border-red-800/40 px-2.5 py-1 rounded-lg">Salir</button>
               </div>
-              <a routerLink="/admin" (click)="closeMobileMenu()" class="w-full text-center py-1.5 rounded-lg bg-wood-accent text-[#111] font-extrabold text-xs tracking-wider uppercase transition-transform hover:scale-[1.02]">
+              <a routerLink="/admin" (click)="closeMobileMenu()" class="w-full text-center py-1.5 rounded-lg bg-wood-accent text-[#002345] font-extrabold text-xs tracking-wider uppercase transition-transform hover:scale-[1.02]">
                 ⚡ Entrar al Portal Admin
               </a>
             </div>

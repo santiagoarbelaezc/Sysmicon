@@ -1,4 +1,4 @@
-<div class="cotiza-page min-h-screen pt-20 md:pt-24 bg-[#000000] text-white relative overflow-hidden font-sans">
+<div class="cotiza-page min-h-screen pt-20 md:pt-24 bg-[#002345] text-white relative overflow-hidden font-sans">
   <!-- Luz ambiental decorativa arquitectónica sutil -->
   <div class="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-white/[0.03] blur-[160px] pointer-events-none"></div>
   <div class="absolute bottom-10 right-10 w-[500px] h-[500px] rounded-full bg-white/[0.02] blur-[150px] pointer-events-none"></div>
@@ -9,7 +9,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-5.5rem)] items-stretch">
       
       <!-- COLUMNA IZQUIERDA: VIDEO ARQUITECTÓNICO EDGE-TO-EDGE (Cols 1-9) -->
-      <div class="lg:col-span-9 relative flex flex-col justify-center overflow-hidden bg-black min-h-[460px] lg:min-h-[calc(100vh-5.5rem)] group" data-aos="fade-right" data-aos-duration="1000">
+      <div class="lg:col-span-9 relative flex flex-col justify-center overflow-hidden bg-[#001A33] min-h-[460px] lg:min-h-[calc(100vh-5.5rem)] group" data-aos="fade-right" data-aos-duration="1000">
         <!-- Reproductor de Video en Gran Formato (con oscuridad balanceada y clara) -->
         <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover transform scale-[1.01] transition-transform duration-1000 group-hover:scale-[1.03] brightness-[0.82] contrast-[1.06]">
           <source src="assets/videos/video-sysmicon3d.mp4" type="video/mp4">
@@ -17,17 +17,17 @@
         </video>
 
         <!-- Overlays arquitectónicos ligeros y uniformes para que todo el video (incluida la derecha) sea claro y visible -->
-        <div class="absolute inset-0 bg-black/15 pointer-events-none z-10 transition-opacity duration-700 group-hover:opacity-10"></div>
+        <div class="absolute inset-0 bg-[#002345]/20 pointer-events-none z-10 transition-opacity duration-700 group-hover:opacity-10"></div>
 
         <!-- Etiqueta técnica CAD flotante sutil en la esquina superior izquierda -->
-        <div class="absolute top-6 left-8 z-20 pointer-events-none hidden md:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-[10px] font-mono tracking-[0.2em] text-white/70 uppercase shadow-lg">
+        <div class="absolute top-6 left-8 z-20 pointer-events-none hidden md:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#001A33]/80 backdrop-blur-md border border-white/10 text-[10px] font-mono tracking-[0.2em] text-white/70 uppercase shadow-lg">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
           <span>SYSMICON ARCHITECTURAL STUDIO • ASESORÍA & INTERVENTORÍA</span>
         </div>
       </div>
 
       <!-- COLUMNA DERECHA: CUADRO "HABLAR CON NOSOTROS" DE ALTA ELEGANCIA (Cols 10-12) -->
-      <div class="lg:col-span-3 flex flex-col justify-center bg-[#040404]/95 backdrop-blur-3xl border-l border-white/10 p-6 sm:p-8 lg:p-8 xl:p-10 shadow-2xl relative z-20 min-h-full" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="150">
+      <div class="lg:col-span-3 flex flex-col justify-center bg-[#001A33]/95 backdrop-blur-3xl border-l border-white/10 p-6 sm:p-8 lg:p-8 xl:p-10 shadow-2xl relative z-20 min-h-full" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="150">
         
         <div class="flex flex-col justify-between h-full space-y-7">
           <div>
@@ -79,7 +79,7 @@
                 <textarea id="mensaje" name="mensaje" rows="3"
                           [ngModel]="mensaje()" (ngModelChange)="mensaje.set($event)"
                           placeholder="¿Cómo podemos ayudarte o asesorarte?"
-                          class="w-full px-4 py-3.5 rounded-xl bg-white/[0.04] border border-white/15 text-white placeholder-white/35 font-sans text-sm focus:outline-none focus:border-wood-light focus:bg-white/[0.08] transition-all resize-none"></textarea>
+                          class="w-full px-4 py-3.5 rounded-xl bg-white/[0.04] border border-white/15 text-white placeholder-white/35 font-sans text-sm focus:outline-none focus:border-[#C2E1FF] focus:bg-white/[0.08] transition-all resize-none"></textarea>
               </div>
 
               <!-- Alerta de Error -->
@@ -123,28 +123,28 @@
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
               <!-- WhatsApp -->
               <a [href]="whatsappUrl" target="_blank" rel="noopener noreferrer" 
-                 class="social-btn group flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-white/[0.03] hover:bg-white/10 border border-white/10 hover:border-white transition-all text-white text-[11px] font-semibold tracking-wider uppercase">
+                 class="social-btn group flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-white/[0.03] hover:bg-white/10 border border-white/10 hover:border-[#C2E1FF] hover:text-[#C2E1FF] transition-all text-white text-[11px] font-semibold tracking-wider uppercase">
                 <svg class="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 1.636 6.015L.195 23.518l5.656-1.484A11.95 11.95 0 0 0 11.944 24C18.575 24 24 18.627 24 12S18.575 0 11.944 0zm0 21.986a9.96 9.96 0 0 1-5.074-1.385l-.364-.216-3.765.988 1.006-3.668-.238-.379A9.954 9.954 0 0 1 1.986 12c0-5.492 4.471-9.964 9.958-9.964 5.492 0 9.964 4.472 9.964 9.964 0 5.492-4.472 9.986-9.964 9.986zm5.457-7.466c-.299-.15-1.768-.872-2.042-.971-.274-.1-.474-.15-.674.15-.2.299-.774.971-.949 1.171-.174.2-.349.224-.648.075-.3-.15-1.263-.465-2.404-1.482-.888-.792-1.488-1.769-1.663-2.068-.175-.3-.018-.462.132-.611.135-.135.299-.35.449-.524.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.674-1.624-.924-2.224-.243-.585-.49-.505-.674-.515-.174-.01-.374-.01-.574-.01-.2 0-.524.075-.799.375-.274.3-1.048 1.024-1.048 2.497 0 1.474 1.073 2.898 1.223 3.098.15.2 2.112 3.223 5.116 4.522.715.309 1.274.494 1.708.632.718.228 1.371.196 1.889.119.578-.086 1.768-.723 2.017-1.422.249-.699.249-1.299.174-1.423-.075-.124-.274-.199-.574-.349z"/></svg>
                 <span>WhatsApp</span>
               </a>
 
               <!-- Instagram -->
               <a [href]="contact.instagram" target="_blank" rel="noopener noreferrer"
-                 class="social-btn group flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-white/[0.03] hover:bg-white/10 border border-white/10 hover:border-white transition-all text-white text-[11px] font-semibold tracking-wider uppercase">
+                 class="social-btn group flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-white/[0.03] hover:bg-white/10 border border-white/10 hover:border-[#C2E1FF] hover:text-[#C2E1FF] transition-all text-white text-[11px] font-semibold tracking-wider uppercase">
                 <svg class="w-3.5 h-3.5 text-pink-400 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                 <span>Instagram</span>
               </a>
 
               <!-- LinkedIn -->
               <a [href]="contact.linkedin" target="_blank" rel="noopener noreferrer"
-                 class="social-btn group flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-white/[0.03] hover:bg-white/10 border border-white/10 hover:border-white transition-all text-white text-[11px] font-semibold tracking-wider uppercase">
+                 class="social-btn group flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-white/[0.03] hover:bg-white/10 border border-white/10 hover:border-[#C2E1FF] hover:text-[#C2E1FF] transition-all text-white text-[11px] font-semibold tracking-wider uppercase">
                 <svg class="w-3.5 h-3.5 text-blue-400 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                 <span>LinkedIn</span>
               </a>
 
               <!-- Facebook -->
               <a [href]="contact.facebook" target="_blank" rel="noopener noreferrer"
-                 class="social-btn group flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-white/[0.03] hover:bg-white/10 border border-white/10 hover:border-white transition-all text-white text-[11px] font-semibold tracking-wider uppercase">
+                 class="social-btn group flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-white/[0.03] hover:bg-white/10 border border-white/10 hover:border-[#C2E1FF] hover:text-[#C2E1FF] transition-all text-white text-[11px] font-semibold tracking-wider uppercase">
                 <svg class="w-3.5 h-3.5 text-blue-500 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                 <span>Facebook</span>
               </a>

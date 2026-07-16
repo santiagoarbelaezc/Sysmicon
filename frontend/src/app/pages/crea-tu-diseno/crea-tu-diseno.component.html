@@ -1,7 +1,7 @@
-<div class="config-page min-h-screen bg-[#080808] text-white py-16 font-sans">
+<div class="config-page min-h-screen bg-[#002345] text-white py-16 font-sans">
   
   <!-- PANTALLA DE CARGA ELEGANTE STUDIO CAD 2D -->
-  <div *ngIf="isLoadingScreen()" class="fixed inset-0 z-[9999] bg-[#030303] text-white flex flex-col items-center justify-center px-6 font-sans overflow-hidden animate-fade">
+  <div *ngIf="isLoadingScreen()" class="fixed inset-0 z-[9999] bg-[#001A33] text-white flex flex-col items-center justify-center px-6 font-sans overflow-hidden animate-fade">
     
     <!-- Trazos y ejes de plano arquitectónico de precisión en el fondo -->
     <div class="absolute top-0 bottom-0 left-[8%] w-[1px] bg-white/[0.04] pointer-events-none"></div>
@@ -30,7 +30,7 @@
     <div class="absolute w-[600px] h-[600px] rounded-full bg-white/[0.02] blur-[180px] pointer-events-none"></div>
 
     <!-- Contenedor del video (Centrado, blanco y negro con filtro grayscale) -->
-    <div class="w-72 h-72 sm:w-80 sm:h-80 md:w-90 md:h-90 rounded-3xl overflow-hidden shadow-[0_20px_70px_rgba(0,0,0,0.95)] border border-white/10 relative bg-[#050608] z-10 flex items-center justify-center">
+    <div class="w-72 h-72 sm:w-80 sm:h-80 md:w-90 md:h-90 rounded-3xl overflow-hidden shadow-[0_20px_70px_rgba(0,0,0,0.95)] border border-white/10 relative bg-[#002345] z-10 flex items-center justify-center">
       <video autoplay loop muted [muted]="true" playsinline class="w-full h-full object-cover filter grayscale" style="filter: grayscale(100%); opacity: 0.9;">
         <source src="assets/videos/video-sysmicon.mp4" type="video/mp4">
         <source src="videos/video-sysmicon.mp4" type="video/mp4">
@@ -88,7 +88,7 @@
 
     <!-- PANTALLA PRINCIPAL DE ESTUDIO CAD 2D -->
     <div id="cad-canvas-wrapper" 
-         [ngClass]="isFullscreen() ? 'flex flex-row w-full h-full bg-[#080808] overflow-hidden' : 'grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch mb-16'"
+         [ngClass]="isFullscreen() ? 'flex flex-row w-full h-full bg-[#002345] overflow-hidden' : 'grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch mb-16'"
          class="relative" *ngIf="!isSubmitted()">
       
       <!-- COLUMNA IZQUIERDA: MENÚ Y CATÁLOGO DE BLOQUES -->
@@ -96,10 +96,10 @@
       <div [ngClass]="isFullscreen() ? 
           (catalogoAbierto() ? 'w-72 flex-shrink-0 h-full' : 'w-0 overflow-hidden') : 
           'lg:col-span-3 h-[700px] md:h-[760px]'"
-           class="flex flex-col bg-[#111111] border-r border-white/10 overflow-hidden shadow-2xl transition-all duration-300 ease-in-out">
+           class="flex flex-col bg-[#001A33] border-r border-white/10 overflow-hidden shadow-2xl transition-all duration-300 ease-in-out">
         
         <!-- Cabecera del menú -->
-        <div class="p-4 border-b border-white/10 bg-[#161616] flex items-center justify-between">
+        <div class="p-4 border-b border-white/10 bg-[#002345] flex items-center justify-between">
           <span class="font-serif font-bold text-base text-white flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-wood-accent"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
             <span>Categorías CAD</span>
@@ -110,10 +110,10 @@
         </div>
 
         <!-- Pestañas de Categorías -->
-        <div class="flex xl:grid xl:grid-cols-2 gap-1.5 p-2.5 overflow-x-auto xl:overflow-visible border-b border-white/10 bg-[#0C0C0C] scrollbar-thin">
+        <div class="flex xl:grid xl:grid-cols-2 gap-1.5 p-2.5 overflow-x-auto xl:overflow-visible border-b border-white/10 bg-[#001A33] scrollbar-thin">
           <button *ngFor="let cat of categorias"
                   (click)="setCategoria(cat.id)"
-                  [ngClass]="{'bg-wood-accent text-[#111] font-bold shadow-md scale-[1.02]': categoriaSeleccionada() === cat.id, 'bg-[#181818] text-gray-400 hover:text-white hover:bg-[#222]': categoriaSeleccionada() !== cat.id}"
+                  [ngClass]="{'bg-wood-accent text-[#002345] font-extrabold shadow-md scale-[1.02]': categoriaSeleccionada() === cat.id, 'bg-[#242424] text-gray-300 hover:text-white hover:bg-[#4C7AA6]/40': categoriaSeleccionada() !== cat.id}"
                   class="flex items-center gap-2 px-3 py-2.5 rounded-lg text-xs font-sans transition-all duration-200 cursor-pointer flex-shrink-0 text-left border border-transparent">
             <div [ngSwitch]="cat.id" class="flex-shrink-0">
               <svg *ngSwitchCase="'alcobas'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/></svg>
@@ -130,14 +130,14 @@
         </div>
 
         <!-- Lista de Bloques en la categoría seleccionada -->
-        <div class="flex-1 overflow-y-auto p-3 space-y-3 scrollbar-thin bg-[#101010]">
+        <div class="flex-1 overflow-y-auto p-3 space-y-3 scrollbar-thin bg-[#001A33]">
           <div class="text-[11px] text-gray-500 uppercase tracking-wider font-bold mb-1 px-1">
             Selecciona para añadir al plano:
           </div>
 
           <div *ngFor="let b of getBloquesPorCategoria()" 
                (click)="agregarBloqueAlLienzo(b)"
-               class="group relative bg-[#181818] hover:bg-[#222222] border border-white/10 hover:border-wood-accent/60 rounded-xl p-3 transition-all duration-300 cursor-pointer flex flex-col items-center justify-between gap-2 shadow-sm">
+               class="group relative bg-[#242424] hover:bg-[#4C7AA6]/30 border border-white/10 hover:border-wood-accent/60 rounded-xl p-3 transition-all duration-300 cursor-pointer flex flex-col items-center justify-between gap-2 shadow-sm">
             
             <!-- Contenedor del bloque en blanco sobre transparente -->
             <div class="w-full h-24 bg-[#080808] rounded-lg p-2 flex items-center justify-center border border-white/5 relative overflow-hidden group-hover:scale-105 transition-transform">
@@ -166,7 +166,7 @@
         </div>
 
         <!-- Pie del catálogo -->
-        <div class="p-3 bg-[#161616] border-t border-white/10 text-center text-[11px] text-gray-400 flex items-center justify-center gap-1.5">
+        <div class="p-3 bg-[#002345] border-t border-white/10 text-center text-[11px] text-gray-400 flex items-center justify-center gap-1.5">
           <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-wood-accent"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           <span class="text-white font-medium">Tip:</span> Haz clic en un bloque para colocarlo en el centro del lienzo.
         </div>
@@ -174,10 +174,10 @@
 
       <!-- COLUMNA DERECHA: EL LIENZO NEGRO CAD 2D (Cols 4-12) -->
       <div [ngClass]="isFullscreen() ? 'flex-1 h-full min-w-0' : 'lg:col-span-9 h-[700px] md:h-[760px]'" 
-           class="flex flex-col bg-[#111111] rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
+           class="flex flex-col bg-[#001A33] rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
         
         <!-- BARRA SUPERIOR DE HERRAMIENTAS DEL LIENZO -->
-        <div class="p-3 bg-[#181818] border-b border-white/10 flex flex-wrap items-center justify-between gap-3">
+        <div class="p-3 bg-[#002345] border-b border-white/10 flex flex-wrap items-center justify-between gap-3">
           
           <!-- Lado Izquierdo: Historial, Cuadrícula y Limpiar -->
           <div class="flex flex-wrap items-center gap-2">
@@ -185,7 +185,7 @@
             <!-- Botón de toggle catálogo (solo visible en fullscreen) -->
             <button *ngIf="isFullscreen()" (click)="toggleCatalogo()"
                     [title]="catalogoAbierto() ? 'Cerrar catálogo' : 'Abrir catálogo de bloques'"
-                    [ngClass]="{'bg-wood-accent/20 text-wood-light border-wood-accent/40': catalogoAbierto(), 'bg-[#222] text-gray-400 border-white/10 hover:text-white hover:bg-[#282828]': !catalogoAbierto()}"
+                    [ngClass]="{'bg-wood-accent/20 text-wood-light border-wood-accent/40': catalogoAbierto(), 'bg-[#242424] text-gray-300 border-white/10 hover:text-white hover:bg-[#4C7AA6]/40': !catalogoAbierto()}"
                     class="px-2.5 py-1.5 rounded-lg border text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
               <span>{{ catalogoAbierto() ? 'Cerrar' : 'Catálogo' }}</span>
@@ -193,17 +193,17 @@
             <div *ngIf="isFullscreen()" class="h-4 w-[1px] bg-white/10 mx-0.5"></div>
 
             <button (click)="deshacer()" [disabled]="historialPasos.length === 0"
-                    [ngClass]="{'opacity-40 cursor-not-allowed': historialPasos.length === 0, 'hover:bg-[#282828] text-white': historialPasos.length > 0}"
+                    [ngClass]="{'opacity-40 cursor-not-allowed': historialPasos.length === 0, 'hover:bg-[#4C7AA6]/40 text-white': historialPasos.length > 0}"
                     title="Deshacer último cambio (Ctrl+Z)"
-                    class="px-2.5 py-1.5 rounded-lg bg-[#1F1F1F] border border-white/10 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
+                    class="px-2.5 py-1.5 rounded-lg bg-[#242424] border border-white/10 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
               <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/></svg>
               <span>Deshacer</span>
             </button>
 
             <button (click)="rehacer()" [disabled]="historialRehacer.length === 0"
-                    [ngClass]="{'opacity-40 cursor-not-allowed': historialRehacer.length === 0, 'hover:bg-[#282828] text-white': historialRehacer.length > 0}"
+                    [ngClass]="{'opacity-40 cursor-not-allowed': historialRehacer.length === 0, 'hover:bg-[#4C7AA6]/40 text-white': historialRehacer.length > 0}"
                     title="Rehacer cambio (Ctrl+Y)"
-                    class="px-2.5 py-1.5 rounded-lg bg-[#1F1F1F] border border-white/10 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
+                    class="px-2.5 py-1.5 rounded-lg bg-[#242424] border border-white/10 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
               <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5A5.5 5.5 0 0 0 4 14.5A5.5 5.5 0 0 0 9.5 20H13"/></svg>
               <span>Rehacer</span>
             </button>
@@ -211,7 +211,7 @@
             <div class="h-4 w-[1px] bg-white/10 mx-1 hidden sm:block"></div>
 
             <button (click)="toggleCuadricula()" 
-                    [ngClass]="{'bg-wood-accent/20 text-wood-light border-wood-accent/40': mostrarCuadricula(), 'bg-[#222] text-gray-400 border-white/10': !mostrarCuadricula()}"
+                    [ngClass]="{'bg-wood-accent/20 text-wood-light border-wood-accent/40': mostrarCuadricula(), 'bg-[#242424] text-gray-300 border-white/10': !mostrarCuadricula()}"
                     class="px-2.5 py-1.5 rounded-lg border text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
               <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
               <span>Cuadrícula</span>
@@ -226,6 +226,7 @@
             <!-- Botón Imprimir Plano (Nuevo) -->
             <button (click)="imprimirPlano()" *ngIf="elementosLienzo().length > 0"
                     class="px-2.5 py-1.5 rounded-lg bg-white hover:bg-gray-200 text-black border border-white text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
+                    class="px-2.5 py-1.5 rounded-lg bg-white hover:bg-gray-200 text-[#002345] border border-white text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
               <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
               <span>Imprimir Plano</span>
             </button>
@@ -236,7 +237,7 @@
             <!-- Botón Pantalla Completa -->
             <button (click)="toggleFullscreen()"
                     [title]="isFullscreen() ? 'Salir de pantalla completa (Esc)' : 'Ver en pantalla completa'"
-                    [ngClass]="{'bg-wood-accent/20 text-wood-light border-wood-accent/40': isFullscreen(), 'bg-[#222] text-gray-400 border-white/10 hover:text-white hover:bg-[#282828]': !isFullscreen()}"
+                    [ngClass]="{'bg-wood-accent/20 text-wood-light border-wood-accent/40': isFullscreen(), 'bg-[#242424] text-gray-300 border-white/10 hover:text-white hover:bg-[#4C7AA6]/40': !isFullscreen()}"
                     class="px-2.5 py-1.5 rounded-lg border text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
               <!-- Icono Entrar Pantalla Completa -->
               <svg *ngIf="!isFullscreen()" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
@@ -247,24 +248,24 @@
           </div>
 
           <!-- Lado Derecho: Controles del Elemento Seleccionado o Guía Rápida -->
-          <div *ngIf="bloqueSeleccionadoObj() as sel" class="flex flex-wrap items-center gap-1.5 bg-[#0C0C0C] px-3 py-1 rounded-xl border border-wood-accent/40 animate-fade">
+          <div *ngIf="bloqueSeleccionadoObj() as sel" class="flex flex-wrap items-center gap-1.5 bg-[#001A33] px-3 py-1 rounded-xl border border-wood-accent/40 animate-fade">
             <span class="text-[11px] text-wood-light font-bold truncate max-w-[130px] mr-1 flex items-center gap-1">
               <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
               {{ sel.bloque.nombre }}:
             </span>
             
-            <button (click)="rotarElemento(45)" title="Rotar 45°" class="px-2 py-1.5 rounded-lg bg-[#222] hover:bg-wood-accent hover:text-[#111] text-white transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
+            <button (click)="rotarElemento(45)" title="Rotar 45°" class="px-2 py-1.5 rounded-lg bg-[#242424] hover:bg-wood-accent hover:text-[#002345] text-white transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
               +45°
             </button>
-            <button (click)="rotarElemento(90)" title="Rotar 90°" class="px-2 py-1.5 rounded-lg bg-[#222] hover:bg-wood-accent hover:text-[#111] text-white transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
+            <button (click)="rotarElemento(90)" title="Rotar 90°" class="px-2 py-1.5 rounded-lg bg-[#242424] hover:bg-wood-accent hover:text-[#002345] text-white transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
               +90°
             </button>
-            <button (click)="escalarElemento(0.1)" title="Agrandar (+10%)" class="px-2 py-1.5 rounded-lg bg-[#222] hover:bg-wood-accent hover:text-[#111] text-white transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
+            <button (click)="escalarElemento(0.1)" title="Agrandar (+10%)" class="px-2 py-1.5 rounded-lg bg-[#242424] hover:bg-wood-accent hover:text-[#002345] text-white transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             </button>
-            <button (click)="escalarElemento(-0.1)" title="Reducir (-10%)" class="px-2 py-1.5 rounded-lg bg-[#222] hover:bg-wood-accent hover:text-[#111] text-white transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
+            <button (click)="escalarElemento(-0.1)" title="Reducir (-10%)" class="px-2 py-1.5 rounded-lg bg-[#242424] hover:bg-wood-accent hover:text-[#002345] text-white transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
             </button>
             <button (click)="duplicarElemento()" title="Duplicar Bloque (Atajo: Ctrl+D o Ctrl+C y Ctrl+V)" class="px-2 py-1.5 rounded-lg bg-blue-950/60 hover:bg-blue-800/80 text-blue-300 border border-blue-800/40 transition-all text-xs cursor-pointer font-bold ml-1 flex items-center gap-1">
@@ -278,18 +279,16 @@
           <div *ngIf="!bloqueSeleccionadoObj()" class="text-[11px] text-gray-400 flex items-center gap-3 font-sans">
             <span class="hidden md:inline flex items-center gap-1">
               <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-wood-accent"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              <strong class="text-wood-light">Atajos CAD:</strong>
+              Haz clic en un módulo del lienzo para ver herramientas.
             </span>
-            <span class="bg-[#222] px-2 py-0.5 rounded text-[10px] text-gray-300 border border-white/5"><strong>Ctrl+Z</strong> Deshacer</span>
-            <span class="bg-[#222] px-2 py-0.5 rounded text-[10px] text-gray-300 border border-white/5"><strong>Ctrl+C / V</strong> Copiar y Pegar</span>
-            <span class="bg-[#222] px-2 py-0.5 rounded text-[10px] text-gray-300 border border-white/5"><strong>Supr</strong> Eliminar</span>
-            <span class="bg-[#222] px-2 py-0.5 rounded text-[10px] text-gray-300 border border-white/5 hidden lg:inline"><strong>Flechas</strong> Mover Precisión</span>
+            <span class="bg-[#242424] px-2 py-0.5 rounded text-[10px] text-gray-300 border border-white/5"><strong>Supr</strong> Eliminar</span>
+            <span class="bg-[#242424] px-2 py-0.5 rounded text-[10px] text-gray-300 border border-white/5 hidden lg:inline"><strong>Flechas</strong> Mover Precisión</span>
           </div>
 
         </div>
 
         <!-- EL LIENZO CAD NEGRO INTERACTIVO (Viewport) -->
-        <div class="flex-1 relative bg-[#050505] overflow-hidden select-none cursor-crosshair"
+        <div class="flex-1 relative bg-[#001A33] overflow-hidden select-none cursor-crosshair"
              [ngClass]="{'cad-grid': mostrarCuadricula()}"
              (mousemove)="onCanvasMouseMove($event)"
              (touchmove)="onCanvasMouseMove($event)"
@@ -361,7 +360,7 @@
             <div *ngIf="selectedElementId() === el.instanceId" 
                  (click)="rotarElemento(45); $event.stopPropagation()"
                  title="Clic para rotar 45°"
-                 class="absolute -top-3 -right-3 w-7 h-7 rounded-full bg-wood-accent text-[#111] font-bold text-xs flex items-center justify-center shadow-lg border-2 border-white cursor-pointer hover:scale-125 transition-transform z-50">
+                 class="absolute -top-3 -right-3 w-7 h-7 rounded-full bg-wood-accent text-[#002345] font-bold text-xs flex items-center justify-center shadow-lg border-2 border-white cursor-pointer hover:scale-125 transition-transform z-50">
               ↻
             </div>
           </div>
@@ -369,7 +368,7 @@
         </div>
 
         <!-- BARRA INFERIOR DE RESUMEN EN VIVO Y BOTÓN DE COTIZACIÓN -->
-        <div class="p-4 bg-[#161616] border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="p-4 bg-[#002345] border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           
           <div class="flex items-center gap-6 text-sm font-sans">
             <div class="flex items-center gap-2">
@@ -391,7 +390,7 @@
 
           <div class="flex items-center gap-3 w-full md:w-auto">
             <button (click)="abrirCotizacion()" 
-                    class="w-full md:w-auto py-3 px-8 rounded-xl bg-white hover:bg-gray-200 text-black font-sans font-bold text-xs tracking-widest uppercase shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer border border-white">
+                    class="w-full md:w-auto py-3 px-8 rounded-xl bg-white hover:bg-gray-200 text-[#002345] font-sans font-bold text-xs tracking-widest uppercase shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer border border-white">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
               <span>Formalizar este Plano en Propuesta</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -404,7 +403,7 @@
     </div>
 
     <!-- SECCIÓN MODAL / FORMULARIO DE FORMALIZACIÓN DE PROPUESTA -->
-    <div *ngIf="modoCotizacion() && !isSubmitted()" class="max-w-4xl mx-auto bg-[#111111] rounded-2xl border border-wood-accent/40 p-6 md:p-10 shadow-2xl animate-fade mb-20">
+    <div *ngIf="modoCotizacion() && !isSubmitted()" class="max-w-4xl mx-auto bg-[#001A33] rounded-2xl border border-wood-accent/40 p-6 md:p-10 shadow-2xl animate-fade mb-20">
       <div class="flex items-center justify-between border-b border-white/10 pb-5 mb-6">
         <div>
           <span class="text-xs font-bold uppercase tracking-widest text-wood-light bg-wood-accent/15 px-3 py-1 rounded-full border border-wood-accent/30">Paso Final</span>
@@ -414,7 +413,7 @@
         <button (click)="modoCotizacion.set(false)" class="text-gray-400 hover:text-white font-bold text-lg p-2">✕</button>
       </div>
 
-      <div class="bg-[#181818] p-4 rounded-xl border border-white/5 mb-6 flex flex-wrap items-center justify-between gap-4 text-xs font-sans">
+      <div class="bg-[#002345] p-4 rounded-xl border border-white/5 mb-6 flex flex-wrap items-center justify-between gap-4 text-xs font-sans">
         <div>
           <span class="text-gray-400 block">Resumen de tu plano 2D:</span>
           <span class="text-white font-bold">{{ elementosLienzo().length }} módulos CAD estructurados en lienzo.</span>
@@ -434,12 +433,12 @@
           <div>
             <label class="block text-xs font-bold uppercase text-gray-300 mb-1.5 font-serif">Nombre Completo *</label>
             <input type="text" [(ngModel)]="nombre" name="nombre" required placeholder="Ej: Carlos Alberto Rodríguez" 
-                   class="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm">
+                   class="w-full px-4 py-3 rounded-xl bg-[#001A33] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm">
           </div>
           <div>
             <label class="block text-xs font-bold uppercase text-gray-300 mb-1.5 font-serif">Correo Electrónico *</label>
             <input type="email" [(ngModel)]="email" name="email" required placeholder="carlos@correo.com" 
-                   class="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm">
+                   class="w-full px-4 py-3 rounded-xl bg-[#001A33] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm">
           </div>
         </div>
 
@@ -447,22 +446,22 @@
           <div>
             <label class="block text-xs font-bold uppercase text-gray-300 mb-1.5 font-serif">Teléfono / WhatsApp *</label>
             <input type="tel" [(ngModel)]="telefono" name="telefono" required placeholder="+57 310 000 0000" 
-                   class="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm">
+                   class="w-full px-4 py-3 rounded-xl bg-[#001A33] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm">
           </div>
           <div>
             <label class="block text-xs font-bold uppercase text-gray-300 mb-1.5 font-serif">Ciudad de Construcción *</label>
             <input type="text" [(ngModel)]="ciudad" name="ciudad" required placeholder="Ej: Llanogrande, Medellín, Bogotá..." 
-                   class="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm">
+                   class="w-full px-4 py-3 rounded-xl bg-[#001A33] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm">
           </div>
         </div>
 
         <div>
           <label class="block text-xs font-bold uppercase text-gray-300 mb-1.5 font-serif">Notas Adicionales para el Arquitecto (Opcional)</label>
           <textarea [(ngModel)]="notas" name="notas" rows="3" placeholder="Indícanos si ya cuentas con lote propio, orientación solar preferida o requerimientos especiales..." 
-                    class="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm"></textarea>
+                    class="w-full px-4 py-3 rounded-xl bg-[#001A33] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm"></textarea>
         </div>
 
-        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-wood-accent to-[#0F254B] hover:brightness-110 text-white font-sans font-bold text-sm tracking-widest uppercase shadow-2xl transition-all cursor-pointer mt-4 flex items-center justify-center gap-2">
+        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-wood-accent to-[#002345] hover:brightness-110 text-[#002345] font-sans font-bold text-sm tracking-widest uppercase shadow-2xl transition-all cursor-pointer mt-4 flex items-center justify-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           <span>Enviar mi Plano 2D y Solicitar Cita con Director Arquitectónico</span>
         </button>
@@ -470,7 +469,7 @@
     </div>
 
     <!-- PANTALLA DE ÉXITO DE PROPUESTA -->
-    <div *ngIf="isSubmitted()" class="max-w-3xl mx-auto bg-[#111111] rounded-2xl border border-wood-accent p-8 md:p-12 text-center shadow-2xl animate-fade my-16">
+    <div *ngIf="isSubmitted()" class="max-w-3xl mx-auto bg-[#001A33] rounded-2xl border border-wood-accent p-8 md:p-12 text-center shadow-2xl animate-fade my-16">
       <div class="w-16 h-16 rounded-full bg-wood-accent/15 border border-wood-accent/40 flex items-center justify-center mx-auto mb-4">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-wood-light"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
@@ -482,7 +481,7 @@
         <strong class="text-wood-light">{{ totalAreaM2() }} m²</strong> con <strong>{{ elementosLienzo().length }} módulos CAD</strong>.
       </p>
 
-      <div class="bg-[#181818] border border-white/10 rounded-xl p-6 max-w-md mx-auto my-6">
+      <div class="bg-[#002345] border border-white/10 rounded-xl p-6 max-w-md mx-auto my-6">
         <div class="text-xs uppercase tracking-widest text-gray-400 font-bold">Código Referencial de tu Plano:</div>
         <div class="font-serif font-bold text-2xl text-wood-light my-1">CAD-{{ currentYear }}-{{ totalAreaM2() }}M</div>
         <div class="text-xs text-gray-400">Presupuesto estimado: <strong class="text-emerald-400">${{ totalPrecioUSD() | number }} COP*</strong></div>
@@ -493,11 +492,11 @@
       </p>
 
       <div class="flex justify-center gap-4">
-        <button (click)="reiniciarProyecto()" class="px-6 py-3 rounded-xl bg-[#222] hover:bg-[#333] text-white font-sans text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border border-white/10 flex items-center gap-2">
+        <button (click)="reiniciarProyecto()" class="px-6 py-3 rounded-xl bg-[#242424] hover:bg-[#333] text-white font-sans text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border border-white/10 flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
           <span>Diseñar Otro Plano 2D</span>
         </button>
-        <button (click)="solicitarSalida('/')" class="px-6 py-3 rounded-xl bg-wood-accent hover:brightness-110 text-[#111] font-sans text-xs font-bold uppercase tracking-wider transition-all cursor-pointer">
+        <button (click)="solicitarSalida('/')" class="px-6 py-3 rounded-xl bg-wood-accent hover:brightness-110 text-[#002345] font-sans text-xs font-bold uppercase tracking-wider transition-all cursor-pointer">
           <span>Volver al Inicio</span>
         </button>
       </div>
@@ -509,11 +508,11 @@
 <!-- ===== MODAL: ACCESO REQUERIDO — CAD 2D ===== -->
 <div *ngIf="mostrarModalAuth()"
      class="fixed inset-0 z-[99999] flex items-center justify-center"
-     style="background: rgba(3,3,3,0.92); backdrop-filter: blur(18px) saturate(0.4);">
+     style="background: rgba(0, 26, 51, 0.92); backdrop-filter: blur(18px) saturate(0.4);">
 
   <!-- Tarjeta principal -->
   <div class="relative w-full max-w-lg mx-4 overflow-hidden"
-       style="background: #080808; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 48px 120px rgba(0,0,0,0.95);">
+       style="background: #001A33; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 48px 120px rgba(0,0,0,0.95);"> style="background: #080808; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 48px 120px rgba(0,0,0,0.95);">
 
     <!-- Esquinas de plano arquitectónico -->
     <div class="absolute top-0 left-0 w-8 h-8 pointer-events-none" style="border-top: 1px solid rgba(232,213,163,0.5); border-left: 1px solid rgba(232,213,163,0.5);"></div>
@@ -598,7 +597,7 @@
         <!-- CTA principal -->
         <button (click)="irARegistro()"
                 class="w-full py-4 text-sm font-bold tracking-widest uppercase transition-all duration-200 cursor-pointer relative overflow-hidden group"
-                style="background: rgba(232,213,163,0.96); color: #080808; letter-spacing: 0.12em;">
+                style="background: #C2E1FF; color: #002345; letter-spacing: 0.12em;">
           <!-- Línea de brillo en hover -->
           <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200" style="background: rgba(255,255,255,0.15);"></div>
           <span class="relative">Crear cuenta — Es gratis</span>

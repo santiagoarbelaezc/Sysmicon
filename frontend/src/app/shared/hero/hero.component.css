@@ -56,9 +56,9 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(180deg,
-      rgba(3, 3, 3, 0.50) 0%,
-      rgba(3, 3, 3, 0.25) 50%,
-      rgba(3, 3, 3, 0.85) 100%);
+      rgba(0, 0, 0, 0.45) 0%,
+      rgba(0, 0, 0, 0.20) 50%,
+      rgba(0, 0, 0, 0.75) 100%);
   z-index: 2;
 }
 
@@ -147,8 +147,9 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background: #FFFFFF;
+  background: #C2E1FF;
   animation: slideProgress 3.5s linear infinite;
+  box-shadow: 0 0 10px #C2E1FF;
 }
 
 @keyframes slideProgress {
@@ -184,8 +185,8 @@
   gap: 0.85rem;
   padding: 0.45rem 1.4rem;
   margin-bottom: 2rem;
-  background: rgba(4, 4, 4, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 35, 69, 0.85);
+  border: 1px solid rgba(194, 225, 255, 0.35);
   backdrop-filter: blur(12px);
 }
 
@@ -197,8 +198,8 @@
   left: -3px;
   width: 8px;
   height: 8px;
-  border-top: 1.5px solid var(--text-primary);
-  border-left: 1.5px solid var(--text-primary);
+  border-top: 1.5px solid #C2E1FF;
+  border-left: 1.5px solid #C2E1FF;
 }
 
 .arch-plan-badge::after {
@@ -208,16 +209,16 @@
   right: -3px;
   width: 8px;
   height: 8px;
-  border-bottom: 1.5px solid var(--wood-light);
-  border-right: 1.5px solid var(--wood-light);
+  border-bottom: 1.5px solid #C2E1FF;
+  border-right: 1.5px solid #C2E1FF;
 }
 
 .arch-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--wood-light);
-  box-shadow: 0 0 8px var(--wood-light);
+  background: #C2E1FF;
+  box-shadow: 0 0 10px #C2E1FF;
 }
 
 /* Title */
@@ -233,7 +234,7 @@
 .hero-subtitle {
   font-family: var(--font-sans);
   font-size: clamp(1.1rem, 2vw, 1.35rem);
-  color: var(--text-secondary);
+  color: #C2E1FF;
   line-height: 1.6;
   max-width: 720px;
   margin-bottom: 1.5rem;
@@ -259,22 +260,22 @@
   justify-content: center;
   gap: 0.75rem;
   padding: 1rem 2.2rem;
-  background: var(--wood-accent);
-  color: #030303; /* Texto oscuro sobre botón blanco */
-  font-weight: 600;
+  background: #C2E1FF;
+  color: #002345; /* Dark Blue sobre Pale Blue */
+  font-weight: 700;
   font-size: 1rem;
-  border-radius: 6px;
+  border-radius: 8px;
   transition: all var(--transition-smooth);
-  border: 1px solid var(--wood-accent);
-  box-shadow: var(--shadow-gold);
+  border: 1.5px solid #C2E1FF;
+  box-shadow: 0 10px 25px rgba(194, 225, 255, 0.35);
 }
 
 .btn-primary:hover {
-  background: var(--wood-dark);
-  border-color: var(--wood-light);
-  color: #FFFFFF; /* Texto blanco en hover sobre fondo oscuro */
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.15);
+  background: #FFFFFF;
+  border-color: #C2E1FF;
+  color: #002345;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(194, 225, 255, 0.6);
 }
 
 .btn-secondary {
@@ -283,20 +284,22 @@
   align-items: center;
   justify-content: center;
   padding: 1rem 2.2rem;
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-primary);
+  background: rgba(0, 35, 69, 0.4);
+  color: #FFFFFF;
   font-weight: 600;
   font-size: 1rem;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  border: 1px solid rgba(194, 225, 255, 0.35);
   backdrop-filter: blur(8px);
   transition: all var(--transition-smooth);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: var(--text-primary);
+  background: rgba(194, 225, 255, 0.18);
+  border-color: #C2E1FF;
+  color: #C2E1FF;
   transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(194, 225, 255, 0.2);
 }
 
 @media (max-width: 600px) {

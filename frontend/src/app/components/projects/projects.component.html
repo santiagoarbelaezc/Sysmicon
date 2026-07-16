@@ -1,29 +1,29 @@
 <!-- Portafolio / Proyectos Destacados Section (Premium Split Responsive) -->
-<section id="proyectos" class="portfolio-section bg-[#080808] border-t border-b border-white/5 py-12 md:py-20">
+<section id="proyectos" class="portfolio-section bg-[#002345] border-t border-b border-white/10 py-12 md:py-20">
   <div class="container mb-8">
     <div class="section-header text-center mb-10" data-aos="fade-up" data-aos-duration="900">
       <div class="section-tag font-sans justify-center mb-4">
-        <span class="tag-line bg-gray-600"></span>
-        <span class="text-gray-400">Portafolio Exclusivo</span>
-        <span class="tag-line bg-gray-600"></span>
+        <span class="tag-line bg-[#4C7AA6]"></span>
+        <span class="text-[#C2E1FF] font-bold">Portafolio Exclusivo</span>
+        <span class="tag-line bg-[#4C7AA6]"></span>
       </div>
       <h2 class="title-lg font-serif text-white text-4xl md:text-5xl font-bold tracking-tight">
-        Obras que redefinen el <span class="text-gray-400 italic font-serif">paisaje habitado</span>
+        Obras que redefinen el <span class="text-[#C2E1FF] italic font-serif">paisaje habitado</span>
       </h2>
-      <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto mt-6 leading-relaxed font-sans font-light">
+      <p class="text-[#C2E1FF]/80 text-sm md:text-base max-w-2xl mx-auto mt-6 leading-relaxed font-sans font-light">
         Explora nuestra selección de proyectos residenciales, geometrías puras y volúmenes integrados al entorno natural.
       </p>
     </div>
   </div>
 
   <!-- Carrusel Hero para Móvil (Visible solo en pantallas pequeñas) -->
-  <div class="hero-carousel-mobile font-sans lg:hidden relative w-full h-[85vh] overflow-hidden bg-[#0A0A0A]">
+  <div class="hero-carousel-mobile font-sans lg:hidden relative w-full h-[85vh] overflow-hidden bg-[#001A33]">
     <!-- Brand Header for Mobile landing -->
-    <div class="mobile-brand-header absolute top-0 inset-x-0 z-20 p-6 pt-12 bg-gradient-to-b from-black/80 via-black/40 to-transparent flex flex-col items-center text-center gap-2 pointer-events-none">
-      <img src="assets/icons/logo-sysmico.png" alt="Sysmicon Logo" class="w-12 h-12 object-contain filter drop-shadow-[0_4px_10px_rgba(212,175,55,0.3)] animate-pulse">
+    <div class="mobile-brand-header absolute top-0 inset-x-0 z-20 p-6 pt-12 bg-gradient-to-b from-[#002345]/90 via-[#002345]/50 to-transparent flex flex-col items-center text-center gap-2 pointer-events-none">
+      <img src="assets/icons/logo-sysmico.png" alt="Sysmicon Logo" class="w-12 h-12 object-contain filter drop-shadow-[0_4px_10px_rgba(194,225,255,0.4)] animate-pulse">
       <div>
         <h1 class="font-serif text-lg font-bold text-white tracking-widest">SYSMICON</h1>
-        <p class="text-[9px] uppercase tracking-widest text-wood-light font-bold">Estudio Arquitectónico</p>
+        <p class="text-[9px] uppercase tracking-widest text-[#C2E1FF] font-bold">Estudio Arquitectónico</p>
       </div>
     </div>
 
@@ -31,11 +31,11 @@
       <div class="carousel-track flex h-full w-max">
         <div class="carousel-slide w-screen h-full relative scroll-snap-align-center flex-shrink-0" *ngFor="let item of items; let i = index" [id]="'slide-proj-' + i">
           <img [src]="item.img" [alt]="item.title" class="slide-img w-full h-full object-cover">
-          <div class="slide-overlay absolute inset-0 bg-gradient-to-t from-[#080808]/90 via-transparent to-transparent flex items-end justify-center pb-12">
+          <div class="slide-overlay absolute inset-0 bg-gradient-to-t from-[#001A33]/95 via-transparent to-transparent flex items-end justify-center pb-12">
             <div class="slide-content text-center text-white px-6 max-w-sm">
               <h2 class="font-serif text-3xl font-bold tracking-tight mb-2 uppercase text-white">{{ item.title }}</h2>
-              <p class="text-xs text-gray-300 mb-5 leading-relaxed font-sans">{{ item.subtitle }}</p>
-              <button (click)="abrirGaleria(item)" class="inline-block bg-wood-accent text-white py-3.5 px-10 rounded-full font-bold text-xs uppercase tracking-widest shadow-lg hover:brightness-110 active:scale-95 transition-all">
+              <p class="text-xs text-[#C2E1FF] mb-5 leading-relaxed font-sans">{{ item.subtitle }}</p>
+              <button (click)="abrirGaleria(item)" class="inline-block bg-[#C2E1FF] text-[#002345] py-3.5 px-10 rounded-full font-extrabold text-xs uppercase tracking-widest shadow-lg hover:bg-white active:scale-95 transition-all">
                 Descubrir Proyecto
               </button>
             </div>
@@ -50,13 +50,13 @@
               (click)="scrollToSlide(i)" 
               [class.active]="i === currentSlide"
               class="dot-btn w-2 h-2 rounded-full bg-white/40 transition-all"
-              [ngClass]="{'w-8 bg-wood-accent shadow-md': i === currentSlide}"></button>
+              [ngClass]="{'w-8 bg-[#C2E1FF] shadow-md': i === currentSlide}"></button>
     </div>
   </div>
 
   <!-- Desktop Side-by-Side View (Visible en pantallas grandes con animación AOS escalonada) -->
-  <div class="portfolio-desktop-section hidden lg:flex w-full h-[95vh] items-stretch overflow-hidden bg-[#0A0A0A] border-t border-b border-white/10 relative">
-    <div class="box group relative flex-1 flex items-center justify-center overflow-hidden cursor-pointer border-r border-white/5 transition-all duration-[900ms] ease-[cubic-bezier(0.25,1,0.5,1)] hover:flex-[1.9]" 
+  <div class="portfolio-desktop-section hidden lg:flex w-full h-[95vh] items-stretch overflow-hidden bg-[#001A33] border-t border-b border-white/10 relative">
+    <div class="box group relative flex-1 flex items-center justify-center overflow-hidden cursor-pointer border-r border-white/10 transition-all duration-[900ms] ease-[cubic-bezier(0.25,1,0.5,1)] hover:flex-[1.9]" 
          *ngFor="let item of items; let idx = index" 
          (click)="abrirGaleria(item)"
          data-aos="fade-up"
@@ -66,7 +66,7 @@
       
       <!-- Nombre de la casa con tipografía elegante y ultra delgada, sin logo ni contenedores -->
       <div class="content absolute z-20 text-center pointer-events-none">
-        <h3 class="font-serif text-3xl md:text-4xl font-light tracking-[0.25em] text-white uppercase transition-all duration-700 group-hover:text-wood-light group-hover:scale-[1.03]">
+        <h3 class="font-serif text-3xl md:text-4xl font-light tracking-[0.25em] text-white uppercase transition-all duration-700 group-hover:text-[#C2E1FF] group-hover:scale-[1.03]">
           {{ item.title }}
         </h3>
       </div>
@@ -75,25 +75,25 @@
 
   <!-- Botón para ir a la Galería de Proyectos (Posicionado abajo de las 4 casas con animación AOS) -->
   <div class="container mt-12 md:mt-16 text-center" data-aos="fade-up" data-aos-delay="600" data-aos-duration="800">
-    <a routerLink="/proyectos" class="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-white/5 hover:bg-wood-accent hover:text-black border border-white/20 hover:border-wood-accent text-white font-sans text-xs md:text-sm font-bold tracking-[0.25em] uppercase transition-all shadow-2xl group cursor-pointer">
+    <a routerLink="/proyectos" class="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-[#001A33] hover:bg-[#C2E1FF] hover:text-[#002345] border border-[#C2E1FF]/40 hover:border-[#C2E1FF] text-white font-sans text-xs md:text-sm font-bold tracking-[0.25em] uppercase transition-all shadow-2xl group cursor-pointer">
       <span>VER GALERÍA DE PROYECTOS</span>
-      <span class="text-wood-accent group-hover:text-black group-hover:translate-x-1.5 transition-transform font-black text-base">→</span>
+      <span class="text-[#C2E1FF] group-hover:text-[#002345] group-hover:translate-x-1.5 transition-transform font-black text-base">→</span>
     </a>
   </div>
 </section>
 
 <!-- ===== MODAL / DOSSIER ARQUITECTÓNICO DE ALTO STANDING (98vw x 94vh) ===== -->
-<div *ngIf="selectedProject() as p" class="fixed inset-0 z-[99999] p-2 md:p-6 flex items-center justify-center bg-black/95 backdrop-blur-3xl animate-fade-in select-none">
-  <div class="w-[98vw] max-w-[1850px] h-[94vh] max-h-[1080px] bg-[#070707] border border-white/15 rounded-3xl overflow-hidden shadow-[0_0_150px_rgba(0,0,0,1)] relative flex flex-col lg:flex-row">
+<div *ngIf="selectedProject() as p" class="fixed inset-0 z-[99999] p-2 md:p-6 flex items-center justify-center bg-[#002345]/95 backdrop-blur-3xl animate-fade-in select-none">
+  <div class="w-[98vw] max-w-[1850px] h-[94vh] max-h-[1080px] bg-[#242424] border border-[#C2E1FF]/25 rounded-3xl overflow-hidden shadow-[0_0_150px_rgba(0,0,0,1)] relative flex flex-col lg:flex-row">
     
     <!-- Botón cerrar flotante superior derecho -->
-    <button (click)="cerrarGaleria()" class="absolute top-6 right-6 z-50 px-6 py-3 rounded-full bg-black/90 border border-white/20 text-white font-sans text-xs font-bold tracking-[0.25em] uppercase flex items-center gap-2 hover:bg-wood-accent hover:text-black hover:border-wood-accent transition-all shadow-2xl cursor-pointer">
+    <button (click)="cerrarGaleria()" class="absolute top-6 right-6 z-50 px-6 py-3 rounded-full bg-[#001A33]/90 border border-[#C2E1FF]/30 text-white font-sans text-xs font-bold tracking-[0.25em] uppercase flex items-center gap-2 hover:bg-[#C2E1FF] hover:text-[#002345] transition-all shadow-2xl cursor-pointer">
       <span>Cerrar</span>
       <span class="text-base font-black">✕</span>
     </button>
 
     <!-- COLUMNA IZQUIERDA (70%): DOS IMÁGENES VERTICALES + TIPOGRAFÍA VERTICAL -->
-    <div class="lg:w-[70%] h-[62vh] lg:h-full relative bg-[#050505] flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 overflow-hidden">
+    <div class="lg:w-[70%] h-[62vh] lg:h-full relative bg-[#001A33] flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 overflow-hidden">
       
       <!-- Contenedor del Doble Spread Vertical -->
       <div class="relative flex-1 w-full h-full p-6 md:p-12 flex items-center justify-center">
@@ -101,7 +101,7 @@
         <!-- Flecha Anterior (‹) -->
         <button *ngIf="p.images && p.images.length > 1"
                 (click)="anteriorImagen(); $event.stopPropagation()" 
-                class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full bg-black/80 hover:bg-wood-accent hover:text-black border border-white/20 text-white text-3xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
+                class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full bg-[#002345]/80 hover:bg-[#C2E1FF] hover:text-[#002345] border border-[#C2E1FF]/30 text-white text-3xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
           <span class="group-hover:-translate-x-0.5 transition-transform">‹</span>
         </button>
 
@@ -109,40 +109,40 @@
         <div class="w-full max-w-6xl h-full grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 items-center justify-center relative">
           
           <!-- Foto Vertical Principal (Col 1-7) -->
-          <div class="md:col-span-7 h-[46vh] md:h-[70vh] rounded-2xl overflow-hidden relative border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.95)] group bg-[#111]">
+          <div class="md:col-span-7 h-[46vh] md:h-[70vh] rounded-2xl overflow-hidden relative border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.95)] group bg-[#242424]">
             <img [src]="(p.images && p.images.length > 0) ? (p.images[currentImageIndex()] || p.img) : p.img" 
                  [alt]="p.title + ' vista 1'" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-all duration-[1000ms]">
             
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#002345]/80 via-transparent to-[#002345]/30 pointer-events-none"></div>
             
             <!-- Etiqueta sobre foto vertical 1 -->
-            <div class="absolute top-5 left-5 bg-black/75 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 text-[10px] font-mono tracking-[0.25em] text-wood-light uppercase">
+            <div class="absolute top-5 left-5 bg-[#001A33]/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#C2E1FF]/30 text-[10px] font-mono tracking-[0.25em] text-[#C2E1FF] uppercase">
               VISTA PRINCIPAL • 0{{ currentImageIndex() + 1 }}
             </div>
 
             <!-- Letra Vertical elegante en el borde izquierdo de la imagen -->
-            <div class="absolute left-3 bottom-8 [writing-mode:vertical-rl] rotate-180 font-mono text-[9px] tracking-[0.4em] text-white/50 uppercase pl-2 border-l border-wood-accent select-none pointer-events-none">
+            <div class="absolute left-3 bottom-8 [writing-mode:vertical-rl] rotate-180 font-mono text-[9px] tracking-[0.4em] text-white/70 uppercase pl-2 border-l border-[#C2E1FF] select-none pointer-events-none">
               SYSMICON ARCHITECTURE • RESIDENCIAL
             </div>
           </div>
 
           <!-- Foto Vertical Secundaria Detalle (Col 8-11) -->
-          <div *ngIf="p.images && p.images.length > 1" class="hidden md:block md:col-span-4 h-[58vh] rounded-2xl overflow-hidden relative border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.95)] group bg-[#111] self-end mb-6">
+          <div *ngIf="p.images && p.images.length > 1" class="hidden md:block md:col-span-4 h-[58vh] rounded-2xl overflow-hidden relative border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.95)] group bg-[#242424] self-end mb-6">
             <img [src]="p.images[(currentImageIndex() + 1) % p.images.length]" 
                  [alt]="p.title + ' vista 2'" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-all duration-[1000ms]">
             
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#002345]/80 via-transparent to-transparent pointer-events-none"></div>
             
-            <div class="absolute bottom-5 left-5 text-[10px] font-mono tracking-[0.2em] text-white/80 uppercase bg-black/70 px-3 py-1 rounded backdrop-blur-md">
+            <div class="absolute bottom-5 left-5 text-[10px] font-mono tracking-[0.2em] text-[#C2E1FF] uppercase bg-[#001A33]/80 px-3 py-1 rounded backdrop-blur-md border border-[#C2E1FF]/20">
               DETALLE • 0{{ ((currentImageIndex() + 1) % p.images.length) + 1 }}
             </div>
           </div>
 
           <!-- Letra Vertical Monumental a la derecha del spread (Col 12) -->
           <div class="hidden md:flex md:col-span-1 h-[70vh] items-center justify-center select-none pointer-events-none">
-            <span class="[writing-mode:vertical-rl] rotate-180 font-serif text-xs tracking-[0.5em] text-wood-light/60 uppercase font-light border-l border-white/10 pl-4 py-6">
+            <span class="[writing-mode:vertical-rl] rotate-180 font-serif text-xs tracking-[0.5em] text-[#C2E1FF]/80 uppercase font-light border-l border-[#C2E1FF]/30 pl-4 py-6">
               S Y S M I C O N   D O S S I E R   2 0 2 6
             </span>
           </div>
@@ -152,40 +152,41 @@
         <!-- Flecha Siguiente (›) -->
         <button *ngIf="p.images && p.images.length > 1"
                 (click)="siguienteImagen(); $event.stopPropagation()" 
-                class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full bg-black/80 hover:bg-wood-accent hover:text-black border border-white/20 text-white text-3xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
+                class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full bg-[#002345]/80 hover:bg-[#C2E1FF] hover:text-[#002345] border border-[#C2E1FF]/30 text-white text-3xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
           <span class="group-hover:translate-x-0.5 transition-transform">›</span>
         </button>
 
       </div>
 
       <!-- Tira Inferior de Miniaturas Limpias (h-24) -->
-      <div *ngIf="p.images && p.images.length > 1" class="h-24 bg-[#050505] border-t border-white/10 px-8 py-3 flex items-center justify-center gap-3.5 overflow-x-auto z-30 shrink-0">
+      <div *ngIf="p.images && p.images.length > 1" class="h-24 bg-[#002345] border-t border-white/10 px-8 py-3 flex items-center justify-center gap-3.5 overflow-x-auto z-30 shrink-0">
         <div *ngFor="let m of p.images; let idx = index" 
              (click)="seleccionarImagen(idx)"
              [ngClass]="{
-               'border-wood-accent scale-105 opacity-100 ring-2 ring-wood-accent/50 shadow-gold': currentImageIndex() === idx,
+               'border-[#C2E1FF] scale-105 opacity-100 ring-2 ring-[#C2E1FF]/50 shadow-lg': currentImageIndex() === idx,
                'border-white/15 opacity-40 hover:opacity-85 hover:scale-100': currentImageIndex() !== idx
              }"
              class="w-20 h-16 rounded-lg overflow-hidden border-2 cursor-pointer transition-all shrink-0 relative group">
           <img [src]="m" [alt]="p.title + ' miniatura ' + idx" class="w-full h-full object-cover">
-          <div *ngIf="currentImageIndex() === idx" class="absolute bottom-0 inset-x-0 h-1 bg-wood-accent"></div>
+          <div *ngIf="currentImageIndex() === idx" class="absolute bottom-0 inset-x-0 h-1 bg-[#C2E1FF]"></div>
         </div>
       </div>
 
     </div>
 
     <!-- COLUMNA DERECHA (30%): COMPACTA, GARANTIZADO CERO SCROLL, LOOK CARO Y SOFISTICADO -->
-    <div class="lg:w-[30%] h-[60vh] lg:h-full bg-[#0a0a0a] p-6 lg:p-8 overflow-hidden flex flex-col justify-between text-left">
+    <!-- COLUMNA DERECHA (30%): COMPACTA, GARANTIZADO CERO SCROLL, LOOK CARO Y SOFISTICADO -->
+    <div class="lg:w-[30%] h-[60vh] lg:h-full bg-[#001A33] p-6 lg:p-8 overflow-hidden flex flex-col justify-between text-left border-l border-white/10">
       
       <!-- Encabezado Ficha y Título -->
       <div class="shrink-0">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-wood-accent/10 border border-wood-accent/30 text-[9px] font-mono text-wood-accent tracking-[0.25em] uppercase mb-2">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C2E1FF]/15 border border-[#C2E1FF]/40 text-[9px] font-mono text-[#C2E1FF] tracking-[0.25em] uppercase mb-2">
           <span>OBRA MAESTRA VIP</span>
         </div>
         <h2 class="font-serif text-3xl lg:text-4xl font-light text-white uppercase tracking-[0.1em] leading-tight drop-shadow-md truncate">
           {{ p.title }}
         </h2>
-        <p class="font-serif italic text-xs lg:text-sm text-wood-light mt-1 font-normal leading-snug line-clamp-2">
+        <p class="font-serif italic text-xs lg:text-sm text-[#C2E1FF] mt-1 font-normal leading-snug line-clamp-2">
           "{{ p.subtitle }}"
         </p>
       </div>
@@ -194,7 +195,7 @@
       <div class="grid grid-cols-2 gap-y-3 gap-x-4 py-3 border-y border-white/10 my-3 shrink-0">
         <div>
           <span class="text-white/40 font-mono text-[9px] uppercase tracking-[0.2em] block">ÁREA</span>
-          <span class="font-serif text-xl lg:text-2xl font-light text-white tracking-wider">580 <span class="text-[10px] font-mono text-wood-accent">M²</span></span>
+          <span class="font-serif text-xl lg:text-2xl font-light text-white tracking-wider">580 <span class="text-[10px] font-mono text-[#C2E1FF]">M²</span></span>
         </div>
         <div>
           <span class="text-white/40 font-mono text-[9px] uppercase tracking-[0.2em] block">ENTREGA</span>
@@ -206,7 +207,7 @@
         </div>
         <div>
           <span class="text-white/40 font-mono text-[9px] uppercase tracking-[0.2em] block">SISTEMA</span>
-          <span class="font-sans text-[11px] font-bold text-wood-accent tracking-widest uppercase block">Llave en Mano</span>
+          <span class="font-sans text-[11px] font-bold text-[#C2E1FF] tracking-widest uppercase block">Llave en Mano</span>
         </div>
       </div>
 
@@ -215,20 +216,20 @@
         <p class="text-white/85 font-sans text-xs leading-relaxed font-light tracking-wide line-clamp-3">
           Arquitectura residencial de alto nivel con voladizos estructurales sin apoyos intermedios. Integración perfecta entre concreto aparente, madera noble de teca e iluminación bioclimática.
         </p>
-        <div class="flex items-center gap-2.5 text-xs text-white/90 font-sans tracking-wide bg-white/[0.02] p-2.5 rounded-lg border border-white/5 line-clamp-1">
-          <span class="w-1.5 h-1.5 rounded-full bg-wood-accent shrink-0"></span>
+        <div class="flex items-center gap-2.5 text-xs text-white/90 font-sans tracking-wide bg-white/[0.04] p-2.5 rounded-lg border border-[#C2E1FF]/20 line-clamp-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#C2E1FF] shrink-0"></span>
           <span class="font-medium truncate">Estructura y volumetría suspendida sobre el paisaje</span>
         </div>
       </div>
 
       <!-- Botón de Asesoría VIP Inferior (Siempre visible abajo) -->
       <div class="pt-3 border-t border-white/10 mt-auto shrink-0 space-y-2">
-        <a routerLink="/cotiza-con-nosotros" [queryParams]="{proyecto: p.title}" (click)="cerrarGaleria()" class="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-wood-accent via-wood-light to-wood-accent text-black font-sans text-xs tracking-[0.2em] font-extrabold uppercase transition-all shadow-gold hover:scale-[1.02] flex items-center justify-center gap-2 cursor-pointer">
+        <a routerLink="/cotiza-con-nosotros" [queryParams]="{proyecto: p.title}" (click)="cerrarGaleria()" class="w-full py-3.5 px-6 rounded-full bg-[#C2E1FF] hover:bg-white text-[#002345] font-sans text-xs tracking-[0.2em] font-extrabold uppercase transition-all shadow-lg hover:scale-[1.02] flex items-center justify-center gap-2 cursor-pointer">
           <span>SOLICITAR ASESORÍA PRIVADA</span>
           <span class="text-sm font-black">→</span>
         </a>
         <div class="text-center">
-          <span class="text-[9px] font-mono text-white/40 tracking-[0.2em] uppercase">SYSMICON ARCHITECTS • MEDELLÍN</span>
+          <span class="text-[9px] font-mono text-[#C2E1FF]/60 tracking-[0.2em] uppercase">SYSMICON ARCHITECTS • MEDELLÍN</span>
         </div>
       </div>
 
@@ -238,13 +239,13 @@
 </div>
 
 <!-- ===== PANTALLA COMPLETA LIGHTBOX EXPANDIDA ===== -->
-<div *ngIf="activeLightboxImage() as lbImg" class="fixed inset-0 z-[100000] flex items-center justify-center p-4 md:p-8 select-none animate-lightbox-backdrop" (click)="cerrarLightbox()">
-  <button (click)="cerrarLightbox(); $event.stopPropagation()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 flex items-center justify-center text-white text-lg transition-colors cursor-pointer z-50">
+<div *ngIf="activeLightboxImage() as lbImg" class="fixed inset-0 z-[100000] flex items-center justify-center p-4 md:p-8 select-none animate-lightbox-backdrop bg-[#002345]/95" (click)="cerrarLightbox()">
+  <button (click)="cerrarLightbox(); $event.stopPropagation()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 border border-[#C2E1FF]/40 hover:bg-[#C2E1FF] hover:text-[#002345] flex items-center justify-center text-white text-lg transition-colors cursor-pointer z-50">
     ✕
   </button>
   <div class="relative max-w-[95vw] max-h-[90vh] flex items-center justify-center animate-lightbox-image" (click)="$event.stopPropagation()">
-    <img [src]="lbImg" alt="Vista ampliada" class="w-auto h-auto max-w-[95vw] max-h-[90vh] object-contain rounded-lg shadow-2xl border border-white/10">
-    <div class="absolute -bottom-10 left-0 right-0 text-center text-xs text-gray-400 tracking-wider">
+    <img [src]="lbImg" alt="Vista ampliada" class="w-auto h-auto max-w-[95vw] max-h-[90vh] object-contain rounded-lg shadow-2xl border border-[#C2E1FF]/30">
+    <div class="absolute -bottom-10 left-0 right-0 text-center text-xs text-[#C2E1FF] tracking-wider">
       <span>Sysmicon Studio — Visualizador de Renderizado HD</span>
     </div>
   </div>

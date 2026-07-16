@@ -1,35 +1,35 @@
 .config-banner {
-  background: #080808;
+  background: #FFFFFF;
 }
 
 .banner-card-luxury {
   padding: 4rem 2rem;
   border-radius: 20px;
-  background: #030303; /* Negro puro ultra profundo */
-  border: 1.5px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.95);
+  background: #FFFFFF; /* Tarjeta blanca elegante */
+  border: 1.5px solid rgba(0, 35, 69, 0.12);
+  box-shadow: 0 25px 65px rgba(0, 35, 69, 0.08);
   transition: all var(--transition-smooth);
 }
 
 @media (min-width: 1024px) {
   .banner-card-luxury {
-    padding: 6.5rem 5rem; /* Alto incrementado */
+    padding: 6.5rem 5rem;
   }
 }
 
 .banner-card-luxury:hover {
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow: 0 45px 95px rgba(0, 0, 0, 1), 0 0 40px rgba(255, 255, 255, 0.03);
+  border-color: rgba(0, 35, 69, 0.25);
+  box-shadow: 0 35px 85px rgba(0, 35, 69, 0.13), 0 0 40px rgba(76, 122, 166, 0.05);
   transform: scale(1.01);
 }
 
 /* Efecto hover interactivo sobre trazos de plano */
-.banner-card-luxury:hover .absolute.border-white\/20 {
-  border-color: #FFFFFF;
+.banner-card-luxury:hover .absolute.border-black\/20 {
+  border-color: #002345;
 }
 
-.banner-card-luxury:hover .absolute.bg-white\/\[0\.06\] {
-  background-color: rgba(255, 255, 255, 0.15);
+.banner-card-luxury:hover .absolute.bg-black\/\[0\.06\] {
+  background-color: rgba(0, 35, 69, 0.15);
 }
 
 /* Micro-interacciones elegantes en los pasos (Steps) */
@@ -40,34 +40,34 @@
 
 .step-item:hover {
   transform: translateX(8px);
-  background: rgba(255, 255, 255, 0.08) !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
+  background: #F4F8FC !important;
+  border-color: #4C7AA6 !important;
+  box-shadow: 0 12px 28px rgba(0, 35, 69, 0.08);
 }
 
 .step-item:hover .step-num {
-  background: #FFFFFF !important;
-  color: #000000 !important;
+  background: #002345 !important;
+  color: #FFFFFF !important;
   transform: scale(1.1);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 15px rgba(0, 35, 69, 0.2);
 }
 
 .step-item:hover h4 {
-  color: #FFFFFF !important;
+  color: #002345 !important;
 }
 
 .step-item:hover p {
-  color: rgba(255, 255, 255, 0.8) !important;
+  color: #1A1A1A !important;
 }
 
-/* High-Fashion Architectural CTA Button (Diseño Blanco de Alto Contraste) */
+/* High-Fashion Architectural CTA Button (Diseño Dark Blue de Alto Contraste sobre Tarjeta Blanca) */
 .cta-architect-btn {
   position: relative;
   display: inline-block;
-  background: #FFFFFF; /* Botón blanco */
-  border: 1px solid #FFFFFF;
+  background: #002345; /* Botón azul marino/negro sobre fondo blanco */
+  border: 1px solid #002345;
   border-radius: 14px;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 12px 35px rgba(0, 35, 69, 0.25);
   transition: all var(--transition-smooth);
   text-decoration: none;
   overflow: hidden;
@@ -77,14 +77,14 @@
   content: '';
   position: absolute;
   top: 0; left: -100%; width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.05), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
   transition: left 0.6s ease;
   pointer-events: none;
 }
 
 .cta-architect-btn:hover {
   transform: translateY(-4px) scale(1.02);
-  border-color: #E5E5E5;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(255, 255, 255, 0.15);
-  background: #E5E5E5; /* Cambio sutil en hover */
+  border-color: #001A33;
+  box-shadow: 0 20px 50px rgba(0, 35, 69, 0.35), 0 0 30px rgba(194, 225, 255, 0.3);
+  background: #001A33;
 }

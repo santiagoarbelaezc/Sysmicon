@@ -34,8 +34,14 @@
 /* Story Showcase */
 .story-grid {
   align-items: center;
-  gap: 4rem;
-  margin-bottom: 4rem;
+  gap: 4.5rem;
+  margin-bottom: 5rem;
+}
+
+@media (min-width: 1024px) {
+  .story-grid {
+    gap: 7rem;
+  }
 }
 
 .story-content .txt {
@@ -75,6 +81,8 @@
   overflow: hidden;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 480px;
+  height: 100%;
 }
 
 .story-visual img {
@@ -297,7 +305,13 @@
 /* Team */
 .team-grid {
   gap: 2.5rem;
-  margin-top: 3rem;
+  margin-top: 3.5rem;
+}
+
+@media (min-width: 1024px) {
+  .team-grid {
+    gap: 3.5rem;
+  }
 }
 
 .team-card {

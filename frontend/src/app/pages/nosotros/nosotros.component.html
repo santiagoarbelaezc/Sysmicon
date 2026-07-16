@@ -1,5 +1,5 @@
 <div class="nosotros-page section-padding">
-  <div class="container">
+  <div class="w-full max-w-[1800px] mx-auto px-6 sm:px-10 md:px-16 lg:px-20 xl:px-24">
     
     <!-- Hero Header -->
     <div class="page-header text-center">
@@ -8,7 +8,7 @@
         <span>Identidad & Filosofía</span>
         <span class="tag-line"></span>
       </div>
-      <h1 class="title-xl font-serif font-black tracking-tight">
+      <h1 class="title-xl font-serif tracking-tight">
         Diseño, rigor y <span class="text-accent font-serif">autenticidad</span>
       </h1>
       <p class="subtitle mx-auto">
@@ -19,7 +19,7 @@
     <!-- Story Showcase Section -->
     <div class="story-grid grid-2">
       <div class="story-content">
-        <h2 class="title-md font-serif font-bold tracking-tight">Nuestra Historia: 15 Años de Tradición Arquitectónica</h2>
+        <h2 class="title-md font-serif tracking-tight">Nuestra Historia: 15 Años de Tradición Arquitectónica</h2>
         <div class="divider-wood"></div>
         <p class="txt">
           Sysmicon nació con una visión clara: elevar los estándares de la arquitectura residencial en nuestra región, combinando una sensibilidad de diseño internacional con el respeto por las técnicas constructivas locales y los materiales nobles de nuestro entorno.
@@ -50,14 +50,14 @@
       <!-- Rejilla o cuadrícula arquitectónica sutil de fondo -->
       <div class="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
 
-      <div class="w-full px-6 md:px-12 lg:px-16 relative z-10">
+      <div class="w-full px-2 sm:px-6 relative z-10">
         <!-- Título y Tag de la sección -->
         <div class="timeline-header mb-8 text-center md:text-left">
           <div class="section-tag font-sans text-left justify-center md:justify-start">
             <span class="tag-line"></span>
             <span>Trayectoria Histórica</span>
           </div>
-          <h2 class="font-serif text-2xl md:text-3xl text-white mt-2">
+          <h2 class="font-serif text-3xl md:text-4xl text-white mt-2 font-normal">
             15 años trazando la evolución espacial
           </h2>
         </div>
@@ -84,7 +84,7 @@
 
               <!-- Tarjeta técnica detallada del hito -->
               <div class="node-card bg-[#111] border border-white/10 p-4 rounded-xl max-w-[240px] md:max-w-[280px] shadow-xl text-left active-card">
-                <h3 class="font-serif text-sm text-white mb-1.5 font-bold">{{ milestone.titulo }}</h3>
+                <h3 class="font-serif text-base text-white mb-1.5 font-normal">{{ milestone.titulo }}</h3>
                 <p class="text-[11px] text-gray-400 leading-relaxed font-sans">{{ milestone.desc }}</p>
               </div>
             </div>
@@ -96,20 +96,20 @@
 
     <!-- Methodology Section (Diseño Nuestros Servicios con Fondo Blanco) -->
     <section class="methodology-section py-16 md:py-24 bg-[#FAFAFA] border-t border-b border-black/5 text-gray-900">
-      <div class="container mb-12">
+      <div class="w-full max-w-[1800px] mx-auto px-6 md:px-12 lg:px-20 mb-14">
         <div class="section-header text-center">
           <div class="section-tag font-sans justify-center">
             <span class="tag-line"></span>
             <span>Metodología</span>
             <span class="tag-line"></span>
           </div>
-          <h2 class="title-lg font-serif text-gray-900">El Ciclo Constructivo <span class="text-accent font-serif">Sysmicon</span></h2>
+          <h2 class="title-lg font-serif text-gray-900 font-normal">El Ciclo Constructivo <span class="text-accent font-serif">Sysmicon</span></h2>
           <div class="divider-wood mx-auto"></div>
           <p class="subtitle mx-auto text-gray-600 max-w-xl">Nuestra metodología paso a paso para garantizar la excelencia desde la primera línea en el plano hasta el momento de habitar tu hogar.</p>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 w-full max-w-[1800px] mx-auto px-6 md:px-12 lg:px-20">
         <div *ngFor="let m of pilaresMetodologia; let i = index" class="method-card" [class.card-alt]="i % 2 === 1">
           <!-- Trazos esquineros decorativos arquitectónicos -->
           <div class="arch-plan-box-top"></div>
@@ -142,12 +142,12 @@
     <!-- Leadership Team -->
     <section class="team-section section-padding">
       <div class="section-header text-center">
-        <div class="section-tag font-sans">
+        <div class="section-tag font-sans justify-center">
           <span class="tag-line"></span>
           <span>Talento Senior</span>
           <span class="tag-line"></span>
         </div>
-        <h2 class="title-lg font-serif">Dirección <span class="text-accent font-serif">Arquitectónica</span></h2>
+        <h2 class="title-lg font-serif font-normal">Dirección <span class="text-accent font-serif">Arquitectónica</span></h2>
         <div class="divider-wood mx-auto"></div>
         <p class="subtitle mx-auto">Conoce a los profesionales senior que dirigen e impulsan cada uno de nuestros proyectos residenciales.</p>
       </div>
@@ -167,18 +167,18 @@
     </section>
 
     <!-- Bottom CTA (Diseño Blanco Tipo Ficha de Servicios) -->
-    <div class="team-cta text-center relative overflow-visible bg-white text-gray-900 border border-black/5 rounded-2xl shadow-xl max-w-4xl mx-auto p-8 md:p-12 my-12">
+    <div class="team-cta text-center relative overflow-visible bg-white text-gray-900 border border-black/5 rounded-2xl shadow-xl w-full max-w-[1500px] mx-auto p-10 md:p-16 my-14">
       <!-- Trazos esquineros decorativos arquitectónicos -->
       <div class="arch-plan-box-top"></div>
       <div class="arch-plan-box-bottom"></div>
       <div class="arch-corner-line"></div>
 
-      <h2 class="title-md font-serif text-gray-900 mb-4">¿Quieres conversar directamente con nuestro equipo de dirección?</h2>
-      <p class="mx-auto text-gray-600 text-sm md:text-base max-w-xl mb-8 leading-relaxed">
+      <h2 class="title-md font-serif text-gray-900 mb-4 font-normal">¿Quieres conversar directamente con nuestro equipo de dirección?</h2>
+      <p class="mx-auto text-gray-600 text-base md:text-lg max-w-2xl mb-8 leading-relaxed">
         Agenda una sesión de exploración arquitectónica y evaluemos el potencial de tu lote.
       </p>
       
-      <a routerLink="/contacto" class="inline-flex items-center gap-3 bg-[#111] hover:bg-wood-accent text-white py-3.5 px-8 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg active:scale-95">
+      <a routerLink="/contacto" class="inline-flex items-center gap-3 bg-[#111] hover:bg-wood-accent text-white py-4 px-10 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg active:scale-95">
         <span>Agendar Consulta con Dirección</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>

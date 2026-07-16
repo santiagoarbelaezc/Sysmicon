@@ -211,26 +211,26 @@ img {
 
 h1, h2, h3, h4, .font-serif {
   font-family: var(--font-serif);
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.15;
   letter-spacing: -0.025em;
 }
 
 .title-xl {
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 700;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 400;
   letter-spacing: -0.035em;
 }
 
 .title-lg {
-  font-size: clamp(2rem, 3.5vw, 3.2rem);
-  font-weight: 600;
+  font-size: clamp(2.3rem, 4.2vw, 3.8rem);
+  font-weight: 400;
   letter-spacing: -0.025em;
 }
 
 .title-md {
-  font-size: clamp(1.4rem, 2vw, 2rem);
-  font-weight: 600;
+  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+  font-weight: 400;
   letter-spacing: -0.02em;
 }
 

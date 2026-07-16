@@ -10,15 +10,15 @@
       
       <!-- COLUMNA IZQUIERDA: VIDEO ARQUITECTÓNICO EDGE-TO-EDGE Y OSCURO (Cols 1-8) -->
       <div class="lg:col-span-8 relative flex flex-col justify-center overflow-hidden bg-black min-h-[460px] lg:min-h-[calc(100vh-5.5rem)] group" data-aos="fade-right" data-aos-duration="1000">
-        <!-- Reproductor de Video en Gran Formato y Oscurecido -->
-        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover transform scale-[1.01] transition-transform duration-1000 group-hover:scale-[1.03] brightness-[0.6] contrast-[1.12]">
+        <!-- Reproductor de Video en Gran Formato (con oscuridad balanceada y clara) -->
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover transform scale-[1.01] transition-transform duration-1000 group-hover:scale-[1.03] brightness-[0.82] contrast-[1.06]">
           <source src="assets/videos/video-sysmicon3d.mp4" type="video/mp4">
           Tu navegador no soporta el formato de video.
         </video>
 
-        <!-- Overlays arquitectónicos para oscurecimiento profundo y fusión hacia el formulario -->
-        <div class="absolute inset-0 bg-gradient-to-r from-black/40 via-black/45 to-[#000000] pointer-events-none z-10"></div>
-        <div class="absolute inset-0 bg-black/45 pointer-events-none z-10 transition-opacity duration-700 group-hover:opacity-85"></div>
+        <!-- Overlays arquitectónicos para transición suave hacia el formulario (más claros en el centro/izquierda) -->
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-black/15 to-[#000000] pointer-events-none z-10"></div>
+        <div class="absolute inset-0 bg-black/20 pointer-events-none z-10 transition-opacity duration-700 group-hover:opacity-65"></div>
 
         <!-- Etiqueta técnica CAD flotante sutil en la esquina superior izquierda -->
         <div class="absolute top-6 left-8 z-20 pointer-events-none hidden md:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-[10px] font-mono tracking-[0.2em] text-white/70 uppercase shadow-lg">

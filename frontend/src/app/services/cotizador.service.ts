@@ -11,28 +11,28 @@ export class CotizadorService {
       id: 'minimalista',
       nombre: 'Minimalista Puro',
       descripcion: 'Volumetría limpia, líneas ortogonales, grandes claros en concreto blanco y ventanales sin marcos visibles.',
-      imagen: 'assets/images/plano1.png',
+      imagen: '/assets/images/plano1.png',
       precioBaseM2: 1450
     },
     {
       id: 'nordico-moderno',
       nombre: 'Nórdico Cálido',
       descripcion: 'Fusión de arquitectura nórdica con materiales locales: revestimientos abundantes en madera noble, piedra y chimeneas de leña.',
-      imagen: 'assets/images/plano2.png',
+      imagen: '/assets/images/plano2.png',
       precioBaseM2: 1580
     },
     {
       id: 'contemporaneo-villa',
       nombre: 'Villa Contemporánea',
       descripcion: 'Grandes luces estructurales, aperturas integrales al paisaje, piscinas infinitas y transiciones fluidas interior-exterior.',
-      imagen: 'assets/images/plano3.png',
+      imagen: '/assets/images/plano3.png',
       precioBaseM2: 1720
     },
     {
       id: 'mediterraneo-zen',
       nombre: 'Mediterráneo Zen',
       descripcion: 'Espacios introspectivos con patios interiores de agua y vegetación, muros estucados en tonos cálidos y pérgolas de madera.',
-      imagen: 'assets/images/plano4.png',
+      imagen: '/assets/images/plano4.png',
       precioBaseM2: 1520
     }
   ]);

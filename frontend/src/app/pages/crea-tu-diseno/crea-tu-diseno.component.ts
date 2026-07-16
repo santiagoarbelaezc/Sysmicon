@@ -159,40 +159,40 @@ export class CreaTuDisenoComponent implements OnInit, OnDestroy {
   // Catálogo completo de bloques CAD en blanco sobre transparente/negro
   readonly bloquesCAD: BloqueCAD[] = [
     // Alcobas
-    { id: 'alc-1', nombre: 'Alcoba Principal Master Suite', categoria: 'alcobas', imagen: 'assets/images/arquitectura/alcobas/alcoba-principal.png', areaM2: 45, precioUSD: 65000 },
-    { id: 'alc-2', nombre: 'Alcoba Secundaria Doble', categoria: 'alcobas', imagen: 'assets/images/arquitectura/alcobas/alcoba2.png', areaM2: 25, precioUSD: 35000 },
-    { id: 'alc-3', nombre: 'Alcoba Individual / Huéspedes', categoria: 'alcobas', imagen: 'assets/images/arquitectura/alcobas/alcoba3.png', areaM2: 20, precioUSD: 28000 },
-    { id: 'alc-4', nombre: 'Walk-in Closet & Estudio', categoria: 'alcobas', imagen: 'assets/images/arquitectura/alcobas/alcoba4.png', areaM2: 30, precioUSD: 42000 },
+    { id: 'alc-1', nombre: 'Alcoba Principal Master Suite', categoria: 'alcobas', imagen: '/assets/images/arquitectura/alcobas/alcoba-principal.png', areaM2: 45, precioUSD: 65000 },
+    { id: 'alc-2', nombre: 'Alcoba Secundaria Doble', categoria: 'alcobas', imagen: '/assets/images/arquitectura/alcobas/alcoba2.png', areaM2: 25, precioUSD: 35000 },
+    { id: 'alc-3', nombre: 'Alcoba Individual / Huéspedes', categoria: 'alcobas', imagen: '/assets/images/arquitectura/alcobas/alcoba3.png', areaM2: 20, precioUSD: 28000 },
+    { id: 'alc-4', nombre: 'Walk-in Closet & Estudio', categoria: 'alcobas', imagen: '/assets/images/arquitectura/alcobas/alcoba4.png', areaM2: 30, precioUSD: 42000 },
     
     // Área Común
-    { id: 'com-1', nombre: 'Sala Principal & Comedor', categoria: 'area-comun', imagen: 'assets/images/arquitectura/area-comun/comun1.png', areaM2: 60, precioUSD: 85000 },
-    { id: 'com-2', nombre: 'Estar de TV / Lounge', categoria: 'area-comun', imagen: 'assets/images/arquitectura/area-comun/comun2.png', areaM2: 35, precioUSD: 48000 },
-    { id: 'com-3', nombre: 'Salón Social & Eventos', categoria: 'area-comun', imagen: 'assets/images/arquitectura/area-comun/comun3.png', areaM2: 50, precioUSD: 70000 },
+    { id: 'com-1', nombre: 'Sala Principal & Comedor', categoria: 'area-comun', imagen: '/assets/images/arquitectura/area-comun/comun1.png', areaM2: 60, precioUSD: 85000 },
+    { id: 'com-2', nombre: 'Estar de TV / Lounge', categoria: 'area-comun', imagen: '/assets/images/arquitectura/area-comun/comun2.png', areaM2: 35, precioUSD: 48000 },
+    { id: 'com-3', nombre: 'Salón Social & Eventos', categoria: 'area-comun', imagen: '/assets/images/arquitectura/area-comun/comun3.png', areaM2: 50, precioUSD: 70000 },
     
     // Baños
-    { id: 'ban-1', nombre: 'Baño Principal con Tina', categoria: 'bano', imagen: 'assets/images/arquitectura/bano/bano1.png', areaM2: 12, precioUSD: 24000 },
-    { id: 'ban-2', nombre: 'Baño Social / Auxiliar', categoria: 'bano', imagen: 'assets/images/arquitectura/bano/bano2.png', areaM2: 6, precioUSD: 12000 },
+    { id: 'ban-1', nombre: 'Baño Principal con Tina', categoria: 'bano', imagen: '/assets/images/arquitectura/bano/bano1.png', areaM2: 12, precioUSD: 24000 },
+    { id: 'ban-2', nombre: 'Baño Social / Auxiliar', categoria: 'bano', imagen: '/assets/images/arquitectura/bano/bano2.png', areaM2: 6, precioUSD: 12000 },
     
     // Cocina
-    { id: 'coc-1', nombre: 'Cocina Integral con Isla Gourmet', categoria: 'cocina', imagen: 'assets/images/arquitectura/cocina/cocina1.png', areaM2: 35, precioUSD: 58000 },
+    { id: 'coc-1', nombre: 'Cocina Integral con Isla Gourmet', categoria: 'cocina', imagen: '/assets/images/arquitectura/cocina/cocina1.png', areaM2: 35, precioUSD: 58000 },
     
     // Columnas
-    { id: 'col-1', nombre: 'Columna Circular Estructural', categoria: 'columnas', imagen: 'assets/images/arquitectura/columnas/circular.png', areaM2: 4, precioUSD: 6000 },
-    { id: 'col-2', nombre: 'Columna Cuadrada de Concreto', categoria: 'columnas', imagen: 'assets/images/arquitectura/columnas/cuadrada.png', areaM2: 4, precioUSD: 6000 },
-    { id: 'col-3', nombre: 'Columna / Muro Rectangular', categoria: 'columnas', imagen: 'assets/images/arquitectura/columnas/rectangular.png', areaM2: 6, precioUSD: 8500 },
+    { id: 'col-1', nombre: 'Columna Circular Estructural', categoria: 'columnas', imagen: '/assets/images/arquitectura/columnas/circular.png', areaM2: 4, precioUSD: 6000 },
+    { id: 'col-2', nombre: 'Columna Cuadrada de Concreto', categoria: 'columnas', imagen: '/assets/images/arquitectura/columnas/cuadrada.png', areaM2: 4, precioUSD: 6000 },
+    { id: 'col-3', nombre: 'Columna / Muro Rectangular', categoria: 'columnas', imagen: '/assets/images/arquitectura/columnas/rectangular.png', areaM2: 6, precioUSD: 8500 },
     
     // Estacionamiento
-    { id: 'est-1', nombre: 'Garaje Doble Cubierto', categoria: 'estacionamiento', imagen: 'assets/images/arquitectura/estacionamiento/congarage.png', areaM2: 40, precioUSD: 38000 },
-    { id: 'est-2', nombre: 'Plaza de Estacionamiento Abierta', categoria: 'estacionamiento', imagen: 'assets/images/arquitectura/estacionamiento/singarage.png', areaM2: 25, precioUSD: 18000 },
+    { id: 'est-1', nombre: 'Garaje Doble Cubierto', categoria: 'estacionamiento', imagen: '/assets/images/arquitectura/estacionamiento/congarage.png', areaM2: 40, precioUSD: 38000 },
+    { id: 'est-2', nombre: 'Plaza de Estacionamiento Abierta', categoria: 'estacionamiento', imagen: '/assets/images/arquitectura/estacionamiento/singarage.png', areaM2: 25, precioUSD: 18000 },
     
     // Muros
-    { id: 'mur-1', nombre: 'Muro de Contención / Perimetral', categoria: 'muro', imagen: 'assets/images/arquitectura/muro/muro-contencion.png', areaM2: 15, precioUSD: 22000 },
-    { id: 'mur-2', nombre: 'Muro Divisorio Interno', categoria: 'muro', imagen: 'assets/images/arquitectura/muro/muro.png', areaM2: 8, precioUSD: 10000 },
-    { id: 'mur-3', nombre: 'Muro Largo Estructural / Perimetral', categoria: 'muro', imagen: 'assets/images/arquitectura/muro/muro-largo.png', areaM2: 25, precioUSD: 35000 },
+    { id: 'mur-1', nombre: 'Muro de Contención / Perimetral', categoria: 'muro', imagen: '/assets/images/arquitectura/muro/muro-contencion.png', areaM2: 15, precioUSD: 22000 },
+    { id: 'mur-2', nombre: 'Muro Divisorio Interno', categoria: 'muro', imagen: '/assets/images/arquitectura/muro/muro.png', areaM2: 8, precioUSD: 10000 },
+    { id: 'mur-3', nombre: 'Muro Largo Estructural / Perimetral', categoria: 'muro', imagen: '/assets/images/arquitectura/muro/muro-largo.png', areaM2: 25, precioUSD: 35000 },
     
     // Piscina
-    { id: 'pis-1', nombre: 'Jacuzzi Hidromasaje Exterior', categoria: 'piscina', imagen: 'assets/images/arquitectura/piscina/jacuzzi.png', areaM2: 15, precioUSD: 28000 },
-    { id: 'pis-2', nombre: 'Piscina Infinity & Solárium', categoria: 'piscina', imagen: 'assets/images/arquitectura/piscina/piscina.png', areaM2: 55, precioUSD: 75000 }
+    { id: 'pis-1', nombre: 'Jacuzzi Hidromasaje Exterior', categoria: 'piscina', imagen: '/assets/images/arquitectura/piscina/jacuzzi.png', areaM2: 15, precioUSD: 28000 },
+    { id: 'pis-2', nombre: 'Piscina Infinity & Solárium', categoria: 'piscina', imagen: '/assets/images/arquitectura/piscina/piscina.png', areaM2: 55, precioUSD: 75000 }
   ];
 
   // Elementos actualmente colocados en el lienzo CAD

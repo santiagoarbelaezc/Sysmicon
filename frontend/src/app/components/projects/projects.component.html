@@ -1,7 +1,7 @@
 <!-- Portafolio / Proyectos Destacados Section (Premium Split Responsive) -->
 <section id="proyectos" class="portfolio-section bg-[#080808] border-t border-b border-white/5 py-12 md:py-20">
   <div class="container mb-8">
-    <div class="section-header text-center mb-10">
+    <div class="section-header text-center mb-10" data-aos="fade-up" data-aos-duration="900">
       <div class="section-tag font-sans justify-center mb-4">
         <span class="tag-line bg-gray-600"></span>
         <span class="text-gray-400">Portafolio Exclusivo</span>
@@ -54,11 +54,14 @@
     </div>
   </div>
 
-  <!-- Desktop Side-by-Side View (Visible en pantallas grandes) -->
+  <!-- Desktop Side-by-Side View (Visible en pantallas grandes con animación AOS escalonada) -->
   <div class="portfolio-desktop-section hidden lg:flex w-full h-[95vh] items-stretch overflow-hidden bg-[#0A0A0A] border-t border-b border-white/10 relative">
     <div class="box group relative flex-1 flex items-center justify-center overflow-hidden cursor-pointer border-r border-white/5 transition-all duration-[900ms] ease-[cubic-bezier(0.25,1,0.5,1)] hover:flex-[1.9]" 
-         *ngFor="let item of items" 
-         (click)="abrirGaleria(item)">
+         *ngFor="let item of items; let idx = index" 
+         (click)="abrirGaleria(item)"
+         data-aos="fade-up"
+         [attr.data-aos-delay]="idx * 160"
+         data-aos-duration="1000">
       <img [src]="item.img" [alt]="item.title" class="bg-img w-full h-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105" />
       
       <!-- Nombre de la casa con tipografía elegante y ultra delgada, sin logo ni contenedores -->
@@ -70,8 +73,8 @@
     </div>
   </div>
 
-  <!-- Botón para ir a la Galería de Proyectos (Posicionado abajo de las 4 casas) -->
-  <div class="container mt-12 md:mt-16 text-center">
+  <!-- Botón para ir a la Galería de Proyectos (Posicionado abajo de las 4 casas con animación AOS) -->
+  <div class="container mt-12 md:mt-16 text-center" data-aos="fade-up" data-aos-delay="600" data-aos-duration="800">
     <a routerLink="/proyectos" class="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-white/5 hover:bg-wood-accent hover:text-black border border-white/20 hover:border-wood-accent text-white font-sans text-xs md:text-sm font-bold tracking-[0.25em] uppercase transition-all shadow-2xl group cursor-pointer">
       <span>VER GALERÍA DE PROYECTOS</span>
       <span class="text-wood-accent group-hover:text-black group-hover:translate-x-1.5 transition-transform font-black text-base">→</span>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { ProyectosService } from '../../services/proyectos.service';
 import { Proyecto } from '../../models/proyecto.model';
+import AOS from 'aos';
 
 @Component({
   selector: 'app-proyectos-page',
@@ -40,10 +41,12 @@ export class ProyectosPageComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => AOS.refresh(), 150);
   }
 
   setCategoria(cat: string): void {
     this.categoriaSeleccionada.set(cat);
+    setTimeout(() => AOS.refresh(), 150);
   }
 
   abrirDossier(proyecto: Proyecto): void {

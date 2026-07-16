@@ -1,6 +1,7 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import AOS from 'aos';
 
 export interface PortfolioItem {
   id: string;
@@ -17,7 +18,10 @@ export interface PortfolioItem {
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.css'
 })
-export class ProjectsComponent {
+export class ProjectsComponent implements AfterViewInit {
+  ngAfterViewInit(): void {
+    setTimeout(() => AOS.refresh(), 150);
+  }
   // PROYECTOS PORTAFOLIO EXCLUSIVO SYSMICON
   readonly items: PortfolioItem[] = [
     {

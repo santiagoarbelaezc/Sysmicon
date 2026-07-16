@@ -22,6 +22,9 @@
 
 /* Efectos en Inputs de Formulario */
 input, textarea {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: 0.01em;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -33,6 +36,10 @@ input:focus, textarea:focus {
 
 /* Botón Principal */
 .btn-primary {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   background: #FFFFFF;
   color: #000000;
   border: 1px solid #FFFFFF;

@@ -23,8 +23,13 @@ module.exports = {
         'text-dark-muted': '#555555',
       },
       fontFamily: {
-        serif: ['"Magistral"', '"Inter Tight"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        sans: ['"Magistral"', '"Inter Tight"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        serif: ['"Exo 2"', '"Inter Tight"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        sans: ['"Exo 2"', '"Inter Tight"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+      },
+      letterSpacing: {
+        cad: '0.18em',
+        technical: '0.22em',
+        display: '-0.03em',
       },
       boxShadow: {
         'sm-custom': '0 4px 12px rgba(0, 0, 0, 0.15)',

@@ -79,19 +79,12 @@
         </div>
       </div>
 
-      <!-- Footer CTA y Accesos Rápidos -->
-      <div class="pt-6 border-t border-black/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mt-auto">
-        <a routerLink="/contacto" [queryParams]="{servicio: servicio.titulo}" 
-           class="inline-flex items-center justify-center gap-3 px-7 py-3.5 rounded-lg bg-[#111111] hover:bg-black text-white font-sans text-xs md:text-sm font-bold tracking-[0.12em] uppercase transition-all duration-300 hover:translate-x-1 shadow-md hover:shadow-xl">
+      <!-- Footer CTA -->
+      <div class="pt-6 border-t border-black/10 flex items-center justify-start mt-auto">
+        <a routerLink="/cotiza-con-nosotros" [queryParams]="{servicio: servicio.titulo}" 
+           class="inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-lg bg-[#111111] hover:bg-black text-white font-sans text-xs md:text-sm font-bold tracking-[0.14em] uppercase transition-all duration-300 hover:translate-x-1.5 shadow-md hover:shadow-xl">
           <span>Solicitar Cotización Privada</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
-
-        <!-- Botón secundario al configurador sin mención de CAD -->
-        <a *ngIf="servicio.pilarPrincipal" routerLink="/crea-tu-diseno" 
-           class="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-lg border border-black/15 hover:border-black text-[#111111] font-sans text-xs font-bold tracking-wider uppercase hover:bg-black/5 transition-all">
-          <span>Explorar Configurador</span>
-          <span class="font-mono text-wood-dark">➔</span>
         </a>
       </div>
     </div>

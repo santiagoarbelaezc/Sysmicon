@@ -1,15 +1,15 @@
 export const BRAND_CONFIG = {
   name: 'Sysmicon',
-  tagline: 'Diseñamos hogares',
-  subtagline: 'Versatilidad y excelencia en cada detalle',
-  motto: 'Proyectos para la vida',
-  description: 'Empresa de arquitectura y construcción de alto nivel dedicada a crear espacios habitables extraordinarios con materiales nobles y diseño atemporal.',
+  tagline: 'Diseño & Construcción Integral',
+  subtagline: 'Arquitectura, ingeniería y ejecución sin límites',
+  motto: 'Proyectos para la vida y la industria',
+  description: 'Organización integral que diseña y construye hogares residenciales, fincas campestres, bodegas industriales y proyectos comerciales con rigor técnico y excelencia en cada detalle.',
   established: 2011,
   stats: [
-    { value: '10', label: 'Años de Experiencia' },
-    { value: '30', label: 'Obras Diseñadas' },
+    { value: '10+', label: 'Años de Experiencia' },
+    { value: '50+', label: 'Obras Diseñadas & Construidas' },
     { value: 'Todo', label: 'Colombia' },
-    { value: 'Sobrios', label: 'Diseños Elegantes' }
+    { value: '360°', label: 'Hogares, Fincas y Bodegas' }
   ]
 };
 

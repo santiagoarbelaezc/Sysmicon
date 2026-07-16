@@ -9,11 +9,21 @@
 
   <!-- Elegant Carousel Indicator / Controls (Bottom Right) -->
   <div class="carousel-controls font-sans">
-    <div class="slide-info">
-      <span class="slide-loc">📍 {{ slides[currentSlide()].location }}</span>
-      <span class="slide-title font-serif">{{ slides[currentSlide()].title }}</span>
+    <div class="slide-info-elegant">
+      <!-- Ubicación fina, sutil y espaciada -->
+      <div class="flex items-center justify-end gap-2.5 mb-1.5">
+        <span class="w-4 h-[1px] bg-wood-accent/80"></span>
+        <span class="slide-loc font-mono text-[10px] uppercase tracking-[0.28em] text-white/80">{{ slides[currentSlide()].location }}</span>
+      </div>
+      
+      <!-- Título en Serif ligera y refinada -->
+      <div class="slide-title font-serif text-base md:text-lg font-normal tracking-[0.06em] text-white">
+        {{ slides[currentSlide()].title }}
+      </div>
     </div>
-    <div class="carousel-indicators">
+
+    <!-- Líneas indicadoras minimalistas ultrafinas -->
+    <div class="carousel-indicators mt-3 justify-end">
       <button *ngFor="let slide of slides; let i = index" (click)="setSlide(i)"
         [ngClass]="{'active': currentSlide() === i}" class="indicator-btn" [attr.aria-label]="'Ir a ' + slide.title">
         <span class="progress-bar"></span>
@@ -24,12 +34,11 @@
   <div class="container hero-content flex flex-col items-center justify-center text-center relative z-10">
 
     <h1 class="hero-title font-serif">
-      Diseñamos <span class="text-gradient font-serif">Hogares</span>
+      Diseñamos y <span class="text-gradient font-serif">Construimos</span>
     </h1>
 
-    <p class="hero-subtitle max-w-2xl mx-auto">
-      {{ brand.subtagline }}. Creamos obras residenciales de alto nivel donde la arquitectura moderna, los materiales
-      nobles y la habitabilidad se unen en perfecta armonía.
+    <p class="hero-subtitle max-w-xl mx-auto">
+      Diseño y construcción integral llave en mano para <span class="text-white font-medium">hogares, fincas campestres, bodegas y espacios comerciales</span>.
     </p>
 
     <div class="hero-actions flex flex-wrap items-center justify-center gap-4 my-8">

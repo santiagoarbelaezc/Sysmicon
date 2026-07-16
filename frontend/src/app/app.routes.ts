@@ -11,7 +11,7 @@ import { ProyectosPageComponent } from './pages/proyectos-page/proyectos-page.co
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Sysmicon | Diseño y Construcción de Viviendas' },
-  { path: 'proyectos', component: ProyectosPageComponent, title: 'Galería Editorial de Proyectos | Portafolio Sysmicon' },
+  { path: 'proyectos', component: ProyectosPageComponent, title: 'Galería de Proyectos | Portafolio Sysmicon' },
   { path: 'cotiza-con-nosotros', component: CotizaConNosotrosComponent, title: 'Cotiza con Nosotros | Sysmicon Arquitectura & Construcción' },
   { path: 'crea-tu-diseno', redirectTo: 'cotiza-con-nosotros', pathMatch: 'full' },
   { path: 'nosotros', component: NosotrosComponent, title: 'Nosotros | Filosofía y Arquitectura Sysmicon' },

@@ -29,9 +29,9 @@ export class ProyectosService {
       editorialStyle: 'coral-title',
       barcode: '0 600229402 1',
       imagenesAdicionales: [
-        '/assets/images/casaM/1.png',
-        '/assets/images/casaM/2.png',
-        '/assets/images/casaM/3.png',
+        '/assets/images/imagen6.jpg',
+        '/assets/images/principal.jpg',
+        '/assets/images/imagen1.jpg',
         '/assets/images/casaM/4.png',
         '/assets/images/casaM/5.png',
         '/assets/images/casaM/6.png'
@@ -60,13 +60,13 @@ export class ProyectosService {
       editorialStyle: 'white-bold',
       barcode: '0 600229402 2',
       imagenesAdicionales: [
-        '/assets/images/casaS19/S19-2.png',
+        '/assets/images/casaS19/s19-portada.jpg',
+        '/assets/images/imagen4.jpg',
+        '/assets/images/imagen5.jpg',
         '/assets/images/casaS19/S19-3.png',
-        '/assets/images/casaS19/S19-4.png',
         '/assets/images/casaS19/S19-5.png',
         '/assets/images/casaS19/S19-6.png',
-        '/assets/images/casaS19/S19-7.png',
-        '/assets/images/casaS19/S19-8.png'
+        '/assets/images/casaS19/S19-7.png'
       ]
     },
     {
@@ -93,13 +93,12 @@ export class ProyectosService {
       editorialStyle: 'ribbon-tag',
       barcode: '0 600229402 3',
       imagenesAdicionales: [
+        '/assets/images/casaS23/S23-1.png',
         '/assets/images/casaS23/S23-2.png',
-        '/assets/images/casaS23/S23-3.png',
+        '/assets/images/imagen2.jpg',
         '/assets/images/casaS23/S23-4.png',
         '/assets/images/casaS23/S23-5.png',
-        '/assets/images/casaS23/S23-6.png',
-        '/assets/images/casaS23/S23-7.png',
-        '/assets/images/casaS23/S23-8.png'
+        '/assets/images/casaS23/S23-6.png'
       ]
     },
     {
@@ -125,12 +124,11 @@ export class ProyectosService {
       editorialStyle: 'split-grid',
       barcode: '0 600229402 4',
       imagenesAdicionales: [
-        '/assets/images/casaL/casaL-1.png',
-        '/assets/images/casaL/casaL-2.png',
-        '/assets/images/casaL/casaL-3.png',
-        '/assets/images/casaL/casaL-4.png',
+        '/assets/images/casaL/CasaL-portada.jpg',
+        '/assets/images/imagen3.jpg',
+        '/assets/images/casaL/casaL-6.png',
         '/assets/images/casaL/casaL-5.png',
-        '/assets/images/casaL/casaL-6.png'
+        '/assets/images/casaL/casaL-3.png'
       ]
     },
     {

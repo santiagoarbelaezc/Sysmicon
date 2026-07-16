@@ -24,11 +24,11 @@ export class ProjectsComponent {
       id: 'casaM',
       title: 'CASA M',
       subtitle: 'Geometría minimalista integrada con materiales nobles y luz natural en el Oriente Antioqueño.',
-      img: '/images/imagen6.jpg',
+      img: '/assets/images/imagen6.jpg',
       images: [
-        '/assets/images/casaM/1.png',
-        '/assets/images/casaM/2.png',
-        '/assets/images/casaM/3.png',
+        '/assets/images/imagen6.jpg',
+        '/assets/images/principal.jpg',
+        '/assets/images/imagen1.jpg',
         '/assets/images/casaM/4.png',
         '/assets/images/casaM/5.png',
         '/assets/images/casaM/6.png'
@@ -40,14 +40,13 @@ export class ProjectsComponent {
       subtitle: 'Volumetría suspendida y grandes ventanales con vista panorámica y diseño bioclimático.',
       img: '/assets/images/casaS19/s19-portada.jpg',
       images: [
-        '/assets/images/casaS19/S19-2.png',
+        '/assets/images/casaS19/s19-portada.jpg',
+        '/assets/images/imagen4.jpg',
+        '/assets/images/imagen5.jpg',
         '/assets/images/casaS19/S19-3.png',
-        '/assets/images/casaS19/S19-4.png',
         '/assets/images/casaS19/S19-5.png',
         '/assets/images/casaS19/S19-6.png',
-        '/assets/images/casaS19/S19-7.png',
-        '/assets/images/casaS19/S19-8.png',
-        '/assets/images/casaS19/S19-9.png'
+        '/assets/images/casaS19/S19-7.png'
       ]
     },
     {
@@ -58,12 +57,10 @@ export class ProjectsComponent {
       images: [
         '/assets/images/casaS23/S23-1.png',
         '/assets/images/casaS23/S23-2.png',
-        '/assets/images/casaS23/S23-3.png',
+        '/assets/images/imagen2.jpg',
         '/assets/images/casaS23/S23-4.png',
         '/assets/images/casaS23/S23-5.png',
-        '/assets/images/casaS23/S23-6.png',
-        '/assets/images/casaS23/S23-7.png',
-        '/assets/images/casaS23/S23-8.png'
+        '/assets/images/casaS23/S23-6.png'
       ]
     },
     {
@@ -72,34 +69,11 @@ export class ProjectsComponent {
       subtitle: 'Estructura en concreto a la vista combinada con madera fina y acabados artesanales.',
       img: '/assets/images/casaL/CasaL-portada.jpg',
       images: [
-        '/assets/images/casaL/casaL-1.png',
-        '/assets/images/casaL/casaL-2.png',
-        '/assets/images/casaL/casaL-3.png',
-        '/assets/images/casaL/casaL-4.png',
+        '/assets/images/casaL/CasaL-portada.jpg',
+        '/assets/images/imagen3.jpg',
+        '/assets/images/casaL/casaL-6.png',
         '/assets/images/casaL/casaL-5.png',
-        '/assets/images/casaL/casaL-6.png'
-      ]
-    },
-    {
-      id: 'casa-carmen',
-      title: 'CASA CARMEN',
-      subtitle: 'Fusión entre naturaleza y arquitectura contemporánea con espejos de agua perimetrales.',
-      img: '/images/project-villa.png',
-      images: [
-        '/assets/images/imagen1.jpg',
-        '/assets/images/imagen2.jpg',
-        '/assets/images/imagen3.jpg'
-      ]
-    },
-    {
-      id: 'edificio-gp',
-      title: 'EDIFICIO GP',
-      subtitle: 'Hito de arquitectura residencial vertical y ladrillo noble en La Aguacatala.',
-      img: '/assets/images/principal.jpg',
-      images: [
-        '/assets/images/imagen4.jpg',
-        '/assets/images/imagen5.jpg',
-        '/images/project-roble.png'
+        '/assets/images/casaL/casaL-3.png'
       ]
     }
   ];

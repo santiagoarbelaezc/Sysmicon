@@ -13,7 +13,7 @@
           <span>SYSMICON ARCHITECTURAL DOSSIER</span>
         </div>
         <h1 class="font-serif text-4xl md:text-6xl font-bold tracking-tight uppercase text-white mb-4">
-          Galería Editorial de <span class="text-wood-accent italic">Proyectos</span>
+          Galería de <span class="text-wood-accent italic">Proyectos</span>
         </h1>
         <p class="text-white/60 font-sans text-base md:text-lg max-w-2xl leading-relaxed">
           Obras residenciales, fincas campestres, bodegas e hitos arquitectónicos concebidos y construidos bajo un único liderazgo técnico y financiero.
@@ -193,7 +193,7 @@
             <img *ngIf="modalImages()[currentImageIndex()] as activeImg" 
                  [src]="activeImg" 
                  [alt]="sp.titulo + ' vista 1'" 
-                 class="w-full h-full object-cover filter brightness-95 group-hover:brightness-105 group-hover:scale-105 transition-all duration-[1000ms]">
+                 class="w-full h-full object-cover group-hover:scale-105 transition-all duration-[1000ms]">
             
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none"></div>
             
@@ -212,7 +212,7 @@
           <div *ngIf="modalImages().length > 1" class="hidden md:block md:col-span-4 h-[58vh] rounded-2xl overflow-hidden relative border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.95)] group bg-[#111] self-end mb-6">
             <img [src]="modalImages()[(currentImageIndex() + 1) % modalImages().length]" 
                  [alt]="sp.titulo + ' vista 2'" 
-                 class="w-full h-full object-cover filter brightness-90 group-hover:brightness-100 group-hover:scale-105 transition-all duration-[1000ms]">
+                 class="w-full h-full object-cover group-hover:scale-105 transition-all duration-[1000ms]">
             
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
             
@@ -255,69 +255,58 @@
 
     </div>
 
-    <!-- COLUMNA DERECHA (30%): TEXTO REDUCIDO, TÍTULOS GIGANTES, LOOK CARO Y SOFISTICADO -->
-    <div class="lg:w-[30%] h-full bg-[#0a0a0a] p-8 lg:p-12 overflow-y-auto flex flex-col justify-between space-y-8 text-left">
-      <div class="space-y-8">
-        
-        <!-- Badge y Título Gigante -->
-        <div>
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-wood-accent/10 border border-wood-accent/30 text-[10px] font-mono text-wood-accent tracking-[0.3em] uppercase mb-5">
-            <span>OBRA MAESTRA</span>
-          </div>
-          <h2 class="font-serif text-5xl lg:text-6xl font-extralight text-white uppercase tracking-[0.12em] leading-[0.9] drop-shadow-lg">
-            {{ sp.titulo }}
-          </h2>
-          <p class="font-serif italic text-base lg:text-xl text-wood-light mt-4 font-normal leading-relaxed">
-            "{{ sp.subtitulo }}"
-          </p>
+    <!-- COLUMNA DERECHA (30%): COMPACTA, GARANTIZADO CERO SCROLL, LOOK CARO Y SOFISTICADO -->
+    <div class="lg:w-[30%] h-[60vh] lg:h-full bg-[#0a0a0a] p-6 lg:p-8 overflow-hidden flex flex-col justify-between text-left">
+      
+      <!-- Encabezado Ficha y Título -->
+      <div class="shrink-0">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-wood-accent/10 border border-wood-accent/30 text-[9px] font-mono text-wood-accent tracking-[0.25em] uppercase mb-2">
+          <span>OBRA MAESTRA VIP</span>
         </div>
-
-        <div class="w-full h-[1px] bg-gradient-to-r from-white/20 via-white/5 to-transparent"></div>
-
-        <!-- Cuadro Técnico Minimalista de Lujo (Números Grandes) -->
-        <div class="grid grid-cols-2 gap-y-6 gap-x-6 py-2">
-          <div>
-            <span class="text-white/40 font-mono text-[10px] uppercase tracking-[0.25em] block mb-1">ÁREA</span>
-            <span class="font-serif text-3xl font-light text-white tracking-wider">{{ sp.area }} <span class="text-xs font-mono text-wood-accent">M²</span></span>
-          </div>
-          <div>
-            <span class="text-white/40 font-mono text-[10px] uppercase tracking-[0.25em] block mb-1">ENTREGA</span>
-            <span class="font-serif text-3xl font-light text-white tracking-wider">{{ sp.anio }}</span>
-          </div>
-          <div>
-            <span class="text-white/40 font-mono text-[10px] uppercase tracking-[0.25em] block mb-1">UBICACIÓN</span>
-            <span class="font-sans text-xs font-bold text-white tracking-widest uppercase">{{ sp.ubicacion }}</span>
-          </div>
-          <div>
-            <span class="text-white/40 font-mono text-[10px] uppercase tracking-[0.25em] block mb-1">SISTEMA</span>
-            <span class="font-sans text-xs font-bold text-wood-accent tracking-widest uppercase">Llave en Mano</span>
-          </div>
-        </div>
-
-        <div class="w-full h-[1px] bg-gradient-to-r from-white/20 via-white/5 to-transparent"></div>
-
-        <!-- Párrafo Descriptivo Reducido y Elegante -->
-        <div>
-          <p class="text-white/85 font-sans text-xs lg:text-sm leading-relaxed font-light tracking-wide">
-            {{ sp.descripcion | slice:0:190 }}{{ sp.descripcion.length > 190 ? '...' : '' }}
-          </p>
-        </div>
-
-        <!-- Solo 2 Hitos Clave Concisos -->
-        <div class="space-y-3 pt-1">
-          <div *ngFor="let feat of sp.caracteristicas | slice:0:2" class="flex items-center gap-3 text-xs text-white/90 font-sans tracking-wide bg-white/[0.02] p-3 rounded-xl border border-white/5">
-            <span class="w-2 h-2 rounded-full bg-wood-accent shrink-0"></span>
-            <span class="font-medium">{{ feat }}</span>
-          </div>
-        </div>
-
+        <h2 class="font-serif text-3xl lg:text-4xl font-light text-white uppercase tracking-[0.1em] leading-tight drop-shadow-md truncate">
+          {{ sp.titulo }}
+        </h2>
+        <p class="font-serif italic text-xs lg:text-sm text-wood-light mt-1 font-normal leading-snug line-clamp-2">
+          "{{ sp.subtitulo }}"
+        </p>
       </div>
 
-      <!-- Botón de Asesoría VIP Inferior -->
-      <div class="pt-8 border-t border-white/10 mt-auto space-y-3">
-        <button (click)="solicitarAsesoria(sp)" class="w-full py-4 px-6 rounded-full bg-gradient-to-r from-wood-accent via-wood-light to-wood-accent text-black font-sans text-xs tracking-[0.25em] font-extrabold uppercase transition-all shadow-[0_10px_30px_rgba(217,160,102,0.3)] hover:shadow-[0_15px_40px_rgba(217,160,102,0.5)] hover:scale-[1.02] flex items-center justify-center gap-3 cursor-pointer">
+      <!-- Cuadro Técnico Minimalista de Lujo (Números Grandes) -->
+      <div class="grid grid-cols-2 gap-y-3 gap-x-4 py-3 border-y border-white/10 my-3 shrink-0">
+        <div>
+          <span class="text-white/40 font-mono text-[9px] uppercase tracking-[0.2em] block">ÁREA</span>
+          <span class="font-serif text-xl lg:text-2xl font-light text-white tracking-wider">{{ sp.area }} <span class="text-[10px] font-mono text-wood-accent">M²</span></span>
+        </div>
+        <div>
+          <span class="text-white/40 font-mono text-[9px] uppercase tracking-[0.2em] block">ENTREGA</span>
+          <span class="font-serif text-xl lg:text-2xl font-light text-white tracking-wider">{{ sp.anio }}</span>
+        </div>
+        <div>
+          <span class="text-white/40 font-mono text-[9px] uppercase tracking-[0.2em] block">UBICACIÓN</span>
+          <span class="font-sans text-[11px] font-bold text-white tracking-widest uppercase truncate block">{{ sp.ubicacion }}</span>
+        </div>
+        <div>
+          <span class="text-white/40 font-mono text-[9px] uppercase tracking-[0.2em] block">SISTEMA</span>
+          <span class="font-sans text-[11px] font-bold text-wood-accent tracking-widest uppercase block">Llave en Mano</span>
+        </div>
+      </div>
+
+      <!-- Párrafo Descriptivo y 1 Hito Clave (Todo Ajustado sin Scroll) -->
+      <div class="space-y-2 overflow-hidden flex-1 flex flex-col justify-center">
+        <p class="text-white/85 font-sans text-xs leading-relaxed font-light tracking-wide line-clamp-3">
+          {{ sp.descripcion }}
+        </p>
+        <div *ngIf="sp.caracteristicas && sp.caracteristicas.length > 0" class="flex items-center gap-2.5 text-xs text-white/90 font-sans tracking-wide bg-white/[0.02] p-2.5 rounded-lg border border-white/5 line-clamp-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-wood-accent shrink-0"></span>
+          <span class="font-medium truncate">{{ sp.caracteristicas[0] }}</span>
+        </div>
+      </div>
+
+      <!-- Botón de Asesoría VIP Inferior (Siempre visible abajo) -->
+      <div class="pt-3 border-t border-white/10 mt-auto shrink-0 space-y-2">
+        <button (click)="solicitarAsesoria(sp)" class="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-wood-accent via-wood-light to-wood-accent text-black font-sans text-xs tracking-[0.2em] font-extrabold uppercase transition-all shadow-gold hover:scale-[1.02] flex items-center justify-center gap-2 cursor-pointer">
           <span>SOLICITAR ASESORÍA PRIVADA</span>
-          <span class="text-base font-black">→</span>
+          <span class="text-sm font-black">→</span>
         </button>
         <div class="text-center">
           <span class="text-[9px] font-mono text-white/40 tracking-[0.2em] uppercase">SYSMICON ARCHITECTS • MEDELLÍN</span>

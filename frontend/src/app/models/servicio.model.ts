@@ -6,4 +6,8 @@ export interface Servicio {
   icono: string; // SVG icon path o nombre
   caracteristicas: string[];
   destacado?: boolean;
+  imagen?: string;
+  codigoCad?: string;
+  fase?: string;
+  pilarPrincipal?: boolean;
 }

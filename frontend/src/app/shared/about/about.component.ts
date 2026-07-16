@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { BRAND_CONFIG } from '../../core/app.constants';
+import AOS from 'aos';
 
 @Component({
   selector: 'app-about',
@@ -10,6 +11,12 @@ import { BRAND_CONFIG } from '../../core/app.constants';
   templateUrl: './about.component.html',
   styleUrl: './about.component.css'
 })
-export class AboutComponent {
+export class AboutComponent implements AfterViewInit {
   readonly brand = BRAND_CONFIG;
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      AOS.refresh();
+    }, 150);
+  }
 }

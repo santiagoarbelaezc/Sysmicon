@@ -23,8 +23,8 @@ module.exports = {
         'text-dark-muted': '#555555',
       },
       fontFamily: {
-        serif: ['"Inter Tight"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        sans: ['"Inter Tight"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        serif: ['"Magistral"', '"Inter Tight"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        sans: ['"Magistral"', '"Inter Tight"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       boxShadow: {
         'sm-custom': '0 4px 12px rgba(0, 0, 0, 0.15)',

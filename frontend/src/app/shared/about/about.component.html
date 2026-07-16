@@ -1,51 +1,54 @@
 <section id="nosotros-section" class="about-section section-padding">
-  <div class="w-full max-w-[1750px] mx-auto px-6 md:px-16">
+  <!-- Luz ambiental decorativa flotante -->
+  <div class="about-ambient-glow"></div>
+
+  <div class="w-full max-w-[1750px] mx-auto px-6 md:px-16 relative z-10">
     <div class="about-grid">
       <!-- Left Column: Architectural Image Collage -->
       <div class="about-visuals">
-        <div class="img-wrapper main-img glass-card">
+        <div class="img-wrapper main-img glass-card" data-aos="fade-right" data-aos-duration="1000">
           <img src="images/about-studio.png" alt="Estudio de arquitectura y diseño Sysmicon" loading="lazy">
         </div>
-        <div class="img-wrapper accent-img glass-card">
+        <div class="img-wrapper accent-img glass-card" data-aos="zoom-in-up" data-aos-delay="250" data-aos-duration="1000">
           <img src="images/about-detail.png" alt="Detalle de materiales nobles en madera y concreto" loading="lazy">
           <div class="img-badge">
             <span class="val font-serif">100%</span>
             <span class="lbl">Excelencia en Detalle</span>
           </div>
         </div>
-        <div class="wood-accent-box"></div>
+        <div class="wood-accent-box" data-aos="fade-up-right" data-aos-delay="400" data-aos-duration="1000"></div>
       </div>
 
       <!-- Right Column: Story & Philosophy -->
       <div class="about-content">
-        <div class="section-tag font-sans">
+        <div class="section-tag font-sans" data-aos="fade-up" data-aos-delay="100">
           <span class="tag-line"></span>
           <span>Sobre Nosotros</span>
         </div>
 
-        <h2 class="title-lg font-serif">
+        <h2 class="title-lg font-serif" data-aos="fade-up" data-aos-delay="200">
           Arquitectura que trasciende el <span class="text-accent font-serif">tiempo</span> y enaltece la vida
         </h2>
 
-        <div class="divider-wood"></div>
+        <div class="divider-wood" data-aos="fade-up" data-aos-delay="250"></div>
 
-        <p class="about-text lead font-sans">
+        <p class="about-text lead font-sans" data-aos="fade-up" data-aos-delay="300">
           Fundada con la convicción de que cada ser humano merece habitar en un entorno excepcional, <strong>Sysmicon</strong> ha redefinido el estándar del diseño arquitectónico residencial en Colombia y América Latina.
         </p>
 
-        <p class="about-text">
+        <p class="about-text" data-aos="fade-up" data-aos-delay="380">
           Nuestra filosofía se basa en la sobriedad, la funcionalidad armónica y la autenticidad de los materiales. Integramos concreto arquitectónico pulido, maderas nobles de tala responsable y grandes superficies vidriadas que disuelven las fronteras entre el interior y la naturaleza circundante.
         </p>
 
         <!-- Mission / Vision pillars -->
         <div class="pillars-grid">
-          <div class="pillar-box">
+          <div class="pillar-box" data-aos="fade-up" data-aos-delay="450">
             <h3 class="pillar-title font-serif">Misión</h3>
             <p class="pillar-desc">
               Diseñar y construir residencias extraordinarias que reflejen la esencia e historia de cada familia, garantizando rigor técnico, presupuestal y una belleza imperecedera.
             </p>
           </div>
-          <div class="pillar-box">
+          <div class="pillar-box" data-aos="fade-up" data-aos-delay="550">
             <h3 class="pillar-title font-serif">Filosofía</h3>
             <p class="pillar-desc">
               "Versatilidad y excelencia en cada detalle". Entendemos el diseño no como un adorno exterior, sino como la articulación precisa de luz, espacio, materia y emoción.
@@ -54,7 +57,7 @@
         </div>
 
         <!-- CTA to full About or Contact -->
-        <div class="about-actions">
+        <div class="about-actions" data-aos="fade-up" data-aos-delay="650">
           <a routerLink="/nosotros" class="btn-outline-wood">
             <span>Conoce Nuestra Historia y Equipo</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>

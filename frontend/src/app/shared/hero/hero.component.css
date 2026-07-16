@@ -102,6 +102,7 @@
 }
 
 .slide-title {
+  font-family: var(--font-serif);
   font-size: 0.95rem;
   color: var(--text-primary);
   font-weight: 600;
@@ -193,6 +194,7 @@
 
 /* Title */
 .hero-title {
+  font-family: var(--font-serif);
   font-size: clamp(3rem, 7vw, 5.5rem);
   font-weight: 700;
   line-height: 1.1;
@@ -201,6 +203,7 @@
 }
 
 .hero-subtitle {
+  font-family: var(--font-sans);
   font-size: clamp(1.1rem, 2vw, 1.35rem);
   color: var(--text-secondary);
   line-height: 1.6;
@@ -222,6 +225,7 @@
 }
 
 .btn-primary {
+  font-family: var(--font-sans);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -246,6 +250,7 @@
 }
 
 .btn-secondary {
+  font-family: var(--font-sans);
   display: inline-flex;
   align-items: center;
   justify-content: center;

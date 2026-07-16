@@ -5,6 +5,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoadingService } from './services/loading.service';
 import { filter } from 'rxjs/operators';
+import AOS from 'aos';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +32,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Inicializar AOS para animaciones de scroll profesionales
+    AOS.init({
+      duration: 900,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 80
+    });
+
     // Mostrar pantalla de carga elegante en el primer ingreso al sitio
     this.loadingService.showTemporarily(2200, 'Inicializando Sysmicon Studio...');
 
@@ -40,6 +49,9 @@ export class AppComponent implements OnInit {
       if (!event.urlAfterRedirects?.includes('#')) {
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       }
+      setTimeout(() => {
+        AOS.refresh();
+      }, 250);
     });
   }
 }

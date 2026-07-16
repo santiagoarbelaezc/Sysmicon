@@ -13,6 +13,7 @@
           <a [routerLink]="link.path" 
              routerLinkActive="active" 
              [routerLinkActiveOptions]="{exact: link.path === '/'}"
+             (click)="onNavLinkClick(link)"
              class="nav-link font-sans">
             {{ link.label }}
             <span class="link-underline"></span>
@@ -73,7 +74,7 @@
           <a [routerLink]="link.path" 
              routerLinkActive="active" 
              [routerLinkActiveOptions]="{exact: link.path === '/'}"
-             (click)="closeMobileMenu()"
+             (click)="onNavLinkClick(link)"
              class="mobile-nav-link font-serif">
             {{ link.label }}
           </a>

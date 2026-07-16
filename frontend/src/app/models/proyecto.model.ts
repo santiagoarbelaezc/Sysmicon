@@ -12,4 +12,12 @@ export interface Proyecto {
   ubicacion: string;
   destacado: boolean;
   caracteristicas: string[];
+  // Propiedades Editoriales para Galería Tipo Catálogo / Revista
+  editorialTitle?: string;
+  editorialSubtitle?: string;
+  editorialSlogan?: string;
+  editorialBadge?: string;
+  editorialStyle?: 'coral-title' | 'white-bold' | 'ribbon-tag' | 'split-grid';
+  barcode?: string;
+  imagenesAdicionales?: string[];
 }

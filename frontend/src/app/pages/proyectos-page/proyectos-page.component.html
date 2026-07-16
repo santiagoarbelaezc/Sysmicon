@@ -1,0 +1,249 @@
+<div class="min-h-screen bg-[#080808] text-white pt-28 pb-32 relative overflow-hidden">
+  <!-- Architectural background grid & ambient light -->
+  <div class="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-white/[0.03] blur-[150px] pointer-events-none"></div>
+  <div class="absolute bottom-1/3 right-10 w-[500px] h-[500px] rounded-full bg-wood-accent/[0.04] blur-[160px] pointer-events-none"></div>
+  <div class="absolute inset-0 pointer-events-none opacity-[0.025]" style="background-image: radial-gradient(#FFF 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+  <!-- Header & Filtros Editorial -->
+  <header class="w-full max-w-[1750px] mx-auto px-6 md:px-16 mb-14 relative z-10 animate-fade-in">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/10 pb-10">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-wood-light font-mono text-xs tracking-[0.2em] uppercase mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-wood-accent"></span>
+          <span>SYSMICON ARCHITECTURAL DOSSIER</span>
+        </div>
+        <h1 class="font-serif text-4xl md:text-6xl font-bold tracking-tight uppercase text-white mb-4">
+          Galería Editorial de <span class="text-wood-accent italic">Proyectos</span>
+        </h1>
+        <p class="text-white/60 font-sans text-base md:text-lg max-w-2xl leading-relaxed">
+          Obras residenciales, fincas campestres, bodegas e hitos arquitectónicos concebidos y construidos bajo un único liderazgo técnico y financiero.
+        </p>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="flex flex-wrap items-center gap-2 bg-[#121212] p-1.5 rounded-2xl border border-white/10">
+        <button *ngFor="let cat of categorias"
+                (click)="setCategoria(cat)"
+                [ngClass]="{
+                  'bg-wood-accent text-black font-extrabold shadow-md': categoriaSeleccionada() === cat,
+                  'text-white/70 hover:text-white font-medium hover:bg-white/5': categoriaSeleccionada() !== cat
+                }"
+                class="px-5 py-2 rounded-xl text-xs md:text-sm font-sans tracking-wide transition-all duration-300 cursor-pointer">
+          {{ cat }}
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Grilla Tipo Catálogo / Revista Editorial (4 Columnas Desktop, 2 Tablet, 1 Móvil) -->
+  <main class="w-full max-w-[1750px] mx-auto px-6 md:px-16 relative z-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-10">
+      <div *ngFor="let p of proyectos()" 
+           (click)="abrirDossier(p)"
+           class="group flex flex-col cursor-pointer animate-fade-up">
+        
+        <!-- Contenedor Poster / Editorial Cover (Aspect Ratio 3:4) -->
+        <div class="aspect-[3/4] relative overflow-hidden rounded-xl bg-[#141414] shadow-2xl border border-white/10 group-hover:border-wood-accent/50 transition-all duration-500">
+          
+          <!-- Background Photo con sutil Zoom -->
+          <img [src]="p.imagenUrl" [alt]="p.titulo" 
+               class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90 group-hover:brightness-100">
+          
+          <!-- Gradientes y sombras para perfecta legibilidad de textos sobre imagen -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-black/20 opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/50 pointer-events-none"></div>
+
+          <!-- ESTILO 1: CORAL TITLE (Tipo CASA CARMEN / CASA ZEN) -->
+          <ng-container *ngIf="p.editorialStyle === 'coral-title' || !p.editorialStyle">
+            <!-- Barcode vertical superior derecho -->
+            <div class="absolute top-5 right-4 text-[8px] font-mono tracking-[0.3em] text-white/50 uppercase origin-top-right rotate-90 select-none">
+              {{ p.barcode || '0 600229402 1' }} |||||
+            </div>
+            
+            <div class="absolute bottom-6 left-6 right-8 flex flex-col items-start z-10">
+              <p *ngIf="p.editorialSubtitle" class="text-white/80 font-sans text-[10px] md:text-xs leading-relaxed mb-3 max-w-[90%] border-l-2 border-wood-accent pl-3">
+                {{ p.editorialSubtitle }}
+              </p>
+              <h3 class="font-serif text-3xl md:text-4xl font-extrabold tracking-tight text-wood-accent uppercase leading-none drop-shadow-lg group-hover:translate-x-1 transition-transform duration-300">
+                {{ p.editorialTitle || p.titulo }}
+              </h3>
+            </div>
+          </ng-container>
+
+          <!-- ESTILO 2: WHITE BOLD CENTERED (Tipo CASA RS / FINCA RE) -->
+          <ng-container *ngIf="p.editorialStyle === 'white-bold'">
+            <div class="absolute top-5 right-5 text-[9px] font-mono text-white/70 tracking-widest select-none">
+              {{ p.barcode || '0 600229402 2' }}
+            </div>
+            
+            <div class="absolute inset-x-0 bottom-[30%] flex flex-col items-center justify-center text-center px-4 z-10">
+              <h3 class="font-serif text-4xl md:text-5xl font-black text-white uppercase tracking-wider drop-shadow-2xl group-hover:scale-105 transition-transform duration-500">
+                {{ p.editorialTitle || p.titulo }}
+              </h3>
+            </div>
+            
+            <div class="absolute bottom-12 right-4 origin-bottom-right -rotate-90 text-[8px] font-mono tracking-[0.25em] text-wood-light uppercase select-none">
+              {{ p.editorialSlogan || p.subtitulo }}
+            </div>
+            
+            <p class="absolute bottom-5 left-6 text-white/80 text-[11px] max-w-[70%] font-sans leading-snug">
+              {{ p.editorialSubtitle || p.descripcion.slice(0, 70) + '...' }}
+            </p>
+          </ng-container>
+
+          <!-- ESTILO 3: RIBBON TAG + ITALIC QUOTE (Tipo CASA MH / STUDIO SM) -->
+          <ng-container *ngIf="p.editorialStyle === 'ribbon-tag'">
+            <div class="absolute top-0 left-6 z-20">
+              <span class="inline-block bg-wood-accent text-black font-sans font-extrabold text-xs px-3.5 py-2 uppercase tracking-widest shadow-xl">
+                {{ p.editorialBadge || '+ NUEVO' }}
+              </span>
+            </div>
+            
+            <div class="absolute top-[34%] left-6 z-10 right-10">
+              <h3 class="font-serif text-3xl md:text-4xl font-bold text-white uppercase tracking-wide drop-shadow-[0_4px_15px_rgba(0,0,0,0.9)] group-hover:translate-x-1 transition-transform">
+                {{ p.editorialTitle || p.titulo }}
+              </h3>
+            </div>
+            
+            <div class="absolute bottom-16 right-5 origin-bottom-right -rotate-90 text-[10px] font-serif italic text-white/70 max-w-[200px] truncate select-none">
+              "{{ p.editorialSlogan || p.subtitulo }}"
+            </div>
+            
+            <p class="absolute bottom-5 left-6 text-white/60 text-[11px] max-w-[70%] leading-relaxed font-sans">
+              {{ p.editorialSubtitle || p.subtitulo }}
+            </p>
+          </ng-container>
+
+          <!-- ESTILO 4: SPLIT GRID THUMBNAILS (Tipo EDIFICIO GP / AURORA GP) -->
+          <ng-container *ngIf="p.editorialStyle === 'split-grid'">
+            <div class="absolute top-6 left-6 z-10">
+              <h3 class="font-serif text-3xl md:text-4xl font-black text-white uppercase leading-[0.92] tracking-tight drop-shadow-xl">
+                {{ p.editorialTitle || p.titulo }}
+              </h3>
+            </div>
+            
+            <div class="absolute top-8 right-4 origin-top-right rotate-90 text-[8px] font-mono tracking-[0.28em] text-white/60 uppercase select-none">
+              {{ p.editorialSlogan || 'MEDELLÍN ES COLOR LADRILLO.' }}
+            </div>
+            
+            <!-- Mini grid de fotos en la parte inferior del poster -->
+            <div class="absolute inset-x-3 bottom-3 h-[24%] grid grid-cols-3 gap-1.5 z-20 rounded-lg overflow-hidden border border-white/20 bg-black/50 p-1 backdrop-blur-xs">
+              <img *ngFor="let img of (p.imagenesAdicionales || ['assets/images/imagen1.jpg', 'assets/images/imagen2.jpg', 'assets/images/imagen3.jpg']).slice(0,3)" 
+                   [src]="img" 
+                   class="w-full h-full object-cover rounded-xs filter brightness-90 hover:brightness-110 transition-all">
+            </div>
+          </ng-container>
+
+          <!-- Badge flotante inferior derecho con código editorial -->
+          <div class="absolute top-4 left-4 text-[9px] font-mono text-white/40 tracking-wider">
+            #{{ p.id.toUpperCase() }}
+          </div>
+        </div>
+
+        <!-- Texto y acción debajo de la tarjeta poster -->
+        <div class="mt-4 flex flex-col items-start px-1">
+          <p class="text-gray-300 font-sans text-xs md:text-sm leading-relaxed min-h-[2.4rem] line-clamp-2">
+            {{ p.subtitulo }}
+          </p>
+          <div class="flex items-center gap-1.5 mt-2 text-wood-accent group-hover:text-white font-sans text-xs font-bold tracking-widest uppercase transition-colors">
+            <span>CONOCE MÁS</span>
+            <span class="text-sm font-black">+</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Si no hay proyectos con el filtro -->
+    <div *ngIf="proyectos().length === 0" class="py-20 text-center border border-white/10 rounded-2xl bg-white/[0.02]">
+      <p class="text-gray-400 font-serif text-xl">No se encontraron proyectos en la categoría «{{ categoriaSeleccionada() }}»</p>
+      <button (click)="setCategoria('Todas')" class="mt-4 px-6 py-2.5 rounded-full bg-wood-accent text-black font-bold text-xs uppercase tracking-widest">
+        Ver Todos los Proyectos
+      </button>
+    </div>
+  </main>
+
+  <!-- MODAL / DOSSIER ARQUITECTÓNICO DE ALTO STANDING -->
+  <div *ngIf="selectedProject() as sp" class="fixed inset-0 z-[99999] overflow-y-auto p-4 md:p-8 flex items-center justify-center bg-black/85 backdrop-blur-xl animate-fade-in">
+    <div class="max-w-5xl w-full bg-[#111] border border-white/15 rounded-2xl overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.9)] relative flex flex-col md:flex-row max-h-[90vh]">
+      
+      <!-- Botón cerrar móvil/desktop -->
+      <button (click)="cerrarDossier()" class="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-black/80 border border-white/20 text-white flex items-center justify-center hover:bg-wood-accent hover:text-black transition-colors">
+        ✕
+      </button>
+
+      <!-- Columna izquierda: Imagen Principal y Galería de Muestra -->
+      <div class="md:w-1/2 relative bg-[#0a0a0a] min-h-[320px] md:min-h-full flex flex-col">
+        <div class="relative flex-1 overflow-hidden">
+          <img [src]="sp.imagenUrl" [alt]="sp.titulo" class="w-full h-full object-cover">
+          <div class="absolute top-4 left-4 bg-black/70 backdrop-blur-md px-3 py-1 rounded border border-white/10 text-[10px] font-mono text-wood-light uppercase">
+            {{ sp.categoria }} • {{ sp.anio }}
+          </div>
+        </div>
+        <!-- Si tiene imágenes adicionales, mostramos tira miniatura -->
+        <div *ngIf="sp.imagenesAdicionales && sp.imagenesAdicionales.length > 0" class="flex items-center gap-2 p-3 bg-black/90 border-t border-white/10 overflow-x-auto">
+          <img *ngFor="let m of sp.imagenesAdicionales" [src]="m" class="w-16 h-12 object-cover rounded border border-white/20 opacity-80 hover:opacity-100 cursor-pointer transition-opacity">
+        </div>
+      </div>
+
+      <!-- Columna derecha: Detalles Técnicos, Descripción y CTA -->
+      <div class="md:w-1/2 p-6 md:p-10 overflow-y-auto flex flex-col justify-between space-y-6">
+        <div>
+          <div class="text-[10px] font-mono uppercase tracking-[0.2em] text-wood-accent mb-2">
+            ESPECIFICACIÓN ARQUITECTÓNICA
+          </div>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-white tracking-tight uppercase mb-2">
+            {{ sp.titulo }}
+          </h2>
+          <p class="text-wood-light text-sm md:text-base font-serif italic mb-6">
+            {{ sp.subtitulo }}
+          </p>
+
+          <div class="grid grid-cols-2 gap-4 py-4 border-y border-white/10 mb-6 text-xs font-mono">
+            <div>
+              <span class="text-white/40 block uppercase">Ubicación</span>
+              <span class="text-white font-bold">{{ sp.ubicacion }}</span>
+            </div>
+            <div>
+              <span class="text-white/40 block uppercase">Área Construida</span>
+              <span class="text-white font-bold">{{ sp.area }} m²</span>
+            </div>
+            <div>
+              <span class="text-white/40 block uppercase">Año de Entrega</span>
+              <span class="text-white font-bold">{{ sp.anio }}</span>
+            </div>
+            <div>
+              <span class="text-white/40 block uppercase">Modelo Técnico</span>
+              <span class="text-wood-accent font-bold">Llave en Mano</span>
+            </div>
+          </div>
+
+          <p class="text-white/75 font-sans text-sm leading-relaxed mb-6">
+            {{ sp.descripcion }}
+          </p>
+
+          <div class="space-y-2">
+            <h4 class="text-xs font-mono uppercase tracking-widest text-white/50 mb-3">Hitos Técnicos del Proyecto:</h4>
+            <ul class="space-y-2 text-xs font-sans text-white/80">
+              <li *ngFor="let feat of sp.caracteristicas" class="flex items-start gap-2.5">
+                <span class="text-wood-accent font-bold mt-0.5">✓</span>
+                <span>{{ feat }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CTA Botón inferior -->
+        <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center gap-4">
+          <button (click)="solicitarAsesoria(sp)" class="w-full py-3.5 px-6 rounded-xl bg-wood-accent hover:bg-wood-light text-black font-bold font-sans text-xs tracking-widest uppercase transition-all shadow-lg flex items-center justify-center gap-2">
+            <span>Cotizar un Proyecto Similar</span>
+            <span>→</span>
+          </button>
+          <button (click)="cerrarDossier()" class="w-full sm:w-auto py-3.5 px-6 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold font-sans text-xs tracking-wider uppercase transition-all">
+            Cerrar
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

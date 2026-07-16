@@ -7,9 +7,11 @@ import { ContactoComponent } from './pages/contacto/contacto.component';
 import { LoginComponent } from './pages/login/login.component';
 import { OlvideContrasenaComponent } from './pages/olvide-contrasena/olvide-contrasena.component';
 
+import { ProyectosPageComponent } from './pages/proyectos-page/proyectos-page.component';
+
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Sysmicon | Diseño y Construcción de Viviendas' },
-  { path: 'proyectos', component: HomeComponent, title: 'Proyectos | Portafolio Sysmicon Arquitectura' },
+  { path: 'proyectos', component: ProyectosPageComponent, title: 'Galería Editorial de Proyectos | Portafolio Sysmicon' },
   { path: 'cotiza-con-nosotros', component: CotizaConNosotrosComponent, title: 'Cotiza con Nosotros | Sysmicon Arquitectura & Construcción' },
   { path: 'crea-tu-diseno', redirectTo: 'cotiza-con-nosotros', pathMatch: 'full' },
   { path: 'nosotros', component: NosotrosComponent, title: 'Nosotros | Filosofía y Arquitectura Sysmicon' },

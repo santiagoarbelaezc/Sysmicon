@@ -57,13 +57,5 @@ export class NavbarComponent {
 
   onNavLinkClick(link: { label: string; path: string }): void {
     this.closeMobileMenu();
-    if (link.path === '/proyectos') {
-      setTimeout(() => {
-        const el = document.getElementById('proyectos');
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    }
   }
 }

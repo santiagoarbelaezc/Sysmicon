@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   login(email: string, pass: string): Promise<boolean> {
-    this.loadingService.show('Iniciando sesión en Sysmicon...');
+    this.loadingService.show('Iniciando sesión en el Portal Privado...');
     return new Promise((resolve) => {
       setTimeout(() => {
         const user: Usuario = {
@@ -52,7 +52,7 @@ export class AuthService {
   }
 
   register(nombre: string, email: string, telefono: string, rol: 'propietario' | 'arquitecto' | 'inversionista'): Promise<boolean> {
-    this.loadingService.show('Creando tu cuenta privada...');
+    this.loadingService.show('Creando cuenta en el Portal Privado...');
     return new Promise((resolve) => {
       setTimeout(() => {
         const user: Usuario = {
@@ -72,7 +72,7 @@ export class AuthService {
   }
 
   logout(): Promise<void> {
-    this.loadingService.show('Cerrando tu sesión de forma segura...');
+    this.loadingService.show('Cerrando sesión de forma segura...');
     return new Promise((resolve) => {
       setTimeout(() => {
         this.currentUser.set(null);

@@ -7,25 +7,47 @@
 </div>
 
 <!-- PANTALLA DE CARGA ELEGANTE SYSMICON -->
-<div *ngIf="loadingService.isLoading()" class="fixed inset-0 bg-[#080808]/98 backdrop-blur-md flex flex-col items-center justify-center z-[999999] animate-fade">
-  <div class="flex flex-col items-center justify-center space-y-6 max-w-xs text-center select-none">
+<div *ngIf="loadingService.isLoading()" class="fixed inset-0 bg-[#060606]/98 backdrop-blur-2xl flex flex-col items-center justify-center z-[999999] animate-fade">
+  <!-- Rejilla arquitectónica sutil en el fondo -->
+  <div class="absolute inset-0 pointer-events-none opacity-[0.03]" style="background-image: radial-gradient(#FFF 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+  <!-- Luces ambientales de fondo -->
+  <div class="absolute w-[450px] h-[450px] rounded-full bg-wood-accent/10 blur-[130px] pointer-events-none animate-pulse" style="animation-duration: 4s;"></div>
+
+  <div class="flex flex-col items-center justify-center max-w-md text-center select-none relative z-10 px-6">
     
-    <!-- Contenedor del Logo con Pulsación y Órbita Giratoria -->
-    <div class="relative w-32 h-32 flex items-center justify-center">
-      <!-- Círculo exterior giratorio y degradado -->
-      <div class="absolute inset-0 rounded-full border-2 border-white/5 border-t-wood-accent animate-spin" style="animation-duration: 1.5s;"></div>
-      <!-- Círculo interior de pulso de luz dorado -->
-      <div class="absolute w-24 h-24 rounded-full bg-wood-accent/10 border border-wood-accent/25 animate-ping" style="animation-duration: 2.5s;"></div>
-      <!-- Logo central -->
-      <img src="assets/icons/logo-sysmico.png" alt="Sysmicon Logo" class="w-16 h-16 object-contain relative z-10 filter drop-shadow-[0_0_15px_rgba(212,175,55,0.4)] animate-pulse" style="animation-duration: 2s;">
+    <!-- Etiqueta superior VIP de Dossier -->
+    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-wood-accent font-mono text-[10px] tracking-[0.3em] uppercase mb-10 shadow-lg">
+      <span class="w-1.5 h-1.5 rounded-full bg-wood-accent animate-ping"></span>
+      <span>SYSMICON PORTAL PRIVADO</span>
     </div>
 
-    <!-- Mensaje y Subtexto -->
-    <div class="space-y-2">
-      <h3 class="font-serif text-lg font-bold text-white tracking-wide animate-pulse" style="animation-duration: 1.5s;">
+    <!-- Contenedor Geométrico de Órbitas Arquitectónicas -->
+    <div class="relative w-36 h-36 flex items-center justify-center">
+      <!-- Anillo exterior giratorio con acento dorado -->
+      <div class="absolute inset-0 rounded-full border border-white/10 border-t-wood-accent animate-spin" style="animation-duration: 2s;"></div>
+      <!-- Anillo intermedio punteado técnico -->
+      <div class="absolute w-28 h-28 rounded-full border border-dashed border-white/15 animate-spin" style="animation-duration: 5s; animation-direction: reverse;"></div>
+      <!-- Halo central suave -->
+      <div class="absolute w-20 h-20 rounded-full bg-wood-accent/15 animate-pulse" style="animation-duration: 2.5s;"></div>
+      <!-- Logo central iluminado -->
+      <img src="assets/icons/logo-sysmico.png" alt="Sysmicon Logo" class="w-16 h-16 object-contain relative z-10 filter drop-shadow-[0_0_20px_rgba(212,175,55,0.6)] animate-pulse" style="animation-duration: 2s;">
+    </div>
+
+    <!-- Mensaje Principal y Subtítulo Institucinal -->
+    <div class="mt-9 space-y-4 w-full">
+      <h3 class="font-serif text-xl sm:text-2xl font-light text-white tracking-widest uppercase drop-shadow">
         {{ loadingService.loadingMessage() }}
       </h3>
-      <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Diseño & Construcción Integral</p>
+      
+      <!-- Línea de progreso minimalista y brillante -->
+      <div class="w-56 h-[2px] bg-white/10 rounded-full mx-auto overflow-hidden relative shadow-inner">
+        <div class="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-transparent via-wood-accent to-transparent animate-progress"></div>
+      </div>
+
+      <p class="text-[10px] sm:text-[11px] font-mono text-gray-400 tracking-[0.28em] uppercase font-medium pt-1">
+        ARQUITECTURA • DISEÑO & CONSTRUCCIÓN INTEGRAL
+      </p>
     </div>
 
   </div>

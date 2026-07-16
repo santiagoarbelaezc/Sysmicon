@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { RouterOutlet, Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoadingService } from './services/loading.service';
@@ -40,18 +40,32 @@ export class AppComponent implements OnInit {
       offset: 80
     });
 
-    // Mostrar pantalla de carga elegante en el primer ingreso al sitio
-    this.loadingService.showTemporarily(2200, 'Inicializando Sysmicon Studio...');
+    // Mostrar pantalla de carga SOLAMENTE si el ingreso inicial es directo al login o al dashboard (admin)
+    const initialPath = window.location.pathname;
+    if (initialPath.includes('/login') || initialPath.includes('/registro')) {
+      this.loadingService.showTemporarily(1100, 'Accediendo al Portal Privado...');
+    } else if (initialPath.includes('/admin')) {
+      this.loadingService.showTemporarily(1100, 'Cargando Panel del Dashboard...');
+    }
 
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: any) => {
-      if (!event.urlAfterRedirects?.includes('#')) {
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    // Interceptar navegaciones para mostrar el estado de carga únicamente al ingresar a login o al dashboard
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationStart) {
+        if (event.url.includes('/login') || event.url.includes('/registro')) {
+          this.loadingService.showTemporarily(950, 'Accediendo al Portal Privado...');
+        } else if (event.url.includes('/admin')) {
+          this.loadingService.showTemporarily(950, 'Cargando Panel del Dashboard...');
+        } else {
+          this.loadingService.hide();
+        }
+      } else if (event instanceof NavigationEnd) {
+        if (!event.urlAfterRedirects?.includes('#')) {
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        }
+        setTimeout(() => {
+          AOS.refresh();
+        }, 250);
       }
-      setTimeout(() => {
-        AOS.refresh();
-      }, 250);
     });
   }
 }

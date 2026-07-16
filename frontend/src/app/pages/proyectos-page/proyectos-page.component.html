@@ -5,7 +5,7 @@
   <div class="absolute inset-0 pointer-events-none opacity-[0.025]" style="background-image: radial-gradient(#FFF 1px, transparent 1px); background-size: 32px 32px;"></div>
 
   <!-- Header & Filtros Editorial -->
-  <header class="w-full max-w-[1750px] mx-auto px-6 md:px-16 mb-14 relative z-10 animate-fade-in">
+  <header class="w-full max-w-[1750px] mx-auto px-6 md:px-16 mb-14 relative z-10" data-aos="fade-down" data-aos-duration="900">
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/10 pb-10">
       <div>
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-wood-light font-mono text-xs tracking-[0.2em] uppercase mb-4">
@@ -21,7 +21,7 @@
       </div>
 
       <!-- Category Filter Pills -->
-      <div class="flex flex-wrap items-center gap-2 bg-[#121212] p-1.5 rounded-2xl border border-white/10">
+      <div class="flex flex-wrap items-center gap-2 bg-[#121212] p-1.5 rounded-2xl border border-white/10" data-aos="fade-up" data-aos-delay="200" data-aos-duration="900">
         <button *ngFor="let cat of categorias"
                 (click)="setCategoria(cat)"
                 [ngClass]="{
@@ -35,12 +35,15 @@
     </div>
   </header>
 
-  <!-- Grilla Tipo Catálogo / Revista Editorial (4 Columnas Desktop, 2 Tablet, 1 Móvil) -->
+  <!-- Grilla Tipo Catálogo / Revista Editorial (4 Columnas Desktop, 2 Tablet, 1 Móvil con AOS escalonado) -->
   <main class="w-full max-w-[1750px] mx-auto px-6 md:px-16 relative z-10">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-10">
-      <div *ngFor="let p of proyectos()" 
+      <div *ngFor="let p of proyectos(); let idx = index" 
            (click)="abrirDossier(p)"
-           class="group flex flex-col cursor-pointer animate-fade-up">
+           data-aos="fade-up"
+           [attr.data-aos-delay]="(idx % 4) * 140"
+           data-aos-duration="950"
+           class="group flex flex-col cursor-pointer">
         
         <!-- Contenedor Poster / Editorial Cover (Aspect Ratio 3:4) -->
         <div class="aspect-[3/4] relative overflow-hidden rounded-xl bg-[#141414] shadow-2xl border border-white/10 group-hover:border-wood-accent/50 transition-all duration-500">

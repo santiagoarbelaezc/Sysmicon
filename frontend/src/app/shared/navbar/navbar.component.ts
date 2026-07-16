@@ -22,7 +22,7 @@ export class NavbarComponent {
   }
 
   get isAuthPage(): boolean {
-    return this.router.url.includes('/login') || this.router.url.includes('/registro') || this.router.url.includes('/crea-tu-diseno');
+    return this.router.url.includes('/login') || this.router.url.includes('/registro') || this.router.url.includes('/crea-tu-diseno') || this.router.url.includes('/cotiza-con-nosotros');
   }
 
   readonly isScrolled = signal<boolean>(false);

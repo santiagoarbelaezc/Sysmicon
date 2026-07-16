@@ -1,0 +1,206 @@
+<div class="cotiza-page min-h-screen pt-28 pb-24 bg-[#030303] text-white relative overflow-hidden font-sans">
+  <!-- Luz ambiental decorativa arquitectónica -->
+  <div class="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-white/[0.04] blur-[150px] pointer-events-none"></div>
+  <div class="absolute bottom-10 right-10 w-[500px] h-[500px] rounded-full bg-white/[0.03] blur-[140px] pointer-events-none"></div>
+
+  <!-- Grilla arquitectónica CAD sutil de fondo -->
+  <div class="absolute inset-0 pointer-events-none opacity-[0.03]" style="background-image: radial-gradient(#FFF 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+  <div class="w-full max-w-[1680px] mx-auto px-6 md:px-12 relative z-10">
+    <!-- Encabezado de la Sección -->
+    <div class="text-center max-w-3xl mx-auto mb-14" data-aos="fade-down" data-aos-duration="900">
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.07] border border-white/15 text-wood-light font-sans text-xs font-bold tracking-[0.18em] uppercase mb-5 backdrop-blur-md">
+        <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+        <span>Asesoría & Cotización Privada</span>
+      </div>
+      <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight mb-4">
+        Cotiza con <span class="text-gradient font-serif">Nosotros</span>
+      </h1>
+      <p class="text-white/70 text-base md:text-lg font-sans font-light leading-relaxed">
+        Concebimos proyectos residenciales únicos. Visualiza nuestro estándar de modelado 3D y permítenos calcular la inversión exacta para tu nuevo hogar.
+      </p>
+    </div>
+
+    <!-- Grilla Principal 2 Columnas (Video 3D + Formulario Hablar con Nosotros) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-stretch">
+      
+      <!-- COLUMNA IZQUIERDA: SHOWCASE DE VIDEO 3D ARQUITECTÓNICO (Cols 1-6) -->
+      <div class="lg:col-span-6 flex flex-col" data-aos="fade-right" data-aos-duration="1000">
+        <div class="video-showcase-card glass-panel bg-[#0B0B0B]/90 border border-white/15 rounded-3xl p-3 md:p-4 shadow-2xl relative flex-1 flex flex-col justify-between overflow-hidden group">
+          
+          <!-- Esquineros CAD arquitectónicos -->
+          <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-white/30 z-20 pointer-events-none rounded-tl-xl"></div>
+          <div class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-white/30 z-20 pointer-events-none rounded-tr-xl"></div>
+          <div class="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-white/30 z-20 pointer-events-none rounded-bl-xl"></div>
+          <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-white/30 z-20 pointer-events-none rounded-br-xl"></div>
+
+          <!-- Video Wrapper con Marco Premium -->
+          <div class="relative w-full rounded-2xl overflow-hidden border border-white/10 bg-black shadow-inner flex-1 min-h-[380px] md:min-h-[460px] flex items-center justify-center">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover transform scale-[1.01] transition-transform duration-700 group-hover:scale-[1.03]">
+              <source src="assets/videos/video-sysmicon3d.mp4" type="video/mp4">
+              Tu navegador no soporta el formato de video.
+            </video>
+
+            <!-- Overlay técnico de plano sobre el video -->
+            <div class="absolute top-4 left-4 z-10 px-3 py-1 rounded-md bg-black/75 backdrop-blur-md border border-white/15 text-[10px] font-mono tracking-widest text-white/80 uppercase">
+              ● RENDER 3D • ESC 1:100
+            </div>
+            <div class="absolute top-4 right-4 z-10 text-[10px] font-mono tracking-widest text-white/50 hidden sm:block">
+              SECCIÓN X-Y' • N.P.T. ±0.00m
+            </div>
+            <div class="absolute bottom-4 right-4 z-10 px-3 py-1 rounded-md bg-black/75 backdrop-blur-md border border-white/15 text-[10px] font-mono tracking-wider text-wood-light">
+              SYSMICON ARQUITECTURA
+            </div>
+          </div>
+
+          <!-- Barra de información inferior -->
+          <div class="p-5 md:p-6 mt-3 rounded-2xl bg-white/[0.03] border border-white/[0.07] flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3.5">
+              <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white shrink-0 border border-white/15">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div>
+                <h4 class="font-serif font-bold text-sm md:text-base text-white">Inversión Arquitectónica Precisa</h4>
+                <p class="text-xs text-white/60 font-sans">Cotización detallada con desglose por metro cuadrado y acabados.</p>
+              </div>
+            </div>
+            <span class="hidden sm:inline-flex px-3 py-1 rounded-full bg-white/10 text-[11px] font-mono font-bold text-wood-light">
+              PREMIUM CAD
+            </span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA: CUADRO "HABLAR CON NOSOTROS" + REDES SOCIALES (Cols 7-12) -->
+      <div class="lg:col-span-6 flex flex-col" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+        <div class="contact-box-luxury glass-panel bg-[#0B0B0B]/95 border border-white/15 rounded-3xl p-8 md:p-12 shadow-2xl relative flex-1 flex flex-col justify-between">
+          
+          <div>
+            <!-- Título y Subtítulo Hablar con nosotros -->
+            <div class="mb-8">
+              <span class="text-xs font-mono font-semibold tracking-widest text-wood-light uppercase block mb-1">Contacto Directo & Presupuestos</span>
+              <h2 class="font-serif text-3xl md:text-4xl font-bold text-white tracking-tight">
+                Hablar con <span class="text-gradient font-serif">nosotros</span>
+              </h2>
+              <p class="text-white/65 text-sm md:text-base font-sans mt-2 leading-relaxed">
+                Ingresa tus datos y te contactaremos fácilmente para resolver dudas, agendar una visita o estructurar la propuesta de tu vivienda.
+              </p>
+            </div>
+
+            <!-- Formulario de Contacto -->
+            <form *ngIf="!enviado()" (submit)="enviarMensaje($event)" class="space-y-5">
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <!-- Campo Nombre -->
+                <div class="form-group">
+                  <label for="nombre" class="block font-sans text-xs font-semibold tracking-wider uppercase text-white/80 mb-2">Nombre Completo *</label>
+                  <input type="text" id="nombre" name="nombre"
+                         [ngModel]="nombre()" (ngModelChange)="nombre.set($event)"
+                         placeholder="Ej. Carlos Mendoza"
+                         class="w-full px-4 py-3.5 rounded-xl bg-white/[0.04] border border-white/15 text-white placeholder-white/35 font-sans text-sm focus:outline-none focus:border-white focus:bg-white/[0.08] transition-all">
+                </div>
+
+                <!-- Campo Teléfono -->
+                <div class="form-group">
+                  <label for="telefono" class="block font-sans text-xs font-semibold tracking-wider uppercase text-white/80 mb-2">Teléfono / WhatsApp *</label>
+                  <input type="tel" id="telefono" name="telefono"
+                         [ngModel]="telefono()" (ngModelChange)="telefono.set($event)"
+                         placeholder="Ej. +57 310 845 9210"
+                         class="w-full px-4 py-3.5 rounded-xl bg-white/[0.04] border border-white/15 text-white placeholder-white/35 font-sans text-sm focus:outline-none focus:border-white focus:bg-white/[0.08] transition-all">
+                </div>
+              </div>
+
+              <!-- Campo Asunto -->
+              <div class="form-group">
+                <label for="asunto" class="block font-sans text-xs font-semibold tracking-wider uppercase text-white/80 mb-2">Asunto del Proyecto *</label>
+                <input type="text" id="asunto" name="asunto"
+                       [ngModel]="asunto()" (ngModelChange)="asunto.set($event)"
+                       placeholder="Ej. Cotización construcción de casa en Envigado / Llanogrande"
+                       class="w-full px-4 py-3.5 rounded-xl bg-white/[0.04] border border-white/15 text-white placeholder-white/35 font-sans text-sm focus:outline-none focus:border-white focus:bg-white/[0.08] transition-all">
+              </div>
+
+              <!-- Campo Mensaje -->
+              <div class="form-group">
+                <label for="mensaje" class="block font-sans text-xs font-semibold tracking-wider uppercase text-white/80 mb-2">Mensaje o Detalles Adicionales</label>
+                <textarea id="mensaje" name="mensaje" rows="3"
+                          [ngModel]="mensaje()" (ngModelChange)="mensaje.set($event)"
+                          placeholder="Cuéntanos el metraje aproximado, si ya cuentas con lote o cualquier idea arquitectónica que tengas en mente..."
+                          class="w-full px-4 py-3.5 rounded-xl bg-white/[0.04] border border-white/15 text-white placeholder-white/35 font-sans text-sm focus:outline-none focus:border-white focus:bg-white/[0.08] transition-all resize-none"></textarea>
+              </div>
+
+              <!-- Alerta de Error -->
+              <div *ngIf="errorMsg()" class="p-3.5 rounded-xl bg-red-500/15 border border-red-500/30 text-red-300 text-xs font-sans flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+                <span>{{ errorMsg() }}</span>
+              </div>
+
+              <!-- Botón Enviar -->
+              <button type="submit" [disabled]="cargando()" class="btn-primary w-full py-4 rounded-xl flex items-center justify-center gap-3 font-sans font-bold text-base tracking-widest uppercase transition-all shadow-lg hover:scale-[1.01] cursor-pointer">
+                <span *ngIf="!cargando()">Enviar Consulta</span>
+                <span *ngIf="cargando()" class="flex items-center gap-2">
+                  <svg class="animate-spin h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                  Procesando...
+                </span>
+                <svg *ngIf="!cargando()" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+            </form>
+
+            <!-- Pantalla de Éxito al Enviar -->
+            <div *ngIf="enviado()" class="py-8 text-center animate-fade space-y-5">
+              <div class="w-16 h-16 rounded-full bg-white/10 border border-white/20 text-wood-light flex items-center justify-center mx-auto shadow-gold">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </div>
+              <h3 class="font-serif text-2xl md:text-3xl font-bold text-white">¡Consulta Recibida con Éxito!</h3>
+              <p class="text-white/70 text-sm md:text-base font-sans max-w-md mx-auto leading-relaxed">
+                Hemos registrado tu solicitud de cotización. Un arquitecto senior de Sysmicon revisará la información y te contactará en breve al teléfono indicado.
+              </p>
+              <button (click)="nuevaConsulta()" class="btn-secondary px-6 py-3 rounded-xl font-sans text-xs font-bold uppercase tracking-wider">
+                Enviar otra consulta
+              </button>
+            </div>
+          </div>
+
+          <!-- SECCIÓN BOTONES DE REDES SOCIALES AL FINAL -->
+          <div class="mt-8 pt-7 border-t border-white/10">
+            <p class="font-sans text-xs font-bold tracking-[0.16em] uppercase text-white/75 mb-4 text-center sm:text-left">
+              O escríbenos directamente por nuestras redes oficiales:
+            </p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <!-- WhatsApp -->
+              <a [href]="whatsappUrl" target="_blank" rel="noopener noreferrer" 
+                 class="social-btn group flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl bg-white/[0.04] hover:bg-white/15 border border-white/15 hover:border-white transition-all text-white text-xs font-semibold tracking-wider uppercase">
+                <svg class="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 1.636 6.015L.195 23.518l5.656-1.484A11.95 11.95 0 0 0 11.944 24C18.575 24 24 18.627 24 12S18.575 0 11.944 0zm0 21.986a9.96 9.96 0 0 1-5.074-1.385l-.364-.216-3.765.988 1.006-3.668-.238-.379A9.954 9.954 0 0 1 1.986 12c0-5.492 4.471-9.964 9.958-9.964 5.492 0 9.964 4.472 9.964 9.964 0 5.492-4.472 9.986-9.964 9.986zm5.457-7.466c-.299-.15-1.768-.872-2.042-.971-.274-.1-.474-.15-.674.15-.2.299-.774.971-.949 1.171-.174.2-.349.224-.648.075-.3-.15-1.263-.465-2.404-1.482-.888-.792-1.488-1.769-1.663-2.068-.175-.3-.018-.462.132-.611.135-.135.299-.35.449-.524.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.674-1.624-.924-2.224-.243-.585-.49-.505-.674-.515-.174-.01-.374-.01-.574-.01-.2 0-.524.075-.799.375-.274.3-1.048 1.024-1.048 2.497 0 1.474 1.073 2.898 1.223 3.098.15.2 2.112 3.223 5.116 4.522.715.309 1.274.494 1.708.632.718.228 1.371.196 1.889.119.578-.086 1.768-.723 2.017-1.422.249-.699.249-1.299.174-1.423-.075-.124-.274-.199-.574-.349z"/></svg>
+                <span>WhatsApp</span>
+              </a>
+
+              <!-- Instagram -->
+              <a [href]="contact.instagram" target="_blank" rel="noopener noreferrer"
+                 class="social-btn group flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl bg-white/[0.04] hover:bg-white/15 border border-white/15 hover:border-white transition-all text-white text-xs font-semibold tracking-wider uppercase">
+                <svg class="w-4 h-4 text-pink-400 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                <span>Instagram</span>
+              </a>
+
+              <!-- LinkedIn -->
+              <a [href]="contact.linkedin" target="_blank" rel="noopener noreferrer"
+                 class="social-btn group flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl bg-white/[0.04] hover:bg-white/15 border border-white/15 hover:border-white transition-all text-white text-xs font-semibold tracking-wider uppercase">
+                <svg class="w-4 h-4 text-blue-400 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                <span>LinkedIn</span>
+              </a>
+
+              <!-- Facebook -->
+              <a [href]="contact.facebook" target="_blank" rel="noopener noreferrer"
+                 class="social-btn group flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl bg-white/[0.04] hover:bg-white/15 border border-white/15 hover:border-white transition-all text-white text-xs font-semibold tracking-wider uppercase">
+                <svg class="w-4 h-4 text-blue-500 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                <span>Facebook</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

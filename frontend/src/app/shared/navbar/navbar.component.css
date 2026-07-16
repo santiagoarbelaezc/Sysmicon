@@ -123,17 +123,7 @@
   width: 100%;
 }
 
-/* Únicamente en el Home cuando el navbar es transparente sobre el cielo claro, usamos negro */
-.navbar.home-transparent .nav-link:hover,
-.navbar.home-transparent .nav-link.active {
-  color: #000000;
-  text-shadow: none;
-}
 
-.navbar.home-transparent .link-underline {
-  background: #000000;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-}
 
 /* Desktop CTA Button */
 .nav-cta-btn {

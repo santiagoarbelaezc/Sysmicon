@@ -56,41 +56,34 @@
       <div class="absolute top-5 right-5 font-mono text-gray-300 text-xs pointer-events-none">+</div>
       <div class="absolute bottom-5 left-5 font-mono text-gray-300 text-xs pointer-events-none">+</div>
 
-      <!-- Cabecera con Subtítulo, Título y Línea separadora -->
+      <!-- Cabecera con Subtítulo, Título y Resumen Breve -->
       <div>
         <p class="font-sans text-xs font-bold uppercase tracking-[0.16em] text-wood-dark mb-1.5 flex items-center gap-2">
           <span class="w-6 h-[2px] bg-wood-accent inline-block"></span>
           {{ servicio.subtitulo }}
         </p>
-        <h3 class="font-serif text-2xl md:text-3xl font-bold text-[#111111] mb-4 leading-tight group-hover:text-black transition-colors">
+        <h3 class="font-serif text-2xl md:text-3xl font-bold text-[#111111] mb-3 leading-tight group-hover:text-black transition-colors">
           {{ servicio.titulo }}
         </h3>
         
-        <p class="font-sans text-gray-700 text-sm md:text-base leading-relaxed mb-8">
+        <p class="font-sans text-gray-600 text-sm md:text-base leading-relaxed mb-6 font-light">
           {{ servicio.descripcion }}
         </p>
 
-        <!-- Lista de Características / Puntos clave -->
-        <div *ngIf="servicio.caracteristicas && servicio.caracteristicas.length > 0" class="mb-8 border-t border-black/10 pt-6">
-          <p class="font-serif text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">Lo que incluye este servicio:</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-            <div *ngFor="let item of servicio.caracteristicas" class="flex items-start gap-3">
-              <span class="w-5 h-5 rounded-full bg-[#111111] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-wood-dark transition-colors">
-                ✓
-              </span>
-              <span class="font-sans text-xs md:text-sm text-gray-800 font-medium leading-snug">
-                {{ item }}
-              </span>
-            </div>
-          </div>
+        <!-- Puntos clave directos en formato de etiquetas limpias y compactas (sin subtítulos ni viñetas de texto largo) -->
+        <div *ngIf="servicio.caracteristicas && servicio.caracteristicas.length > 0" class="flex flex-wrap gap-2 mb-6">
+          <span *ngFor="let item of servicio.caracteristicas" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F4F4F4] border border-black/10 text-xs font-medium text-[#111111] hover:bg-black hover:text-white transition-all">
+            <span class="w-1.5 h-1.5 rounded-full bg-wood-accent shrink-0"></span>
+            <span>{{ item }}</span>
+          </span>
         </div>
       </div>
 
       <!-- Footer CTA -->
-      <div class="pt-6 border-t border-black/10 flex items-center justify-start mt-auto">
+      <div class="pt-5 border-t border-black/10 flex items-center justify-start mt-auto">
         <a routerLink="/cotiza-con-nosotros" [queryParams]="{servicio: servicio.titulo}" 
-           class="inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-lg bg-[#111111] hover:bg-black text-white font-sans text-xs md:text-sm font-bold tracking-[0.14em] uppercase transition-all duration-300 hover:translate-x-1.5 shadow-md hover:shadow-xl">
-          <span>Solicitar Cotización Privada</span>
+           class="inline-flex items-center justify-center gap-3 px-7 py-3 rounded-xl bg-[#111111] hover:bg-black text-white font-sans text-xs font-bold tracking-[0.14em] uppercase transition-all duration-300 hover:translate-x-1.5 shadow-md hover:shadow-xl">
+          <span>Cotizar Servicio</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
       </div>

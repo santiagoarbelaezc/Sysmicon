@@ -9,18 +9,18 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-5.5rem)] items-stretch">
       
       <!-- COLUMNA IZQUIERDA: VIDEO ARQUITECTÓNICO EDGE-TO-EDGE (Cols 1-9) -->
-      <div class="lg:col-span-9 relative flex flex-col justify-center overflow-hidden bg-[#001A33] min-h-[460px] lg:min-h-[calc(100vh-5.5rem)] group" data-aos="fade-right" data-aos-duration="1000">
+      <div class="lg:col-span-9 relative flex flex-col justify-center overflow-hidden bg-black min-h-[460px] lg:min-h-[calc(100vh-5.5rem)] group" data-aos="fade-right" data-aos-duration="1000">
         <!-- Reproductor de Video en Gran Formato (con oscuridad balanceada y clara) -->
-        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover transform scale-[1.01] transition-transform duration-1000 group-hover:scale-[1.03] brightness-[0.82] contrast-[1.06]">
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover transform scale-[1.01] transition-transform duration-1000 group-hover:scale-[1.03]">
           <source src="assets/videos/video-sysmicon3d.mp4" type="video/mp4">
           Tu navegador no soporta el formato de video.
         </video>
 
-        <!-- Overlays arquitectónicos ligeros y uniformes para que todo el video (incluida la derecha) sea claro y visible -->
-        <div class="absolute inset-0 bg-[#002345]/20 pointer-events-none z-10 transition-opacity duration-700 group-hover:opacity-10"></div>
+        <!-- Overlay neutro ligeramente oscuro sin sombra ni tinte azul -->
+        <div class="absolute inset-0 bg-black/35 pointer-events-none z-10 transition-opacity duration-700 group-hover:bg-black/25"></div>
 
         <!-- Etiqueta técnica CAD flotante sutil en la esquina superior izquierda -->
-        <div class="absolute top-6 left-8 z-20 pointer-events-none hidden md:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#001A33]/80 backdrop-blur-md border border-white/10 text-[10px] font-mono tracking-[0.2em] text-white/70 uppercase shadow-lg">
+        <div class="absolute top-6 left-8 z-20 pointer-events-none hidden md:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-[10px] font-mono tracking-[0.2em] text-white/70 uppercase shadow-lg">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
           <span>SYSMICON ARCHITECTURAL STUDIO • ASESORÍA & INTERVENTORÍA</span>
         </div>

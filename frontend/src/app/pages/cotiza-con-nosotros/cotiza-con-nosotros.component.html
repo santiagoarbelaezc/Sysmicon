@@ -11,7 +11,7 @@
       <!-- COLUMNA IZQUIERDA: VIDEO ARQUITECTÓNICO EDGE-TO-EDGE (Cols 1-9) -->
       <div class="lg:col-span-9 relative flex flex-col justify-center overflow-hidden bg-black min-h-[460px] lg:min-h-[calc(100vh-5.5rem)] group" data-aos="fade-right" data-aos-duration="1000">
         <!-- Reproductor de Video en Gran Formato (con oscuridad balanceada y clara) -->
-        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover transform scale-[1.01] transition-transform duration-1000 group-hover:scale-[1.03]">
+        <video #bgVideo autoplay loop muted playsinline [muted]="true" [volume]="0" onloadedmetadata="this.muted=true; this.volume=0;" class="absolute inset-0 w-full h-full object-cover transform scale-[1.01] transition-transform duration-1000 group-hover:scale-[1.03]">
           <source src="assets/videos/video-sysmicon3d.mp4" type="video/mp4">
           Tu navegador no soporta el formato de video.
         </video>
@@ -151,9 +151,82 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <!-- FIN GRILLA NIVEL 1 -->
 
+    <!-- NIVEL 2: SECCIÓN DE MARCA SYSMICON & VIDEO ARCHITECTURAL EN GRILLA WIDE EDGE-TO-EDGE -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 w-full min-h-[520px] lg:min-h-[580px] items-stretch border-t border-white/10 bg-black relative z-20">
+      
+      <!-- COLUMNA IZQUIERDA: TÍTULO & TEXTO REFERENTE A LA MARCA (Cols 1-5) -->
+      <div class="lg:col-span-5 flex flex-col justify-center bg-[#001A33] border-b lg:border-b-0 lg:border-r border-white/10 p-8 sm:p-10 lg:p-12 xl:p-14 space-y-6 relative z-20" data-aos="fade-right" data-aos-duration="1000">
+        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-[10px] font-mono tracking-[0.22em] text-[#C2E1FF] uppercase w-fit">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#C2E1FF]"></span>
+          <span>FILOSOFÍA CONSTRUCTIVA SYSMICON</span>
+        </div>
+
+        <h3 class="font-serif text-3xl sm:text-4xl lg:text-[40px] text-white font-normal leading-tight tracking-tight">
+          Ingeniería y Arquitectura en <span class="text-[#C2E1FF]">Perfecta Armonía</span>
+        </h3>
+
+        <p class="font-sans text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
+          Con una destacada trayectoria en el diseño y construcción integral, en <strong class="text-white font-semibold">Sysmicon</strong> concebimos cada proyecto arquitectónico como una obra maestra única. Integramos vanguardia estética, modelado CAD 3D y una estricta dirección de obra llave en mano.
+        </p>
+
+        <p class="font-sans text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
+          Nuestra metodología rigurosa optimiza plazos y presupuestos sin comprometer la calidad en los materiales ni la excelencia estructural, creando hogares campestres y espacios corporativos que perduran en el tiempo con sobriedad y distinción.
+        </p>
+
+        <div class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-white/[0.03] border border-white/10">
+            <div class="w-5 h-5 rounded-full bg-[#C2E1FF]/15 flex items-center justify-center text-[#C2E1FF] shrink-0 mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <div>
+              <h4 class="text-xs font-bold font-sans text-white uppercase tracking-wider">Interventoría Técnica</h4>
+              <p class="text-[11px] text-white/60 font-sans mt-0.5">Supervisión exhaustiva en cada fase.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-white/[0.03] border border-white/10">
+            <div class="w-5 h-5 rounded-full bg-[#C2E1FF]/15 flex items-center justify-center text-[#C2E1FF] shrink-0 mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <div>
+              <h4 class="text-xs font-bold font-sans text-white uppercase tracking-wider">Control Presupuestal</h4>
+              <p class="text-[11px] text-white/60 font-sans mt-0.5">Transparencia y ejecución llave en mano.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA: VIDEO SYSMICON 2 EN FORMATO WIDE EDGE-TO-EDGE (Cols 6-12) -->
+      <div class="lg:col-span-7 relative flex flex-col justify-center overflow-hidden bg-black min-h-[380px] lg:min-h-full group" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="150">
+        <!-- Reproductor de Video 2 ajustado al 100% de la columna de 7 cols -->
+        <video #bgVideo autoplay loop muted playsinline [muted]="true" [volume]="0" onloadedmetadata="this.muted=true; this.volume=0;" class="absolute inset-0 w-full h-full object-cover transform scale-[1.01] transition-transform duration-1000 group-hover:scale-[1.03]">
+          <source src="assets/videos/video-sysmicon2.mp4" type="video/mp4">
+          Tu navegador no soporta el formato de video.
+        </video>
+
+        <!-- Overlay neutro y claro sin sombra ni tinte azul -->
+        <div class="absolute inset-0 bg-black/35 pointer-events-none z-10 transition-opacity duration-700 group-hover:bg-black/20"></div>
+
+        <!-- Etiqueta técnica CAD flotante superior izquierda -->
+        <div class="absolute top-6 left-8 z-20 pointer-events-none flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-[10px] font-mono tracking-[0.2em] text-white/80 uppercase shadow-lg">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#C2E1FF] animate-pulse"></span>
+          <span>PROYECTOS RESIDENCIALES EN OBRA • SYSMICON HD</span>
+        </div>
+
+        <!-- Etiqueta técnica CAD inferior derecha -->
+        <div class="absolute bottom-6 right-8 z-20 pointer-events-none hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-[10px] font-sans tracking-wider text-white shadow-lg">
+          <span class="font-bold text-[#C2E1FF]">RIGOR Y CALIDAD</span>
+          <span class="text-white/30">•</span>
+          <span class="text-white/70">LLAVE EN MANO</span>
+        </div>
       </div>
 
     </div>
+    <!-- FIN NIVEL 2 -->
+
   </div>
 </div>

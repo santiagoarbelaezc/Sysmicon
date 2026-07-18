@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, signal, inject } from '@angular/core';
+import { Component, AfterViewInit, signal, inject, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -15,6 +15,8 @@ import AOS from 'aos';
 export class CotizaConNosotrosComponent implements AfterViewInit {
   readonly contact = CONTACT_INFO;
   readonly brand = BRAND_CONFIG;
+
+  @ViewChildren('bgVideo') videos!: QueryList<ElementRef<HTMLVideoElement>>;
 
   // Form Model
   nombre = signal<string>('');
@@ -35,6 +37,16 @@ export class CotizaConNosotrosComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       AOS.refresh();
+      if (this.videos) {
+        this.videos.forEach(v => {
+          if (v && v.nativeElement) {
+            v.nativeElement.muted = true;
+            v.nativeElement.volume = 0;
+            v.nativeElement.defaultMuted = true;
+            v.nativeElement.play().catch(() => {});
+          }
+        });
+      }
     }, 100);
   }
 

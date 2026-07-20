@@ -86,6 +86,11 @@ export class ProjectsComponent implements AfterViewInit {
   readonly selectedProject = signal<PortfolioItem | null>(null);
   readonly currentImageIndex = signal<number>(0);
   readonly activeLightboxImage = signal<string | null>(null);
+  readonly animTrigger = signal<number>(0);
+
+  trackByTrigger(index: number, item: number): number {
+    return item;
+  }
 
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent): void {
@@ -164,6 +169,7 @@ export class ProjectsComponent implements AfterViewInit {
   abrirGaleria(item: PortfolioItem): void {
     this.selectedProject.set(item);
     this.currentImageIndex.set(0);
+    this.animTrigger.set(0);
     document.body.style.overflow = 'hidden';
   }
 
@@ -174,7 +180,9 @@ export class ProjectsComponent implements AfterViewInit {
   }
 
   seleccionarImagen(idx: number): void {
+    if (this.currentImageIndex() === idx) return;
     this.currentImageIndex.set(idx);
+    this.animTrigger.update(v => v + 1);
   }
 
   anteriorImagen(): void {
@@ -182,6 +190,7 @@ export class ProjectsComponent implements AfterViewInit {
     if (!sp || !sp.images || sp.images.length === 0) return;
     const total = sp.images.length;
     this.currentImageIndex.update(i => (i - 1 + total) % total);
+    this.animTrigger.update(v => v + 1);
   }
 
   siguienteImagen(): void {
@@ -189,6 +198,7 @@ export class ProjectsComponent implements AfterViewInit {
     if (!sp || !sp.images || sp.images.length === 0) return;
     const total = sp.images.length;
     this.currentImageIndex.update(i => (i + 1) % total);
+    this.animTrigger.update(v => v + 1);
   }
 
   anteriorImagenLightbox(): void {

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, signal } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { BRAND_CONFIG } from '../../core/app.constants';
@@ -39,11 +39,27 @@ export class HeroComponent implements OnInit, OnDestroy {
     this.stopCarousel();
   }
 
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent): void {
+    // Si no hay modales abiertos bloqueando el body, las flechas cambian el carrusel hero
+    if (document.body.style.overflow !== 'hidden') {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        this.prevSlide();
+        this.startCarousel();
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        this.nextSlide();
+        this.startCarousel();
+      }
+    }
+  }
+
   startCarousel(): void {
     this.stopCarousel();
     this.timerId = setInterval(() => {
       this.nextSlide();
-    }, 3500);
+    }, 4000);
   }
 
   stopCarousel(): void {

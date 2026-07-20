@@ -90,74 +90,74 @@
   </div>
 </section>
 
-<!-- ===== MODAL / DOSSIER ARQUITECTÓNICO DE ALTO STANDING (98vw x 94vh) ===== -->
-<div *ngIf="selectedProject() as p" class="fixed inset-0 z-[99999] p-2 md:p-6 flex items-center justify-center bg-[#00050d]/95 backdrop-blur-3xl animate-fade-in select-none">
-  <div class="w-[98vw] max-w-[1880px] h-[94vh] max-h-[1080px] bg-[#000814] border border-[#C2E1FF]/25 rounded-3xl overflow-hidden shadow-[0_0_180px_rgba(0,0,0,1)] relative flex flex-col lg:flex-row">
+<!-- ===== MODAL / DOSSIER ARQUITECTÓNICO DE ALTO STANDING (99vw x 97vh) ===== -->
+<div *ngIf="selectedProject() as p" class="fixed inset-0 z-[99999] p-1.5 md:p-3 flex items-center justify-center bg-[#00050d]/95 backdrop-blur-3xl animate-fade-in select-none">
+  <div class="w-[99vw] max-w-[1920px] h-[97vh] max-h-[1100px] bg-[#000814] border border-[#C2E1FF]/25 rounded-2xl overflow-hidden shadow-[0_0_180px_rgba(0,0,0,1)] relative flex flex-col lg:flex-row">
     
     <!-- Botón cerrar flotante superior derecho -->
-    <button (click)="cerrarGaleria()" class="absolute top-6 right-6 z-50 px-6 py-3 rounded-full bg-[#000e1e]/90 border border-[#C2E1FF]/30 text-white font-sans text-xs font-bold tracking-[0.25em] uppercase flex items-center gap-2 hover:bg-[#C2E1FF] hover:text-[#00060e] transition-all shadow-2xl cursor-pointer">
+    <button (click)="cerrarGaleria()" class="absolute top-4 right-4 z-50 px-5 py-2 rounded-full bg-[#000e1e]/90 border border-[#C2E1FF]/30 text-white font-sans text-xs font-bold tracking-[0.25em] uppercase flex items-center gap-2 hover:bg-[#C2E1FF] hover:text-[#00060e] transition-all shadow-2xl cursor-pointer">
       <span>Cerrar</span>
       <span class="text-base font-black">✕</span>
     </button>
 
-    <!-- COLUMNA IZQUIERDA (76%): GALERÍA AMPLIA CON IMÁGENES NOTABLEMENTE MÁS GRANDES -->
-    <div class="lg:w-[76%] h-[65vh] lg:h-full relative bg-[#00040a] flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 overflow-hidden">
+    <!-- COLUMNA IZQUIERDA (77%): GALERÍA AMPLIA CON IMÁGENES COMPLETAS SIN CORTARSE -->
+    <div class="lg:w-[77%] h-[64vh] lg:h-full relative bg-[#00040a] flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 overflow-hidden">
       
-      <!-- Contenedor del Doble Spread Vertical -->
-      <div class="relative flex-1 w-full h-full p-4 md:p-10 flex items-center justify-center">
+      <!-- Contenedor del Doble Spread Vertical con padding reducido (p-2 md:p-3) y min-h-0 -->
+      <div class="relative flex-1 w-full p-2 md:p-3 flex items-center justify-center overflow-hidden min-h-0">
         
         <!-- Flecha Anterior (‹) -->
         <button *ngIf="p.images && p.images.length > 1"
                 (click)="anteriorImagen(); $event.stopPropagation()" 
-                class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full bg-[#000814]/85 hover:bg-[#C2E1FF] hover:text-[#00060e] border border-[#C2E1FF]/30 text-white text-3xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
+                class="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#000814]/85 hover:bg-[#C2E1FF] hover:text-[#00060e] border border-[#C2E1FF]/30 text-white text-3xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
           <span class="group-hover:-translate-x-0.5 transition-transform">‹</span>
         </button>
 
-        <!-- Grid de DOS IMÁGENES VERTICALES en Paralelo (Imágenes en gran formato) -->
-        <div class="w-full max-w-[1450px] h-full grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 items-center justify-center relative">
+        <!-- Grid de DOS IMÁGENES en Paralelo con gap reducido y altura adaptable -->
+        <div class="w-full h-full max-w-[1680px] grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 items-center justify-center relative">
           
-          <!-- Foto Vertical Principal Ampliada (Col 1-8) -->
-          <div class="md:col-span-8 h-[52vh] md:h-[75vh] max-h-[820px] rounded-3xl overflow-hidden relative border border-white/15 shadow-[0_30px_90px_rgba(0,0,0,0.95)] group bg-[#000814] cursor-pointer"
+          <!-- Foto Vertical Principal Ampliada (Col 1-8, h-full sin desbordar) -->
+          <div class="md:col-span-8 h-full max-h-full rounded-2xl overflow-hidden relative border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.95)] group bg-[#000814] cursor-pointer"
                (click)="abrirLightbox(getMainImg(p)); $event.stopPropagation()">
-            <ng-container *ngFor="let idx of [currentImageIndex()]">
-              <img [src]="getMainImg(p, idx)" 
+            <ng-container *ngFor="let t of [animTrigger()]; trackBy: trackByTrigger">
+              <img [src]="getMainImg(p)" 
                    [alt]="p.title + ' vista principal'" 
                    class="w-full h-full object-cover group-hover:scale-105 transition-all duration-[1000ms] animate-slide-change">
             </ng-container>
             
             <div class="absolute inset-0 bg-gradient-to-t from-[#000814]/85 via-transparent to-[#000814]/30 pointer-events-none"></div>
             
-            <!-- Etiqueta superior sobre foto vertical 1 -->
-            <div class="absolute top-6 left-6 bg-[#000814]/85 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#C2E1FF]/30 text-[10px] font-mono tracking-[0.25em] text-[#C2E1FF] uppercase">
+            <!-- Etiqueta superior sobre foto principal -->
+            <div class="absolute top-4 left-4 bg-[#000814]/85 backdrop-blur-md px-3.5 py-1 rounded-full border border-[#C2E1FF]/30 text-[10px] font-mono tracking-[0.25em] text-[#C2E1FF] uppercase">
               VISTA PRINCIPAL • 0{{ currentImageIndex() + 1 }}
             </div>
 
-            <div class="absolute bottom-6 right-6 bg-[#000814]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 text-[10px] font-sans tracking-widest text-white/80 uppercase opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5">
+            <div class="absolute bottom-4 right-4 bg-[#000814]/85 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 text-[10px] font-sans tracking-widest text-white/80 uppercase opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5">
               <span>🔍 Ampliar HD</span>
             </div>
 
             <!-- Letra Vertical elegante en el borde izquierdo de la imagen -->
-            <div class="absolute left-4 bottom-8 [writing-mode:vertical-rl] rotate-180 font-mono text-[9px] tracking-[0.4em] text-white/70 uppercase pl-2 border-l border-[#C2E1FF] select-none pointer-events-none">
+            <div class="absolute left-3 bottom-6 [writing-mode:vertical-rl] rotate-180 font-mono text-[9px] tracking-[0.4em] text-white/70 uppercase pl-2 border-l border-[#C2E1FF] select-none pointer-events-none">
               SYSMICON ARCHITECTURE • RESIDENCIAL
             </div>
           </div>
 
-          <!-- Foto Vertical Secundaria Detalle (Col 9-12) -->
-          <div *ngIf="p.images && p.images.length > 1" class="hidden md:block md:col-span-4 h-[63vh] max-h-[700px] rounded-3xl overflow-hidden relative border border-white/15 shadow-[0_30px_90px_rgba(0,0,0,0.95)] group bg-[#000814] self-center cursor-pointer"
+          <!-- Foto Vertical Secundaria Detalle (Col 9-12, h-[92%] proporcional) -->
+          <div *ngIf="p.images && p.images.length > 1" class="hidden md:block md:col-span-4 h-[92%] max-h-full rounded-2xl overflow-hidden relative border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.95)] group bg-[#000814] self-center cursor-pointer"
                (click)="abrirLightbox(getDetailImg(p)); $event.stopPropagation()">
-            <ng-container *ngFor="let idx of [currentImageIndex()]">
-              <img [src]="getDetailImg(p, idx)" 
+            <ng-container *ngFor="let t of [animTrigger()]; trackBy: trackByTrigger">
+              <img [src]="getDetailImg(p)" 
                    [alt]="p.title + ' vista detalle'" 
                    class="w-full h-full object-cover group-hover:scale-105 transition-all duration-[1000ms] animate-slide-change-delay">
             </ng-container>
             
             <div class="absolute inset-0 bg-gradient-to-t from-[#000814]/85 via-transparent to-transparent pointer-events-none"></div>
             
-            <div class="absolute bottom-6 left-6 text-[10px] font-mono tracking-[0.2em] text-[#C2E1FF] uppercase bg-[#000814]/85 px-3.5 py-1.5 rounded-full backdrop-blur-md border border-[#C2E1FF]/30">
+            <div class="absolute bottom-4 left-4 text-[10px] font-mono tracking-[0.2em] text-[#C2E1FF] uppercase bg-[#000814]/85 px-3 py-1 rounded-full backdrop-blur-md border border-[#C2E1FF]/30">
               DETALLE • 0{{ ((currentImageIndex() + 1) % p.images.length) + 1 }}
             </div>
 
-            <div class="absolute top-6 right-6 bg-[#000814]/85 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 text-[9px] font-sans tracking-widest text-white/80 uppercase opacity-0 group-hover:opacity-100 transition-opacity">
+            <div class="absolute top-4 right-4 bg-[#000814]/85 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 text-[9px] font-sans tracking-widest text-white/80 uppercase opacity-0 group-hover:opacity-100 transition-opacity">
               <span>🔍</span>
             </div>
           </div>
@@ -167,21 +167,21 @@
         <!-- Flecha Siguiente (›) -->
         <button *ngIf="p.images && p.images.length > 1"
                 (click)="siguienteImagen(); $event.stopPropagation()" 
-                class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full bg-[#000814]/85 hover:bg-[#C2E1FF] hover:text-[#00060e] border border-[#C2E1FF]/30 text-white text-3xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
+                class="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#000814]/85 hover:bg-[#C2E1FF] hover:text-[#00060e] border border-[#C2E1FF]/30 text-white text-3xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
           <span class="group-hover:translate-x-0.5 transition-transform">›</span>
         </button>
 
       </div>
 
-      <!-- Tira Inferior de Miniaturas Limpias y Grandes (h-24) -->
-      <div *ngIf="p.images && p.images.length > 1" class="h-24 bg-[#00060f] border-t border-white/10 px-8 py-3 flex items-center justify-center gap-4 overflow-x-auto z-30 shrink-0">
+      <!-- Tira Inferior de Miniaturas Limpias y Visibles al 100% (h-22) -->
+      <div *ngIf="p.images && p.images.length > 1" class="h-20 md:h-22 bg-[#00060f] border-t border-white/10 px-4 py-2 flex items-center justify-center gap-3 overflow-x-auto z-30 shrink-0">
         <div *ngFor="let m of p.images; let idx = index" 
              (click)="seleccionarImagen(idx)"
              [ngClass]="{
                'border-[#C2E1FF] scale-105 opacity-100 ring-2 ring-[#C2E1FF]/50 shadow-lg': currentImageIndex() === idx,
                'border-white/15 opacity-40 hover:opacity-85 hover:scale-100': currentImageIndex() !== idx
              }"
-             class="w-24 h-16 rounded-xl overflow-hidden border-2 cursor-pointer transition-all shrink-0 relative group">
+             class="w-22 h-14 md:w-24 md:h-16 rounded-lg overflow-hidden border-2 cursor-pointer transition-all shrink-0 relative group">
           <img [src]="m" [alt]="p.title + ' miniatura ' + idx" class="w-full h-full object-cover">
           <div *ngIf="currentImageIndex() === idx" class="absolute bottom-0 inset-x-0 h-1 bg-[#C2E1FF]"></div>
         </div>
@@ -189,12 +189,12 @@
 
     </div>
 
-    <!-- COLUMNA DERECHA (24%): PURO MINIMALISMO VIP, SIN EXCESO DE TEXTO -->
-    <div class="lg:w-[24%] h-[55vh] lg:h-full bg-[#000814] p-6 lg:p-10 overflow-hidden flex flex-col justify-between text-left border-l border-white/10">
+    <!-- COLUMNA DERECHA (23%): PURO MINIMALISMO VIP, SIN EXCESO DE TEXTO -->
+    <div class="lg:w-[23%] h-[36vh] lg:h-full bg-[#000814] p-5 lg:p-7 overflow-hidden flex flex-col justify-between text-left border-l border-white/10">
       
       <!-- Encabezado Ficha y Título -->
       <div class="shrink-0">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#C2E1FF]/15 border border-[#C2E1FF]/40 text-[9px] font-mono text-[#C2E1FF] tracking-[0.28em] uppercase mb-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C2E1FF]/15 border border-[#C2E1FF]/40 text-[9px] font-mono text-[#C2E1FF] tracking-[0.28em] uppercase mb-2.5">
           <span>OBRA MAESTRA VIP</span>
         </div>
         <h2 class="font-serif text-3xl lg:text-4xl xl:text-5xl font-light text-white uppercase tracking-[0.12em] leading-tight drop-shadow-md truncate">
@@ -206,7 +206,7 @@
       </div>
 
       <!-- Ficha Técnica CAD Limpia y Elegante (Sin textos largos ni párrafos saturados) -->
-      <div class="py-6 border-y border-white/10 my-6 space-y-5 shrink-0">
+      <div class="py-5 border-y border-white/10 my-5 space-y-4 shrink-0">
         <div class="flex items-center justify-between font-mono text-xs text-white/80">
           <span class="text-white/40 tracking-[0.22em] uppercase">SUPERFICIE</span>
           <span class="font-serif text-xl lg:text-2xl text-white tracking-wider">580 <span class="text-xs font-mono text-[#C2E1FF]">M²</span></span>
@@ -222,8 +222,8 @@
       </div>
 
       <!-- Botón de Asesoría VIP Inferior (Directo y Limpio) -->
-      <div class="pt-2 mt-auto shrink-0 space-y-3">
-        <a routerLink="/cotiza-con-nosotros" [queryParams]="{proyecto: p.title}" (click)="cerrarGaleria()" class="w-full py-4 px-6 rounded-full bg-[#C2E1FF] hover:bg-white text-[#00060e] font-sans text-xs tracking-[0.22em] font-extrabold uppercase transition-all shadow-[0_0_25px_rgba(194,225,255,0.35)] hover:shadow-[0_0_40px_rgba(255,255,255,0.8)] hover:scale-[1.02] flex items-center justify-center gap-3 cursor-pointer">
+      <div class="pt-1 mt-auto shrink-0 space-y-2.5">
+        <a routerLink="/cotiza-con-nosotros" [queryParams]="{proyecto: p.title}" (click)="cerrarGaleria()" class="w-full py-3.5 px-6 rounded-full bg-[#C2E1FF] hover:bg-white text-[#00060e] font-sans text-xs tracking-[0.22em] font-extrabold uppercase transition-all shadow-[0_0_25px_rgba(194,225,255,0.35)] hover:shadow-[0_0_40px_rgba(255,255,255,0.8)] hover:scale-[1.02] flex items-center justify-center gap-3 cursor-pointer">
           <span>SOLICITAR ASESORÍA PRIVADA</span>
           <span class="text-sm font-black">→</span>
         </a>
@@ -257,8 +257,8 @@
   </button>
 
   <div class="relative max-w-[95vw] max-h-[92vh] flex items-center justify-center" (click)="$event.stopPropagation()">
-    <ng-container *ngFor="let img of [lbImg]">
-      <img [src]="img" alt="Vista ampliada HD" class="w-auto h-auto max-w-[95vw] max-h-[92vh] object-contain rounded-2xl shadow-2xl border border-[#C2E1FF]/30 animate-slide-change">
+    <ng-container *ngFor="let t of [animTrigger()]; trackBy: trackByTrigger">
+      <img [src]="lbImg" alt="Vista ampliada HD" class="w-auto h-auto max-w-[95vw] max-h-[92vh] object-contain rounded-2xl shadow-2xl border border-[#C2E1FF]/30 animate-slide-change">
     </ng-container>
     <div class="absolute -bottom-10 left-0 right-0 text-center text-xs font-mono text-[#C2E1FF] tracking-[0.25em] uppercase">
       <span>Sysmicon Studio — Visualizador Arquitectónico HD</span>

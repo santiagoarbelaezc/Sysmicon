@@ -7,6 +7,14 @@
     <div class="hero-overlay"></div>
   </div>
 
+  <!-- Flechas de navegación elegantes en pantalla -->
+  <button (click)="prevSlide(); startCarousel()" class="hero-arrow hero-arrow-left" aria-label="Anterior diapositiva">
+    ‹
+  </button>
+  <button (click)="nextSlide(); startCarousel()" class="hero-arrow hero-arrow-right" aria-label="Siguiente diapositiva">
+    ›
+  </button>
+
   <!-- Elegant Carousel Indicator / Controls (Bottom Right) -->
   <div class="carousel-controls font-sans">
     <div class="slide-info-elegant">

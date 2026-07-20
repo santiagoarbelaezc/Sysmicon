@@ -30,3 +30,53 @@
 .aspect-\[3\/4\] {
   aspect-ratio: 3 / 4;
 }
+
+/* Efecto Cinematográfico de Cambio de Diapositiva (Slide Change Effect) */
+@keyframes imageFadeScale {
+  0% {
+    opacity: 0;
+    transform: scale(1.08) translateY(12px);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.animate-slide-change {
+  animation: imageFadeScale 0.68s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-change-delay {
+  animation: imageFadeScale 0.68s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
+.animate-lightbox-backdrop {
+  animation: lightboxBackdrop 0.4s ease-out forwards;
+}
+
+@keyframes lightboxBackdrop {
+  from { background-color: rgba(0, 0, 0, 0); }
+  to { background-color: rgba(0, 0, 0, 0.98); }
+}
+
+.animate-lightbox-image {
+  animation: lightboxImageReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes lightboxImageReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}

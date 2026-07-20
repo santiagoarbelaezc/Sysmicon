@@ -1,49 +1,49 @@
 <header class="navbar" [ngClass]="{'scrolled': isScrolled() && !isAuthPage, 'auth-solid': isAuthPage, 'home-transparent': isHomePage && !isScrolled()}">
-  <div class="w-full max-w-[1800px] mx-auto px-6 md:px-12 navbar-container flex items-center justify-between">
-    <!-- Logo -->
-    <a routerLink="/" class="navbar-logo group flex items-center gap-3 z-[1001]" (click)="closeMobileMenu()">
-      <img src="assets/icons/logo-sysmico-navbar.png" alt="Sysmicon" class="w-10 h-10 md:w-11 md:h-11 object-contain transition-transform duration-300 group-hover:scale-105">
-      <span class="logo-text font-serif">{{ brandName }}</span>
+  <div class="w-full max-w-[1750px] mx-auto px-6 md:px-16 navbar-container flex items-center justify-between">
+    <!-- Logo Sobrio y Distinguido -->
+    <a routerLink="/" class="navbar-logo group flex items-center gap-3.5 z-[1001]" (click)="closeMobileMenu()">
+      <img src="assets/icons/logo-sysmico-navbar.png" alt="Sysmicon" class="w-10 h-10 md:w-11 md:h-11 object-contain transition-transform duration-500 group-hover:scale-105">
+      <span class="logo-text font-serif tracking-[0.22em] text-xl md:text-2xl font-light text-white uppercase">{{ brandName }}</span>
     </a>
 
-    <!-- Desktop Nav Links -->
+    <!-- Desktop Nav Links (Sobrios y Minimalistas con Tamaño Ajustado) -->
     <nav class="desktop-nav">
-      <ul class="nav-list flex items-center gap-16">
+      <ul class="nav-list flex items-center gap-14">
         <li *ngFor="let link of navLinks">
           <a [routerLink]="link.path" 
              routerLinkActive="active" 
              [routerLinkActiveOptions]="{exact: link.path === '/'}"
              (click)="onNavLinkClick(link)"
-             class="nav-link font-sans">
-            {{ link.label }}
+             class="nav-link font-sans text-xs md:text-[13.5px] tracking-[0.2em] uppercase font-medium">
+            <span>{{ link.label }}</span>
             <span class="link-underline"></span>
           </a>
         </li>
       </ul>
     </nav>
 
-    <!-- Desktop Right Actions -->
+    <!-- Desktop Right Actions (Ingreso / Registro Elegante) -->
     <div class="desktop-actions flex items-center gap-8">
       <!-- Auth Links / User Profile -->
-      <div class="auth-links flex items-center gap-6 font-sans text-sm">
+      <div class="auth-links flex items-center gap-6 font-sans">
         <ng-container *ngIf="!authService.isLoggedIn()">
-          <a routerLink="/login" class="font-semibold text-white/90 hover:text-[#C2E1FF] transition-colors">Ingresar</a>
-          <a routerLink="/registro" class="px-5 py-2.5 rounded-full border border-[#C2E1FF]/50 bg-[#C2E1FF]/15 hover:bg-[#C2E1FF] text-white hover:text-[#00060e] transition-all font-sans text-xs font-extrabold tracking-wider uppercase shadow-lg">Registrarse</a>
+          <a routerLink="/login" class="text-xs md:text-[13px] uppercase tracking-[0.18em] text-white/80 hover:text-white transition-colors py-1 font-medium">Ingresar</a>
+          <a routerLink="/registro" class="px-6 py-2.5 rounded-full border border-white/25 hover:border-[#C2E1FF] bg-white/[0.03] hover:bg-[#C2E1FF] text-white hover:text-[#000814] transition-all duration-300 font-sans text-xs md:text-[13px] font-semibold tracking-[0.18em] uppercase shadow-sm">Registrarse</a>
         </ng-container>
 
         <ng-container *ngIf="authService.currentUser() as user">
-          <a routerLink="/admin" title="Ir al Portal Admin" class="flex items-center gap-2 bg-[#001A33] hover:bg-[#242424] px-3.5 py-1.5 rounded-full border border-wood-accent/40 hover:border-wood-accent shadow-sm animate-fade transition-all cursor-pointer">
-            <span class="w-6 h-6 rounded-full bg-wood-accent text-[#002345] font-bold text-xs flex items-center justify-center">{{ user.nombre.charAt(0) }}</span>
-            <span class="font-bold text-wood-light truncate max-w-[100px]">{{ user.nombre }}</span>
-            <span class="bg-wood-accent/20 text-wood-accent text-[10px] font-extrabold px-2 py-0.5 rounded">ADMIN</span>
-            <button (click)="authService.logout(); $event.stopPropagation(); $event.preventDefault()" title="Cerrar sesión" class="text-gray-400 hover:text-red-400 font-bold ml-0.5 transition-colors cursor-pointer relative z-10">✕</button>
+          <a routerLink="/admin" title="Ir al Portal Admin" class="flex items-center gap-2.5 bg-[#000814]/90 hover:bg-[#001428] px-4 py-1.5 rounded-full border border-[#C2E1FF]/30 hover:border-[#C2E1FF] shadow-md transition-all cursor-pointer">
+            <span class="w-6 h-6 rounded-full bg-[#C2E1FF] text-[#000814] font-bold text-[10px] flex items-center justify-center">{{ user.nombre.charAt(0) }}</span>
+            <span class="font-sans text-xs tracking-wider text-white truncate max-w-[110px]">{{ user.nombre }}</span>
+            <span class="bg-[#C2E1FF]/15 text-[#C2E1FF] text-[9px] font-mono tracking-widest px-2 py-0.5 rounded uppercase">ADMIN</span>
+            <button (click)="authService.logout(); $event.stopPropagation(); $event.preventDefault()" title="Cerrar sesión" class="text-white/40 hover:text-red-400 font-bold ml-1 transition-colors cursor-pointer relative z-10 text-xs">✕</button>
           </a>
         </ng-container>
       </div>
     </div>
 
     <!-- Mobile Hamburger Trigger -->
-    <button class="mobile-toggle flex flex-col justify-between w-8 h-[22px] z-[1001]" 
+    <button class="mobile-toggle flex flex-col justify-between w-8 h-[20px] z-[1001]" 
             (click)="toggleMobileMenu()" 
             [ngClass]="{'open': isMobileMenuOpen()}"
             aria-label="Abrir menú de navegación">
@@ -53,16 +53,16 @@
     </button>
   </div>
 
-  <!-- Fullscreen Mobile Menu Overlay -->
+  <!-- Fullscreen Mobile Menu Overlay (Sobrio y de Alta Joyería Arquitectónica) -->
   <div class="mobile-menu-overlay" [ngClass]="{'active': isMobileMenuOpen()}">
     <div class="mobile-menu-content">
       <ul class="mobile-nav-list">
-        <li *ngFor="let link of navLinks; let i = index" [style.transition-delay]="(i * 100) + 'ms'">
+        <li *ngFor="let link of navLinks; let i = index" [style.transition-delay]="(i * 90) + 'ms'">
           <a [routerLink]="link.path" 
              routerLinkActive="active" 
              [routerLinkActiveOptions]="{exact: link.path === '/'}"
              (click)="onNavLinkClick(link)"
-             class="mobile-nav-link font-serif">
+             class="mobile-nav-link font-serif text-3xl font-light uppercase tracking-[0.15em]">
             {{ link.label }}
           </a>
         </li>
@@ -70,31 +70,31 @@
 
       <div class="mobile-menu-footer">
         <!-- Mobile Auth -->
-        <div class="flex flex-col items-center justify-center gap-3 my-4 font-sans text-base">
+        <div class="flex flex-col items-center justify-center gap-4 my-4 font-sans text-base w-full max-w-xs">
           <ng-container *ngIf="!authService.isLoggedIn()">
-            <div class="flex items-center gap-6">
-              <a routerLink="/login" (click)="closeMobileMenu()" class="text-white/90 hover:text-[#C2E1FF] font-semibold">Ingresar</a>
-              <a routerLink="/registro" (click)="closeMobileMenu()" class="px-5 py-2 rounded-full border border-[#C2E1FF]/50 bg-[#C2E1FF]/15 hover:bg-[#C2E1FF] text-white hover:text-[#00060e] font-sans text-xs font-extrabold tracking-wider uppercase">Registrarse</a>
+            <div class="flex items-center justify-center gap-8 w-full">
+              <a routerLink="/login" (click)="closeMobileMenu()" class="text-xs uppercase tracking-[0.22em] text-white/70 hover:text-white font-medium">Ingresar</a>
+              <a routerLink="/registro" (click)="closeMobileMenu()" class="px-7 py-3 rounded-full border border-white/25 bg-white/[0.04] hover:bg-[#C2E1FF] hover:text-[#000814] text-white font-sans text-xs font-semibold tracking-[0.22em] uppercase transition-all">Registrarse</a>
             </div>
           </ng-container>
           <ng-container *ngIf="authService.currentUser() as user">
-            <div class="flex flex-col gap-2 bg-[#001A33] px-4 py-3 rounded-xl border border-wood-accent/40 w-full max-w-[280px]">
+            <div class="flex flex-col gap-3 bg-[#000814] px-5 py-4 rounded-2xl border border-[#C2E1FF]/30 w-full shadow-2xl">
               <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <span class="w-7 h-7 rounded-full bg-wood-accent text-[#002345] font-bold text-sm flex items-center justify-center">{{ user.nombre.charAt(0) }}</span>
-                  <span class="font-bold text-wood-light text-sm truncate max-w-[130px]">{{ user.nombre }}</span>
+                <div class="flex items-center gap-2.5">
+                  <span class="w-7 h-7 rounded-full bg-[#C2E1FF] text-[#000814] font-bold text-xs flex items-center justify-center">{{ user.nombre.charAt(0) }}</span>
+                  <span class="font-sans text-xs tracking-wider text-white truncate max-w-[130px]">{{ user.nombre }}</span>
                 </div>
-                <button (click)="authService.logout(); closeMobileMenu()" class="text-xs bg-red-950/60 text-red-300 border border-red-800/40 px-2.5 py-1 rounded-lg">Salir</button>
+                <button (click)="authService.logout(); closeMobileMenu()" class="text-[10px] bg-red-950/60 text-red-300 border border-red-800/40 px-2.5 py-1 rounded-md uppercase tracking-wider">Salir</button>
               </div>
-              <a routerLink="/admin" (click)="closeMobileMenu()" class="w-full text-center py-1.5 rounded-lg bg-wood-accent text-[#002345] font-extrabold text-xs tracking-wider uppercase transition-transform hover:scale-[1.02]">
-                ⚡ Entrar al Portal Admin
+              <a routerLink="/admin" (click)="closeMobileMenu()" class="w-full text-center py-2 rounded-xl bg-[#C2E1FF] text-[#000814] font-semibold text-xs tracking-[0.18em] uppercase transition-all">
+                Portal Admin
               </a>
             </div>
           </ng-container>
         </div>
 
-        <div class="mobile-socials mt-6">
-          <a href="https://www.instagram.com/sysmicon/" target="_blank" rel="noopener noreferrer">Instagram &#64;sysmicon</a>
+        <div class="mobile-socials mt-4">
+          <a href="https://www.instagram.com/sysmicon/" target="_blank" rel="noopener noreferrer" class="font-mono text-[10px] tracking-[0.3em] uppercase text-white/40 hover:text-[#C2E1FF] transition-colors">INSTAGRAM • &#64;SYSMICON</a>
         </div>
       </div>
     </div>

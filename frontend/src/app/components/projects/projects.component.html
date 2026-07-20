@@ -83,68 +83,71 @@
 </section>
 
 <!-- ===== MODAL / DOSSIER ARQUITECTÓNICO DE ALTO STANDING (98vw x 94vh) ===== -->
-<div *ngIf="selectedProject() as p" class="fixed inset-0 z-[99999] p-2 md:p-6 flex items-center justify-center bg-[#002345]/95 backdrop-blur-3xl animate-fade-in select-none">
-  <div class="w-[98vw] max-w-[1850px] h-[94vh] max-h-[1080px] bg-[#242424] border border-[#C2E1FF]/25 rounded-3xl overflow-hidden shadow-[0_0_150px_rgba(0,0,0,1)] relative flex flex-col lg:flex-row">
+<div *ngIf="selectedProject() as p" class="fixed inset-0 z-[99999] p-2 md:p-6 flex items-center justify-center bg-[#00050d]/95 backdrop-blur-3xl animate-fade-in select-none">
+  <div class="w-[98vw] max-w-[1880px] h-[94vh] max-h-[1080px] bg-[#000814] border border-[#C2E1FF]/25 rounded-3xl overflow-hidden shadow-[0_0_180px_rgba(0,0,0,1)] relative flex flex-col lg:flex-row">
     
     <!-- Botón cerrar flotante superior derecho -->
-    <button (click)="cerrarGaleria()" class="absolute top-6 right-6 z-50 px-6 py-3 rounded-full bg-[#001A33]/90 border border-[#C2E1FF]/30 text-white font-sans text-xs font-bold tracking-[0.25em] uppercase flex items-center gap-2 hover:bg-[#C2E1FF] hover:text-[#002345] transition-all shadow-2xl cursor-pointer">
+    <button (click)="cerrarGaleria()" class="absolute top-6 right-6 z-50 px-6 py-3 rounded-full bg-[#000e1e]/90 border border-[#C2E1FF]/30 text-white font-sans text-xs font-bold tracking-[0.25em] uppercase flex items-center gap-2 hover:bg-[#C2E1FF] hover:text-[#00060e] transition-all shadow-2xl cursor-pointer">
       <span>Cerrar</span>
       <span class="text-base font-black">✕</span>
     </button>
 
-    <!-- COLUMNA IZQUIERDA (70%): DOS IMÁGENES VERTICALES + TIPOGRAFÍA VERTICAL -->
-    <div class="lg:w-[70%] h-[62vh] lg:h-full relative bg-[#001A33] flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 overflow-hidden">
+    <!-- COLUMNA IZQUIERDA (76%): GALERÍA AMPLIA CON IMÁGENES NOTABLEMENTE MÁS GRANDES -->
+    <div class="lg:w-[76%] h-[65vh] lg:h-full relative bg-[#00040a] flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 overflow-hidden">
       
       <!-- Contenedor del Doble Spread Vertical -->
-      <div class="relative flex-1 w-full h-full p-6 md:p-12 flex items-center justify-center">
+      <div class="relative flex-1 w-full h-full p-4 md:p-10 flex items-center justify-center">
         
         <!-- Flecha Anterior (‹) -->
         <button *ngIf="p.images && p.images.length > 1"
                 (click)="anteriorImagen(); $event.stopPropagation()" 
-                class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full bg-[#002345]/80 hover:bg-[#C2E1FF] hover:text-[#002345] border border-[#C2E1FF]/30 text-white text-3xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
+                class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full bg-[#000814]/85 hover:bg-[#C2E1FF] hover:text-[#00060e] border border-[#C2E1FF]/30 text-white text-3xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
           <span class="group-hover:-translate-x-0.5 transition-transform">‹</span>
         </button>
 
-        <!-- Grid de DOS IMÁGENES VERTICALES en Paralelo + Letra Vertical -->
-        <div class="w-full max-w-6xl h-full grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 items-center justify-center relative">
+        <!-- Grid de DOS IMÁGENES VERTICALES en Paralelo (Imágenes en gran formato) -->
+        <div class="w-full max-w-[1450px] h-full grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 items-center justify-center relative">
           
-          <!-- Foto Vertical Principal (Col 1-7) -->
-          <div class="md:col-span-7 h-[46vh] md:h-[70vh] rounded-2xl overflow-hidden relative border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.95)] group bg-[#242424]">
+          <!-- Foto Vertical Principal Ampliada (Col 1-8) -->
+          <div class="md:col-span-8 h-[52vh] md:h-[75vh] max-h-[820px] rounded-3xl overflow-hidden relative border border-white/15 shadow-[0_30px_90px_rgba(0,0,0,0.95)] group bg-[#000814] cursor-pointer"
+               (click)="abrirLightbox((p.images && p.images.length > 0) ? (p.images[currentImageIndex()] || p.img) : p.img); $event.stopPropagation()">
             <img [src]="(p.images && p.images.length > 0) ? (p.images[currentImageIndex()] || p.img) : p.img" 
-                 [alt]="p.title + ' vista 1'" 
+                 [alt]="p.title + ' vista principal'" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-all duration-[1000ms]">
             
-            <div class="absolute inset-0 bg-gradient-to-t from-[#002345]/80 via-transparent to-[#002345]/30 pointer-events-none"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#000814]/85 via-transparent to-[#000814]/30 pointer-events-none"></div>
             
-            <!-- Etiqueta sobre foto vertical 1 -->
-            <div class="absolute top-5 left-5 bg-[#001A33]/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#C2E1FF]/30 text-[10px] font-mono tracking-[0.25em] text-[#C2E1FF] uppercase">
+            <!-- Etiqueta superior sobre foto vertical 1 -->
+            <div class="absolute top-6 left-6 bg-[#000814]/85 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#C2E1FF]/30 text-[10px] font-mono tracking-[0.25em] text-[#C2E1FF] uppercase">
               VISTA PRINCIPAL • 0{{ currentImageIndex() + 1 }}
             </div>
 
+            <div class="absolute bottom-6 right-6 bg-[#000814]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 text-[10px] font-sans tracking-widest text-white/80 uppercase opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5">
+              <span>🔍 Ampliar HD</span>
+            </div>
+
             <!-- Letra Vertical elegante en el borde izquierdo de la imagen -->
-            <div class="absolute left-3 bottom-8 [writing-mode:vertical-rl] rotate-180 font-mono text-[9px] tracking-[0.4em] text-white/70 uppercase pl-2 border-l border-[#C2E1FF] select-none pointer-events-none">
+            <div class="absolute left-4 bottom-8 [writing-mode:vertical-rl] rotate-180 font-mono text-[9px] tracking-[0.4em] text-white/70 uppercase pl-2 border-l border-[#C2E1FF] select-none pointer-events-none">
               SYSMICON ARCHITECTURE • RESIDENCIAL
             </div>
           </div>
 
-          <!-- Foto Vertical Secundaria Detalle (Col 8-11) -->
-          <div *ngIf="p.images && p.images.length > 1" class="hidden md:block md:col-span-4 h-[58vh] rounded-2xl overflow-hidden relative border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.95)] group bg-[#242424] self-end mb-6">
+          <!-- Foto Vertical Secundaria Detalle (Col 9-12) -->
+          <div *ngIf="p.images && p.images.length > 1" class="hidden md:block md:col-span-4 h-[63vh] max-h-[700px] rounded-3xl overflow-hidden relative border border-white/15 shadow-[0_30px_90px_rgba(0,0,0,0.95)] group bg-[#000814] self-center cursor-pointer"
+               (click)="abrirLightbox(p.images[(currentImageIndex() + 1) % p.images.length]); $event.stopPropagation()">
             <img [src]="p.images[(currentImageIndex() + 1) % p.images.length]" 
-                 [alt]="p.title + ' vista 2'" 
+                 [alt]="p.title + ' vista detalle'" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-all duration-[1000ms]">
             
-            <div class="absolute inset-0 bg-gradient-to-t from-[#002345]/80 via-transparent to-transparent pointer-events-none"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#000814]/85 via-transparent to-transparent pointer-events-none"></div>
             
-            <div class="absolute bottom-5 left-5 text-[10px] font-mono tracking-[0.2em] text-[#C2E1FF] uppercase bg-[#001A33]/80 px-3 py-1 rounded backdrop-blur-md border border-[#C2E1FF]/20">
+            <div class="absolute bottom-6 left-6 text-[10px] font-mono tracking-[0.2em] text-[#C2E1FF] uppercase bg-[#000814]/85 px-3.5 py-1.5 rounded-full backdrop-blur-md border border-[#C2E1FF]/30">
               DETALLE • 0{{ ((currentImageIndex() + 1) % p.images.length) + 1 }}
             </div>
-          </div>
 
-          <!-- Letra Vertical Monumental a la derecha del spread (Col 12) -->
-          <div class="hidden md:flex md:col-span-1 h-[70vh] items-center justify-center select-none pointer-events-none">
-            <span class="[writing-mode:vertical-rl] rotate-180 font-serif text-xs tracking-[0.5em] text-[#C2E1FF]/80 uppercase font-light border-l border-[#C2E1FF]/30 pl-4 py-6">
-              S Y S M I C O N   D O S S I E R   2 0 2 6
-            </span>
+            <div class="absolute top-6 right-6 bg-[#000814]/85 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 text-[9px] font-sans tracking-widest text-white/80 uppercase opacity-0 group-hover:opacity-100 transition-opacity">
+              <span>🔍</span>
+            </div>
           </div>
 
         </div>
@@ -152,21 +155,21 @@
         <!-- Flecha Siguiente (›) -->
         <button *ngIf="p.images && p.images.length > 1"
                 (click)="siguienteImagen(); $event.stopPropagation()" 
-                class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full bg-[#002345]/80 hover:bg-[#C2E1FF] hover:text-[#002345] border border-[#C2E1FF]/30 text-white text-3xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
+                class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full bg-[#000814]/85 hover:bg-[#C2E1FF] hover:text-[#00060e] border border-[#C2E1FF]/30 text-white text-3xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
           <span class="group-hover:translate-x-0.5 transition-transform">›</span>
         </button>
 
       </div>
 
-      <!-- Tira Inferior de Miniaturas Limpias (h-24) -->
-      <div *ngIf="p.images && p.images.length > 1" class="h-24 bg-[#002345] border-t border-white/10 px-8 py-3 flex items-center justify-center gap-3.5 overflow-x-auto z-30 shrink-0">
+      <!-- Tira Inferior de Miniaturas Limpias y Grandes (h-24) -->
+      <div *ngIf="p.images && p.images.length > 1" class="h-24 bg-[#00060f] border-t border-white/10 px-8 py-3 flex items-center justify-center gap-4 overflow-x-auto z-30 shrink-0">
         <div *ngFor="let m of p.images; let idx = index" 
              (click)="seleccionarImagen(idx)"
              [ngClass]="{
                'border-[#C2E1FF] scale-105 opacity-100 ring-2 ring-[#C2E1FF]/50 shadow-lg': currentImageIndex() === idx,
                'border-white/15 opacity-40 hover:opacity-85 hover:scale-100': currentImageIndex() !== idx
              }"
-             class="w-20 h-16 rounded-lg overflow-hidden border-2 cursor-pointer transition-all shrink-0 relative group">
+             class="w-24 h-16 rounded-xl overflow-hidden border-2 cursor-pointer transition-all shrink-0 relative group">
           <img [src]="m" [alt]="p.title + ' miniatura ' + idx" class="w-full h-full object-cover">
           <div *ngIf="currentImageIndex() === idx" class="absolute bottom-0 inset-x-0 h-1 bg-[#C2E1FF]"></div>
         </div>
@@ -174,62 +177,46 @@
 
     </div>
 
-    <!-- COLUMNA DERECHA (30%): COMPACTA, GARANTIZADO CERO SCROLL, LOOK CARO Y SOFISTICADO -->
-    <!-- COLUMNA DERECHA (30%): COMPACTA, GARANTIZADO CERO SCROLL, LOOK CARO Y SOFISTICADO -->
-    <div class="lg:w-[30%] h-[60vh] lg:h-full bg-[#001A33] p-6 lg:p-8 overflow-hidden flex flex-col justify-between text-left border-l border-white/10">
+    <!-- COLUMNA DERECHA (24%): PURO MINIMALISMO VIP, SIN EXCESO DE TEXTO -->
+    <div class="lg:w-[24%] h-[55vh] lg:h-full bg-[#000814] p-6 lg:p-10 overflow-hidden flex flex-col justify-between text-left border-l border-white/10">
       
       <!-- Encabezado Ficha y Título -->
       <div class="shrink-0">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C2E1FF]/15 border border-[#C2E1FF]/40 text-[9px] font-mono text-[#C2E1FF] tracking-[0.25em] uppercase mb-2">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#C2E1FF]/15 border border-[#C2E1FF]/40 text-[9px] font-mono text-[#C2E1FF] tracking-[0.28em] uppercase mb-3">
           <span>OBRA MAESTRA VIP</span>
         </div>
-        <h2 class="font-serif text-3xl lg:text-4xl font-light text-white uppercase tracking-[0.1em] leading-tight drop-shadow-md truncate">
+        <h2 class="font-serif text-3xl lg:text-4xl xl:text-5xl font-light text-white uppercase tracking-[0.12em] leading-tight drop-shadow-md truncate">
           {{ p.title }}
         </h2>
-        <p class="font-serif italic text-xs lg:text-sm text-[#C2E1FF] mt-1 font-normal leading-snug line-clamp-2">
+        <p class="font-serif italic text-xs lg:text-sm text-[#C2E1FF] mt-2 font-normal leading-relaxed">
           "{{ p.subtitle }}"
         </p>
       </div>
 
-      <!-- Cuadro Técnico Minimalista de Lujo (Números Grandes) -->
-      <div class="grid grid-cols-2 gap-y-3 gap-x-4 py-3 border-y border-white/10 my-3 shrink-0">
-        <div>
-          <span class="text-white/40 font-mono text-[9px] uppercase tracking-[0.2em] block">ÁREA</span>
-          <span class="font-serif text-xl lg:text-2xl font-light text-white tracking-wider">580 <span class="text-[10px] font-mono text-[#C2E1FF]">M²</span></span>
+      <!-- Ficha Técnica CAD Limpia y Elegante (Sin textos largos ni párrafos saturados) -->
+      <div class="py-6 border-y border-white/10 my-6 space-y-5 shrink-0">
+        <div class="flex items-center justify-between font-mono text-xs text-white/80">
+          <span class="text-white/40 tracking-[0.22em] uppercase">SUPERFICIE</span>
+          <span class="font-serif text-xl lg:text-2xl text-white tracking-wider">580 <span class="text-xs font-mono text-[#C2E1FF]">M²</span></span>
         </div>
-        <div>
-          <span class="text-white/40 font-mono text-[9px] uppercase tracking-[0.2em] block">ENTREGA</span>
-          <span class="font-serif text-xl lg:text-2xl font-light text-white tracking-wider">2025</span>
+        <div class="flex items-center justify-between font-mono text-xs text-white/80">
+          <span class="text-white/40 tracking-[0.22em] uppercase">SISTEMA</span>
+          <span class="font-sans text-xs font-bold text-[#C2E1FF] tracking-widest uppercase">Llave en Mano</span>
         </div>
-        <div>
-          <span class="text-white/40 font-mono text-[9px] uppercase tracking-[0.2em] block">UBICACIÓN</span>
-          <span class="font-sans text-[11px] font-bold text-white tracking-widest uppercase truncate block">Antioquia</span>
-        </div>
-        <div>
-          <span class="text-white/40 font-mono text-[9px] uppercase tracking-[0.2em] block">SISTEMA</span>
-          <span class="font-sans text-[11px] font-bold text-[#C2E1FF] tracking-widest uppercase block">Llave en Mano</span>
+        <div class="flex items-center justify-between font-mono text-xs text-white/80">
+          <span class="text-white/40 tracking-[0.22em] uppercase">UBICACIÓN</span>
+          <span class="font-serif text-base text-white tracking-wider">Antioquia</span>
         </div>
       </div>
 
-      <!-- Párrafo Descriptivo y 1 Hito Clave (Todo Ajustado sin Scroll) -->
-      <div class="space-y-2 overflow-hidden flex-1 flex flex-col justify-center">
-        <p class="text-white/85 font-sans text-xs leading-relaxed font-light tracking-wide line-clamp-3">
-          Arquitectura residencial de alto nivel con voladizos estructurales sin apoyos intermedios. Integración perfecta entre concreto aparente, madera noble de teca e iluminación bioclimática.
-        </p>
-        <div class="flex items-center gap-2.5 text-xs text-white/90 font-sans tracking-wide bg-white/[0.04] p-2.5 rounded-lg border border-[#C2E1FF]/20 line-clamp-1">
-          <span class="w-1.5 h-1.5 rounded-full bg-[#C2E1FF] shrink-0"></span>
-          <span class="font-medium truncate">Estructura y volumetría suspendida sobre el paisaje</span>
-        </div>
-      </div>
-
-      <!-- Botón de Asesoría VIP Inferior (Siempre visible abajo) -->
-      <div class="pt-3 border-t border-white/10 mt-auto shrink-0 space-y-2">
-        <a routerLink="/cotiza-con-nosotros" [queryParams]="{proyecto: p.title}" (click)="cerrarGaleria()" class="w-full py-3.5 px-6 rounded-full bg-[#C2E1FF] hover:bg-white text-[#002345] font-sans text-xs tracking-[0.2em] font-extrabold uppercase transition-all shadow-lg hover:scale-[1.02] flex items-center justify-center gap-2 cursor-pointer">
+      <!-- Botón de Asesoría VIP Inferior (Directo y Limpio) -->
+      <div class="pt-2 mt-auto shrink-0 space-y-3">
+        <a routerLink="/cotiza-con-nosotros" [queryParams]="{proyecto: p.title}" (click)="cerrarGaleria()" class="w-full py-4 px-6 rounded-full bg-[#C2E1FF] hover:bg-white text-[#00060e] font-sans text-xs tracking-[0.22em] font-extrabold uppercase transition-all shadow-[0_0_25px_rgba(194,225,255,0.35)] hover:shadow-[0_0_40px_rgba(255,255,255,0.8)] hover:scale-[1.02] flex items-center justify-center gap-3 cursor-pointer">
           <span>SOLICITAR ASESORÍA PRIVADA</span>
           <span class="text-sm font-black">→</span>
         </a>
         <div class="text-center">
-          <span class="text-[9px] font-mono text-[#C2E1FF]/60 tracking-[0.2em] uppercase">SYSMICON ARCHITECTS • MEDELLÍN</span>
+          <span class="text-[9px] font-mono text-[#C2E1FF]/50 tracking-[0.24em] uppercase">SYSMICON ARCHITECTS • MEDELLÍN</span>
         </div>
       </div>
 
@@ -239,14 +226,14 @@
 </div>
 
 <!-- ===== PANTALLA COMPLETA LIGHTBOX EXPANDIDA ===== -->
-<div *ngIf="activeLightboxImage() as lbImg" class="fixed inset-0 z-[100000] flex items-center justify-center p-4 md:p-8 select-none animate-lightbox-backdrop bg-[#002345]/95" (click)="cerrarLightbox()">
-  <button (click)="cerrarLightbox(); $event.stopPropagation()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 border border-[#C2E1FF]/40 hover:bg-[#C2E1FF] hover:text-[#002345] flex items-center justify-center text-white text-lg transition-colors cursor-pointer z-50">
+<div *ngIf="activeLightboxImage() as lbImg" class="fixed inset-0 z-[100000] flex items-center justify-center p-4 md:p-8 select-none animate-lightbox-backdrop bg-[#00050d]/98" (click)="cerrarLightbox()">
+  <button (click)="cerrarLightbox(); $event.stopPropagation()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 border border-[#C2E1FF]/40 hover:bg-[#C2E1FF] hover:text-[#00060e] flex items-center justify-center text-white text-lg transition-colors cursor-pointer z-50">
     ✕
   </button>
-  <div class="relative max-w-[95vw] max-h-[90vh] flex items-center justify-center animate-lightbox-image" (click)="$event.stopPropagation()">
-    <img [src]="lbImg" alt="Vista ampliada" class="w-auto h-auto max-w-[95vw] max-h-[90vh] object-contain rounded-lg shadow-2xl border border-[#C2E1FF]/30">
-    <div class="absolute -bottom-10 left-0 right-0 text-center text-xs text-[#C2E1FF] tracking-wider">
-      <span>Sysmicon Studio — Visualizador de Renderizado HD</span>
+  <div class="relative max-w-[95vw] max-h-[92vh] flex items-center justify-center animate-lightbox-image" (click)="$event.stopPropagation()">
+    <img [src]="lbImg" alt="Vista ampliada HD" class="w-auto h-auto max-w-[95vw] max-h-[92vh] object-contain rounded-2xl shadow-2xl border border-[#C2E1FF]/30">
+    <div class="absolute -bottom-10 left-0 right-0 text-center text-xs font-mono text-[#C2E1FF] tracking-[0.25em] uppercase">
+      <span>Sysmicon Studio — Visualizador Arquitectónico HD</span>
     </div>
   </div>
 </div>

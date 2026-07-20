@@ -1,4 +1,4 @@
-import { Component, inject, signal, AfterViewInit } from '@angular/core';
+import { Component, inject, signal, AfterViewInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import AOS from 'aos';
@@ -87,6 +87,52 @@ export class ProjectsComponent implements AfterViewInit {
   readonly currentImageIndex = signal<number>(0);
   readonly activeLightboxImage = signal<string | null>(null);
 
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent): void {
+    if (this.activeLightboxImage() || this.selectedProject()) {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        this.anteriorImagen();
+        if (this.activeLightboxImage()) {
+          const p = this.selectedProject();
+          if (p && p.images && p.images.length > 0) {
+            this.activeLightboxImage.set(p.images[this.currentImageIndex()]);
+          }
+        }
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        this.siguienteImagen();
+        if (this.activeLightboxImage()) {
+          const p = this.selectedProject();
+          if (p && p.images && p.images.length > 0) {
+            this.activeLightboxImage.set(p.images[this.currentImageIndex()]);
+          }
+        }
+      } else if (event.key === 'Escape') {
+        event.preventDefault();
+        if (this.activeLightboxImage()) {
+          this.cerrarLightbox();
+        } else if (this.selectedProject()) {
+          this.cerrarGaleria();
+        }
+      }
+    }
+  }
+
+  getMainImg(p: PortfolioItem, idx: number = this.currentImageIndex()): string {
+    if (p.images && p.images.length > 0) {
+      return p.images[idx] || p.img;
+    }
+    return p.img;
+  }
+
+  getDetailImg(p: PortfolioItem, idx: number = this.currentImageIndex()): string {
+    if (p.images && p.images.length > 1) {
+      return p.images[(idx + 1) % p.images.length];
+    }
+    return p.img;
+  }
+
   onScroll(event: Event): void {
     const container = event.target as HTMLElement;
     if (container) {
@@ -101,6 +147,18 @@ export class ProjectsComponent implements AfterViewInit {
     if (slideElement) {
       slideElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
+  }
+
+  anteriorSlideMobile(): void {
+    const total = this.items.length;
+    const prev = (this.currentSlide - 1 + total) % total;
+    this.scrollToSlide(prev);
+  }
+
+  siguienteSlideMobile(): void {
+    const total = this.items.length;
+    const next = (this.currentSlide + 1) % total;
+    this.scrollToSlide(next);
   }
 
   abrirGaleria(item: PortfolioItem): void {
@@ -131,6 +189,22 @@ export class ProjectsComponent implements AfterViewInit {
     if (!sp || !sp.images || sp.images.length === 0) return;
     const total = sp.images.length;
     this.currentImageIndex.update(i => (i + 1) % total);
+  }
+
+  anteriorImagenLightbox(): void {
+    this.anteriorImagen();
+    const p = this.selectedProject();
+    if (p && p.images && p.images.length > 0) {
+      this.activeLightboxImage.set(p.images[this.currentImageIndex()]);
+    }
+  }
+
+  siguienteImagenLightbox(): void {
+    this.siguienteImagen();
+    const p = this.selectedProject();
+    if (p && p.images && p.images.length > 0) {
+      this.activeLightboxImage.set(p.images[this.currentImageIndex()]);
+    }
   }
 
   abrirLightbox(img: string): void {

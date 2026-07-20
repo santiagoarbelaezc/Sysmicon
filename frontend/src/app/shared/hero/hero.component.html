@@ -7,12 +7,16 @@
     <div class="hero-overlay"></div>
   </div>
 
-  <!-- Flechas de navegación elegantes en pantalla -->
-  <button (click)="prevSlide(); startCarousel()" class="hero-arrow hero-arrow-left" aria-label="Anterior diapositiva">
-    ‹
+  <!-- Flechas de navegación minimalistas y elegantes -->
+  <button (click)="prevSlide(); startCarousel()" class="hero-arrow hero-arrow-left group" aria-label="Anterior diapositiva">
+    <svg class="w-5 h-5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-0.5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m15 18-6-6 6-6"/>
+    </svg>
   </button>
-  <button (click)="nextSlide(); startCarousel()" class="hero-arrow hero-arrow-right" aria-label="Siguiente diapositiva">
-    ›
+  <button (click)="nextSlide(); startCarousel()" class="hero-arrow hero-arrow-right group" aria-label="Siguiente diapositiva">
+    <svg class="w-5 h-5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m9 18 6-6-6-6"/>
+    </svg>
   </button>
 
   <!-- Elegant Carousel Indicator / Controls (Bottom Right) -->

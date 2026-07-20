@@ -79,7 +79,7 @@
 </section>
 
 <!-- ===== MODAL / DOSSIER ARQUITECTÓNICO DE ALTO STANDING (99vw x 97vh) ===== -->
-<div *ngIf="selectedProject() as p" class="fixed inset-0 z-[99999] p-1.5 md:p-3 flex items-center justify-center bg-[#00050d]/95 backdrop-blur-3xl animate-fade-in select-none">
+<div *ngIf="selectedProject() as p" class="fixed inset-0 z-[1000000] p-1.5 md:p-3 flex items-center justify-center bg-[#00050d]/95 backdrop-blur-3xl animate-fade-in select-none">
   <div class="w-[99vw] max-w-[1920px] h-[97vh] max-h-[1100px] bg-[#000814] border border-[#C2E1FF]/25 rounded-2xl overflow-hidden shadow-[0_0_180px_rgba(0,0,0,1)] relative flex flex-col lg:flex-row">
     
     <!-- Botón cerrar flotante superior derecho -->
@@ -226,7 +226,7 @@
 </div>
 
 <!-- ===== PANTALLA COMPLETA LIGHTBOX EXPANDIDA ===== -->
-<div *ngIf="activeLightboxImage() as lbImg" class="fixed inset-0 z-[100000] flex items-center justify-center p-4 md:p-8 select-none animate-lightbox-backdrop bg-[#00050d]/98" (click)="cerrarLightbox()">
+<div *ngIf="activeLightboxImage() as lbImg" class="fixed inset-0 z-[1000001] flex items-center justify-center p-4 md:p-8 select-none animate-lightbox-backdrop bg-[#00050d]/98" (click)="cerrarLightbox()">
   <button (click)="cerrarLightbox(); $event.stopPropagation()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 border border-[#C2E1FF]/40 hover:bg-[#C2E1FF] hover:text-[#00060e] flex items-center justify-center text-white text-lg transition-colors cursor-pointer z-50">
     ✕
   </button>

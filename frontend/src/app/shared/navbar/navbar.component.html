@@ -23,19 +23,12 @@
     </nav>
 
     <!-- Desktop Right Actions -->
-    <div class="desktop-actions flex items-center gap-12">
-      <!-- Language Switcher -->
-      <div class="lang-switcher flex items-center gap-2 font-sans text-sm font-semibold">
-        <button (click)="setLang('ES')" [ngClass]="{'text-wood-light font-bold': currentLang() === 'ES', 'text-white/60 hover:text-white': currentLang() !== 'ES'}" class="transition-colors py-1 px-1.5 rounded">ES</button>
-        <span class="text-white/30">/</span>
-        <button (click)="setLang('EN')" [ngClass]="{'text-wood-light font-bold': currentLang() === 'EN', 'text-white/60 hover:text-white': currentLang() !== 'EN'}" class="transition-colors py-1 px-1.5 rounded">EN</button>
-      </div>
-
+    <div class="desktop-actions flex items-center gap-8">
       <!-- Auth Links / User Profile -->
       <div class="auth-links flex items-center gap-6 font-sans text-sm">
         <ng-container *ngIf="!authService.isLoggedIn()">
-          <a routerLink="/login" class="font-semibold text-white/90 hover:text-wood-light transition-colors">Ingresar</a>
-          <a routerLink="/registro" class="px-4 py-2 rounded-md border border-white/20 hover:border-wood-light hover:bg-wood-subtle text-white hover:text-wood-light transition-all font-semibold">Registrarse</a>
+          <a routerLink="/login" class="font-semibold text-white/90 hover:text-[#C2E1FF] transition-colors">Ingresar</a>
+          <a routerLink="/registro" class="px-5 py-2.5 rounded-full border border-[#C2E1FF]/50 bg-[#C2E1FF]/15 hover:bg-[#C2E1FF] text-white hover:text-[#00060e] transition-all font-sans text-xs font-extrabold tracking-wider uppercase shadow-lg">Registrarse</a>
         </ng-container>
 
         <ng-container *ngIf="authService.currentUser() as user">
@@ -47,12 +40,6 @@
           </a>
         </ng-container>
       </div>
-
-      <!-- Desktop CTA Button -->
-      <a routerLink="/cotiza-con-nosotros" class="nav-cta-btn inline-flex items-center gap-2">
-        <span>Cotiza con Nosotros</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </a>
     </div>
 
     <!-- Mobile Hamburger Trigger -->
@@ -82,12 +69,12 @@
       </ul>
 
       <div class="mobile-menu-footer">
-        <!-- Mobile Auth & Lang -->
+        <!-- Mobile Auth -->
         <div class="flex flex-col items-center justify-center gap-3 my-4 font-sans text-base">
           <ng-container *ngIf="!authService.isLoggedIn()">
             <div class="flex items-center gap-6">
-              <a routerLink="/login" (click)="closeMobileMenu()" class="text-white/90 hover:text-wood-light font-semibold">Ingresar</a>
-              <a routerLink="/registro" (click)="closeMobileMenu()" class="px-4 py-1.5 rounded-md border border-white/20 text-white font-semibold">Registrarse</a>
+              <a routerLink="/login" (click)="closeMobileMenu()" class="text-white/90 hover:text-[#C2E1FF] font-semibold">Ingresar</a>
+              <a routerLink="/registro" (click)="closeMobileMenu()" class="px-5 py-2 rounded-full border border-[#C2E1FF]/50 bg-[#C2E1FF]/15 hover:bg-[#C2E1FF] text-white hover:text-[#00060e] font-sans text-xs font-extrabold tracking-wider uppercase">Registrarse</a>
             </div>
           </ng-container>
           <ng-container *ngIf="authService.currentUser() as user">
@@ -105,16 +92,8 @@
             </div>
           </ng-container>
         </div>
-        <div class="flex items-center justify-center gap-3 my-2 font-sans text-sm font-semibold">
-          <button (click)="setLang('ES')" [ngClass]="{'text-wood-light font-bold': currentLang() === 'ES', 'text-white/60': currentLang() !== 'ES'}">ES</button>
-          <span class="text-white/30">/</span>
-          <button (click)="setLang('EN')" [ngClass]="{'text-wood-light font-bold': currentLang() === 'EN', 'text-white/60': currentLang() !== 'EN'}">EN</button>
-        </div>
 
-        <a routerLink="/cotiza-con-nosotros" (click)="closeMobileMenu()" class="mobile-cta-btn mt-3">
-          Cotiza con Nosotros
-        </a>
-        <div class="mobile-socials">
+        <div class="mobile-socials mt-6">
           <a href="https://www.instagram.com/sysmicon/" target="_blank" rel="noopener noreferrer">Instagram &#64;sysmicon</a>
         </div>
       </div>

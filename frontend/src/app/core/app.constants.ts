@@ -26,7 +26,7 @@ export const CONTACT_INFO = {
 
 export const NAV_LINKS = [
   { label: 'Inicio', path: '/' },
-  { label: 'Cotiza', path: '/cotiza-con-nosotros' },
+  { label: 'Cotiza con nosotros', path: '/cotiza-con-nosotros' },
   { label: 'Proyectos', path: '/proyectos' },
   { label: 'Nosotros', path: '/nosotros' }
 ];

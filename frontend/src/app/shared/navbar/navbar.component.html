@@ -1,20 +1,20 @@
-<header class="navbar" [ngClass]="{'scrolled': isScrolled() && !isAuthPage, 'auth-solid': isAuthPage, 'home-transparent': isHomePage && !isScrolled()}">
+<header class="navbar always-white-scrolled">
   <div class="w-full max-w-[1750px] mx-auto px-6 md:px-16 navbar-container flex items-center justify-between">
-    <!-- Logo Sobrio y Distinguido -->
-    <a routerLink="/" class="navbar-logo group flex items-center gap-3.5 z-[1001]" (click)="closeMobileMenu()">
-      <img src="assets/icons/logo-sysmico-navbar.png" alt="Sysmicon" class="w-10 h-10 md:w-11 md:h-11 object-contain transition-transform duration-500 group-hover:scale-105">
-      <span class="logo-text font-serif tracking-[0.22em] text-xl md:text-2xl font-light text-white uppercase">{{ brandName }}</span>
+    <!-- Logo Sobrio y Compacto -->
+    <a routerLink="/" class="navbar-logo group flex items-center gap-3 z-[1001]" (click)="closeMobileMenu()">
+      <img src="assets/icons/logo-sysmico-navbar.png" alt="Sysmicon" class="w-8 h-8 md:w-9 md:h-9 object-contain transition-transform duration-500 group-hover:scale-105">
+      <span class="logo-text font-serif tracking-[0.2em] text-lg md:text-xl font-light uppercase">{{ brandName }}</span>
     </a>
 
-    <!-- Desktop Nav Links (Sobrios y Minimalistas con Tamaño Ajustado) -->
+    <!-- Desktop Nav Links (Sobrios, Letra Más Pequeña y Fina) -->
     <nav class="desktop-nav">
-      <ul class="nav-list flex items-center gap-14">
+      <ul class="nav-list flex items-center gap-12">
         <li *ngFor="let link of navLinks">
           <a [routerLink]="link.path" 
              routerLinkActive="active" 
              [routerLinkActiveOptions]="{exact: link.path === '/'}"
              (click)="onNavLinkClick(link)"
-             class="nav-link font-sans text-xs md:text-[13.5px] tracking-[0.2em] uppercase font-medium">
+             class="nav-link font-sans text-[11.5px] md:text-[12px] tracking-[0.18em] uppercase font-normal">
             <span>{{ link.label }}</span>
             <span class="link-underline"></span>
           </a>
@@ -22,21 +22,21 @@
       </ul>
     </nav>
 
-    <!-- Desktop Right Actions (Ingreso / Registro Elegante) -->
-    <div class="desktop-actions flex items-center gap-8">
+    <!-- Desktop Right Actions (Ingreso / Registro Compacto y Elegante) -->
+    <div class="desktop-actions flex items-center gap-6">
       <!-- Auth Links / User Profile -->
-      <div class="auth-links flex items-center gap-6 font-sans">
+      <div class="auth-links flex items-center gap-5 font-sans">
         <ng-container *ngIf="!authService.isLoggedIn()">
-          <a routerLink="/login" class="text-xs md:text-[13px] uppercase tracking-[0.18em] text-white/80 hover:text-white transition-colors py-1 font-medium">Ingresar</a>
-          <a routerLink="/registro" class="px-6 py-2.5 rounded-full border border-white/25 hover:border-[#C2E1FF] bg-white/[0.03] hover:bg-[#C2E1FF] text-white hover:text-[#000814] transition-all duration-300 font-sans text-xs md:text-[13px] font-semibold tracking-[0.18em] uppercase shadow-sm">Registrarse</a>
+          <a routerLink="/login" class="auth-link-ingresar text-[11.5px] md:text-[12px] uppercase tracking-[0.16em] transition-colors py-1 font-normal">Ingresar</a>
+          <a routerLink="/registro" class="auth-btn-registro px-5 py-1.5 rounded-full border transition-all duration-300 font-sans text-[11.5px] md:text-[12px] font-medium tracking-[0.16em] uppercase shadow-sm">Registrarse</a>
         </ng-container>
 
         <ng-container *ngIf="authService.currentUser() as user">
-          <a routerLink="/admin" title="Ir al Portal Admin" class="flex items-center gap-2.5 bg-[#000814]/90 hover:bg-[#001428] px-4 py-1.5 rounded-full border border-[#C2E1FF]/30 hover:border-[#C2E1FF] shadow-md transition-all cursor-pointer">
-            <span class="w-6 h-6 rounded-full bg-[#C2E1FF] text-[#000814] font-bold text-[10px] flex items-center justify-center">{{ user.nombre.charAt(0) }}</span>
-            <span class="font-sans text-xs tracking-wider text-white truncate max-w-[110px]">{{ user.nombre }}</span>
-            <span class="bg-[#C2E1FF]/15 text-[#C2E1FF] text-[9px] font-mono tracking-widest px-2 py-0.5 rounded uppercase">ADMIN</span>
-            <button (click)="authService.logout(); $event.stopPropagation(); $event.preventDefault()" title="Cerrar sesión" class="text-white/40 hover:text-red-400 font-bold ml-1 transition-colors cursor-pointer relative z-10 text-xs">✕</button>
+          <a routerLink="/admin" title="Ir al Portal Admin" class="auth-btn-admin flex items-center gap-2 px-3.5 py-1 rounded-full border shadow-sm transition-all cursor-pointer">
+            <span class="auth-user-avatar w-6 h-6 rounded-full font-bold text-[10px] flex items-center justify-center">{{ user.nombre.charAt(0) }}</span>
+            <span class="auth-user-name font-sans text-xs tracking-wider truncate max-w-[110px]">{{ user.nombre }}</span>
+            <span class="auth-user-badge text-[9px] font-mono tracking-widest px-2 py-0.5 rounded uppercase">ADMIN</span>
+            <button (click)="authService.logout(); $event.stopPropagation(); $event.preventDefault()" title="Cerrar sesión" class="auth-logout-btn font-bold ml-1 transition-colors cursor-pointer relative z-10 text-xs">✕</button>
           </a>
         </ng-container>
       </div>

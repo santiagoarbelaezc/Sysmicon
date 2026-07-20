@@ -12,7 +12,7 @@ export class ProyectosService {
       subtitulo: 'Geometría minimalista integrada con materiales nobles y luz natural en el Oriente Antioqueño.',
       categoria: 'Residencial',
       descripcion: 'Una majestuosa residencia que celebra el minimalismo y la intimidad en el Oriente Antioqueño. Su volumetría en concreto y maderas nativas genera patios interiores que inundan de luz natural cada espacio social.',
-      imagenUrl: '/images/imagen6.jpg',
+      imagenUrl: 'assets/images/imagen6.jpg',
       area: 520,
       anio: 2024,
       ubicacion: 'Llanogrande, Antioquia',

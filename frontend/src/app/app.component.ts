@@ -1,11 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { RouterOutlet, Router, NavigationStart } from '@angular/router';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoadingService } from './services/loading.service';
-import { filter } from 'rxjs/operators';
-import AOS from 'aos';
 
 @Component({
   selector: 'app-root',
@@ -32,14 +30,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Inicializar AOS para animaciones de scroll profesionales
-    AOS.init({
-      duration: 900,
-      easing: 'ease-out-cubic',
-      once: true,
-      offset: 80
-    });
-
     // Mostrar pantalla de carga SOLAMENTE si el ingreso inicial es directo al login o al dashboard (admin)
     const initialPath = window.location.pathname;
     if (initialPath.includes('/login') || initialPath.includes('/registro')) {
@@ -58,13 +48,6 @@ export class AppComponent implements OnInit {
         } else {
           this.loadingService.hide();
         }
-      } else if (event instanceof NavigationEnd) {
-        if (!event.urlAfterRedirects?.includes('#')) {
-          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-        }
-        setTimeout(() => {
-          AOS.refresh();
-        }, 250);
       }
     });
   }

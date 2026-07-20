@@ -3,10 +3,14 @@
 .service-card-wrapper {
   position: relative;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  isolation: isolate;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .service-card-wrapper:hover {
-  transform: translateY(-8px);
+  transform: translateY(-8px) translateZ(0);
   border-color: rgba(0, 0, 0, 0.25);
 }
 

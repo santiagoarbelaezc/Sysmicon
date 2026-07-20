@@ -1,9 +1,8 @@
-import { Component, inject, signal, computed, AfterViewInit, HostListener } from '@angular/core';
+import { Component, inject, signal, computed, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { ProyectosService } from '../../services/proyectos.service';
 import { Proyecto } from '../../models/proyecto.model';
-import AOS from 'aos';
 
 @Component({
   selector: 'app-proyectos-page',
@@ -12,7 +11,7 @@ import AOS from 'aos';
   templateUrl: './proyectos-page.component.html',
   styleUrl: './proyectos-page.component.css'
 })
-export class ProyectosPageComponent implements AfterViewInit {
+export class ProyectosPageComponent {
   readonly proyectosService = inject(ProyectosService);
   readonly router = inject(Router);
 
@@ -41,9 +40,8 @@ export class ProyectosPageComponent implements AfterViewInit {
     return Array.from(new Set(list));
   });
 
-  ngAfterViewInit(): void {
+  constructor() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    setTimeout(() => AOS.refresh(), 150);
   }
 
   trackByTrigger(index: number, item: number): number {
@@ -82,7 +80,6 @@ export class ProyectosPageComponent implements AfterViewInit {
 
   setCategoria(cat: string): void {
     this.categoriaSeleccionada.set(cat);
-    setTimeout(() => AOS.refresh(), 150);
   }
 
   abrirDossier(proyecto: Proyecto): void {

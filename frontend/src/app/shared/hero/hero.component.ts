@@ -20,12 +20,12 @@ export class HeroComponent implements OnInit, OnDestroy {
   readonly brand = BRAND_CONFIG;
 
   readonly slides: HeroSlide[] = [
-    { image: '/images/principal.jpg', title: 'Residencia Principal', location: 'Llanogrande, Medellín' },
-    { image: '/images/imagen1.jpg', title: 'Villa Serena', location: 'El Retiro, Antioquia' },
-    { image: '/images/imagen2.jpg', title: 'Casa Roble', location: 'Alto de las Palmas' },
-    { image: '/images/imagen3.jpg', title: 'Loft Cielo', location: 'El Poblado, Medellín' },
-    { image: '/images/imagen4.jpg', title: 'Interior Zen & Mármol', location: 'Envigado, Antioquia' },
-    { image: '/images/imagen5.jpg', title: 'Casa Mirador del Valle', location: 'La Calera, Bogotá' }
+    { image: 'assets/images/principal.jpg', title: 'Residencia Principal', location: 'Llanogrande, Medellín' },
+    { image: 'assets/images/imagen1.jpg', title: 'Villa Serena', location: 'El Retiro, Antioquia' },
+    { image: 'assets/images/imagen2.jpg', title: 'Casa Roble', location: 'Alto de las Palmas' },
+    { image: 'assets/images/imagen3.jpg', title: 'Loft Cielo', location: 'El Poblado, Medellín' },
+    { image: 'assets/images/imagen4.jpg', title: 'Interior Zen & Mármol', location: 'Envigado, Antioquia' },
+    { image: 'assets/images/imagen5.jpg', title: 'Casa Mirador del Valle', location: 'La Calera, Bogotá' }
   ];
 
   readonly currentSlide = signal<number>(0);

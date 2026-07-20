@@ -1,5 +1,12 @@
 /* === PORTAFOLIO SPLIT RESPONSIVE (MÓVIL & DESKTOP ACCORDION) === */
 
+.portfolio-section {
+  position: relative;
+  z-index: 5;
+  isolation: isolate;
+  overflow: hidden;
+}
+
 /* Carrusel Hero Móvil */
 .hero-carousel-mobile {
   position: relative;
@@ -7,10 +14,7 @@
   height: 85vh;
   overflow: hidden;
   background: #0A0A0A;
-}
-
-.mobile-brand-header {
-  pointer-events: none;
+  z-index: 5;
 }
 
 .carousel-track-container {
@@ -69,7 +73,8 @@
   height: 95vh; /* Aumentado a 95vh */
   align-items: stretch;
   overflow: hidden;
-  background: #0A0A0A;
+  background: #001A33;
+  transform: translateZ(0);
 }
 
 .box {
@@ -83,6 +88,10 @@
   min-width: 0;
   border-right: 1px solid rgba(255, 255, 255, 0.05);
   cursor: pointer;
+  background: #001A33;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .box:hover {
@@ -95,6 +104,7 @@
   object-fit: cover;
   transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
   filter: brightness(1) !important; /* Brillo al 100% normal sin sombras */
+  background: #001A33;
 }
 
 .box:hover .bg-img {

@@ -2,7 +2,6 @@
    SYSMICON - ARCHITECTURAL DESIGN SYSTEM & GLOBAL STYLES (TAILWIND CSS v3)
    ========================================================================== */
 
-@import 'aos/dist/aos.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

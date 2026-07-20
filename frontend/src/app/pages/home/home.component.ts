@@ -6,6 +6,7 @@ import { AboutComponent } from '../../shared/about/about.component';
 import { ServiceCardComponent } from '../../components/service-card/service-card.component';
 import { ProjectCardComponent } from '../../components/project-card/project-card.component';
 import { ProjectsComponent } from '../../components/projects/projects.component';
+import { DirectorShowcaseComponent } from '../../components/director-showcase/director-showcase.component';
 import { BannerCrearplanoComponent } from '../../components/banner-crearplano/banner-crearplano.component';
 import { ProyectosService } from '../../services/proyectos.service';
 import { ServiciosService } from '../../services/servicios.service';
@@ -21,6 +22,7 @@ import { ServiciosService } from '../../services/servicios.service';
     ServiceCardComponent,
     ProjectCardComponent,
     ProjectsComponent,
+    DirectorShowcaseComponent,
     BannerCrearplanoComponent
   ],
   templateUrl: './home.component.html',

@@ -1,7 +1,7 @@
 <!-- Portafolio / Proyectos Destacados Section (Premium Split Responsive) -->
 <section id="proyectos" class="portfolio-section bg-[#002345] border-t border-b border-white/10 py-12 md:py-20">
   <div class="container mb-8">
-    <div class="section-header text-center mb-10" data-aos="fade-up" data-aos-duration="900">
+    <div class="section-header text-center mb-10">
       <div class="section-tag font-sans justify-center mb-4">
         <span class="tag-line bg-[#4C7AA6]"></span>
         <span class="text-[#C2E1FF] font-bold">Portafolio Exclusivo</span>
@@ -17,16 +17,7 @@
   </div>
 
   <!-- Carrusel Hero para Móvil (Visible solo en pantallas pequeñas) -->
-  <div class="hero-carousel-mobile font-sans lg:hidden relative w-full h-[85vh] overflow-hidden bg-[#001A33]">
-    <!-- Brand Header for Mobile landing -->
-    <div class="mobile-brand-header absolute top-0 inset-x-0 z-20 p-6 pt-12 bg-gradient-to-b from-[#002345]/90 via-[#002345]/50 to-transparent flex flex-col items-center text-center gap-2 pointer-events-none">
-      <img src="assets/icons/logo-sysmico.png" alt="Sysmicon Logo" class="w-12 h-12 object-contain filter drop-shadow-[0_4px_10px_rgba(194,225,255,0.4)] animate-pulse">
-      <div>
-        <h1 class="font-serif text-lg font-bold text-white tracking-widest">SYSMICON</h1>
-        <p class="text-[9px] uppercase tracking-widest text-[#C2E1FF] font-bold">Estudio Arquitectónico</p>
-      </div>
-    </div>
-
+  <div class="hero-carousel-mobile font-sans lg:hidden relative w-full h-[85vh] overflow-hidden bg-[#001A33] z-10">
     <!-- Flechas de navegación del carrusel móvil -->
     <button (click)="anteriorSlideMobile()" class="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-[#000814]/85 border border-[#C2E1FF]/30 text-white text-2xl flex items-center justify-center hover:bg-[#C2E1FF] hover:text-[#00060e] shadow-xl">
       ‹
@@ -62,14 +53,11 @@
     </div>
   </div>
 
-  <!-- Desktop Side-by-Side View (Visible en pantallas grandes con animación AOS escalonada) -->
+  <!-- Desktop Side-by-Side View (Visible en pantallas grandes) -->
   <div class="portfolio-desktop-section hidden lg:flex w-full h-[95vh] items-stretch overflow-hidden bg-[#001A33] border-t border-b border-white/10 relative">
     <div class="box group relative flex-1 flex items-center justify-center overflow-hidden cursor-pointer border-r border-white/10 transition-all duration-[900ms] ease-[cubic-bezier(0.25,1,0.5,1)] hover:flex-[1.9]" 
          *ngFor="let item of items; let idx = index" 
-         (click)="abrirGaleria(item)"
-         data-aos="fade-up"
-         [attr.data-aos-delay]="idx * 160"
-         data-aos-duration="1000">
+         (click)="abrirGaleria(item)">
       <img [src]="item.img" [alt]="item.title" class="bg-img w-full h-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105" />
       
       <!-- Nombre de la casa con tipografía elegante y ultra delgada, sin logo ni contenedores -->
@@ -81,8 +69,8 @@
     </div>
   </div>
 
-  <!-- Botón para ir a la Galería de Proyectos (Posicionado abajo de las 4 casas con animación AOS) -->
-  <div class="container mt-12 md:mt-16 text-center" data-aos="fade-up" data-aos-delay="600" data-aos-duration="800">
+  <!-- Botón para ir a la Galería de Proyectos -->
+  <div class="container mt-12 md:mt-16 text-center">
     <a routerLink="/proyectos" class="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-[#001A33] hover:bg-[#C2E1FF] hover:text-[#002345] border border-[#C2E1FF]/40 hover:border-[#C2E1FF] text-white font-sans text-xs md:text-sm font-bold tracking-[0.25em] uppercase transition-all shadow-2xl group cursor-pointer">
       <span>VER GALERÍA DE PROYECTOS</span>
       <span class="text-[#C2E1FF] group-hover:text-[#002345] group-hover:translate-x-1.5 transition-transform font-black text-base">→</span>

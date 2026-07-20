@@ -1,19 +1,19 @@
 /* ==========================================================================
-   COTIZA CON NOSOTROS - ESTILOS DE LUJO ARQUITECTÓNICO (NEGRO PURO #000000)
+   COTIZA CON NOSOTROS - ESTILOS DE LUJO ARQUITECTÓNICO (BLANCO PURO #FFFFFF)
    ========================================================================== */
 
 .cotiza-page {
   position: relative;
-  background-color: #000000;
-  color: #FAFAFA;
+  background-color: #FFFFFF;
+  color: #111111;
 }
 
 .glass-panel {
-  background: rgba(4, 4, 4, 0.95);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95), 0 0 45px rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
 }
 
 .video-showcase-card {
@@ -29,9 +29,9 @@ input, textarea {
 }
 
 input:focus, textarea:focus {
-  border-color: rgba(212, 175, 55, 0.6) !important;
-  background: rgba(255, 255, 255, 0.08) !important;
-  box-shadow: 0 0 25px rgba(212, 175, 55, 0.12);
+  border-color: #000000 !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
 }
 
 /* Botón Principal */
@@ -40,18 +40,18 @@ input:focus, textarea:focus {
   font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  background: #FFFFFF;
-  color: #000000;
-  border: 1px solid #FFFFFF;
+  background: #000814;
+  color: #FFFFFF;
+  border: 1px solid #000814;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-primary:hover:not([disabled]) {
-  background: #141414;
+  background: #222222;
   color: #FFFFFF;
-  border-color: #D4AF37;
+  border-color: #222222;
   transform: translateY(-2px);
-  box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 .btn-primary:disabled {
@@ -60,15 +60,15 @@ input:focus, textarea:focus {
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.06);
-  color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: #F3F4F6;
+  color: #111111;
+  border: 1px solid #E5E7EB;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: #D4AF37;
+  background: #E5E7EB;
+  border-color: #111111;
 }
 
 /* Botones de redes sociales */
@@ -78,7 +78,7 @@ input:focus, textarea:focus {
 
 .social-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
 /* Gradiente en textos */

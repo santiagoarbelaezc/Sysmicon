@@ -2,7 +2,7 @@
   <div class="w-full max-w-[1800px] mx-auto px-6 sm:px-10 md:px-16 lg:px-20 xl:px-24">
     
     <!-- Hero Header -->
-    <div class="page-header text-center" data-aos="fade-down" data-aos-duration="1000">
+    <div class="page-header text-center">
       <div class="section-tag font-sans">
         <span class="tag-line"></span>
         <span>Identidad & Filosofía</span>
@@ -17,8 +17,8 @@
     </div>
 
     <!-- Story Showcase Section -->
-    <div class="story-grid grid-2" data-aos="fade-up" data-aos-duration="1000">
-      <div class="story-content" data-aos="fade-right" data-aos-duration="1000">
+    <div class="story-grid grid-2">
+      <div class="story-content">
         <h2 class="title-md font-serif tracking-tight">Nuestra Historia: 15 Años de Tradición Arquitectónica</h2>
         <div class="divider-wood"></div>
         <p class="txt">
@@ -29,19 +29,19 @@
         </p>
 
         <div class="stats-mini grid-2">
-          <div class="stat-box glass-card" data-aos="zoom-in" data-aos-delay="200">
+          <div class="stat-box glass-card">
             <span class="val font-serif text-accent font-black">100%</span>
             <span class="lbl font-sans">Proyectos Entregados a Tiempo</span>
           </div>
-          <div class="stat-box glass-card" data-aos="zoom-in" data-aos-delay="350">
+          <div class="stat-box glass-card">
             <span class="val font-serif text-accent font-black">10 Años</span>
             <span class="lbl font-sans">Garantía Estructural Directa</span>
           </div>
         </div>
       </div>
 
-      <div class="story-visual glass-card" data-aos="fade-left" data-aos-duration="1000">
-        <img src="/images/about-studio.png" alt="Estudio Sysmicon" loading="lazy">
+      <div class="story-visual glass-card">
+        <img src="assets/images/about-studio.png" alt="Estudio Sysmicon" loading="lazy">
       </div>
     </div>
 
@@ -52,7 +52,7 @@
 
       <div class="w-full px-2 sm:px-6 relative z-10">
         <!-- Título y Tag de la sección -->
-        <div class="timeline-header mb-8 text-center md:text-left" data-aos="fade-up" data-aos-duration="900">
+        <div class="timeline-header mb-8 text-center md:text-left">
           <div class="section-tag font-sans text-left justify-center md:justify-start">
             <span class="tag-line"></span>
             <span>Trayectoria Histórica</span>
@@ -71,10 +71,7 @@
           <div class="timeline-track flex items-center gap-12 md:gap-20 relative z-10 w-max px-4">
             
             <!-- Nodo de Hito Individual -->
-            <div *ngFor="let milestone of hitos; let idx = index" class="timeline-node flex flex-col items-center select-none"
-                 data-aos="fade-up"
-                 [attr.data-aos-delay]="idx * 150"
-                 data-aos-duration="900">
+            <div *ngFor="let milestone of hitos; let idx = index" class="timeline-node flex flex-col items-center select-none">
               <!-- Año en formato sutil y reducido -->
               <div class="year-badge font-serif text-3xl md:text-4xl font-light active">
                 {{ milestone.year }}
@@ -99,7 +96,7 @@
 
     <!-- Methodology Section (Diseño Nuestros Servicios con Fondo Blanco) -->
     <section class="methodology-section py-16 md:py-24 bg-[#FFFFFF] border-t border-b border-black/5 text-gray-900">
-      <div class="w-full max-w-[1800px] mx-auto px-6 md:px-12 lg:px-20 mb-14" data-aos="fade-up" data-aos-duration="900">
+      <div class="w-full max-w-[1800px] mx-auto px-6 md:px-12 lg:px-20 mb-14">
         <div class="section-header text-center">
           <div class="section-tag font-sans justify-center">
             <span class="tag-line"></span>
@@ -113,10 +110,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 w-full max-w-[1800px] mx-auto px-6 md:px-12 lg:px-20">
-        <div *ngFor="let m of pilaresMetodologia; let i = index" class="method-card" [class.card-alt]="i % 2 === 1"
-             data-aos="fade-up"
-             [attr.data-aos-delay]="i * 150"
-             data-aos-duration="900">
+        <div *ngFor="let m of pilaresMetodologia; let i = index" class="method-card" [class.card-alt]="i % 2 === 1">
           <!-- Trazos esquineros decorativos arquitectónicos -->
           <div class="arch-plan-box-top"></div>
           <div class="arch-plan-box-bottom"></div>
@@ -147,7 +141,7 @@
 
     <!-- Leadership Team -->
     <section class="team-section section-padding">
-      <div class="section-header text-center" data-aos="fade-up" data-aos-duration="900">
+      <div class="section-header text-center">
         <div class="section-tag font-sans justify-center">
           <span class="tag-line"></span>
           <span>Talento Senior</span>
@@ -159,10 +153,7 @@
       </div>
 
       <div class="grid-3 team-grid">
-        <div *ngFor="let m of equipo; let tIdx = index" class="team-card glass-card"
-             data-aos="zoom-in-up"
-             [attr.data-aos-delay]="tIdx * 160"
-             data-aos-duration="900">
+        <div *ngFor="let m of equipo; let tIdx = index" class="team-card glass-card">
           <div class="team-top">
             <div class="team-initial font-serif">{{ m.nombre.charAt(5) }}</div>
             <span class="team-spec font-sans">{{ m.especialidad }}</span>
@@ -176,7 +167,7 @@
     </section>
 
     <!-- Bottom CTA (Diseño Blanco Tipo Ficha de Servicios) -->
-    <div class="team-cta text-center relative overflow-visible bg-white text-gray-900 border border-black/5 rounded-2xl shadow-xl w-full max-w-[1500px] mx-auto p-10 md:p-16 my-14" data-aos="fade-up" data-aos-duration="1000">
+    <div class="team-cta text-center relative overflow-visible bg-white text-gray-900 border border-black/5 rounded-2xl shadow-xl w-full max-w-[1500px] mx-auto p-10 md:p-16 my-14">
       <!-- Trazos esquineros decorativos arquitectónicos -->
       <div class="arch-plan-box-top"></div>
       <div class="arch-plan-box-bottom"></div>

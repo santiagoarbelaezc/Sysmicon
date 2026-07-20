@@ -1,7 +1,6 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import AOS from 'aos';
 
 @Component({
   selector: 'app-banner-crearplano',
@@ -10,10 +9,5 @@ import AOS from 'aos';
   templateUrl: './banner-crearplano.component.html',
   styleUrls: ['./banner-crearplano.component.css']
 })
-export class BannerCrearplanoComponent implements AfterViewInit {
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      AOS.refresh();
-    }, 150);
-  }
+export class BannerCrearplanoComponent {
 }

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CONTACT_INFO, BRAND_CONFIG } from '../../core/app.constants';
-import AOS from 'aos';
 
 @Component({
   selector: 'app-cotiza-con-nosotros',
@@ -36,7 +35,6 @@ export class CotizaConNosotrosComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      AOS.refresh();
       if (this.videos) {
         this.videos.forEach(v => {
           if (v && v.nativeElement) {

@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding-top: 11.5rem;
+  padding-top: 9.5rem;
   padding-bottom: 4rem;
 }
 
@@ -223,7 +223,7 @@
   text-align: center;
   max-width: 950px;
   padding: 0 1.5rem;
-  margin-top: 0.5rem;
+  margin-top: -0.5rem;
 }
 
 /* Rediseño de Indicador "Arquitectura Residencial CAD 3D" con Trazos Arquitectónicos */
@@ -293,16 +293,16 @@
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
 }
 
-/* Actions */
+/* Actions (Sobrio, Elegante, Sin Iluminaciones ni Saltos) */
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 1.2rem;
+  gap: 1.25rem;
   padding: 0 1rem;
-  margin-top: 1.5rem;
-  margin-bottom: 3.5rem;
+  margin-top: 1.25rem;
+  margin-bottom: 3rem;
 }
 
 .btn-primary {
@@ -310,24 +310,26 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  padding: 1rem 2.2rem;
-  background: #C2E1FF;
-  color: #002345; /* Dark Blue sobre Pale Blue */
+  gap: 0.65rem;
+  padding: 0.95rem 2.4rem;
+  background: #FFFFFF;
+  color: #000814;
   font-weight: 700;
-  font-size: 1rem;
-  border-radius: 8px;
-  transition: all var(--transition-smooth);
-  border: 1.5px solid #C2E1FF;
-  box-shadow: 0 10px 25px rgba(194, 225, 255, 0.35);
+  font-size: 0.82rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  border: 1px solid #FFFFFF;
+  box-shadow: none;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .btn-primary:hover {
-  background: #FFFFFF;
-  border-color: #C2E1FF;
-  color: #002345;
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 15px 35px rgba(194, 225, 255, 0.6);
+  background: #000814;
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+  transform: none;
+  box-shadow: none;
 }
 
 .btn-secondary {
@@ -335,23 +337,26 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 2.2rem;
-  background: rgba(0, 35, 69, 0.4);
+  padding: 0.95rem 2.4rem;
+  background: rgba(255, 255, 255, 0.05);
   color: #FFFFFF;
   font-weight: 600;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid rgba(194, 225, 255, 0.35);
-  backdrop-filter: blur(8px);
-  transition: all var(--transition-smooth);
+  font-size: 0.82rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  backdrop-filter: blur(12px);
+  box-shadow: none;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-secondary:hover {
-  background: rgba(194, 225, 255, 0.18);
-  border-color: #C2E1FF;
-  color: #C2E1FF;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(194, 225, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+  transform: none;
+  box-shadow: none;
 }
 
 @media (max-width: 600px) {

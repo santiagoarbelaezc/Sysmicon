@@ -1,27 +1,17 @@
-<div class="service-card-wrapper rounded-2xl border border-black/15 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:shadow-[0_30px_70px_rgba(0,0,0,0.09)] transition-all duration-500 overflow-hidden relative group"
-     [ngClass]="{'border-wood-accent/60 ring-1 ring-wood-accent/30': servicio.pilarPrincipal}">
+<div class="service-card-wrapper rounded-2xl border border-black/15 bg-white shadow-[0_15px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.09)] transition-all duration-500 overflow-hidden relative group" data-aos="fade-up">
   
-  <!-- Etiqueta superior opcional de Pilar Principal -->
-  <div *ngIf="servicio.pilarPrincipal" class="bg-[#001A33] text-white px-6 py-2.5 flex items-center justify-between border-b border-white/10 font-mono text-xs tracking-widest uppercase">
-    <span class="flex items-center gap-2 text-wood-accent font-bold">
-      <span class="w-2 h-2 rounded-full bg-wood-accent animate-ping"></span>
-      ★ PILAR INTEGRAL SYSMICON — DISEÑO Y OBRA
-    </span>
-    <span class="text-white/60 hidden sm:inline">CAPACIDAD 360°</span>
-  </div>
-
-  <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[480px]">
-    <!-- COLUMNA IMAGEN DE PROYECTO TIPO CATÁLOGO (Cols 1-5, Alternada por índice en desktop) -->
-    <div class="lg:col-span-5 relative overflow-hidden bg-[#001A33] min-h-[380px] lg:min-h-full flex flex-col justify-center items-center p-8 group/img"
+  <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[460px]">
+    <!-- COLUMNA IMAGEN DE PROYECTO TIPO CATÁLOGO (Cols 1-6, Alternada por índice en desktop) -->
+    <div class="lg:col-span-6 relative overflow-hidden bg-[#111111] min-h-[390px] lg:min-h-full flex flex-col justify-center items-center p-6 group/img"
          [ngClass]="{'order-1 lg:order-1': index % 2 === 0, 'order-1 lg:order-2': index % 2 !== 0}">
       <!-- Imagen de proyecto real como fondo tipo catálogo -->
       <div *ngIf="servicio.imagen" 
-           class="absolute inset-0 bg-cover bg-center transition-transform duration-[12000ms] group-hover/img:scale-110 opacity-85"
+           class="absolute inset-0 bg-cover bg-center transition-transform duration-[12000ms] group-hover/img:scale-110 opacity-100"
            [style.background-image]="'url(\'' + servicio.imagen + '\')'">
       </div>
       
-      <!-- Gradiente suave para que el texto resalte con máxima claridad y contraste -->
-      <div class="absolute inset-0 bg-gradient-to-t from-[#001A33]/90 via-[#001A33]/40 to-[#001A33]/80"></div>
+      <!-- Gradiente neutro (sin sombra azul) para que el texto resalte con máxima claridad -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/60"></div>
       
       <!-- Trazos esquineros arquitectónicos puros (Sin números ni textos saturados) -->
       <div class="absolute top-6 left-6 w-8 h-8 border-t border-l border-white/35 pointer-events-none"></div>
@@ -44,8 +34,8 @@
       </div>
     </div>
 
-    <!-- COLUMNA CONTENIDO Y CARACTERÍSTICAS EN FONDO BLANCO (Cols 6-12, Alternada por índice en desktop) -->
-    <div class="lg:col-span-7 p-8 md:p-11 lg:p-12 flex flex-col justify-between bg-white relative"
+    <!-- COLUMNA CONTENIDO Y CARACTERÍSTICAS EN FONDO BLANCO (Cols 7-12, Alternada por índice en desktop) -->
+    <div class="lg:col-span-6 p-6 md:p-8 lg:p-9 flex flex-col justify-between bg-white relative"
          [ngClass]="{'order-2 lg:order-2': index % 2 === 0, 'order-2 lg:order-1': index % 2 !== 0}">
       <!-- Trazos de esquina de plano en la caja blanca -->
       <div class="absolute top-5 right-5 font-mono text-gray-300 text-xs pointer-events-none">+</div>

@@ -6,6 +6,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* === OVERRIDE DE SEGURIDAD AOS ===
+   Garantiza que ningún elemento sea invisible mientras AOS no esté listo.
+   La clase .aos-ready se agrega al <body> DESPUÉS de que AOS se inicialice. */
+body:not(.aos-ready) [data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
 /* ==========================================================================
    TIPOGRAFÍA INSTITUCIONAL: EXO 2
    ========================================================================== */
@@ -190,6 +199,32 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Global Scrollbar (Barra de desplazamiento con fondo blanco y barra azul institucional) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFFFFF !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #002345 !important;
+  border-radius: 5px;
+  border: 2px solid #FFFFFF;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #001A33 !important;
+}
+
+/* Soporte para Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #002345 #FFFFFF;
 }
 
 a {

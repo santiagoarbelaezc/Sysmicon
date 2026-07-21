@@ -8,10 +8,13 @@ import { LoginComponent } from './pages/login/login.component';
 import { OlvideContrasenaComponent } from './pages/olvide-contrasena/olvide-contrasena.component';
 
 import { ProyectosPageComponent } from './pages/proyectos-page/proyectos-page.component';
+import { AgendarCitaComponent } from './pages/agendar-cita/agendar-cita.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Sysmicon | Diseño y Construcción de Viviendas' },
   { path: 'proyectos', component: ProyectosPageComponent, title: 'Galería de Proyectos | Portafolio Sysmicon' },
+  { path: 'agendar-cita', component: AgendarCitaComponent, title: 'Agendar Cita Privada | Consultoría Sysmicon' },
+  { path: 'agendar', redirectTo: 'agendar-cita', pathMatch: 'full' },
   { path: 'cotiza-con-nosotros', component: CotizaConNosotrosComponent, title: 'Cotiza con Nosotros | Sysmicon Arquitectura & Construcción' },
   { path: 'crea-tu-diseno', redirectTo: 'cotiza-con-nosotros', pathMatch: 'full' },
   { path: 'nosotros', component: NosotrosComponent, title: 'Nosotros | Filosofía y Arquitectura Sysmicon' },

@@ -7,7 +7,7 @@
   <!-- Header & Filtros Editorial -->
   <header class="w-full max-w-[1750px] mx-auto px-6 md:px-16 mb-14 relative z-10">
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/10 pb-10">
-      <div>
+      <div data-aos="fade-up">
         <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#C2E1FF]/15 border border-[#C2E1FF]/30 text-[#C2E1FF] font-mono text-xs tracking-[0.2em] uppercase mb-4">
           <span class="w-1.5 h-1.5 rounded-full bg-[#C2E1FF]"></span>
           <span>SYSMICON ARCHITECTURAL DOSSIER</span>
@@ -21,7 +21,7 @@
       </div>
 
       <!-- Category Filter Pills -->
-      <div class="flex flex-wrap items-center gap-2 bg-[#00050d] p-1.5 rounded-2xl border border-white/15">
+      <div class="flex flex-wrap items-center gap-2 bg-[#00050d] p-1.5 rounded-2xl border border-white/15" data-aos="fade-up" data-aos-delay="100">
         <button *ngFor="let cat of categorias"
                 (click)="setCategoria(cat)"
                 [ngClass]="{

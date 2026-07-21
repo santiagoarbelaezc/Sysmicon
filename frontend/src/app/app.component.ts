@@ -4,6 +4,7 @@ import { RouterOutlet, Router, NavigationStart } from '@angular/router';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoadingService } from './services/loading.service';
+import AOS from 'aos';
 
 @Component({
   selector: 'app-root',
@@ -50,5 +51,21 @@ export class AppComponent implements OnInit {
         }
       }
     });
+
+    // Inicialización centralizada de AOS con startEvent personalizado
+    // Espera a que Angular termine de renderizar antes de activar las animaciones
+    setTimeout(() => {
+      AOS.init({
+        duration: 700,
+        easing: 'ease-out-cubic',
+        once: true,
+        offset: 80,
+        disable: 'mobile',
+        startEvent: 'aos:start'
+      });
+      document.body.classList.add('aos-ready');
+      document.dispatchEvent(new CustomEvent('aos:start'));
+    }, 300);
   }
 }
+

@@ -9,7 +9,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[500px] lg:h-[calc(100vh-160px)] lg:max-h-[760px] items-stretch border-y border-gray-100">
       
       <!-- COLUMNA IZQUIERDA: VIDEO ARQUITECTÓNICO (Cols 1-8) -->
-      <div class="lg:col-span-8 relative flex flex-col justify-center overflow-hidden bg-white min-h-[380px] lg:min-h-full group">
+      <div class="lg:col-span-8 relative flex flex-col justify-center overflow-hidden bg-white min-h-[380px] lg:min-h-full group" data-aos="fade-up">
         <!-- Reproductor de Video en Gran Formato con Colores Invertidos -->
         <video #bgVideo autoplay loop muted playsinline [muted]="true" [volume]="0" onloadedmetadata="this.muted=true; this.volume=0;" class="absolute inset-0 w-full h-full object-cover transform scale-[1.01] transition-transform duration-1000 group-hover:scale-[1.03] invert" style="filter: invert(1);">
           <source src="assets/videos/sysmicon3.mp4" type="video/mp4">
@@ -18,7 +18,7 @@
       </div>
 
       <!-- COLUMNA DERECHA: CUADRO "HABLAR CON NOSOTROS" DE ALTA ELEGANCIA (Cols 9-12) -->
-      <div class="lg:col-span-4 flex flex-col justify-center bg-white border-l border-gray-200 p-6 sm:p-8 lg:p-10 xl:p-12 shadow-[0_15px_50px_rgba(0,0,0,0.04)] relative z-20 min-h-full">
+      <div class="lg:col-span-4 flex flex-col justify-center bg-white border-l border-gray-200 p-6 sm:p-8 lg:p-10 xl:p-12 shadow-[0_15px_50px_rgba(0,0,0,0.04)] relative z-20 min-h-full" data-aos="fade-up" data-aos-delay="100">
         
         <div class="flex flex-col justify-between h-full space-y-7">
           <div>

@@ -1,0 +1,125 @@
+<section class="hero-video-section relative w-full h-screen overflow-hidden bg-[#000814] flex items-center justify-center">
+
+  <!-- VIDEO PLAYER SLOTS (CROSSFADE TRANSITION) -->
+  <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+    
+    <!-- Video Slot A -->
+    <video #videoA
+           [src]="srcA()"
+           autoplay
+           muted
+           playsinline
+           [ngClass]="activeSlot() === 'A' ? 'opacity-100 scale-100' : 'opacity-0 scale-105'"
+           (ended)="onVideoEnded('A')"
+           (timeupdate)="onTimeUpdate('A')"
+           class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-out">
+    </video>
+
+    <!-- Video Slot B -->
+    <video #videoB
+           [src]="srcB()"
+           autoplay
+           muted
+           playsinline
+           [ngClass]="activeSlot() === 'B' ? 'opacity-100 scale-100' : 'opacity-0 scale-105'"
+           (ended)="onVideoEnded('B')"
+           (timeupdate)="onTimeUpdate('B')"
+           class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-out">
+    </video>
+
+    <!-- GRADIENTES & AMBIENTE CINEMATOGRÁFICO DE LUXURY (OSCURECIDO SUTILMENTE) -->
+    <div class="absolute inset-0 bg-black/45"></div>
+    <div class="absolute inset-0 bg-radial-vignette opacity-65"></div>
+  </div>
+
+  <!-- NAVEGACIÓN MANUAL DE VIDEOS (FLECHAS MINIMALISTAS Y ELEGANTES LATERALES) -->
+  <button (click)="prevVideo()"
+          class="video-arrow video-arrow-left group hidden sm:flex"
+          aria-label="Video anterior">
+    <div class="video-arrow-inner">
+      <svg class="w-5 h-5 stroke-current transition-transform duration-500 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 19l-7-7 7-7"/>
+      </svg>
+    </div>
+  </button>
+  
+  <button (click)="nextVideo()"
+          class="video-arrow video-arrow-right group hidden sm:flex"
+          aria-label="Siguiente video">
+    <div class="video-arrow-inner">
+      <svg class="w-5 h-5 stroke-current transition-transform duration-500 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 5l7 7-7 7"/>
+      </svg>
+    </div>
+  </button>
+
+  <!-- CONTENIDO CENTRAL DEL HERO -->
+  <div class="container relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center justify-center pt-8">
+    
+    <!-- Título Principal con animación de entrada elegante -->
+    <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-white tracking-tight leading-[0.98] drop-shadow-2xl mb-8 animate-title-entrance">
+      Diseñamos y <span class="font-serif italic font-normal text-[#C2E1FF]">Construimos</span>
+    </h1>
+
+    <!-- Botones de Acción -->
+    <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+      <a routerLink="/cotiza-con-nosotros" class="group inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-500 font-sans text-xs font-bold tracking-[0.24em] uppercase shadow-2xl hover:scale-105">
+        <span>Cotiza con nosotros</span>
+        <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
+        </svg>
+      </a>
+
+      <button (click)="scrollToNext()" class="group inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/40 backdrop-blur-md transition-all duration-500 font-sans text-xs font-medium tracking-[0.2em] uppercase">
+        <span>Ver Obras & Proyectos</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- REPRODUCTOR / INDICADORES EN ESQUINA INFERIOR DERECHA -->
+  <div class="absolute bottom-8 right-6 sm:right-12 z-20 hidden md:flex flex-col items-end gap-2 text-right">
+    <div class="flex items-center gap-2">
+      <span class="w-6 h-[1px] bg-[#C2E1FF]/60"></span>
+      <span class="font-mono text-[10px] tracking-[0.26em] uppercase text-[#C2E1FF] font-bold">
+        {{ playlist[currentIndex()].tagline }}
+      </span>
+    </div>
+    
+    <span class="font-serif text-sm text-white/90 font-light">
+      {{ playlist[currentIndex()].title }}
+    </span>
+
+    <div class="flex items-center gap-2 mt-2">
+      <button *ngFor="let item of playlist; let i = index"
+              (click)="goToVideo(i)"
+              [attr.aria-label]="'Ver video ' + (i + 1)"
+              class="group relative py-1 px-2 cursor-pointer focus:outline-none">
+        <span class="block h-[2px] transition-all duration-500 rounded-full"
+              [ngClass]="currentIndex() === i ? 'w-10 bg-[#C2E1FF] shadow-[0_0_10px_#C2E1FF]' : 'w-4 bg-white/30 group-hover:bg-white/60'">
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- INDICATIVO DEL SCROLL MEJORADO (CENTRO INFERIOR) -->
+  <div (click)="scrollToNext()"
+       class="scroll-indicator-enhanced absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center cursor-pointer group">
+    
+    <!-- Texto animado -->
+    <span class="font-mono text-[10px] tracking-[0.3em] uppercase text-white/70 group-hover:text-[#C2E1FF] transition-colors mb-2">
+      DESLIZA PARA EXPLORAR
+    </span>
+
+    <!-- Cápsula animada tipo Mouse VIP con pulso brillante -->
+    <div class="w-6 h-10 rounded-full border-2 border-white/30 group-hover:border-[#C2E1FF] transition-all duration-300 flex justify-center p-1.5 relative shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_20px_rgba(194,225,255,0.4)]">
+      <div class="w-1.5 h-2.5 rounded-full bg-[#C2E1FF] animate-mouse-wheel"></div>
+    </div>
+
+    <!-- Línea con haz de luz descendente -->
+    <div class="w-[1px] h-8 bg-gradient-to-b from-[#C2E1FF] via-white/30 to-transparent mt-2 overflow-hidden relative">
+      <div class="w-full h-full bg-[#C2E1FF] animate-beam-drop"></div>
+    </div>
+  </div>
+
+</section>

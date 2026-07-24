@@ -87,3 +87,32 @@ input:focus, textarea:focus {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* Animaciones del Modal Desplegable */
+@keyframes slideLeft {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slideLeft {
+  animation: slideLeft 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.35s ease forwards;
+}

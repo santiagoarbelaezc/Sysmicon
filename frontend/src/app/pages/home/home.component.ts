@@ -2,6 +2,7 @@ import { Component, inject, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { HeroComponent } from '../../shared/hero/hero.component';
+import { HeroVideoComponent } from '../../shared/hero-video/hero-video.component';
 import { AboutComponent } from '../../shared/about/about.component';
 import { ServiceCardComponent } from '../../components/service-card/service-card.component';
 import { ProjectCardComponent } from '../../components/project-card/project-card.component';
@@ -18,6 +19,7 @@ import { ServiciosService } from '../../services/servicios.service';
     CommonModule,
     RouterModule,
     HeroComponent,
+    HeroVideoComponent,
     AboutComponent,
     ServiceCardComponent,
     ProjectCardComponent,

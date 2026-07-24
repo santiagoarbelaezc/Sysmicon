@@ -53,56 +53,27 @@
           "Dirigimos cada obra cumpliendo estrictamente con los tiempos acordados y optimizando cada peso de tu presupuesto."
         </p>
 
-        <!-- TARJETAS DE PROYECTOS MINIMALISTAS SIN IMÁGENES (Redirigen al componente de Proyectos) -->
-        <div class="w-full pt-2">
-          <div class="flex items-center justify-between mb-4 pb-2 border-b border-white/10">
-            <span class="font-mono text-[10px] tracking-[0.26em] text-white/60 uppercase">
-              OBRAS DIRIGIDAS — DOSSIER SELECTO
-            </span>
-            <a routerLink="/proyectos" class="text-[10px] font-sans font-semibold uppercase tracking-[0.2em] text-[#C2E1FF] hover:text-white transition-colors flex items-center gap-1">
-              <span>Ver Catálogo Completo</span>
-              <span>→</span>
-            </a>
-          </div>
-
-          <!-- Grid de 3 tarjetas minimalistas tipográficas (Sin imágenes) -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <a *ngFor="let p of proyectosDestacados" 
-               [routerLink]="['/proyectos']" 
-               [queryParams]="{categoria: p.categoria}"
-               class="group/card p-5 rounded-xl bg-white/[0.02] border border-white/10 hover:border-[#C2E1FF]/50 hover:bg-white/[0.05] transition-all duration-400 flex flex-col justify-between min-h-[140px] text-left shadow-md cursor-pointer">
-              
-              <!-- Categoría y Año -->
-              <div class="flex items-center justify-between font-mono text-[10px] tracking-widest uppercase">
-                <span class="text-[#C2E1FF] font-medium">{{ p.categoria }}</span>
-                <span class="text-white/40">{{ p.anio }}</span>
-              </div>
-
-              <!-- Título de Proyecto minimalista -->
-              <div class="my-3">
-                <h4 class="font-serif text-lg font-light text-white tracking-wide group-hover/card:text-[#C2E1FF] transition-colors leading-snug">
-                  {{ p.titulo }}
-                </h4>
-              </div>
-
-              <!-- Ubicación y flecha minimalista -->
-              <div class="pt-2 border-t border-white/10 flex items-center justify-between text-xs font-sans text-white/50 group-hover/card:text-white transition-colors">
-                <span class="truncate pr-2 font-light">{{ p.ubicacion }}</span>
-                <span class="text-[#C2E1FF] font-mono group-hover/card:translate-x-1 transition-transform inline-block">→</span>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <!-- Botones Minimalistas de Agendamiento y Dossier -->
-        <div class="pt-3 flex flex-wrap items-center gap-4">
-          <a routerLink="/agendar-cita" class="group inline-flex items-center gap-4 px-8 py-4 rounded bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-500 font-sans text-xs font-bold tracking-[0.26em] uppercase cursor-pointer shadow-lg">
-            <span>Agendar Cita Privada</span>
-            <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1.5 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        <!-- Botones Minimalistas de Acción Directa -->
+        <div class="pt-6 flex flex-wrap items-center gap-4">
+          <!-- Botón 1: Ver Proyectos -->
+          <a routerLink="/proyectos"
+             class="group inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-500 font-sans text-xs font-bold tracking-[0.24em] uppercase cursor-pointer shadow-xl hover:scale-105">
+            <span>Ver Proyectos</span>
+            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
+            </svg>
           </a>
-          
-          <a routerLink="/proyectos" class="group inline-flex items-center gap-2 px-6 py-4 rounded bg-transparent hover:bg-white/[0.06] text-white/70 hover:text-white border border-white/15 hover:border-white/30 transition-all duration-500 font-sans text-xs font-medium tracking-[0.2em] uppercase">
-            <span>Explorar Dossier</span>
+
+          <!-- Botón 2: Contacto -->
+          <a routerLink="/contacto"
+             class="group inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-transparent hover:bg-white/10 text-white border border-white/20 hover:border-white/50 backdrop-blur-md transition-all duration-500 font-sans text-xs font-medium tracking-[0.22em] uppercase cursor-pointer">
+            <span>Contacto</span>
+          </a>
+
+          <!-- Botón 3: Agendar Cita -->
+          <a routerLink="/agendar-cita"
+             class="group inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-transparent hover:bg-white/10 text-white/90 hover:text-white border border-white/20 hover:border-white/50 backdrop-blur-md transition-all duration-500 font-sans text-xs font-medium tracking-[0.22em] uppercase cursor-pointer">
+            <span>Agendar Cita</span>
           </a>
         </div>
 

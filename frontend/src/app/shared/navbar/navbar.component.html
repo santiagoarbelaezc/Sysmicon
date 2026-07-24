@@ -1,4 +1,7 @@
-<header class="navbar always-white-scrolled">
+<header class="navbar always-white-scrolled" 
+        [ngClass]="{'navbar-hidden': !isNavbarVisible, 'navbar-visible': isNavbarVisible}"
+        (mouseenter)="onMouseEnterHeader()"
+        (mouseleave)="onMouseLeaveHeader()">
   <div class="w-full max-w-[1750px] mx-auto px-6 md:px-16 navbar-container flex items-center justify-between">
     <!-- Logo Sobrio y Compacto -->
     <a routerLink="/" class="navbar-logo group flex items-center gap-3 z-[1001]" (click)="closeMobileMenu()">

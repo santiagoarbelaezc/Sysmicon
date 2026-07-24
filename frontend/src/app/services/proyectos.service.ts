@@ -130,62 +130,6 @@ export class ProyectosService {
         '/assets/images/casaL/casaL-5.png',
         '/assets/images/casaL/casaL-3.png'
       ]
-    },
-    {
-      id: 'casa-carmen',
-      titulo: 'Casa Carmen',
-      subtitulo: 'Fusión entre naturaleza y arquitectura contemporánea con espejos de agua.',
-      categoria: 'Residencial',
-      descripcion: 'Diseñada con grandes volúmenes horizontales que reposan suavemente entre la exuberante vegetación tropical. La casa propone un diálogo poético entre estanques reflectantes, concreto aparente y jardines exuberantes.',
-      imagenUrl: '/images/project-villa.png',
-      area: 720,
-      anio: 2025,
-      ubicacion: 'Llanogrande, Antioquia',
-      destacado: true,
-      caracteristicas: [
-        'Espejos de agua perimetrales que regulan la temperatura exterior',
-        'Estructura aporticada en concreto blanco arquitectónico',
-        'Cubiertas verdes con aislamiento térmico natural',
-        'Iluminación escénica integrada en estanques y jardines'
-      ],
-      editorialTitle: 'CASA CARMEN',
-      editorialSubtitle: 'Fusión entre naturaleza y arq.',
-      editorialSlogan: 'TRANSICIÓN ENTRE INTERIOR Y EXTERIOR.',
-      editorialStyle: 'coral-title',
-      barcode: '0 600229402 5',
-      imagenesAdicionales: [
-        '/assets/images/imagen1.jpg',
-        '/assets/images/imagen2.jpg',
-        '/assets/images/imagen3.jpg'
-      ]
-    },
-    {
-      id: 'edificio-gp',
-      titulo: 'Edificio GP',
-      subtitulo: 'Hito de arquitectura residencial vertical y ladrillo noble en La Aguacatala.',
-      categoria: 'Residencial',
-      descripcion: 'Un edificio residencial boutique que honra la tradición arquitectónica del ladrillo en Medellín fusionándola con grandes voladizos en concreto y jardines verticales en cada balcón.',
-      imagenUrl: '/assets/images/principal.jpg',
-      area: 1450,
-      anio: 2025,
-      ubicacion: 'La Aguacatala, Medellín',
-      destacado: true,
-      caracteristicas: [
-        'Fachada en ladrillo arquitectónico de alta densidad con celosías',
-        'Balcones profundos con vegetación colgante autorregable',
-        'Lobby monumental de doble altura con arte fundido en concreto',
-        'Sistema de eficiencia energética y aislamiento solar'
-      ],
-      editorialTitle: 'EDI FICIO GP',
-      editorialSubtitle: 'GP se ubica en el barrio La Aguacatala',
-      editorialSlogan: 'MEDELLÍN ES COLOR LADRILLO.',
-      editorialStyle: 'split-grid',
-      barcode: '0 600229402 6',
-      imagenesAdicionales: [
-        '/assets/images/imagen4.jpg',
-        '/assets/images/imagen5.jpg',
-        '/images/project-roble.png'
-      ]
     }
   ]);
 

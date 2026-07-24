@@ -62,130 +62,130 @@
     <div (click)="cerrarModal()" class="absolute inset-0 bg-black/75 backdrop-blur-md animate-fadeIn"></div>
 
     <!-- Panel Lateral Desplegable -->
-    <div class="relative z-10 w-full max-w-lg bg-white text-black h-full shadow-2xl flex flex-col justify-between p-6 sm:p-10 overflow-y-auto animate-slideLeft">
+    <div class="relative z-10 w-full max-w-md bg-white h-full shadow-2xl overflow-y-auto p-5 sm:p-6 flex flex-col justify-between animate-slideLeft">
       
       <div>
         <!-- Header del Modal -->
-        <div class="flex items-center justify-between pb-6 border-b border-gray-200 mb-6">
+        <div class="flex items-center justify-between pb-3 mb-3 border-b border-gray-100">
           <div>
-            <span class="font-mono text-[10px] tracking-[0.26em] uppercase text-gray-500 font-bold block mb-1">
+            <span class="font-mono text-[9px] tracking-[0.24em] uppercase text-gray-500 font-bold block mb-0.5">
               SYSMICON — CONTACTO DIRECTO
             </span>
-            <h2 class="font-serif text-3xl font-light text-[#111111] tracking-tight">
+            <h2 class="font-serif text-2xl font-light text-[#111111] tracking-tight">
               Habla con Nosotros
             </h2>
           </div>
-          <button (click)="cerrarModal()" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-700 text-base font-bold transition-all cursor-pointer">
+          <button (click)="cerrarModal()" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-700 text-sm font-bold transition-all cursor-pointer">
             ✕
           </button>
         </div>
 
         <!-- Formulario de Mensaje -->
-        <form *ngIf="!enviado()" (submit)="enviarMensaje($event)" class="space-y-4">
+        <form *ngIf="!enviado()" (submit)="enviarMensaje($event)" class="space-y-2.5">
           <div>
-            <label for="modal-nombre" class="block font-sans text-[11px] font-bold tracking-[0.18em] uppercase text-gray-800 mb-1.5">Nombre *</label>
+            <label for="modal-nombre" class="block font-sans text-[10px] font-bold tracking-[0.16em] uppercase text-gray-800 mb-1">Nombre *</label>
             <input type="text" id="modal-nombre" name="nombre"
                    [ngModel]="nombre()" (ngModelChange)="nombre.set($event)"
                    placeholder="Tu nombre completo"
-                   class="w-full px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:border-black focus:bg-white transition-all">
+                   class="w-full px-3.5 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-xs focus:outline-none focus:border-black focus:bg-white transition-all">
           </div>
 
           <div>
-            <label for="modal-telefono" class="block font-sans text-[11px] font-bold tracking-[0.18em] uppercase text-gray-800 mb-1.5">Teléfono *</label>
+            <label for="modal-telefono" class="block font-sans text-[10px] font-bold tracking-[0.16em] uppercase text-gray-800 mb-1">Teléfono *</label>
             <input type="tel" id="modal-telefono" name="telefono"
                    [ngModel]="telefono()" (ngModelChange)="telefono.set($event)"
                    placeholder="+57 300 000 0000"
-                   class="w-full px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:border-black focus:bg-white transition-all">
+                   class="w-full px-3.5 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-xs focus:outline-none focus:border-black focus:bg-white transition-all">
           </div>
 
           <div>
-            <label for="modal-asunto" class="block font-sans text-[11px] font-bold tracking-[0.18em] uppercase text-gray-800 mb-1.5">Asunto *</label>
+            <label for="modal-asunto" class="block font-sans text-[10px] font-bold tracking-[0.16em] uppercase text-gray-800 mb-1">Asunto *</label>
             <input type="text" id="modal-asunto" name="asunto"
                    [ngModel]="asunto()" (ngModelChange)="asunto.set($event)"
                    placeholder="Tipo de proyecto o consulta"
-                   class="w-full px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:border-black focus:bg-white transition-all">
+                   class="w-full px-3.5 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-xs focus:outline-none focus:border-black focus:bg-white transition-all">
           </div>
 
           <div>
-            <label for="modal-mensaje" class="block font-sans text-[11px] font-bold tracking-[0.18em] uppercase text-gray-800 mb-1.5">Detalles</label>
-            <textarea id="modal-mensaje" name="mensaje" rows="3"
+            <label for="modal-mensaje" class="block font-sans text-[10px] font-bold tracking-[0.16em] uppercase text-gray-800 mb-1">Detalles</label>
+            <textarea id="modal-mensaje" name="mensaje" rows="2"
                       [ngModel]="mensaje()" (ngModelChange)="mensaje.set($event)"
-                      placeholder="Cuéntanos brevemente tu presupuesto estimado o requerimientos..."
-                      class="w-full px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:border-black focus:bg-white transition-all resize-none"></textarea>
+                      placeholder="Cuéntanos brevemente tu presupuesto o requerimientos..."
+                      class="w-full px-3.5 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-xs focus:outline-none focus:border-black focus:bg-white transition-all resize-none"></textarea>
           </div>
 
-          <div *ngIf="errorMsg()" class="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-sans">
+          <div *ngIf="errorMsg()" class="p-2.5 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs font-sans">
             {{ errorMsg() }}
           </div>
 
-          <button type="submit" [disabled]="cargando()" class="w-full py-4 rounded-xl bg-[#000814] hover:bg-[#002345] text-white flex items-center justify-center gap-3 font-sans font-bold text-xs tracking-[0.22em] uppercase transition-all shadow-lg cursor-pointer">
+          <button type="submit" [disabled]="cargando()" class="w-full py-3 rounded-lg bg-[#000814] hover:bg-[#002345] text-white flex items-center justify-center gap-2 font-sans font-bold text-xs tracking-[0.2em] uppercase transition-all shadow-md cursor-pointer mt-1">
             <span *ngIf="!cargando()">Enviar Consulta</span>
             <span *ngIf="cargando()">Procesando...</span>
-            <svg *ngIf="!cargando()" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            <svg *ngIf="!cargando()" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
           </button>
         </form>
 
         <!-- Mensaje de Éxito -->
-        <div *ngIf="enviado()" class="py-8 text-center space-y-4">
-          <div class="w-14 h-14 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mx-auto">
+        <div *ngIf="enviado()" class="py-6 text-center space-y-3">
+          <div class="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mx-auto text-lg font-bold">
             ✓
           </div>
-          <h3 class="font-serif text-2xl font-bold text-[#111111]">¡Solicitud Recibida!</h3>
-          <p class="text-gray-600 text-sm font-sans max-w-sm mx-auto">
+          <h3 class="font-serif text-xl font-bold text-[#111111]">¡Solicitud Recibida!</h3>
+          <p class="text-gray-600 text-xs font-sans max-w-sm mx-auto">
             Te contactaremos de inmediato a tu teléfono o WhatsApp.
           </p>
-          <button (click)="nuevaConsulta()" class="px-5 py-2.5 rounded-xl bg-gray-100 text-gray-900 text-xs font-bold uppercase tracking-wider">
+          <button (click)="nuevaConsulta()" class="px-4 py-2 rounded-lg bg-gray-100 text-gray-900 text-xs font-bold uppercase tracking-wider">
             Enviar otra consulta
           </button>
         </div>
       </div>
 
       <!-- BOTONES DE CANALES & REDES SOCIALES COMPLETAS -->
-      <div class="pt-6 border-t border-gray-200 mt-6">
-        <p class="font-sans text-[10px] font-bold tracking-[0.2em] uppercase text-gray-500 mb-3.5">
+      <div class="pt-3.5 border-t border-gray-200 mt-3.5">
+        <p class="font-sans text-[9.5px] font-bold tracking-[0.18em] uppercase text-gray-500 mb-2">
           O contáctanos en redes y canales directos:
         </p>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
           <!-- WhatsApp Directo -->
           <a [href]="whatsappUrl" target="_blank" rel="noopener noreferrer" 
-             class="flex items-center justify-center gap-2 p-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-[11px] font-semibold tracking-wider uppercase transition-all">
-            <svg class="w-4 h-4 text-emerald-600" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 1.636 6.015L.195 23.518l5.656-1.484A11.95 11.95 0 0 0 11.944 24C18.575 24 24 18.627 24 12S18.575 0 11.944 0zm0 21.986a9.96 9.96 0 0 1-5.074-1.385l-.364-.216-3.765.988 1.006-3.668-.238-.379A9.954 9.954 0 0 1 1.986 12c0-5.492 4.471-9.964 9.958-9.964 5.492 0 9.964 4.472 9.964 9.964 0 5.492-4.472 9.986-9.964 9.986zm5.457-7.466c-.299-.15-1.768-.872-2.042-.971-.274-.1-.474-.15-.674.15-.2.299-.774.971-.949 1.171-.174.2-.349.224-.648.075-.3-.15-1.263-.465-2.404-1.482-.888-.792-1.488-1.769-1.663-2.068-.175-.3-.018-.462.132-.611.135-.135.299-.35.449-.524.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.674-1.624-.924-2.224-.243-.585-.49-.505-.674-.515-.174-.01-.374-.01-.574-.01-.2 0-.524.075-.799.375-.274.3-1.048 1.024-1.048 2.497 0 1.474 1.073 2.898 1.223 3.098.15.2 2.112 3.223 5.116 4.522.715.309 1.274.494 1.708.632.718.228 1.371.196 1.889.119.578-.086 1.768-.723 2.017-1.422.249-.699.249-1.299.174-1.423-.075-.124-.274-.199-.574-.349z"/></svg>
+             class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-[10px] font-semibold tracking-wider uppercase transition-all">
+            <svg class="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 1.636 6.015L.195 23.518l5.656-1.484A11.95 11.95 0 0 0 11.944 24C18.575 24 24 18.627 24 12S18.575 0 11.944 0zm0 21.986a9.96 9.96 0 0 1-5.074-1.385l-.364-.216-3.765.988 1.006-3.668-.238-.379A9.954 9.954 0 0 1 1.986 12c0-5.492 4.471-9.964 9.958-9.964 5.492 0 9.964 4.472 9.964 9.964 0 5.492-4.472 9.986-9.964 9.986zm5.457-7.466c-.299-.15-1.768-.872-2.042-.971-.274-.1-.474-.15-.674.15-.2.299-.774.971-.949 1.171-.174.2-.349.224-.648.075-.3-.15-1.263-.465-2.404-1.482-.888-.792-1.488-1.769-1.663-2.068-.175-.3-.018-.462.132-.611.135-.135.299-.35.449-.524.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.674-1.624-.924-2.224-.243-.585-.49-.505-.674-.515-.174-.01-.374-.01-.574-.01-.2 0-.524.075-.799.375-.274.3-1.048 1.024-1.048 2.497 0 1.474 1.073 2.898 1.223 3.098.15.2 2.112 3.223 5.116 4.522.715.309 1.274.494 1.708.632.718.228 1.371.196 1.889.119.578-.086 1.768-.723 2.017-1.422.249-.699.249-1.299.174-1.423-.075-.124-.274-.199-.574-.349z"/></svg>
             <span>WhatsApp</span>
           </a>
 
           <!-- Instagram -->
           <a href="https://www.instagram.com/sysmicon/" target="_blank" rel="noopener noreferrer"
-             class="flex items-center justify-center gap-2 p-3 rounded-xl bg-pink-50 hover:bg-pink-100 border border-pink-200 text-pink-800 text-[11px] font-semibold tracking-wider uppercase transition-all">
-            <svg class="w-4 h-4 text-pink-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+             class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-pink-50 hover:bg-pink-100 border border-pink-200 text-pink-800 text-[10px] font-semibold tracking-wider uppercase transition-all">
+            <svg class="w-3.5 h-3.5 text-pink-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
             <span>Instagram</span>
           </a>
 
           <!-- TikTok -->
           <a href="https://www.tiktok.com/@sysmicon" target="_blank" rel="noopener noreferrer"
-             class="flex items-center justify-center gap-2 p-3 rounded-xl bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-900 text-[11px] font-semibold tracking-wider uppercase transition-all">
-            <svg class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 1 1-5.2-1.74 2.89 2.89 0 0 1 2.31-2.84V7.63a6.34 6.34 0 0 0-5.11 6.18A6.34 6.34 0 1 0 14.82 20V11.8a8.31 8.31 0 0 0 4.77 1.49v-3.5a4.84 4.84 0 0 1-3-.94z"/></svg>
+             class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-900 text-[10px] font-semibold tracking-wider uppercase transition-all">
+            <svg class="w-3.5 h-3.5 text-black" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 1 1-5.2-1.74 2.89 2.89 0 0 1 2.31-2.84V7.63a6.34 6.34 0 0 0-5.11 6.18A6.34 6.34 0 1 0 14.82 20V11.8a8.31 8.31 0 0 0 4.77 1.49v-3.5a4.84 4.84 0 0 1-3-.94z"/></svg>
             <span>TikTok</span>
           </a>
 
           <!-- Correo Electrónico -->
           <a href="mailto:contacto@sysmicon.com"
-             class="flex items-center justify-center gap-2 p-3 rounded-xl bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-800 text-[11px] font-semibold tracking-wider uppercase transition-all">
-            <svg class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+             class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-800 text-[10px] font-semibold tracking-wider uppercase transition-all">
+            <svg class="w-3.5 h-3.5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             <span>Correo</span>
           </a>
 
           <!-- LinkedIn -->
           <a href="https://www.linkedin.com/company/sysmicon/" target="_blank" rel="noopener noreferrer"
-             class="flex items-center justify-center gap-2 p-3 rounded-xl bg-sky-50 hover:bg-sky-100 border border-sky-200 text-sky-800 text-[11px] font-semibold tracking-wider uppercase transition-all">
-            <svg class="w-4 h-4 text-sky-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+             class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-sky-50 hover:bg-sky-100 border border-sky-200 text-sky-800 text-[10px] font-semibold tracking-wider uppercase transition-all">
+            <svg class="w-3.5 h-3.5 text-sky-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
             <span>LinkedIn</span>
           </a>
 
           <!-- Facebook -->
           <a href="https://www.facebook.com/sysmicon/" target="_blank" rel="noopener noreferrer"
-             class="flex items-center justify-center gap-2 p-3 rounded-xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-800 text-[11px] font-semibold tracking-wider uppercase transition-all">
-            <svg class="w-4 h-4 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+             class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-800 text-[10px] font-semibold tracking-wider uppercase transition-all">
+            <svg class="w-3.5 h-3.5 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
             <span>Facebook</span>
           </a>
         </div>

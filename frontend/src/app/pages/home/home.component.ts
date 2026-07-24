@@ -9,6 +9,7 @@ import { ProjectCardComponent } from '../../components/project-card/project-card
 import { ProjectsComponent } from '../../components/projects/projects.component';
 import { DirectorShowcaseComponent } from '../../components/director-showcase/director-showcase.component';
 import { BannerCrearplanoComponent } from '../../components/banner-crearplano/banner-crearplano.component';
+import { ArchitecturalScrollBlockComponent } from '../../components/architectural-scroll-block/architectural-scroll-block.component';
 import { ProyectosService } from '../../services/proyectos.service';
 import { ServiciosService } from '../../services/servicios.service';
 
@@ -25,7 +26,8 @@ import { ServiciosService } from '../../services/servicios.service';
     ProjectCardComponent,
     ProjectsComponent,
     DirectorShowcaseComponent,
-    BannerCrearplanoComponent
+    BannerCrearplanoComponent,
+    ArchitecturalScrollBlockComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

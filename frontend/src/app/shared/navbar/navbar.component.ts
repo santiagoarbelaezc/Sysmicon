@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { BRAND_CONFIG, NAV_LINKS } from '../../core/app.constants';
 import { AuthService } from '../../services/auth.service';
+import { PwaService } from '../../services/pwa.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,6 +14,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavbarComponent implements OnInit {
   readonly authService = inject(AuthService);
+  readonly pwaService = inject(PwaService);
   readonly router = inject(Router);
   readonly brandName = BRAND_CONFIG.name;
   readonly navLinks = NAV_LINKS;
@@ -21,6 +23,11 @@ export class NavbarComponent implements OnInit {
   readonly isScrolled = signal<boolean>(false);
   readonly isHoveredTop = signal<boolean>(false);
   readonly currentLang = signal<'ES' | 'EN'>('ES');
+
+  abrirGuiaPwa(): void {
+    this.closeMobileMenu();
+    this.pwaService.openInstallModal();
+  }
 
   constructor() {}
 

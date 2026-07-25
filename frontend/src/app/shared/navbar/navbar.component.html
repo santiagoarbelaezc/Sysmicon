@@ -27,6 +27,18 @@
 
     <!-- Desktop Right Actions (Ingreso / Registro Compacto y Elegante) -->
     <div class="desktop-actions flex items-center gap-6">
+      <!-- Boton Instalar PWA -->
+      <button (click)="abrirGuiaPwa()" 
+              title="Instalar App de Sysmicon" 
+              class="flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/25 hover:border-[#C2E1FF] text-[11px] font-mono tracking-wider uppercase text-white hover:text-[#000814] hover:bg-[#C2E1FF] transition-all cursor-pointer shadow-sm">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        <span>Instalar App</span>
+      </button>
+
       <!-- Auth Links / User Profile -->
       <div class="auth-links flex items-center gap-5 font-sans">
         <ng-container *ngIf="!authService.isLoggedIn()">
@@ -80,6 +92,16 @@
               <a routerLink="/registro" (click)="closeMobileMenu()" class="px-7 py-3 rounded-full border border-white/25 bg-white/[0.04] hover:bg-[#C2E1FF] hover:text-[#000814] text-white font-sans text-xs font-semibold tracking-[0.22em] uppercase transition-all">Registrarse</a>
             </div>
           </ng-container>
+
+          <!-- Botón Guia Instalar PWA -->
+          <button (click)="abrirGuiaPwa()" class="w-full py-3.5 px-6 rounded-full bg-[#C2E1FF]/10 hover:bg-[#C2E1FF] text-white hover:text-[#000814] border border-[#C2E1FF]/40 font-mono text-xs font-bold tracking-[0.2em] uppercase flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg mt-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span>INSTALAR APP MÓVIL</span>
+          </button>
           <ng-container *ngIf="authService.currentUser() as user">
             <div class="flex flex-col gap-3 bg-[#000814] px-5 py-4 rounded-2xl border border-[#C2E1FF]/30 w-full shadow-2xl">
               <div class="flex items-center justify-between">

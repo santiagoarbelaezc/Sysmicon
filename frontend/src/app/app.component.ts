@@ -7,10 +7,12 @@ import { LoadingService } from './services/loading.service';
 import { ProyectosService } from './services/proyectos.service';
 import AOS from 'aos';
 
+import { PwaInstallModalComponent } from './shared/pwa-install-modal/pwa-install-modal.component';
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent],
+  imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent, PwaInstallModalComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

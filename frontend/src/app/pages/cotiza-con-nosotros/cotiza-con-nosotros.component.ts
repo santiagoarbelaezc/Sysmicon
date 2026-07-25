@@ -22,15 +22,17 @@ export class CotizaConNosotrosComponent implements OnInit, AfterViewInit {
 
   // Playlist adaptable para Desktop y Móvil (Hero de alta definición)
   readonly videoPlaylistDesktop = [
-    'assets/videos/recursos/sysmi-0.mp4',
-    'assets/videos/recursos/sysmi-5.mp4',
-    'assets/videos/recursos/sysmi-2.mp4'
+    'https://res.cloudinary.com/dsv1gdgya/video/upload/v1785017834/sysmi-0_n3fxgd.mp4',
+    'https://res.cloudinary.com/dsv1gdgya/video/upload/v1785017752/sysmi-5_zakn8v.mp4',
+    'https://res.cloudinary.com/dsv1gdgya/video/upload/v1785017819/sysmi-1_mvv1wg.mp4',
+    'https://res.cloudinary.com/dsv1gdgya/video/upload/v1785017765/sysmi-4_has6qd.mp4'
   ];
 
   readonly videoPlaylistMobile = [
-    'assets/videos/recursos/sysmi-movil-0.mp4',
-    'assets/videos/recursos/sysmi-5.mp4',
-    'assets/videos/recursos/sysmi-2.mp4'
+    'https://res.cloudinary.com/dsv1gdgya/video/upload/v1785017824/sysmi-movil-0_kk2hr0.mp4',
+    'https://res.cloudinary.com/dsv1gdgya/video/upload/v1785017752/sysmi-5_zakn8v.mp4',
+    'https://res.cloudinary.com/dsv1gdgya/video/upload/v1785017819/sysmi-1_mvv1wg.mp4',
+    'https://res.cloudinary.com/dsv1gdgya/video/upload/v1785017765/sysmi-4_has6qd.mp4'
   ];
 
   get videoPlaylist(): string[] {

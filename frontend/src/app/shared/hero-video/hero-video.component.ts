@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
 export class HeroVideoComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('videoEl') videoRef!: ElementRef<HTMLVideoElement>;
 
-  readonly videoSrc = signal<string>('assets/videos/recursos/sysmi-0.mp4');
+  readonly videoSrc = signal<string>('https://res.cloudinary.com/dsv1gdgya/video/upload/v1785017834/sysmi-0_n3fxgd.mp4');
   readonly isMobile = signal<boolean>(false);
   readonly seekBadgeText = signal<string | null>(null);
   
@@ -51,8 +51,8 @@ export class HeroVideoComponent implements OnInit, OnDestroy, AfterViewInit {
       const mobile = window.innerWidth < 768;
       this.isMobile.set(mobile);
       const newSrc = mobile 
-        ? 'assets/videos/recursos/sysmi-movil-0.mp4' 
-        : 'assets/videos/recursos/sysmi-0.mp4';
+        ? 'https://res.cloudinary.com/dsv1gdgya/video/upload/v1785017824/sysmi-movil-0_kk2hr0.mp4' 
+        : 'https://res.cloudinary.com/dsv1gdgya/video/upload/v1785017834/sysmi-0_n3fxgd.mp4';
       if (this.videoSrc() !== newSrc) {
         this.videoSrc.set(newSrc);
       }

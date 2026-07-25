@@ -17,18 +17,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   private location = inject(Location);
   private route = inject(ActivatedRoute);
 
-  ngOnInit(): void {
-    document.body.style.overflow = 'hidden';
-    // Si la URL actual es /registro, activar pestaña de registro
-    if (this.router.url.startsWith('/registro')) {
-      this.tabActiva.set('registro');
-    }
-  }
-
-  ngOnDestroy(): void {
-    document.body.style.overflow = '';
-  }
-
   readonly tabActiva = signal<'login' | 'registro'>('login');
   readonly isSubmitting = signal<boolean>(false);
   readonly errorMessage = signal<string>('');
@@ -48,11 +36,28 @@ export class LoginComponent implements OnInit, OnDestroy {
   regPassConfirm = '';
   regRol: 'propietario' | 'arquitecto' | 'inversionista' = 'propietario';
 
+  ngOnInit(): void {
+    document.body.style.overflow = 'hidden';
+    if (this.router.url.startsWith('/registro')) {
+      this.tabActiva.set('registro');
+    }
+
+    // Verificar si intentó acceder a una ruta protegida
+    this.route.queryParams.subscribe(params => {
+      if (params['blocked'] === 'true' || params['returnUrl']) {
+        this.errorMessage.set('Acceso Restringido: El Portal Directivo (/admin) está protegido. Debes iniciar sesión con credenciales backend válidas.');
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    document.body.style.overflow = '';
+  }
+
   setTab(tab: 'login' | 'registro'): void {
     this.tabActiva.set(tab);
     this.errorMessage.set('');
     this.successMessage.set('');
-    // Actualizar URL sin recargar la página
     this.location.replaceState(tab === 'registro' ? '/registro' : '/login');
   }
 
@@ -62,50 +67,44 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   async onLogin(event: Event): Promise<void> {
     event.preventDefault();
-    if (!this.loginEmail) {
-      this.loginEmail = 'director@sysmicon.com';
-    }
-    if (!this.loginPass) {
-      this.loginPass = 'admin123456';
-    }
     this.isSubmitting.set(true);
     this.errorMessage.set('');
-    
-    await this.authService.login(this.loginEmail, this.loginPass);
+    this.successMessage.set('');
+
+    const success = await this.authService.login(this.loginEmail || 'admin@sysmicon.com', this.loginPass || '123456');
     this.isSubmitting.set(false);
-    this.successMessage.set('¡Autenticado con éxito! Redirigiéndote al Dashboard...');
-    
-    setTimeout(() => {
-      this.router.navigate(['/admin']);
-    }, 500);
+
+    if (!success) {
+      this.errorMessage.set('Acceso denegado: El ingreso al Dashboard (/admin) se encuentra bloqueado hasta conectar los servicios backend.');
+    }
   }
 
   async onRegister(event: Event): Promise<void> {
     event.preventDefault();
-    if (!this.regNombre) this.regNombre = 'Propietario Demo';
-    if (!this.regEmail) this.regEmail = 'demo@sysmicon.com';
-    if (!this.regTelefono) this.regTelefono = '+57 310 000 0000';
-    if (!this.regPass) this.regPass = 'demo123456';
-    
     this.isSubmitting.set(true);
     this.errorMessage.set('');
+    this.successMessage.set('');
 
-    await this.authService.register(this.regNombre, this.regEmail, this.regTelefono, this.regRol);
+    const success = await this.authService.register(
+      this.regNombre || 'Usuario Demo', 
+      this.regEmail || 'demo@sysmicon.com', 
+      this.regTelefono || '+57 300 000 0000', 
+      this.regRol
+    );
     this.isSubmitting.set(false);
-    this.successMessage.set('¡Cuenta creada con éxito! Redirigiéndote al Dashboard...');
 
-    setTimeout(() => {
-      this.router.navigate(['/admin']);
-    }, 500);
+    if (!success) {
+      this.errorMessage.set('Registro en pausa: La creación de cuentas hacia el Dashboard se encuentra bloqueada hasta conectar los servicios backend.');
+    }
   }
 
   loginConSocial(provedor: string): void {
     this.isSubmitting.set(true);
+    this.errorMessage.set('');
     setTimeout(async () => {
       await this.authService.login(`usuario_${provedor.toLowerCase()}@correo.com`, '123456');
       this.isSubmitting.set(false);
-      this.successMessage.set(`¡Conectado con éxito a través de ${provedor}! Redirigiéndote al Dashboard...`);
-      setTimeout(() => this.router.navigate(['/admin']), 800);
-    }, 800);
+      this.errorMessage.set(`Acceso denegado con ${provedor}: El Portal Directivo (/admin) está protegido por AuthGuard.`);
+    }, 600);
   }
 }

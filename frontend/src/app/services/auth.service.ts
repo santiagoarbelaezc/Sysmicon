@@ -18,68 +18,47 @@ export class AuthService {
   private readonly USER_KEY = 'sysmicon_user_session';
   private readonly loadingService = inject(LoadingService);
   
-  readonly currentUser = signal<Usuario | null>(this.loadUserFromStorage());
+  readonly currentUser = signal<Usuario | null>(null);
   readonly isLoggedIn = computed(() => !!this.currentUser());
 
-  constructor() {}
-
-  private loadUserFromStorage(): Usuario | null {
+  constructor() {
+    // Asegurar que no quede ninguna sesión abierta en este momento
     try {
-      const data = localStorage.getItem(this.USER_KEY);
-      return data ? JSON.parse(data) : null;
-    } catch {
-      return null;
-    }
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem(this.USER_KEY);
+      }
+    } catch {}
   }
 
   login(email: string, pass: string): Promise<boolean> {
-    this.loadingService.show('Iniciando sesión en el Portal Privado...');
+    this.loadingService.show('Verificando credenciales...');
     return new Promise((resolve) => {
       setTimeout(() => {
-        const user: Usuario = {
-          id: 'usr-' + Date.now(),
-          nombre: email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1),
-          email: email,
-          rol: 'propietario',
-          fechaRegistro: new Date()
-        };
-        this.currentUser.set(user);
-        localStorage.setItem(this.USER_KEY, JSON.stringify(user));
         this.loadingService.hide();
-        resolve(true);
-      }, 1500);
+        // El acceso al Dashboard permanece bloqueado hasta conectar los servicios backend
+        this.currentUser.set(null);
+        resolve(false);
+      }, 1000);
     });
   }
 
   register(nombre: string, email: string, telefono: string, rol: 'propietario' | 'arquitecto' | 'inversionista'): Promise<boolean> {
-    this.loadingService.show('Creando cuenta en el Portal Privado...');
+    this.loadingService.show('Procesando solicitud de registro...');
     return new Promise((resolve) => {
       setTimeout(() => {
-        const user: Usuario = {
-          id: 'usr-' + Date.now(),
-          nombre: nombre,
-          email: email,
-          telefono: telefono,
-          rol: rol,
-          fechaRegistro: new Date()
-        };
-        this.currentUser.set(user);
-        localStorage.setItem(this.USER_KEY, JSON.stringify(user));
         this.loadingService.hide();
-        resolve(true);
-      }, 1800);
+        // El acceso al Dashboard permanece bloqueado hasta conectar los servicios backend
+        this.currentUser.set(null);
+        resolve(false);
+      }, 1000);
     });
   }
 
   logout(): Promise<void> {
-    this.loadingService.show('Cerrando sesión de forma segura...');
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        this.currentUser.set(null);
-        localStorage.removeItem(this.USER_KEY);
-        this.loadingService.hide();
-        resolve();
-      }, 1200);
-    });
+    this.currentUser.set(null);
+    try {
+      localStorage.removeItem(this.USER_KEY);
+    } catch {}
+    return Promise.resolve();
   }
 }

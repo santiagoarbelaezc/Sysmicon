@@ -11,6 +11,9 @@ import { ProyectosPageComponent } from './pages/proyectos-page/proyectos-page.co
 import { ProyectoDetalleComponent } from './pages/proyecto-detalle/proyecto-detalle.component';
 import { AgendarCitaComponent } from './pages/agendar-cita/agendar-cita.component';
 
+import { authGuard } from './guards/auth.guard';
+import { guestGuard } from './guards/guest.guard';
+
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Sysmicon | Diseño y Construcción de Viviendas' },
   { path: 'proyectos', component: ProyectosPageComponent, title: 'Galería de Proyectos | Portafolio Sysmicon' },
@@ -21,9 +24,19 @@ export const routes: Routes = [
   { path: 'crea-tu-diseno', redirectTo: 'cotiza-con-nosotros', pathMatch: 'full' },
   { path: 'nosotros', component: NosotrosComponent, title: 'Nosotros | Filosofía y Arquitectura Sysmicon' },
   { path: 'contacto', component: ContactoComponent, title: 'Contacto | Sysmicon Arquitectura' },
-  { path: 'login', component: LoginComponent, title: 'Acceso Privado | Portal Sysmicon' },
-  { path: 'registro', component: LoginComponent, title: 'Crear Cuenta | Portal Sysmicon' },
+  
+  // Rutas de Autenticación (con GuestGuard)
+  { path: 'login', component: LoginComponent, canActivate: [guestGuard], title: 'Acceso Privado | Portal Sysmicon' },
+  { path: 'registro', component: LoginComponent, canActivate: [guestGuard], title: 'Crear Cuenta | Portal Sysmicon' },
   { path: 'olvide-mi-contrasena', component: OlvideContrasenaComponent, title: 'Recuperar Contraseña | Portal Sysmicon' },
-  { path: 'admin', loadComponent: () => import('./pages/admin/admin-layout/admin-layout.component').then(m => m.AdminLayoutComponent), title: 'Portal Directivo | Sysmicon Admin' },
+  
+  // Ruta Privada de Administración (Protegida estrictamente con AuthGuard)
+  { 
+    path: 'admin', 
+    loadComponent: () => import('./pages/admin/admin-layout/admin-layout.component').then(m => m.AdminLayoutComponent), 
+    canActivate: [authGuard], 
+    title: 'Portal Directivo | Sysmicon Admin' 
+  },
+  
   { path: '**', redirectTo: '' }
 ];

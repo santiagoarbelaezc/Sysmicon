@@ -9,65 +9,65 @@ export class ServiciosService {
     {
       id: 'diseno-arquitectonico',
       titulo: 'Diseño Arquitectónico',
-      subtitulo: 'Concepción Espacial Multi-Escala',
-      descripcion: 'Diseño arquitectónico integral de hogares, fincas campestres, bodegas industriales y espacios comerciales.',
+      subtitulo: 'Concepción Espacial',
+      descripcion: 'Diseño arquitectónico integral de fincas campestres y residencias contemporáneas de autor.',
       icono: 'architecture',
       destacado: true,
       pilarPrincipal: true,
       fase: 'Concepción & Anteproyecto',
-      imagen: '/assets/images/casaS19/s19-portada.jpg',
+      imagen: 'assets/images/FOTOGRAFIA-CASA L/9245d22d-26fa-469c-aa3c-429fc0825f55.JPG',
       caracteristicas: [
-        'Modelado y recorridos virtuales inmersivos',
-        'Estudio bioclimático, solar y aprovechamiento de lotes',
-        'Planimetría ejecutiva completa para licencias y obra'
+        'Modelado 3D Inmersivo',
+        'Estudio Bioclimático',
+        'Planimetría Ejecutiva'
       ]
     },
     {
       id: 'construccion-integral',
       titulo: 'Construcción Integral',
-      subtitulo: 'Ejecución de Obra Llave en Mano',
-      descripcion: 'Construcción civil y dirección residente para residencias, fincas de recreo, bodegas industriales y oficinas.',
+      subtitulo: 'Ejecución Llave en Mano',
+      descripcion: 'Dirección de obra y construcción civil residencial con presupuesto blindado y garantía estructural.',
       icono: 'construction',
       destacado: true,
       pilarPrincipal: true,
       fase: 'Ingeniería & Ejecución',
-      imagen: '/assets/images/casaL/CasaL-portada.jpg',
+      imagen: 'assets/images/FOTOGRAFIA-CASA L/85e0f169-2d00-444c-99a8-9ba0ab7c2836.JPG',
       caracteristicas: [
-        'Presupuesto blindado y cronograma garantizado',
-        'Cálculo y sismorresistencia en todo tipo de estructuras',
-        'Entrega llave en mano con garantía estructural de 10 años'
+        'Presupuesto Blindado',
+        'Cronograma Garantizado',
+        'Garantía Estructural'
       ]
     },
     {
       id: 'remodelacion-premium',
       titulo: 'Remodelación de Alto Nivel',
-      subtitulo: 'Transformación Residencial & Industrial',
-      descripcion: 'Renovación y revalorización integral de casas, fincas, oficinas y naves industriales con acabados premium.',
+      subtitulo: 'Transformación Residencial',
+      descripcion: 'Renovación integral de espacios campestres y residenciales con acabados de alta gama.',
       icono: 'remodel',
       destacado: false,
       pilarPrincipal: false,
       fase: 'Transformación & Acabados',
-      imagen: '/assets/images/casaS23/S23-1.png',
+      imagen: 'assets/images/FOTOGRAFIA-CASA L/390124c1-e70a-4713-b438-ada6247d4363.JPG',
       caracteristicas: [
-        'Diagnóstico estructural y reforzamiento antisísmico',
-        'Integración de domótica, redes y eficiencia energética',
-        'Optimización espacial y acabados de lujo mundial'
+        'Reforzamiento Estructural',
+        'Domótica e Iluminación',
+        'Acabados de Lujo'
       ]
     },
     {
       id: 'asesoria-supervision',
       titulo: 'Asesoría & Interventoría',
-      subtitulo: 'Supervisión Técnica & Financiera',
-      descripcion: 'Auditoría técnica e interventoría financiera neutral para proteger tu inversión constructiva en cualquier escala.',
+      subtitulo: 'Supervisión Técnica',
+      descripcion: 'Auditoría técnica e interventoría independiente para proteger tu inversión constructiva.',
       icono: 'consulting',
       destacado: false,
       pilarPrincipal: false,
       fase: 'Auditoría & Supervisión',
-      imagen: '/assets/images/imagen6.jpg',
+      imagen: 'assets/images/FOTOGRAFIA-CASA L/cf9427b0-b774-455f-a0ab-e51c3729d5fb.JPG',
       caracteristicas: [
-        'Interventoría técnica, administrativa y contable',
-        'Estudio de viabilidad técnica antes de comprar lotes',
-        'Peritaje de calidad y recepción bajo normas NSR-10'
+        'Interventoría de Obra',
+        'Viabilidad de Lotes',
+        'Recepción NSR-10'
       ]
     }
   ]);

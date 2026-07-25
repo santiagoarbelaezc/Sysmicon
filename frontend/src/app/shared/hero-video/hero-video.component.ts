@@ -1,13 +1,6 @@
-import { Component, OnInit, OnDestroy, signal, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, ElementRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
-export interface VideoItem {
-  id: number;
-  src: string;
-  title: string;
-  tagline: string;
-}
 
 @Component({
   selector: 'app-hero-video',
@@ -17,52 +10,24 @@ export interface VideoItem {
   styleUrl: './hero-video.component.css'
 })
 export class HeroVideoComponent implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild('videoA') videoA!: ElementRef<HTMLVideoElement>;
-  @ViewChild('videoB') videoB!: ElementRef<HTMLVideoElement>;
+  @ViewChild('videoEl') videoRef!: ElementRef<HTMLVideoElement>;
 
-  readonly playlist: VideoItem[] = [
-    {
-      id: 0,
-      src: 'assets/videos/recursos/sysmi-6.mp4',
-      title: 'Ingeniería & Obra 360°',
-      tagline: 'Innovación en Cada Detalle'
-    },
-    {
-      id: 1,
-      src: 'assets/videos/recursos/sysmi-1.mp4',
-      title: 'Diseño Residencial & Fincas',
-      tagline: 'Arquitectura de Alta Gama'
-    },
-    {
-      id: 2,
-      src: 'assets/videos/recursos/sysmi-4.mp4',
-      title: 'Estructuración & Ejecución',
-      tagline: 'Rigor Técnico y Presupuesto Blindado'
-    },
-    {
-      id: 3,
-      src: 'assets/videos/recursos/sysmi-5.mp4',
-      title: 'Espacios Exclusivos & Acabados',
-      tagline: 'Excelencia en Construcción'
-    }
-  ];
-
-  readonly currentIndex = signal<number>(0);
-  readonly activeSlot = signal<'A' | 'B'>('A');
-
-  srcA = signal<string>(this.playlist[0].src);
-  srcB = signal<string>(this.playlist[1].src);
-
-  private isTransitioning = false;
+  readonly videoSrc = signal<string>('assets/videos/recursos/sysmi-0.mp4');
+  readonly isMobile = signal<boolean>(false);
+  readonly seekBadgeText = signal<string | null>(null);
+  
   private observer?: IntersectionObserver;
   private isHeroVisible = true;
+  private seekTimeout?: any;
 
   constructor(private hostEl: ElementRef) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.updateVideoSource();
+  }
 
   ngAfterViewInit(): void {
-    this.initVideos();
+    this.initVideo();
     this.initIntersectionObserver();
   }
 
@@ -70,14 +35,35 @@ export class HeroVideoComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.observer) {
       this.observer.disconnect();
     }
-    this.pauseAllVideos();
+    this.pauseVideo();
+    if (this.seekTimeout) {
+      clearTimeout(this.seekTimeout);
+    }
   }
 
-  private initVideos(): void {
-    if (this.videoA?.nativeElement) {
-      const vA = this.videoA.nativeElement;
-      vA.muted = true;
-      vA.play().catch(() => {});
+  @HostListener('window:resize', [])
+  onResize(): void {
+    this.updateVideoSource();
+  }
+
+  private updateVideoSource(): void {
+    if (typeof window !== 'undefined') {
+      const mobile = window.innerWidth < 768;
+      this.isMobile.set(mobile);
+      const newSrc = mobile 
+        ? 'assets/videos/recursos/sysmi-movil-0.mp4' 
+        : 'assets/videos/recursos/sysmi-0.mp4';
+      if (this.videoSrc() !== newSrc) {
+        this.videoSrc.set(newSrc);
+      }
+    }
+  }
+
+  private initVideo(): void {
+    if (this.videoRef?.nativeElement) {
+      const v = this.videoRef.nativeElement;
+      v.muted = true;
+      v.play().catch(() => {});
     }
   }
 
@@ -87,9 +73,9 @@ export class HeroVideoComponent implements OnInit, OnDestroy, AfterViewInit {
         entries.forEach(entry => {
           this.isHeroVisible = entry.isIntersecting;
           if (entry.isIntersecting) {
-            this.playActiveVideo();
+            this.playVideo();
           } else {
-            this.pauseAllVideos();
+            this.pauseVideo();
           }
         });
       }, { threshold: 0.1 });
@@ -100,89 +86,51 @@ export class HeroVideoComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  playActiveVideo(): void {
-    const videoEl = this.activeSlot() === 'A' ? this.videoA?.nativeElement : this.videoB?.nativeElement;
-    if (videoEl && videoEl.paused) {
-      videoEl.play().catch(() => {});
+  playVideo(): void {
+    if (this.videoRef?.nativeElement && this.videoRef.nativeElement.paused) {
+      this.videoRef.nativeElement.play().catch(() => {});
     }
   }
 
-  pauseAllVideos(): void {
-    if (this.videoA?.nativeElement) {
-      this.videoA.nativeElement.pause();
-    }
-    if (this.videoB?.nativeElement) {
-      this.videoB.nativeElement.pause();
+  pauseVideo(): void {
+    if (this.videoRef?.nativeElement) {
+      this.videoRef.nativeElement.pause();
     }
   }
 
-  onVideoEnded(slot: 'A' | 'B'): void {
-    if (!this.isHeroVisible) return;
-    if (slot === this.activeSlot() && !this.isTransitioning) {
-      this.nextVideo();
+  // Avanzar 15 segundos de manera cíclica con animación elegante
+  avanzar15Segundos(): void {
+    if (!this.videoRef?.nativeElement) return;
+    const v = this.videoRef.nativeElement;
+    const duration = v.duration || 60;
+    const targetTime = (v.currentTime + 15) % duration;
+    v.currentTime = targetTime;
+
+    this.showSeekBadge('+15s');
+  }
+
+  // Retroceder 15 segundos cíclicamente
+  retroceder15Segundos(): void {
+    if (!this.videoRef?.nativeElement) return;
+    const v = this.videoRef.nativeElement;
+    const duration = v.duration || 60;
+    let targetTime = v.currentTime - 15;
+    if (targetTime < 0) {
+      targetTime = Math.max(0, duration + targetTime);
     }
+    v.currentTime = targetTime;
+
+    this.showSeekBadge('-15s');
   }
 
-  onTimeUpdate(slot: 'A' | 'B'): void {
-    if (!this.isHeroVisible) return;
-    const videoEl = slot === 'A' ? this.videoA?.nativeElement : this.videoB?.nativeElement;
-    if (videoEl && slot === this.activeSlot() && !this.isTransitioning) {
-      // Trigger transition slightly before actual end to guarantee smooth crossfade
-      if (videoEl.duration > 0 && videoEl.currentTime >= videoEl.duration - 0.4) {
-        this.nextVideo();
-      }
+  private showSeekBadge(text: string): void {
+    this.seekBadgeText.set(text);
+    if (this.seekTimeout) {
+      clearTimeout(this.seekTimeout);
     }
-  }
-
-  nextVideo(): void {
-    const nextIdx = (this.currentIndex() + 1) % this.playlist.length;
-    this.goToVideo(nextIdx);
-  }
-
-  prevVideo(): void {
-    const prevIdx = (this.currentIndex() - 1 + this.playlist.length) % this.playlist.length;
-    this.goToVideo(prevIdx);
-  }
-
-  goToVideo(targetIndex: number): void {
-    if (this.isTransitioning || targetIndex === this.currentIndex()) return;
-    this.isTransitioning = true;
-
-    const currentSlot = this.activeSlot();
-    const nextSlot = currentSlot === 'A' ? 'B' : 'A';
-    const nextSrc = this.playlist[targetIndex].src;
-
-    if (nextSlot === 'A') {
-      this.srcA.set(nextSrc);
-      if (this.videoA?.nativeElement) {
-        const vA = this.videoA.nativeElement;
-        vA.currentTime = 0;
-        vA.play().then(() => {
-          this.activeSlot.set('A');
-          this.currentIndex.set(targetIndex);
-          setTimeout(() => { this.isTransitioning = false; }, 800);
-        }).catch(() => {
-          this.activeSlot.set('A');
-          this.currentIndex.set(targetIndex);
-          this.isTransitioning = false;
-        });
-      }
-    } else {
-      this.srcB.set(nextSrc);
-      if (this.videoB?.nativeElement) {
-        const vB = this.videoB.nativeElement;
-        vB.currentTime = 0;
-        vB.play().then(() => {
-          this.activeSlot.set('B');
-          this.currentIndex.set(targetIndex);
-          setTimeout(() => { this.isTransitioning = false; }, 800);
-        }).catch(() => {
-          this.activeSlot.set('B');
-          this.currentIndex.set(targetIndex);
-          this.isTransitioning = false;
-        });
-      }
-    }
+    this.seekTimeout = setTimeout(() => {
+      this.seekBadgeText.set(null);
+    }, 1000);
   }
 
   scrollToNext(): void {

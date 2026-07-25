@@ -4,33 +4,16 @@
   <div class="absolute bottom-1/3 right-10 w-[500px] h-[500px] rounded-full bg-[#C2E1FF]/[0.04] blur-[160px] pointer-events-none"></div>
   <div class="absolute inset-0 pointer-events-none opacity-[0.025]" style="background-image: radial-gradient(#FFF 1px, transparent 1px); background-size: 32px 32px;"></div>
 
-  <!-- Header & Filtros Editorial -->
+  <!-- Header Editorial -->
   <header class="w-full max-w-[1750px] mx-auto px-6 md:px-16 mb-14 relative z-10">
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/10 pb-10">
+    <div class="border-b border-white/10 pb-10">
       <div data-aos="fade-up">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#C2E1FF]/15 border border-[#C2E1FF]/30 text-[#C2E1FF] font-mono text-xs tracking-[0.2em] uppercase mb-4">
-          <span class="w-1.5 h-1.5 rounded-full bg-[#C2E1FF]"></span>
-          <span>SYSMICON ARCHITECTURAL DOSSIER</span>
-        </div>
         <h1 class="font-serif text-4xl md:text-6xl font-bold tracking-tight uppercase text-white mb-4">
           Galería de <span class="text-[#C2E1FF] italic font-light">Proyectos</span>
         </h1>
         <p class="text-white/70 font-serif italic text-base md:text-lg max-w-2xl leading-relaxed">
           Obras residenciales, fincas campestres, bodegas e hitos arquitectónicos concebidos y construidos bajo un único liderazgo técnico y financiero.
         </p>
-      </div>
-
-      <!-- Category Filter Pills -->
-      <div class="flex flex-wrap items-center gap-2 bg-[#00050d] p-1.5 rounded-2xl border border-white/15" data-aos="fade-up" data-aos-delay="100">
-        <button *ngFor="let cat of categorias"
-                (click)="setCategoria(cat)"
-                [ngClass]="{
-                  'bg-[#C2E1FF] text-[#00060e] font-extrabold shadow-md': categoriaSeleccionada() === cat,
-                  'text-white/70 hover:text-[#C2E1FF] font-medium hover:bg-white/5': categoriaSeleccionada() !== cat
-                }"
-                class="px-5 py-2 rounded-xl text-xs md:text-sm font-sans tracking-wide transition-all duration-300 cursor-pointer">
-          {{ cat }}
-        </button>
       </div>
     </div>
   </header>
@@ -53,68 +36,83 @@
           <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-black/20 opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
           <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/50 pointer-events-none"></div>
 
-          <!-- ESTILO 1: CORAL TITLE (Tipo CASA CARMEN / CASA ZEN) -->
+          <!-- ESTILO 1: CORAL TITLE (Casa M: Título horizontal abajo + 3 fotos horizontales) -->
           <ng-container *ngIf="p.editorialStyle === 'coral-title' || !p.editorialStyle">
             <!-- Barcode vertical superior derecho -->
             <div class="absolute top-5 right-4 text-[8px] font-mono tracking-[0.3em] text-white/50 uppercase origin-top-right rotate-90 select-none">
               {{ p.barcode || '0 600229402 1' }} |||||
             </div>
             
-            <div class="absolute bottom-6 left-6 right-8 flex flex-col items-start z-10">
-              <p *ngIf="p.editorialSubtitle" class="text-white/80 font-sans text-[10px] md:text-xs leading-relaxed mb-3 max-w-[90%] border-l-2 border-wood-accent pl-3">
+            <div class="absolute bottom-[28%] left-5 right-6 flex flex-col items-start z-10">
+              <p *ngIf="p.editorialSubtitle" class="text-white/90 font-sans text-[10px] md:text-xs leading-relaxed mb-2 max-w-[90%] border-l-2 border-wood-accent pl-2.5 bg-black/50 py-0.5 rounded-r">
                 {{ p.editorialSubtitle }}
               </p>
               <h3 class="font-serif text-3xl md:text-4xl font-extrabold tracking-tight text-wood-accent uppercase leading-none drop-shadow-lg group-hover:translate-x-1 transition-transform duration-300">
                 {{ p.editorialTitle || p.titulo }}
               </h3>
             </div>
+
+            <!-- Disposición A: 3 miniaturas horizontales en la franja inferior -->
+            <div class="absolute inset-x-3 bottom-3 h-[22%] grid grid-cols-3 gap-1.5 z-20 rounded-lg overflow-hidden border border-white/20 bg-black/60 p-1 backdrop-blur-xs">
+              <img *ngFor="let img of (p.imagenesAdicionales || [p.imagenUrl]).slice(0,3)" 
+                   [src]="img" 
+                   class="w-full h-full object-cover rounded-xs filter brightness-90 hover:brightness-110 transition-all">
+            </div>
           </ng-container>
 
-          <!-- ESTILO 2: WHITE BOLD CENTERED (Tipo CASA RS / FINCA RE) -->
+          <!-- ESTILO 2: WHITE BOLD VERTICAL (Casa S19: Título VERTICAL lateral + 3 fotos en columna izquierda) -->
           <ng-container *ngIf="p.editorialStyle === 'white-bold'">
-            <div class="absolute top-5 right-5 text-[9px] font-mono text-white/70 tracking-widest select-none">
-              {{ p.barcode || '0 600229402 2' }}
-            </div>
-            
-            <div class="absolute inset-x-0 bottom-[30%] flex flex-col items-center justify-center text-center px-4 z-10">
-              <h3 class="font-serif text-4xl md:text-5xl font-black text-white uppercase tracking-wider drop-shadow-2xl group-hover:scale-105 transition-transform duration-500">
+            <!-- Título VERTICAL elegante en el lado derecho -->
+            <div class="absolute right-5 top-12 bottom-20 z-10 flex items-center justify-center [writing-mode:vertical-rl] rotate-180">
+              <h3 class="font-serif text-3xl md:text-4xl font-black text-white uppercase tracking-[0.2em] drop-shadow-2xl group-hover:scale-105 transition-transform duration-500">
                 {{ p.editorialTitle || p.titulo }}
               </h3>
             </div>
-            
-            <div class="absolute bottom-12 right-4 origin-bottom-right -rotate-90 text-[8px] font-mono tracking-[0.25em] text-wood-light uppercase select-none">
-              {{ p.editorialSlogan || p.subtitulo }}
-            </div>
-            
-            <p class="absolute bottom-5 left-6 text-white/80 text-[11px] max-w-[70%] font-sans leading-snug">
-              {{ p.editorialSubtitle || p.descripcion.slice(0, 70) + '...' }}
+
+            <p class="absolute bottom-5 right-16 text-white/80 font-sans text-[10px] max-w-[50%] text-right bg-black/50 px-2 py-1 rounded border-r border-[#C2E1FF]">
+              {{ p.editorialSubtitle || p.subtitulo }}
             </p>
+
+            <!-- Disposición B: 3 miniaturas apiladas verticalmente en la izquierda -->
+            <div class="absolute left-3 top-10 bottom-10 w-20 flex flex-col gap-1.5 z-20 rounded-lg overflow-hidden border border-white/20 bg-black/60 p-1 backdrop-blur-xs">
+              <img *ngFor="let img of (p.imagenesAdicionales || [p.imagenUrl]).slice(0,3)" 
+                   [src]="img" 
+                   class="w-full h-1/3 object-cover rounded-xs filter brightness-90 hover:brightness-110 transition-all">
+            </div>
           </ng-container>
 
-          <!-- ESTILO 3: RIBBON TAG + ITALIC QUOTE (Tipo CASA MH / STUDIO SM) -->
+          <!-- ESTILO 3: RIBBON TAG (Casa S23: Distintivo superior + Título centro + 3 fotos en layout 2+1) -->
           <ng-container *ngIf="p.editorialStyle === 'ribbon-tag'">
             <div class="absolute top-0 left-6 z-20">
               <span class="inline-block bg-wood-accent text-black font-sans font-extrabold text-xs px-3.5 py-2 uppercase tracking-widest shadow-xl">
-                {{ p.editorialBadge || '+ NUEVO' }}
+                {{ p.editorialBadge || '+ DESTACADO' }}
               </span>
             </div>
             
-            <div class="absolute top-[34%] left-6 z-10 right-10">
-              <h3 class="font-serif text-3xl md:text-4xl font-bold text-white uppercase tracking-wide drop-shadow-[0_4px_15px_rgba(0,0,0,0.9)] group-hover:translate-x-1 transition-transform">
+            <div class="absolute top-[26%] left-6 z-10 right-8">
+              <h3 class="font-serif text-3xl md:text-4xl font-bold text-white uppercase tracking-wide drop-shadow-[0_4px_15px_rgba(0,0,0,0.9)] group-hover:translate-x-1 transition-transform mb-1.5">
                 {{ p.editorialTitle || p.titulo }}
               </h3>
+              <p class="text-white/80 text-[11px] font-serif italic max-w-[85%] bg-black/50 px-2.5 py-1 rounded border-l border-wood-accent">
+                "{{ p.editorialSubtitle || p.subtitulo }}"
+              </p>
             </div>
-            
-            <div class="absolute bottom-16 right-5 origin-bottom-right -rotate-90 text-[10px] font-serif italic text-white/70 max-w-[200px] truncate select-none">
-              "{{ p.editorialSlogan || p.subtitulo }}"
+
+            <!-- Disposición C: 3 fotos en cuadrícula asimétrica (1 ancha + 2 angostas) -->
+            <div class="absolute inset-x-3 bottom-3 h-[24%] grid grid-cols-12 gap-1.5 z-20 rounded-lg overflow-hidden border border-white/20 bg-black/60 p-1 backdrop-blur-xs">
+              <div class="col-span-6 h-full">
+                <img [src]="(p.imagenesAdicionales || [p.imagenUrl])[0]" class="w-full h-full object-cover rounded-xs filter brightness-90 hover:brightness-110 transition-all">
+              </div>
+              <div class="col-span-3 h-full">
+                <img [src]="(p.imagenesAdicionales || [p.imagenUrl])[1] || (p.imagenesAdicionales || [p.imagenUrl])[0]" class="w-full h-full object-cover rounded-xs filter brightness-90 hover:brightness-110 transition-all">
+              </div>
+              <div class="col-span-3 h-full">
+                <img [src]="(p.imagenesAdicionales || [p.imagenUrl])[2] || (p.imagenesAdicionales || [p.imagenUrl])[0]" class="w-full h-full object-cover rounded-xs filter brightness-90 hover:brightness-110 transition-all">
+              </div>
             </div>
-            
-            <p class="absolute bottom-5 left-6 text-white/60 text-[11px] max-w-[70%] leading-relaxed font-sans">
-              {{ p.editorialSubtitle || p.subtitulo }}
-            </p>
           </ng-container>
 
-          <!-- ESTILO 4: SPLIT GRID THUMBNAILS (Tipo EDIFICIO GP / AURORA GP) -->
+          <!-- ESTILO 4: SPLIT GRID (Casa L: Título top left + slogan vertical right + 3 fotos abajo) -->
           <ng-container *ngIf="p.editorialStyle === 'split-grid'">
             <div class="absolute top-6 left-6 z-10">
               <h3 class="font-serif text-3xl md:text-4xl font-black text-white uppercase leading-[0.92] tracking-tight drop-shadow-xl">
@@ -126,9 +124,9 @@
               {{ p.editorialSlogan || 'MEDELLÍN ES COLOR LADRILLO.' }}
             </div>
             
-            <!-- Mini grid de fotos en la parte inferior del poster -->
-            <div class="absolute inset-x-3 bottom-3 h-[24%] grid grid-cols-3 gap-1.5 z-20 rounded-lg overflow-hidden border border-white/20 bg-black/50 p-1 backdrop-blur-xs">
-              <img *ngFor="let img of (p.imagenesAdicionales || ['assets/images/imagen1.jpg', 'assets/images/imagen2.jpg', 'assets/images/imagen3.jpg']).slice(0,3)" 
+            <!-- Disposición D: 3 fotos en rejilla uniforme horizontal -->
+            <div class="absolute inset-x-3 bottom-3 h-[22%] grid grid-cols-3 gap-1.5 z-20 rounded-lg overflow-hidden border border-white/20 bg-black/60 p-1 backdrop-blur-xs">
+              <img *ngFor="let img of (p.imagenesAdicionales || [p.imagenUrl]).slice(0,3)" 
                    [src]="img" 
                    class="w-full h-full object-cover rounded-xs filter brightness-90 hover:brightness-110 transition-all">
             </div>
@@ -162,179 +160,86 @@
     </div>
   </main>
 
-  <!-- ===== MODAL / DOSSIER ARQUITECTÓNICO DE ALTO STANDING (99vw x 97vh) ===== -->
-  <div *ngIf="selectedProject() as sp" class="fixed inset-0 z-[1000000] p-1.5 md:p-3 flex items-center justify-center bg-[#00050d]/95 backdrop-blur-3xl animate-fade-in select-none">
-    <div class="w-[99vw] max-w-[1920px] h-[97vh] max-h-[1100px] bg-[#000814] border border-[#C2E1FF]/25 rounded-2xl overflow-hidden shadow-[0_0_180px_rgba(0,0,0,1)] relative flex flex-col lg:flex-row">
-      
-      <!-- Botón cerrar flotante superior derecho -->
-      <button (click)="cerrarDossier()" class="absolute top-4 right-4 z-50 px-5 py-2 rounded-full bg-[#000e1e]/90 border border-[#C2E1FF]/30 text-white font-sans text-xs font-bold tracking-[0.25em] uppercase flex items-center gap-2 hover:bg-[#C2E1FF] hover:text-[#00060e] transition-all shadow-2xl cursor-pointer">
-        <span>Cerrar</span>
-        <span class="text-base font-black">✕</span>
-      </button>
+  <!-- SECCIÓN INFERIOR EDITORIAL: BANNERS VIDEO CASA M & CASA L CON BANNER DE CONTACTO EN EL MEDIO -->
+  <section class="w-full mt-24 space-y-20 relative z-10">
+    
+    <!-- 1. Banner Video Casa M -->
+    <app-banner-video
+      videoSrc="assets/videos/recursos/sysmi-1.mp4"
+      titulo="CASA"
+      tituloHighlight="M"
+      subtitulo="Residencia contemporánea donde la arquitectura de autor y la materialidad convergen en perfecta simetría."
+      proyectoId="casaM"
+      ctaText="VER PROYECTO"
+      secondaryCtaText="VER DOSSIER COMPLETO">
+    </app-banner-video>
 
-      <!-- COLUMNA IZQUIERDA (77%): GALERÍA AMPLIA CON IMÁGENES COMPLETAS SIN CORTARSE -->
-      <div class="lg:w-[77%] h-[64vh] lg:h-full relative bg-[#00040a] flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 overflow-hidden">
-        
-        <!-- Contenedor del Doble Spread Vertical con padding reducido (p-2 md:p-3) y min-h-0 -->
-        <div class="relative flex-1 w-full p-2 md:p-3 flex items-center justify-center overflow-hidden min-h-0">
+    <!-- 2. Banner de Contacto Intermedio Blanco & Negro (En el medio entre Casa M y Casa L) -->
+    <section class="relative w-full py-16 sm:py-20 lg:py-24 bg-white text-neutral-900 border-y border-black/20 overflow-hidden font-sans my-16">
+      <!-- Líneas superiores e inferiores de plano -->
+      <div class="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-black/40 to-transparent"></div>
+      <div class="absolute bottom-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-black/40 to-transparent"></div>
+
+      <!-- Guías laterales con crucetas "+" -->
+      <div class="absolute left-6 md:left-10 top-8 bottom-8 hidden lg:flex flex-col justify-between items-center pointer-events-none select-none z-20">
+        <span class="text-black/40 font-mono text-xs font-bold">+</span>
+        <div class="w-[1px] flex-1 bg-gradient-to-b from-transparent via-black/20 to-transparent my-6"></div>
+        <span class="text-black/40 font-mono text-xs font-bold">+</span>
+      </div>
+      <div class="absolute right-6 md:right-10 top-8 bottom-8 hidden lg:flex flex-col justify-between items-center pointer-events-none select-none z-20">
+        <span class="text-black/40 font-mono text-xs font-bold">+</span>
+        <div class="w-[1px] flex-1 bg-gradient-to-b from-transparent via-black/20 to-transparent my-6"></div>
+        <span class="text-black/40 font-mono text-xs font-bold">+</span>
+      </div>
+
+      <div class="max-w-[1720px] mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
+        <div class="relative overflow-hidden rounded-[32px] bg-gradient-to-r from-neutral-50 via-white to-neutral-50 border border-black/20 hover:border-black/40 shadow-lg p-8 sm:p-12 lg:p-16 transition-all duration-500">
           
-          <!-- Flecha Anterior (‹) -->
-          <button *ngIf="modalImages().length > 1"
-                  (click)="anteriorImagenModal(); $event.stopPropagation()" 
-                  class="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#000814]/85 hover:bg-[#C2E1FF] hover:text-[#00060e] border border-[#C2E1FF]/30 text-white text-3xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
-            <span class="group-hover:-translate-x-0.5 transition-transform">‹</span>
-          </button>
-
-          <!-- Grid de DOS IMÁGENES en Paralelo con gap reducido y altura adaptable -->
-          <div class="w-full h-full max-w-[1680px] grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 items-center justify-center relative">
-            
-            <!-- Foto Vertical Principal Ampliada (Col 1-8, h-full sin desbordar) -->
-            <div class="md:col-span-8 h-full max-h-full rounded-2xl overflow-hidden relative border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.95)] group bg-[#000814] cursor-pointer"
-                 (click)="abrirLightbox(getMainImg()); $event.stopPropagation()">
-              <ng-container *ngFor="let t of [animTrigger()]; trackBy: trackByTrigger">
-                <img [src]="getMainImg()" 
-                     [alt]="sp.titulo + ' vista principal'" 
-                     class="w-full h-full object-cover group-hover:scale-105 transition-all duration-[1000ms] animate-slide-change">
-              </ng-container>
-              
-              <div class="absolute inset-0 bg-gradient-to-t from-[#000814]/85 via-transparent to-[#000814]/30 pointer-events-none"></div>
-              
-              <!-- Etiqueta superior sobre foto principal -->
-              <div class="absolute top-4 left-4 bg-[#000814]/85 backdrop-blur-md px-3.5 py-1 rounded-full border border-[#C2E1FF]/30 text-[10px] font-mono tracking-[0.25em] text-[#C2E1FF] uppercase">
-                VISTA PRINCIPAL • 0{{ currentImageIndex() + 1 }}
+          <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12 relative z-10">
+            <div class="max-w-3xl space-y-4">
+              <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-black/[0.04] border border-black/20 text-[10px] font-mono tracking-[0.25em] text-black uppercase">
+                <span class="w-1.5 h-1.5 rounded-full bg-black animate-pulse"></span>
+                <span>SYSMICON ARCHITECTURAL STUDIO • CONTACTO DIRECTO</span>
               </div>
 
-              <div class="absolute bottom-4 right-4 bg-[#000814]/85 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 text-[10px] font-sans tracking-widest text-white/80 uppercase opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5">
-                <span>🔍 Ampliar HD</span>
-              </div>
+              <h3 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-neutral-900 font-normal leading-tight tracking-tight uppercase">
+                ¿Tienes un terreno o un <span class="font-serif italic font-normal text-neutral-600">sueño en mente?</span>
+              </h3>
 
-              <!-- Letra Vertical elegante en el borde izquierdo de la imagen -->
-              <div class="absolute left-3 bottom-6 [writing-mode:vertical-rl] rotate-180 font-mono text-[9px] tracking-[0.4em] text-white/70 uppercase pl-2 border-l border-[#C2E1FF] select-none pointer-events-none">
-                SYSMICON ARCHITECTURE • {{ sp.categoria }}
-              </div>
+              <p class="font-sans text-base sm:text-lg text-neutral-600 leading-relaxed font-normal max-w-2xl">
+                Nuestros arquitectos e ingenieros están listos para asesorarte. Agenda una consulta de viabilidad técnica y presupuestal sin costo.
+              </p>
             </div>
 
-            <!-- Foto Vertical Secundaria Detalle (Col 9-12, h-[92%] proporcional) -->
-            <div *ngIf="modalImages().length > 1" class="hidden md:block md:col-span-4 h-[92%] max-h-full rounded-2xl overflow-hidden relative border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.95)] group bg-[#000814] self-center cursor-pointer"
-                 (click)="abrirLightbox(getDetailImg()); $event.stopPropagation()">
-              <ng-container *ngFor="let t of [animTrigger()]; trackBy: trackByTrigger">
-                <img [src]="getDetailImg()" 
-                     [alt]="sp.titulo + ' vista detalle'" 
-                     class="w-full h-full object-cover group-hover:scale-105 transition-all duration-[1000ms] animate-slide-change-delay">
-              </ng-container>
-              
-              <div class="absolute inset-0 bg-gradient-to-t from-[#000814]/85 via-transparent to-transparent pointer-events-none"></div>
-              
-              <div class="absolute bottom-4 left-4 text-[10px] font-mono tracking-[0.2em] text-[#C2E1FF] uppercase bg-[#000814]/85 px-3 py-1 rounded-full backdrop-blur-md border border-[#C2E1FF]/30">
-                DETALLE • 0{{ ((currentImageIndex() + 1) % modalImages().length) + 1 }}
-              </div>
+            <div class="flex flex-wrap items-center gap-4 sm:gap-6 shrink-0">
+              <a routerLink="/contacto" class="inline-flex items-center gap-3.5 px-9 py-4 sm:py-5 rounded-full bg-black text-white font-extrabold text-xs uppercase tracking-widest hover:bg-neutral-800 hover:scale-105 transition-all duration-300 shadow-xl group/btn cursor-pointer">
+                <span>Agendar Cita Privada</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover/btn:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
 
-              <div class="absolute top-4 right-4 bg-[#000814]/85 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 text-[9px] font-sans tracking-widest text-white/80 uppercase opacity-0 group-hover:opacity-100 transition-opacity">
-                <span>🔍</span>
-              </div>
+              <a href="tel:+573108459210" class="inline-flex items-center gap-3 px-8 py-4 sm:py-5 rounded-full bg-neutral-100 hover:bg-black text-neutral-900 hover:text-white border border-black/20 font-mono text-xs tracking-wider uppercase transition-all duration-300">
+                <svg class="w-4 h-4 text-neutral-800 group-hover:text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                </svg>
+                <span>+57 (310) 845-9210</span>
+              </a>
             </div>
-
           </div>
 
-          <!-- Flecha Siguiente (›) -->
-          <button *ngIf="modalImages().length > 1"
-                  (click)="siguienteImagenModal(); $event.stopPropagation()" 
-                  class="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#000814]/85 hover:bg-[#C2E1FF] hover:text-[#00060e] border border-[#C2E1FF]/30 text-white text-3xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
-            <span class="group-hover:translate-x-0.5 transition-transform">›</span>
-          </button>
-
         </div>
-
-        <!-- Tira Inferior de Miniaturas Limpias y Visibles al 100% (h-22) -->
-        <div *ngIf="modalImages().length > 1" class="h-20 md:h-22 bg-[#00060f] border-t border-white/10 px-4 py-2 flex items-center justify-center gap-3 overflow-x-auto z-30 shrink-0">
-          <div *ngFor="let m of modalImages(); let idx = index" 
-               (click)="seleccionarImagenModal(idx)"
-               [ngClass]="{
-                 'border-[#C2E1FF] scale-105 opacity-100 ring-2 ring-[#C2E1FF]/50 shadow-lg': currentImageIndex() === idx,
-                 'border-white/15 opacity-40 hover:opacity-85 hover:scale-100': currentImageIndex() !== idx
-               }"
-               class="w-22 h-14 md:w-24 md:h-16 rounded-lg overflow-hidden border-2 cursor-pointer transition-all shrink-0 relative group">
-            <img [src]="m" [alt]="sp.titulo + ' miniatura ' + idx" class="w-full h-full object-cover">
-            <div *ngIf="currentImageIndex() === idx" class="absolute bottom-0 inset-x-0 h-1 bg-[#C2E1FF]"></div>
-          </div>
-        </div>
-
       </div>
+    </section>
 
-      <!-- COLUMNA DERECHA (23%): PURO MINIMALISMO VIP, SIN EXCESO DE TEXTO -->
-      <div class="lg:w-[23%] h-[36vh] lg:h-full bg-[#000814] p-5 lg:p-7 overflow-hidden flex flex-col justify-between text-left border-l border-white/10">
-        
-        <!-- Encabezado Ficha y Título -->
-        <div class="shrink-0">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C2E1FF]/15 border border-[#C2E1FF]/40 text-[9px] font-mono text-[#C2E1FF] tracking-[0.28em] uppercase mb-2.5">
-            <span>OBRA MAESTRA VIP</span>
-          </div>
-          <h2 class="font-serif text-3xl lg:text-4xl xl:text-5xl font-light text-white uppercase tracking-[0.12em] leading-tight drop-shadow-md truncate">
-            {{ sp.titulo }}
-          </h2>
-          <p class="font-serif italic text-xs lg:text-sm text-[#C2E1FF] mt-2 font-normal leading-relaxed">
-            "{{ sp.subtitulo }}"
-          </p>
-        </div>
+    <!-- 3. Banner Video Casa L -->
+    <app-banner-video
+      videoSrc="assets/videos/recursos/sysmi-5.mp4"
+      titulo="CASA"
+      tituloHighlight="L"
+      subtitulo="Villa campestre de alto standing con grandes superficies vidriadas y materialidad noble en perfecta armonía con el entorno."
+      proyectoId="casaL"
+      ctaText="VER PROYECTO"
+      secondaryCtaText="VER DOSSIER COMPLETO">
+    </app-banner-video>
 
-        <!-- Ficha Técnica CAD Limpia y Elegante (Sin textos largos ni párrafos saturados) -->
-        <div class="py-5 border-y border-white/10 my-5 space-y-4 shrink-0">
-          <div class="flex items-center justify-between font-mono text-xs text-white/80">
-            <span class="text-white/40 tracking-[0.22em] uppercase">SUPERFICIE</span>
-            <span class="font-serif text-xl lg:text-2xl text-white tracking-wider">{{ sp.area || '580' }} <span class="text-xs font-mono text-[#C2E1FF]">M²</span></span>
-          </div>
-          <div class="flex items-center justify-between font-mono text-xs text-white/80">
-            <span class="text-white/40 tracking-[0.22em] uppercase">SISTEMA</span>
-            <span class="font-sans text-xs font-bold text-[#C2E1FF] tracking-widest uppercase">Llave en Mano</span>
-          </div>
-          <div class="flex items-center justify-between font-mono text-xs text-white/80">
-            <span class="text-white/40 tracking-[0.22em] uppercase">UBICACIÓN</span>
-            <span class="font-serif text-base text-white tracking-wider truncate max-w-[130px]">{{ sp.ubicacion || 'Antioquia' }}</span>
-          </div>
-        </div>
-
-        <!-- Botón de Asesoría VIP Inferior (Directo y Limpio) -->
-        <div class="pt-1 mt-auto shrink-0 space-y-2.5">
-          <a (click)="solicitarAsesoria(sp)" class="w-full py-3.5 px-6 rounded-full bg-[#C2E1FF] hover:bg-white text-[#00060e] font-sans text-xs tracking-[0.22em] font-extrabold uppercase transition-all shadow-[0_0_25px_rgba(194,225,255,0.35)] hover:shadow-[0_0_40px_rgba(255,255,255,0.8)] hover:scale-[1.02] flex items-center justify-center gap-3 cursor-pointer">
-            <span>SOLICITAR ASESORÍA PRIVADA</span>
-            <span class="text-sm font-black">→</span>
-          </a>
-          <div class="text-center">
-            <span class="text-[9px] font-mono text-[#C2E1FF]/50 tracking-[0.24em] uppercase">SYSMICON ARCHITECTS • MEDELLÍN</span>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ===== PANTALLA COMPLETA LIGHTBOX EXPANDIDA ===== -->
-  <div *ngIf="activeLightboxImage() as lbImg" class="fixed inset-0 z-[1000001] flex items-center justify-center p-4 md:p-8 select-none animate-lightbox-backdrop bg-[#00050d]/98" (click)="cerrarLightbox()">
-    <button (click)="cerrarLightbox(); $event.stopPropagation()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 border border-[#C2E1FF]/40 hover:bg-[#C2E1FF] hover:text-[#00060e] flex items-center justify-center text-white text-lg transition-colors cursor-pointer z-50">
-      ✕
-    </button>
-
-    <!-- Flechas de navegación en Lightbox -->
-    <button *ngIf="modalImages().length > 1"
-            (click)="anteriorImagenLightbox(); $event.stopPropagation()" 
-            class="absolute left-6 top-1/2 -translate-y-1/2 z-50 w-16 h-16 rounded-full bg-[#000814]/85 hover:bg-[#C2E1FF] hover:text-[#00060e] border border-[#C2E1FF]/30 text-white text-4xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
-      <span class="group-hover:-translate-x-0.5 transition-transform">‹</span>
-    </button>
-
-    <button *ngIf="modalImages().length > 1"
-            (click)="siguienteImagenLightbox(); $event.stopPropagation()" 
-            class="absolute right-6 top-1/2 -translate-y-1/2 z-50 w-16 h-16 rounded-full bg-[#000814]/85 hover:bg-[#C2E1FF] hover:text-[#00060e] border border-[#C2E1FF]/30 text-white text-4xl font-light flex items-center justify-center transition-all shadow-2xl cursor-pointer group">
-      <span class="group-hover:translate-x-0.5 transition-transform">›</span>
-    </button>
-
-    <div class="relative max-w-[95vw] max-h-[92vh] flex items-center justify-center" (click)="$event.stopPropagation()">
-      <ng-container *ngFor="let t of [animTrigger()]; trackBy: trackByTrigger">
-        <img [src]="lbImg" alt="Vista ampliada HD" class="w-auto h-auto max-w-[95vw] max-h-[92vh] object-contain rounded-2xl shadow-2xl border border-[#C2E1FF]/30 animate-slide-change">
-      </ng-container>
-      <div class="absolute -bottom-10 left-0 right-0 text-center text-xs font-mono text-[#C2E1FF] tracking-[0.25em] uppercase">
-        <span>Sysmicon Studio — Visualizador Arquitectónico HD</span>
-      </div>
-    </div>
-  </div>
+  </section>
 </div>

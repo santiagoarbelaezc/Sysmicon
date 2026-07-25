@@ -1,9 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, Router, NavigationStart } from '@angular/router';
+import { RouterOutlet, Router } from '@angular/router';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoadingService } from './services/loading.service';
+import { ProyectosService } from './services/proyectos.service';
 import AOS from 'aos';
 
 @Component({
@@ -16,14 +17,24 @@ import AOS from 'aos';
 export class AppComponent implements OnInit {
   title = 'Sysmicon';
   readonly loadingService = inject(LoadingService);
+  readonly proyectosService = inject(ProyectosService);
 
   constructor(public router: Router) {}
 
   get showNavbar(): boolean {
+    if (this.router.url.includes('/proyecto/')) {
+      return false;
+    }
+    if (this.proyectosService.proyectoModalActivo()) {
+      return false;
+    }
     return !this.router.url.includes('/admin') && !this.router.url.includes('/olvide-mi-contrasena');
   }
 
   get showFooter(): boolean {
+    if (this.router.url.includes('/proyecto/')) {
+      return false;
+    }
     return !this.router.url.includes('/login')
       && !this.router.url.includes('/registro')
       && !this.router.url.includes('/admin')
@@ -39,33 +50,14 @@ export class AppComponent implements OnInit {
       this.loadingService.showTemporarily(1100, 'Cargando Panel del Dashboard...');
     }
 
-    // Interceptar navegaciones para mostrar el estado de carga únicamente al ingresar a login o al dashboard
-    this.router.events.subscribe((event: any) => {
-      if (event instanceof NavigationStart) {
-        if (event.url.includes('/login') || event.url.includes('/registro')) {
-          this.loadingService.showTemporarily(950, 'Accediendo al Portal Privado...');
-        } else if (event.url.includes('/admin')) {
-          this.loadingService.showTemporarily(950, 'Cargando Panel del Dashboard...');
-        } else {
-          this.loadingService.hide();
-        }
-      }
-    });
-
-    // Inicialización centralizada de AOS con startEvent personalizado
-    // Espera a que Angular termine de renderizar antes de activar las animaciones
-    setTimeout(() => {
+    try {
       AOS.init({
-        duration: 700,
-        easing: 'ease-out-cubic',
+        duration: 800,
         once: true,
-        offset: 80,
-        disable: 'mobile',
-        startEvent: 'aos:start'
+        easing: 'ease-out-cubic'
       });
-      document.body.classList.add('aos-ready');
-      document.dispatchEvent(new CustomEvent('aos:start'));
-    }, 300);
+    } catch (e) {
+      console.warn('AOS initialization warning:', e);
+    }
   }
 }
-

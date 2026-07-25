@@ -1,0 +1,56 @@
+<section #sectionEl
+         class="banner-video-section relative w-full h-[90vh] sm:h-screen min-h-[700px] max-h-[950px] overflow-hidden bg-[#000814] flex items-center justify-center select-none border-y border-white/10 group">
+
+  <!-- VIDEO PLAYER NÍTIDO Y BRILLANTE DE FONDO -->
+  <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+    <video #videoEl
+           [src]="videoSrc"
+           autoplay
+           muted
+           loop
+           playsinline
+           class="absolute inset-0 w-full h-full object-cover opacity-95 transition-opacity duration-1000 ease-out">
+    </video>
+
+    <!-- SUPERPOSICIÓN LIGERA PARA MÁXIMA CLARIDAD Y BRILLO DEL VIDEO -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30"></div>
+  </div>
+
+  <!-- CONTENIDO CENTRAL DEL BANNER -->
+  <div class="container relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center justify-center py-12">
+    
+    <!-- Logo Hero Centrado -->
+    <div *ngIf="logoSrc" class="mb-4 sm:mb-6 flex justify-center">
+      <img [src]="logoSrc" 
+           alt="Sysmicon Logo" 
+           class="h-28 sm:h-36 md:h-44 lg:h-48 max-h-[220px] w-auto object-contain drop-shadow-[0_15px_40px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-500">
+    </div>
+
+    <!-- Título Principal -->
+    <h2 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-wider leading-[1.05] drop-shadow-2xl mb-4 uppercase">
+      {{ titulo }} <span class="font-serif italic font-normal text-[#C2E1FF]">{{ tituloHighlight }}</span>
+    </h2>
+
+    <!-- Subtítulo Breve Conciso -->
+    <p class="font-sans text-sm sm:text-base md:text-lg text-white/90 max-w-2xl mx-auto font-light leading-relaxed mb-8 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+      {{ subtitulo }}
+    </p>
+
+    <!-- Botones de Acción Estilo Hero -->
+    <div *ngIf="showCta" class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+      <button (click)="abrirProyecto($event)" class="group/btn inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-500 font-sans text-xs font-bold tracking-[0.24em] uppercase shadow-2xl hover:scale-105 cursor-pointer">
+        <span>{{ ctaText }}</span>
+        <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
+        </svg>
+      </button>
+
+      <button *ngIf="secondaryCtaText" (click)="abrirProyecto($event)" class="group/btn inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/40 backdrop-blur-md transition-all duration-500 font-sans text-xs font-medium tracking-[0.2em] uppercase cursor-pointer">
+        <span>{{ secondaryCtaText }}</span>
+        <span class="text-sm font-black transform group-hover/btn:translate-x-1 transition-transform duration-300">→</span>
+      </button>
+    </div>
+
+  </div>
+
+</section>

@@ -1,4 +1,18 @@
-<section class="director-section py-16 md:py-24 bg-[#000814] text-white border-y border-white/10 relative overflow-hidden flex items-center">
+<section class="director-section py-20 md:py-28 bg-[#000814] text-white border-y border-[#C2E1FF]/20 relative overflow-hidden flex items-center">
+  <!-- Líneas de corte arquitectónico elegantes en los extremos superior e inferior -->
+  <div class="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#C2E1FF]/50 to-transparent pointer-events-none"></div>
+  <div class="absolute bottom-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#C2E1FF]/50 to-transparent pointer-events-none"></div>
+
+  <!-- Líneas de guía vertical tipo CAD blueprint en los laterales -->
+  <div class="absolute top-0 left-6 md:left-16 bottom-0 w-[1px] bg-white/[0.08] pointer-events-none hidden sm:block"></div>
+  <div class="absolute top-0 right-6 md:right-16 bottom-0 w-[1px] bg-white/[0.08] pointer-events-none hidden sm:block"></div>
+
+  <!-- Esquinas arquitectónicas (+) -->
+  <div class="absolute top-4 left-6 md:left-16 text-[10px] font-mono text-[#C2E1FF]/40 pointer-events-none hidden sm:block select-none">+</div>
+  <div class="absolute top-4 right-6 md:right-16 text-[10px] font-mono text-[#C2E1FF]/40 pointer-events-none hidden sm:block select-none">+</div>
+  <div class="absolute bottom-4 left-6 md:left-16 text-[10px] font-mono text-[#C2E1FF]/40 pointer-events-none hidden sm:block select-none">+</div>
+  <div class="absolute bottom-4 right-6 md:right-16 text-[10px] font-mono text-[#C2E1FF]/40 pointer-events-none hidden sm:block select-none">+</div>
+
   <!-- Luces ambientales de fondo arquitectónico sutiles -->
   <div class="absolute -top-32 left-1/3 w-[600px] h-[600px] rounded-full bg-[#002345]/20 blur-[180px] pointer-events-none"></div>
   <div class="absolute bottom-0 right-10 w-[500px] h-[500px] rounded-full bg-[#C2E1FF]/05 blur-[160px] pointer-events-none"></div>
@@ -10,47 +24,47 @@
       <!-- Columna Izquierda: Fotografía Gran Formato Minimalista (Cols 1-5) -->
       <div class="lg:col-span-5 flex justify-center lg:justify-center" data-aos="fade-up">
         <div class="relative w-full max-w-[560px]">
-          <!-- Recuadro exterior decorativo fino y sobrio -->
-          <div class="absolute -top-5 -left-5 w-full h-full border border-white/10 rounded-xl pointer-events-none hidden sm:block"></div>
+          <!-- Recuadro exterior decorativo fino con bordes CAD de precisión -->
+          <div class="absolute -top-4 -left-4 w-full h-full border border-[#C2E1FF]/30 rounded-xl pointer-events-none hidden sm:block"></div>
           
           <!-- Contenedor Principal de la Imagen -->
           <div class="relative z-10 w-full h-[580px] sm:h-[660px] lg:h-[700px] overflow-hidden rounded-xl bg-[#001226] border border-white/15 shadow-[0_30px_70px_rgba(0,0,0,0.95)] group">
             <img src="assets/images/juanmoreno.jpg" 
-                 alt="Juan Moreno - Director General" 
+                 alt="JUAN MORENO - INGENIERO CIVIL" 
                  class="w-full h-full object-cover object-top filter contrast-[1.03] transition-transform duration-1000 group-hover:scale-102">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#000814]/50 via-transparent to-transparent opacity-60 pointer-events-none"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#000814]/60 via-transparent to-transparent opacity-70 pointer-events-none"></div>
+            
+            <!-- Etiqueta técnica inferior sobre la imagen -->
+            <div class="absolute bottom-5 left-5 right-5 flex justify-between items-center z-20 pointer-events-none">
+              <span class="font-mono text-[9px] tracking-[0.3em] text-[#C2E1FF] uppercase bg-[#000814]/80 px-3 py-1 rounded border border-[#C2E1FF]/30 backdrop-blur-md">
+                SYSMICON ARCHITECTURE & ENGINEERING
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Columna Derecha: Minimalismo Suizo/Editorial y Tarjetas Tipográficas (Cols 6-12) -->
+      <!-- Columna Derecha: Minimalismo Editorial (Cols 6-12) -->
       <div class="lg:col-span-7 flex flex-col justify-center space-y-6 my-auto text-left" data-aos="fade-up" data-aos-delay="100">
         
-        <!-- Etiqueta Editorial Minimalista -->
+        <!-- Encabezado Sobrio y Elegante -->
         <div>
-          <div class="flex items-center gap-3 mb-3">
-            <span class="w-6 h-[1px] bg-[#C2E1FF]/50"></span>
-            <span class="font-mono text-[10px] tracking-[0.32em] uppercase text-[#C2E1FF] font-medium">
-              LIDERAZGO TÉCNICO & EJECUCIÓN
-            </span>
-          </div>
-
-          <!-- Título Sobrio y Sintético -->
-          <h2 class="font-serif text-5xl sm:text-6xl font-light text-white tracking-tight leading-none mb-2">
-            Juan Moreno
+          <h2 class="font-serif text-5xl sm:text-6xl md:text-7xl font-bold text-white uppercase tracking-[0.1em] leading-none mb-4">
+            JUAN MORENO
           </h2>
           
-          <p class="font-sans text-xs tracking-[0.28em] uppercase text-white/50 font-light">
-            Director General de Proyectos
-          </p>
+          <!-- Cargo INGENIERO CIVIL con alta elegancia arquitectónica -->
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-[1px] bg-[#C2E1FF]"></span>
+            <span class="font-mono text-xs md:text-sm tracking-[0.38em] text-[#C2E1FF] font-bold uppercase">
+              INGENIERO CIVIL
+            </span>
+          </div>
         </div>
 
-        <!-- Línea Separadora Minimalista -->
-        <div class="w-12 h-[1px] bg-white/20"></div>
-
-        <!-- Texto Reducido, Conciso y Directo -->
-        <p class="font-serif italic text-xl sm:text-2xl text-white/85 font-light leading-relaxed max-w-2xl">
-          "Dirigimos cada obra cumpliendo estrictamente con los tiempos acordados y optimizando cada peso de tu presupuesto."
+        <!-- Texto Renovado Elegante y Directo -->
+        <p class="font-serif italic text-xl sm:text-2xl text-white/90 font-light leading-relaxed max-w-2xl border-l-2 border-[#C2E1FF] pl-4 py-1">
+          "Lideramos la ejecución técnica y financiera de cada proyecto bajo los más altos estándares de ingeniería, garantizando rigor estructural, transparencia presupuestal y cumplimiento absoluto."
         </p>
 
         <!-- Botones Minimalistas de Acción Directa -->
@@ -58,7 +72,7 @@
           <!-- Botón 1: Ver Proyectos -->
           <a routerLink="/proyectos"
              class="group inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-500 font-sans text-xs font-bold tracking-[0.24em] uppercase cursor-pointer shadow-xl hover:scale-105">
-            <span>Ver Proyectos</span>
+            <span>VER PROYECTOS</span>
             <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
             </svg>
@@ -67,13 +81,13 @@
           <!-- Botón 2: Contacto -->
           <a routerLink="/contacto"
              class="group inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-transparent hover:bg-white/10 text-white border border-white/20 hover:border-white/50 backdrop-blur-md transition-all duration-500 font-sans text-xs font-medium tracking-[0.22em] uppercase cursor-pointer">
-            <span>Contacto</span>
+            <span>CONTACTO</span>
           </a>
 
           <!-- Botón 3: Agendar Cita -->
           <a routerLink="/agendar-cita"
              class="group inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-transparent hover:bg-white/10 text-white/90 hover:text-white border border-white/20 hover:border-white/50 backdrop-blur-md transition-all duration-500 font-sans text-xs font-medium tracking-[0.22em] uppercase cursor-pointer">
-            <span>Agendar Cita</span>
+            <span>AGENDAR CITA</span>
           </a>
         </div>
 

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, signal, inject, ViewChild, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, OnInit, signal, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -11,23 +11,37 @@ import { CONTACT_INFO, BRAND_CONFIG } from '../../core/app.constants';
   templateUrl: './cotiza-con-nosotros.component.html',
   styleUrl: './cotiza-con-nosotros.component.css'
 })
-export class CotizaConNosotrosComponent implements AfterViewInit {
+export class CotizaConNosotrosComponent implements OnInit, AfterViewInit {
   readonly contact = CONTACT_INFO;
   readonly brand = BRAND_CONFIG;
 
   @ViewChild('videoA') videoA!: ElementRef<HTMLVideoElement>;
   @ViewChild('videoB') videoB!: ElementRef<HTMLVideoElement>;
 
-  readonly videoPlaylist = [
+  readonly isMobile = signal<boolean>(false);
+
+  // Playlist adaptable para Desktop y Móvil (Hero de alta definición)
+  readonly videoPlaylistDesktop = [
+    'assets/videos/recursos/sysmi-0.mp4',
     'assets/videos/recursos/sysmi-5.mp4',
     'assets/videos/recursos/sysmi-2.mp4'
   ];
 
+  readonly videoPlaylistMobile = [
+    'assets/videos/recursos/sysmi-movil-0.mp4',
+    'assets/videos/recursos/sysmi-5.mp4',
+    'assets/videos/recursos/sysmi-2.mp4'
+  ];
+
+  get videoPlaylist(): string[] {
+    return this.isMobile() ? this.videoPlaylistMobile : this.videoPlaylistDesktop;
+  }
+
   readonly currentVideoIndex = signal<number>(0);
   readonly activeSlot = signal<'A' | 'B'>('A');
 
-  srcA = signal<string>(this.videoPlaylist[0]);
-  srcB = signal<string>(this.videoPlaylist[1]);
+  srcA = signal<string>(this.videoPlaylistDesktop[0]);
+  srcB = signal<string>(this.videoPlaylistDesktop[1]);
 
   private isTransitioning = false;
 
@@ -56,10 +70,31 @@ export class CotizaConNosotrosComponent implements AfterViewInit {
     return `https://wa.me/573108459210?text=${encodeURIComponent(text)}`;
   }
 
+  ngOnInit(): void {
+    this.checkMobile();
+  }
+
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.playActiveVideo();
     }, 100);
+  }
+
+  @HostListener('window:resize', [])
+  onResize(): void {
+    this.checkMobile();
+  }
+
+  private checkMobile(): void {
+    if (typeof window !== 'undefined') {
+      const mobile = window.innerWidth < 768;
+      if (this.isMobile() !== mobile) {
+        this.isMobile.set(mobile);
+        const playlist = this.videoPlaylist;
+        this.srcA.set(playlist[0]);
+        this.srcB.set(playlist[1] || playlist[0]);
+      }
+    }
   }
 
   private playActiveVideo(): void {
@@ -89,67 +124,65 @@ export class CotizaConNosotrosComponent implements AfterViewInit {
   nextVideo(): void {
     if (this.isTransitioning) return;
     this.isTransitioning = true;
-    const nextIdx = (this.currentVideoIndex() + 1) % this.videoPlaylist.length;
-    const currentSlot = this.activeSlot();
-    const nextSlot = currentSlot === 'A' ? 'B' : 'A';
-    const nextSrc = this.videoPlaylist[nextIdx];
 
-    if (nextSlot === 'A') {
-      this.srcA.set(nextSrc);
-      if (this.videoA?.nativeElement) {
-        const vA = this.videoA.nativeElement;
-        vA.currentTime = 0;
-        vA.play().then(() => {
-          this.activeSlot.set('A');
-          this.currentVideoIndex.set(nextIdx);
-          setTimeout(() => { this.isTransitioning = false; }, 800);
-        }).catch(() => {
-          this.activeSlot.set('A');
-          this.currentVideoIndex.set(nextIdx);
-          this.isTransitioning = false;
-        });
-      }
+    const playlist = this.videoPlaylist;
+    const nextIdx = (this.currentVideoIndex() + 1) % playlist.length;
+    this.currentVideoIndex.set(nextIdx);
+
+    const targetSlot = this.activeSlot() === 'A' ? 'B' : 'A';
+    const targetVideoEl = targetSlot === 'A' ? this.videoA?.nativeElement : this.videoB?.nativeElement;
+
+    if (targetSlot === 'A') {
+      this.srcA.set(playlist[nextIdx]);
     } else {
-      this.srcB.set(nextSrc);
-      if (this.videoB?.nativeElement) {
-        const vB = this.videoB.nativeElement;
-        vB.currentTime = 0;
-        vB.play().then(() => {
-          this.activeSlot.set('B');
-          this.currentVideoIndex.set(nextIdx);
-          setTimeout(() => { this.isTransitioning = false; }, 800);
-        }).catch(() => {
-          this.activeSlot.set('B');
-          this.currentVideoIndex.set(nextIdx);
+      this.srcB.set(playlist[nextIdx]);
+    }
+
+    if (targetVideoEl) {
+      targetVideoEl.currentTime = 0;
+      targetVideoEl.muted = true;
+      targetVideoEl.volume = 0;
+      targetVideoEl.play().then(() => {
+        this.activeSlot.set(targetSlot);
+        setTimeout(() => {
           this.isTransitioning = false;
-        });
-      }
+        }, 1000);
+      }).catch(() => {
+        this.activeSlot.set(targetSlot);
+        this.isTransitioning = false;
+      });
+    } else {
+      this.activeSlot.set(targetSlot);
+      this.isTransitioning = false;
     }
   }
 
-  enviarMensaje(event: Event): void {
-    event.preventDefault();
-    if (!this.nombre().trim() || !this.telefono().trim() || !this.asunto().trim()) {
-      this.errorMsg.set('Por favor completa al menos tu nombre, teléfono y asunto.');
+  onSubmit(): void {
+    if (!this.nombre() || !this.telefono()) {
+      this.errorMsg.set('Por favor completa los campos de nombre y teléfono.');
       return;
     }
-
-    this.errorMsg.set('');
     this.cargando.set(true);
+    this.errorMsg.set('');
 
-    // Simulación de envío del formulario al sistema de contacto de Sysmicon
     setTimeout(() => {
       this.cargando.set(false);
       this.enviado.set(true);
-      // Limpiar campos para nueva consulta
-      this.nombre.set('');
-      this.telefono.set('');
-      this.asunto.set('');
-      this.mensaje.set('');
-    }, 1200);
+      window.open(this.whatsappUrl, '_blank');
+    }, 800);
+  }
+
+  enviarMensaje(event?: Event): void {
+    if (event) event.preventDefault();
+    this.onSubmit();
   }
 
   nuevaConsulta(): void {
+    this.nombre.set('');
+    this.telefono.set('');
+    this.asunto.set('');
+    this.mensaje.set('');
     this.enviado.set(false);
+    this.errorMsg.set('');
   }
 }

@@ -1,0 +1,188 @@
+<div *ngIf="proyecto() as p" class="w-screen h-screen fixed inset-0 z-[9999999] bg-[#000814] text-white flex flex-col lg:flex-row overflow-hidden select-none cursor-default">
+  
+  <!-- HEADER MÓVIL (Solo visible en pantallas pequeñas) -->
+  <div class="flex lg:hidden items-center justify-between px-4 py-3 bg-[#000814] border-b border-white/10 z-[70] shrink-0">
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-[#C2E1FF] animate-pulse"></span>
+      <h3 class="font-serif text-lg font-bold text-white uppercase tracking-wider">{{ p.titulo }}</h3>
+      <span class="font-mono text-[9px] px-2 py-0.5 rounded-full bg-white/10 text-[#C2E1FF] uppercase">{{ p.categoria || 'Residencial' }}</span>
+    </div>
+    
+    <button (click)="regresar()" aria-label="Cerrar dossier" class="px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white text-white hover:text-black font-mono text-xs font-bold transition-all border border-white/20 flex items-center gap-1.5 cursor-pointer">
+      <span>REGRESAR</span>
+      <span class="font-black">✕</span>
+    </button>
+  </div>
+
+  <!-- Botón Regresar flotante superior izquierdo (DESKTOP) -->
+  <button (click)="regresar()" aria-label="Regresar" class="hidden lg:flex absolute top-4 left-4 z-[60] px-5 py-2.5 rounded-full bg-[#000814]/85 hover:bg-[#C2E1FF] text-white hover:text-[#00060e] border border-[#C2E1FF]/40 backdrop-blur-md font-sans text-xs font-extrabold tracking-[0.22em] uppercase items-center gap-2.5 transition-all duration-300 shadow-2xl hover:shadow-[0_0_25px_rgba(194,225,255,0.5)] hover:scale-105 cursor-pointer group">
+    <span class="text-base group-hover:-translate-x-1 transition-transform font-black">←</span>
+    <span>REGRESAR</span>
+  </button>
+
+  <!-- Botón Cerrar X flotante superior derecho (DESKTOP) -->
+  <button (click)="regresar()" aria-label="Cerrar dossier" class="hidden lg:flex absolute top-4 right-4 z-[60] w-10 h-10 rounded-full bg-[#000814]/85 hover:bg-[#C2E1FF] text-white hover:text-[#00060e] border border-[#C2E1FF]/40 backdrop-blur-md items-center justify-center transition-all duration-300 shadow-2xl hover:scale-110 cursor-pointer">
+    <span class="text-sm font-black">✕</span>
+  </button>
+
+  <!-- COLUMNA IZQUIERDA: GALERÍA AMPLIA CON IMÁGENES MAXIMIZADAS -->
+  <div (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)" [ngClass]="isPanelExpanded() ? 'lg:w-[72%] xl:w-[75%]' : 'lg:w-[94%] xl:w-[96%]'" class="flex-1 lg:h-full relative bg-[#00040a] flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 overflow-hidden transition-all duration-500 min-h-0">
+    
+    <div class="relative flex-1 w-full p-1 md:p-1.5 flex items-center justify-center overflow-hidden min-h-0">
+      
+      <!-- Flecha Anterior -->
+      <button *ngIf="allImages().length > 1"
+              (click)="anteriorImagen(); $event.stopPropagation()" 
+              aria-label="Imagen anterior"
+              class="absolute left-2 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 md:w-14 md:h-14 rounded-full bg-[#000814]/80 hover:bg-[#001226]/90 text-white border border-white/25 hover:border-[#C2E1FF]/60 backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-xl hover:scale-[1.05] cursor-pointer group">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-x-0.5 transition-transform">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+      </button>
+
+      <!-- Grid de IMÁGENES -->
+      <div class="w-full h-full max-w-[1800px] grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-3 items-center justify-center relative">
+        
+        <!-- Foto Principal -->
+        <div class="md:col-span-8 w-full h-full max-h-full rounded-xl sm:rounded-2xl overflow-hidden relative border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.95)] group bg-[#000814] flex items-center justify-center">
+          <ng-container *ngFor="let t of [animTrigger()]; trackBy: trackByTrigger">
+            <img [src]="getMainImg()" 
+                 [alt]="p.titulo + ' vista principal'" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition-all duration-[1000ms] animate-visualizer-img">
+          </ng-container>
+        </div>
+
+        <!-- Foto Secundarios (Desktop) -->
+        <div *ngIf="allImages().length > 1" class="hidden md:block md:col-span-4 h-[94%] max-h-full rounded-2xl overflow-hidden relative border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.95)] group bg-[#000814] self-center">
+          <ng-container *ngFor="let t of [animTrigger()]; trackBy: trackByTrigger">
+            <img [src]="getDetailImg()" 
+                 [alt]="p.titulo + ' vista detalle'" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition-all duration-[1000ms] animate-visualizer-img">
+          </ng-container>
+        </div>
+
+      </div>
+
+      <!-- Flecha Siguiente -->
+      <button *ngIf="allImages().length > 1"
+              (click)="siguienteImagen(); $event.stopPropagation()" 
+              aria-label="Imagen siguiente"
+              class="absolute right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 md:w-14 md:h-14 rounded-full bg-[#000814]/80 hover:bg-[#001226]/90 text-white border border-white/25 hover:border-[#C2E1FF]/60 backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-xl hover:scale-[1.05] cursor-pointer group">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-0.5 transition-transform">
+          <path d="m9 18 6-6-6-6"/>
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- Tira Inferior de Miniaturas Limpias -->
+    <div *ngIf="allImages().length > 1" class="h-16 sm:h-20 md:h-22 bg-[#00060f] border-t border-white/10 px-3 sm:px-4 py-2 flex items-center justify-start gap-2.5 overflow-x-auto overflow-y-hidden z-30 shrink-0 custom-modal-scrollbar">
+      <div *ngFor="let m of allImages(); let idx = index" 
+           [id]="'thumb-item-' + idx"
+           (click)="seleccionarImagen(idx)"
+           [ngClass]="{
+             'border-[#C2E1FF] scale-105 opacity-100 ring-2 ring-[#C2E1FF]/50 shadow-lg': currentImageIndex() === idx,
+             'border-white/15 opacity-50 hover:opacity-85 hover:scale-100': currentImageIndex() !== idx
+           }"
+           class="thumb-item w-16 h-12 sm:w-22 sm:h-14 md:w-24 md:h-16 rounded-lg overflow-hidden border-2 cursor-pointer transition-all shrink-0 relative group">
+        <img [src]="m" [alt]="p.titulo + ' miniatura ' + idx" class="w-full h-full object-cover">
+        <div *ngIf="currentImageIndex() === idx" class="absolute bottom-0 inset-x-0 h-1 bg-[#C2E1FF]"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PANEL INFERIOR MÓVIL (Solo visible en pantallas pequeñas) -->
+  <div class="flex lg:hidden flex-col bg-white text-neutral-900 p-5 rounded-t-2xl shadow-2xl overflow-y-auto max-h-[38vh] shrink-0 border-t border-black/15">
+    <div class="w-12 h-1 bg-neutral-300 rounded-full mx-auto mb-3 shrink-0"></div>
+    
+    <div class="flex items-center justify-between mb-2">
+      <span class="font-mono text-[10px] text-neutral-500 uppercase tracking-widest">{{ p.ubicacion || 'Antioquia' }} • {{ p.area || '580' }} M²</span>
+      <span class="font-sans text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-black text-white uppercase">Llave en Mano</span>
+    </div>
+
+    <h3 class="font-serif text-2xl font-bold text-neutral-900 uppercase mb-1">{{ p.titulo }}</h3>
+    <p class="font-serif italic text-xs text-neutral-600 mb-4 font-normal">"{{ p.subtitulo }}"</p>
+
+    <a (click)="solicitarAsesoria()" class="w-full py-3.5 px-6 rounded-full bg-black hover:bg-neutral-800 text-white font-sans text-xs tracking-widest font-extrabold uppercase transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer shrink-0">
+      <span>SOLICITAR ASESORÍA PRIVADA</span>
+      <span class="text-sm font-black">→</span>
+    </a>
+  </div>
+
+  <!-- COLUMNA DERECHA: PANEL BLANCO EN DESKTOP -->
+  <div [ngClass]="isPanelExpanded() ? 'lg:w-[28%] xl:w-[25%] p-5 lg:p-7' : 'lg:w-[56px] xl:w-[64px] p-2 items-center justify-between cursor-pointer hover:bg-neutral-100'"
+       (click)="!isPanelExpanded() && togglePanel()"
+       class="hidden lg:flex h-full bg-white text-neutral-900 border-l border-black/15 shadow-2xl overflow-hidden flex-col transition-all duration-500 relative z-30 select-none">
+    
+    <!-- VISTA COLAPSADA: BARRA VERTICAL BLANCA ELEGANTE -->
+    <ng-container *ngIf="!isPanelExpanded()">
+      <button (click)="togglePanel(); $event.stopPropagation()" title="Ver detalles del proyecto" class="mt-14 w-9 h-9 md:w-10 md:h-10 rounded-full bg-black text-white hover:bg-neutral-800 flex items-center justify-center transition-transform hover:scale-110 shrink-0 shadow-md">
+        <span class="text-xs font-mono font-bold">+</span>
+      </button>
+
+      <div (click)="togglePanel()" class="my-auto py-8 [writing-mode:vertical-rl] rotate-180 flex items-center justify-center gap-4 cursor-pointer group">
+        <span class="font-serif text-2xl lg:text-3xl font-bold tracking-[0.2em] text-neutral-900 uppercase group-hover:text-black transition-colors">
+          {{ p.titulo }}
+        </span>
+        <span class="font-mono text-[9px] tracking-[0.3em] text-neutral-500 uppercase border-l border-black/30 pl-2">
+          FICHA TÉCNICA
+        </span>
+      </div>
+
+      <button (click)="togglePanel(); $event.stopPropagation()" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-neutral-100 border border-black/20 hover:bg-black hover:text-white flex items-center justify-center text-black font-mono text-xs transition-all shrink-0">
+        →
+      </button>
+    </ng-container>
+
+    <!-- VISTA EXPANDIDA: DETALLES DEL PROYECTO -->
+    <ng-container *ngIf="isPanelExpanded()">
+      <div class="shrink-0 flex items-center justify-between mt-12 mb-3 pb-2 border-b border-black/10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/5 border border-black/15 text-[9px] font-mono text-black tracking-[0.25em] uppercase">
+          <span>OBRA MAESTRA VIP</span>
+        </div>
+
+        <button (click)="togglePanel(); $event.stopPropagation()" class="px-3 py-1 rounded-full bg-neutral-100 border border-black/20 hover:bg-black hover:text-white text-[10px] font-mono tracking-widest uppercase transition-colors flex items-center gap-1">
+          <span>OCULTAR</span>
+          <span>✕</span>
+        </button>
+      </div>
+
+      <div class="shrink-0 my-2">
+        <h2 class="font-serif text-3xl lg:text-4xl font-bold text-neutral-900 uppercase tracking-[0.1em] leading-tight">
+          {{ p.titulo }}
+        </h2>
+        <p class="font-serif italic text-xs lg:text-sm text-neutral-600 mt-2 font-normal leading-relaxed">
+          "{{ p.subtitulo }}"
+        </p>
+      </div>
+
+      <div class="py-5 border-y border-black/15 my-4 space-y-4 shrink-0">
+        <div class="flex items-center justify-between font-mono text-xs text-neutral-800">
+          <span class="text-neutral-500 tracking-[0.2em] uppercase">SUPERFICIE</span>
+          <span class="font-serif text-xl lg:text-2xl text-neutral-900 font-bold tracking-wider">{{ p.area || '580' }} <span class="text-xs font-mono text-neutral-600">M²</span></span>
+        </div>
+        <div class="flex items-center justify-between font-mono text-xs text-neutral-800">
+          <span class="text-neutral-500 tracking-[0.2em] uppercase">SISTEMA</span>
+          <span class="font-sans text-xs font-extrabold text-black tracking-widest uppercase">Llave en Mano</span>
+        </div>
+        <div class="flex items-center justify-between font-mono text-xs text-neutral-800">
+          <span class="text-neutral-500 tracking-[0.2em] uppercase">UBICACIÓN</span>
+          <span class="font-serif text-base text-neutral-900 font-medium tracking-wider truncate max-w-[130px]">{{ p.ubicacion || 'Antioquia' }}</span>
+        </div>
+      </div>
+
+      <div class="pt-2 mt-auto shrink-0 space-y-3">
+        <a (click)="solicitarAsesoria()" class="w-full py-4 px-6 rounded-full bg-black hover:bg-neutral-800 text-white font-sans text-xs tracking-[0.22em] font-extrabold uppercase transition-all shadow-lg flex items-center justify-center gap-3 cursor-pointer">
+          <span>SOLICITAR ASESORÍA PRIVADA</span>
+          <span class="text-sm font-black">→</span>
+        </a>
+        <div class="text-center">
+          <span class="text-[9px] font-mono text-neutral-500 tracking-[0.24em] uppercase">SYSMICON ARCHITECTS • MEDELLÍN</span>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+
+</div>

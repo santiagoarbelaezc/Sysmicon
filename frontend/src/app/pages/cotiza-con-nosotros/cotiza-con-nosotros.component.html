@@ -8,7 +8,9 @@
            [src]="srcA()"
            autoplay
            muted
+           [muted]="true"
            playsinline
+           webkit-playsinline
            [ngClass]="activeSlot() === 'A' ? 'opacity-100 scale-100' : 'opacity-0 scale-105'"
            (ended)="onVideoEnded('A')"
            (timeupdate)="onTimeUpdate('A')"
@@ -20,7 +22,9 @@
            [src]="srcB()"
            autoplay
            muted
+           [muted]="true"
            playsinline
+           webkit-playsinline
            [ngClass]="activeSlot() === 'B' ? 'opacity-100 scale-100' : 'opacity-0 scale-105'"
            (ended)="onVideoEnded('B')"
            (timeupdate)="onTimeUpdate('B')"

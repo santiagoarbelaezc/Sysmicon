@@ -20,12 +20,14 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
+            "serviceWorker": "ngsw-config.json",
             "assets": [
               {
                 "glob": "**/*",
                 "input": "public"
               },
               "src/assets",
+              "src/manifest.webmanifest",
               {
                 "glob": "**/*",
                 "input": "src/assets/images",

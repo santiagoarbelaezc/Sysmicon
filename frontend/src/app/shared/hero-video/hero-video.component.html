@@ -1,63 +1,46 @@
 <section class="hero-video-section relative w-full h-screen overflow-hidden bg-[#000814] flex items-center justify-center">
 
-  <!-- VIDEO PLAYER SLOTS (CROSSFADE TRANSITION) -->
+  <!-- VIDEO PLAYER RESPONSIVO (DESKTOP: sysmi-0.mp4 / MÓVIL: sysmi-movil-0.mp4) -->
   <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
-    
-    <!-- Video Slot A -->
-    <video #videoA
-           [src]="srcA()"
+    <video #videoEl
+           [src]="videoSrc()"
            autoplay
            muted
+           loop
            playsinline
-           [ngClass]="activeSlot() === 'A' ? 'opacity-100 scale-100' : 'opacity-0 scale-105'"
-           (ended)="onVideoEnded('A')"
-           (timeupdate)="onTimeUpdate('A')"
-           class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-out">
+           class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-out">
     </video>
 
-    <!-- Video Slot B -->
-    <video #videoB
-           [src]="srcB()"
-           autoplay
-           muted
-           playsinline
-           [ngClass]="activeSlot() === 'B' ? 'opacity-100 scale-100' : 'opacity-0 scale-105'"
-           (ended)="onVideoEnded('B')"
-           (timeupdate)="onTimeUpdate('B')"
-           class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-out">
-    </video>
-
-    <!-- GRADIENTES & AMBIENTE CINEMATOGRÁFICO DE LUXURY (OSCURECIDO SUTILMENTE) -->
+    <!-- GRADIENTES & AMBIENTE CINEMATOGRÁFICO DE LUXURY -->
     <div class="absolute inset-0 bg-black/45"></div>
     <div class="absolute inset-0 bg-radial-vignette opacity-65"></div>
   </div>
 
-  <!-- NAVEGACIÓN MANUAL DE VIDEOS (FLECHAS MINIMALISTAS Y ELEGANTES LATERALES) -->
-  <button (click)="prevVideo()"
-          class="video-arrow video-arrow-left group hidden sm:flex"
-          aria-label="Video anterior">
-    <div class="video-arrow-inner">
-      <svg class="w-5 h-5 stroke-current transition-transform duration-500 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M15 19l-7-7 7-7"/>
-      </svg>
+  <!-- INSIGNIA DE ANIMACIÓN / INDICADOR DE SALTO 15 SEGUNDOS -->
+  <div *ngIf="seekBadgeText() as badge" 
+       class="absolute z-30 inset-0 flex items-center justify-center pointer-events-none animate-fadeIn">
+    <div class="px-6 py-3 rounded-2xl bg-black/70 border border-[#C2E1FF]/50 backdrop-blur-xl shadow-2xl text-center">
+      <span class="font-mono text-xl sm:text-2xl font-bold text-[#C2E1FF] tracking-[0.2em] uppercase">
+        {{ badge }}
+      </span>
+      <span class="block font-sans text-[10px] uppercase tracking-widest text-white/70 mt-0.5">
+        Navegación de Video
+      </span>
     </div>
-  </button>
-  
-  <button (click)="nextVideo()"
-          class="video-arrow video-arrow-right group hidden sm:flex"
-          aria-label="Siguiente video">
-    <div class="video-arrow-inner">
-      <svg class="w-5 h-5 stroke-current transition-transform duration-500 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 5l7 7-7 7"/>
-      </svg>
-    </div>
-  </button>
+  </div>
 
   <!-- CONTENIDO CENTRAL DEL HERO -->
   <div class="container relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center justify-center pt-8">
     
-    <!-- Título Principal con animación de entrada elegante -->
-    <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-white tracking-tight leading-[0.98] drop-shadow-2xl mb-8 animate-title-entrance">
+    <!-- Logo Hero Animado (Más Grande) -->
+    <div class="mb-4 sm:mb-6 flex justify-center">
+      <img src="assets/icons/logo-hero.png" 
+           alt="Sysmicon Logo" 
+           class="h-28 sm:h-36 md:h-44 lg:h-52 max-h-[240px] w-auto object-contain animate-logo-hero drop-shadow-[0_15px_40px_rgba(0,0,0,0.9)]">
+    </div>
+
+    <!-- Título Principal (Un poco más pequeño y proporcionado) -->
+    <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-tight leading-[1.05] drop-shadow-2xl mb-8 animate-title-entrance">
       Diseñamos y <span class="font-serif italic font-normal text-[#C2E1FF]">Construimos</span>
     </h1>
 
@@ -75,31 +58,6 @@
       </button>
     </div>
 
-  </div>
-
-  <!-- REPRODUCTOR / INDICADORES EN ESQUINA INFERIOR DERECHA -->
-  <div class="absolute bottom-8 right-6 sm:right-12 z-20 hidden md:flex flex-col items-end gap-2 text-right">
-    <div class="flex items-center gap-2">
-      <span class="w-6 h-[1px] bg-[#C2E1FF]/60"></span>
-      <span class="font-mono text-[10px] tracking-[0.26em] uppercase text-[#C2E1FF] font-bold">
-        {{ playlist[currentIndex()].tagline }}
-      </span>
-    </div>
-    
-    <span class="font-serif text-sm text-white/90 font-light">
-      {{ playlist[currentIndex()].title }}
-    </span>
-
-    <div class="flex items-center gap-2 mt-2">
-      <button *ngFor="let item of playlist; let i = index"
-              (click)="goToVideo(i)"
-              [attr.aria-label]="'Ver video ' + (i + 1)"
-              class="group relative py-1 px-2 cursor-pointer focus:outline-none">
-        <span class="block h-[2px] transition-all duration-500 rounded-full"
-              [ngClass]="currentIndex() === i ? 'w-10 bg-[#C2E1FF] shadow-[0_0_10px_#C2E1FF]' : 'w-4 bg-white/30 group-hover:bg-white/60'">
-        </span>
-      </button>
-    </div>
   </div>
 
   <!-- INDICATIVO DEL SCROLL MEJORADO (CENTRO INFERIOR) -->

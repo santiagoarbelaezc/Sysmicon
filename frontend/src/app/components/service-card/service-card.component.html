@@ -1,32 +1,33 @@
-<div class="service-card-wrapper rounded-2xl border border-black/15 bg-white shadow-[0_15px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.09)] transition-all duration-500 overflow-hidden relative group" data-aos="fade-up">
+<div class="service-card-wrapper rounded-2xl border border-black/15 bg-white shadow-[0_15px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.1)] transition-all duration-500 overflow-hidden relative group" data-aos="fade-up">
   
-  <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[460px]">
-    <!-- COLUMNA IMAGEN DE PROYECTO TIPO CATÁLOGO (Cols 1-6, Alternada por índice en desktop) -->
-    <div class="lg:col-span-6 relative overflow-hidden bg-[#111111] min-h-[390px] lg:min-h-full flex flex-col justify-center items-center p-6 group/img"
+  <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[480px] lg:min-h-[520px]">
+    <!-- COLUMNA IMAGEN DE PROYECTO MAXIMIZADA CON FOTOS DE CASA L (Cols 1-7, Alternada por índice) -->
+    <div class="lg:col-span-7 relative overflow-hidden bg-[#000814] min-h-[420px] lg:min-h-full flex flex-col justify-center items-center p-6 group/img"
          [ngClass]="{'order-1 lg:order-1': index % 2 === 0, 'order-1 lg:order-2': index % 2 !== 0}">
-      <!-- Imagen de proyecto real como fondo tipo catálogo -->
-      <div *ngIf="servicio.imagen" 
-           class="absolute inset-0 bg-cover bg-center transition-transform duration-[12000ms] group-hover/img:scale-110 opacity-100"
-           [style.background-image]="'url(\'' + servicio.imagen + '\')'">
-      </div>
       
-      <!-- Gradiente neutro (sin sombra azul) para que el texto resalte con máxima claridad -->
-      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/60"></div>
+      <!-- Imagen nativa de Casa L para renderizado nítido y rápido -->
+      <img *ngIf="servicio.imagen" 
+           [src]="servicio.imagen" 
+           [alt]="servicio.titulo"
+           class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] group-hover/img:scale-105 opacity-95">
+
+      <!-- Gradiente elegante para contraste -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/50"></div>
       
-      <!-- Trazos esquineros arquitectónicos puros (Sin números ni textos saturados) -->
+      <!-- Trazos esquineros arquitectónicos puros -->
       <div class="absolute top-6 left-6 w-8 h-8 border-t border-l border-white/35 pointer-events-none"></div>
       <div class="absolute top-6 right-6 w-8 h-8 border-t border-r border-white/35 pointer-events-none"></div>
       <div class="absolute bottom-6 left-6 w-8 h-8 border-b border-l border-white/35 pointer-events-none"></div>
       <div class="absolute bottom-6 right-6 w-8 h-8 border-b border-r border-white/35 pointer-events-none"></div>
 
-      <!-- TEXTO TIPO CATÁLOGO EN EL CENTRO EXACTO (Editorial y limpio) -->
-      <div class="relative z-20 text-center px-4 pointer-events-none transition-all duration-700 group-hover/img:scale-[1.03]">
-        <h3 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-light tracking-[0.26em] text-white uppercase drop-shadow-[0_12px_25px_rgba(0,0,0,0.95)]">
+      <!-- TÍTULO EDITORIAL EN EL CENTRO DE LA FOTO -->
+      <div class="relative z-20 text-center px-6 pointer-events-none transition-transform duration-500 group-hover/img:scale-[1.03]">
+        <h3 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-light tracking-[0.2em] text-white uppercase drop-shadow-[0_12px_30px_rgba(0,0,0,0.95)]">
           {{ servicio.titulo }}
         </h3>
       </div>
 
-      <!-- Subtítulo de fase abajo, discreto y sin numeración -->
+      <!-- Indicador de Fase Abajo -->
       <div *ngIf="servicio.fase" class="absolute bottom-7 inset-x-0 text-center pointer-events-none z-20">
         <span class="font-mono text-[11px] text-white/80 tracking-[0.28em] uppercase drop-shadow">
           {{ servicio.fase }}
@@ -34,20 +35,21 @@
       </div>
     </div>
 
-    <!-- COLUMNA CONTENIDO Y CARACTERÍSTICAS EN FONDO BLANCO (Cols 7-12, Alternada por índice en desktop) -->
-    <div class="lg:col-span-6 p-6 md:p-8 lg:p-9 flex flex-col justify-between bg-white relative"
+    <!-- COLUMNA CONTENIDO CONTEXTUAL CONCENTRADO Y CONCISO (Cols 8-12) -->
+    <div class="lg:col-span-5 p-7 md:p-9 flex flex-col justify-between bg-white relative"
          [ngClass]="{'order-2 lg:order-2': index % 2 === 0, 'order-2 lg:order-1': index % 2 !== 0}">
-      <!-- Trazos de esquina de plano en la caja blanca -->
+      
+      <!-- Detalle arquitectónico de esquina -->
       <div class="absolute top-5 right-5 font-mono text-gray-300 text-xs pointer-events-none">+</div>
-      <div class="absolute bottom-5 left-5 font-mono text-gray-300 text-xs pointer-events-none">+</div>
 
-      <!-- Cabecera con Subtítulo, Título y Resumen Breve -->
+      <!-- Contenido conciso -->
       <div>
-        <p class="font-sans text-xs font-bold uppercase tracking-[0.16em] text-wood-dark mb-1.5 flex items-center gap-2">
-          <span class="w-6 h-[2px] bg-wood-accent inline-block"></span>
+        <p class="font-sans text-xs font-bold uppercase tracking-[0.18em] text-[#000814] mb-2 flex items-center gap-2">
+          <span class="w-6 h-[2px] bg-[#C2E1FF] inline-block"></span>
           {{ servicio.subtitulo }}
         </p>
-        <h3 class="font-serif text-2xl md:text-3xl font-bold text-[#111111] mb-3 leading-tight group-hover:text-black transition-colors">
+        
+        <h3 class="font-serif text-2xl md:text-3xl font-bold text-[#111111] mb-3 leading-tight">
           {{ servicio.titulo }}
         </h3>
         
@@ -55,23 +57,24 @@
           {{ servicio.descripcion }}
         </p>
 
-        <!-- Puntos clave directos en formato de etiquetas limpias y compactas (sin subtítulos ni viñetas de texto largo) -->
+        <!-- Puntos clave ultraconcisos -->
         <div *ngIf="servicio.caracteristicas && servicio.caracteristicas.length > 0" class="flex flex-wrap gap-2 mb-6">
           <span *ngFor="let item of servicio.caracteristicas" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F4F4F4] border border-black/10 text-xs font-medium text-[#111111] hover:bg-black hover:text-white transition-all">
-            <span class="w-1.5 h-1.5 rounded-full bg-wood-accent shrink-0"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-[#000814] shrink-0"></span>
             <span>{{ item }}</span>
           </span>
         </div>
       </div>
 
-      <!-- Footer CTA -->
+      <!-- Botón CTA -->
       <div class="pt-5 border-t border-black/10 flex items-center justify-start mt-auto">
         <a routerLink="/cotiza-con-nosotros" [queryParams]="{servicio: servicio.titulo}" 
-           class="inline-flex items-center justify-center gap-3 px-7 py-3 rounded-xl bg-[#111111] hover:bg-black text-white font-sans text-xs font-bold tracking-[0.14em] uppercase transition-all duration-300 hover:translate-x-1.5 shadow-md hover:shadow-xl">
-          <span>Cotizar Servicio</span>
+           class="inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl bg-[#000814] hover:bg-black text-white font-sans text-xs font-bold tracking-[0.16em] uppercase transition-all duration-300 hover:translate-x-1.5 shadow-lg hover:shadow-2xl">
+          <span>COTIZAR SERVICIO</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
       </div>
+
     </div>
   </div>
 </div>

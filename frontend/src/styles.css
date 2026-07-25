@@ -201,30 +201,122 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Global Scrollbar (Barra de desplazamiento con fondo blanco y barra azul institucional) */
+/* Custom Global Scrollbar Ultra-Elegante (Fondo blanco puro, barra negra mate flotante) */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 11px;
+  height: 11px;
 }
 
 ::-webkit-scrollbar-track {
   background: #FFFFFF !important;
+  border-left: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #002345 !important;
-  border-radius: 5px;
-  border: 2px solid #FFFFFF;
+  background: #0A0A0A !important;
+  border-radius: 9999px;
+  border: 3px solid #FFFFFF;
+  transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #001A33 !important;
+  background: #000000 !important;
 }
 
 /* Soporte para Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #002345 #FFFFFF;
+  scrollbar-color: #0A0A0A #FFFFFF;
+}
+
+/* Custom Scrollbar Ultra-Elegante para el Carrusel de Miniaturas del Visualizador */
+.custom-modal-scrollbar {
+  overflow-y: hidden !important;
+  overflow-x: auto !important;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(194, 225, 255, 0.5) rgba(0, 14, 30, 0.9);
+}
+
+.custom-modal-scrollbar::-webkit-scrollbar {
+  height: 6px !important;
+  width: 0px !important;
+}
+
+.custom-modal-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 14, 30, 0.9) !important;
+  border-radius: 9999px;
+  margin: 0 1rem;
+}
+
+.custom-modal-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(194, 225, 255, 0.4) !important;
+  border-radius: 9999px;
+  border: none !important;
+  transition: background 0.3s ease;
+}
+
+.custom-modal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #C2E1FF !important;
+}
+
+/* Ocultar botones/flechas por defecto del navegador en el scrollbar de miniaturas */
+.custom-modal-scrollbar::-webkit-scrollbar-button,
+.custom-modal-scrollbar::-webkit-scrollbar-button:start,
+.custom-modal-scrollbar::-webkit-scrollbar-button:end,
+.custom-modal-scrollbar::-webkit-scrollbar-button:single-button,
+.custom-modal-scrollbar::-webkit-scrollbar-button:vertical:decrement,
+.custom-modal-scrollbar::-webkit-scrollbar-button:vertical:increment,
+.custom-modal-scrollbar::-webkit-scrollbar-button:horizontal:decrement,
+.custom-modal-scrollbar::-webkit-scrollbar-button:horizontal:increment {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Animaciones Ultraligeras Aceleradas por GPU para el Visualizador de Proyectos */
+@keyframes visualizerBackdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes visualizerCardIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes visualizerImgReveal {
+  from {
+    opacity: 0.15;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-visualizer-backdrop {
+  will-change: opacity;
+  animation: visualizerBackdropIn 200ms ease-out forwards;
+}
+
+.animate-visualizer-card {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  animation: visualizerCardIn 250ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-visualizer-img {
+  will-change: opacity;
+  animation: visualizerImgReveal 250ms ease-out forwards;
 }
 
 a {

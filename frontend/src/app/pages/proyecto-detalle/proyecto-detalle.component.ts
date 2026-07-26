@@ -29,8 +29,10 @@ export class ProyectoDetalleComponent implements OnInit {
   readonly allImages = computed(() => {
     const p = this.proyecto();
     if (!p) return [];
-    const list = [p.imagenUrl, ...(p.imagenesAdicionales || [])];
-    return Array.from(new Set(list));
+    const rawList = [p.imagenUrl, ...(p.imagenesAdicionales || [])];
+    const filtered = rawList.filter(img => !img.toUpperCase().includes('/EN USO/') && !img.toUpperCase().includes('\\EN USO\\'));
+    const finalSet = filtered.length > 0 ? filtered : rawList;
+    return Array.from(new Set(finalSet));
   });
 
   ngOnInit(): void {

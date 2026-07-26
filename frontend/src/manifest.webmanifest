@@ -10,26 +10,33 @@
   "description": "Diseñamos hogares. Versatilidad y excelencia en cada detalle. Proyectos residenciales y arquitectura de alto nivel para la vida.",
   "icons": [
     {
-      "src": "assets/icons/favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "assets/icons/icon-movil.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-movil.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "assets/icons/icon-movil.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
     },
     {
       "src": "assets/icons/icon-movil.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
     },
     {
-      "src": "assets/icons/logo-sysmico.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "assets/icons/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
     }
   ]
 }

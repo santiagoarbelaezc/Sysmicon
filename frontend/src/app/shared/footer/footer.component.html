@@ -202,7 +202,7 @@
         <span>&copy; {{ currentYear }} <strong class="text-neutral-900 font-semibold">{{ brand.name }} S.A.S.</strong> Todos los derechos reservados.</span>
       </div>
       <div class="flex items-center gap-6 font-mono text-[11px]">
-        <a *ngFor="let leg of legalLinks" [routerLink]="leg.path" class="hover:text-black font-medium transition-colors uppercase tracking-wider">{{ leg.label }}</a>
+        <a *ngFor="let leg of legalLinks" [routerLink]="leg.path" [fragment]="leg.fragment" class="hover:text-black font-medium transition-colors uppercase tracking-wider">{{ leg.label }}</a>
       </div>
     </div>
 

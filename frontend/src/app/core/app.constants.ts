@@ -32,7 +32,8 @@ export const NAV_LINKS = [
 ];
 
 export const LEGAL_LINKS = [
-  { label: 'Políticas de Privacidad', path: '/contacto' },
-  { label: 'Términos de Servicio', path: '/contacto' },
-  { label: 'Garantía Estructural', path: '/nosotros' }
+  { label: 'Políticas de Privacidad', path: '/legal', fragment: 'privacidad' },
+  { label: 'Términos de Servicio', path: '/legal', fragment: 'terminos' },
+  { label: 'Tratamiento de Datos', path: '/legal', fragment: 'datos' }
 ];
+

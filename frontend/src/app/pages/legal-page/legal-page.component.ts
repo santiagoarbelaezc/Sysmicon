@@ -29,11 +29,13 @@ export class LegalPageComponent implements OnInit {
     this.route.fragment.subscribe(fragment => {
       if (fragment === 'privacidad' || fragment === 'terminos' || fragment === 'datos') {
         this.activeSection.set(fragment);
+        window.scrollTo(0, 0);
       }
     });
   }
 
   setSection(section: LegalSection): void {
     this.activeSection.set(section);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

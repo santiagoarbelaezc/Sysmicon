@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, Router } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoadingService } from './services/loading.service';
@@ -61,5 +61,12 @@ export class AppComponent implements OnInit {
     } catch (e) {
       console.warn('AOS initialization warning:', e);
     }
+
+    // Scroll automático al top (0,0) en cada cambio de ruta/componente
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo(0, 0);
+      }
+    });
   }
 }

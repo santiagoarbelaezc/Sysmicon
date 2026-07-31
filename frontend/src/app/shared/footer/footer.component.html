@@ -203,6 +203,7 @@
       </div>
       <div class="flex items-center gap-6 font-mono text-[11px]">
         <a *ngFor="let leg of legalLinks" [routerLink]="leg.path" [fragment]="leg.fragment" class="hover:text-black font-medium transition-colors uppercase tracking-wider">{{ leg.label }}</a>
+        <a href="#" (click)="openCookieModal($event)" class="hover:text-black font-medium transition-colors uppercase tracking-wider text-black font-semibold cursor-pointer">Configuración de Cookies</a>
       </div>
     </div>
 

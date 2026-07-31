@@ -8,11 +8,12 @@ import { ProyectosService } from './services/proyectos.service';
 import AOS from 'aos';
 
 import { PwaInstallModalComponent } from './shared/pwa-install-modal/pwa-install-modal.component';
+import { CookieConsentComponent } from './components/cookie-consent/cookie-consent.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent, PwaInstallModalComponent],
+  imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent, PwaInstallModalComponent, CookieConsentComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

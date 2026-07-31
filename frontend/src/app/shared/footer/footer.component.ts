@@ -1,8 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { BRAND_CONFIG, CONTACT_INFO, NAV_LINKS, LEGAL_LINKS } from '../../core/app.constants';
+import { CookieConsentService } from '../../services/cookie-consent.service';
 
 @Component({
   selector: 'app-footer',
@@ -16,6 +17,12 @@ export class FooterComponent {
   readonly contact = CONTACT_INFO;
   readonly navLinks = NAV_LINKS;
   readonly legalLinks = LEGAL_LINKS;
+  readonly cookieService = inject(CookieConsentService);
+
+  openCookieModal(event: Event): void {
+    event.preventDefault();
+    this.cookieService.openModal();
+  }
 
   readonly currentYear = new Date().getFullYear();
   readonly newsletterEmail = signal<string>('');

@@ -1,0 +1,266 @@
+<!-- TARJETA FLOTANTE DE COOKIES (ESQUINA INFERIOR IZQUIERDA) -->
+<div *ngIf="isVisible" class="cookie-banner-wrapper animate-slide-up" role="region" aria-label="Consentimiento de cookies">
+  <div class="cookie-card">
+    <div class="cookie-card-header">
+      <div class="cookie-icon-box">
+        <svg class="cookie-svg-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.2"/>
+          <circle cx="8.5" cy="8.5" r="1.5" fill="#002345"/>
+          <circle cx="15" cy="9.5" r="1.8" fill="#002345"/>
+          <circle cx="11.5" cy="13.5" r="1.5" fill="#002345"/>
+          <circle cx="16" cy="15" r="1.2" fill="#002345"/>
+          <circle cx="7.5" cy="14.5" r="1.4" fill="#002345"/>
+        </svg>
+      </div>
+
+      <div class="cookie-title-area">
+        <h3 class="cookie-title">
+          USO DE COOKIES Y PRIVACIDAD <span class="cookie-badge-dot">●</span>
+        </h3>
+        <div class="cookie-pill-badge">
+          LEY 1581 & RGPD
+        </div>
+      </div>
+    </div>
+
+    <div class="cookie-card-body">
+      <p class="cookie-description">
+        En <strong>Sysmicon</strong> utilizamos cookies propias y de terceros para optimizar la experiencia de navegación, analizar el tráfico y personalizar contenidos según la <strong>Ley 1581 de 2012 (Habeas Data)</strong> y el <strong>RGPD</strong>.
+      </p>
+    </div>
+
+    <div class="cookie-card-actions">
+      <button type="button" class="btn-cookie-primary" (click)="acceptAll()">
+        Aceptar todas
+      </button>
+      <button type="button" class="btn-cookie-secondary" (click)="acceptEssential()">
+        Solo esenciales
+      </button>
+      <button type="button" class="btn-cookie-link" (click)="openModal()">
+        Configurar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE CONFIGURACIÓN Y DOCUMENTO LEGAL COMPLETO -->
+<div *ngIf="showModal" class="cookie-modal-backdrop animate-fade-in" (click)="closeModal()">
+  <div class="cookie-modal-container animate-scale-up" (click)="$event.stopPropagation()" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    
+    <!-- Modal Header -->
+    <div class="cookie-modal-header">
+      <div class="modal-header-title-box">
+        <div class="modal-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" class="w-6 h-6 stroke-current text-[#002345]">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+        <div>
+          <h2 id="modal-title" class="modal-title">Centro de Privacidad y Cookies</h2>
+          <p class="modal-subtitle">Sysmicon S.A.S. • Protección de Datos Personales</p>
+        </div>
+      </div>
+      <button type="button" class="modal-close-btn" (click)="closeModal()" aria-label="Cerrar modal">
+        ✕
+      </button>
+    </div>
+
+    <!-- Modal Tabs Nav -->
+    <div class="cookie-modal-tabs">
+      <button 
+        type="button" 
+        class="tab-btn" 
+        [class.active]="activeTab === 'preferences'"
+        (click)="setTab('preferences')">
+        <svg viewBox="0 0 24 24" fill="none" class="tab-icon">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+        </svg>
+        Configurar Preferencias
+      </button>
+      <button 
+        type="button" 
+        class="tab-btn" 
+        [class.active]="activeTab === 'legal'"
+        (click)="setTab('legal')">
+        <svg viewBox="0 0 24 24" fill="none" class="tab-icon">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+        Documento Legal Completo
+      </button>
+    </div>
+
+    <!-- Modal Body Content -->
+    <div class="cookie-modal-body custom-scrollbar">
+      
+      <!-- TAB 1: PREFERENCIAS -->
+      <div *ngIf="activeTab === 'preferences'" class="tab-content space-y-5">
+        <p class="tab-intro-text">
+          Administre sus preferencias de cookies. Puede habilitar o deshabilitar cada categoría según sus necesidades. Las cookies estrictamente necesarias garantizan el funcionamiento básico de nuestro portal.
+        </p>
+
+        <!-- Option 1: Necesarias -->
+        <div class="cookie-option-card">
+          <div class="option-info">
+            <div class="option-header">
+              <span class="option-title">Cookies Necesarias & Estrictamente Técnicas</span>
+              <span class="badge-required">Siempre activas</span>
+            </div>
+            <p class="option-desc">
+              Son indispensables para posibilitar la navegación segura, la autenticación en el portal, la gestión de sesiones y el correcto funcionamiento del sistema. No se pueden desactivar.
+            </p>
+          </div>
+          <div class="option-toggle">
+            <label class="switch disabled">
+              <input type="checkbox" checked disabled>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Option 2: Analíticas -->
+        <div class="cookie-option-card">
+          <div class="option-info">
+            <div class="option-header">
+              <span class="option-title">Cookies Analíticas y de Rendimiento</span>
+            </div>
+            <p class="option-desc">
+              Nos permiten medir de forma anónima el rendimiento de nuestras páginas, el flujo de usuarios y detectar eventuales errores de navegación para mejorar continuamente nuestros servicios.
+            </p>
+          </div>
+          <div class="option-toggle">
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="preferences.analytics">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Option 3: Preferencias -->
+        <div class="cookie-option-card">
+          <div class="option-info">
+            <div class="option-header">
+              <span class="option-title">Cookies de Preferencias y Funcionalidad</span>
+            </div>
+            <p class="option-desc">
+              Permiten recordar sus configuraciones de idioma, temas de interfaz o visualización arquitectónica preferida para ofrecer una navegación personalizada y fluida.
+            </p>
+          </div>
+          <div class="option-toggle">
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="preferences.preferences">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Option 4: Marketing -->
+        <div class="cookie-option-card">
+          <div class="option-info">
+            <div class="option-header">
+              <span class="option-title">Cookies de Marketing y Publicidad Dirigida</span>
+            </div>
+            <p class="option-desc">
+              Se utilizan para mostrar ofertas comerciales, proyectos arquitectónicos relevantes y contenidos ajustados a su perfil de interés a través de nuestras redes y socios.
+            </p>
+          </div>
+          <div class="option-toggle">
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="preferences.marketing">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: DOCUMENTO LEGAL COMPLETO (HABEAS DATA Y RGPD) -->
+      <div *ngIf="activeTab === 'legal'" class="tab-content legal-text-wrapper">
+        
+        <div class="legal-section">
+          <h4>1. Marco Legal y Cumplimiento Normativo</h4>
+          <p>
+            En cumplimiento de la <strong>Ley Estatutaria 1581 de 2012</strong> de Colombia (Habeas Data), el <strong>Decreto 1377 de 2013</strong> y el Reglamento General de Protección de Datos (<strong>RGPD - UE 2016/679</strong>), el presente documento establece la Política Integral de Tratamiento de Datos Personales y Uso de Cookies de <strong>SYSMICON S.A.S.</strong>
+          </p>
+        </div>
+
+        <div class="legal-section">
+          <h4>2. Identificación del Responsable del Tratamiento</h4>
+          <p>
+            <strong>Razón Social:</strong> SYSMICON S.A.S.<br>
+            <strong>Domicilio Principal:</strong> Colombia<br>
+            <strong>Canal Oficial de Atención Privacidad:</strong> <a href="mailto:privacidad&#64;sysmicon.com" class="legal-link">privacidad&#64;sysmicon.com</a> / <a href="mailto:contacto&#64;sysmicon.com" class="legal-link">contacto&#64;sysmicon.com</a><br>
+            <strong>Objeto Social:</strong> Arquitectura, Ingeniería, Diseño, Consultoría y Construcción Integral.
+          </p>
+        </div>
+
+        <div class="legal-section">
+          <h4>3. Finalidad del Tratamiento de Datos Personales</h4>
+          <p>
+            Los datos personales capturados en nuestro portal mediante formularios, cookies o canales interactivos se tratarán para las siguientes finalidades:
+          </p>
+          <ul>
+            <li>Atención de requerimientos comerciales, cotizaciones de proyectos arquitectónicos y consultas técnicas.</li>
+            <li>Gestión de credenciales de acceso al Portal Privado y Dashboard de clientes/aliados.</li>
+            <li>Análisis estadístico anónimo del rendimiento del sitio web y optimización de la experiencia digital.</li>
+            <li>Envío de boletines institucionales, actualizaciones de proyectos o comunicaciones normativas (previo consentimiento expreso).</li>
+          </ul>
+        </div>
+
+        <div class="legal-section">
+          <h4>4. Derechos de los Titulares (Derechos ARCO)</h4>
+          <p>
+            De conformidad con el Artículo 8 de la Ley 1581 de 2012 y normativas internacionales equivalentes, usted como titular de la información posee los siguientes derechos:
+          </p>
+          <ul>
+            <li><strong>Acceso / Conocer:</strong> Solicitar prueba de la autorización otorgada y consultar sus datos personales almacenados.</li>
+            <li><strong>Rectificación / Actualizar:</strong> Solicitar la corrección o actualización de datos parciales, inexactos o incompletos.</li>
+            <li><strong>Cancelación / Suprimir:</strong> Solicitar la eliminación de sus datos cuando no exista un deber legal o contractual de permanecer en la base de datos.</li>
+            <li><strong>Oposición / Revocar:</strong> Revocar la autorización otorgada para el tratamiento de sus datos o el uso de cookies no esenciales en cualquier momento.</li>
+          </ul>
+        </div>
+
+        <div class="legal-section">
+          <h4>5. Procedimiento para el Ejercicio de Derechos ARCO</h4>
+          <p>
+            Para ejercer cualquiera de sus derechos ARCO, podrá enviar una solicitud escrita dirigida al Oficial de Protección de Datos al correo <strong>privacidad&#64;sysmicon.com</strong> indicando:
+          </p>
+          <ol>
+            <li>Nombre completo y documento de identificación del titular.</li>
+            <li>Descripción clara de los hechos que dan lugar a la consulta, reclamo o revocatoria de consentimiento.</li>
+            <li>Dirección física o electrónica de notificación.</li>
+          </ol>
+          <p>
+            La solicitud será atendida en los términos legalmente fijados por la Ley 1581 de 2012 (máximo 10 días hábiles para consultas y 15 días hábiles para reclamos).
+          </p>
+        </div>
+
+        <div class="legal-section">
+          <h4>6. Exención de Responsabilidad sobre Datos de Terceros</h4>
+          <p>
+            SYSMICON S.A.S. no se hace responsable por el tratamiento de datos personales realizado por plataformas de terceros enlazadas de manera externa (tales como redes sociales, proveedores de pasarelas o servicios de alojamiento externo), los cuales se rigen por sus propias políticas de privacidad.
+          </p>
+        </div>
+
+        <div class="legal-section">
+          <h4>7. Autoridad de Control Competente</h4>
+          <p>
+            En Colombia, la autoridad encargada de velar por el cumplimiento del régimen de protección de datos personales es la <strong>Superintendencia de Industria y Comercio (SIC) - Delegatura para la Protección de Datos Personales</strong> (<a href="https://www.sic.gov.co" target="_blank" rel="noopener noreferrer" class="legal-link">www.sic.gov.co</a>).
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="cookie-modal-footer">
+      <button type="button" class="btn-cookie-secondary" (click)="acceptEssential()">
+        Solo esenciales
+      </button>
+      <div class="footer-primary-group">
+        <button type="button" class="btn-cookie-primary" (click)="saveCustomPreferences()">
+          Guardar preferencias
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

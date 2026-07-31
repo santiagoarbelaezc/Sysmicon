@@ -17,15 +17,15 @@
     </div>
 
     <!-- Story Showcase Section -->
-    <div class="story-grid grid-2">
+    <div class="story-grid grid-2 my-12">
       <div class="story-content" data-aos="fade-up">
-        <h2 class="title-md font-serif tracking-tight">Nuestra Historia: 15 Años de Tradición Arquitectónica</h2>
+        <h2 class="title-md font-serif tracking-tight">Nuestra Historia: 6 Años de Trayectoria Arquitectónica</h2>
         <div class="divider-wood"></div>
         <p class="txt">
           Sysmicon nació con una visión clara: elevar los estándares de la arquitectura residencial en nuestra región, combinando una sensibilidad de diseño internacional con el respeto por las técnicas constructivas locales y los materiales nobles de nuestro entorno.
         </p>
         <p class="txt">
-          A lo largo de más de una década, hemos consolidado una metodología de trabajo que elimina la incertidumbre presupuestal habitual de la construcción tradicional. Operamos con total transparencia, integrando arquitectura, ingeniería civil, diseño interior e interventoría bajo un mismo techo.
+          A lo largo de 6 años de trayectoria, hemos consolidado una metodología de trabajo que elimina la incertidumbre presupuestal habitual de la construcción tradicional. Operamos con total transparencia, integrando arquitectura, ingeniería civil, diseño interior e interventoría bajo un mismo techo.
         </p>
 
         <div class="stats-mini grid-2">
@@ -34,68 +34,74 @@
             <span class="lbl font-sans">Proyectos Entregados a Tiempo</span>
           </div>
           <div class="stat-box glass-card">
-            <span class="val font-serif text-accent font-black">10 Años</span>
-            <span class="lbl font-sans">Garantía Estructural Directa</span>
+            <span class="val font-serif text-accent font-black">6+ Años</span>
+            <span class="lbl font-sans">Garantía y Respaldo Institucional</span>
           </div>
         </div>
       </div>
 
-      <div class="story-visual glass-card" data-aos="fade-up" data-aos-delay="100">
-        <img src="assets/images/about-studio.png" alt="Estudio Sysmicon" loading="lazy">
+      <div class="story-visual glass-card overflow-hidden rounded-2xl border border-white/10 shadow-2xl" data-aos="fade-up" data-aos-delay="100">
+        <img src="https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_1000/v1785440099/6c62aa8e-b604-4c3a-a8c2-cb4ac61759a2_czyho0.jpg" alt="Estudio Sysmicon" class="w-full h-full object-cover">
       </div>
     </div>
 
-    <!-- LÍNEA DE TIEMPO ESTÁTICA Y DESLIZANTE NATIVA (Monocromática, Sin Fondo Diferenciado) -->
-    <section class="timeline-section relative w-full py-12 md:py-16">
-      <!-- Rejilla o cuadrícula arquitectónica sutil de fondo -->
-      <div class="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
-
-      <div class="w-full px-2 sm:px-6 relative z-10">
-        <!-- Título y Tag de la sección -->
-        <div class="timeline-header mb-8 text-center md:text-left">
-          <div class="section-tag font-sans text-left justify-center md:justify-start">
-            <span class="tag-line"></span>
-            <span>Trayectoria Histórica</span>
-          </div>
-          <h2 class="font-serif text-3xl md:text-4xl text-white mt-2 font-normal">
-            15 años trazando la evolución espacial
-          </h2>
+    <!-- LÍNEA DE TIEMPO CON TARJETAS DE FOTOS DE PROYECTOS -->
+    <section class="timeline-projects-section py-16 md:py-24 my-12">
+      <div class="w-full text-center mb-14" data-aos="fade-up">
+        <div class="section-tag font-sans justify-center">
+          <span class="tag-line"></span>
+          <span>Trayectoria Histórica</span>
+          <span class="tag-line"></span>
         </div>
+        <h2 class="title-lg font-serif font-normal text-white">6 Años Trazando la Evolución <span class="text-accent font-serif">Espacial</span></h2>
+        <div class="divider-wood mx-auto"></div>
+      </div>
 
-        <!-- Pista de la línea de tiempo con scroll horizontal nativo súper fluido -->
-        <div class="timeline-track-outer relative overflow-x-auto w-full py-8 scrollbar-thin">
-          <!-- La línea de planos horizontal blanca y sutil de fondo -->
-          <div class="absolute top-[50%] left-0 w-full h-[2px] bg-white/10 z-0"></div>
-
-          <!-- La pista horizontal -->
-          <div class="timeline-track flex items-center gap-12 md:gap-20 relative z-10 w-max px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div *ngFor="let item of hitos; let idx = index" 
+             class="timeline-card-item group flex flex-col bg-[#00172e] border border-white/10 hover:border-[#C2E1FF]/50 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 shadow-2xl"
+             data-aos="fade-up" 
+             [attr.data-aos-delay]="idx * 150">
+          
+          <!-- Imagen del Proyecto -->
+          <div class="relative h-56 w-full overflow-hidden bg-[#000814]">
+            <img [src]="item.image" [alt]="item.titulo" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#00172e] via-transparent to-transparent opacity-90"></div>
             
-            <!-- Nodo de Hito Individual -->
-            <div *ngFor="let milestone of hitos; let idx = index" class="timeline-node flex flex-col items-center select-none">
-              <!-- Año en formato sutil y reducido -->
-              <div class="year-badge font-serif text-3xl md:text-4xl font-light active">
-                {{ milestone.year }}
-              </div>
-              
-              <!-- Nodo conector -->
-              <div class="node-dot w-4 h-4 rounded-full bg-[#242424] border-2 border-white/40 my-3 flex items-center justify-center active">
-                <div class="w-1.5 h-1.5 rounded-full bg-white scale-100"></div>
-              </div>
-
-              <!-- Tarjeta técnica detallada del hito -->
-              <div class="node-card bg-[#242424] border border-white/10 p-4 rounded-xl max-w-[240px] md:max-w-[280px] shadow-xl text-left active-card">
-                <h3 class="font-serif text-base text-white mb-1.5 font-normal">{{ milestone.titulo }}</h3>
-                <p class="text-[11px] text-gray-400 leading-relaxed font-sans">{{ milestone.desc }}</p>
-              </div>
+            <!-- Badge de Año -->
+            <div class="absolute top-4 left-4 bg-[#002345]/90 backdrop-blur-md border border-[#C2E1FF]/40 text-[#C2E1FF] font-serif text-xl font-bold px-3.5 py-1 rounded-xl shadow-lg">
+              {{ item.year }}
             </div>
 
+            <!-- Tag de Proyecto -->
+            <div class="absolute bottom-3 left-4 text-[10px] font-mono text-[#C2E1FF] tracking-widest uppercase bg-black/60 px-2.5 py-1 rounded border border-white/10">
+              {{ item.projectTag }}
+            </div>
           </div>
+
+          <!-- Contenido del Hito -->
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div class="space-y-2 text-left">
+              <h3 class="font-serif text-lg font-bold text-white group-hover:text-[#C2E1FF] transition-colors leading-snug">
+                {{ item.titulo }}
+              </h3>
+              <p class="font-sans text-xs text-gray-300 leading-relaxed font-light">
+                {{ item.desc }}
+              </p>
+            </div>
+
+            <div class="pt-2 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-gray-400">
+              <span>HITO 0{{ idx + 1 }}</span>
+              <span class="text-[#C2E1FF]">SYSMICON</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- Methodology Section (Diseño Nuestros Servicios con Fondo Blanco) -->
-    <section class="methodology-section py-16 md:py-24 bg-[#FFFFFF] border-t border-b border-black/5 text-gray-900">
+    <!-- Methodology Section -->
+    <section class="methodology-section py-16 md:py-24 bg-[#FFFFFF] border-t border-b border-black/5 text-gray-900 rounded-3xl my-12 shadow-xl">
       <div class="w-full max-w-[1800px] mx-auto px-6 md:px-12 lg:px-20 mb-14">
         <div class="section-header text-center" data-aos="fade-up">
           <div class="section-tag font-sans justify-center">
@@ -139,34 +145,12 @@
       </div>
     </section>
 
-    <!-- Leadership Team -->
-    <section class="team-section section-padding">
-      <div class="section-header text-center" data-aos="fade-up">
-        <div class="section-tag font-sans justify-center">
-          <span class="tag-line"></span>
-          <span>Talento Senior</span>
-          <span class="tag-line"></span>
-        </div>
-        <h2 class="title-lg font-serif font-normal">Dirección <span class="text-accent font-serif">Arquitectónica</span></h2>
-        <div class="divider-wood mx-auto"></div>
-        <p class="subtitle mx-auto">Conoce a los profesionales senior que dirigen e impulsan cada uno de nuestros proyectos residenciales.</p>
-      </div>
+    <!-- DIRECTOR SHOWCASE MEJORADO -->
+    <div class="my-12">
+      <app-director-showcase></app-director-showcase>
+    </div>
 
-      <div class="grid-3 team-grid">
-        <div *ngFor="let m of equipo; let tIdx = index" class="team-card glass-card">
-          <div class="team-top">
-            <div class="team-initial font-serif">{{ m.nombre.charAt(5) }}</div>
-            <span class="team-spec font-sans">{{ m.especialidad }}</span>
-          </div>
-          <h3 class="team-name font-serif">{{ m.nombre }}</h3>
-          <span class="team-role font-sans">{{ m.cargo }}</span>
-          <div class="divider-wood"></div>
-          <p class="team-bio">{{ m.bio }}</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Bottom CTA (Diseño Blanco Tipo Ficha de Servicios) -->
+    <!-- Bottom CTA -->
     <div class="team-cta text-center relative overflow-visible bg-white text-gray-900 border border-black/5 rounded-2xl shadow-xl w-full max-w-[1500px] mx-auto p-10 md:p-16 my-14" data-aos="fade-up">
       <!-- Trazos esquineros decorativos arquitectónicos -->
       <div class="arch-plan-box-top"></div>
@@ -178,7 +162,7 @@
         Agenda una sesión de exploración arquitectónica y evaluemos el potencial de tu lote.
       </p>
       
-      <a routerLink="/contacto" class="inline-flex items-center gap-3 bg-[#002345] hover:bg-wood-accent text-white py-4 px-10 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg active:scale-95">
+      <a routerLink="/contacto" class="inline-flex items-center gap-3 bg-[#002345] hover:bg-wood-accent text-white py-4 px-10 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 cursor-pointer">
         <span>Agendar Consulta con Dirección</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>

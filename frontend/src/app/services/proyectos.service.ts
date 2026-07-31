@@ -1,6 +1,20 @@
 import { Injectable, signal, computed } from '@angular/core';
 import { Proyecto } from '../models/proyecto.model';
 
+/**
+ * Función auxiliar para optimizar dinámicamente imágenes de Cloudinary.
+ * Aplica compresión inteligente (q_auto), formato moderno WebP/AVIF (f_auto) y ancho ajustado (w_width).
+ */
+export function optimizeCloudinary(url: string, width: number = 1000): string {
+  if (!url || !url.includes('cloudinary.com') || !url.includes('/upload/')) {
+    return url;
+  }
+  if (url.includes('/upload/f_auto')) {
+    return url;
+  }
+  return url.replace('/upload/', `/upload/f_auto,q_auto,w_${width}/`);
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +26,7 @@ export class ProyectosService {
       subtitulo: 'Geometría minimalista integrada con materiales nobles y luz natural en el Oriente Antioqueño.',
       categoria: 'Residencial',
       descripcion: 'Una majestuosa residencia que celebra el minimalismo y la intimidad en el Oriente Antioqueño. Su volumetría en concreto y maderas nativas genera patios interiores que inundan de luz natural cada espacio social.',
-      imagenUrl: 'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785439943/0bb0bfc3-d421-4b92-90ba-1bd3b1600bdf_pjfpj8.jpg',
+      imagenUrl: optimizeCloudinary('https://res.cloudinary.com/dsv1gdgya/image/upload/v1785439943/0bb0bfc3-d421-4b92-90ba-1bd3b1600bdf_pjfpj8.jpg', 1200),
       area: 520,
       anio: 2024,
       ubicacion: 'Llanogrande, Antioquia',
@@ -53,7 +67,7 @@ export class ProyectosService {
         'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785439921/5e6cc529-2da2-44d1-92b6-fcba9ebfe698_e3v0m7.jpg',
         'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785439919/1f2f3f7e-396b-45c0-9250-442352720986_qeyhd5.jpg',
         'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785439920/4fce2d32-af26-4a1c-9da9-caa27c8c1ece_pc8tzt.jpg'
-      ]
+      ].map(url => optimizeCloudinary(url, 1000))
     },
     {
       id: 'casaS19',
@@ -61,7 +75,7 @@ export class ProyectosService {
       subtitulo: 'Volumetría suspendida y grandes ventanales con vista panorámica y diseño bioclimático.',
       categoria: 'Residencial',
       descripcion: 'Diseño arquitectónico concebido en voladizo para flotar sobre el paisaje. Con ventanales panorámicos sin perfiles divisorios y un sistema bioclimático pasivo, Casa S19 es un hito de ingeniería residencial.',
-      imagenUrl: 'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785440076/dji_fly_20241221_104148_0591_1734879851956_photo_gmbz05.jpg',
+      imagenUrl: optimizeCloudinary('https://res.cloudinary.com/dsv1gdgya/image/upload/v1785440076/dji_fly_20241221_104148_0591_1734879851956_photo_gmbz05.jpg', 1200),
       area: 610,
       anio: 2024,
       ubicacion: 'Envigado, Antioquia',
@@ -118,7 +132,7 @@ export class ProyectosService {
         'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785440017/0561ea51-063e-4a47-a39b-14b9ca3320eb_ixz02i.jpg',
         'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785440019/8796c803-aed8-44dc-8827-c06f6f3e992e_v4qawq.jpg',
         'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785440015/15fec915-4377-4363-84a3-beacfccd68d7_p08p8u.jpg'
-      ]
+      ].map(url => optimizeCloudinary(url, 1000))
     },
     {
       id: 'casaS23',
@@ -126,7 +140,7 @@ export class ProyectosService {
       subtitulo: 'Espacios fluidos que diluyen los límites entre el interior y los jardines exteriores.',
       categoria: 'Residencial',
       descripcion: 'Una obra de líneas continuas donde el interior social se extiende hacia terrazas cubiertas y jardines zen. La carpintería oculta de gran formato permite una apertura total hacia el exterior.',
-      imagenUrl: 'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785440109/243315d3-e0c8-4791-8f0a-b341587e1c70_eshvqt.jpg',
+      imagenUrl: optimizeCloudinary('https://res.cloudinary.com/dsv1gdgya/image/upload/v1785440109/243315d3-e0c8-4791-8f0a-b341587e1c70_eshvqt.jpg', 1200),
       area: 580,
       anio: 2023,
       ubicacion: 'El Retiro, Antioquia',
@@ -166,7 +180,7 @@ export class ProyectosService {
         'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785440099/6c62aa8e-b604-4c3a-a8c2-cb4ac61759a2_czyho0.jpg',
         'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785440097/5b558f90-b7e8-4e87-8d25-9729150bf5db_pwuk27.jpg',
         'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785440096/5b32dea6-e4b3-4d14-b2b0-3cc18f67a056_thtleb.jpg'
-      ]
+      ].map(url => optimizeCloudinary(url, 1000))
     },
     {
       id: 'casaL',
@@ -174,7 +188,7 @@ export class ProyectosService {
       subtitulo: 'Estructura en concreto a la vista combinada con madera fina y acabados artesanales.',
       categoria: 'Residencial',
       descripcion: 'Una pieza arquitectónica en forma de L que articula el área íntima con el ala social alrededor de una piscina reflectante. El concreto ocre y las celosías de madera aportan una identidad sobria y cálida.',
-      imagenUrl: 'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785439869/0515c974-72ed-4747-a2b4-400fc4a61610_zz7mu0.jpg',
+      imagenUrl: optimizeCloudinary('https://res.cloudinary.com/dsv1gdgya/image/upload/v1785439869/0515c974-72ed-4747-a2b4-400fc4a61610_zz7mu0.jpg', 1200),
       area: 640,
       anio: 2024,
       ubicacion: 'Alto de las Palmas, Medellín',
@@ -224,7 +238,7 @@ export class ProyectosService {
         'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785439864/8cb5f9f1-6745-4626-93e0-6c3c740d0fd0_tpucpz.jpg',
         'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785439864/20a1e7fd-ac20-431f-93c9-9693250df4a5_jzzcdo.jpg',
         'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785439863/6ea43fc4-e148-4ac6-aeab-5484c4aef69d_ncnygs.jpg'
-      ]
+      ].map(url => optimizeCloudinary(url, 1000))
     }
   ]);
 
@@ -275,5 +289,12 @@ export class ProyectosService {
 
   cerrarProyectoModal(): void {
     this.proyectoModalActivo.set(null);
+  }
+
+  /**
+   * Obtiene la URL optimizada para móviles (ancho 650px y compresión inteligente)
+   */
+  getMobileImageUrl(url: string): string {
+    return optimizeCloudinary(url, 650);
   }
 }

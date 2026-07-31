@@ -1,4 +1,19 @@
+/* ==========================================================================
+   SYSMICON - DIRECTOR SHOWCASE COMPONENT (ESTILO VIP ARQUITECTÓNICO)
+   ========================================================================== */
+
 .director-section {
-  position: relative;
-  z-index: 10;
+  font-family: var(--font-sans, 'Exo 2', sans-serif);
+}
+
+.director-section img {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@media (max-width: 640px) {
+  .director-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
 }

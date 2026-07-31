@@ -15,7 +15,7 @@ export class ServiciosService {
       destacado: true,
       pilarPrincipal: true,
       fase: 'Concepción & Anteproyecto',
-      imagen: 'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785439872/9245d22d-26fa-469c-aa3c-429fc0825f55_pm1hi0.jpg',
+      imagen: 'https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_800/v1785439872/9245d22d-26fa-469c-aa3c-429fc0825f55_pm1hi0.jpg',
       caracteristicas: [
         'Modelado 3D Inmersivo',
         'Estudio Bioclimático',
@@ -31,7 +31,7 @@ export class ServiciosService {
       destacado: true,
       pilarPrincipal: true,
       fase: 'Ingeniería & Ejecución',
-      imagen: 'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785439867/85e0f169-2d00-444c-99a8-9ba0ab7c2836_wagykz.jpg',
+      imagen: 'https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_800/v1785439867/85e0f169-2d00-444c-99a8-9ba0ab7c2836_wagykz.jpg',
       caracteristicas: [
         'Presupuesto Blindado',
         'Cronograma Garantizado',
@@ -47,7 +47,7 @@ export class ServiciosService {
       destacado: false,
       pilarPrincipal: false,
       fase: 'Transformación & Acabados',
-      imagen: 'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785439875/390124c1-e70a-4713-b438-ada6247d4363_adxqt1.jpg',
+      imagen: 'https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_800/v1785439875/390124c1-e70a-4713-b438-ada6247d4363_adxqt1.jpg',
       caracteristicas: [
         'Reforzamiento Estructural',
         'Domótica e Iluminación',
@@ -63,7 +63,7 @@ export class ServiciosService {
       destacado: false,
       pilarPrincipal: false,
       fase: 'Auditoría & Supervisión',
-      imagen: 'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785439882/cf9427b0-b774-455f-a0ab-e51c3729d5fb_xf4sbc.jpg',
+      imagen: 'https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_800/v1785439882/cf9427b0-b774-455f-a0ab-e51c3729d5fb_xf4sbc.jpg',
       caracteristicas: [
         'Interventoría de Obra',
         'Viabilidad de Lotes',

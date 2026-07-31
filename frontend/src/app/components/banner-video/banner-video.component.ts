@@ -17,7 +17,7 @@ export class BannerVideoComponent implements AfterViewInit, OnDestroy {
   @ViewChild('sectionEl') sectionElement?: ElementRef<HTMLElement>;
   @ViewChild('videoEl') videoElement?: ElementRef<HTMLVideoElement>;
 
-  @Input() videoSrc: string = 'https://res.cloudinary.com/dsv1gdgya/video/upload/v1785017819/sysmi-1_mvv1wg.mp4';
+  @Input() videoSrc: string = 'https://res.cloudinary.com/dsv1gdgya/video/upload/f_auto,q_auto,w_1000/v1785017819/sysmi-1_mvv1wg.mp4';
   @Input() logoSrc: string = 'assets/icons/logo-hero.png';
   @Input() badgeText: string = '';
   @Input() titulo: string = 'CASA';

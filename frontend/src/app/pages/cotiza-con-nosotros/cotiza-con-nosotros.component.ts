@@ -49,27 +49,23 @@ export class CotizaConNosotrosComponent implements OnInit, AfterViewInit {
 
   // Form Model
   nombre = signal<string>('');
-  telefono = signal<string>('');
-  asunto = signal<string>('');
+  correo = signal<string>('');
   mensaje = signal<string>('');
 
   // UI States
   cargando = signal<boolean>(false);
   enviado = signal<boolean>(false);
   errorMsg = signal<string>('');
-  modalAbierto = signal<boolean>(false);
-
-  abrirModal(): void {
-    this.modalAbierto.set(true);
-  }
-
-  cerrarModal(): void {
-    this.modalAbierto.set(false);
-  }
 
   get whatsappUrl(): string {
-    const text = `Hola Sysmicon, me gustaría cotizar mi proyecto arquitectónico. Mi nombre es ${this.nombre() || 'un cliente interesado'}.`;
+    const text = `Hola Sysmicon, me gustaría cotizar mi proyecto arquitectónico. Mi nombre es ${this.nombre() || 'un cliente interesado'}. Correo: ${this.correo()}. ${this.mensaje() ? 'Mensaje: ' + this.mensaje() : ''}`;
     return `https://wa.me/573108459210?text=${encodeURIComponent(text)}`;
+  }
+
+  get mailtoUrl(): string {
+    const subject = encodeURIComponent('Cotización de proyecto arquitectónico');
+    const body = encodeURIComponent(`Nombre: ${this.nombre()}\nCorreo: ${this.correo()}\n\n${this.mensaje()}`);
+    return `mailto:redes.sysmicon@gmail.com?subject=${subject}&body=${body}`;
   }
 
   ngOnInit(): void {
@@ -160,18 +156,16 @@ export class CotizaConNosotrosComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit(): void {
-    if (!this.nombre() || !this.telefono()) {
-      this.errorMsg.set('Por favor completa los campos de nombre y teléfono.');
+    if (!this.nombre() || !this.correo()) {
+      this.errorMsg.set('Por favor completa tu nombre y correo electrónico.');
       return;
     }
     this.cargando.set(true);
     this.errorMsg.set('');
-
     setTimeout(() => {
       this.cargando.set(false);
       this.enviado.set(true);
-      window.open(this.whatsappUrl, '_blank');
-    }, 800);
+    }, 600);
   }
 
   enviarMensaje(event?: Event): void {
@@ -181,8 +175,7 @@ export class CotizaConNosotrosComponent implements OnInit, AfterViewInit {
 
   nuevaConsulta(): void {
     this.nombre.set('');
-    this.telefono.set('');
-    this.asunto.set('');
+    this.correo.set('');
     this.mensaje.set('');
     this.enviado.set(false);
     this.errorMsg.set('');

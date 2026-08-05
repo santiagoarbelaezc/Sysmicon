@@ -1,6 +1,6 @@
-<div class="cotiza-page relative min-h-screen pt-[50px] md:pt-[54px] bg-[#000814] text-white font-sans overflow-hidden">
+<div class="cotiza-page relative min-h-screen pt-[50px] md:pt-[54px] bg-white text-neutral-900 font-sans overflow-hidden">
   
-  <!-- HERO VIDEO 100% ANCHO COMPLETO ALINEADO PERFECTAMENTE AL NAVBAR -->
+  <!-- HERO VIDEO 100% ANCHO COMPLETO -->
   <div class="relative w-full h-[calc(100vh-50px)] md:h-[calc(100vh-54px)] min-h-[500px] overflow-hidden bg-[#000814] flex items-center justify-center">
     
     <!-- Video Slot A -->
@@ -31,170 +31,169 @@
            class="absolute inset-0 w-full h-full object-cover transform transition-all duration-1000 ease-out">
     </video>
 
-    <!-- GRADIENTES & AMBIENTE CINEMATOGRÁFICO DE LUXURY -->
-    <div class="absolute inset-0 bg-black/45"></div>
-    <div class="absolute inset-0 bg-radial-vignette opacity-70"></div>
+    <!-- Gradiente oscuro -->
+    <div class="absolute inset-0 bg-black/50"></div>
 
-    <!-- CONTENIDO CENTRAL DEL HERO DE COTIZACIÓN (LIMPIO & MINIMALISTA) -->
-    <div class="container relative z-10 max-w-4xl mx-auto px-6 text-center flex flex-col items-center justify-center pt-4">
-      <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-light text-white tracking-tight leading-[0.98] drop-shadow-2xl mb-8">
-        Cotiza tu Proyecto <span class="font-serif italic font-normal text-white">Arquitectónico</span>
+    <!-- Contenido Central del Hero -->
+    <div class="container relative z-10 max-w-4xl mx-auto px-6 text-center flex flex-col items-center justify-center">
+      <span class="font-mono text-xs tracking-[0.3em] text-white/60 font-semibold uppercase block mb-4">
+        SYSMICON ARCHITECTURAL STUDIO
+      </span>
+      <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-light text-white tracking-tight leading-[0.98] drop-shadow-2xl mb-3">
+        Cotiza tu Proyecto <span class="font-serif italic font-normal text-white/80">Arquitectónico</span>
       </h1>
-
-      <button (click)="abrirModal()"
-              class="group inline-flex items-center gap-3 px-9 py-4 rounded-xl bg-white text-[#000814] hover:bg-gray-100 transition-all duration-500 font-sans text-xs font-bold tracking-[0.24em] uppercase shadow-2xl hover:scale-105 cursor-pointer">
-        <span>Hablar con Nosotros</span>
-        <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
-        </svg>
-      </button>
+      <p class="font-sans text-base sm:text-lg text-white/70 font-light leading-relaxed max-w-xl mt-4">
+        Cuéntanos tu idea. Nuestros arquitectos e ingenieros te responden en menos de 24 horas.
+      </p>
     </div>
   </div>
 
-  <!-- BARRA FLOTANTE VERTICAL A LA DERECHA ("HABLA CON NOSOTROS") - BLANCO INSTITUCIONAL -->
-  <button (click)="abrirModal()"
-          class="fixed right-0 top-1/2 -translate-y-1/2 z-40 group flex items-center gap-3 px-3.5 py-6 bg-white hover:bg-gray-100 text-[#000814] border-l border-y border-gray-300 rounded-l-2xl shadow-[0_10px_35px_rgba(0,0,0,0.25)] transition-all duration-400 cursor-pointer hover:scale-105">
-    <span class="w-2.5 h-2.5 rounded-full bg-[#000814] animate-pulse"></span>
-    <span class="font-mono text-xs uppercase tracking-[0.28em] font-bold [writing-mode:vertical-rl] rotate-180 text-[#000814]">
-      HABLA CON NOSOTROS
-    </span>
-  </button>
+  <!-- SECCIÓN DEL FORMULARIO (ESTILO MISIÓN SECTION) -->
+  <section class="relative w-full bg-white py-20 sm:py-28 font-sans">
+    <div class="max-w-[1550px] mx-auto px-6 sm:px-12 lg:px-16">
 
-  <!-- MODAL / DRAWER LATERAL DESPLEGABLE DE COTIZACIÓN & REDES SOCIALES -->
-  <div *ngIf="modalAbierto()" class="fixed inset-0 z-[1000000] flex justify-end">
-    <!-- Telón de fondo oscuro con blur -->
-    <div (click)="cerrarModal()" class="absolute inset-0 bg-black/75 backdrop-blur-md animate-fadeIn"></div>
-
-    <!-- Panel Lateral Desplegable -->
-    <div class="relative z-10 w-full max-w-md bg-white h-full shadow-2xl overflow-y-auto p-5 sm:p-6 flex flex-col justify-between animate-slideLeft">
-      
-      <div>
-        <!-- Header del Modal -->
-        <div class="flex items-center justify-between pb-3 mb-3 border-b border-gray-100">
-          <div>
-            <span class="font-mono text-[9px] tracking-[0.24em] uppercase text-gray-500 font-bold block mb-0.5">
-              SYSMICON — CONTACTO DIRECTO
-            </span>
-            <h2 class="font-serif text-2xl font-light text-[#111111] tracking-tight">
-              Habla con Nosotros
-            </h2>
-          </div>
-          <button (click)="cerrarModal()" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-700 text-sm font-bold transition-all cursor-pointer">
-            ✕
-          </button>
-        </div>
-
-        <!-- Formulario de Mensaje -->
-        <form *ngIf="!enviado()" (submit)="enviarMensaje($event)" class="space-y-2.5">
-          <div>
-            <label for="modal-nombre" class="block font-sans text-[10px] font-bold tracking-[0.16em] uppercase text-gray-800 mb-1">Nombre *</label>
-            <input type="text" id="modal-nombre" name="nombre"
-                   [ngModel]="nombre()" (ngModelChange)="nombre.set($event)"
-                   placeholder="Tu nombre completo"
-                   class="w-full px-3.5 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-xs focus:outline-none focus:border-black focus:bg-white transition-all">
-          </div>
-
-          <div>
-            <label for="modal-telefono" class="block font-sans text-[10px] font-bold tracking-[0.16em] uppercase text-gray-800 mb-1">Teléfono *</label>
-            <input type="tel" id="modal-telefono" name="telefono"
-                   [ngModel]="telefono()" (ngModelChange)="telefono.set($event)"
-                   placeholder="+57 300 000 0000"
-                   class="w-full px-3.5 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-xs focus:outline-none focus:border-black focus:bg-white transition-all">
-          </div>
-
-          <div>
-            <label for="modal-asunto" class="block font-sans text-[10px] font-bold tracking-[0.16em] uppercase text-gray-800 mb-1">Asunto *</label>
-            <input type="text" id="modal-asunto" name="asunto"
-                   [ngModel]="asunto()" (ngModelChange)="asunto.set($event)"
-                   placeholder="Tipo de proyecto o consulta"
-                   class="w-full px-3.5 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-xs focus:outline-none focus:border-black focus:bg-white transition-all">
-          </div>
-
-          <div>
-            <label for="modal-mensaje" class="block font-sans text-[10px] font-bold tracking-[0.16em] uppercase text-gray-800 mb-1">Detalles</label>
-            <textarea id="modal-mensaje" name="mensaje" rows="2"
-                      [ngModel]="mensaje()" (ngModelChange)="mensaje.set($event)"
-                      placeholder="Cuéntanos brevemente tu presupuesto o requerimientos..."
-                      class="w-full px-3.5 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-xs focus:outline-none focus:border-black focus:bg-white transition-all resize-none"></textarea>
-          </div>
-
-          <div *ngIf="errorMsg()" class="p-2.5 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs font-sans">
-            {{ errorMsg() }}
-          </div>
-
-          <button type="submit" [disabled]="cargando()" class="w-full py-3 rounded-lg bg-[#000814] hover:bg-[#002345] text-white flex items-center justify-center gap-2 font-sans font-bold text-xs tracking-[0.2em] uppercase transition-all shadow-md cursor-pointer mt-1">
-            <span *ngIf="!cargando()">Enviar Consulta</span>
-            <span *ngIf="cargando()">Procesando...</span>
-            <svg *ngIf="!cargando()" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
-          </button>
-        </form>
-
-        <!-- Mensaje de Éxito -->
-        <div *ngIf="enviado()" class="py-6 text-center space-y-3">
-          <div class="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mx-auto text-lg font-bold">
-            ✓
-          </div>
-          <h3 class="font-serif text-xl font-bold text-[#111111]">¡Solicitud Recibida!</h3>
-          <p class="text-gray-600 text-xs font-sans max-w-sm mx-auto">
-            Te contactaremos de inmediato a tu teléfono o WhatsApp.
-          </p>
-          <button (click)="nuevaConsulta()" class="px-4 py-2 rounded-lg bg-gray-100 text-gray-900 text-xs font-bold uppercase tracking-wider">
-            Enviar otra consulta
-          </button>
-        </div>
-      </div>
-
-      <!-- BOTONES DE CANALES & REDES SOCIALES COMPLETAS -->
-      <div class="pt-3.5 border-t border-gray-200 mt-3.5">
-        <p class="font-sans text-[9.5px] font-bold tracking-[0.18em] uppercase text-gray-500 mb-2">
-          O contáctanos en redes y canales directos:
+      <!-- Encabezado Editorial -->
+      <div class="max-w-4xl space-y-4 mb-16" data-aos="fade-up">
+        <span class="font-mono text-xs tracking-[0.3em] text-neutral-400 font-semibold uppercase block">
+          CONTACTO DIRECTO
+        </span>
+        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-neutral-900 font-bold tracking-tight uppercase leading-[1.08]">
+          HABLEMOS DE <span class="font-serif italic font-normal text-neutral-500">TU PROYECTO</span>
+        </h2>
+        <p class="font-sans text-base sm:text-xl text-neutral-600 font-light leading-relaxed pt-2">
+          Escríbenos un breve mensaje y te contactaremos para agendar una consulta de viabilidad técnica sin costo.
         </p>
-
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-          <!-- WhatsApp Directo -->
-          <a [href]="whatsappUrl" target="_blank" rel="noopener noreferrer" 
-             class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-[10px] font-semibold tracking-wider uppercase transition-all">
-            <svg class="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 1.636 6.015L.195 23.518l5.656-1.484A11.95 11.95 0 0 0 11.944 24C18.575 24 24 18.627 24 12S18.575 0 11.944 0zm0 21.986a9.96 9.96 0 0 1-5.074-1.385l-.364-.216-3.765.988 1.006-3.668-.238-.379A9.954 9.954 0 0 1 1.986 12c0-5.492 4.471-9.964 9.958-9.964 5.492 0 9.964 4.472 9.964 9.964 0 5.492-4.472 9.986-9.964 9.986zm5.457-7.466c-.299-.15-1.768-.872-2.042-.971-.274-.1-.474-.15-.674.15-.2.299-.774.971-.949 1.171-.174.2-.349.224-.648.075-.3-.15-1.263-.465-2.404-1.482-.888-.792-1.488-1.769-1.663-2.068-.175-.3-.018-.462.132-.611.135-.135.299-.35.449-.524.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.674-1.624-.924-2.224-.243-.585-.49-.505-.674-.515-.174-.01-.374-.01-.574-.01-.2 0-.524.075-.799.375-.274.3-1.048 1.024-1.048 2.497 0 1.474 1.073 2.898 1.223 3.098.15.2 2.112 3.223 5.116 4.522.715.309 1.274.494 1.708.632.718.228 1.371.196 1.889.119.578-.086 1.768-.723 2.017-1.422.249-.699.249-1.299.174-1.423-.075-.124-.274-.199-.574-.349z"/></svg>
-            <span>WhatsApp</span>
-          </a>
-
-          <!-- Instagram -->
-          <a href="https://www.instagram.com/sysmicon/" target="_blank" rel="noopener noreferrer"
-             class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-pink-50 hover:bg-pink-100 border border-pink-200 text-pink-800 text-[10px] font-semibold tracking-wider uppercase transition-all">
-            <svg class="w-3.5 h-3.5 text-pink-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-            <span>Instagram</span>
-          </a>
-
-          <!-- TikTok -->
-          <a href="https://www.tiktok.com/@sysmicon" target="_blank" rel="noopener noreferrer"
-             class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-900 text-[10px] font-semibold tracking-wider uppercase transition-all">
-            <svg class="w-3.5 h-3.5 text-black" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 1 1-5.2-1.74 2.89 2.89 0 0 1 2.31-2.84V7.63a6.34 6.34 0 0 0-5.11 6.18A6.34 6.34 0 1 0 14.82 20V11.8a8.31 8.31 0 0 0 4.77 1.49v-3.5a4.84 4.84 0 0 1-3-.94z"/></svg>
-            <span>TikTok</span>
-          </a>
-
-          <!-- Correo Electrónico -->
-          <a href="mailto:contacto@sysmicon.com"
-             class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-800 text-[10px] font-semibold tracking-wider uppercase transition-all">
-            <svg class="w-3.5 h-3.5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <span>Correo</span>
-          </a>
-
-          <!-- LinkedIn -->
-          <a href="https://www.linkedin.com/company/sysmicon/" target="_blank" rel="noopener noreferrer"
-             class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-sky-50 hover:bg-sky-100 border border-sky-200 text-sky-800 text-[10px] font-semibold tracking-wider uppercase transition-all">
-            <svg class="w-3.5 h-3.5 text-sky-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-            <span>LinkedIn</span>
-          </a>
-
-          <!-- Facebook -->
-          <a href="https://www.facebook.com/sysmicon/" target="_blank" rel="noopener noreferrer"
-             class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-800 text-[10px] font-semibold tracking-wider uppercase transition-all">
-            <svg class="w-3.5 h-3.5 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-            <span>Facebook</span>
-          </a>
-        </div>
       </div>
+
+      <!-- Grid: Formulario (8 cols) + Canales (4 cols) — Misión Section Border Style -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 w-full border-2 border-neutral-200 rounded-[28px] overflow-hidden bg-white shadow-sm" data-aos="fade-up" data-aos-delay="100">
+
+        <!-- Columna Formulario (8 cols) -->
+        <div class="lg:col-span-8 border-b-2 lg:border-b-0 lg:border-r-2 border-neutral-200">
+
+          <!-- Formulario Activo -->
+          <form *ngIf="!enviado()" (submit)="enviarMensaje($event)">
+
+            <!-- NOMBRE -->
+            <div class="border-b-2 border-neutral-200 px-8 sm:px-12 py-6 sm:py-8">
+              <label for="cotiza-nombre" class="font-mono text-xs tracking-[0.25em] text-neutral-400 uppercase font-semibold block mb-2.5">
+                NOMBRE COMPLETO *
+              </label>
+              <input type="text" id="cotiza-nombre" name="nombre"
+                     [ngModel]="nombre()" (ngModelChange)="nombre.set($event)"
+                     placeholder="Ej: Arq. Carlos Rodríguez"
+                     class="w-full px-5 py-3.5 rounded-xl bg-neutral-50 border-2 border-neutral-200 text-neutral-900 placeholder-neutral-400 font-sans text-base focus:outline-none focus:border-neutral-900 focus:bg-white transition-all">
+            </div>
+
+            <!-- CORREO -->
+            <div class="border-b-2 border-neutral-200 px-8 sm:px-12 py-6 sm:py-8">
+              <label for="cotiza-correo" class="font-mono text-xs tracking-[0.25em] text-neutral-400 uppercase font-semibold block mb-2.5">
+                CORREO ELECTRÓNICO *
+              </label>
+              <input type="email" id="cotiza-correo" name="correo"
+                     [ngModel]="correo()" (ngModelChange)="correo.set($event)"
+                     placeholder="correo@empresa.com"
+                     class="w-full px-5 py-3.5 rounded-xl bg-neutral-50 border-2 border-neutral-200 text-neutral-900 placeholder-neutral-400 font-sans text-base focus:outline-none focus:border-neutral-900 focus:bg-white transition-all">
+            </div>
+
+            <!-- MENSAJE -->
+            <div class="px-8 sm:px-12 py-6 sm:py-8">
+              <label for="cotiza-mensaje" class="font-mono text-xs tracking-[0.25em] text-neutral-400 uppercase font-semibold block mb-2.5">
+                MENSAJE
+              </label>
+              <textarea id="cotiza-mensaje" name="mensaje" rows="4"
+                        [ngModel]="mensaje()" (ngModelChange)="mensaje.set($event)"
+                        placeholder="Cuéntanos sobre tu visión, área estimada del terreno o ubicación..."
+                        class="w-full px-5 py-3.5 rounded-xl bg-neutral-50 border-2 border-neutral-200 text-neutral-900 placeholder-neutral-400 font-sans text-base focus:outline-none focus:border-neutral-900 focus:bg-white transition-all resize-none leading-relaxed"></textarea>
+            </div>
+
+            <!-- Error -->
+            <div *ngIf="errorMsg()" class="mx-8 sm:mx-14 mb-4 p-4 rounded-2xl bg-red-50 border-2 border-red-200 text-red-700 text-sm font-sans">
+              {{ errorMsg() }}
+            </div>
+
+            <!-- Acción -->
+            <div class="border-t-2 border-neutral-200 px-8 sm:px-14 py-8 flex flex-col sm:flex-row gap-5 items-start sm:items-center">
+              <button type="submit" [disabled]="cargando()"
+                      class="group inline-flex items-center gap-4 px-11 py-5 rounded-2xl bg-black hover:bg-neutral-800 text-white font-mono text-xs sm:text-sm font-bold tracking-[0.26em] uppercase transition-all duration-300 shadow-md hover:scale-[1.02] cursor-pointer disabled:opacity-60">
+                <span *ngIf="!cargando()">ENVIAR MENSAJE</span>
+                <span *ngIf="cargando()">ENVIANDO...</span>
+                <svg *ngIf="!cargando()" class="w-5 h-5 group-hover:translate-x-1.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
+                </svg>
+              </button>
+              <span class="font-mono text-xs text-neutral-400 tracking-wider">Respuesta garantizada en menos de 24 horas hábiles.</span>
+            </div>
+
+          </form>
+
+          <!-- Éxito -->
+          <div *ngIf="enviado()" class="px-8 sm:px-14 py-16 text-center space-y-6">
+            <div class="w-16 h-16 rounded-full bg-neutral-100 border-2 border-neutral-200 flex items-center justify-center mx-auto font-serif text-2xl font-bold text-neutral-900">✓</div>
+            <h3 class="font-serif text-3xl font-bold text-neutral-900 uppercase">¡Mensaje Enviado!</h3>
+            <p class="text-neutral-600 text-base font-sans max-w-md mx-auto leading-relaxed">
+              Te contactaremos pronto. También puedes escribirnos directamente.
+            </p>
+            <div class="flex flex-wrap gap-3 justify-center pt-2">
+              <a [href]="whatsappUrl" target="_blank" rel="noopener noreferrer"
+                 class="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-black text-white font-mono text-xs font-bold tracking-widest uppercase hover:bg-neutral-800 transition-all cursor-pointer">
+                WhatsApp →
+              </a>
+              <a [href]="mailtoUrl"
+                 class="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-neutral-100 hover:bg-black hover:text-white text-neutral-900 font-mono text-xs font-bold tracking-widest uppercase transition-all cursor-pointer">
+                Correo →
+              </a>
+              <button (click)="nuevaConsulta()" class="px-7 py-3.5 rounded-2xl bg-neutral-50 border-2 border-neutral-200 text-neutral-900 text-xs font-mono font-bold uppercase tracking-widest hover:bg-neutral-900 hover:text-white transition-all cursor-pointer">
+                Nueva Consulta
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Columna Canales (4 cols) — Estilo celdas Misión Section -->
+        <div class="lg:col-span-4 flex flex-col divide-y-2 divide-neutral-200">
+
+          <!-- Badge -->
+          <div class="px-8 py-7">
+            <span class="font-mono text-xs tracking-[0.3em] text-neutral-400 font-semibold uppercase block">
+              CANALES OFICIALES
+            </span>
+          </div>
+
+          <!-- WhatsApp -->
+          <a href="https://wa.me/573108459210?text=Hola%20Sysmicon%2C%20deseo%20informaci%C3%B3n%20sobre%20un%20proyecto"
+             target="_blank" rel="noopener noreferrer"
+             class="group flex flex-col gap-3 px-8 py-10 sm:py-12 bg-white hover:bg-neutral-900 transition-all duration-300 cursor-pointer select-none">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-neutral-700 group-hover:text-white flex-shrink-0 transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 1.636 6.015L.195 23.518l5.656-1.484A11.95 11.95 0 0 0 11.944 24C18.575 24 24 18.627 24 12S18.575 0 11.944 0zm5.457 14.52c-.299-.15-1.768-.872-2.042-.971-.274-.1-.474-.15-.674.15-.2.299-.774.971-.949 1.171-.174.2-.349.224-.648.075-.3-.15-1.263-.465-2.404-1.482-.888-.792-1.488-1.769-1.663-2.068-.175-.3-.018-.462.132-.611.135-.135.299-.35.449-.524.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.674-1.624-.924-2.224-.243-.585-.49-.505-.674-.515l-.574-.01c-.2 0-.524.075-.799.375-.274.3-1.048 1.024-1.048 2.497 0 1.474 1.073 2.898 1.223 3.098.15.2 2.112 3.223 5.116 4.522.715.309 1.274.494 1.708.632.718.228 1.371.196 1.889.119.578-.086 1.768-.723 2.017-1.422.249-.699.249-1.299.174-1.423-.075-.124-.274-.199-.574-.349z"/>
+              </svg>
+              <span class="font-mono text-[10px] tracking-[0.25em] text-neutral-400 group-hover:text-neutral-400 uppercase font-bold">WHATSAPP</span>
+            </div>
+            <span class="font-serif text-2xl sm:text-3xl font-bold text-neutral-900 group-hover:text-white transition-colors leading-tight">+57 (310) 845-9210</span>
+            <span class="font-mono text-[10px] tracking-wider text-neutral-400 group-hover:text-neutral-500 uppercase">Respuesta instantánea →</span>
+          </a>
+
+          <!-- Correo -->
+          <a href="mailto:redes.sysmicon@gmail.com?subject=Cotizaci%C3%B3n%20de%20proyecto%20arquitect%C3%B3nico"
+             class="group flex flex-col gap-3 px-8 py-10 sm:py-12 bg-neutral-50 hover:bg-neutral-900 transition-all duration-300 cursor-pointer select-none flex-1">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-neutral-700 group-hover:text-white flex-shrink-0 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <span class="font-mono text-[10px] tracking-[0.25em] text-neutral-400 group-hover:text-neutral-400 uppercase font-bold">CORREO ELECTRÓNICO</span>
+            </div>
+            <span class="font-serif text-xl sm:text-2xl font-bold text-neutral-900 group-hover:text-white transition-colors leading-tight break-all">redes.sysmicon&#64;gmail.com</span>
+            <span class="font-mono text-[10px] tracking-wider text-neutral-400 group-hover:text-neutral-500 uppercase">Escribir correo →</span>
+          </a>
+
+        </div>
+
+      </div>
+
     </div>
-  </div>
+  </section>
 
 </div>

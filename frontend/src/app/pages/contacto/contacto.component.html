@@ -1,117 +1,156 @@
-<div class="contacto-page section-padding">
-  <div class="container">
+<div class="contacto-page min-h-screen bg-white text-neutral-900 py-20 sm:py-28 font-sans">
+  <div class="max-w-[1500px] mx-auto px-6 sm:px-12 lg:px-16">
     
-    <!-- Hero Header -->
-    <div class="page-header text-center" *ngIf="!isSubmitted()" data-aos="fade-up">
-      <div class="section-tag font-sans">
-        <span class="tag-line"></span>
-        <span>Atención Exclusiva</span>
-        <span class="tag-line"></span>
-      </div>
-      <h1 class="title-xl font-serif">
-        Iniciar una <span class="text-accent font-serif">Conversación</span>
+    <!-- Hero Header Ultra-Limpio -->
+    <div class="text-left max-w-3xl mb-16" *ngIf="!isSubmitted()">
+      <span class="font-mono text-xs tracking-[0.3em] text-neutral-400 font-semibold uppercase block mb-3">
+        CONTACTO DIRECTO
+      </span>
+      <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-neutral-900 font-bold leading-[1.1] tracking-tight uppercase mb-4">
+        HABLA CON UN EXPERTO Y <span class="font-serif italic font-normal text-neutral-500">AGENDA TU CITA</span>
       </h1>
-      <p class="subtitle mx-auto">
-        Estamos listos para materializar tu visión arquitectónica. Contáctanos por nuestro canal oficial o agenda una sesión de evaluación de tu proyecto.
+      <p class="font-sans text-base sm:text-lg text-neutral-600 leading-relaxed font-light">
+        Nuestros arquitectos e ingenieros están listos para asesorarte. Agenda una consulta de viabilidad técnica y presupuestal sin costo.
       </p>
     </div>
 
-    <!-- Main Grid -->
-    <div class="contact-grid grid-2" *ngIf="!isSubmitted()">
+    <!-- Main Contact Grid (Cols 12) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start" *ngIf="!isSubmitted()">
       
-      <!-- Contact Info & Socials -->
-      <div class="contact-info-panel" data-aos="fade-up">
-        <div class="info-box glass-card">
-          <h2 class="title-md font-serif">Nuestras Oficinas & Dirección</h2>
-          <div class="divider-wood"></div>
-          
-          <ul class="info-list">
-            <li>
-              <span class="icon">📍</span>
-              <div class="txt">
-                <strong class="font-serif">Oficina Principal Medellín</strong>
-                <span>{{ contact.address }}</span>
-              </div>
-            </li>
+      <!-- Columna Izquierda: Enlaces Directos Elegantes (Cols 1-5) -->
+      <div class="lg:col-span-5 space-y-6">
+        <span class="font-mono text-xs tracking-widest text-neutral-400 uppercase font-semibold block mb-4">
+          CANALES OFICIALES DE ATENCIÓN:
+        </span>
 
-            <li>
-              <span class="icon">📞</span>
-              <div class="txt">
-                <strong class="font-serif">Atención Telefónica / WhatsApp</strong>
-                <a [href]="'tel:' + contact.phone">{{ contact.phone }}</a>
-              </div>
-            </li>
-
-            <li>
-              <span class="icon">✉️</span>
-              <div class="txt">
-                <strong class="font-serif">Correo Electrónico Oficial</strong>
-                <a [href]="'mailto:' + contact.email">{{ contact.email }}</a>
-              </div>
-            </li>
-
-            <li>
-              <span class="icon">🕒</span>
-              <div class="txt">
-                <strong class="font-serif">Horario de Consultas</strong>
-                <span>{{ contact.hours }}</span>
-              </div>
-            </li>
-          </ul>
-
-          <div class="social-box">
-            <h3 class="social-title font-serif">Conéctate en Redes</h3>
-            <p class="social-sub">Descubre el detrás de cámaras de nuestras obras y maquetajes en tiempo real:</p>
-            <div class="social-links">
-              <a [href]="contact.instagram" target="_blank" rel="noopener noreferrer" class="social-btn instagram">
-                <span>📸 Instagram</span>
-                <strong>{{ contact.instagramHandle }}</strong>
-              </a>
-              <a [href]="contact.linkedin" target="_blank" rel="noopener noreferrer" class="social-btn">
-                <span>💼 LinkedIn</span>
-                <strong>Sysmicon</strong>
-              </a>
+        <!-- WhatsApp Directo Card -->
+        <a href="https://wa.me/573108459210?text=Hola%20Sysmicon,%20deseo%20agendar%20una%20cita%20para%20un%20proyecto" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="group flex items-center justify-between p-6 rounded-2xl bg-neutral-50 hover:bg-black text-neutral-900 hover:text-white border border-neutral-200/80 transition-all duration-300 shadow-xs cursor-pointer">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-white group-hover:bg-neutral-800 flex items-center justify-center text-xl shrink-0 transition-colors shadow-xs">
+              💬
+            </div>
+            <div>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-neutral-400 group-hover:text-neutral-400 font-semibold block">WhatsApp Instantáneo</span>
+              <strong class="font-sans text-base font-bold tracking-wide">+57 (310) 845-9210</strong>
             </div>
           </div>
+          <svg class="w-5 h-5 text-neutral-400 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+        </a>
+
+        <!-- Llamada Directa Card -->
+        <a href="tel:+573108459210" 
+           class="group flex items-center justify-between p-6 rounded-2xl bg-neutral-50 hover:bg-black text-neutral-900 hover:text-white border border-neutral-200/80 transition-all duration-300 shadow-xs cursor-pointer">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-white group-hover:bg-neutral-800 flex items-center justify-center text-xl shrink-0 transition-colors shadow-xs">
+              📞
+            </div>
+            <div>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-neutral-400 group-hover:text-neutral-400 font-semibold block">Línea Telefónica</span>
+              <strong class="font-sans text-base font-bold tracking-wide">+57 (310) 845-9210</strong>
+            </div>
+          </div>
+          <svg class="w-5 h-5 text-neutral-400 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+        </a>
+
+        <!-- Correo Electrónico Card -->
+        <a href="mailto:direccion@sysmicon.com" 
+           class="group flex items-center justify-between p-6 rounded-2xl bg-neutral-50 hover:bg-black text-neutral-900 hover:text-white border border-neutral-200/80 transition-all duration-300 shadow-xs cursor-pointer">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-white group-hover:bg-neutral-800 flex items-center justify-center text-xl shrink-0 transition-colors shadow-xs">
+              ✉️
+            </div>
+            <div>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-neutral-400 group-hover:text-neutral-400 font-semibold block">Correo Electrónico</span>
+              <strong class="font-sans text-base font-bold tracking-wide">direccion&#64;sysmicon.com</strong>
+            </div>
+          </div>
+          <svg class="w-5 h-5 text-neutral-400 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+        </a>
+
+        <!-- Ubicación Oficina Card -->
+        <div class="p-6 rounded-2xl bg-neutral-50 border border-neutral-200/80 space-y-2">
+          <div class="flex items-center gap-3 text-neutral-400 font-mono text-[10px] uppercase tracking-widest font-semibold">
+            <span>📍 UBICACIÓN & SEDES</span>
+          </div>
+          <p class="font-serif text-lg font-bold text-neutral-900 leading-snug uppercase">
+            Medellín & Llanogrande, Colombia
+          </p>
+          <p class="font-sans text-sm text-neutral-500 font-light">
+            Atención presencial en oficina o en sitio de obra con previa agenda.
+          </p>
         </div>
 
-        <!-- Simulated Interactive Map Preview -->
-        <div class="map-preview glass-card">
-          <div class="map-overlay">
-            <span class="map-badge font-sans">📍 El Poblado / Llanogrande, Medellín</span>
-            <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="map-btn">Abrir en Google Maps →</a>
-          </div>
+        <!-- Redes Sociales Elegantes -->
+        <div class="pt-2 flex items-center gap-4">
+          <a href="https://www.instagram.com/sysmicon/" target="_blank" rel="noopener noreferrer" 
+             class="flex-1 inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-neutral-100 hover:bg-black text-neutral-900 hover:text-white border border-neutral-200 font-mono text-xs uppercase tracking-wider transition-all duration-300">
+            <span>📸 Instagram</span>
+          </a>
+          <a href="https://www.linkedin.com/company/sysmicon/" target="_blank" rel="noopener noreferrer" 
+             class="flex-1 inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-neutral-100 hover:bg-black text-neutral-900 hover:text-white border border-neutral-200 font-mono text-xs uppercase tracking-wider transition-all duration-300">
+            <span>💼 LinkedIn</span>
+          </a>
         </div>
       </div>
 
-      <!-- Contact Form -->
-      <div class="contact-form-panel glass-panel" data-aos="fade-up" data-aos-delay="100">
-        <h2 class="form-title font-serif">Formulario de Contacto Directo</h2>
-        <p class="form-desc">Completa los datos de tu proyecto. Te garantizamos absoluta confidencialidad y una respuesta formalizada en 24 horas hábiles.</p>
-        <div class="divider-wood"></div>
+      <!-- Columna Derecha: Formulario Agendar Cita Ultra-Limpio (Cols 6-12) -->
+      <div class="lg:col-span-7 bg-neutral-50/60 rounded-[32px] border border-neutral-200/90 p-8 sm:p-12">
+        <div class="mb-8">
+          <span class="font-mono text-xs tracking-widest text-neutral-400 uppercase font-semibold block mb-1">
+            FORMULARIO DIRECTO
+          </span>
+          <h3 class="font-serif text-2xl sm:text-3xl text-neutral-900 font-bold uppercase leading-tight">
+            SOLICITA TU CITA DE ASESORÍA
+          </h3>
+          <p class="font-sans text-sm text-neutral-600 font-light pt-1">
+            Garantizamos respuesta formalizada en menos de 24 horas hábiles.
+          </p>
+        </div>
 
-        <form (submit)="onSubmitContacto($event)" class="main-form">
-          <div class="form-group">
-            <label class="form-label font-serif">Nombre Completo *</label>
-            <input type="text" [(ngModel)]="nombre" name="nombre" required placeholder="Ej: Arq. Fernando Morales / Sra. Camila Gómez" class="form-input">
+        <form (submit)="onSubmitContacto($event)" class="space-y-6">
+          
+          <!-- Nombre Completo -->
+          <div class="space-y-2">
+            <label class="block font-mono text-xs uppercase tracking-widest text-neutral-700 font-semibold">
+              Nombre Completo *
+            </label>
+            <input type="text" [(ngModel)]="nombre" name="nombre" required 
+                   placeholder="Ej: Arq. Carlos Rodríguez" 
+                   class="w-full px-5 py-4 rounded-xl bg-white border border-neutral-300 text-neutral-900 placeholder:text-neutral-400 focus:border-black focus:outline-none transition-all text-sm font-sans">
           </div>
 
-          <div class="grid-2 form-row">
-            <div class="form-group">
-              <label class="form-label font-serif">Correo Electrónico *</label>
-              <input type="email" [(ngModel)]="email" name="email" required placeholder="correo@empresa.com" class="form-input">
+          <!-- Correo & Teléfono Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="space-y-2">
+              <label class="block font-mono text-xs uppercase tracking-widest text-neutral-700 font-semibold">
+                Correo Electrónico *
+              </label>
+              <input type="email" [(ngModel)]="email" name="email" required 
+                     placeholder="correo@empresa.com" 
+                     class="w-full px-5 py-4 rounded-xl bg-white border border-neutral-300 text-neutral-900 placeholder:text-neutral-400 focus:border-black focus:outline-none transition-all text-sm font-sans">
             </div>
 
-            <div class="form-group">
-              <label class="form-label font-serif">Teléfono de Contacto *</label>
-              <input type="tel" [(ngModel)]="telefono" name="telefono" required placeholder="+57 310 845 9210" class="form-input">
+            <div class="space-y-2">
+              <label class="block font-mono text-xs uppercase tracking-widest text-neutral-700 font-semibold">
+                Teléfono / WhatsApp *
+              </label>
+              <input type="tel" [(ngModel)]="telefono" name="telefono" required 
+                     placeholder="+57 310 845 9210" 
+                     class="w-full px-5 py-4 rounded-xl bg-white border border-neutral-300 text-neutral-900 placeholder:text-neutral-400 focus:border-black focus:outline-none transition-all text-sm font-sans">
             </div>
           </div>
 
-          <div class="grid-2 form-row">
-            <div class="form-group">
-              <label class="form-label font-serif">Tipo de Servicio Solicitado</label>
-              <select [(ngModel)]="tipoServicio" name="servicio" class="select-input">
+          <!-- Tipo Servicio & Presupuesto Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="space-y-2">
+              <label class="block font-mono text-xs uppercase tracking-widest text-neutral-700 font-semibold">
+                Servicio Solicitado
+              </label>
+              <select [(ngModel)]="tipoServicio" name="servicio" 
+                      class="w-full px-5 py-4 rounded-xl bg-white border border-neutral-300 text-neutral-900 focus:border-black focus:outline-none transition-all text-sm font-sans">
                 <option value="Diseño Arquitectónico">Diseño Arquitectónico</option>
                 <option value="Construcción Integral">Construcción Integral</option>
                 <option value="Remodelación Premium">Remodelación Premium</option>
@@ -120,63 +159,86 @@
               </select>
             </div>
 
-            <div class="form-group">
-              <label class="form-label font-serif">Rango de Inversión Estimado</label>
-              <select [(ngModel)]="presupuestoAprox" name="presupuesto" class="select-input">
+            <div class="space-y-2">
+              <label class="block font-mono text-xs uppercase tracking-widest text-neutral-700 font-semibold">
+                Presupuesto Estimado
+              </label>
+              <select [(ngModel)]="presupuestoAprox" name="presupuesto" 
+                      class="w-full px-5 py-4 rounded-xl bg-white border border-neutral-300 text-neutral-900 focus:border-black focus:outline-none transition-all text-sm font-sans">
                 <option value="$100,000 - $250,000 USD">$100,000 – $250,000 USD</option>
                 <option value="$250,000 - $500,000 USD">$250,000 – $500,000 USD</option>
                 <option value="$500,000 - $1,000,000 USD">$500,000 – $1,000,000 USD</option>
-                <option value="Más de $1,000,000 USD">Más de $1,000,000 USD (Residencia High-End)</option>
+                <option value="Más de $1,000,000 USD">Más de $1,000,000 USD (High-End)</option>
               </select>
             </div>
           </div>
 
-          <div class="form-group">
-            <label class="form-label font-serif">Ubicación / Municipio del Terreno o Propiedad</label>
-            <input type="text" [(ngModel)]="ubicacionProyecto" name="ubicacion" placeholder="Ej: Llanogrande, Alto de las Palmas, Chía, Cartagena..." class="form-input">
+          <!-- Ubicación Terreno -->
+          <div class="space-y-2">
+            <label class="block font-mono text-xs uppercase tracking-widest text-neutral-700 font-semibold">
+              Ubicación del Terreno o Propiedad
+            </label>
+            <input type="text" [(ngModel)]="ubicacionProyecto" name="ubicacion" 
+                   placeholder="Ej: Llanogrande, El Retiro, Alto de las Palmas, Cartagena..." 
+                   class="w-full px-5 py-4 rounded-xl bg-white border border-neutral-300 text-neutral-900 placeholder:text-neutral-400 focus:border-black focus:outline-none transition-all text-sm font-sans">
           </div>
 
-          <div class="form-group">
-            <label class="form-label font-serif">Mensaje o Detalles del Proyecto *</label>
-            <textarea [(ngModel)]="mensaje" name="mensaje" rows="4" required placeholder="Cuéntanos cuál es tu visión, qué características valoras más en tu hogar o qué dudas técnicas tienes..." class="form-input"></textarea>
+          <!-- Mensaje -->
+          <div class="space-y-2">
+            <label class="block font-mono text-xs uppercase tracking-widest text-neutral-700 font-semibold">
+              Mensaje o Detalles del Proyecto *
+            </label>
+            <textarea [(ngModel)]="mensaje" name="mensaje" rows="4" required 
+                      placeholder="Cuéntanos cuál es tu visión, área estimada, dudas técnicas..." 
+                      class="w-full px-5 py-4 rounded-xl bg-white border border-neutral-300 text-neutral-900 placeholder:text-neutral-400 focus:border-black focus:outline-none transition-all text-sm font-sans"></textarea>
           </div>
 
-          <div class="form-group checkbox-group">
-            <label class="checkbox-label">
-              <input type="checkbox" [(ngModel)]="aceptaPoliticas" name="politicas" required>
-              <span>Acepto la política de tratamiento de datos personales y confirmo que la información proporcionada es veraz. *</span>
+          <!-- Checkbox Políticas -->
+          <div class="pt-2">
+            <label class="inline-flex items-start gap-3 text-xs text-neutral-600 font-light cursor-pointer select-none">
+              <input type="checkbox" [(ngModel)]="aceptaPoliticas" name="politicas" required 
+                     class="mt-0.5 rounded border-neutral-300 text-black focus:ring-black">
+              <span>Acepto la política de tratamiento de datos personales (Habeas Data). *</span>
             </label>
           </div>
 
-          <button type="submit" [disabled]="!nombre.trim() || !email.includes('@') || !telefono.trim() || !aceptaPoliticas" class="btn-primary btn-full submit-btn">
-            <span>Enviar Mensaje a Sysmicon</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-          </button>
+          <!-- Submit Button Píldora Negra -->
+          <div class="pt-4">
+            <button type="submit" 
+                    [disabled]="!nombre.trim() || !email.includes('@') || !telefono.trim() || !aceptaPoliticas" 
+                    class="group inline-flex items-center gap-3 px-9 py-4 rounded-full bg-black text-white font-bold text-xs uppercase tracking-widest hover:bg-neutral-800 hover:scale-105 transition-all duration-300 shadow-sm cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
+              <span>Agendar Cita</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+
         </form>
       </div>
+
     </div>
 
     <!-- PANTALLA DE ÉXITO CONTACTO -->
-    <div *ngIf="isSubmitted()" class="success-screen glass-panel animate-fade text-center">
-      <div class="success-icon">📬</div>
-      <h2 class="title-lg font-serif">¡Mensaje Recibido en <span class="text-accent font-serif">Sysmicon</span>!</h2>
-      <div class="divider-wood mx-auto"></div>
-      
-      <p class="success-txt mx-auto">
-        Muchas gracias por comunicarte con nosotros, <strong>{{ nombre }}</strong>. Hemos registrado tu interés en 
-        <strong>"{{ tipoServicio }}"</strong>.
+    <div *ngIf="isSubmitted()" class="max-w-2xl mx-auto text-center py-16 space-y-6">
+      <div class="w-20 h-20 rounded-full bg-neutral-100 text-black flex items-center justify-center text-3xl mx-auto shadow-sm">
+        ✓
+      </div>
+      <span class="font-mono text-xs uppercase tracking-widest text-neutral-400 font-semibold block">
+        SOLICITUD RECIBIDA CON ÉXITO
+      </span>
+      <h2 class="font-serif text-4xl sm:text-5xl font-bold text-neutral-900 uppercase">
+        ¡GRACIAS POR CONTACTARNOS!
+      </h2>
+      <p class="font-sans text-neutral-600 text-base sm:text-lg font-light leading-relaxed">
+        Muchas gracias, <strong>{{ nombre }}</strong>. Hemos registrado tu interés en 
+        <strong>"{{ tipoServicio }}"</strong>. Nuestro equipo directivo se comunicará contigo en breve al teléfono <strong>{{ telefono }}</strong> o correo <strong>{{ email }}</strong>.
       </p>
 
-      <p class="success-sub">
-        Nuestro equipo de dirección técnica revisará tu mensaje y se comunicará al teléfono <strong>{{ telefono }}</strong> o al correo <strong>{{ email }}</strong> en el transcurso de las próximas horas para coordinar nuestra primera sesión de trabajo.
-      </p>
-
-      <div class="success-actions">
-        <button (click)="resetForm()" class="btn-secondary">
+      <div class="pt-6 flex items-center justify-center gap-4">
+        <button (click)="resetForm()" class="px-8 py-4 rounded-full bg-black text-white font-bold text-xs uppercase tracking-widest hover:bg-neutral-800 transition-all cursor-pointer">
           <span>Enviar Otro Mensaje</span>
         </button>
-        <a href="https://www.instagram.com/sysmicon/" target="_blank" class="btn-primary">
-          <span>Visitar Instagram &#64;sysmicon</span>
+        <a href="https://www.instagram.com/sysmicon/" target="_blank" class="px-8 py-4 rounded-full bg-neutral-100 text-neutral-900 border border-neutral-300 font-bold text-xs uppercase tracking-widest hover:bg-black hover:text-white transition-all cursor-pointer">
+          <span>Ver Instagram</span>
         </a>
       </div>
     </div>

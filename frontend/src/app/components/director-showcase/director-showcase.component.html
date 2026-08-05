@@ -1,105 +1,80 @@
-<section class="director-section py-20 md:py-28 bg-[#000814] text-white border-y border-[#C2E1FF]/20 relative overflow-hidden flex items-center">
-  <!-- Líneas de corte arquitectónico elegantes en los extremos superior e inferior -->
-  <div class="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#C2E1FF]/50 to-transparent pointer-events-none"></div>
-  <div class="absolute bottom-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#C2E1FF]/50 to-transparent pointer-events-none"></div>
-
-  <!-- Guías de plano CAD en los laterales con crucetas "+" -->
-  <div class="absolute top-0 left-6 md:left-16 bottom-0 w-[1px] bg-white/[0.08] pointer-events-none hidden sm:block"></div>
-  <div class="absolute top-0 right-6 md:right-16 bottom-0 w-[1px] bg-white/[0.08] pointer-events-none hidden sm:block"></div>
-
-  <div class="absolute top-4 left-6 md:left-16 text-[10px] font-mono text-[#C2E1FF]/40 pointer-events-none hidden sm:block select-none">+ CAD 01</div>
-  <div class="absolute top-4 right-6 md:right-16 text-[10px] font-mono text-[#C2E1FF]/40 pointer-events-none hidden sm:block select-none">+ CAD 02</div>
-  <div class="absolute bottom-4 left-6 md:left-16 text-[10px] font-mono text-[#C2E1FF]/40 pointer-events-none hidden sm:block select-none">+ GRID 01</div>
-  <div class="absolute bottom-4 right-6 md:right-16 text-[10px] font-mono text-[#C2E1FF]/40 pointer-events-none hidden sm:block select-none">+ GRID 02</div>
-
-  <!-- Luces ambientales de fondo -->
-  <div class="absolute -top-32 left-1/3 w-[650px] h-[650px] rounded-full bg-[#002345]/30 blur-[180px] pointer-events-none"></div>
-  <div class="absolute bottom-0 right-10 w-[550px] h-[550px] rounded-full bg-[#C2E1FF]/10 blur-[160px] pointer-events-none"></div>
-
-  <div class="w-full max-w-[1600px] mx-auto px-6 sm:px-12 lg:px-16 relative z-10 my-auto">
+<section class="director-section py-20 md:py-28 bg-white text-neutral-900 flex items-center">
+  <div class="w-full max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-16">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
       
-      <!-- COLUMNA FOTOGRÁFICA EDITORIAL (Cols 1-5) -->
-      <div class="lg:col-span-5 flex justify-center" data-aos="fade-right">
-        <div class="relative w-full max-w-[540px]">
-          
-          <!-- Marco exterior sutil con estilo plano técnico -->
-          <div class="absolute -top-4 -left-4 w-full h-full border border-[#C2E1FF]/30 rounded-2xl pointer-events-none hidden sm:block"></div>
-          
-          <!-- Contenedor Principal de la Imagen -->
-          <div class="relative z-10 w-full h-[540px] sm:h-[620px] lg:h-[660px] overflow-hidden rounded-2xl bg-[#001226] border border-white/20 shadow-[0_30px_70px_rgba(0,0,0,0.9)] group">
-            <img src="assets/images/juanmoreno.jpg" 
-                 alt="JUAN MORENO - INGENIERO CIVIL" 
-                 class="w-full h-full object-cover object-top filter contrast-[1.04] transition-transform duration-1000 group-hover:scale-105"
-                 onerror="this.src='https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_800/v1785440109/243315d3-e0c8-4791-8f0a-b341587e1c70_eshvqt.jpg'">
-            
-            <div class="absolute inset-0 bg-gradient-to-t from-[#000814] via-[#000814]/20 to-transparent opacity-85 pointer-events-none"></div>
-            
-            <!-- Badge superior flotante -->
-            <div class="absolute top-5 left-5 z-20">
-              <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/70 border border-[#C2E1FF]/40 text-[#C2E1FF] font-mono text-[10px] tracking-[0.2em] uppercase backdrop-blur-md">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse"></span>
-                <span>DIRECCIÓN TÉCNICA SENIOR</span>
-              </span>
-            </div>
+      <!-- FOTO DEL DIRECTOR (Entrada desde la izquierda) -->
+      <div class="lg:col-span-5 flex flex-col items-start" 
+           data-aos="fade-right" 
+           data-aos-duration="1000" 
+           data-aos-easing="ease-out-cubic">
+        
+        <!-- Imagen Directa sin contenedores pesados ni sombras -->
+        <img src="assets/images/juanmoreno.jpg" 
+             alt="JUAN MORENO - INGENIERO CIVIL" 
+             class="w-full max-w-[420px] h-[440px] sm:h-[500px] object-cover object-top rounded-2xl"
+             onerror="this.src='https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_800/v1785440109/243315d3-e0c8-4791-8f0a-b341587e1c70_eshvqt.jpg'">
 
-            <!-- Etiqueta técnica e identificación inferior -->
-            <div class="absolute bottom-6 left-6 right-6 z-20 space-y-2 text-left">
-              <h4 class="font-serif text-2xl font-bold text-white tracking-wide uppercase drop-shadow">JUAN MORENO</h4>
-              <p class="font-mono text-xs text-[#C2E1FF] tracking-[0.25em] uppercase font-semibold">
-                INGENIERO CIVIL • FUNDADOR
-              </p>
-              <div class="w-16 h-[2px] bg-[#C2E1FF]"></div>
-            </div>
-          </div>
-
+        <!-- Pie de foto limpio -->
+        <div class="mt-3.5 space-y-0.5 text-left">
+          <h3 class="font-serif text-lg font-bold text-neutral-900 uppercase tracking-wide">JUAN MORENO</h3>
+          <p class="font-sans text-xs text-neutral-500 font-medium tracking-wider uppercase">INGENIERO CIVIL • FUNDADOR</p>
         </div>
+
       </div>
 
-      <!-- COLUMNA DERECHA: TEXTO EDITORIAL & MÉTRICAS (Cols 6-12) -->
-      <div class="lg:col-span-7 flex flex-col justify-center space-y-8 text-left" data-aos="fade-left">
+      <!-- TEXTO & BOTONES (Entrada desde la derecha) -->
+      <div class="lg:col-span-7 flex flex-col justify-center space-y-8 text-left">
         
-        <!-- Header & Tag -->
-        <div class="space-y-3">
-          <div class="inline-flex items-center gap-3">
-            <span class="w-10 h-[1px] bg-[#C2E1FF]"></span>
-            <span class="font-mono text-xs md:text-sm tracking-[0.35em] text-[#C2E1FF] font-bold uppercase">
-              LIDERAZGO & RIGOR TÉCNICO
-            </span>
-          </div>
+        <!-- Subtítulo & Título Principal -->
+        <div data-aos="fade-left" 
+             data-aos-duration="900" 
+             data-aos-delay="100"
+             data-aos-easing="ease-out-cubic"
+             class="space-y-3">
+          <span class="font-sans text-xs tracking-[0.25em] text-neutral-400 font-bold uppercase block">
+            LIDERAZGO & RIGOR TÉCNICO
+          </span>
 
-          <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white uppercase tracking-tight leading-tight">
-            Ingeniería de Excelencia <span class="font-serif italic font-normal text-[#C2E1FF]">sin Concesiones</span>
+          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-900 uppercase tracking-tight leading-tight">
+            Ingeniería de Excelencia <span class="font-serif italic font-normal text-neutral-500">sin Concesiones</span>
           </h2>
         </div>
 
-        <!-- Cita Editorial del Director -->
-        <div class="relative pl-6 border-l-2 border-[#C2E1FF]">
-          <p class="font-serif italic text-lg sm:text-xl md:text-2xl text-white/95 font-light leading-relaxed">
-            "En Sysmicon entendemos que la arquitectura trasciende la estética: es rigor técnico, responsabilidad presupuestal y liderazgo integral. Cada residencia que construimos es un testimonio de precisión estructural y elegancia perdurable."
+        <!-- Cita del Director -->
+        <div class="pl-5 border-l-2 border-neutral-900 space-y-2" 
+             data-aos="fade-left" 
+             data-aos-duration="1000" 
+             data-aos-delay="200"
+             data-aos-easing="ease-out-cubic">
+          <p class="font-serif italic text-lg sm:text-xl text-neutral-800 font-light leading-relaxed">
+            "Cada residencia que construimos es un testimonio de precisión estructural, rigor técnico y elegancia perdurable."
           </p>
-          <span class="block font-mono text-xs text-gray-400 tracking-widest uppercase mt-3">
-            — Ing. Juan Moreno, Director General de Sysmicon
+          <span class="block font-sans text-xs text-neutral-500 font-medium uppercase tracking-wider">
+            — Ing. Juan Moreno, Director General
           </span>
         </div>
 
-        <!-- Botones de Acción Directa -->
-        <div class="pt-2 flex flex-wrap items-center gap-4">
-          <a routerLink="/proyectos"
-             class="group inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-300 font-sans text-xs font-bold tracking-[0.22em] uppercase cursor-pointer shadow-2xl hover:scale-105">
-            <span>VER PORTAFOLIO DE OBRAS</span>
-            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <!-- Botones Estilo WordPress / Framer Minimalista -->
+        <div class="pt-2 flex flex-wrap items-center gap-3.5" 
+             data-aos="fade-left" 
+             data-aos-duration="1100" 
+             data-aos-delay="350"
+             data-aos-easing="ease-out-cubic">
+          <a routerLink="/cotiza-con-nosotros"
+             class="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-black text-white hover:bg-neutral-800 transition-all duration-300 font-sans text-xs font-bold tracking-widest uppercase cursor-pointer">
+            <span>COTIZAR TU PROYECTO</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
             </svg>
           </a>
 
-          <a routerLink="/cotiza-con-nosotros"
-             class="group inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-transparent hover:bg-white/10 text-white border border-white/20 hover:border-white/50 backdrop-blur-md transition-all duration-300 font-sans text-xs font-semibold tracking-[0.2em] uppercase cursor-pointer">
-            <span>COTIZAR TU PROYECTO</span>
+          <a routerLink="/proyectos"
+             class="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-transparent hover:bg-neutral-100 text-neutral-900 border border-neutral-300 transition-all duration-300 font-sans text-xs font-semibold tracking-widest uppercase cursor-pointer">
+            <span>VER PROYECTOS</span>
           </a>
 
           <a routerLink="/contacto"
-             class="group inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-transparent hover:bg-white/10 text-[#C2E1FF] border border-[#C2E1FF]/30 hover:border-[#C2E1FF] backdrop-blur-md transition-all duration-300 font-sans text-xs font-semibold tracking-[0.2em] uppercase cursor-pointer">
+             class="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-transparent hover:bg-neutral-100 text-neutral-900 border border-neutral-300 transition-all duration-300 font-sans text-xs font-semibold tracking-widest uppercase cursor-pointer">
             <span>AGENDAR CITA</span>
           </a>
         </div>

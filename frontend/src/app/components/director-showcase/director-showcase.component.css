@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SYSMICON - DIRECTOR SHOWCASE COMPONENT (ESTILO VIP ARQUITECTÓNICO)
+   SYSMICON - DIRECTOR SHOWCASE COMPONENT (ESTILO VIP EDITORIAL)
    ========================================================================== */
 
 .director-section {
@@ -11,9 +11,17 @@
   -webkit-backface-visibility: hidden;
 }
 
+/* Optimización para animaciones laterales súper fluidas */
+[data-aos="fade-right"],
+[data-aos="fade-left"] {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
 @media (max-width: 640px) {
   .director-section {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
   }
 }
+

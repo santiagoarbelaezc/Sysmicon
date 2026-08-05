@@ -1,28 +1,22 @@
-<div class="service-card-wrapper rounded-2xl border border-black/15 bg-white shadow-[0_15px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.1)] transition-all duration-500 overflow-hidden relative group" data-aos="fade-up">
+<div class="service-card-wrapper rounded-3xl border border-neutral-200 bg-white shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden relative group">
   
   <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[480px] lg:min-h-[520px]">
-    <!-- COLUMNA IMAGEN DE PROYECTO MAXIMIZADA CON FOTOS DE CASA L (Cols 1-7, Alternada por índice) -->
-    <div class="lg:col-span-7 relative overflow-hidden bg-[#000814] min-h-[420px] lg:min-h-full flex flex-col justify-center items-center p-6 group/img"
+    <!-- COLUMNA IMAGEN DE PROYECTO MAXIMIZADA (Cols 1-7, Alternada por índice) -->
+    <div class="lg:col-span-7 relative overflow-hidden bg-[#000814] min-h-[380px] lg:min-h-full flex flex-col justify-center items-center p-6 group/img"
          [ngClass]="{'order-1 lg:order-1': index % 2 === 0, 'order-1 lg:order-2': index % 2 !== 0}">
       
-      <!-- Imagen nativa de Casa L para renderizado nítido y rápido -->
+      <!-- Imagen nativa para renderizado nítido -->
       <img *ngIf="servicio.imagen" 
            [src]="servicio.imagen" 
            [alt]="servicio.titulo"
            class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] group-hover/img:scale-105 opacity-95">
 
       <!-- Gradiente elegante para contraste -->
-      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/50"></div>
-      
-      <!-- Trazos esquineros arquitectónicos puros -->
-      <div class="absolute top-6 left-6 w-8 h-8 border-t border-l border-white/35 pointer-events-none"></div>
-      <div class="absolute top-6 right-6 w-8 h-8 border-t border-r border-white/35 pointer-events-none"></div>
-      <div class="absolute bottom-6 left-6 w-8 h-8 border-b border-l border-white/35 pointer-events-none"></div>
-      <div class="absolute bottom-6 right-6 w-8 h-8 border-b border-r border-white/35 pointer-events-none"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40"></div>
 
       <!-- TÍTULO EDITORIAL EN EL CENTRO DE LA FOTO -->
       <div class="relative z-20 text-center px-6 pointer-events-none transition-transform duration-500 group-hover/img:scale-[1.03]">
-        <h3 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-light tracking-[0.2em] text-white uppercase drop-shadow-[0_12px_30px_rgba(0,0,0,0.95)]">
+        <h3 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-light tracking-[0.18em] text-white uppercase drop-shadow-[0_12px_30px_rgba(0,0,0,0.95)]">
           {{ servicio.titulo }}
         </h3>
       </div>
@@ -36,40 +30,36 @@
     </div>
 
     <!-- COLUMNA CONTENIDO CONTEXTUAL CONCENTRADO Y CONCISO (Cols 8-12) -->
-    <div class="lg:col-span-5 p-7 md:p-9 flex flex-col justify-between bg-white relative"
+    <div class="lg:col-span-5 p-7 md:p-10 flex flex-col justify-between bg-white relative"
          [ngClass]="{'order-2 lg:order-2': index % 2 === 0, 'order-2 lg:order-1': index % 2 !== 0}">
       
-      <!-- Detalle arquitectónico de esquina -->
-      <div class="absolute top-5 right-5 font-mono text-gray-300 text-xs pointer-events-none">+</div>
-
       <!-- Contenido conciso -->
       <div>
-        <p class="font-sans text-xs font-bold uppercase tracking-[0.18em] text-[#000814] mb-2 flex items-center gap-2">
-          <span class="w-6 h-[2px] bg-[#C2E1FF] inline-block"></span>
+        <span class="font-mono text-xs tracking-widest text-neutral-400 uppercase font-semibold block mb-2">
           {{ servicio.subtitulo }}
-        </p>
+        </span>
         
-        <h3 class="font-serif text-2xl md:text-3xl font-bold text-[#111111] mb-3 leading-tight">
+        <h3 class="font-serif text-2xl md:text-3xl font-bold text-neutral-900 mb-3 leading-tight uppercase">
           {{ servicio.titulo }}
         </h3>
         
-        <p class="font-sans text-gray-600 text-sm md:text-base leading-relaxed mb-6 font-light">
+        <p class="font-sans text-neutral-600 text-sm md:text-base leading-relaxed mb-6 font-light">
           {{ servicio.descripcion }}
         </p>
 
         <!-- Puntos clave ultraconcisos -->
         <div *ngIf="servicio.caracteristicas && servicio.caracteristicas.length > 0" class="flex flex-wrap gap-2 mb-6">
-          <span *ngFor="let item of servicio.caracteristicas" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F4F4F4] border border-black/10 text-xs font-medium text-[#111111] hover:bg-black hover:text-white transition-all">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#000814] shrink-0"></span>
+          <span *ngFor="let item of servicio.caracteristicas" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-100 border border-neutral-200 text-xs font-medium text-neutral-800 hover:bg-black hover:text-white transition-all cursor-default">
+            <span class="w-1.5 h-1.5 rounded-full bg-black shrink-0"></span>
             <span>{{ item }}</span>
           </span>
         </div>
       </div>
 
-      <!-- Botón CTA -->
-      <div class="pt-5 border-t border-black/10 flex items-center justify-start mt-auto">
+      <!-- Botón CTA Estilo Píldora Negra -->
+      <div class="pt-5 border-t border-neutral-100 flex items-center justify-start mt-auto">
         <a routerLink="/cotiza-con-nosotros" [queryParams]="{servicio: servicio.titulo}" 
-           class="inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl bg-[#000814] hover:bg-black text-white font-sans text-xs font-bold tracking-[0.16em] uppercase transition-all duration-300 hover:translate-x-1.5 shadow-lg hover:shadow-2xl">
+           class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-black hover:bg-neutral-800 text-white font-sans text-xs font-bold tracking-[0.18em] uppercase transition-all duration-300 hover:scale-105 shadow-sm cursor-pointer">
           <span>COTIZAR SERVICIO</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>

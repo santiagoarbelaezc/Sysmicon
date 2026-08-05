@@ -20,24 +20,25 @@
         [class.active]="activeIndex === i">
         
         <div class="text-content">
-          <!-- Subtle White Subtitle with Underline -->
-          <div class="subtitle-wrapper">
-            <p class="subtitle">{{ val.subtitle }}</p>
-            <div class="subtitle-underline"></div>
+          <!-- Subtítulo Monospaced Estilo Hero Video -->
+          <div class="subtitle-wrapper mb-3">
+            <span class="font-mono text-xs tracking-[0.3em] uppercase text-white/80 font-semibold block">
+              {{ val.subtitle }}
+            </span>
           </div>
 
-          <!-- Main Title Estilo Hero (Ligero en Blanco + Cursiva Azul Hielo) -->
-          <h2 class="title font-serif">
+          <!-- Título Principal Estilo Hero Video (Serif Ligero en Blanco + Cursiva Azul Hielo #C2E1FF) -->
+          <h2 class="title font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-tight leading-[1.05] drop-shadow-2xl mb-6">
             {{ val.title }} <span class="font-serif italic font-normal text-[#C2E1FF]">{{ val.titleHighlight }}</span>
           </h2>
           
           <!-- Description -->
-          <p *ngIf="val.description" class="description font-sans">{{ val.description }}</p>
+          <p *ngIf="val.description" class="description font-sans text-white/80 font-light text-base sm:text-lg max-w-2xl leading-relaxed mb-6">{{ val.description }}</p>
           
-          <!-- CTA Action — Estilo Exacto del Botón del Hero -->
+          <!-- Botón de Acción Estilo Exacto del Hero Video -->
           <div class="action-wrap" [class.show]="activeIndex === i">
             <a routerLink="/nosotros" class="group/btn inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-500 font-sans text-xs font-bold tracking-[0.24em] uppercase shadow-2xl hover:scale-105 cursor-pointer">
-              <span>CONOCE NUESTRA HISTORIA Y EQUIPO</span>
+              <span>Conoce nuestra historia y equipo</span>
               <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
               </svg>
@@ -60,79 +61,3 @@
 
   </section>
 </div>
-
-<!-- LÍNEA DE TIEMPO ARQUITECTÓNICA DE HISTORIA DE SYSMICON CON IMÁGENES DE PROYECTOS -->
-<section class="timeline-projects-section py-20 md:py-28 bg-[#001020] text-white border-t border-b border-white/10 relative overflow-hidden">
-  <!-- Rejilla y luces de acento -->
-  <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#FFF 1px, transparent 1px); background-size: 28px 28px;"></div>
-  <div class="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full bg-[#002345]/40 blur-[160px] pointer-events-none"></div>
-
-  <div class="max-w-[1700px] mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
-    
-    <!-- Encabezado de la Línea de Tiempo -->
-    <div class="text-center max-w-3xl mx-auto space-y-4 mb-16" data-aos="fade-up">
-      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/15 text-[#C2E1FF] font-mono text-[10px] tracking-[0.25em] uppercase">
-        <span class="w-1.5 h-1.5 rounded-full bg-[#C2E1FF] animate-ping"></span>
-        <span>EVOLUCIÓN ARQUITECTÓNICA • TRAYECTORIA</span>
-      </div>
-
-      <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-white uppercase tracking-tight">
-        Nuestra Historia a través de <span class="font-serif italic text-[#C2E1FF]">las Obras</span>
-      </h2>
-
-      <p class="font-sans text-sm sm:text-base text-gray-300 font-light leading-relaxed">
-        Desde 2018 hemos redefinido la arquitectura residencial en Colombia, trazando una evolución continua de excelencia técnica y espacial.
-      </p>
-    </div>
-
-    <!-- Rejilla de Hitos de la Línea de Tiempo con Tarjetas Fotográficas de Proyectos -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8">
-      <div *ngFor="let item of timelineEvents; let idx = index" 
-           class="timeline-card-item group flex flex-col bg-[#00172e] border border-white/10 hover:border-[#C2E1FF]/50 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 shadow-2xl"
-           data-aos="fade-up" 
-           [attr.data-aos-delay]="idx * 150">
-        
-        <!-- Imagen del Proyecto -->
-        <div class="relative h-56 w-full overflow-hidden bg-[#000814]">
-          <img [src]="item.image" [alt]="item.title" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#00172e] via-transparent to-transparent opacity-90"></div>
-          
-          <!-- Badge de Año -->
-          <div class="absolute top-4 left-4 bg-[#002345]/90 backdrop-blur-md border border-[#C2E1FF]/40 text-[#C2E1FF] font-serif text-xl font-bold px-3.5 py-1 rounded-xl shadow-lg">
-            {{ item.year }}
-          </div>
-
-          <!-- Tag de Proyecto -->
-          <div class="absolute bottom-3 left-4 text-[10px] font-mono text-[#C2E1FF] tracking-widest uppercase bg-black/60 px-2.5 py-1 rounded border border-white/10">
-            {{ item.projectTag }}
-          </div>
-        </div>
-
-        <!-- Contenido del Hito -->
-        <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-          <div class="space-y-2">
-            <h3 class="font-serif text-lg font-bold text-white group-hover:text-[#C2E1FF] transition-colors leading-snug">
-              {{ item.title }}
-            </h3>
-            <p class="font-mono text-[11px] text-[#C2E1FF]/80 uppercase tracking-wider font-semibold">
-              {{ item.subtitle }}
-            </p>
-            <p class="font-sans text-xs text-gray-300 leading-relaxed font-light pt-1">
-              {{ item.description }}
-            </p>
-          </div>
-
-          <div class="pt-2 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-gray-400">
-            <span>HITO 0{{ idx + 1 }}</span>
-            <span class="text-[#C2E1FF]">SYSMICON</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- SECCIÓN DIRECTOR SHOWCASE MEJORADA -->
-<app-director-showcase></app-director-showcase>

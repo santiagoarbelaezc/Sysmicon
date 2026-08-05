@@ -1,58 +1,27 @@
-<section class="config-banner relative w-full py-16 sm:py-20 lg:py-24 bg-white text-neutral-900 border-t border-b border-black/20 overflow-hidden font-sans">
-  <!-- Líneas superiores e inferiores principales de plano arquitectónico (Estilo Footer) -->
-  <div class="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-black/40 to-transparent"></div>
-  <div class="absolute bottom-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-black/40 to-transparent"></div>
-
-  <!-- Guías laterales verticales con crucetas "+" -->
-  <div class="absolute left-6 md:left-10 top-8 bottom-8 hidden lg:flex flex-col justify-between items-center pointer-events-none select-none z-20">
-    <span class="text-black/40 font-mono text-xs font-bold">+</span>
-    <div class="w-[1px] flex-1 bg-gradient-to-b from-transparent via-black/20 to-transparent my-6"></div>
-    <span class="text-black/40 font-mono text-xs font-bold">+</span>
-  </div>
-  <div class="absolute right-6 md:right-10 top-8 bottom-8 hidden lg:flex flex-col justify-between items-center pointer-events-none select-none z-20">
-    <span class="text-black/40 font-mono text-xs font-bold">+</span>
-    <div class="w-[1px] flex-1 bg-gradient-to-b from-transparent via-black/20 to-transparent my-6"></div>
-    <span class="text-black/40 font-mono text-xs font-bold">+</span>
-  </div>
-
-  <div class="max-w-[1720px] mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
+<section class="config-banner relative w-full py-16 sm:py-20 lg:py-24 bg-white text-neutral-900 overflow-hidden font-sans">
+  <div class="max-w-[1500px] mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
     
-    <!-- TOP CTA BANNER VIP ESTILO FOOTER Y CONTACTO -->
-    <div class="relative overflow-hidden rounded-[32px] bg-gradient-to-r from-neutral-50 via-white to-neutral-50 border border-black/20 hover:border-black/40 shadow-lg p-8 sm:p-12 lg:p-16 transition-all duration-500 group" data-aos="fade-up">
+    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12 relative z-10">
       
-      <!-- Líneas de acento internas de plano -->
-      <div class="absolute top-0 inset-x-8 h-[1px] bg-black/15"></div>
-      <div class="absolute bottom-0 inset-x-8 h-[1px] bg-black/15"></div>
-      <div class="absolute left-6 top-4 text-black/30 font-mono text-[10px] select-none pointer-events-none tracking-widest">+ PROYECTO 01</div>
-      <div class="absolute right-6 top-4 text-black/30 font-mono text-[10px] select-none pointer-events-none tracking-widest">+ ESTUDIO 02</div>
+      <!-- Texto Principal & Asesoría -->
+      <div class="max-w-3xl space-y-3 text-left">
+        <h3 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-neutral-900 font-bold leading-tight tracking-tight uppercase">
+          ASESÓRATE Y COTIZA TU OBRA CON <span class="font-serif italic font-normal text-neutral-500">ARQUITECTOS SENIOR</span>
+        </h3>
 
-      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12 relative z-10">
-        
-        <!-- Texto Principal & Asesoría -->
-        <div class="max-w-3xl space-y-4">
-          <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-black/[0.04] border border-black/20 text-[10px] font-mono tracking-[0.25em] text-black uppercase">
-            <span class="w-1.5 h-1.5 rounded-full bg-black animate-pulse"></span>
-            <span>SYSMICON ARCHITECTURAL STUDIO • ASESORÍA SENIOR</span>
-          </div>
-
-          <h3 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-neutral-900 font-normal leading-tight tracking-tight uppercase">
-            ASESÓRATE Y COTIZA TU OBRA CON <span class="font-serif italic font-normal text-neutral-600">ARQUITECTOS SENIOR</span>
-          </h3>
-
-          <p class="font-sans text-base sm:text-lg text-neutral-600 leading-relaxed font-normal max-w-2xl">
-            Recibe dirección ejecutiva, estudio de viabilidad técnica y un presupuesto integral blindado a la medida de tu proyecto.
-          </p>
-        </div>
-
-        <!-- Botón CTA Monocromático Blanco & Negro -->
-        <div class="shrink-0">
-          <a routerLink="/cotiza-con-nosotros" class="inline-flex items-center gap-3.5 px-9 py-4 sm:py-5 rounded-full bg-black text-white font-extrabold text-xs uppercase tracking-widest hover:bg-neutral-800 hover:scale-105 transition-all duration-300 shadow-xl group/btn cursor-pointer">
-            <span>Cotiza con Nosotros</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover/btn:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
-        </div>
-
+        <p class="font-sans text-base sm:text-lg text-neutral-600 leading-relaxed font-light max-w-2xl">
+          Recibe dirección ejecutiva, estudio de viabilidad técnica y un presupuesto integral blindado a la medida de tu proyecto.
+        </p>
       </div>
+
+      <!-- Botón CTA Monocromático Blanco & Negro -->
+      <div class="shrink-0">
+        <a routerLink="/cotiza-con-nosotros" class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-black text-white font-bold text-xs uppercase tracking-widest hover:bg-neutral-800 hover:scale-105 transition-all duration-300 shadow-sm cursor-pointer">
+          <span>Cotiza con Nosotros</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+
     </div>
 
   </div>

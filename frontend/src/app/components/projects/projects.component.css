@@ -5,6 +5,13 @@
   z-index: 5;
   isolation: isolate;
   overflow: hidden;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.portfolio-section [data-aos] {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 /* Carrusel Hero Móvil */

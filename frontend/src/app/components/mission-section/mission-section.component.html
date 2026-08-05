@@ -1,0 +1,54 @@
+<!-- Nuestra Misión & Matriz de Valores (Inspiración Minimalista Arquitectónica) -->
+<section class="mission-section relative w-full py-20 sm:py-28 bg-white text-neutral-900 overflow-hidden font-sans border-b border-neutral-200/80">
+  <div class="max-w-[1550px] mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
+    
+    <!-- Encabezado de Sección con Badge Superior y Titular Editorial -->
+    <div class="max-w-4xl space-y-4 mb-14" data-aos="fade-up">
+      <span class="font-mono text-xs tracking-[0.3em] text-neutral-400 font-semibold uppercase block">
+        VALORES & PROPÓSITO
+      </span>
+      <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-neutral-900 font-bold tracking-tight uppercase leading-[1.08]">
+        Nuestra Misión
+      </h2>
+      <p class="font-sans text-base sm:text-xl text-neutral-600 font-light leading-relaxed pt-2">
+        Desarrollar proyectos a través de los conocimientos multidisciplinares que buscan canalizar la información por medio de la interacción con el espacio, el ingenio de la ejecución y la interpretación de la forma. Esto nos permite partir de lo esencial y generar ideas que proyecten espacios únicos con propósito y calidad de vida.
+      </p>
+    </div>
+
+    <!-- Matriz de Valores Arquitectónica (Grid 2 Filas x 3 Columnas con Bordes Definidos) -->
+    <div class="w-full border-2 border-neutral-200 rounded-[28px] overflow-hidden bg-white shadow-sm mb-12" data-aos="fade-up" data-aos-delay="100">
+      
+      <!-- Fila 1 -->
+      <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x-2 divide-neutral-200 border-b-2 border-neutral-200">
+        <div *ngFor="let item of valoresFila1" 
+             class="p-8 sm:p-12 flex items-center justify-center text-center transition-all duration-300 select-none cursor-default"
+             [ngClass]="item.destacado ? 'bg-neutral-100/90 font-bold text-neutral-900 shadow-inner' : 'bg-white hover:bg-neutral-900 hover:text-white font-medium text-neutral-800'">
+          <span class="font-mono text-xs sm:text-sm tracking-[0.3em] uppercase">
+            {{ item.nombre }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Fila 2 -->
+      <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x-2 divide-neutral-200">
+        <div *ngFor="let item of valoresFila2" 
+             class="p-8 sm:p-12 flex items-center justify-center text-center bg-white hover:bg-neutral-900 hover:text-white transition-all duration-300 font-medium text-neutral-800 select-none cursor-default">
+          <span class="font-mono text-xs sm:text-sm tracking-[0.3em] uppercase">
+            {{ item.nombre }}
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Botón + DESCUBRE PROYECTOS -->
+    <div class="flex items-center justify-start" data-aos="fade-up" data-aos-delay="150">
+      <a routerLink="/proyectos" 
+         class="group inline-flex items-center gap-3.5 px-9 py-4.5 rounded-2xl bg-neutral-100 hover:bg-black text-neutral-900 hover:text-white font-mono text-xs font-bold tracking-[0.24em] uppercase transition-all duration-300 shadow-xs cursor-pointer">
+        <span class="text-lg font-normal group-hover:rotate-90 transition-transform duration-300">+</span>
+        <span>DESCUBRE PROYECTOS</span>
+      </a>
+    </div>
+
+  </div>
+</section>

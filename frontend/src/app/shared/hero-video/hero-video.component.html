@@ -1,6 +1,6 @@
 <section class="hero-video-section relative w-full h-screen overflow-hidden bg-[#000814] flex items-center justify-center">
 
-  <!-- VIDEO PLAYER RESPONSIVO (DESKTOP: sysmi-0.mp4 / MÓVIL: sysmi-movil-0.mp4) -->
+  <!-- VIDEO PLAYER RESPONSIVO CON REVEAL CINEMATOGRÁFICO DE ZOOM SUAVE -->
   <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
     <video #videoEl
            [src]="videoSrc()"
@@ -8,7 +8,7 @@
            muted
            loop
            playsinline
-           class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-out">
+           class="hero-bg-video absolute inset-0 w-full h-full object-cover">
     </video>
 
     <!-- GRADIENTES & AMBIENTE CINEMATOGRÁFICO DE LUXURY -->
@@ -29,10 +29,17 @@
     </div>
   </div>
 
-  <!-- CONTENIDO CENTRAL DEL HERO -->
+  <!-- CONTENIDO CENTRAL DEL HERO CON ORQUESTACIÓN EN CASCADA -->
   <div class="container relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center justify-center pt-8">
     
-    <!-- Logo Hero Animado (Sin titileo ni parpadeo blanco en móvil) -->
+    <!-- Subtítulo Monospaciado sutil de Apertura -->
+    <div class="hero-badge-entrance mb-3">
+      <span class="font-mono text-[10px] sm:text-xs tracking-[0.35em] text-[#C2E1FF]/90 font-semibold uppercase block drop-shadow">
+        SYSMICON ARCHITECTURAL STUDIO
+      </span>
+    </div>
+
+    <!-- Logo Hero Animado -->
     <div class="mb-4 sm:mb-6 flex justify-center animate-logo-entrance">
       <img src="assets/icons/logo-hero.png" 
            alt="Sysmicon Logo" 
@@ -41,13 +48,13 @@
            class="h-28 sm:h-36 md:h-44 lg:h-52 max-h-[240px] w-auto object-contain animate-logo-float drop-shadow-[0_15px_40px_rgba(0,0,0,0.9)]">
     </div>
 
-    <!-- Título Principal (Un poco más pequeño y proporcionado) -->
-    <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-tight leading-[1.05] drop-shadow-2xl mb-8 animate-title-entrance">
+    <!-- Título Principal con Revelación Cinemática -->
+    <h1 class="hero-title-entrance font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-tight leading-[1.05] drop-shadow-2xl mb-8">
       Diseñamos y <span class="font-serif italic font-normal text-[#C2E1FF]">Construimos</span>
     </h1>
 
-    <!-- Botones de Acción -->
-    <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+    <!-- Botones de Acción con Revelación Escalonada -->
+    <div class="hero-buttons-entrance flex flex-wrap items-center justify-center gap-4 sm:gap-6">
       <a routerLink="/cotiza-con-nosotros" class="group inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-500 font-sans text-xs font-bold tracking-[0.24em] uppercase shadow-2xl hover:scale-105">
         <span>Cotiza con nosotros</span>
         <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -62,9 +69,9 @@
 
   </div>
 
-  <!-- INDICATIVO DEL SCROLL MEJORADO (CENTRO INFERIOR) -->
+  <!-- INDICATIVO DEL SCROLL CON REVEAL RETARDADO (CENTRO INFERIOR) -->
   <div (click)="scrollToNext()"
-       class="scroll-indicator-enhanced absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center cursor-pointer group">
+       class="hero-scroll-entrance scroll-indicator-enhanced absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center cursor-pointer group">
     
     <!-- Texto animado -->
     <span class="font-mono text-[10px] tracking-[0.3em] uppercase text-white/70 group-hover:text-[#C2E1FF] transition-colors mb-2">

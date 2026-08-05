@@ -8,38 +8,46 @@
   background: radial-gradient(circle at center, transparent 30%, rgba(0, 8, 20, 0.75) 100%);
 }
 
-/* Botones de navegación de video (+15s / -15s) */
-.video-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 25;
-  cursor: pointer;
-  outline: none;
-}
-
-.video-arrow-left {
-  left: 1.25rem;
-}
-
-.video-arrow-right {
-  right: 1.25rem;
-}
-
-@media (min-width: 1280px) {
-  .video-arrow-left {
-    left: 2.5rem;
+/* Revelación de Zoom Cinemático para el Video de Fondo */
+@keyframes videoZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(1.08);
   }
-  .video-arrow-right {
-    right: 2.5rem;
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
-/* Animación de entrada y flotación sutil del Logo Hero (Optimizado para móvil sin titileo blanco) */
+.hero-bg-video {
+  will-change: opacity, transform;
+  animation: videoZoomIn 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 1. Entrada de la Insignia Superior */
+@keyframes badgeEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-badge-entrance {
+  opacity: 0;
+  will-change: opacity, transform;
+  animation: badgeEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+/* 2. Entrada y Flotación del Logo Hero */
 @keyframes logoEntrance {
   0% {
     opacity: 0;
-    transform: translateY(-20px) scale(0.95);
+    transform: translateY(-24px) scale(0.94);
   }
   100% {
     opacity: 1;
@@ -58,38 +66,35 @@
 
 .animate-logo-entrance {
   opacity: 0;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
   will-change: opacity, transform;
-  animation: logoEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: logoEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards, logoFloat 5s ease-in-out 1.65s infinite;
 }
 
-.animate-logo-float {
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  will-change: transform;
-  animation: logoFloat 5s ease-in-out 1.2s infinite;
-}
-
-.animate-logo-hero {
-  opacity: 0;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  will-change: opacity, transform;
-  animation: logoEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards, logoFloat 5s ease-in-out 1.2s infinite;
-}
-
-/* Animación de entrada del Título Principal */
+/* 3. Entrada del Título Principal */
 @keyframes titleEntrance {
   0% {
     opacity: 0;
-    transform: translateY(24px) scale(0.96);
+    transform: translateY(32px) scale(0.96);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.hero-title-entrance {
+  opacity: 0;
+  will-change: opacity, transform, filter;
+  animation: titleEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+}
+
+/* 4. Entrada de los Botones de Acción */
+@keyframes buttonsEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.95);
   }
   100% {
     opacity: 1;
@@ -97,15 +102,31 @@
   }
 }
 
-.animate-title-entrance {
+.hero-buttons-entrance {
   opacity: 0;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
   will-change: opacity, transform;
-  animation: titleEntrance 1.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: buttonsEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
 }
 
-/* Animaciones de Scroll Indicator */
+/* 5. Entrada del Indicador de Desplazamiento Inferior */
+@keyframes scrollEntrance {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.hero-scroll-entrance {
+  opacity: 0;
+  will-change: opacity, transform;
+  animation: scrollEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
+}
+
+/* Animaciones de Scroll Indicator Mouse Wheel & Beam Drop */
 @keyframes mouseWheel {
   0% {
     opacity: 1;

@@ -12,6 +12,7 @@ import { ArchitecturalScrollBlockComponent } from '../../components/architectura
 import { BannerVideoComponent } from '../../components/banner-video/banner-video.component';
 import { ServicesSectionComponent } from '../../components/services-section/services-section.component';
 import { ContactStepsComponent } from '../../components/contact-steps/contact-steps.component';
+import { MissionSectionComponent } from '../../components/mission-section/mission-section.component';
 import { ProyectosService } from '../../services/proyectos.service';
 
 @Component({
@@ -30,7 +31,8 @@ import { ProyectosService } from '../../services/proyectos.service';
     ArchitecturalScrollBlockComponent,
     BannerVideoComponent,
     ServicesSectionComponent,
-    ContactStepsComponent
+    ContactStepsComponent,
+    MissionSectionComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

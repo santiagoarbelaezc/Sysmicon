@@ -1,75 +1,70 @@
-<div class="min-h-screen bg-[#000814] text-white pt-24 pb-20 relative overflow-hidden selection:bg-[#C2E1FF]/30">
-  <!-- Luces ambientales arquitectónicas -->
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-gradient-to-b from-[#002345]/30 to-transparent blur-[140px] pointer-events-none"></div>
-  <div class="absolute bottom-10 right-10 w-[500px] h-[500px] bg-[#C2E1FF]/05 rounded-full blur-[160px] pointer-events-none"></div>
-
-  <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="min-h-screen bg-white text-neutral-900 pt-24 pb-28 relative overflow-hidden font-sans">
+  <div class="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
     
-    <!-- HEADER VIP -->
-    <div class="text-center max-w-3xl mx-auto mb-12">
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-xs font-mono tracking-widest uppercase text-[#C2E1FF] mb-4">
-        <span class="w-2 h-2 rounded-full bg-[#C2E1FF] animate-pulse"></span>
-        <span>ATENCIÓN EXCLUSIVA & CONSULTORÍA 360°</span>
-      </div>
-      <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-light text-white tracking-tight uppercase leading-tight mb-4">
-        Agendar Cita Privada
+    <!-- HEADER VIP MINIMALISTA -->
+    <div class="text-left max-w-3xl mb-14">
+      <span class="font-mono text-xs tracking-[0.3em] text-neutral-400 font-semibold uppercase block mb-3">
+        ATENCIÓN EXCLUSIVA & CONSULTORÍA 360°
+      </span>
+      <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-neutral-900 tracking-tight uppercase leading-tight mb-4">
+        AGENDAR CITA <span class="font-serif italic font-normal text-neutral-500">TÉCNICA</span>
       </h1>
-      <p class="font-sans text-sm sm:text-base text-white/70 tracking-wide font-light max-w-2xl mx-auto">
-        Reserva un espacio con nuestro equipo directivo para evaluar tu proyecto, viabilidad de lote o diseño arquitectónico a la medida.
+      <p class="font-sans text-base sm:text-lg text-neutral-600 font-light leading-relaxed">
+        Reserva un espacio directamente con nuestro equipo directivo para evaluar tu proyecto, viabilidad legal del lote o arquitectura a la medida.
       </p>
     </div>
 
-    <!-- STEPPER PROGRESS BAR -->
+    <!-- STEPPER PROGRESS BAR MINIMALISTA -->
     <div *ngIf="!citaConfirmada()" class="max-w-3xl mx-auto mb-14">
-      <div class="grid grid-cols-3 gap-2 sm:gap-4 relative">
+      <div class="grid grid-cols-3 gap-4 relative">
         <!-- Paso 1 -->
         <div class="flex flex-col items-center text-center group cursor-pointer" (click)="pasoActual.set(1)">
           <div class="w-10 h-10 rounded-full flex items-center justify-center font-mono text-xs font-bold border transition-all duration-300 mb-2"
-               [ngClass]="pasoActual() === 1 ? 'bg-[#C2E1FF] text-[#000814] border-[#C2E1FF] shadow-[0_0_20px_rgba(194,225,255,0.4)] scale-110' : (pasoActual() > 1 ? 'bg-[#002345] text-white border-[#C2E1FF]/40' : 'bg-white/5 text-white/40 border-white/10')">
+               [ngClass]="pasoActual() === 1 ? 'bg-black text-white border-black scale-110 shadow-sm' : (pasoActual() > 1 ? 'bg-neutral-200 text-neutral-900 border-neutral-300' : 'bg-neutral-100 text-neutral-400 border-neutral-200')">
             {{ pasoActual() > 1 ? '✓' : '01' }}
           </div>
           <span class="font-sans text-[11px] uppercase tracking-widest font-semibold"
-                [ngClass]="pasoActual() === 1 ? 'text-white' : 'text-white/50'">
-            1. Tipo de Consulta
+                [ngClass]="pasoActual() === 1 ? 'text-black' : 'text-neutral-400'">
+            1. Consulta
           </span>
         </div>
 
         <!-- Paso 2 -->
         <div class="flex flex-col items-center text-center group cursor-pointer" (click)="pasoActual() > 1 ? pasoActual.set(2) : null">
           <div class="w-10 h-10 rounded-full flex items-center justify-center font-mono text-xs font-bold border transition-all duration-300 mb-2"
-               [ngClass]="pasoActual() === 2 ? 'bg-[#C2E1FF] text-[#000814] border-[#C2E1FF] shadow-[0_0_20px_rgba(194,225,255,0.4)] scale-110' : (pasoActual() > 2 ? 'bg-[#002345] text-white border-[#C2E1FF]/40' : 'bg-white/5 text-white/40 border-white/10')">
+               [ngClass]="pasoActual() === 2 ? 'bg-black text-white border-black scale-110 shadow-sm' : (pasoActual() > 2 ? 'bg-neutral-200 text-neutral-900 border-neutral-300' : 'bg-neutral-100 text-neutral-400 border-neutral-200')">
             {{ pasoActual() > 2 ? '✓' : '02' }}
           </div>
           <span class="font-sans text-[11px] uppercase tracking-widest font-semibold"
-                [ngClass]="pasoActual() === 2 ? 'text-white' : 'text-white/50'">
-            2. Fecha y Horario
+                [ngClass]="pasoActual() === 2 ? 'text-black' : 'text-neutral-400'">
+            2. Horario
           </span>
         </div>
 
         <!-- Paso 3 -->
         <div class="flex flex-col items-center text-center group cursor-pointer" (click)="pasoActual() > 2 ? pasoActual.set(3) : null">
           <div class="w-10 h-10 rounded-full flex items-center justify-center font-mono text-xs font-bold border transition-all duration-300 mb-2"
-               [ngClass]="pasoActual() === 3 ? 'bg-[#C2E1FF] text-[#000814] border-[#C2E1FF] shadow-[0_0_20px_rgba(194,225,255,0.4)] scale-110' : 'bg-white/5 text-white/40 border-white/10'">
+               [ngClass]="pasoActual() === 3 ? 'bg-black text-white border-black scale-110 shadow-sm' : 'bg-neutral-100 text-neutral-400 border-neutral-200'">
             03
           </div>
           <span class="font-sans text-[11px] uppercase tracking-widest font-semibold"
-                [ngClass]="pasoActual() === 3 ? 'text-white' : 'text-white/50'">
-            3. Datos del Proyecto
+                [ngClass]="pasoActual() === 3 ? 'text-black' : 'text-neutral-400'">
+            3. Datos
           </span>
         </div>
       </div>
     </div>
 
     <!-- CONTENEDOR PRINCIPAL DEL PASO -->
-    <div class="bg-[#001226]/60 border border-white/15 rounded-2xl backdrop-blur-xl p-6 sm:p-10 lg:p-12 shadow-2xl relative">
+    <div class="bg-neutral-50/60 border border-neutral-200/90 rounded-[32px] p-6 sm:p-12 shadow-sm relative">
       
       <!-- ==================== PASO 1: TIPO DE CONSULTA ==================== -->
-      <div *ngIf="pasoActual() === 1" class="space-y-8 animate-fadeIn">
-        <div class="border-b border-white/10 pb-4">
-          <h3 class="font-serif text-2xl sm:text-3xl text-white font-light tracking-wide">
+      <div *ngIf="pasoActual() === 1" class="space-y-8">
+        <div class="border-b border-neutral-200 pb-4">
+          <h3 class="font-serif text-2xl sm:text-3xl text-neutral-900 font-bold uppercase">
             Selecciona la Naturaleza de tu Consulta
           </h3>
-          <p class="font-sans text-xs text-white/60 tracking-wider uppercase mt-1">
+          <p class="font-sans text-xs text-neutral-500 tracking-wider uppercase mt-1">
             Cada sesión es atendida directamente por arquitectos o ingenieros senior de Sysmicon.
           </p>
         </div>
@@ -77,306 +72,213 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div *ngFor="let c of tiposConsulta" 
                (click)="seleccionarConsulta(c)"
-               class="p-6 rounded-xl border transition-all duration-500 cursor-pointer relative flex flex-col justify-between group overflow-hidden"
-               [ngClass]="consultaSeleccionada()?.id === c.id ? 'bg-[#002345] border-[#C2E1FF] shadow-[0_10px_35px_rgba(0,35,69,0.8)] scale-[1.01]' : 'bg-white/[0.02] border-white/10 hover:border-white/30 hover:bg-white/[0.05]'">
+               class="p-6 rounded-2xl border transition-all duration-300 cursor-pointer relative flex flex-col justify-between group overflow-hidden"
+               [ngClass]="consultaSeleccionada()?.id === c.id ? 'bg-black text-white border-black shadow-lg scale-[1.01]' : 'bg-white border-neutral-200/90 hover:border-black text-neutral-900'">
             
-            <!-- Badge Destacado o Check -->
             <div class="flex items-start justify-between mb-4">
-              <span class="text-3xl p-3 rounded-lg bg-white/5 border border-white/10">{{ c.icono }}</span>
+              <span class="text-3xl p-3 rounded-xl bg-neutral-100 text-neutral-900 group-hover:bg-neutral-800 group-hover:text-white transition-colors">{{ c.icono }}</span>
               <div class="flex items-center gap-2">
-                <span *ngIf="c.destacado" class="px-2.5 py-1 rounded bg-[#C2E1FF]/20 border border-[#C2E1FF]/40 text-[10px] font-mono tracking-widest uppercase text-[#C2E1FF]">
+                <span *ngIf="c.destacado" class="px-2.5 py-1 rounded-full bg-neutral-200 text-neutral-900 group-hover:bg-neutral-800 group-hover:text-white text-[10px] font-mono tracking-widest uppercase">
                   RECOMENDADO
                 </span>
                 <span class="w-6 h-6 rounded-full border flex items-center justify-center text-xs transition-colors"
-                      [ngClass]="consultaSeleccionada()?.id === c.id ? 'bg-[#C2E1FF] text-[#000814] border-[#C2E1FF]' : 'border-white/20 text-transparent group-hover:border-white/40'">
+                      [ngClass]="consultaSeleccionada()?.id === c.id ? 'bg-white text-black border-white' : 'border-neutral-300 text-transparent'">
                   ✓
                 </span>
               </div>
             </div>
 
             <div>
-              <h4 class="font-serif text-xl sm:text-2xl text-white font-medium tracking-wide mb-2">
+              <h4 class="font-serif text-xl sm:text-2xl font-bold uppercase mb-2" [ngClass]="consultaSeleccionada()?.id === c.id ? 'text-white' : 'text-neutral-900'">
                 {{ c.titulo }}
               </h4>
-              <p class="font-sans text-xs sm:text-sm text-white/70 leading-relaxed font-light mb-6">
+              <p class="font-sans text-xs sm:text-sm leading-relaxed font-light mb-6" [ngClass]="consultaSeleccionada()?.id === c.id ? 'text-neutral-300' : 'text-neutral-600'">
                 {{ c.subtitulo }}
               </p>
             </div>
 
-            <div class="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/60 tracking-widest uppercase">
-              <span class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-[#C2E1FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                {{ c.duracion }}
-              </span>
-              <span class="text-[#C2E1FF] font-semibold">{{ c.modalidad }}</span>
+            <div class="pt-4 border-t border-neutral-200/30 flex items-center justify-between text-xs font-mono tracking-widest uppercase" [ngClass]="consultaSeleccionada()?.id === c.id ? 'text-neutral-300' : 'text-neutral-500'">
+              <span>⏱️ {{ c.duracion }}</span>
+              <span class="font-bold" [ngClass]="consultaSeleccionada()?.id === c.id ? 'text-white' : 'text-neutral-900'">{{ c.modalidad }}</span>
             </div>
           </div>
         </div>
 
         <div class="pt-6 flex justify-end">
           <button type="button" (click)="avanzarPaso()" [disabled]="!consultaSeleccionada()"
-                  class="px-8 py-4 rounded bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-300 font-sans text-xs font-bold tracking-[0.26em] uppercase flex items-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl">
-            <span>Continuar a Fecha y Horario</span>
+                  class="px-9 py-4 rounded-full bg-black text-white hover:bg-neutral-800 transition-all duration-300 font-sans text-xs font-bold tracking-[0.2em] uppercase flex items-center gap-3 disabled:opacity-40 disabled:cursor-not-allowed shadow-sm cursor-pointer">
+            <span>Continuar a Horario</span>
             <span>→</span>
           </button>
         </div>
       </div>
 
       <!-- ==================== PASO 2: SELECCIÓN DE FECHA Y HORARIO ==================== -->
-      <div *ngIf="pasoActual() === 2" class="space-y-8 animate-fadeIn">
-        <div class="border-b border-white/10 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div *ngIf="pasoActual() === 2" class="space-y-8">
+        <div class="border-b border-neutral-200 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h3 class="font-serif text-2xl sm:text-3xl text-white font-light tracking-wide">
+            <h3 class="font-serif text-2xl sm:text-3xl text-neutral-900 font-bold uppercase">
               Selecciona Fecha y Modalidad
             </h3>
-            <p class="font-sans text-xs text-white/60 tracking-wider uppercase mt-1">
+            <p class="font-sans text-xs text-neutral-500 tracking-wider uppercase mt-1">
               {{ consultaSeleccionada()?.titulo }} ({{ consultaSeleccionada()?.duracion }})
             </p>
           </div>
           
-          <!-- Toggle Modalidad -->
-          <div class="inline-flex p-1 rounded-lg bg-white/5 border border-white/15">
+          <div class="inline-flex p-1 rounded-full bg-neutral-200/80 border border-neutral-300">
             <button type="button" (click)="setModalidad('Presencial')"
-                    class="px-4 py-2 rounded font-sans text-xs uppercase tracking-widest transition-all"
-                    [ngClass]="modalidadSeleccionada() === 'Presencial' ? 'bg-[#C2E1FF] text-[#000814] font-bold shadow' : 'text-white/70 hover:text-white'">
-              🏛️ Presencial en Oficina
+                    class="px-4 py-2 rounded-full font-sans text-xs uppercase tracking-widest transition-all cursor-pointer"
+                    [ngClass]="modalidadSeleccionada() === 'Presencial' ? 'bg-black text-white font-bold shadow' : 'text-neutral-600 hover:text-black'">
+              🏛️ Presencial
             </button>
             <button type="button" (click)="setModalidad('Virtual')"
-                    class="px-4 py-2 rounded font-sans text-xs uppercase tracking-widest transition-all"
-                    [ngClass]="modalidadSeleccionada() === 'Virtual' ? 'bg-[#C2E1FF] text-[#000814] font-bold shadow' : 'text-white/70 hover:text-white'">
-              💻 Videollamada VIP
+                    class="px-4 py-2 rounded-full font-sans text-xs uppercase tracking-widest transition-all cursor-pointer"
+                    [ngClass]="modalidadSeleccionada() === 'Virtual' ? 'bg-black text-white font-bold shadow' : 'text-neutral-600 hover:text-black'">
+              💻 Videollamada
             </button>
           </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <!-- Calendario / Selección de día -->
+          <!-- Calendario / Día -->
           <div class="lg:col-span-7 space-y-4">
-            <label class="block font-mono text-xs uppercase tracking-widest text-[#C2E1FF] font-semibold">
+            <label class="block font-mono text-xs uppercase tracking-widest text-neutral-700 font-semibold">
               1. Elige un día disponible
             </label>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
               <div *ngFor="let item of diasMes"
                    (click)="seleccionarDia(item.fechaCompleta, item.disponible)"
-                   class="p-4 rounded-xl border text-center transition-all flex flex-col items-center justify-center relative"
+                   class="p-4 rounded-2xl border text-center transition-all flex flex-col items-center justify-center relative cursor-pointer"
                    [ngClass]="{
-                     'bg-[#002345] border-[#C2E1FF] text-white shadow-lg scale-105 cursor-pointer': diaSeleccionado() === item.fechaCompleta,
-                     'bg-white/[0.03] border-white/15 hover:border-white/40 text-white/90 cursor-pointer': diaSeleccionado() !== item.fechaCompleta && item.disponible,
-                     'bg-white/[0.01] border-white/5 text-white/20 cursor-not-allowed opacity-50': !item.disponible
+                     'bg-black border-black text-white shadow-md scale-105': diaSeleccionado() === item.fechaCompleta,
+                     'bg-white border-neutral-200 hover:border-black text-neutral-900': diaSeleccionado() !== item.fechaCompleta && item.disponible,
+                     'bg-neutral-100 border-neutral-200 text-neutral-400 cursor-not-allowed opacity-50': !item.disponible
                    }">
-                <span class="font-mono text-[11px] uppercase tracking-wider text-white/60 mb-1">{{ item.nombreDia }}</span>
+                <span class="font-mono text-[11px] uppercase tracking-wider text-neutral-400 mb-1" [class.text-neutral-300]="diaSeleccionado() === item.fechaCompleta">{{ item.nombreDia }}</span>
                 <span class="font-serif text-3xl font-light">{{ item.dia }}</span>
-                <span *ngIf="!item.disponible" class="text-[9px] font-mono uppercase text-red-400/80 mt-1">Agotado</span>
-                <span *ngIf="item.disponible" class="text-[9px] font-mono uppercase text-[#C2E1FF] mt-1">Disponible</span>
+                <span *ngIf="item.disponible" class="text-[9px] font-mono uppercase mt-1" [ngClass]="diaSeleccionado() === item.fechaCompleta ? 'text-white' : 'text-black'">Disponible</span>
               </div>
             </div>
           </div>
 
-          <!-- Selección de Horario -->
+          <!-- Horario -->
           <div class="lg:col-span-5 space-y-4">
-            <label class="block font-mono text-xs uppercase tracking-widest text-[#C2E1FF] font-semibold">
+            <label class="block font-mono text-xs uppercase tracking-widest text-neutral-700 font-semibold">
               2. Elige el horario exacto
             </label>
             <div class="grid grid-cols-2 gap-3">
               <div *ngFor="let h of horarios"
                    (click)="seleccionarHora(h.hora + ' ' + h.periodo, h.disponible)"
-                   class="p-4 rounded-xl border text-center transition-all flex items-center justify-center gap-2"
+                   class="p-4 rounded-2xl border text-center transition-all flex items-center justify-center gap-2 cursor-pointer"
                    [ngClass]="{
-                     'bg-[#002345] border-[#C2E1FF] text-white shadow-lg scale-105 font-bold cursor-pointer': horaSeleccionada() === (h.hora + ' ' + h.periodo) && h.disponible,
-                     'bg-white/[0.03] border-white/15 hover:border-white/40 text-white/90 cursor-pointer': horaSeleccionada() !== (h.hora + ' ' + h.periodo) && h.disponible,
-                     'bg-white/[0.01] border-white/5 text-white/20 cursor-not-allowed opacity-40': !h.disponible
+                     'bg-black border-black text-white shadow-md scale-105 font-bold': horaSeleccionada() === (h.hora + ' ' + h.periodo) && h.disponible,
+                     'bg-white border-neutral-200 hover:border-black text-neutral-900': horaSeleccionada() !== (h.hora + ' ' + h.periodo) && h.disponible,
+                     'bg-neutral-100 border-neutral-200 text-neutral-400 cursor-not-allowed opacity-40': !h.disponible
                    }">
                 <span class="font-mono text-sm tracking-wider">{{ h.hora }}</span>
-                <span class="font-mono text-xs text-[#C2E1FF]">{{ h.periodo }}</span>
-                <span *ngIf="!h.disponible" class="text-[10px] text-red-400/80">✗</span>
-              </div>
-            </div>
-
-            <!-- Resumen flotante en el lateral -->
-            <div class="mt-6 p-5 rounded-xl bg-black/40 border border-white/10 space-y-3">
-              <h5 class="font-serif text-sm uppercase tracking-widest text-[#C2E1FF] font-semibold">Resumen Previo</h5>
-              <div class="text-xs space-y-1.5 text-white/80 font-light">
-                <p><strong>Modalidad:</strong> {{ modalidadSeleccionada() }}</p>
-                <p><strong>Fecha:</strong> {{ resumenFecha || 'Ninguna seleccionada' }}</p>
-                <p><strong>Hora:</strong> {{ horaSeleccionada() }}</p>
+                <span class="font-mono text-xs">{{ h.periodo }}</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="pt-6 border-t border-white/10 flex items-center justify-between">
+        <div class="pt-6 border-t border-neutral-200 flex items-center justify-between">
           <button type="button" (click)="retrocederPaso()"
-                  class="px-6 py-3 rounded border border-white/20 hover:border-white text-white/80 hover:text-white transition-all font-sans text-xs tracking-widest uppercase">
+                  class="px-6 py-3 rounded-full border border-neutral-300 hover:bg-black hover:text-white text-neutral-800 transition-all font-sans text-xs tracking-widest uppercase cursor-pointer">
             ← Volver
           </button>
           <button type="button" (click)="avanzarPaso()" [disabled]="!diaSeleccionado() || !horaSeleccionada()"
-                  class="px-8 py-4 rounded bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-300 font-sans text-xs font-bold tracking-[0.26em] uppercase flex items-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl">
-            <span>Continuar con tus Datos</span>
+                  class="px-9 py-4 rounded-full bg-black text-white hover:bg-neutral-800 transition-all duration-300 font-sans text-xs font-bold tracking-[0.2em] uppercase flex items-center gap-3 disabled:opacity-40 disabled:cursor-not-allowed shadow-sm cursor-pointer">
+            <span>Continuar a Datos</span>
             <span>→</span>
           </button>
         </div>
       </div>
 
-      <!-- ==================== PASO 3: FORMULARIO DEL CLIENTE & PROYECTO ==================== -->
-      <div *ngIf="pasoActual() === 3 && !citaConfirmada()" class="space-y-8 animate-fadeIn">
-        <div class="border-b border-white/10 pb-4">
-          <h3 class="font-serif text-2xl sm:text-3xl text-white font-light tracking-wide">
-            Datos Generales y Especificaciones del Proyecto
+      <!-- ==================== PASO 3: FORMULARIO CLIENTE ==================== -->
+      <div *ngIf="pasoActual() === 3 && !citaConfirmada()" class="space-y-8">
+        <div class="border-b border-neutral-200 pb-4">
+          <h3 class="font-serif text-2xl sm:text-3xl text-neutral-900 font-bold uppercase">
+            Especificaciones y Datos del Proyecto
           </h3>
-          <p class="font-sans text-xs text-white/60 tracking-wider uppercase mt-1">
-            Tu información goza de total privacidad y confidencialidad arquitectónica.
-          </p>
         </div>
 
         <form [formGroup]="citaForm" (ngSubmit)="avanzarPaso()" class="space-y-6">
-          <div class="grid grid-cols-1 sm:grid-cols-2 sm:gap-6 space-y-6 sm:space-y-0">
-            <!-- Nombre -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div class="space-y-2">
-              <label class="block font-mono text-xs uppercase tracking-widest text-white/80">
-                Nombre Completo *
-              </label>
+              <label class="block font-mono text-xs uppercase tracking-widest text-neutral-700 font-semibold">Nombre Completo *</label>
               <input type="text" formControlName="nombreCompleto" placeholder="Ej. Ing. Carlos Rodríguez"
-                     class="w-full px-4 py-3.5 rounded-lg bg-white/5 border border-white/15 text-white focus:border-[#C2E1FF] focus:bg-white/10 transition-all text-sm">
-              <span *ngIf="citaForm.get('nombreCompleto')?.touched && citaForm.get('nombreCompleto')?.invalid"
-                    class="text-red-400 text-xs block">Por favor ingresa tu nombre completo.</span>
+                     class="w-full px-5 py-4 rounded-xl bg-white border border-neutral-300 text-neutral-900 focus:border-black focus:outline-none transition-all text-sm font-sans">
             </div>
 
-            <!-- Correo -->
             <div class="space-y-2">
-              <label class="block font-mono text-xs uppercase tracking-widest text-white/80">
-                Correo Electrónico *
-              </label>
+              <label class="block font-mono text-xs uppercase tracking-widest text-neutral-700 font-semibold">Correo Electrónico *</label>
               <input type="email" formControlName="correo" placeholder="carlos@empresa.com"
-                     class="w-full px-4 py-3.5 rounded-lg bg-white/5 border border-white/15 text-white focus:border-[#C2E1FF] focus:bg-white/10 transition-all text-sm">
-              <span *ngIf="citaForm.get('correo')?.touched && citaForm.get('correo')?.invalid"
-                    class="text-red-400 text-xs block">Correo electrónico inválido.</span>
+                     class="w-full px-5 py-4 rounded-xl bg-white border border-neutral-300 text-neutral-900 focus:border-black focus:outline-none transition-all text-sm font-sans">
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 sm:gap-6 space-y-6 sm:space-y-0">
-            <!-- Teléfono -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div class="space-y-2">
-              <label class="block font-mono text-xs uppercase tracking-widest text-white/80">
-                Teléfono / WhatsApp *
-              </label>
-              <input type="tel" formControlName="telefono" placeholder="+57 300 000 0000"
-                     class="w-full px-4 py-3.5 rounded-lg bg-white/5 border border-white/15 text-white focus:border-[#C2E1FF] focus:bg-white/10 transition-all text-sm">
-              <span *ngIf="citaForm.get('telefono')?.touched && citaForm.get('telefono')?.invalid"
-                    class="text-red-400 text-xs block">Teléfono requerido (mínimo 7 dígitos).</span>
+              <label class="block font-mono text-xs uppercase tracking-widest text-neutral-700 font-semibold">Teléfono / WhatsApp *</label>
+              <input type="tel" formControlName="telefono" placeholder="+57 310 845 9210"
+                     class="w-full px-5 py-4 rounded-xl bg-white border border-neutral-300 text-neutral-900 focus:border-black focus:outline-none transition-all text-sm font-sans">
             </div>
 
-            <!-- Ubicación del lote o vivienda -->
             <div class="space-y-2">
-              <label class="block font-mono text-xs uppercase tracking-widest text-white/80">
-                Ciudad o Ubicación del Lote
-              </label>
-              <input type="text" formControlName="ubicacionLote" placeholder="Ej. Llanogrande, Envigado, El Retiro..."
-                     class="w-full px-4 py-3.5 rounded-lg bg-white/5 border border-white/15 text-white focus:border-[#C2E1FF] focus:bg-white/10 transition-all text-sm">
+              <label class="block font-mono text-xs uppercase tracking-widest text-neutral-700 font-semibold">Ubicación del Lote</label>
+              <input type="text" formControlName="ubicacionLote" placeholder="Llanogrande, Envigado, El Retiro..."
+                     class="w-full px-5 py-4 rounded-xl bg-white border border-neutral-300 text-neutral-900 focus:border-black focus:outline-none transition-all text-sm font-sans">
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 sm:gap-6 space-y-6 sm:space-y-0">
-            <!-- Presupuesto -->
-            <div class="space-y-2 sm:col-span-2">
-              <label class="block font-mono text-xs uppercase tracking-widest text-white/80">
-                Rango Presupuestal o Inversión Estimada
-              </label>
-              <select formControlName="presupuestoEstimado"
-                      class="w-full px-4 py-3.5 rounded-lg bg-[#001226] border border-white/15 text-white focus:border-[#C2E1FF] transition-all text-sm">
-                <option value="300M - 600M COP">Entre $300M y $600M COP</option>
-                <option value="600M - 1.200M COP">Entre $600M y $1.200M COP</option>
-                <option value="1.200M - 2.500M+ COP">Superior a $1.200M / Alta Gama Lux</option>
-                <option value="Aún en evaluación">Aún en evaluación o estudio de factibilidad</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Notas -->
           <div class="space-y-2">
-            <label class="block font-mono text-xs uppercase tracking-widest text-white/80">
-              ¿Tienes algún requerimiento específico, idea o visión? (Opcional)
-            </label>
-            <textarea rows="3" formControlName="notasAdicionales" placeholder="Describe brevemente el área que deseas construir, número de habitaciones, estilo deseado..."
-                      class="w-full px-4 py-3.5 rounded-lg bg-white/5 border border-white/15 text-white focus:border-[#C2E1FF] focus:bg-white/10 transition-all text-sm"></textarea>
+            <label class="block font-mono text-xs uppercase tracking-widest text-neutral-700 font-semibold">Rango Presupuestal</label>
+            <select formControlName="presupuestoEstimado"
+                    class="w-full px-5 py-4 rounded-xl bg-white border border-neutral-300 text-neutral-900 focus:border-black focus:outline-none transition-all text-sm font-sans">
+              <option value="300M - 600M COP">Entre $300M y $600M COP</option>
+              <option value="600M - 1.200M COP">Entre $600M y $1.200M COP</option>
+              <option value="1.200M - 2.500M+ COP">Superior a $1.200M / Alta Gama Lux</option>
+              <option value="Aún en evaluación">Aún en evaluación o estudio de factibilidad</option>
+            </select>
           </div>
 
-          <div class="pt-6 border-t border-white/10 flex items-center justify-between">
+          <div class="space-y-2">
+            <label class="block font-mono text-xs uppercase tracking-widest text-neutral-700 font-semibold">Notas o Requerimientos</label>
+            <textarea rows="3" formControlName="notasAdicionales" placeholder="Describe área deseada, estilo o inquietudes..."
+                      class="w-full px-5 py-4 rounded-xl bg-white border border-neutral-300 text-neutral-900 focus:border-black focus:outline-none transition-all text-sm font-sans"></textarea>
+          </div>
+
+          <div class="pt-6 border-t border-neutral-200 flex items-center justify-between">
             <button type="button" (click)="retrocederPaso()"
-                    class="px-6 py-3 rounded border border-white/20 hover:border-white text-white/80 hover:text-white transition-all font-sans text-xs tracking-widest uppercase">
+                    class="px-6 py-3 rounded-full border border-neutral-300 hover:bg-black hover:text-white text-neutral-800 transition-all font-sans text-xs tracking-widest uppercase cursor-pointer">
               ← Volver
             </button>
             <button type="submit"
-                    class="px-10 py-4 rounded bg-[#C2E1FF] text-[#000814] hover:bg-white transition-all duration-300 font-sans text-xs font-bold tracking-[0.26em] uppercase flex items-center gap-3 shadow-[0_10px_35px_rgba(194,225,255,0.4)]">
-              <span>Confirmar y Reservar Cita VIP</span>
+                    class="px-9 py-4 rounded-full bg-black text-white hover:bg-neutral-800 transition-all duration-300 font-sans text-xs font-bold tracking-[0.2em] uppercase flex items-center gap-3 shadow-sm cursor-pointer">
+              <span>Agendar Cita</span>
               <span>✓</span>
             </button>
           </div>
         </form>
       </div>
 
-      <!-- ==================== PASO 4: CONFIRMACIÓN Y BOARDING PASS VIP ==================== -->
-      <div *ngIf="citaConfirmada()" class="py-6 text-center space-y-8 animate-fadeIn">
-        <div class="w-20 h-20 rounded-full bg-[#C2E1FF]/20 border border-[#C2E1FF] text-[#C2E1FF] flex items-center justify-center text-4xl mx-auto shadow-[0_0_50px_rgba(194,225,255,0.5)]">
+      <!-- ==================== PASO 4: CONFIRMACIÓN ==================== -->
+      <div *ngIf="citaConfirmada()" class="py-10 text-center space-y-6">
+        <div class="w-20 h-20 rounded-full bg-black text-white flex items-center justify-center text-3xl mx-auto shadow-sm">
           ✓
         </div>
+        <h3 class="font-serif text-4xl sm:text-5xl font-bold text-neutral-900 uppercase">
+          ¡CITA RESERVADA CON ÉXITO!
+        </h3>
+        <p class="font-sans text-neutral-600 text-base max-w-xl mx-auto font-light leading-relaxed">
+          Hemos enviado un correo de confirmación con los detalles para tu cita en nuestra sede o enlace virtual.
+        </p>
 
-        <div class="space-y-2">
-          <span class="px-3 py-1 rounded-full bg-green-500/20 text-green-400 font-mono text-xs uppercase tracking-widest border border-green-500/30">
-            RESERVA CONFIRMADA EXITOSAMENTE
-          </span>
-          <h3 class="font-serif text-4xl sm:text-5xl font-light text-white uppercase tracking-tight pt-2">
-            ¡Tu Sesión ha sido Agendada!
-          </h3>
-          <p class="font-sans text-sm text-white/70 max-w-xl mx-auto font-light leading-relaxed">
-            Hemos enviado un correo de confirmación con la invitación al calendario y los detalles de acceso a nuestra sede de alta dirección o enlace virtual VIP.
-          </p>
-        </div>
-
-        <!-- TARJETA TIPO BOARDING PASS ARQUITECTÓNICO -->
-        <div class="max-w-2xl mx-auto bg-[#000814] border border-[#C2E1FF]/40 rounded-2xl overflow-hidden shadow-2xl text-left relative">
-          <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-[#C2E1FF]/10 rounded-full blur-2xl pointer-events-none"></div>
-          
-          <div class="bg-[#002345] px-6 py-4 flex items-center justify-between border-b border-white/10 font-mono text-xs text-white/90">
-            <span class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-[#C2E1FF]"></span>
-              <span>SYSMICON — BOARDING PASS DE CONSULTORÍA</span>
-            </span>
-            <span class="font-bold text-[#C2E1FF]">#SYS-2026-APPT</span>
-          </div>
-
-          <div class="p-6 sm:p-8 grid grid-cols-1 sm:grid-cols-2 gap-6 font-sans text-sm">
-            <div>
-              <span class="font-mono text-[11px] text-white/50 uppercase tracking-widest block">Tipo de Sesión</span>
-              <p class="font-serif text-lg text-white font-medium mt-1">{{ consultaSeleccionada()?.titulo }}</p>
-              <span class="text-xs text-[#C2E1FF] font-mono mt-0.5 block">{{ consultaSeleccionada()?.duracion }} | {{ modalidadSeleccionada() }}</span>
-            </div>
-
-            <div>
-              <span class="font-mono text-[11px] text-white/50 uppercase tracking-widest block">Fecha y Horario</span>
-              <p class="font-serif text-lg text-white font-medium mt-1">{{ resumenFecha }}</p>
-              <span class="text-xs text-[#C2E1FF] font-mono mt-0.5 block">Hora: {{ horaSeleccionada() }} (Hora Colombia)</span>
-            </div>
-
-            <div class="sm:col-span-2 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div>
-                <span class="font-mono text-[11px] text-white/50 uppercase tracking-widest block">Director Asignado</span>
-                <p class="text-white font-medium text-sm">Ing. Juan Moreno & Equipo Directivo Senior</p>
-              </div>
-              <div class="text-right">
-                <span class="font-mono text-[11px] text-white/50 uppercase tracking-widest block">Lugar / Acceso</span>
-                <p class="text-[#C2E1FF] font-mono text-xs mt-0.5">{{ modalidadSeleccionada() === 'Presencial' ? 'Sede Llanogrande / Medellín' : 'Enlace privado Zoom VIP enviado' }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="pt-4 flex flex-wrap items-center justify-center gap-4">
-          <a routerLink="/" class="px-8 py-4 rounded bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all font-sans text-xs font-bold tracking-[0.2em] uppercase shadow-lg">
+        <div class="pt-6 flex items-center justify-center gap-4">
+          <a routerLink="/" class="px-9 py-4 rounded-full bg-black text-white font-bold text-xs uppercase tracking-widest hover:bg-neutral-800 transition-all cursor-pointer">
             Volver al Inicio
           </a>
-          <button type="button" (click)="reiniciarAgendamiento()" class="px-6 py-4 rounded border border-white/20 hover:border-white text-white/80 hover:text-white transition-all font-sans text-xs tracking-widest uppercase">
-            Agendar Otra Cita
-          </button>
         </div>
       </div>
 

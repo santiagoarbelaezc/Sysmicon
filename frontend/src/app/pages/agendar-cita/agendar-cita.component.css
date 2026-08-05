@@ -1,24 +1,11 @@
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* ==========================================================================
+   SYSMICON - AGENDAR CITA COMPONENT (ULTRA-MINIMALIST AESTHETIC)
+   ========================================================================== */
 
-.animate-fadeIn {
-  animation: fadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Ocultar barra de scroll en contenedores si es necesario pero mantener funcionalidad */
-.custom-scroll::-webkit-scrollbar {
-  height: 4px;
-}
-
-.custom-scroll::-webkit-scrollbar-thumb {
-  background: #002345;
-  border-radius: 4px;
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%20%23666666'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.25rem center;
+  background-size: 1.25rem;
+  appearance: none;
 }

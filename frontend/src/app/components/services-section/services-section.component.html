@@ -3,39 +3,13 @@
   <div class="w-full px-0 relative z-10">
     
     <!-- Header de Sección Centrado & Sintético -->
-    <div class="text-center max-w-4xl mx-auto space-y-2 mb-8 px-4 sm:px-6">
+    <div class="text-center max-w-4xl mx-auto space-y-2 mb-10 px-4 sm:px-6">
       <span class="font-mono text-xs tracking-[0.3em] text-neutral-400 font-semibold uppercase block">
         NUESTROS SERVICIOS
       </span>
       <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-neutral-900 font-bold leading-tight tracking-tight uppercase">
         SOLUCIONES ARQUITECTÓNICAS DE <span class="font-serif italic font-normal text-neutral-500">PRINCIPIO A FIN</span>
       </h2>
-
-      <!-- Indicador de Posición y Estado de Auto-Play -->
-      <div class="pt-2 flex justify-center items-center gap-3">
-        <div class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.25em] text-neutral-500 font-bold px-4 py-1.5 rounded-full bg-neutral-100/90 border border-neutral-200/80 shadow-xs">
-          <span class="text-black font-extrabold">0{{ activeServiceIndex() + 1 }}</span>
-          <span class="text-neutral-400">/ 0{{ servicios.length }}</span>
-        </div>
-        <span *ngIf="isPaused()" class="font-mono text-[10px] uppercase tracking-widest text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200/60 animate-pulse">
-          Pausado
-        </span>
-      </div>
-    </div>
-
-    <!-- PESTAÑAS SELECTORAS DIRECTAS DE SERVICIO (TABS BAR) -->
-    <div class="flex items-center justify-center mb-8 overflow-x-auto py-2 no-scrollbar px-4">
-      <div class="inline-flex p-1.5 rounded-full bg-neutral-100/80 border border-neutral-200/90 backdrop-blur-md gap-1 sm:gap-2 shadow-inner">
-        <button *ngFor="let s of servicios; let i = index"
-                (click)="goToService(i)"
-                class="px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-wider transition-all duration-500 cursor-pointer whitespace-nowrap select-none flex items-center gap-2"
-                [ngClass]="activeServiceIndex() === i 
-                  ? 'bg-black text-white shadow-lg scale-[1.02]' 
-                  : 'text-neutral-600 hover:text-black hover:bg-neutral-200/60'">
-          <span class="font-mono text-[10px] opacity-60">0{{ i + 1 }}</span>
-          <span>{{ s.titulo }}</span>
-        </button>
-      </div>
     </div>
 
     <!-- Carrusel de Tarjetas de Servicios 100% Ancho Total (Edge-to-Edge) -->

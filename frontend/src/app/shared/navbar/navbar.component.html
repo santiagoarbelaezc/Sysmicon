@@ -2,22 +2,22 @@
         [ngClass]="{'navbar-hidden': !isNavbarVisible, 'navbar-visible': isNavbarVisible}"
         (mouseenter)="onMouseEnterHeader()"
         (mouseleave)="onMouseLeaveHeader()">
-  <div class="w-full max-w-[1750px] mx-auto px-6 md:px-16 navbar-container flex items-center justify-between">
-    <!-- Logo Sobrio y Compacto -->
+  <div class="w-full max-w-[1800px] mx-auto px-6 md:px-14 navbar-container flex items-center justify-between">
+    <!-- Logo Elegante con Tamaño Equilibrado -->
     <a routerLink="/" class="navbar-logo group flex items-center gap-3 z-[1001]" (click)="closeMobileMenu()">
-      <img src="assets/icons/logo-sysmico-navbar.png" alt="Sysmicon" class="w-8 h-8 md:w-9 md:h-9 object-contain transition-transform duration-500 group-hover:scale-105">
-      <span class="logo-text font-serif tracking-[0.2em] text-lg md:text-xl font-light uppercase">{{ brandName }}</span>
+      <img src="assets/icons/logo-sysmico-navbar.png" alt="Sysmicon" class="w-9 h-9 md:w-10 md:h-10 object-contain transition-transform duration-500 group-hover:scale-105">
+      <span class="logo-text font-serif tracking-[0.2em] text-lg md:text-xl font-medium uppercase">{{ brandName }}</span>
     </a>
 
-    <!-- Desktop Nav Links (Sobrios, Letra Más Pequeña y Fina) -->
+    <!-- Desktop Nav Links (Tamaño Equilibrado) -->
     <nav class="desktop-nav">
-      <ul class="nav-list flex items-center gap-12">
+      <ul class="nav-list flex items-center gap-8 lg:gap-11">
         <li *ngFor="let link of navLinks">
           <a [routerLink]="link.path" 
              routerLinkActive="active" 
              [routerLinkActiveOptions]="{exact: link.path === '/'}"
              (click)="onNavLinkClick(link)"
-             class="nav-link font-sans text-[11.5px] md:text-[12px] tracking-[0.18em] uppercase font-normal">
+             class="nav-link font-sans text-xs md:text-[13.5px] tracking-[0.16em] uppercase font-medium">
             <span>{{ link.label }}</span>
             <span class="link-underline"></span>
           </a>
@@ -25,25 +25,13 @@
       </ul>
     </nav>
 
-    <!-- Desktop Right Actions (Ingreso / Registro Compacto y Elegante) -->
-    <div class="desktop-actions flex items-center gap-6">
-      <!-- Boton Instalar PWA -->
-      <button (click)="abrirGuiaPwa()" 
-              title="Instalar App de Sysmicon" 
-              class="flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/25 hover:border-[#C2E1FF] text-[11px] font-mono tracking-wider uppercase text-white hover:text-[#000814] hover:bg-[#C2E1FF] transition-all cursor-pointer shadow-sm">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/>
-          <line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>
-        <span>Instalar App</span>
-      </button>
-
+    <!-- Desktop Right Actions (Acciones Equilibradas) -->
+    <div class="desktop-actions flex items-center gap-5">
       <!-- Auth Links / User Profile -->
       <div class="auth-links flex items-center gap-5 font-sans">
         <ng-container *ngIf="!authService.isLoggedIn()">
-          <a routerLink="/login" class="auth-link-ingresar text-[11.5px] md:text-[12px] uppercase tracking-[0.16em] transition-colors py-1 font-normal">Ingresar</a>
-          <a routerLink="/registro" class="auth-btn-registro px-5 py-1.5 rounded-full border transition-all duration-300 font-sans text-[11.5px] md:text-[12px] font-medium tracking-[0.16em] uppercase shadow-sm">Registrarse</a>
+          <a routerLink="/login" class="auth-link-ingresar text-xs md:text-[13.5px] uppercase tracking-[0.16em] transition-colors py-1 font-medium">Ingresar</a>
+          <a routerLink="/registro" class="auth-btn-registro px-5 py-1.5 rounded-full border transition-all duration-300 font-sans text-xs md:text-[13.5px] font-semibold tracking-[0.16em] uppercase shadow-xs">Registrarse</a>
         </ng-container>
 
         <ng-container *ngIf="authService.currentUser() as user">

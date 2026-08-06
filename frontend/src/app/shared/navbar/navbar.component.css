@@ -14,7 +14,7 @@
   left: 0;
   width: 100%;
   z-index: 999999 !important;
-  padding: 0.65rem 0;
+  padding: 0.85rem 0 !important;
   background: #FFFFFF !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06) !important;
@@ -34,13 +34,13 @@
 }
 
 /* ==========================================================================
-   SIEMPRE LETRA NEGRA, TAMAÑO MÁS PEQUEÑO Y PESO REGULAR / FINO
+   SIEMPRE LETRA NEGRA INSTITUCIONAL, TAMAÑO EQUILIBRADO Y LEGIBLE
    ========================================================================== */
 .logo-text {
   font-family: var(--font-serif);
-  font-size: 1.32rem;
-  font-weight: 400 !important;
-  letter-spacing: 0.22em;
+  font-size: 1.45rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #000000 !important;
   transition: color 0.35s ease;
@@ -72,17 +72,17 @@
 .nav-list {
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 2.75rem;
 }
 
 .nav-link {
   position: relative;
   font-family: var(--font-sans);
-  font-size: 0.76rem;
-  font-weight: 400 !important;
+  font-size: 0.84rem !important;
+  font-weight: 500 !important;
   color: #111111 !important;
-  padding: 0.3rem 0.1rem;
-  letter-spacing: 0.18em;
+  padding: 0.35rem 0.15rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   transition: all 0.3s ease;
 }
@@ -97,7 +97,7 @@
   bottom: -4px;
   left: 0;
   width: 0;
-  height: 1.5px;
+  height: 2px;
   background: #000000 !important;
   transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -109,8 +109,8 @@
 /* Auth Links Fino y Letra Negra */
 .auth-link-ingresar {
   color: #111111 !important;
-  font-size: 0.76rem;
-  font-weight: 400 !important;
+  font-size: 0.84rem !important;
+  font-weight: 500 !important;
   transition: color 0.3s ease;
 }
 .auth-link-ingresar:hover {
@@ -118,11 +118,11 @@
 }
 
 .auth-btn-registro {
-  border-color: rgba(0, 0, 0, 0.6) !important;
+  border-color: rgba(0, 0, 0, 0.7) !important;
   background: transparent !important;
   color: #000000 !important;
-  font-size: 0.76rem;
-  font-weight: 500 !important;
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
   transition: all 0.3s ease;
 }
 .auth-btn-registro:hover {

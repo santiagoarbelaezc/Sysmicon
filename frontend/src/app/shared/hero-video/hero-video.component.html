@@ -30,33 +30,33 @@
   </div>
 
   <!-- CONTENIDO CENTRAL DEL HERO CON ORQUESTACIÓN EN CASCADA -->
-  <div class="container relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center justify-center pt-8">
+  <div class="container relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center justify-center pt-4">
 
     <!-- Logo Hero Animado -->
-    <div class="mb-4 sm:mb-6 flex justify-center animate-logo-entrance">
+    <div class="mb-3 sm:mb-5 flex justify-center animate-logo-entrance">
       <img src="assets/icons/logo-hero.png" 
            alt="Sysmicon Logo" 
            loading="eager"
            decoding="async"
-           class="h-28 sm:h-36 md:h-44 lg:h-52 max-h-[240px] w-auto object-contain animate-logo-float drop-shadow-[0_15px_40px_rgba(0,0,0,0.9)]">
+           class="h-24 sm:h-32 md:h-40 lg:h-44 max-h-[200px] w-auto object-contain animate-logo-float drop-shadow-[0_15px_40px_rgba(0,0,0,0.9)]">
     </div>
 
-    <!-- Título Principal con Revelación Cinemática -->
-    <h1 class="hero-title-entrance font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-tight leading-[1.05] drop-shadow-2xl mb-8">
+    <!-- Título Principal con Revelación Cinemática y Letra Más Grande -->
+    <h1 class="hero-title-entrance font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tight leading-[1.05] drop-shadow-2xl mb-7">
       Diseñamos y <span class="font-serif italic font-normal text-[#C2E1FF]">Construimos</span>
     </h1>
 
-    <!-- Botones de Acción con Revelación Escalonada -->
+    <!-- Botones de Acción Restaurados y Perfectamente Alineados -->
     <div class="hero-buttons-entrance flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-      <a routerLink="/cotiza-con-nosotros" class="group inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-500 font-sans text-xs font-bold tracking-[0.24em] uppercase shadow-2xl hover:scale-105">
-        <span>Cotiza con nosotros</span>
-        <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <a routerLink="/cotiza-con-nosotros" class="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-lg bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-500 font-sans text-xs sm:text-sm font-bold tracking-[0.18em] uppercase shadow-2xl hover:scale-105 whitespace-nowrap">
+        <span class="whitespace-nowrap">Cotiza con nosotros</span>
+        <svg class="w-4 h-4 shrink-0 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
         </svg>
       </a>
 
-      <button (click)="scrollToNext()" class="group inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/40 backdrop-blur-md transition-all duration-500 font-sans text-xs font-medium tracking-[0.2em] uppercase">
-        <span>Ver Obras & Proyectos</span>
+      <button (click)="scrollToNext()" class="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/40 backdrop-blur-md transition-all duration-500 font-sans text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase whitespace-nowrap">
+        <span class="whitespace-nowrap">Ver Obras & Proyectos</span>
       </button>
     </div>
 
@@ -67,7 +67,7 @@
        class="hero-scroll-entrance scroll-indicator-enhanced absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center cursor-pointer group">
     
     <!-- Texto animado -->
-    <span class="font-mono text-[10px] tracking-[0.3em] uppercase text-white/70 group-hover:text-[#C2E1FF] transition-colors mb-2">
+    <span class="font-mono text-xs tracking-[0.3em] uppercase text-white/80 group-hover:text-[#C2E1FF] transition-colors mb-2">
       DESLIZA PARA EXPLORAR
     </span>
 

@@ -1,53 +1,72 @@
-<!-- Servicios Section (Carrusel Interactivo Ultra-Limpio & Minimalista) -->
-<section id="servicios-section" class="services-section relative w-full py-20 sm:py-28 bg-white text-neutral-900 overflow-hidden font-sans">
-  <div class="max-w-[1720px] mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
+<!-- Servicios Section (Carrusel Interactivo Ultra-Fluido 100% Full Bleed) -->
+<section id="servicios-section" class="services-section relative w-full py-12 sm:py-20 bg-white text-neutral-900 overflow-hidden font-sans">
+  <div class="w-full px-0 relative z-10">
     
-    <!-- Header de Sección Totalmente Centrado & Minimalista -->
-    <div class="text-center max-w-3xl mx-auto space-y-3 mb-14">
+    <!-- Header de Sección Centrado & Sintético -->
+    <div class="text-center max-w-4xl mx-auto space-y-2 mb-8 px-4 sm:px-6">
       <span class="font-mono text-xs tracking-[0.3em] text-neutral-400 font-semibold uppercase block">
         NUESTROS SERVICIOS
       </span>
       <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-neutral-900 font-bold leading-tight tracking-tight uppercase">
         SOLUCIONES ARQUITECTÓNICAS DE <span class="font-serif italic font-normal text-neutral-500">PRINCIPIO A FIN</span>
       </h2>
-      <p class="font-sans text-base sm:text-lg text-neutral-600 font-light leading-relaxed pt-1">
-        Diseñamos y construimos bajo un único liderazgo técnico hogares y fincas campestres con exactitud milimétrica.
-      </p>
 
-      <!-- Indicador de Posición de Slide Centrado (01 / 04) -->
-      <div class="pt-3 flex justify-center">
-        <div class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.25em] text-neutral-500 font-bold px-5 py-2.5 rounded-full bg-neutral-100 border border-neutral-200/80 shadow-xs">
+      <!-- Indicador de Posición y Estado de Auto-Play -->
+      <div class="pt-2 flex justify-center items-center gap-3">
+        <div class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.25em] text-neutral-500 font-bold px-4 py-1.5 rounded-full bg-neutral-100/90 border border-neutral-200/80 shadow-xs">
           <span class="text-black font-extrabold">0{{ activeServiceIndex() + 1 }}</span>
           <span class="text-neutral-400">/ 0{{ servicios.length }}</span>
         </div>
+        <span *ngIf="isPaused()" class="font-mono text-[10px] uppercase tracking-widest text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200/60 animate-pulse">
+          Pausado
+        </span>
       </div>
     </div>
 
-    <!-- Carrusel de Tarjetas de Servicios Ampliado a Ancho Completo -->
+    <!-- PESTAÑAS SELECTORAS DIRECTAS DE SERVICIO (TABS BAR) -->
+    <div class="flex items-center justify-center mb-8 overflow-x-auto py-2 no-scrollbar px-4">
+      <div class="inline-flex p-1.5 rounded-full bg-neutral-100/80 border border-neutral-200/90 backdrop-blur-md gap-1 sm:gap-2 shadow-inner">
+        <button *ngFor="let s of servicios; let i = index"
+                (click)="goToService(i)"
+                class="px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-wider transition-all duration-500 cursor-pointer whitespace-nowrap select-none flex items-center gap-2"
+                [ngClass]="activeServiceIndex() === i 
+                  ? 'bg-black text-white shadow-lg scale-[1.02]' 
+                  : 'text-neutral-600 hover:text-black hover:bg-neutral-200/60'">
+          <span class="font-mono text-[10px] opacity-60">0{{ i + 1 }}</span>
+          <span>{{ s.titulo }}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Carrusel de Tarjetas de Servicios 100% Ancho Total (Edge-to-Edge) -->
     <div class="relative w-full"
+         (mouseenter)="pauseAutoPlay()"
+         (mouseleave)="resumeAutoPlay()"
          (wheel)="onServicesWheel($event)"
          (touchstart)="onTouchStart($event)"
          (touchend)="onTouchEnd($event)">
 
       <!-- Botón de Navegación Izquierda (Flotante) -->
       <button (click)="prevService()" 
-              class="absolute -left-2 sm:-left-4 lg:-left-7 top-1/2 -translate-y-1/2 z-30 w-12 h-12 lg:w-14 lg:h-14 rounded-full border border-neutral-300 bg-white/95 backdrop-blur-md hover:bg-black hover:text-white text-neutral-900 flex items-center justify-center transition-all duration-300 shadow-xl hover:scale-110 cursor-pointer group"
+              class="absolute left-4 sm:left-6 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 lg:w-13 lg:h-13 rounded-full border border-neutral-300 bg-white/95 backdrop-blur-md hover:bg-black hover:text-white text-neutral-900 flex items-center justify-center transition-all duration-300 shadow-xl hover:scale-110 cursor-pointer group"
               title="Anterior Servicio">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-x-0.5 transition-transform"><path d="m15 18-6-6 6-6"/></svg>
       </button>
 
       <!-- Botón de Navegación Derecha (Flotante) -->
       <button (click)="nextService()" 
-              class="absolute -right-2 sm:-right-4 lg:-right-7 top-1/2 -translate-y-1/2 z-30 w-12 h-12 lg:w-14 lg:h-14 rounded-full border border-neutral-300 bg-white/95 backdrop-blur-md hover:bg-black hover:text-white text-neutral-900 flex items-center justify-center transition-all duration-300 shadow-xl hover:scale-110 cursor-pointer group"
+              class="absolute right-4 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 lg:w-13 lg:h-13 rounded-full border border-neutral-300 bg-white/95 backdrop-blur-md hover:bg-black hover:text-white text-neutral-900 flex items-center justify-center transition-all duration-300 shadow-xl hover:scale-110 cursor-pointer group"
               title="Siguiente Servicio">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-0.5 transition-transform"><path d="m9 18 6-6-6-6"/></svg>
       </button>
       
       <!-- Track Deslizante de Servicios 100% Ancho Completo -->
-      <div class="overflow-hidden rounded-[32px] w-full">
-        <div class="flex transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] w-full"
+      <div class="overflow-hidden w-full p-0 m-0">
+        <div class="services-carousel-track flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] w-full"
              [style.transform]="'translateX(-' + (activeServiceIndex() * 100) + '%)'">
-          <div *ngFor="let s of servicios; let i = index" class="w-full shrink-0">
+          <div *ngFor="let s of servicios; let i = index" 
+               class="service-slide-item w-full shrink-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+               [ngClass]="activeServiceIndex() === i ? 'opacity-100 scale-100 z-10' : 'opacity-40 scale-[0.98] pointer-events-none'">
             <app-service-card [servicio]="s" [index]="i"></app-service-card>
           </div>
         </div>
@@ -56,13 +75,15 @@
     </div>
 
     <!-- Dots Indicadores del Carrusel -->
-    <div class="flex items-center justify-center gap-3 mt-10">
-      <button *ngFor="let s of servicios; let i = index"
-              (click)="goToService(i)"
-              class="h-2.5 rounded-full transition-all duration-500 cursor-pointer"
-              [ngClass]="activeServiceIndex() === i ? 'w-10 bg-black' : 'w-2.5 bg-neutral-300 hover:bg-neutral-500'"
-              [title]="s.titulo">
-      </button>
+    <div class="flex flex-col items-center gap-4 mt-8 px-4">
+      <div class="flex items-center justify-center gap-3">
+        <button *ngFor="let s of servicios; let i = index"
+                (click)="goToService(i)"
+                class="h-2.5 rounded-full transition-all duration-500 cursor-pointer focus:outline-hidden"
+                [ngClass]="activeServiceIndex() === i ? 'w-12 bg-black' : 'w-3 bg-neutral-300 hover:bg-neutral-400'"
+                [title]="s.titulo">
+        </button>
+      </div>
     </div>
 
   </div>

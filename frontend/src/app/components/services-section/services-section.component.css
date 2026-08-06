@@ -5,3 +5,25 @@
 .services-section {
   font-family: var(--font-sans, 'Exo 2', sans-serif);
 }
+
+/* Ocultar barra de scroll en pestañas */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Pista y diapositivas con optimización de hardware */
+.services-carousel-track {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.service-slide-item {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}

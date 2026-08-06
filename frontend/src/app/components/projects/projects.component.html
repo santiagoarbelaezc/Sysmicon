@@ -137,21 +137,23 @@
     </div>
   </div>
 
-  <!-- Botón Sutil Rediseñado para ir al dossier completo de Proyectos -->
-  <div class="container mt-14 md:mt-20 text-center"
-       data-aos="fade-up"
-       data-aos-duration="900"
-       data-aos-delay="250"
-       data-aos-easing="ease-out-cubic">
-    <a routerLink="/proyectos" 
-       class="group inline-flex items-center justify-center gap-3.5 px-9 py-4 rounded-full bg-white/[0.08] hover:bg-white text-white hover:text-[#000814] border border-white/20 hover:border-white transition-all duration-300 font-sans text-xs sm:text-sm font-bold tracking-[0.22em] uppercase shadow-xs hover:shadow-lg cursor-pointer">
-      <span>VER DOSSIER COMPLETO</span>
-      <svg class="w-4 h-4 shrink-0 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
-      </svg>
-    </a>
-  </div>
-</section>
+<!-- GALERÍA COLLAGE EDITORIAL (Debajo de los 4 Pósters) -->
+<app-photo-collage [collageItems]="galleryItems"></app-photo-collage>
+
+<!-- Botón Sutil Rediseñado para ir al dossier completo de Proyectos -->
+<div class="bg-[#000814] pb-12 text-center"
+     data-aos="fade-up"
+     data-aos-duration="900"
+     data-aos-delay="250"
+     data-aos-easing="ease-out-cubic">
+  <a routerLink="/proyectos" 
+     class="group inline-flex items-center justify-center gap-3.5 px-9 py-4 rounded-full bg-white/[0.08] hover:bg-white text-white hover:text-[#000814] border border-white/20 hover:border-white transition-all duration-300 font-sans text-xs sm:text-sm font-bold tracking-[0.22em] uppercase shadow-xs hover:shadow-lg cursor-pointer">
+    <span>VER DOSSIER COMPLETO</span>
+    <svg class="w-4 h-4 shrink-0 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
+    </svg>
+  </a>
+</div></section>
 
 <!-- SECCIÓN INFERIOR EDITORIAL: BANNER DE CONTACTO INTERMEDIO & BANNER VIDEO CASA L -->
 <section class="w-full mt-16 space-y-20 relative z-10">

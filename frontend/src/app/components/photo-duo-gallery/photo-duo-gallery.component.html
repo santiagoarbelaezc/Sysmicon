@@ -1,0 +1,76 @@
+<!-- =====================================================
+     PHOTO DUO GALLERY — Sysmicon Editorial
+     Galería de detalles arquitectónicos en pares de 2
+     ===================================================== -->
+<section class="duo-gallery-section w-full bg-[#000814] py-10 overflow-hidden" *ngIf="items.length > 0">
+
+  <!-- Encabezado sutil -->
+  <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 mb-8"
+       data-aos="fade-up"
+       data-aos-duration="800"
+       data-aos-easing="ease-out-cubic">
+    <div class="flex items-center gap-5">
+      <span class="flex-1 h-[1px] bg-white/10"></span>
+      <span class="font-mono text-[10px] sm:text-xs tracking-[0.35em] uppercase text-white/40 font-semibold whitespace-nowrap">
+        DETALLES DE OBRA
+      </span>
+      <span class="flex-1 h-[1px] bg-white/10"></span>
+    </div>
+  </div>
+
+  <!-- PARES DE IMÁGENES -->
+  <div class="w-full max-w-[1920px] mx-auto px-2 sm:px-4 lg:px-6 flex flex-col gap-[6px]">
+
+    <div *ngFor="let pair of pairs; let pairIdx = index"
+         class="duo-row grid gap-[6px]"
+         [class.duo-row-normal]="pairIdx % 2 === 0"
+         [class.duo-row-reversed]="pairIdx % 2 !== 0">
+
+      <!-- IMAGEN 1 del par -->
+      <div class="duo-item"
+           [attr.data-aos]="pairIdx % 2 === 0 ? 'fade-right' : 'fade-left'"
+           data-aos-duration="1000"
+           data-aos-easing="ease-out-cubic"
+           [attr.data-aos-delay]="pairIdx * 80">
+        <a [routerLink]="['/proyecto', pair[0].projectId]" class="duo-link">
+          <img [src]="pair[0].url" [alt]="pair[0].projectLabel" class="duo-img" loading="lazy">
+          <div class="duo-overlay">
+            <span class="duo-label">{{ pair[0].projectLabel }}</span>
+            <svg class="duo-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      <!-- IMAGEN 2 del par (si existe) -->
+      <div class="duo-item"
+           *ngIf="pair[1]"
+           [attr.data-aos]="pairIdx % 2 === 0 ? 'fade-left' : 'fade-right'"
+           data-aos-duration="1000"
+           data-aos-easing="ease-out-cubic"
+           [attr.data-aos-delay]="pairIdx * 80 + 150">
+        <a [routerLink]="['/proyecto', pair[1].projectId]" class="duo-link">
+          <img [src]="pair[1].url" [alt]="pair[1].projectLabel" class="duo-img" loading="lazy">
+          <div class="duo-overlay">
+            <span class="duo-label">{{ pair[1].projectLabel }}</span>
+            <svg class="duo-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      <!-- Si el par tiene solo 1 imagen, mostrar placeholder decorativo -->
+      <div class="duo-item duo-item-placeholder"
+           *ngIf="!pair[1]"
+           [attr.data-aos]="'fade-left'"
+           data-aos-duration="800"
+           [attr.data-aos-delay]="pairIdx * 80 + 150">
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

@@ -1,0 +1,170 @@
+/* ===================================================
+   PHOTO DUO GALLERY — Sysmicon Pares Editoriales
+   2 imágenes por fila, layout editorial de alto impacto
+   =================================================== */
+
+.duo-gallery-section {
+  position: relative;
+}
+
+/* ===== FILAS ===== */
+.duo-row {
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+}
+
+/* Filas pares: izquierda un poco más ancha */
+.duo-row-normal {
+  grid-template-columns: 1.15fr 0.85fr;
+  height: 420px;
+}
+
+/* Filas impares: derecha un poco más ancha (ritmo visual alternado) */
+.duo-row-reversed {
+  grid-template-columns: 0.85fr 1.15fr;
+  height: 390px;
+}
+
+/* ===== ITEM ===== */
+.duo-item {
+  position: relative;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.duo-item-placeholder {
+  background: linear-gradient(135deg, #0a0a0a 0%, #111827 100%);
+  opacity: 0.4;
+}
+
+/* ===== LINK ===== */
+.duo-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* ===== IMAGEN ===== */
+.duo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+              filter 0.5s ease;
+  filter: brightness(0.85);
+  will-change: transform;
+}
+
+.duo-link:hover .duo-img {
+  transform: scale(1.05);
+  filter: brightness(0.65);
+}
+
+/* ===== OVERLAY ===== */
+.duo-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 28px 32px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 8, 20, 0.90) 0%,
+    rgba(0, 8, 20, 0.35) 45%,
+    rgba(0, 8, 20, 0) 72%
+  );
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+}
+
+.duo-link:hover .duo-overlay {
+  opacity: 1;
+}
+
+/* ===== LABEL ===== */
+.duo-label {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(194, 225, 255, 0.95);
+  margin-bottom: 8px;
+  transform: translateY(10px);
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.duo-link:hover .duo-label {
+  transform: translateY(0);
+}
+
+/* ===== FLECHA ===== */
+.duo-arrow {
+  width: 20px;
+  height: 20px;
+  color: #ffffff;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.4s ease 0.05s,
+              transform 0.45s cubic-bezier(0.25, 1, 0.5, 1) 0.05s;
+}
+
+.duo-link:hover .duo-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Borde interior sutil en hover */
+.duo-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(194, 225, 255, 0);
+  transition: border-color 0.4s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.duo-item:hover::after {
+  border-color: rgba(194, 225, 255, 0.2);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .duo-row-normal,
+  .duo-row-reversed {
+    height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .duo-row-normal,
+  .duo-row-reversed {
+    grid-template-columns: 1fr 1fr !important;
+    height: 240px;
+  }
+}
+
+@media (max-width: 480px) {
+  .duo-row-normal,
+  .duo-row-reversed {
+    grid-template-columns: 1fr !important;
+    height: auto;
+  }
+
+  .duo-item {
+    height: 220px;
+  }
+
+  .duo-item-placeholder {
+    display: none;
+  }
+}

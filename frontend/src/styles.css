@@ -2,12 +2,12 @@
    SYSMICON - ARCHITECTURAL DESIGN SYSTEM & GLOBAL STYLES (TAILWIND CSS v3)
    ========================================================================== */
 
+/* Estilos CSS Globales de AOS (Animate On Scroll) - DEBE IR PRIMERO */
+@import 'aos/dist/aos.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Estilos CSS Globales de AOS (Animate On Scroll) */
-@import 'aos/dist/aos.css';
 
 /* Soporte y suavidad para animaciones AOS */
 [data-aos] {

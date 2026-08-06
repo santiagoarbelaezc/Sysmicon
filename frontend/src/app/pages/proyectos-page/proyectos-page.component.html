@@ -1,164 +1,156 @@
-<div class="min-h-screen bg-[#000814] text-white pt-28 pb-32 relative overflow-hidden">
-  <!-- Architectural background grid & ambient light -->
+<div class="min-h-screen bg-[#000814] text-white pt-24 pb-32 relative overflow-hidden">
+  <!-- Ambient light -->
   <div class="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-white/[0.03] blur-[150px] pointer-events-none"></div>
   <div class="absolute bottom-1/3 right-10 w-[500px] h-[500px] rounded-full bg-[#C2E1FF]/[0.04] blur-[160px] pointer-events-none"></div>
   <div class="absolute inset-0 pointer-events-none opacity-[0.025]" style="background-image: radial-gradient(#FFF 1px, transparent 1px); background-size: 32px 32px;"></div>
 
-  <!-- Header Editorial -->
-  <header class="w-full max-w-[1750px] mx-auto px-6 md:px-16 mb-14 relative z-10">
-    <div class="border-b border-white/10 pb-10">
-      <div data-aos="fade-up">
-        <h1 class="font-serif text-4xl md:text-6xl font-bold tracking-tight uppercase text-white mb-4">
-          Galería de <span class="text-[#C2E1FF] italic font-light">Proyectos</span>
-        </h1>
-        <p class="text-white/70 font-serif italic text-base md:text-lg max-w-2xl leading-relaxed">
-          Obras residenciales, fincas campestres, bodegas e hitos arquitectónicos concebidos y construidos bajo un único liderazgo técnico y financiero.
-        </p>
-      </div>
+  <!-- Encabezado de Sección Centrado & Limpio -->
+  <header class="w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 mb-10 relative z-10"
+          data-aos="fade-up"
+          data-aos-duration="900"
+          data-aos-easing="ease-out-cubic">
+    <div class="section-header text-center max-w-4xl mx-auto border-b border-white/10 pb-8">
+      <h1 class="title-lg font-serif text-white text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight uppercase">
+        DOSSIER DE PROYECTOS
+      </h1>
     </div>
   </header>
 
-  <!-- Grilla Tipo Catálogo / Revista Editorial -->
-  <main class="w-full max-w-[1750px] mx-auto px-6 md:px-16 relative z-10">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-10">
+  <!-- Grilla Tipo Catálogo Ampliada de Máximo Ancho y Altura -->
+  <main class="w-full max-w-[1920px] mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-6">
+      
       <div *ngFor="let p of proyectos(); let idx = index" 
            (click)="abrirDossier(p)"
-           class="group flex flex-col cursor-pointer">
+           class="group flex flex-col cursor-pointer"
+           data-aos="fade-up"
+           data-aos-duration="1000"
+           data-aos-easing="ease-out-cubic"
+           [attr.data-aos-delay]="idx * 120">
         
-        <!-- Contenedor Poster / Editorial Cover (Aspect Ratio 3:4) -->
-        <div class="aspect-[3/4] relative overflow-hidden rounded-xl bg-[#242424] shadow-2xl border border-white/10 group-hover:border-wood-accent/50 transition-all duration-500">
+        <!-- Contenedor Poster Ampliado y Más Alto (Aspect Ratio 3:4.5) -->
+        <div class="aspect-[3/4.5] relative overflow-hidden rounded-2xl bg-[#242424] shadow-2xl border border-white/15 group-hover:border-[#C2E1FF]/60 transition-all duration-500 min-h-[540px] lg:min-h-[640px] xl:min-h-[700px] w-full">
           
           <!-- Background Photo con sutil Zoom -->
           <img [src]="p.imagenUrl" [alt]="p.titulo" 
                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90 group-hover:brightness-100">
           
-          <!-- Gradientes y sombras para perfecta legibilidad de textos sobre imagen -->
+          <!-- Gradientes y sombras -->
           <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-black/20 opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
           <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/50 pointer-events-none"></div>
 
-          <!-- ESTILO 1: CORAL TITLE (Casa M: Título horizontal abajo + 3 fotos horizontales) -->
+          <!-- ESTILO 1: CORAL TITLE -->
           <ng-container *ngIf="p.editorialStyle === 'coral-title' || !p.editorialStyle">
-            <!-- Barcode vertical superior derecho -->
-            <div class="absolute top-5 right-4 text-[8px] font-mono tracking-[0.3em] text-white/50 uppercase origin-top-right rotate-90 select-none">
+            <div class="absolute top-5 right-4 text-[9px] font-mono tracking-[0.3em] text-white/50 uppercase origin-top-right rotate-90 select-none">
               {{ p.barcode || '0 600229402 1' }} |||||
             </div>
             
-            <div class="absolute bottom-[28%] left-5 right-6 flex flex-col items-start z-10">
-              <p *ngIf="p.editorialSubtitle" class="text-white/90 font-sans text-[10px] md:text-xs leading-relaxed mb-2 max-w-[90%] border-l-2 border-wood-accent pl-2.5 bg-black/50 py-0.5 rounded-r">
-                {{ p.editorialSubtitle }}
-              </p>
-              <h3 class="font-serif text-3xl md:text-4xl font-extrabold tracking-tight text-wood-accent uppercase leading-none drop-shadow-lg group-hover:translate-x-1 transition-transform duration-300">
+            <div class="absolute bottom-[26%] left-6 right-6 flex flex-col items-start z-10">
+              <h3 class="font-serif text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#C2E1FF] uppercase leading-none drop-shadow-lg group-hover:translate-x-1 transition-transform duration-300">
                 {{ p.editorialTitle || p.titulo }}
               </h3>
             </div>
 
-            <!-- Disposición A: 3 miniaturas horizontales en la franja inferior -->
-            <div class="absolute inset-x-3 bottom-3 h-[22%] grid grid-cols-3 gap-1.5 z-20 rounded-lg overflow-hidden border border-white/20 bg-black/60 p-1 backdrop-blur-xs">
+            <!-- 3 miniaturas horizontales en la franja inferior -->
+            <div class="absolute inset-x-4 bottom-4 h-[22%] grid grid-cols-3 gap-2 z-20 rounded-xl overflow-hidden border border-white/20 bg-black/60 p-1.5 backdrop-blur-xs">
               <img *ngFor="let img of (p.imagenesAdicionales || [p.imagenUrl]).slice(0,3)" 
                    [src]="img" 
-                   class="w-full h-full object-cover rounded-xs filter brightness-90 hover:brightness-110 transition-all">
+                   class="w-full h-full object-cover rounded-sm filter brightness-90 hover:brightness-110 transition-all">
             </div>
           </ng-container>
 
-          <!-- ESTILO 2: WHITE BOLD VERTICAL (Casa S19: Título VERTICAL lateral + 3 fotos en columna izquierda) -->
+          <!-- ESTILO 2: WHITE BOLD VERTICAL -->
           <ng-container *ngIf="p.editorialStyle === 'white-bold'">
-            <!-- Título VERTICAL elegante en el lado derecho -->
-            <div class="absolute right-5 top-12 bottom-20 z-10 flex items-center justify-center [writing-mode:vertical-rl] rotate-180">
-              <h3 class="font-serif text-3xl md:text-4xl font-black text-white uppercase tracking-[0.2em] drop-shadow-2xl group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute right-6 top-12 bottom-20 z-10 flex items-center justify-center [writing-mode:vertical-rl] rotate-180">
+              <h3 class="font-serif text-3xl md:text-4xl lg:text-5xl font-black text-white uppercase tracking-[0.2em] drop-shadow-2xl group-hover:scale-105 transition-transform duration-500">
                 {{ p.editorialTitle || p.titulo }}
               </h3>
             </div>
 
-            <p class="absolute bottom-5 right-16 text-white/80 font-sans text-[10px] max-w-[50%] text-right bg-black/50 px-2 py-1 rounded border-r border-[#C2E1FF]">
-              {{ p.editorialSubtitle || p.subtitulo }}
-            </p>
-
-            <!-- Disposición B: 3 miniaturas apiladas verticalmente en la izquierda -->
-            <div class="absolute left-3 top-10 bottom-10 w-20 flex flex-col gap-1.5 z-20 rounded-lg overflow-hidden border border-white/20 bg-black/60 p-1 backdrop-blur-xs">
+            <!-- 3 miniaturas apiladas verticalmente en la izquierda -->
+            <div class="absolute left-4 top-10 bottom-10 w-24 flex flex-col gap-2 z-20 rounded-xl overflow-hidden border border-white/20 bg-black/60 p-1.5 backdrop-blur-xs">
               <img *ngFor="let img of (p.imagenesAdicionales || [p.imagenUrl]).slice(0,3)" 
                    [src]="img" 
-                   class="w-full h-1/3 object-cover rounded-xs filter brightness-90 hover:brightness-110 transition-all">
+                   class="w-full h-1/3 object-cover rounded-sm filter brightness-90 hover:brightness-110 transition-all">
             </div>
           </ng-container>
 
-          <!-- ESTILO 3: RIBBON TAG (Casa S23: Distintivo superior + Título centro + 3 fotos en layout 2+1) -->
+          <!-- ESTILO 3: RIBBON TAG -->
           <ng-container *ngIf="p.editorialStyle === 'ribbon-tag'">
             <div class="absolute top-0 left-6 z-20">
-              <span class="inline-block bg-wood-accent text-black font-sans font-extrabold text-xs px-3.5 py-2 uppercase tracking-widest shadow-xl">
+              <span class="inline-block bg-[#C2E1FF] text-[#000814] font-sans font-extrabold text-xs px-4 py-2.5 uppercase tracking-widest shadow-xl">
                 {{ p.editorialBadge || '+ DESTACADO' }}
               </span>
             </div>
             
             <div class="absolute top-[26%] left-6 z-10 right-8">
-              <h3 class="font-serif text-3xl md:text-4xl font-bold text-white uppercase tracking-wide drop-shadow-[0_4px_15px_rgba(0,0,0,0.9)] group-hover:translate-x-1 transition-transform mb-1.5">
+              <h3 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white uppercase tracking-wide drop-shadow-[0_4px_15px_rgba(0,0,0,0.9)] group-hover:translate-x-1 transition-transform mb-2">
                 {{ p.editorialTitle || p.titulo }}
               </h3>
-              <p class="text-white/80 text-[11px] font-serif italic max-w-[85%] bg-black/50 px-2.5 py-1 rounded border-l border-wood-accent">
-                "{{ p.editorialSubtitle || p.subtitulo }}"
-              </p>
             </div>
 
-            <!-- Disposición C: 3 fotos en cuadrícula asimétrica (1 ancha + 2 angostas) -->
-            <div class="absolute inset-x-3 bottom-3 h-[24%] grid grid-cols-12 gap-1.5 z-20 rounded-lg overflow-hidden border border-white/20 bg-black/60 p-1 backdrop-blur-xs">
+            <!-- 3 fotos en cuadrícula asimétrica -->
+            <div class="absolute inset-x-4 bottom-4 h-[24%] grid grid-cols-12 gap-2 z-20 rounded-xl overflow-hidden border border-white/20 bg-black/60 p-1.5 backdrop-blur-xs">
               <div class="col-span-6 h-full">
-                <img [src]="(p.imagenesAdicionales || [p.imagenUrl])[0]" class="w-full h-full object-cover rounded-xs filter brightness-90 hover:brightness-110 transition-all">
+                <img [src]="(p.imagenesAdicionales || [p.imagenUrl])[0]" class="w-full h-full object-cover rounded-sm filter brightness-90 hover:brightness-110 transition-all">
               </div>
               <div class="col-span-3 h-full">
-                <img [src]="(p.imagenesAdicionales || [p.imagenUrl])[1] || (p.imagenesAdicionales || [p.imagenUrl])[0]" class="w-full h-full object-cover rounded-xs filter brightness-90 hover:brightness-110 transition-all">
+                <img [src]="(p.imagenesAdicionales || [p.imagenUrl])[1] || (p.imagenesAdicionales || [p.imagenUrl])[0]" class="w-full h-full object-cover rounded-sm filter brightness-90 hover:brightness-110 transition-all">
               </div>
               <div class="col-span-3 h-full">
-                <img [src]="(p.imagenesAdicionales || [p.imagenUrl])[2] || (p.imagenesAdicionales || [p.imagenUrl])[0]" class="w-full h-full object-cover rounded-xs filter brightness-90 hover:brightness-110 transition-all">
+                <img [src]="(p.imagenesAdicionales || [p.imagenUrl])[2] || (p.imagenesAdicionales || [p.imagenUrl])[0]" class="w-full h-full object-cover rounded-sm filter brightness-90 hover:brightness-110 transition-all">
               </div>
             </div>
           </ng-container>
 
-          <!-- ESTILO 4: SPLIT GRID (Casa L: Título top left + slogan vertical right + 3 fotos abajo) -->
+          <!-- ESTILO 4: SPLIT GRID -->
           <ng-container *ngIf="p.editorialStyle === 'split-grid'">
             <div class="absolute top-6 left-6 z-10">
-              <h3 class="font-serif text-3xl md:text-4xl font-black text-white uppercase leading-[0.92] tracking-tight drop-shadow-xl">
+              <h3 class="font-serif text-3xl md:text-4xl lg:text-5xl font-black text-white uppercase leading-[0.92] tracking-tight drop-shadow-xl">
                 {{ p.editorialTitle || p.titulo }}
               </h3>
             </div>
             
-            <div class="absolute top-8 right-4 origin-top-right rotate-90 text-[8px] font-mono tracking-[0.28em] text-white/60 uppercase select-none">
+            <div class="absolute top-8 right-4 origin-top-right rotate-90 text-[9px] font-mono tracking-[0.28em] text-white/60 uppercase select-none">
               {{ p.editorialSlogan || 'MEDELLÍN ES COLOR LADRILLO.' }}
             </div>
             
-            <!-- Disposición D: 3 fotos en rejilla uniforme horizontal -->
-            <div class="absolute inset-x-3 bottom-3 h-[22%] grid grid-cols-3 gap-1.5 z-20 rounded-lg overflow-hidden border border-white/20 bg-black/60 p-1 backdrop-blur-xs">
+            <!-- 3 fotos en rejilla uniforme horizontal -->
+            <div class="absolute inset-x-4 bottom-4 h-[22%] grid grid-cols-3 gap-2 z-20 rounded-xl overflow-hidden border border-white/20 bg-black/60 p-1.5 backdrop-blur-xs">
               <img *ngFor="let img of (p.imagenesAdicionales || [p.imagenUrl]).slice(0,3)" 
                    [src]="img" 
-                   class="w-full h-full object-cover rounded-xs filter brightness-90 hover:brightness-110 transition-all">
+                   class="w-full h-full object-cover rounded-sm filter brightness-90 hover:brightness-110 transition-all">
             </div>
           </ng-container>
 
-          <!-- Badge flotante inferior derecho con código editorial -->
-          <div class="absolute top-4 left-4 text-[9px] font-mono text-white/40 tracking-wider">
+          <!-- Badge flotante superior derecho con código editorial -->
+          <div class="absolute top-4 left-4 text-[10px] font-mono text-white/40 tracking-wider">
             #{{ p.id.toUpperCase() }}
           </div>
         </div>
 
-        <!-- Texto y acción debajo de la tarjeta poster -->
-        <div class="mt-4 flex flex-col items-start px-1">
-          <p class="text-gray-300 font-sans text-xs md:text-sm leading-relaxed min-h-[2.4rem] line-clamp-2">
-            {{ p.subtitulo }}
-          </p>
-          <div class="flex items-center gap-1.5 mt-2 text-wood-accent group-hover:text-white font-sans text-xs font-bold tracking-widest uppercase transition-colors">
+        <!-- SOLO EL BOTÓN 'CONOCE MÁS' DEBAJO DE LA TARJETA -->
+        <div class="mt-4 flex items-center justify-start px-1">
+          <div class="inline-flex items-center gap-2 text-[#C2E1FF] group-hover:text-white font-sans text-xs sm:text-sm font-bold tracking-[0.2em] uppercase transition-colors">
             <span>CONOCE MÁS</span>
-            <span class="text-sm font-black">+</span>
+            <span class="text-base font-black group-hover:translate-x-1 transition-transform">+</span>
           </div>
         </div>
       </div>
+
     </div>
 
     <!-- Si no hay proyectos con el filtro -->
     <div *ngIf="proyectos().length === 0" class="py-20 text-center border border-white/10 rounded-2xl bg-white/[0.02]">
       <p class="text-gray-400 font-serif text-xl">No se encontraron proyectos en la categoría «{{ categoriaSeleccionada() }}»</p>
-      <button (click)="setCategoria('Todas')" class="mt-4 px-6 py-2.5 rounded-full bg-wood-accent text-black font-bold text-xs uppercase tracking-widest">
+      <button (click)="setCategoria('Todas')" class="mt-4 px-6 py-2.5 rounded-full bg-[#C2E1FF] text-[#000814] font-bold text-xs uppercase tracking-widest">
         Ver Todos los Proyectos
       </button>
     </div>
   </main>
+
+  <!-- GALERÍA COLLAGE EDITORIAL (Debajo de los Pósters) -->
+  <app-photo-collage [collageItems]="galleryItems"></app-photo-collage>
 
   <!-- SECCIÓN INFERIOR EDITORIAL: BANNERS VIDEO CASA M & CASA L CON BANNER DE CONTACTO EN EL MEDIO -->
   <section class="w-full mt-24 space-y-20 relative z-10">
@@ -174,29 +166,53 @@
       secondaryCtaText="VER DOSSIER COMPLETO">
     </app-banner-video>
 
-    <!-- 2. Banner de Contacto Intermedio Ultra-Limpio -->
-    <section class="relative w-full py-16 sm:py-20 lg:py-24 bg-white text-neutral-900 overflow-hidden font-sans my-12">
-      <div class="max-w-[1500px] mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
+    <!-- 2. Banner de Contacto Intermedio Rediseñado & Ampliado -->
+    <section class="relative w-full py-20 sm:py-28 lg:py-32 bg-white text-neutral-900 overflow-hidden font-sans my-12 shadow-sm border-y border-neutral-200/80">
+      <div class="max-w-[1720px] mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
         
-        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12">
-          <div class="max-w-3xl space-y-3 text-left">
-            <h3 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-neutral-900 font-bold leading-tight tracking-tight uppercase">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 lg:gap-16">
+          <!-- Textos Principales con AOS en Cascada -->
+          <div class="max-w-4xl space-y-4 text-left">
+            <span data-aos="fade-up" 
+                  data-aos-duration="800" 
+                  data-aos-easing="ease-out-cubic"
+                  class="font-mono text-xs tracking-[0.3em] text-neutral-400 font-semibold uppercase block">
+              ASESORÍA ARQUITECTÓNICA & PREVENTA
+            </span>
+
+            <h3 data-aos="fade-up" 
+                data-aos-duration="900" 
+                data-aos-delay="100"
+                data-aos-easing="ease-out-cubic"
+                class="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-neutral-900 font-bold leading-[1.08] tracking-tight uppercase">
               ¿Tienes un terreno o un <span class="font-serif italic font-normal text-neutral-500">sueño en mente?</span>
             </h3>
 
-            <p class="font-sans text-base sm:text-lg text-neutral-600 leading-relaxed font-light max-w-2xl">
+            <p data-aos="fade-up" 
+               data-aos-duration="900" 
+               data-aos-delay="200"
+               data-aos-easing="ease-out-cubic"
+               class="font-sans text-lg sm:text-xl md:text-2xl text-neutral-600 leading-relaxed font-light max-w-3xl pt-1">
               Nuestros arquitectos e ingenieros están listos para asesorarte. Agenda una consulta de viabilidad técnica y presupuestal sin costo.
             </p>
           </div>
 
-          <div class="flex flex-wrap items-center gap-4 shrink-0">
-            <a routerLink="/contacto" class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-black text-white font-bold text-xs uppercase tracking-widest hover:bg-neutral-800 hover:scale-105 transition-all duration-300 shadow-sm group/btn cursor-pointer">
+          <!-- Botones Ampliados con Animación AOS -->
+          <div data-aos="fade-left" 
+               data-aos-duration="1000" 
+               data-aos-delay="300"
+               data-aos-easing="ease-out-cubic"
+               class="flex flex-wrap items-center gap-4 sm:gap-5 shrink-0 pt-2 lg:pt-0">
+            
+            <a routerLink="/contacto" 
+               class="inline-flex items-center gap-3.5 px-10 py-5 rounded-full bg-black text-white font-sans font-bold text-xs sm:text-sm uppercase tracking-[0.2em] hover:bg-neutral-800 hover:scale-105 transition-all duration-300 shadow-xl group/btn cursor-pointer whitespace-nowrap">
               <span>Agendar Cita</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover/btn:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover/btn:translate-x-1.5 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
 
-            <a href="tel:+573108459210" class="inline-flex items-center gap-3 px-7 py-4 rounded-full bg-transparent hover:bg-neutral-100 text-neutral-900 border border-neutral-300 font-mono text-xs tracking-wider uppercase transition-all duration-300">
-              <svg class="w-4 h-4 text-neutral-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <a href="tel:+573108459210" 
+               class="inline-flex items-center gap-3.5 px-9 py-5 rounded-full bg-transparent hover:bg-black text-neutral-900 hover:text-white border-2 border-neutral-300 hover:border-black font-mono text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 shadow-xs hover:scale-105 whitespace-nowrap">
+              <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
               </svg>
               <span>+57 (310) 845-9210</span>
@@ -209,6 +225,8 @@
 
     <!-- 3. Banner Video Casa L -->
     <app-banner-video
+      data-aos="fade-up"
+      data-aos-duration="1000"
       videoSrc="https://res.cloudinary.com/dsv1gdgya/video/upload/v1785017752/sysmi-5_zakn8v.mp4"
       titulo="CASA"
       tituloHighlight="L"

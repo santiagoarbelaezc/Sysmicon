@@ -1,0 +1,239 @@
+<!-- =====================================================
+     GALERÍA COLLAGE ARQUITECTÓNICA — Sysmicon Editorial
+     Layout asimétrico tipo revista de lujo + AOS elegante
+     ===================================================== -->
+<section class="collage-section w-full bg-[#000814] py-16 sm:py-20 overflow-hidden" *ngIf="collageItems.length > 0">
+
+  <!-- Encabezado Sutil -->
+  <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 mb-10"
+       data-aos="fade-up"
+       data-aos-duration="800"
+       data-aos-easing="ease-out-cubic">
+    <div class="flex items-center gap-5">
+      <span class="font-mono text-[10px] sm:text-xs tracking-[0.35em] uppercase text-white/40 font-semibold">
+        GALERÍA DE DETALLES
+      </span>
+      <span class="flex-1 h-[1px] bg-white/10"></span>
+      <span class="font-mono text-[10px] sm:text-xs tracking-[0.35em] uppercase text-white/40 font-semibold">
+        {{ collageItems.length }} FOTOGRAFÍAS
+      </span>
+    </div>
+  </div>
+
+  <!-- COLLAGE GRID ASIMÉTRICO -->
+  <div class="collage-grid w-full max-w-[1920px] mx-auto px-2 sm:px-4 lg:px-6">
+
+    <!-- FILA 1: Grande (2 cols) + Mediana + Mediana -->
+    <div class="collage-row row-1">
+
+      <!-- ITEM 1: Grande horizontal (col-span-2) -->
+      <div class="collage-item item-wide"
+           data-aos="fade-right"
+           data-aos-duration="1100"
+           data-aos-easing="ease-out-cubic"
+           *ngIf="collageItems[0] as item">
+        <a [routerLink]="['/proyecto', item.projectId]" class="collage-link">
+          <img [src]="item.url" [alt]="item.projectLabel" class="collage-img" loading="lazy">
+          <div class="collage-overlay">
+            <span class="collage-label">{{ item.projectLabel }}</span>
+            <svg class="collage-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      <!-- ITEM 2: Mediana -->
+      <div class="collage-item item-normal"
+           data-aos="fade-up"
+           data-aos-duration="1000"
+           data-aos-delay="150"
+           data-aos-easing="ease-out-cubic"
+           *ngIf="collageItems[1] as item">
+        <a [routerLink]="['/proyecto', item.projectId]" class="collage-link">
+          <img [src]="item.url" [alt]="item.projectLabel" class="collage-img" loading="lazy">
+          <div class="collage-overlay">
+            <span class="collage-label">{{ item.projectLabel }}</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- ITEM 3: Mediana -->
+      <div class="collage-item item-normal"
+           data-aos="fade-left"
+           data-aos-duration="1000"
+           data-aos-delay="300"
+           data-aos-easing="ease-out-cubic"
+           *ngIf="collageItems[2] as item">
+        <a [routerLink]="['/proyecto', item.projectId]" class="collage-link">
+          <img [src]="item.url" [alt]="item.projectLabel" class="collage-img" loading="lazy">
+          <div class="collage-overlay">
+            <span class="collage-label">{{ item.projectLabel }}</span>
+          </div>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- FILA 2: Pequeña + Grande central (col-span-2) + Mediana -->
+    <div class="collage-row row-2">
+
+      <!-- ITEM 4: Pequeña -->
+      <div class="collage-item item-small"
+           data-aos="fade-up"
+           data-aos-duration="900"
+           data-aos-delay="100"
+           data-aos-easing="ease-out-cubic"
+           *ngIf="collageItems[3] as item">
+        <a [routerLink]="['/proyecto', item.projectId]" class="collage-link">
+          <img [src]="item.url" [alt]="item.projectLabel" class="collage-img" loading="lazy">
+          <div class="collage-overlay">
+            <span class="collage-label">{{ item.projectLabel }}</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- ITEM 5: Grande central (col-span-2) -->
+      <div class="collage-item item-wide"
+           data-aos="zoom-in"
+           data-aos-duration="1100"
+           data-aos-delay="200"
+           data-aos-easing="ease-out-cubic"
+           *ngIf="collageItems[4] as item">
+        <a [routerLink]="['/proyecto', item.projectId]" class="collage-link">
+          <img [src]="item.url" [alt]="item.projectLabel" class="collage-img" loading="lazy">
+          <div class="collage-overlay">
+            <span class="collage-label">{{ item.projectLabel }}</span>
+            <svg class="collage-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      <!-- ITEM 6: Mediana -->
+      <div class="collage-item item-normal"
+           data-aos="fade-left"
+           data-aos-duration="1000"
+           data-aos-delay="350"
+           data-aos-easing="ease-out-cubic"
+           *ngIf="collageItems[5] as item">
+        <a [routerLink]="['/proyecto', item.projectId]" class="collage-link">
+          <img [src]="item.url" [alt]="item.projectLabel" class="collage-img" loading="lazy">
+          <div class="collage-overlay">
+            <span class="collage-label">{{ item.projectLabel }}</span>
+          </div>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- FILA 3: Mediana + Mediana + Grande (col-span-2) -->
+    <div class="collage-row row-3">
+
+      <!-- ITEM 7: Mediana -->
+      <div class="collage-item item-normal"
+           data-aos="fade-right"
+           data-aos-duration="1000"
+           data-aos-delay="100"
+           data-aos-easing="ease-out-cubic"
+           *ngIf="collageItems[6] as item">
+        <a [routerLink]="['/proyecto', item.projectId]" class="collage-link">
+          <img [src]="item.url" [alt]="item.projectLabel" class="collage-img" loading="lazy">
+          <div class="collage-overlay">
+            <span class="collage-label">{{ item.projectLabel }}</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- ITEM 8: Mediana -->
+      <div class="collage-item item-normal"
+           data-aos="fade-up"
+           data-aos-duration="900"
+           data-aos-delay="200"
+           data-aos-easing="ease-out-cubic"
+           *ngIf="collageItems[7] as item">
+        <a [routerLink]="['/proyecto', item.projectId]" class="collage-link">
+          <img [src]="item.url" [alt]="item.projectLabel" class="collage-img" loading="lazy">
+          <div class="collage-overlay">
+            <span class="collage-label">{{ item.projectLabel }}</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- ITEM 9: Grande (col-span-2) -->
+      <div class="collage-item item-wide"
+           data-aos="fade-left"
+           data-aos-duration="1100"
+           data-aos-delay="300"
+           data-aos-easing="ease-out-cubic"
+           *ngIf="collageItems[8] as item">
+        <a [routerLink]="['/proyecto', item.projectId]" class="collage-link">
+          <img [src]="item.url" [alt]="item.projectLabel" class="collage-img" loading="lazy">
+          <div class="collage-overlay">
+            <span class="collage-label">{{ item.projectLabel }}</span>
+            <svg class="collage-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- FILA 4: Grande (col-span-2) + Pequeña + Mediana (si hay más de 9 items) -->
+    <div class="collage-row row-4" *ngIf="collageItems.length >= 12">
+
+      <!-- ITEM 10: Pequeña -->
+      <div class="collage-item item-small"
+           data-aos="fade-up"
+           data-aos-duration="900"
+           data-aos-delay="50"
+           data-aos-easing="ease-out-cubic"
+           *ngIf="collageItems[9] as item">
+        <a [routerLink]="['/proyecto', item.projectId]" class="collage-link">
+          <img [src]="item.url" [alt]="item.projectLabel" class="collage-img" loading="lazy">
+          <div class="collage-overlay">
+            <span class="collage-label">{{ item.projectLabel }}</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- ITEM 11: Grande (col-span-2) -->
+      <div class="collage-item item-wide"
+           data-aos="zoom-in"
+           data-aos-duration="1100"
+           data-aos-delay="150"
+           data-aos-easing="ease-out-cubic"
+           *ngIf="collageItems[10] as item">
+        <a [routerLink]="['/proyecto', item.projectId]" class="collage-link">
+          <img [src]="item.url" [alt]="item.projectLabel" class="collage-img" loading="lazy">
+          <div class="collage-overlay">
+            <span class="collage-label">{{ item.projectLabel }}</span>
+            <svg class="collage-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      <!-- ITEM 12: Mediana -->
+      <div class="collage-item item-normal"
+           data-aos="fade-left"
+           data-aos-duration="1000"
+           data-aos-delay="300"
+           data-aos-easing="ease-out-cubic"
+           *ngIf="collageItems[11] as item">
+        <a [routerLink]="['/proyecto', item.projectId]" class="collage-link">
+          <img [src]="item.url" [alt]="item.projectLabel" class="collage-img" loading="lazy">
+          <div class="collage-overlay">
+            <span class="collage-label">{{ item.projectLabel }}</span>
+          </div>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

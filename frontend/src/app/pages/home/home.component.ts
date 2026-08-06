@@ -32,7 +32,7 @@ import { ProyectosService } from '../../services/proyectos.service';
     BannerVideoComponent,
     ServicesSectionComponent,
     ContactStepsComponent,
-    MissionSectionComponent
+    MissionSectionComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

@@ -53,20 +53,30 @@ export class AppComponent implements OnInit {
       this.loadingService.showTemporarily(1100, 'Cargando Panel del Dashboard...');
     }
 
+    // Inicialización del motor de animaciones AOS (Animate On Scroll)
     try {
       AOS.init({
-        duration: 800,
-        once: true,
-        easing: 'ease-out-cubic'
+        duration: 900,
+        once: false,
+        easing: 'ease-out-cubic',
+        offset: 60,
+        delay: 0,
+        mirror: false
       });
+      if (typeof document !== 'undefined') {
+        document.body.classList.add('aos-ready');
+      }
     } catch (e) {
       console.warn('AOS initialization warning:', e);
     }
 
-    // Scroll automático al top (0,0) en cada cambio de ruta/componente
+    // Scroll automático al top (0,0) y refresco de animaciones AOS en cada navegación
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         window.scrollTo(0, 0);
+        setTimeout(() => {
+          AOS.refresh();
+        }, 150);
       }
     });
   }

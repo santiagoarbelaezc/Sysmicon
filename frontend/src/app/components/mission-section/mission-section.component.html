@@ -1,52 +1,33 @@
-<!-- Nuestra Misión & Matriz de Valores (Inspiración Minimalista Arquitectónica) -->
-<section class="mission-section relative w-full py-20 sm:py-28 bg-white text-neutral-900 overflow-hidden font-sans border-b border-neutral-200/80">
-  <div class="max-w-[1550px] mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
+<!-- Nuestra Misión & Matriz de Valores (Estilo Editorial Sutil & Minimalista) -->
+<section class="mission-section relative w-full py-16 sm:py-24 bg-white text-neutral-900 overflow-hidden font-sans border-b border-neutral-200/80">
+  <div class="max-w-[1650px] mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
     
-    <!-- Encabezado de Sección con Badge Superior y Titular Editorial -->
-    <div class="max-w-4xl space-y-4 mb-14" data-aos="fade-up">
-      <span class="font-mono text-xs tracking-[0.3em] text-neutral-400 font-semibold uppercase block">
-        VALORES & PROPÓSITO
-      </span>
+    <!-- Encabezado de Sección Sutil con Titular Editorial -->
+    <div class="max-w-5xl space-y-4 mb-10" data-aos="fade-up">
       <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-neutral-900 font-bold tracking-tight uppercase leading-[1.08]">
         Nuestra Misión
       </h2>
-      <p class="font-sans text-base sm:text-xl text-neutral-600 font-light leading-relaxed pt-2">
+      <p class="font-sans text-lg sm:text-xl md:text-2xl text-neutral-600 font-light leading-relaxed pt-1">
         Desarrollar proyectos a través de los conocimientos multidisciplinares que buscan canalizar la información por medio de la interacción con el espacio, el ingenio de la ejecución y la interpretación de la forma. Esto nos permite partir de lo esencial y generar ideas que proyecten espacios únicos con propósito y calidad de vida.
       </p>
     </div>
 
-    <!-- Matriz de Valores Arquitectónica (Grid 2 Filas x 3 Columnas con Bordes Definidos) -->
-    <div class="w-full border-2 border-neutral-200 rounded-[28px] overflow-hidden bg-white shadow-sm mb-12" data-aos="fade-up" data-aos-delay="100">
-      
-      <!-- Fila 1 -->
-      <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x-2 divide-neutral-200 border-b-2 border-neutral-200">
-        <div *ngFor="let item of valoresFila1" 
-             class="p-8 sm:p-12 flex items-center justify-center text-center transition-all duration-300 select-none cursor-default"
-             [ngClass]="item.destacado ? 'bg-neutral-100/90 font-bold text-neutral-900 shadow-inner' : 'bg-white hover:bg-neutral-900 hover:text-white font-medium text-neutral-800'">
-          <span class="font-mono text-xs sm:text-sm tracking-[0.3em] uppercase">
-            {{ item.nombre }}
-          </span>
-        </div>
-      </div>
-
-      <!-- Fila 2 -->
-      <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x-2 divide-neutral-200">
-        <div *ngFor="let item of valoresFila2" 
-             class="p-8 sm:p-12 flex items-center justify-center text-center bg-white hover:bg-neutral-900 hover:text-white transition-all duration-300 font-medium text-neutral-800 select-none cursor-default">
-          <span class="font-mono text-xs sm:text-sm tracking-[0.3em] uppercase">
-            {{ item.nombre }}
-          </span>
-        </div>
-      </div>
-
+    <!-- Valores en Chips Sutiles Sin Contenedores ni Líneas Pesadas -->
+    <div class="flex flex-wrap items-center gap-3 sm:gap-4 my-10" data-aos="fade-up" data-aos-delay="100">
+      <span *ngFor="let item of valoresFila1.concat(valoresFila2)" 
+            class="px-6 py-3.5 rounded-full bg-neutral-100/90 hover:bg-black hover:text-white font-mono text-xs font-bold tracking-[0.24em] uppercase text-neutral-700 transition-all duration-300 select-none cursor-default shadow-2xs">
+        {{ item.nombre }}
+      </span>
     </div>
 
-    <!-- Botón + DESCUBRE PROYECTOS -->
-    <div class="flex items-center justify-start" data-aos="fade-up" data-aos-delay="150">
+    <!-- Botón Grande Ampliado + DESCUBRE MÁS PROYECTOS -->
+    <div class="flex items-center justify-start pt-2" data-aos="fade-up" data-aos-delay="150">
       <a routerLink="/proyectos" 
-         class="group inline-flex items-center gap-3.5 px-9 py-4.5 rounded-2xl bg-neutral-100 hover:bg-black text-neutral-900 hover:text-white font-mono text-xs font-bold tracking-[0.24em] uppercase transition-all duration-300 shadow-xs cursor-pointer">
-        <span class="text-lg font-normal group-hover:rotate-90 transition-transform duration-300">+</span>
-        <span>DESCUBRE PROYECTOS</span>
+         class="group inline-flex items-center gap-4 px-11 py-5 rounded-full bg-black hover:bg-neutral-800 text-white font-sans text-xs sm:text-sm font-bold tracking-[0.24em] uppercase transition-all duration-300 shadow-xl hover:scale-105 cursor-pointer whitespace-nowrap">
+        <span>DESCUBRE MÁS PROYECTOS</span>
+        <svg class="w-4 h-4 shrink-0 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
+        </svg>
       </a>
     </div>
 

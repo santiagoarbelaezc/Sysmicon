@@ -6,13 +6,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* === OVERRIDE DE SEGURIDAD AOS ===
-   Garantiza que ningún elemento sea invisible mientras AOS no esté listo.
-   La clase .aos-ready se agrega al <body> DESPUÉS de que AOS se inicialice. */
-body:not(.aos-ready) [data-aos] {
-  opacity: 1 !important;
-  transform: none !important;
-  transition: none !important;
+/* Estilos CSS Globales de AOS (Animate On Scroll) */
+@import 'aos/dist/aos.css';
+
+/* Soporte y suavidad para animaciones AOS */
+[data-aos] {
+  will-change: opacity, transform;
 }
 
 /* ==========================================================================

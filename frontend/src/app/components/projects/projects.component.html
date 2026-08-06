@@ -156,31 +156,53 @@
 <!-- SECCIÓN INFERIOR EDITORIAL: BANNER DE CONTACTO INTERMEDIO & BANNER VIDEO CASA L -->
 <section class="w-full mt-16 space-y-20 relative z-10">
 
-  <!-- 2. Banner de Contacto Intermedio Ultra-Limpio (En el medio entre Casa M y Casa L) -->
-  <section class="relative w-full py-16 sm:py-20 lg:py-24 bg-white text-neutral-900 overflow-hidden font-sans my-12"
-           data-aos="fade-up"
-           data-aos-duration="1000">
-    <div class="max-w-[1500px] mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
+  <!-- 2. Banner de Contacto Intermedio Rediseñado & Ampliado -->
+  <section class="relative w-full py-20 sm:py-28 lg:py-32 bg-white text-neutral-900 overflow-hidden font-sans my-12 shadow-sm border-y border-neutral-200/80">
+    <div class="max-w-[1720px] mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
       
-      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12">
-        <div class="max-w-3xl space-y-3 text-left">
-          <h3 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-neutral-900 font-bold leading-tight tracking-tight uppercase">
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 lg:gap-16">
+        <!-- Textos Principales con AOS en Cascada -->
+        <div class="max-w-4xl space-y-4 text-left">
+          <span data-aos="fade-up" 
+                data-aos-duration="800" 
+                data-aos-easing="ease-out-cubic"
+                class="font-mono text-xs tracking-[0.3em] text-neutral-400 font-semibold uppercase block">
+            ASESORÍA ARQUITECTÓNICA & PREVENTA
+          </span>
+
+          <h3 data-aos="fade-up" 
+              data-aos-duration="900" 
+              data-aos-delay="100"
+              data-aos-easing="ease-out-cubic"
+              class="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-neutral-900 font-bold leading-[1.08] tracking-tight uppercase">
             ¿Tienes un terreno o un <span class="font-serif italic font-normal text-neutral-500">sueño en mente?</span>
           </h3>
 
-          <p class="font-sans text-base sm:text-lg text-neutral-600 leading-relaxed font-light max-w-2xl">
+          <p data-aos="fade-up" 
+             data-aos-duration="900" 
+             data-aos-delay="200"
+             data-aos-easing="ease-out-cubic"
+             class="font-sans text-lg sm:text-xl md:text-2xl text-neutral-600 leading-relaxed font-light max-w-3xl pt-1">
             Nuestros arquitectos e ingenieros están listos para asesorarte. Agenda una consulta de viabilidad técnica y presupuestal sin costo.
           </p>
         </div>
 
-        <div class="flex flex-wrap items-center gap-4 shrink-0">
-          <a routerLink="/contacto" class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-black text-white font-bold text-xs uppercase tracking-widest hover:bg-neutral-800 hover:scale-105 transition-all duration-300 shadow-sm group/btn cursor-pointer">
+        <!-- Botones Ampliados con Animación AOS -->
+        <div data-aos="fade-left" 
+             data-aos-duration="1000" 
+             data-aos-delay="300"
+             data-aos-easing="ease-out-cubic"
+             class="flex flex-wrap items-center gap-4 sm:gap-5 shrink-0 pt-2 lg:pt-0">
+          
+          <a routerLink="/contacto" 
+             class="inline-flex items-center gap-3.5 px-10 py-5 rounded-full bg-black text-white font-sans font-bold text-xs sm:text-sm uppercase tracking-[0.2em] hover:bg-neutral-800 hover:scale-105 transition-all duration-300 shadow-xl group/btn cursor-pointer whitespace-nowrap">
             <span>Agendar Cita</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover/btn:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover/btn:translate-x-1.5 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
 
-          <a href="tel:+573108459210" class="inline-flex items-center gap-3 px-7 py-4 rounded-full bg-transparent hover:bg-neutral-100 text-neutral-900 border border-neutral-300 font-mono text-xs tracking-wider uppercase transition-all duration-300">
-            <svg class="w-4 h-4 text-neutral-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <a href="tel:+573108459210" 
+             class="inline-flex items-center gap-3.5 px-9 py-5 rounded-full bg-transparent hover:bg-black text-neutral-900 hover:text-white border-2 border-neutral-300 hover:border-black font-mono text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 shadow-xs hover:scale-105 whitespace-nowrap">
+            <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
             </svg>
             <span>+57 (310) 845-9210</span>

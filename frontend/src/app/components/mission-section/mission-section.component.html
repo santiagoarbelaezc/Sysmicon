@@ -1,27 +1,27 @@
-<!-- Nuestra Misión & Matriz de Valores (Estilo Editorial Sutil & Minimalista) -->
+<!-- Nuestra Misión & Matriz de Valores (Estilo Editorial Sutil, Elegante & Centrado) -->
 <section class="mission-section relative w-full py-16 sm:py-24 bg-white text-neutral-900 overflow-hidden font-sans border-b border-neutral-200/80">
-  <div class="max-w-[1650px] mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
+  <div class="max-w-[1920px] mx-auto px-6 sm:px-12 lg:px-16 relative z-10 flex flex-col items-center text-center">
     
-    <!-- Encabezado de Sección Sutil con Titular Editorial -->
-    <div class="max-w-5xl space-y-4 mb-10" data-aos="fade-up">
+    <!-- Encabezado de Sección Centrado -->
+    <div class="max-w-5xl space-y-4 mb-8 text-center" data-aos="fade-up">
       <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-neutral-900 font-bold tracking-tight uppercase leading-[1.08]">
         Nuestra Misión
       </h2>
-      <p class="font-sans text-lg sm:text-xl md:text-2xl text-neutral-600 font-light leading-relaxed pt-1">
+      <p class="font-sans text-lg sm:text-xl md:text-2xl text-neutral-600 font-light leading-relaxed pt-1 mx-auto max-w-4xl">
         Desarrollar proyectos a través de los conocimientos multidisciplinares que buscan canalizar la información por medio de la interacción con el espacio, el ingenio de la ejecución y la interpretación de la forma. Esto nos permite partir de lo esencial y generar ideas que proyecten espacios únicos con propósito y calidad de vida.
       </p>
     </div>
 
-    <!-- Valores en Chips Sutiles Sin Contenedores ni Líneas Pesadas -->
-    <div class="flex flex-wrap items-center gap-3 sm:gap-4 my-10" data-aos="fade-up" data-aos-delay="100">
+    <!-- Valores en Chips Sutiles Centrados -->
+    <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 my-8 max-w-4xl" data-aos="fade-up" data-aos-delay="100">
       <span *ngFor="let item of valoresFila1.concat(valoresFila2)" 
             class="px-6 py-3.5 rounded-full bg-neutral-100/90 hover:bg-black hover:text-white font-mono text-xs font-bold tracking-[0.24em] uppercase text-neutral-700 transition-all duration-300 select-none cursor-default shadow-2xs">
         {{ item.nombre }}
       </span>
     </div>
 
-    <!-- Botón Grande Ampliado + DESCUBRE MÁS PROYECTOS -->
-    <div class="flex items-center justify-start pt-2" data-aos="fade-up" data-aos-delay="150">
+    <!-- Botón Grande Ampliado + DESCUBRE MÁS PROYECTOS Centrado -->
+    <div class="flex items-center justify-center pt-3" data-aos="fade-up" data-aos-delay="150">
       <a routerLink="/proyectos" 
          class="group inline-flex items-center gap-4 px-11 py-5 rounded-full bg-black hover:bg-neutral-800 text-white font-sans text-xs sm:text-sm font-bold tracking-[0.24em] uppercase transition-all duration-300 shadow-xl hover:scale-105 cursor-pointer whitespace-nowrap">
         <span>DESCUBRE MÁS PROYECTOS</span>

@@ -20,26 +20,19 @@
         [class.active]="activeIndex === i">
         
         <div class="text-content">
-          <!-- Subtítulo Monospaced Estilo Hero Video -->
-          <div class="subtitle-wrapper mb-3">
-            <span class="font-mono text-xs tracking-[0.3em] uppercase text-white/80 font-semibold block">
-              {{ val.subtitle }}
-            </span>
-          </div>
-
-          <!-- Título Principal Estilo Hero Video (Serif Ligero en Blanco + Cursiva Azul Hielo #C2E1FF) -->
-          <h2 class="title font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-tight leading-[1.05] drop-shadow-2xl mb-6">
-            {{ val.title }} <span class="font-serif italic font-normal text-[#C2E1FF]">{{ val.titleHighlight }}</span>
+          <!-- Título Principal en Mayúsculas y Letra Más Grande -->
+          <h2 class="title font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light text-white tracking-tight leading-[1.05] uppercase drop-shadow-2xl mb-8">
+            {{ val.title }} <span class="font-serif italic font-normal text-[#C2E1FF] uppercase">{{ val.titleHighlight }}</span>
           </h2>
           
           <!-- Description -->
-          <p *ngIf="val.description" class="description font-sans text-white/80 font-light text-base sm:text-lg max-w-2xl leading-relaxed mb-6">{{ val.description }}</p>
+          <p *ngIf="val.description" class="description font-sans text-white/90 font-light text-lg sm:text-xl max-w-3xl leading-relaxed mb-8 uppercase">{{ val.description }}</p>
           
-          <!-- Botón de Acción Estilo Exacto del Hero Video -->
+          <!-- Botón de Acción de Lujo Ampliado en Mayúsculas -->
           <div class="action-wrap" [class.show]="activeIndex === i">
-            <a routerLink="/nosotros" class="group/btn inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-500 font-sans text-xs font-bold tracking-[0.24em] uppercase shadow-2xl hover:scale-105 cursor-pointer">
-              <span>Conoce nuestra historia y equipo</span>
-              <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <a routerLink="/nosotros" class="group/btn inline-flex items-center justify-center gap-4 px-11 py-5 rounded-full bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-500 font-sans text-xs sm:text-sm font-bold tracking-[0.24em] uppercase shadow-[0_10px_35px_rgba(0,0,0,0.6)] hover:shadow-[0_15px_40px_rgba(194,225,255,0.4)] hover:scale-105 cursor-pointer whitespace-nowrap">
+              <span>CONOCE NUESTRA HISTORIA Y EQUIPO</span>
+              <svg class="w-4 h-4 shrink-0 transform group-hover/btn:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
               </svg>
             </a>

@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit {
   readonly isMobileMenuOpen = signal<boolean>(false);
   readonly isScrolled = signal<boolean>(false);
   readonly isHoveredTop = signal<boolean>(false);
+  readonly isInsideNosotrosSection = signal<boolean>(false);
   readonly currentLang = signal<'ES' | 'EN'>('ES');
 
   abrirGuiaPwa(): void {
@@ -52,10 +53,28 @@ export class NavbarComponent implements OnInit {
   private checkScroll(): void {
     const scrollOffset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
     this.isScrolled.set(scrollOffset > 40);
+
+    // Detectar si la pantalla está sobre la sección Sobre Nosotros (#nosotros-section)
+    if (typeof document !== 'undefined') {
+      const nosotrosEl = document.getElementById('nosotros-section');
+      if (nosotrosEl) {
+        const rect = nosotrosEl.getBoundingClientRect();
+        const active = rect.top <= 120 && rect.bottom >= 120;
+        this.isInsideNosotrosSection.set(active);
+      } else {
+        this.isInsideNosotrosSection.set(false);
+      }
+    }
   }
 
   get isNavbarVisible(): boolean {
     if (this.isMobileMenuOpen()) return true;
+
+    // Si el usuario está sobre el componente 'Sobre Nosotros', esconder el navbar (a menos que coloque el cursor arriba)
+    if (this.isInsideNosotrosSection() && !this.isHoveredTop()) {
+      return false;
+    }
+
     if (this.router.url !== '/' && this.router.url !== '') return true;
     return this.isScrolled() || this.isHoveredTop();
   }

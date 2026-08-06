@@ -28,35 +28,35 @@ export class AboutComponent {
       title: 'Arquitectura que trasciende',
       titleHighlight: 'el tiempo',
       description: '',
-      image: 'https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_900/v1785440099/6c62aa8e-b604-4c3a-a8c2-cb4ac61759a2_czyho0.jpg'
+      image: 'https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_1920/v1785440099/6c62aa8e-b604-4c3a-a8c2-cb4ac61759a2_czyho0.jpg'
     },
     {
       subtitle: 'NUESTRA FILOSOFÍA',
       title: 'Sobriedad. Función.',
       titleHighlight: 'Autenticidad.',
       description: '',
-      image: 'https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_900/v1785440100/6df1340c-7691-4ed0-9d57-e8d0f2dc3566_upfx1e.jpg'
+      image: 'https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_1920/v1785440100/6df1340c-7691-4ed0-9d57-e8d0f2dc3566_upfx1e.jpg'
     },
     {
       subtitle: 'NUESTRA MISIÓN',
       title: 'Residencias extraordinarias',
       titleHighlight: 'llave en mano',
       description: '',
-      image: 'https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_900/v1785440122/ea5179e4-6a1a-4fc8-a4da-829c4592c314_t1a9il.jpg'
+      image: 'https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_1920/v1785440122/ea5179e4-6a1a-4fc8-a4da-829c4592c314_t1a9il.jpg'
     },
     {
       subtitle: 'NUESTRO PROCESO',
       title: 'Liderazgo técnico integral',
       titleHighlight: '360°',
       description: '',
-      image: 'https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_900/v1785440111/a087b55c-2f1c-48a6-a2cd-80fc99502dc1_p8afun.jpg'
+      image: 'https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_1920/v1785440111/a087b55c-2f1c-48a6-a2cd-80fc99502dc1_p8afun.jpg'
     },
     {
       subtitle: 'EXCELENCIA EN DETALLE',
       title: 'Precisión milimétrica y',
       titleHighlight: 'materialidad noble',
       description: '',
-      image: 'https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_900/v1785440103/50d3b6d5-e4fb-406f-8515-75f1235a0047_fnb4bu.jpg'
+      image: 'https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_1920/v1785440103/50d3b6d5-e4fb-406f-8515-75f1235a0047_fnb4bu.jpg'
     }
   ];
 

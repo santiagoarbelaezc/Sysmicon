@@ -4,17 +4,14 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { AdminService } from '../../../services/admin.service';
 
-// Importación de las 8 vistas
+// Importación de las 5 vistas activas
 import { DashInicioComponent } from '../views/dash-inicio/dash-inicio.component';
 import { DashAnaliticasComponent } from '../views/dash-analiticas/dash-analiticas.component';
-import { DashCad2Component } from '../views/dash-cad2/dash-cad2.component';
-import { DashEstadisticasComponent } from '../views/dash-estadisticas/dash-estadisticas.component';
 import { DashPersonalizarComponent } from '../views/dash-personalizar/dash-personalizar.component';
 import { DashUsuariosComponent } from '../views/dash-usuarios/dash-usuarios.component';
 import { DashMensajesComponent } from '../views/dash-mensajes/dash-mensajes.component';
-import { DashReportesComponent } from '../views/dash-reportes/dash-reportes.component';
 
-export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | 'personalizar' | 'usuarios' | 'mensajes' | 'reportes';
+export type AdminSection = 'inicio' | 'analiticas' | 'personalizar' | 'usuarios' | 'mensajes';
 
 @Component({
   selector: 'app-admin-layout',
@@ -24,12 +21,9 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
     RouterModule,
     DashInicioComponent,
     DashAnaliticasComponent,
-    DashCad2Component,
-    DashEstadisticasComponent,
     DashPersonalizarComponent,
     DashUsuariosComponent,
-    DashMensajesComponent,
-    DashReportesComponent
+    DashMensajesComponent
   ],
   styles: [`
     :host {
@@ -85,7 +79,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
           </button>
         </div>
 
-        <!-- Menú de Navegación de 8 Secciones -->
+        <!-- Menú de Navegación Principal -->
         <nav class="flex-1 py-6 px-3 space-y-2 overflow-y-auto scrollbar-thin font-sans">
           
           <!-- 1. Dash Inicio -->
@@ -106,28 +100,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
             <span *ngIf="sidebarAbierto()" class="truncate font-sans">Analíticas</span>
           </button>
 
-          <!-- 3. CAD 2 -->
-          <button (click)="setSeccion('cad2')"
-                  [style.backgroundColor]="seccionActiva() === 'cad2' ? 'var(--admin-text-primary)' : 'transparent'"
-                  [style.color]="seccionActiva() === 'cad2' ? 'var(--admin-bg-primary)' : 'var(--admin-text-secondary)'"
-                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-sm transition-all cursor-pointer group font-extrabold shadow-sm hover:brightness-110">
-            <svg class="w-[18px] h-[18px] shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 0 3.4Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
-            <span *ngIf="sidebarAbierto()" class="truncate flex items-center justify-between w-full font-sans">
-              <span>CAD 2</span>
-              <span class="text-[9px] px-1.5 py-0.5 rounded font-bold font-mono" style="background-color: var(--admin-bg-primary); color: var(--admin-text-secondary); border: 1px solid var(--admin-border);">PRO</span>
-            </span>
-          </button>
-
-          <!-- 4. Estadísticas -->
-          <button (click)="setSeccion('estadisticas')"
-                  [style.backgroundColor]="seccionActiva() === 'estadisticas' ? 'var(--admin-text-primary)' : 'transparent'"
-                  [style.color]="seccionActiva() === 'estadisticas' ? 'var(--admin-bg-primary)' : 'var(--admin-text-secondary)'"
-                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-sm transition-all cursor-pointer group font-extrabold shadow-sm hover:brightness-110">
-            <svg class="w-[18px] h-[18px] shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            <span *ngIf="sidebarAbierto()" class="truncate font-sans">Estadísticas</span>
-          </button>
-
-          <!-- 5. Personalizar Sitio -->
+          <!-- 3. Personalizar Sitio -->
           <button (click)="setSeccion('personalizar')"
                   [style.backgroundColor]="seccionActiva() === 'personalizar' ? 'var(--admin-text-primary)' : 'transparent'"
                   [style.color]="seccionActiva() === 'personalizar' ? 'var(--admin-bg-primary)' : 'var(--admin-text-secondary)'"
@@ -136,7 +109,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
             <span *ngIf="sidebarAbierto()" class="truncate font-sans">Personalizar Sitio</span>
           </button>
 
-          <!-- 6. Usuarios -->
+          <!-- 4. Usuarios -->
           <button (click)="setSeccion('usuarios')"
                   [style.backgroundColor]="seccionActiva() === 'usuarios' ? 'var(--admin-text-primary)' : 'transparent'"
                   [style.color]="seccionActiva() === 'usuarios' ? 'var(--admin-bg-primary)' : 'var(--admin-text-secondary)'"
@@ -148,7 +121,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
             </span>
           </button>
 
-          <!-- 7. Mensajes -->
+          <!-- 5. Mensajes -->
           <button (click)="setSeccion('mensajes')"
                   [style.backgroundColor]="seccionActiva() === 'mensajes' ? 'var(--admin-text-primary)' : 'transparent'"
                   [style.color]="seccionActiva() === 'mensajes' ? 'var(--admin-bg-primary)' : 'var(--admin-text-secondary)'"
@@ -158,15 +131,6 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
               <span>Mensajes</span>
               <span *ngIf="countMensajesSinLeer() > 0" class="text-xs font-extrabold px-1.5 py-0.5 rounded-full font-mono" style="background-color: var(--admin-text-primary); color: var(--admin-bg-primary);">{{ countMensajesSinLeer() }}</span>
             </span>
-          </button>
-
-          <!-- 8. Reportes -->
-          <button (click)="setSeccion('reportes')"
-                  [style.backgroundColor]="seccionActiva() === 'reportes' ? 'var(--admin-text-primary)' : 'transparent'"
-                  [style.color]="seccionActiva() === 'reportes' ? 'var(--admin-bg-primary)' : 'var(--admin-text-secondary)'"
-                  class="w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-sm transition-all cursor-pointer group font-extrabold shadow-sm hover:brightness-110">
-            <svg class="w-[18px] h-[18px] shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
-            <span *ngIf="sidebarAbierto()" class="truncate font-sans">Reportes</span>
           </button>
 
         </nav>
@@ -200,7 +164,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
               <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--admin-text-muted);">Sección:</span>
               <span class="text-sm font-serif font-extrabold capitalize px-3 py-1 rounded-lg border"
                     style="background-color: var(--admin-bg-card); border-color: var(--admin-border); color: var(--admin-text-primary);">
-                {{ seccionActiva() === 'cad2' ? 'Studio CAD 2' : seccionActiva() }}
+                {{ seccionActiva() }}
               </span>
             </div>
           </div>
@@ -208,7 +172,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
           <!-- Buscador Rápido Top Header -->
           <div class="hidden md:flex items-center relative max-w-xs w-full">
             <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2" style="color: var(--admin-text-muted);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <input type="text" placeholder="Buscar en el portal o catálogo..." 
+            <input type="text" placeholder="Buscar en el portal..." 
                    class="w-full pl-9 pr-4 py-2 rounded-xl border text-xs focus:border-wood-accent focus:outline-none"
                    style="background-color: var(--admin-bg-input); border-color: var(--admin-border); color: var(--admin-text-primary);">
           </div>
@@ -241,7 +205,7 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
                 AD
               </div>
               <div class="hidden sm:block">
-                <span class="text-xs font-bold block leading-none" style="color: var(--admin-text-primary);">David Jaramillo</span>
+                <span class="text-xs font-bold block leading-none" style="color: var(--admin-text-primary);">Administrador Sysmicon</span>
                 <span class="text-[10px] uppercase tracking-wider font-bold" style="color: var(--admin-text-secondary);">Director Senior</span>
               </div>
               <button (click)="cerrarSesionAdmin()" title="Cerrar sesión o salir del Admin" class="hover:text-red-400 ml-1 p-1 rounded transition-colors" style="color: var(--admin-text-secondary);">
@@ -257,15 +221,12 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
         <main class="flex-1 overflow-y-auto p-6 md:p-8 scrollbar-thin" style="background-color: var(--admin-bg-primary);">
           <div class="max-w-[1600px] mx-auto pb-12">
             
-            <!-- RENDER DE LAS 8 SECCIONES -->
+            <!-- RENDER DE LAS 5 SECCIONES ACTIVAS -->
             <app-dash-inicio *ngIf="seccionActiva() === 'inicio'"></app-dash-inicio>
             <app-dash-analiticas *ngIf="seccionActiva() === 'analiticas'"></app-dash-analiticas>
-            <app-dash-cad2 *ngIf="seccionActiva() === 'cad2'"></app-dash-cad2>
-            <app-dash-estadisticas *ngIf="seccionActiva() === 'estadisticas'"></app-dash-estadisticas>
             <app-dash-personalizar *ngIf="seccionActiva() === 'personalizar'"></app-dash-personalizar>
             <app-dash-usuarios *ngIf="seccionActiva() === 'usuarios'"></app-dash-usuarios>
             <app-dash-mensajes *ngIf="seccionActiva() === 'mensajes'"></app-dash-mensajes>
-            <app-dash-reportes *ngIf="seccionActiva() === 'reportes'"></app-dash-reportes>
 
           </div>
         </main>
@@ -294,17 +255,6 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
               <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
               <span>Analíticas</span>
             </button>
-            <button (click)="setSeccion('cad2'); toggleMenuMovil()" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold flex items-center justify-between hover:bg-black/5 dark:hover:bg-white/5" style="color: var(--admin-text-secondary);">
-              <span class="flex items-center gap-3">
-                <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 0 3.4Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
-                <span>CAD 2</span>
-              </span>
-              <span class="text-[9px] px-1.5 py-0.5 rounded font-bold font-mono" style="background-color: var(--admin-bg-primary); border: 1px solid var(--admin-border);">PRO</span>
-            </button>
-            <button (click)="setSeccion('estadisticas'); toggleMenuMovil()" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-3 hover:bg-black/5 dark:hover:bg-white/5" style="color: var(--admin-text-secondary);">
-              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-              <span>Estadísticas</span>
-            </button>
             <button (click)="setSeccion('personalizar'); toggleMenuMovil()" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-3 hover:bg-black/5 dark:hover:bg-white/5" style="color: var(--admin-text-secondary);">
               <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
               <span>Personalizar Sitio</span>
@@ -316,10 +266,6 @@ export type AdminSection = 'inicio' | 'analiticas' | 'cad2' | 'estadisticas' | '
             <button (click)="setSeccion('mensajes'); toggleMenuMovil()" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-3 hover:bg-black/5 dark:hover:bg-white/5" style="color: var(--admin-text-secondary);">
               <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
               <span>Mensajes</span>
-            </button>
-            <button (click)="setSeccion('reportes'); toggleMenuMovil()" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold flex items-center gap-3 hover:bg-black/5 dark:hover:bg-white/5" style="color: var(--admin-text-secondary);">
-              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
-              <span>Reportes</span>
             </button>
           </nav>
 
@@ -341,13 +287,19 @@ export class AdminLayoutComponent {
   readonly router = inject(Router);
 
   readonly seccionActiva = signal<AdminSection>(
-    (localStorage.getItem('sysmicon_admin_section') as AdminSection) || 'inicio'
+    this.getInitialSection()
   );
   readonly theme = signal<'light' | 'dark'>(
     (localStorage.getItem('sysmicon_admin_theme') as 'light' | 'dark') || 'dark'
   );
   readonly sidebarAbierto = signal<boolean>(true);
   readonly menuMovilAbierto = signal<boolean>(false);
+
+  private getInitialSection(): AdminSection {
+    const saved = localStorage.getItem('sysmicon_admin_section') as AdminSection;
+    const validSections: AdminSection[] = ['inicio', 'analiticas', 'personalizar', 'usuarios', 'mensajes'];
+    return validSections.includes(saved) ? saved : 'inicio';
+  }
 
   toggleTheme(): void {
     const nextTheme = this.theme() === 'dark' ? 'light' : 'dark';

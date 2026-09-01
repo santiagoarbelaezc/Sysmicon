@@ -3,7 +3,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { CreaTuDisenoComponent } from './pages/crea-tu-diseno/crea-tu-diseno.component';
 import { CotizaConNosotrosComponent } from './pages/cotiza-con-nosotros/cotiza-con-nosotros.component';
 import { NosotrosComponent } from './pages/nosotros/nosotros.component';
-import { ContactoComponent } from './pages/contacto/contacto.component';
 import { LegalPageComponent } from './pages/legal-page/legal-page.component';
 import { LoginComponent } from './pages/login/login.component';
 import { OlvideContrasenaComponent } from './pages/olvide-contrasena/olvide-contrasena.component';
@@ -24,7 +23,7 @@ export const routes: Routes = [
   { path: 'cotiza-con-nosotros', component: CotizaConNosotrosComponent, title: 'Cotiza con Nosotros | Sysmicon Arquitectura & Construcción' },
   { path: 'crea-tu-diseno', redirectTo: 'cotiza-con-nosotros', pathMatch: 'full' },
   { path: 'nosotros', component: NosotrosComponent, title: 'Nosotros | Filosofía y Arquitectura Sysmicon' },
-  { path: 'contacto', component: ContactoComponent, title: 'Contacto | Sysmicon Arquitectura' },
+  { path: 'contacto', redirectTo: 'cotiza-con-nosotros', pathMatch: 'full' },
   { path: 'legal', component: LegalPageComponent, title: 'Centro Legal & Transparencia | Sysmicon' },
   
   // Rutas de Autenticación (con GuestGuard)

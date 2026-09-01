@@ -27,7 +27,7 @@ import { AdminService } from '../../../../services/admin.service';
               Bienvenido, <span class="text-gray-400">Director de Arquitectura</span>
             </h2>
             <p class="text-gray-400 text-base mt-1 max-w-xl font-sans">
-              Supervisión en tiempo real del tráfico, cotizaciones en línea, proyectos de Studio CAD 2D y actividad residencial.
+              Supervisión en tiempo real del tráfico, cotizaciones en línea, proyectos residenciales y actividad del portal.
             </p>
           </div>
           <div class="flex items-center gap-3">
@@ -62,22 +62,22 @@ import { AdminService } from '../../../../services/admin.service';
           <p class="text-xs text-gray-500 mt-2 font-sans">Leads cualificados en espera</p>
         </div>
 
-        <!-- KPI 2: Diseños CAD Guardados -->
+        <!-- KPI 2: Mensajes & Contactos -->
         <div class="relative bg-[#030303] hover:bg-[#080808] border border-white/10 hover:border-white/30 rounded-xl p-5 transition-all shadow-lg group">
           <!-- Trazos de plano -->
           <div class="absolute -top-1 -left-1 w-4 h-4 border-t border-l border-white/20 pointer-events-none"></div>
           <div class="absolute -bottom-1 -right-1 w-4 h-4 border-b border-r border-white/20 pointer-events-none"></div>
           <div class="flex items-center justify-between mb-3">
-            <span class="text-sm font-bold uppercase tracking-wider text-gray-400 font-sans">Diseños CAD 2D</span>
+            <span class="text-sm font-bold uppercase tracking-wider text-gray-400 font-sans">Mensajes Recibidos</span>
             <div class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 text-white flex items-center justify-center">
-              <svg class="w-4 h-4 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 0 3.4Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
+              <svg class="w-4 h-4 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             </div>
           </div>
           <div class="flex items-baseline justify-between font-sans">
-            <span class="font-serif text-3xl font-extrabold text-white">{{ adminService.kpis().disenosCADGuardados }}</span>
-            <span class="text-xs text-white font-bold border border-white/20 bg-white/5 px-2 py-0.5 rounded font-mono">Activos en nube</span>
+            <span class="font-serif text-3xl font-extrabold text-white">{{ adminService.mensajes().length }}</span>
+            <span class="text-xs text-white font-bold border border-white/20 bg-white/5 px-2 py-0.5 rounded font-mono">Bandeja activa</span>
           </div>
-          <p class="text-xs text-gray-500 mt-2 font-sans">Proyectos creados en simulador</p>
+          <p class="text-xs text-gray-500 mt-2 font-sans">Consultas de clientes en web</p>
         </div>
 
         <!-- KPI 3: Usuarios Registrados -->
@@ -92,7 +92,7 @@ import { AdminService } from '../../../../services/admin.service';
             </div>
           </div>
           <div class="flex items-baseline justify-between font-sans">
-            <span class="font-serif text-3xl font-extrabold text-white">{{ adminService.kpis().usuariosRegistrados }}</span>
+            <span class="font-serif text-3xl font-extrabold text-white">{{ adminService.usuarios().length }}</span>
             <span class="text-xs text-white font-bold border border-white/20 bg-white/5 px-2 py-0.5 rounded font-mono">{{ adminService.kpis().crecimientoMensual }}</span>
           </div>
           <p class="text-xs text-gray-500 mt-2 font-sans">Propietarios & Arquitectos</p>
@@ -130,7 +130,7 @@ import { AdminService } from '../../../../services/admin.service';
             <div class="flex items-center justify-between mb-6">
               <div>
                 <h3 class="font-serif text-lg font-bold text-white">Rendimiento y Tráfico Semanal</h3>
-                <p class="text-sm text-gray-400 font-sans">Comparativa de visitas al portal vs. conversiones en Studio CAD 2</p>
+                <p class="text-sm text-gray-400 font-sans">Comparativa de visitas al portal vs. conversiones comerciales</p>
               </div>
               <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs text-gray-300 font-mono">Últimos 7 días</span>
             </div>
@@ -155,7 +155,7 @@ import { AdminService } from '../../../../services/admin.service';
           <div class="flex items-center justify-between pt-4 text-xs text-gray-400 font-sans">
             <div class="flex items-center gap-4">
               <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-white/10 inline-block"></span> Visitas Totales</span>
-              <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-white inline-block"></span> Diseños Guardados</span>
+              <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-white inline-block"></span> Conversiones</span>
             </div>
             <span class="text-gray-300 font-bold font-mono">Promedio diario: 1,680 visitas</span>
           </div>
@@ -188,8 +188,8 @@ import { AdminService } from '../../../../services/admin.service';
                   <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18L3 3v18z"/><path d="M7 17h6l-6-6v6z"/></svg>
                 </div>
                 <div>
-                  <p class="text-sm font-bold text-white">Diseño CAD Guardado #412</p>
-                  <p class="text-xs text-gray-400 leading-snug">Arq. Mariana Vélez exportó distribución 2D.</p>
+                  <p class="text-sm font-bold text-white">Nuevo Proyecto en Portafolio</p>
+                  <p class="text-xs text-gray-400 leading-snug">Residencia Alto de Las Palmas publicada.</p>
                   <span class="text-[11px] text-gray-500 mt-1 block font-mono">Hace 45 minutos</span>
                 </div>
               </div>

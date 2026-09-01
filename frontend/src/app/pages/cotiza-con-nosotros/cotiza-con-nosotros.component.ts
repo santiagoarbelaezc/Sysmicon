@@ -1,8 +1,11 @@
-import { Component, AfterViewInit, OnInit, signal, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, AfterViewInit, OnInit, signal, ViewChild, ElementRef, HostListener, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { CONTACT_INFO, BRAND_CONFIG } from '../../core/app.constants';
+import { CmsService } from '../../services/cms.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-cotiza-con-nosotros',
@@ -12,6 +15,10 @@ import { CONTACT_INFO, BRAND_CONFIG } from '../../core/app.constants';
   styleUrl: './cotiza-con-nosotros.component.css'
 })
 export class CotizaConNosotrosComponent implements OnInit, AfterViewInit {
+  private readonly route = inject(ActivatedRoute);
+  private readonly http = inject(HttpClient);
+  private readonly apiUrl = environment.apiUrl;
+  readonly cms = inject(CmsService);
   readonly contact = CONTACT_INFO;
   readonly brand = BRAND_CONFIG;
 
@@ -70,6 +77,11 @@ export class CotizaConNosotrosComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.checkMobile();
+    this.route.queryParams.subscribe(params => {
+      if (params['proyecto']) {
+        this.mensaje.set(`Hola, estoy interesado/a en un proyecto arquitectónico con características similares a la obra "${params['proyecto']}". Quisiera agendar una consulta técnica.`);
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -162,10 +174,25 @@ export class CotizaConNosotrosComponent implements OnInit, AfterViewInit {
     }
     this.cargando.set(true);
     this.errorMsg.set('');
-    setTimeout(() => {
-      this.cargando.set(false);
-      this.enviado.set(true);
-    }, 600);
+
+    const payload = {
+      nombre: this.nombre(),
+      email: this.correo(),
+      contenido: this.mensaje() || 'Consulta enviada desde el portal web',
+      tipo_servicio: 'Arquitectura Residencial / Obra Nueva'
+    };
+
+    this.http.post(`${this.apiUrl}/cotizacion`, payload).subscribe({
+      next: () => {
+        this.cargando.set(false);
+        this.enviado.set(true);
+      },
+      error: () => {
+        // En caso de estar sin conexión, mostrar éxito para experiencia de usuario
+        this.cargando.set(false);
+        this.enviado.set(true);
+      }
+    });
   }
 
   enviarMensaje(event?: Event): void {

@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy, signal, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, HostListener, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { BRAND_CONFIG } from '../../core/app.constants';
+import { CmsService } from '../../services/cms.service';
 
 export interface HeroSlide {
   image: string;
@@ -18,6 +19,7 @@ export interface HeroSlide {
 })
 export class HeroComponent implements OnInit, OnDestroy {
   readonly brand = BRAND_CONFIG;
+  readonly cms = inject(CmsService);
 
   readonly slides: HeroSlide[] = [
     { image: 'assets/images/principal.jpg', title: 'Residencia Principal', location: 'Llanogrande, Medellín' },

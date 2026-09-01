@@ -5,6 +5,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoadingService } from './services/loading.service';
 import { ProyectosService } from './services/proyectos.service';
+import { AnalyticsService } from './services/analytics.service';
 import AOS from 'aos';
 
 import { PwaInstallModalComponent } from './shared/pwa-install-modal/pwa-install-modal.component';
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
   title = 'Sysmicon';
   readonly loadingService = inject(LoadingService);
   readonly proyectosService = inject(ProyectosService);
+  private readonly analytics = inject(AnalyticsService);
 
   constructor(public router: Router) {}
 
@@ -45,6 +47,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Iniciar tracking de analíticas
+    this.analytics.init();
+
     // Mostrar pantalla de carga SOLAMENTE si el ingreso inicial es directo al login o al dashboard (admin)
     const initialPath = window.location.pathname;
     if (initialPath.includes('/login') || initialPath.includes('/registro')) {

@@ -1,0 +1,41 @@
+# ============================================================
+# Sysmicon Backend — Apache Configuration
+# ============================================================
+
+# Activar motor de reescritura
+Options -Indexes
+RewriteEngine On
+
+# ---- CORS pre-flight (OPTIONS) ----
+# Responder a OPTIONS sin pasar por PHP
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# ---- Redirigir todo al router PHP ----
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# ---- Seguridad: bloquear acceso directo a archivos sensibles ----
+<FilesMatch "\.(env|json|lock|md|sql|log|sh)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Bloquear acceso a vendor y node_modules
+<DirectoryMatch "^.*(vendor|node_modules).*$">
+    Order Allow,Deny
+    Deny from all
+</DirectoryMatch>
+
+# ---- Caché para assets estáticos (si los hubiera) ----
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType application/json "access plus 0 seconds"
+</IfModule>
+
+# ---- Comprimir respuestas ----
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE text/plain
+</IfModule>

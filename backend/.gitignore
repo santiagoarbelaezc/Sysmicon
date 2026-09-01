@@ -1,0 +1,30 @@
+# ============================================================
+# Sysmicon Backend — .gitignore
+# ============================================================
+
+# Variables de entorno (¡NUNCA en git!)
+.env
+
+# Dependencias PHP
+/vendor/
+
+# Logs
+*.log
+/logs/
+
+# Archivos temporales de subida
+/uploads/tmp/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Composer binaries
+composer.phar
+.tools/
+
+# OS
+.DS_Store
+Thumbs.db

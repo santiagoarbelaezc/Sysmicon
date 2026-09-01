@@ -71,11 +71,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.errorMessage.set('');
     this.successMessage.set('');
 
-    const success = await this.authService.login(this.loginEmail || 'admin@sysmicon.com', this.loginPass || '123456');
+    const success = await this.authService.login(this.loginEmail || 'adminsysmi@sysmicon.com', this.loginPass || 'Sysmicon-123');
     this.isSubmitting.set(false);
 
     if (!success) {
-      this.errorMessage.set('Acceso denegado: El ingreso al Dashboard (/admin) se encuentra bloqueado hasta conectar los servicios backend.');
+      this.errorMessage.set('Acceso denegado: Credenciales incorrectas o el servidor backend aún no está iniciado.');
+    } else {
+      this.router.navigate(['/admin']);
     }
   }
 
@@ -89,12 +91,16 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.regNombre || 'Usuario Demo', 
       this.regEmail || 'demo@sysmicon.com', 
       this.regTelefono || '+57 300 000 0000', 
-      this.regRol
+      this.regRol,
+      this.regPass || 'Sysmicon-123'
     );
     this.isSubmitting.set(false);
 
     if (!success) {
-      this.errorMessage.set('Registro en pausa: La creación de cuentas hacia el Dashboard se encuentra bloqueada hasta conectar los servicios backend.');
+      this.errorMessage.set('Error en el registro: Verifica los datos o el estado del backend.');
+    } else {
+      this.successMessage.set('¡Registro exitoso! Redirigiendo...');
+      setTimeout(() => this.router.navigate(['/admin']), 1000);
     }
   }
 

@@ -1,0 +1,17 @@
+# Sysmicon Root .gitignore
+.env
+*.env
+backend/.env
+backend/vendor/
+backend/composer.phar
+backend/.tools/
+
+# Node & Angular
+node_modules/
+dist/
+.angular/
+
+# Logs & OS
+*.log
+.DS_Store
+Thumbs.db

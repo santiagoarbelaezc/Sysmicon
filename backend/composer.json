@@ -1,0 +1,26 @@
+{
+  "name": "sysmicon/backend",
+  "description": "Backend PHP API REST para Sysmicon",
+  "type": "project",
+  "require": {
+    "php": ">=8.1",
+    "firebase/php-jwt": "^6.10",
+    "cloudinary/cloudinary_php": "^2.13",
+    "vlucas/phpdotenv": "^5.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Sysmicon\\": "src/"
+    },
+    "files": [
+      "helpers/Response.php",
+      "helpers/Validator.php"
+    ]
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "audit": {
+      "block": false
+    }
+  }
+}

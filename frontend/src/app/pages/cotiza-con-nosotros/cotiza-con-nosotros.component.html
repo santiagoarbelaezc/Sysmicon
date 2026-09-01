@@ -40,10 +40,10 @@
         SYSMICON ARCHITECTURAL STUDIO
       </span>
       <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-light text-white tracking-tight leading-[0.98] drop-shadow-2xl mb-3">
-        Cotiza tu Proyecto <span class="font-serif italic font-normal text-white/80">Arquitectónico</span>
+        {{ cms.config().cotiza_title || 'Cotiza tu Proyecto' }}
       </h1>
       <p class="font-sans text-base sm:text-lg text-white/70 font-light leading-relaxed max-w-xl mt-4">
-        Cuéntanos tu idea. Nuestros arquitectos e ingenieros te responden en menos de 24 horas.
+        {{ cms.config().cotiza_subtitle }}
       </p>
     </div>
   </div>
@@ -61,7 +61,7 @@
           HABLEMOS DE <span class="font-serif italic font-normal text-neutral-500">TU PROYECTO</span>
         </h2>
         <p class="font-sans text-base sm:text-xl text-neutral-600 font-light leading-relaxed pt-2">
-          Escríbenos un breve mensaje y te contactaremos para agendar una consulta de viabilidad técnica sin costo.
+          {{ cms.config().cotiza_intro_text }}
         </p>
       </div>
 
@@ -116,7 +116,7 @@
             <div class="border-t-2 border-neutral-200 px-8 sm:px-14 py-8 flex flex-col sm:flex-row gap-5 items-start sm:items-center">
               <button type="submit" [disabled]="cargando()"
                       class="group inline-flex items-center gap-4 px-11 py-5 rounded-2xl bg-black hover:bg-neutral-800 text-white font-mono text-xs sm:text-sm font-bold tracking-[0.26em] uppercase transition-all duration-300 shadow-md hover:scale-[1.02] cursor-pointer disabled:opacity-60">
-                <span *ngIf="!cargando()">ENVIAR MENSAJE</span>
+                <span *ngIf="!cargando()">{{ cms.config().cotiza_btn_text || 'ENVIAR MENSAJE' }}</span>
                 <span *ngIf="cargando()">ENVIANDO...</span>
                 <svg *ngIf="!cargando()" class="w-5 h-5 group-hover:translate-x-1.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
@@ -162,7 +162,7 @@
           </div>
 
           <!-- WhatsApp -->
-          <a href="https://wa.me/573108459210?text=Hola%20Sysmicon%2C%20deseo%20informaci%C3%B3n%20sobre%20un%20proyecto"
+          <a [href]="whatsappUrl"
              target="_blank" rel="noopener noreferrer"
              class="group flex flex-col gap-3 px-8 py-10 sm:py-12 bg-white hover:bg-neutral-900 transition-all duration-300 cursor-pointer select-none">
             <div class="flex items-center gap-3">
@@ -171,12 +171,12 @@
               </svg>
               <span class="font-mono text-[10px] tracking-[0.25em] text-neutral-400 group-hover:text-neutral-400 uppercase font-bold">WHATSAPP</span>
             </div>
-            <span class="font-serif text-2xl sm:text-3xl font-bold text-neutral-900 group-hover:text-white transition-colors leading-tight">+57 (310) 845-9210</span>
+            <span class="font-serif text-2xl sm:text-3xl font-bold text-neutral-900 group-hover:text-white transition-colors leading-tight">{{ cms.config().telefono_contacto }}</span>
             <span class="font-mono text-[10px] tracking-wider text-neutral-400 group-hover:text-neutral-500 uppercase">Respuesta instantánea →</span>
           </a>
 
           <!-- Correo -->
-          <a href="mailto:redes.sysmicon@gmail.com?subject=Cotizaci%C3%B3n%20de%20proyecto%20arquitect%C3%B3nico"
+          <a [href]="'mailto:' + cms.config().email_soporte + '?subject=Cotización%20de%20proyecto%20arquitectónico'"
              class="group flex flex-col gap-3 px-8 py-10 sm:py-12 bg-neutral-50 hover:bg-neutral-900 transition-all duration-300 cursor-pointer select-none flex-1">
             <div class="flex items-center gap-3">
               <svg class="w-5 h-5 text-neutral-700 group-hover:text-white flex-shrink-0 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -185,7 +185,7 @@
               </svg>
               <span class="font-mono text-[10px] tracking-[0.25em] text-neutral-400 group-hover:text-neutral-400 uppercase font-bold">CORREO ELECTRÓNICO</span>
             </div>
-            <span class="font-serif text-xl sm:text-2xl font-bold text-neutral-900 group-hover:text-white transition-colors leading-tight break-all">redes.sysmicon&#64;gmail.com</span>
+            <span class="font-serif text-xl sm:text-2xl font-bold text-neutral-900 group-hover:text-white transition-colors leading-tight break-all">{{ cms.config().email_soporte }}</span>
             <span class="font-mono text-[10px] tracking-wider text-neutral-400 group-hover:text-neutral-500 uppercase">Escribir correo →</span>
           </a>
 

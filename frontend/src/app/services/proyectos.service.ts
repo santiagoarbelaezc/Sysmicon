@@ -1,5 +1,8 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 import { Proyecto } from '../models/proyecto.model';
+import { environment } from '../../environments/environment';
 
 /**
  * Función auxiliar para optimizar dinámicamente imágenes de Cloudinary.
@@ -19,6 +22,12 @@ export function optimizeCloudinary(url: string, width: number = 1000): string {
   providedIn: 'root'
 })
 export class ProyectosService {
+  private readonly http = inject(HttpClient);
+  private readonly apiUrl = environment.apiUrl;
+
+  constructor() {
+    this.cargarProyectosApi();
+  }
   private readonly proyectosSignal = signal<Proyecto[]>([
     {
       id: 'casaM',
@@ -296,5 +305,77 @@ export class ProyectosService {
    */
   getMobileImageUrl(url: string): string {
     return optimizeCloudinary(url, 650);
+  }
+
+  // ── MÉTODOS DE INTEGRACIÓN CON EL BACKEND REST API ───────────────────────
+
+  cargarProyectosApi(): void {
+    this.http.get<{ success: boolean; data: any[] }>(`${this.apiUrl}/proyectos?per_page=50`)
+      .subscribe({
+        next: (res) => {
+          if (res && res.success && Array.isArray(res.data) && res.data.length > 0) {
+            const apiProjects: Proyecto[] = res.data.map(p => ({
+              id: String(p.id),
+              titulo: p.titulo,
+              subtitulo: p.subtitulo || '',
+              categoria: p.categoria,
+              descripcion: p.descripcion || '',
+              imagenUrl: p.imagen_url ? optimizeCloudinary(p.imagen_url, 1200) : '',
+              area: Number(p.area_m2) || 0,
+              anio: Number(p.anio) || new Date().getFullYear(),
+              ubicacion: p.ubicacion || 'Oriente Antioqueño',
+              destacado: Boolean(Number(p.destacado)),
+              caracteristicas: Array.isArray(p.caracteristicas) ? p.caracteristicas : [],
+              editorialTitle: p.editorial_title || p.titulo,
+              editorialSubtitle: p.editorial_subtitle || p.subtitulo,
+              editorialSlogan: p.editorial_slogan || 'DISEÑO Y EXCELENCIA RESIDENCIAL.',
+              editorialStyle: p.editorial_style || 'coral-title',
+              barcode: p.barcode || '0 600229402 9',
+              imagenesAdicionales: Array.isArray(p.imagenes_adicionales)
+                ? p.imagenes_adicionales.map((img: any) => optimizeCloudinary(img.url || img, 1000))
+                : []
+            }));
+
+            // Combinar proyectos nuevos de la API con los existentes sin duplicar por ID
+            const actuales = this.proyectosSignal();
+            const combinados = [...apiProjects];
+            for (const act of actuales) {
+              if (!combinados.some(c => c.id.toLowerCase() === act.id.toLowerCase())) {
+                combinados.push(act);
+              }
+            }
+            this.proyectosSignal.set(combinados);
+          }
+        },
+        error: () => {}
+      });
+  }
+
+  crearProyectoApi(formData: FormData): Observable<any> {
+    return this.http.post<{ success: boolean; message: string; data: { id: number } }>(
+      `${this.apiUrl}/admin/proyectos`,
+      formData
+    ).pipe(
+      tap(() => {
+        // Refrescar lista de proyectos al instante
+        this.cargarProyectosApi();
+      })
+    );
+  }
+
+  eliminarProyectoApi(id: string | number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/admin/proyectos/${id}`).pipe(
+      tap(() => {
+        this.proyectosSignal.update(list => list.filter(p => p.id !== String(id)));
+      })
+    );
+  }
+
+  toggleProyectoApi(id: string | number): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/admin/proyectos/${id}/toggle`, {}).pipe(
+      tap(() => {
+        this.cargarProyectosApi();
+      })
+    );
   }
 }

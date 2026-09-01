@@ -1,4 +1,9 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
+
+// ── Modelos e Interfaces del Panel Administrativo ───────────────────────────
 
 export interface BloqueAdmin {
   id: string;
@@ -12,27 +17,35 @@ export interface BloqueAdmin {
 }
 
 export interface UsuarioAdmin {
-  id: string;
+  id: string | number;
   nombre: string;
   email: string;
   telefono: string;
-  rol: 'propietario' | 'arquitecto' | 'inversionista' | 'admin';
+  rol: 'propietario' | 'arquitecto' | 'inversionista' | 'admin' | 'usuario';
   estado: 'activo' | 'suspendido' | 'pendiente';
-  fechaRegistro: string;
-  proyectosGuardados: number;
+  fechaRegistro?: string;
+  created_at?: string;
+  avatar_url?: string;
+  proyectosGuardados?: number;
 }
 
 export interface MensajeAdmin {
-  id: string;
+  id: string | number;
   remitente: string;
   email: string;
-  telefono: string;
+  telefono?: string;
   asunto: string;
   contenido: string;
-  fecha: string;
+  fecha?: string;
+  created_at?: string;
   leido: boolean;
-  tipo: 'cotizacion' | 'contacto_general' | 'asistencia_cad';
+  archivado?: boolean;
+  tipo: 'cotizacion' | 'contacto_general' | 'asistencia_cad' | 'agendar_cita';
   presupuesto?: string;
+  tipo_servicio?: string;
+  ubicacion_proyecto?: string;
+  fecha_cita_solicitada?: string;
+  hora_preferida?: string;
 }
 
 export interface ReporteAdmin {
@@ -55,11 +68,70 @@ export interface CmsConfig {
   textoBannerAlerta: string;
 }
 
+export interface DashboardKpis {
+  visitas_totales: number;
+  visitas_hoy: number;
+  visitas_ayer: number;
+  sesiones_unicas: number;
+  mensajes_no_leidos: number;
+  mensajes_este_mes: number;
+  proyectos_activos: number;
+  proyectos_total: number;
+  usuarios_activos: number;
+  crecimiento_24h_pct: number | null;
+}
+
+export interface ProyectoAdmin {
+  id: number;
+  titulo: string;
+  subtitulo?: string;
+  categoria: string;
+  descripcion?: string;
+  imagen_url?: string;
+  area_m2?: number;
+  anio?: number;
+  ubicacion?: string;
+  destacado: boolean;
+  activo: boolean;
+  caracteristicas?: string[];
+  editorial_title?: string;
+  editorial_subtitle?: string;
+  editorial_slogan?: string;
+  editorial_badge?: string;
+  editorial_style?: string;
+  barcode?: string;
+  imagenes_adicionales?: { id: number; url: string; orden: number }[];
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface PaginatedResponse<T> {
+  success: boolean;
+  data: T[];
+  pagination: {
+    total: number;
+    page: number;
+    per_page: number;
+    pages: number;
+  };
+}
+
+export interface ApiResponse<T> {
+  success: boolean;
+  message: string;
+  data: T;
+}
+
+// ── Servicio AdminService ───────────────────────────────────────────────────
+
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
-  // 1. KPIs Generales del Dash Inicio
+  private readonly http = inject(HttpClient);
+  private readonly apiUrl = environment.apiUrl;
+
+  // 1. KPIs Generales del Dashboard
   readonly kpis = signal({
     totalCotizaciones: 184,
     disenosCADGuardados: 412,
@@ -181,9 +253,12 @@ export class AdminService {
     { id: 'rep-3', titulo: 'Auditoría Operativa de Proyectos Residenciales', tipo: 'operativo', periodo: 'Q2 2026', fechaGeneracion: '2026-06-28', formato: 'PDF', tamano: '6.5 MB' }
   ]);
 
+  readonly mensajesNoLeidos = signal<number>(0);
+
   constructor() {}
 
-  // --- MÉTODOS CRUD CAD 2 ---
+  // ── MÉTODOS CRUD CAD 2 (Signals) ─────────────────────────────────────────
+
   agregarBloque(nuevo: Omit<BloqueAdmin, 'id' | 'fechaCreacion'>): void {
     const id = 'blk-' + Date.now().toString().slice(-4);
     const bloqueCompleto: BloqueAdmin = {
@@ -210,8 +285,9 @@ export class AdminService {
     this.bloquesCAD.update(list => list.filter(b => b.id !== id));
   }
 
-  // --- MÉTODOS USUARIOS ---
-  toggleEstadoUsuario(id: string): void {
+  // ── MÉTODOS USUARIOS (Signals) ───────────────────────────────────────────
+
+  toggleEstadoUsuario(id: string | number): void {
     this.usuarios.update(list =>
       list.map(u => {
         if (u.id === id) {
@@ -223,27 +299,31 @@ export class AdminService {
     );
   }
 
-  eliminarUsuario(id: string): void {
+  eliminarUsuario(id: string | number): void {
     this.usuarios.update(list => list.filter(u => u.id !== id));
   }
 
-  // --- MÉTODOS MENSAJES ---
-  marcarMensajeLeido(id: string): void {
+  // ── MÉTODOS MENSAJES (Signals) ───────────────────────────────────────────
+
+  marcarMensajeLeido(id: string | number): void {
     this.mensajes.update(list =>
       list.map(m => m.id === id ? { ...m, leido: true } : m)
     );
+    this.mensajesNoLeidos.update(n => Math.max(0, n - 1));
   }
 
-  eliminarMensaje(id: string): void {
+  eliminarMensaje(id: string | number): void {
     this.mensajes.update(list => list.filter(m => m.id !== id));
   }
 
-  // --- MÉTODOS CMS ---
+  // ── MÉTODOS CMS (Signals) ────────────────────────────────────────────────
+
   actualizarCms(nuevaConfig: Partial<CmsConfig>): void {
     this.cmsConfig.update(actual => ({ ...actual, ...nuevaConfig }));
   }
 
-  // --- MÉTODOS REPORTES ---
+  // ── MÉTODOS REPORTES (Signals) ───────────────────────────────────────────
+
   generarReporte(titulo: string, tipo: 'financiero' | 'operativo' | 'cad_studio', formato: 'PDF' | 'EXCEL' | 'CSV'): void {
     const nuevoReporte: ReporteAdmin = {
       id: 'rep-' + Date.now().toString().slice(-4),
@@ -255,5 +335,116 @@ export class AdminService {
       tamano: (Math.random() * 5 + 1).toFixed(1) + ' MB'
     };
     this.reportes.update(list => [nuevoReporte, ...list]);
+  }
+
+  // =========================================================================
+  // MÉTODOS HTTP CON EL BACKEND PHP REST API
+  // =========================================================================
+
+  // ── Dashboard ────────────────────────────────────────────────────────────
+  getDashboard(): Observable<ApiResponse<{ kpis: DashboardKpis; ultimos_mensajes: MensajeAdmin[]; top_paginas: any[] }>> {
+    return this.http.get<any>(`${this.apiUrl}/admin/dashboard`);
+  }
+
+  // ── Proyectos ────────────────────────────────────────────────────────────
+  getProyectos(page = 1, perPage = 20): Observable<PaginatedResponse<ProyectoAdmin>> {
+    const params = new HttpParams().set('page', page).set('per_page', perPage);
+    return this.http.get<PaginatedResponse<ProyectoAdmin>>(`${this.apiUrl}/admin/proyectos`, { params });
+  }
+
+  crearProyecto(formData: FormData): Observable<ApiResponse<{ id: number }>> {
+    return this.http.post<ApiResponse<{ id: number }>>(`${this.apiUrl}/admin/proyectos`, formData);
+  }
+
+  editarProyecto(id: number, datos: Partial<ProyectoAdmin>): Observable<ApiResponse<null>> {
+    return this.http.put<ApiResponse<null>>(`${this.apiUrl}/admin/proyectos/${id}`, datos);
+  }
+
+  toggleProyecto(id: number): Observable<ApiResponse<null>> {
+    return this.http.patch<ApiResponse<null>>(`${this.apiUrl}/admin/proyectos/${id}/toggle`, {});
+  }
+
+  eliminarProyectoApi(id: number): Observable<ApiResponse<null>> {
+    return this.http.delete<ApiResponse<null>>(`${this.apiUrl}/admin/proyectos/${id}`);
+  }
+
+  subirImagenProyecto(proyectoId: number, file: File): Observable<ApiResponse<{ id: number; url: string }>> {
+    const fd = new FormData();
+    fd.append('imagen', file);
+    return this.http.post<ApiResponse<{ id: number; url: string }>>(
+      `${this.apiUrl}/admin/proyectos/${proyectoId}/imagenes`, fd
+    );
+  }
+
+  eliminarImagenProyecto(proyectoId: number, imgId: number): Observable<ApiResponse<null>> {
+    return this.http.delete<ApiResponse<null>>(
+      `${this.apiUrl}/admin/proyectos/${proyectoId}/imagenes/${imgId}`
+    );
+  }
+
+  // ── Mensajes HTTP ────────────────────────────────────────────────────────
+  getMensajesApi(
+    page = 1,
+    perPage = 20,
+    filtros: { tipo?: string; leido?: number; archivado?: number } = {}
+  ): Observable<PaginatedResponse<MensajeAdmin>> {
+    let params = new HttpParams().set('page', page).set('per_page', perPage);
+    if (filtros.tipo !== undefined) params = params.set('tipo', filtros.tipo);
+    if (filtros.leido !== undefined) params = params.set('leido', filtros.leido);
+    if (filtros.archivado !== undefined) params = params.set('archivado', filtros.archivado);
+    return this.http.get<PaginatedResponse<MensajeAdmin>>(`${this.apiUrl}/admin/mensajes`, { params });
+  }
+
+  getMensajeApi(id: number): Observable<ApiResponse<MensajeAdmin>> {
+    return this.http.get<ApiResponse<MensajeAdmin>>(`${this.apiUrl}/admin/mensajes/${id}`);
+  }
+
+  marcarMensajeLeidoApi(id: number): Observable<ApiResponse<null>> {
+    return this.http.patch<ApiResponse<null>>(`${this.apiUrl}/admin/mensajes/${id}/leer`, {}).pipe(
+      tap(() => this.mensajesNoLeidos.update(n => Math.max(0, n - 1)))
+    );
+  }
+
+  archivarMensaje(id: number): Observable<ApiResponse<null>> {
+    return this.http.patch<ApiResponse<null>>(`${this.apiUrl}/admin/mensajes/${id}/archivar`, {});
+  }
+
+  eliminarMensajeApi(id: number): Observable<ApiResponse<null>> {
+    return this.http.delete<ApiResponse<null>>(`${this.apiUrl}/admin/mensajes/${id}`);
+  }
+
+  // ── Analytics HTTP ───────────────────────────────────────────────────────
+  getResumenAnaliticas(dias = 30): Observable<ApiResponse<any>> {
+    const params = new HttpParams().set('dias', dias);
+    return this.http.get<ApiResponse<any>>(`${this.apiUrl}/admin/analytics/resumen`, { params });
+  }
+
+  getVisitasPorDia(dias = 30): Observable<ApiResponse<any[]>> {
+    const params = new HttpParams().set('dias', dias);
+    return this.http.get<ApiResponse<any[]>>(`${this.apiUrl}/admin/analytics/visitas`, { params });
+  }
+
+  getPaginasMasVisitadas(dias = 30, limit = 10): Observable<ApiResponse<any[]>> {
+    const params = new HttpParams().set('dias', dias).set('limit', limit);
+    return this.http.get<ApiResponse<any[]>>(`${this.apiUrl}/admin/analytics/paginas`, { params });
+  }
+
+  getDispositivos(dias = 30): Observable<ApiResponse<any[]>> {
+    const params = new HttpParams().set('dias', dias);
+    return this.http.get<ApiResponse<any[]>>(`${this.apiUrl}/admin/analytics/dispositivos`, { params });
+  }
+
+  // ── Usuarios HTTP ────────────────────────────────────────────────────────
+  getUsuariosApi(page = 1, perPage = 20): Observable<PaginatedResponse<UsuarioAdmin>> {
+    const params = new HttpParams().set('page', page).set('per_page', perPage);
+    return this.http.get<PaginatedResponse<UsuarioAdmin>>(`${this.apiUrl}/admin/usuarios`, { params });
+  }
+
+  toggleEstadoUsuarioApi(id: number): Observable<ApiResponse<{ estado: string }>> {
+    return this.http.patch<ApiResponse<{ estado: string }>>(`${this.apiUrl}/admin/usuarios/${id}/estado`, {});
+  }
+
+  eliminarUsuarioApi(id: number): Observable<ApiResponse<null>> {
+    return this.http.delete<ApiResponse<null>>(`${this.apiUrl}/admin/usuarios/${id}`);
   }
 }

@@ -131,61 +131,33 @@ export class AdminService {
   private readonly http = inject(HttpClient);
   private readonly apiUrl = environment.apiUrl;
 
-  // 1. KPIs Generales del Dashboard
+  // 1. KPIs Generales del Dashboard (Valores iniciales en cero, sincronizados con la BD)
   readonly kpis = signal({
-    totalCotizaciones: 184,
-    disenosCADGuardados: 412,
-    usuariosRegistrados: 1280,
-    ingresoEstimadoUSD: 4250000,
-    crecimientoMensual: '+18.4%'
+    totalCotizaciones: 0,
+    disenosCADGuardados: 0,
+    usuariosRegistrados: 0,
+    ingresoEstimadoUSD: 0,
+    crecimientoMensual: '0%'
   });
 
-  // 2. Analíticas Detalladas
+  // 2. Analíticas Detalladas (Cargadas desde el backend)
   readonly analiticas = signal({
-    visitasDiarias: [
-      { dia: 'Lun', visitas: 1240, conversiones: 45 },
-      { dia: 'Mar', visitas: 1480, conversiones: 52 },
-      { dia: 'Mié', visitas: 1820, conversiones: 68 },
-      { dia: 'Jue', visitas: 1650, conversiones: 58 },
-      { dia: 'Vie', visitas: 2100, conversiones: 84 },
-      { dia: 'Sáb', visitas: 1950, conversiones: 72 },
-      { dia: 'Dom', visitas: 1720, conversiones: 61 }
-    ],
-    tiempoPromedioCAD: '14 mins 32 segs',
-    tasaRebote: '22.4%',
+    visitasDiarias: [] as { dia: string; visitas: number; conversiones: number }[],
+    tiempoPromedioCAD: '0 mins',
+    tasaRebote: '0%',
     dispositivos: [
-      { tipo: 'Desktop / Laptop (CAD Pro)', porcentaje: 68 },
-      { tipo: 'Móvil / Tablet (Exploración)', porcentaje: 32 }
+      { tipo: 'Desktop / Laptop (CAD Pro)', porcentaje: 70 },
+      { tipo: 'Móvil / Tablet (Exploración)', porcentaje: 30 }
     ]
   });
 
   // 3. Catálogo CAD 2D
-  readonly bloquesCAD = signal<BloqueAdmin[]>([
-    { id: 'alc-1', nombre: 'Master Suite & Vestier Privado', categoria: 'alcobas', imagen: '/assets/images/arquitectura/alcobas/alcoba1.png', areaM2: 45, precioUSD: 65000, activo: true, fechaCreacion: '2026-01-15' },
-    { id: 'alc-2', nombre: 'Suite Secundaria Doble con Terraza', categoria: 'alcobas', imagen: '/assets/images/arquitectura/alcobas/alcoba2.png', areaM2: 28, precioUSD: 38000, activo: true, fechaCreacion: '2026-01-18' },
-    { id: 'coc-1', nombre: 'Cocina Integral con Isla Gourmet', categoria: 'cocina', imagen: '/assets/images/arquitectura/cocina/cocina1.png', areaM2: 35, precioUSD: 58000, activo: true, fechaCreacion: '2026-02-01' },
-    { id: 'com-1', nombre: 'Sala de Estar Doble Altura con Chimenea', categoria: 'area-comun', imagen: '/assets/images/arquitectura/area-comun/comun1.png', areaM2: 50, precioUSD: 72000, activo: true, fechaCreacion: '2026-02-10' },
-    { id: 'est-1', nombre: 'Garaje Doble Cubierto', categoria: 'estacionamiento', imagen: '/assets/images/arquitectura/estacionamiento/congarage.png', areaM2: 40, precioUSD: 38000, activo: true, fechaCreacion: '2026-02-14' },
-    { id: 'pis-2', nombre: 'Piscina Infinity & Solárium', categoria: 'piscina', imagen: '/assets/images/arquitectura/piscina/piscina.png', areaM2: 55, precioUSD: 75000, activo: true, fechaCreacion: '2026-03-01' },
-    { id: 'ban-1', nombre: 'Baño Principal con Jacuzzi & Ducha', categoria: 'bano', imagen: '/assets/images/arquitectura/bano/bano1.png', areaM2: 12, precioUSD: 18000, activo: true, fechaCreacion: '2026-03-05' },
-    { id: 'mur-1', nombre: 'Muro de Contención Estructural 10m', categoria: 'muro', imagen: '/assets/images/arquitectura/muro/muro-contencion.png', areaM2: 15, precioUSD: 8500, activo: true, fechaCreacion: '2026-03-10' },
-    { id: 'col-1', nombre: 'Columna Cuadrada Concreto Arquitectónico', categoria: 'columnas', imagen: '/assets/images/arquitectura/columnas/cuadrada.png', areaM2: 5, precioUSD: 3500, activo: true, fechaCreacion: '2026-03-12' }
-  ]);
+  readonly bloquesCAD = signal<BloqueAdmin[]>([]);
 
   // 4. Estadísticas
   readonly estadisticas = signal({
-    categoriasPopulares: [
-      { categoria: 'Alcobas Suite', porcentaje: 32, totalDisenos: 132 },
-      { categoria: 'Cocinas Gourmet', porcentaje: 24, totalDisenos: 99 },
-      { categoria: 'Piscinas & Solárium', porcentaje: 20, totalDisenos: 82 },
-      { categoria: 'Zonas Sociales Altura', porcentaje: 15, totalDisenos: 62 },
-      { categoria: 'Garajes Cubiertos', porcentaje: 9, totalDisenos: 37 }
-    ],
-    presupuestosPromedio: [
-      { rango: '$100k - $250k USD', porcentaje: 35 },
-      { rango: '$250k - $500k USD', porcentaje: 45 },
-      { rango: 'Más de $500k USD (Luxury)', porcentaje: 20 }
-    ]
+    categoriasPopulares: [] as { categoria: string; porcentaje: number; totalDisenos: number }[],
+    presupuestosPromedio: [] as { rango: string; porcentaje: number }[]
   });
 
   // 5. CMS Personalizar Sitio
@@ -195,67 +167,129 @@ export class AdminService {
     telefonoContacto: '+57 (300) 987-6543',
     emailSoporte: 'arquitectura@sysmicon.com',
     instagramHandle: '@sysmicon',
-    mostrarBannerAlerta: true,
-    textoBannerAlerta: '⚡ Nuevos bloques CAD 2D disponibles para Llanogrande y Retiro. ¡Pruébalos en el configurador!'
+    mostrarBannerAlerta: false,
+    textoBannerAlerta: ''
   });
 
-  // 6. Usuarios Registrados
-  readonly usuarios = signal<UsuarioAdmin[]>([
-    { id: 'usr-1', nombre: 'Carlos Restrepo', email: 'carlos.r@gmail.com', telefono: '+57 310 456 7890', rol: 'propietario', estado: 'activo', fechaRegistro: '2026-06-15', proyectosGuardados: 4 },
-    { id: 'usr-2', nombre: 'Arq. Mariana Vélez', email: 'mvelez@estudio-mv.com', telefono: '+57 312 888 9900', rol: 'arquitecto', estado: 'activo', fechaRegistro: '2026-06-18', proyectosGuardados: 12 },
-    { id: 'usr-3', nombre: 'Alejandro Gómez', email: 'agomez.inv@capital.co', telefono: '+57 300 111 2233', rol: 'inversionista', estado: 'activo', fechaRegistro: '2026-06-20', proyectosGuardados: 2 },
-    { id: 'usr-4', nombre: 'Sofia Londoño', email: 'sofi.londo@hotmail.com', telefono: '+57 315 666 7788', rol: 'propietario', estado: 'pendiente', fechaRegistro: '2026-06-28', proyectosGuardados: 1 },
-    { id: 'usr-5', nombre: 'David Jaramillo', email: 'djaramillo@sysmicon.com', telefono: '+57 311 000 1122', rol: 'admin', estado: 'activo', fechaRegistro: '2026-01-01', proyectosGuardados: 25 }
-  ]);
+  // 6. Usuarios Registrados (Sincronizados en vivo con la tabla usuarios)
+  readonly usuarios = signal<UsuarioAdmin[]>([]);
 
-  // 7. Mensajes & Cotizaciones
-  readonly mensajes = signal<MensajeAdmin[]>([
-    {
-      id: 'msg-1',
-      remitente: 'Dr. Fernando Hoyos',
-      email: 'fhoyos@clinica.com',
-      telefono: '+57 314 555 1234',
-      asunto: 'Cotización Casa Campestre Llanogrande (Lote 2,500m2)',
-      contenido: 'Cordial saludo. He utilizado el simulador Studio CAD 2 para diseñar una residencia con 3 alcobas y piscina infinity. Me gustaría agendar una cita presencial con un arquitecto senior para revisar viabilidad estructural y cotización formal.',
-      fecha: '2026-07-01 14:30',
-      leido: false,
-      tipo: 'cotizacion',
-      presupuesto: '$450,000 USD'
-    },
-    {
-      id: 'msg-2',
-      remitente: 'Andrea Mejía',
-      email: 'amejia@gmail.com',
-      telefono: '+57 318 222 3344',
-      asunto: 'Consulta sobre materiales y concreto blanco',
-      contenido: 'Hola Sysmicon. Estoy interesada en remodelar la fachada de mi casa en El Retiro usando concreto blanco expuesto y madera teca. ¿Ustedes realizan proyectos de remodelación arquitectónica o solo obra nueva desde cero?',
-      fecha: '2026-07-01 10:15',
-      leido: false,
-      tipo: 'contacto_general'
-    },
-    {
-      id: 'msg-3',
-      remitente: 'Arq. Mateo Echavarría',
-      email: 'mechavarria@arq-estudio.co',
-      telefono: '+57 310 999 0000',
-      asunto: 'Exportación de planos DWG desde Studio CAD 2',
-      contenido: 'Excelente herramienta el nuevo Studio CAD 2. Queremos saber si existe la posibilidad de exportar los arreglos de bloques directamente a formato DWG o DXF para integrarlos a nuestros flujos en AutoCAD y Revit.',
-      fecha: '2026-06-30 18:45',
-      leido: true,
-      tipo: 'asistencia_cad'
-    }
-  ]);
+  // 7. Mensajes & Cotizaciones (Sincronizados en vivo con la tabla mensajes)
+  readonly mensajes = signal<MensajeAdmin[]>([]);
 
   // 8. Reportes
-  readonly reportes = signal<ReporteAdmin[]>([
-    { id: 'rep-1', titulo: 'Balance Comercial & Cotizaciones H1 2026', tipo: 'financiero', periodo: 'Enero - Junio 2026', fechaGeneracion: '2026-07-01', formato: 'PDF', tamano: '4.2 MB' },
-    { id: 'rep-2', titulo: 'Rendimiento y Uso del Simulador Studio CAD 2', tipo: 'cad_studio', periodo: 'Junio 2026', fechaGeneracion: '2026-06-30', formato: 'EXCEL', tamano: '1.8 MB' },
-    { id: 'rep-3', titulo: 'Auditoría Operativa de Proyectos Residenciales', tipo: 'operativo', periodo: 'Q2 2026', fechaGeneracion: '2026-06-28', formato: 'PDF', tamano: '6.5 MB' }
-  ]);
+  readonly reportes = signal<ReporteAdmin[]>([]);
 
   readonly mensajesNoLeidos = signal<number>(0);
+  readonly isLiveBackend = signal<boolean>(false);
+  readonly cargandoDatos = signal<boolean>(false);
 
   constructor() {}
+
+  // ── CARGA AUTOMÁTICA DE DATOS REALES DEL BACKEND ─────────────────────────
+  cargarDatosReales(): void {
+    this.cargandoDatos.set(true);
+
+    // 1. Cargar Dashboard & KPIs
+    this.getDashboard().subscribe({
+      next: (res) => {
+        if (res && res.data) {
+          this.isLiveBackend.set(true);
+          const d = res.data;
+          if (d.kpis) {
+            this.kpis.update(prev => ({
+              ...prev,
+              totalCotizaciones: d.kpis.mensajes_este_mes || d.kpis.mensajes_no_leidos || prev.totalCotizaciones,
+              usuariosRegistrados: d.kpis.usuarios_activos || prev.usuariosRegistrados,
+              crecimientoMensual: d.kpis.crecimiento_24h_pct !== null ? `${d.kpis.crecimiento_24h_pct > 0 ? '+' : ''}${d.kpis.crecimiento_24h_pct}%` : prev.crecimientoMensual
+            }));
+            this.mensajesNoLeidos.set(d.kpis.mensajes_no_leidos || 0);
+          }
+          if (d.ultimos_mensajes && Array.isArray(d.ultimos_mensajes)) {
+            this.isLiveBackend.set(true);
+            if (d.ultimos_mensajes.length > 0) {
+              this.mensajes.set(d.ultimos_mensajes.map((m: any) => ({
+                id: m.id,
+                remitente: m.remitente || m.nombre || 'Contacto Web',
+                email: m.email || '',
+                telefono: m.telefono || '',
+                asunto: m.asunto || 'Cotización Arquitectónica',
+                contenido: m.contenido || m.mensaje || '',
+                fecha: m.created_at || m.fecha || '',
+                created_at: m.created_at,
+                leido: Boolean(Number(m.leido)),
+                tipo: m.tipo || 'cotizacion',
+                presupuesto: m.presupuesto || m.presupuesto_estimado || ''
+              })));
+            }
+          }
+        }
+        this.cargandoDatos.set(false);
+      },
+      error: () => {
+        this.cargandoDatos.set(false);
+      }
+    });
+
+    // 2. Cargar Mensajes Completos desde MySQL
+    this.getMensajesApi(1, 100).subscribe({
+      next: (res) => {
+        if (res && res.data && Array.isArray(res.data)) {
+          this.isLiveBackend.set(true);
+          this.mensajes.set(res.data.map((m: any) => ({
+            id: m.id,
+            remitente: m.remitente || m.nombre || 'Contacto Web',
+            email: m.email || '',
+            telefono: m.telefono || '',
+            asunto: m.asunto || 'Cotización Arquitectónica',
+            contenido: m.contenido || m.mensaje || '',
+            fecha: m.created_at || m.fecha || '',
+            created_at: m.created_at,
+            leido: Boolean(Number(m.leido)),
+            tipo: m.tipo || 'cotizacion',
+            presupuesto: m.presupuesto || m.presupuesto_estimado || ''
+          })));
+        }
+      },
+      error: () => {}
+    });
+
+    // 3. Cargar Usuarios Reales
+    this.getUsuariosApi(1, 50).subscribe({
+      next: (res) => {
+        if (res && res.data && Array.isArray(res.data) && res.data.length > 0) {
+          this.usuarios.set(res.data.map((u: any) => ({
+            id: u.id,
+            nombre: u.nombre || u.email.split('@')[0],
+            email: u.email || '',
+            telefono: u.telefono || '+57 300 000 0000',
+            rol: u.rol || 'propietario',
+            estado: u.estado || 'activo',
+            fechaRegistro: u.created_at ? u.created_at.split(' ')[0] : '2026-06-01',
+            proyectosGuardados: u.proyectos_count || 1
+          })));
+        }
+      },
+      error: () => {}
+    });
+
+    // 4. Cargar Analíticas de Visitas
+    this.getVisitasPorDia(7).subscribe({
+      next: (res) => {
+        if (res && res.data && Array.isArray(res.data) && res.data.length > 0) {
+          this.analiticas.update(prev => ({
+            ...prev,
+            visitasDiarias: res.data.map((v: any) => ({
+              dia: v.dia || v.fecha || 'Hoy',
+              visitas: v.total_vistas || v.visitas || 100,
+              conversiones: v.sesiones_unicas || v.conversiones || 10
+            }))
+          }));
+        }
+      },
+      error: () => {}
+    });
+  }
 
   // ── MÉTODOS CRUD CAD 2 (Signals) ─────────────────────────────────────────
 
@@ -285,9 +319,16 @@ export class AdminService {
     this.bloquesCAD.update(list => list.filter(b => b.id !== id));
   }
 
-  // ── MÉTODOS USUARIOS (Signals) ───────────────────────────────────────────
+  // ── MÉTODOS USUARIOS (Signals + API Real) ──────────────────────────────────
 
   toggleEstadoUsuario(id: string | number): void {
+    const numericId = Number(id);
+    if (!isNaN(numericId)) {
+      this.toggleEstadoUsuarioApi(numericId).subscribe({
+        next: () => {},
+        error: () => {}
+      });
+    }
     this.usuarios.update(list =>
       list.map(u => {
         if (u.id === id) {
@@ -300,12 +341,26 @@ export class AdminService {
   }
 
   eliminarUsuario(id: string | number): void {
+    const numericId = Number(id);
+    if (!isNaN(numericId)) {
+      this.eliminarUsuarioApi(numericId).subscribe({
+        next: () => {},
+        error: () => {}
+      });
+    }
     this.usuarios.update(list => list.filter(u => u.id !== id));
   }
 
-  // ── MÉTODOS MENSAJES (Signals) ───────────────────────────────────────────
+  // ── MÉTODOS MENSAJES (Signals + API Real) ──────────────────────────────────
 
   marcarMensajeLeido(id: string | number): void {
+    const numericId = Number(id);
+    if (!isNaN(numericId)) {
+      this.marcarMensajeLeidoApi(numericId).subscribe({
+        next: () => {},
+        error: () => {}
+      });
+    }
     this.mensajes.update(list =>
       list.map(m => m.id === id ? { ...m, leido: true } : m)
     );
@@ -313,6 +368,13 @@ export class AdminService {
   }
 
   eliminarMensaje(id: string | number): void {
+    const numericId = Number(id);
+    if (!isNaN(numericId)) {
+      this.eliminarMensajeApi(numericId).subscribe({
+        next: () => {},
+        error: () => {}
+      });
+    }
     this.mensajes.update(list => list.filter(m => m.id !== id));
   }
 

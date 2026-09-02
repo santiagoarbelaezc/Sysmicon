@@ -64,10 +64,21 @@ class ContactoController
     {
         $body = getJsonBody();
 
+        // Normalizar nombres de campos
+        if (empty($body['nombre']) && !empty($body['remitente'])) {
+            $body['nombre'] = $body['remitente'];
+        }
+        if (empty($body['mensaje']) && !empty($body['contenido'])) {
+            $body['mensaje'] = $body['contenido'];
+        }
+        if (empty($body['mensaje'])) {
+            $body['mensaje'] = 'Solicitud de cotización y asesoría arquitectónica personalizada';
+        }
+
         $v = Validator::make($body, [
             'nombre'  => 'required|max:120',
             'email'   => 'required|email',
-            'mensaje' => 'required|min:5',
+            'mensaje' => 'required|min:3',
         ]);
 
         if ($v->fails()) {
@@ -84,12 +95,12 @@ class ContactoController
             Validator::sanitizeString($body['nombre']    ?? ''),
             Validator::sanitizeString($body['email']     ?? ''),
             Validator::sanitizeString($body['telefono']  ?? ''),
-            'Solicitud de Cotización',
+            Validator::sanitizeString($body['asunto']    ?? 'Solicitud de Cotización'),
             Validator::sanitizeString($body['mensaje']   ?? ''),
             'cotizacion',
             Validator::sanitizeString($body['presupuesto']       ?? ''),
-            Validator::sanitizeString($body['tipoServicio']      ?? ''),
-            Validator::sanitizeString($body['ubicacionProyecto'] ?? ''),
+            Validator::sanitizeString($body['tipoServicio']      ?? $body['tipo_servicio'] ?? ''),
+            Validator::sanitizeString($body['ubicacionProyecto'] ?? $body['ubicacion_proyecto'] ?? ''),
         ]);
 
         jsonSuccess(null, 'Solicitud de cotización recibida. Te contactaremos en menos de 24 horas.', 201);

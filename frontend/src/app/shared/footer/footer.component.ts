@@ -1,6 +1,6 @@
 import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { BRAND_CONFIG, CONTACT_INFO, NAV_LINKS, LEGAL_LINKS } from '../../core/app.constants';
 import { CookieConsentService } from '../../services/cookie-consent.service';
@@ -18,6 +18,11 @@ export class FooterComponent {
   readonly navLinks = NAV_LINKS;
   readonly legalLinks = LEGAL_LINKS;
   readonly cookieService = inject(CookieConsentService);
+  private readonly router = inject(Router);
+
+  get isCotizaPage(): boolean {
+    return this.router.url.includes('cotiza');
+  }
 
   openCookieModal(event: Event): void {
     event.preventDefault();

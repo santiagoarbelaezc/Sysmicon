@@ -1,7 +1,34 @@
-/* ==========================================================================
-   SYSMICON - NOSOTROS PAGE COMPONENT (MISSION SECTION ARCHITECTURAL STYLE)
-   ========================================================================== */
+:host {
+  display: block;
+  width: 100%;
+}
 
 .nosotros-page {
   font-family: var(--font-sans, 'Exo 2', sans-serif);
+}
+
+/* Tarjetas del collage arquitectónico */
+.collage-card {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+  will-change: transform;
+}
+
+.collage-card:hover {
+  transform: translateY(-4px);
+}
+
+.collage-card img {
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Transiciones y optimizaciones para el collage y video */
+video, img {
+  will-change: transform, filter;
+}
+
+video {
+  pointer-events: none;
 }

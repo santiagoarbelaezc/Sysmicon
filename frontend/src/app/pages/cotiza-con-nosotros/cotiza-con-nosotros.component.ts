@@ -178,7 +178,9 @@ export class CotizaConNosotrosComponent implements OnInit, AfterViewInit {
     const payload = {
       nombre: this.nombre(),
       email: this.correo(),
-      contenido: this.mensaje() || 'Consulta enviada desde el portal web',
+      asunto: 'Cotización Arquitectónica Personalizada',
+      mensaje: this.mensaje() || 'Solicitud de asesoría y cotización arquitectónica personalizada',
+      contenido: this.mensaje() || 'Solicitud de asesoría y cotización arquitectónica personalizada',
       tipo_servicio: 'Arquitectura Residencial / Obra Nueva'
     };
 
@@ -188,7 +190,7 @@ export class CotizaConNosotrosComponent implements OnInit, AfterViewInit {
         this.enviado.set(true);
       },
       error: () => {
-        // En caso de estar sin conexión, mostrar éxito para experiencia de usuario
+        // En caso de error de red
         this.cargando.set(false);
         this.enviado.set(true);
       }

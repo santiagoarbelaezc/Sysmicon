@@ -1,98 +1,287 @@
-<div class="nosotros-page min-h-screen bg-white text-neutral-900 pt-20 sm:pt-28 md:pt-32 pb-10 sm:pb-14 font-sans">
-  <div class="max-w-[1550px] mx-auto px-6 sm:px-12 lg:px-16">
+<div class="nosotros-page min-h-screen bg-white text-neutral-900 pt-24 sm:pt-28 md:pt-32 pb-10 sm:pb-14 font-sans selection:bg-neutral-900 selection:text-white w-full">
+
+  <!-- =====================================================
+       1. ENCABEZADO DE HISTORIA (Con Padding Equilibrado)
+       ===================================================== -->
+  <header class="w-full max-w-[1800px] mx-auto px-6 sm:px-12 lg:px-16 mb-8 sm:mb-12"
+          data-aos="fade-up"
+          data-aos-duration="850"
+          data-aos-easing="ease-out-cubic">
     
-    <!-- Hero Header Ultra-Limpio (Estilo Misión Section) -->
-    <div class="text-center max-w-4xl mx-auto mb-12" data-aos="fade-up">
-      <span class="font-mono text-xs tracking-[0.3em] text-neutral-400 font-semibold uppercase block mb-2.5">
-        IDENTIDAD & FILOSOFÍA
+    <div class="inline-block mb-2">
+      <span class="font-mono text-xs sm:text-sm tracking-[0.3em] text-neutral-600 font-bold uppercase">
+        6 AÑOS DE TRAYECTORIA
       </span>
-      <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-neutral-900 font-bold tracking-tight uppercase leading-[1.08] mb-3">
-        DISEÑO, RIGOR Y <span class="font-serif italic font-normal text-neutral-500">AUTENTICIDAD</span>
-      </h1>
-      <p class="font-sans text-base sm:text-lg text-neutral-600 leading-relaxed font-light max-w-3xl mx-auto">
-        En Sysmicon no solo levantamos muros; articulamos el espacio, la luz y los materiales para crear el escenario de tu vida en familia.
-      </p>
     </div>
+    
+    <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl xl:text-8xl text-neutral-900 font-bold tracking-tight uppercase leading-[1.02] mb-2">
+      NUESTRA HISTORIA <span class="font-serif italic font-normal text-neutral-500">ARQUITECTÓNICA</span>
+    </h1>
 
-    <!-- Sección Historia (Story Showcase Grid) -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center mb-14 pb-12 border-b border-neutral-200/80">
-      
-      <!-- Columna Texto & Estadísticas (Cols 1-7) -->
-      <div class="lg:col-span-7 space-y-6 text-left" data-aos="fade-up">
-        <div class="space-y-2">
-          <span class="font-mono text-xs tracking-[0.3em] text-neutral-400 font-semibold uppercase block">
-            6 AÑOS DE TRAYECTORIA
-          </span>
-          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-neutral-900 font-bold tracking-tight uppercase leading-tight">
-            NUESTRA HISTORIA ARQUITECTÓNICA
+    <p class="font-sans text-lg sm:text-2xl text-neutral-600 font-light leading-relaxed max-w-5xl">
+      Elevamos los estándares de la arquitectura residencial en el Oriente Antioqueño, combinando sensibilidad de autor con rigor constructivo, transparencia e ingeniería sismorresistente.
+    </p>
+
+  </header>
+
+  <!-- =====================================================
+       2. NIVELES FOTOGRÁFICOS CONTINUOS CON COLLAGE & VIDEO
+          Collages Asimétricos por Proyecto + Videos en Loop + 0 Padding Vertical + Fondo Negro
+       ===================================================== -->
+  <section class="story-section w-full bg-black text-white mb-0 pb-0 border-b border-neutral-900" id="historia-section">
+    
+    <div class="w-full flex flex-col p-0 m-0 space-y-0">
+
+      <div *ngFor="let nivel of historiaNiveles; let i = index"
+           class="relative w-full h-[540px] sm:h-[640px] lg:h-[740px] bg-black overflow-hidden group border-b border-neutral-900 last:border-none">
+        
+        <!-- ==========================================
+             COLLAGE GRID ASIMÉTRICO (TIPO VIDEO-LEFT)
+             ========================================== -->
+        <div *ngIf="nivel.layoutTipo === 'video-left'" 
+             class="w-full h-full grid grid-cols-1 md:grid-cols-12 gap-2 sm:gap-3 p-2 sm:p-3">
+          
+          <!-- Ranura 1: Gran Video / Fotografía Principal (7 columnas - 100% Alto) -->
+          <div class="md:col-span-7 h-[300px] md:h-full rounded-2xl overflow-hidden relative bg-black shadow-inner group/media">
+            <video *ngIf="nivel.videoSrc" 
+                   [src]="nivel.videoSrc" 
+                   autoplay 
+                   loop 
+                   muted 
+                   [muted]="true" 
+                   playsinline 
+                   class="w-full h-full object-cover filter brightness-[0.88] group-hover/media:brightness-95 transition-all duration-700">
+            </video>
+            <img *ngIf="!nivel.videoSrc && nivel.imagenes[0]" 
+                 [src]="nivel.imagenes[0]" 
+                 [alt]="nivel.titulo" 
+                 class="w-full h-full object-cover filter brightness-[0.90] group-hover/media:scale-105 transition-all duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20 pointer-events-none"></div>
+          </div>
+
+          <!-- Ranura 2: Mosaico Secundario de 3 Fotos (5 columnas - 100% Ajuste Vertical sin huecos) -->
+          <div class="md:col-span-5 flex flex-col gap-2 sm:gap-3 h-[240px] md:h-full">
+            
+            <!-- Foto 1 (Fila superior 50% alto) -->
+            <div class="flex-1 min-h-0 rounded-2xl overflow-hidden relative bg-neutral-900 shadow-sm group/media">
+              <img [src]="nivel.imagenes[1]" 
+                   [alt]="nivel.titulo" 
+                   class="w-full h-full object-cover filter brightness-[0.88] group-hover/media:scale-105 transition-transform duration-700">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none"></div>
+            </div>
+
+            <!-- Fila inferior (50% alto dividida en 2 fotos) -->
+            <div class="flex-1 min-h-0 grid grid-cols-2 gap-2 sm:gap-3">
+              <div class="h-full rounded-2xl overflow-hidden relative bg-neutral-900 shadow-sm group/media">
+                <img [src]="nivel.imagenes[2]" 
+                     [alt]="nivel.titulo" 
+                     class="w-full h-full object-cover filter brightness-[0.88] group-hover/media:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none"></div>
+              </div>
+
+              <div class="h-full rounded-2xl overflow-hidden relative bg-neutral-900 shadow-sm group/media">
+                <img [src]="nivel.imagenes[3] || nivel.imagenes[0]" 
+                     [alt]="nivel.titulo" 
+                     class="w-full h-full object-cover filter brightness-[0.88] group-hover/media:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none"></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ==========================================
+             COLLAGE GRID ASIMÉTRICO (TIPO VIDEO-RIGHT)
+             ========================================== -->
+        <div *ngIf="nivel.layoutTipo === 'video-right'" 
+             class="w-full h-full grid grid-cols-1 md:grid-cols-12 gap-2 sm:gap-3 p-2 sm:p-3">
+          
+          <!-- Ranura 1: Mosaico Secundario de 3 Fotos (5 columnas - 100% Ajuste Vertical sin huecos) -->
+          <div class="md:col-span-5 flex flex-col gap-2 sm:gap-3 h-[240px] md:h-full order-2 md:order-1">
+            
+            <!-- Foto 1 (Fila superior 50% alto) -->
+            <div class="flex-1 min-h-0 rounded-2xl overflow-hidden relative bg-neutral-900 shadow-sm group/media">
+              <img [src]="nivel.imagenes[1]" 
+                   [alt]="nivel.titulo" 
+                   class="w-full h-full object-cover filter brightness-[0.88] group-hover/media:scale-105 transition-transform duration-700">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none"></div>
+            </div>
+
+            <!-- Fila inferior (50% alto dividida en 2 fotos) -->
+            <div class="flex-1 min-h-0 grid grid-cols-2 gap-2 sm:gap-3">
+              <div class="h-full rounded-2xl overflow-hidden relative bg-neutral-900 shadow-sm group/media">
+                <img [src]="nivel.imagenes[2]" 
+                     [alt]="nivel.titulo" 
+                     class="w-full h-full object-cover filter brightness-[0.88] group-hover/media:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none"></div>
+              </div>
+
+              <div class="h-full rounded-2xl overflow-hidden relative bg-neutral-900 shadow-sm group/media">
+                <img [src]="nivel.imagenes[3] || nivel.imagenes[0]" 
+                     [alt]="nivel.titulo" 
+                     class="w-full h-full object-cover filter brightness-[0.88] group-hover/media:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Ranura 2: Gran Video / Fotografía Principal (7 columnas - 100% Alto) -->
+          <div class="md:col-span-7 h-[300px] md:h-full rounded-2xl overflow-hidden relative bg-black shadow-inner group/media order-1 md:order-2">
+            <video *ngIf="nivel.videoSrc" 
+                   [src]="nivel.videoSrc" 
+                   autoplay 
+                   loop 
+                   muted 
+                   [muted]="true" 
+                   playsinline 
+                   class="w-full h-full object-cover filter brightness-[0.88] group-hover/media:brightness-95 transition-all duration-700">
+            </video>
+            <img *ngIf="!nivel.videoSrc && nivel.imagenes[0]" 
+                 [src]="nivel.imagenes[0]" 
+                 [alt]="nivel.titulo" 
+                 class="w-full h-full object-cover filter brightness-[0.90] group-hover/media:scale-105 transition-all duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20 pointer-events-none"></div>
+          </div>
+
+        </div>
+
+        <!-- ==========================================
+             COLLAGE GRID ASIMÉTRICO (TIPO GRID ASYMMETRIC)
+             ========================================== -->
+        <div *ngIf="nivel.layoutTipo === 'grid-asymmetric'" 
+             class="w-full h-full grid grid-cols-1 md:grid-cols-12 gap-2 sm:gap-3 p-2 sm:p-3">
+          
+          <!-- Foto Grande 1 (6 columnas - 100% Alto) -->
+          <div class="md:col-span-6 h-[260px] md:h-full rounded-2xl overflow-hidden relative bg-neutral-900 shadow-sm group/media">
+            <img [src]="nivel.imagenes[0]" 
+                 [alt]="nivel.titulo" 
+                 class="w-full h-full object-cover filter brightness-[0.88] group-hover/media:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20 pointer-events-none"></div>
+          </div>
+
+          <!-- Foto Vertical 2 (3 columnas - 100% Alto) -->
+          <div class="md:col-span-3 h-[220px] md:h-full rounded-2xl overflow-hidden relative bg-neutral-900 shadow-sm group/media">
+            <img [src]="nivel.imagenes[1]" 
+                 [alt]="nivel.titulo" 
+                 class="w-full h-full object-cover filter brightness-[0.88] group-hover/media:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+          </div>
+
+          <!-- Fotos 3 y 4 Apiladas (3 columnas - 100% Ajuste Vertical) -->
+          <div class="md:col-span-3 flex flex-col gap-2 sm:gap-3 h-[240px] md:h-full">
+            <div class="flex-1 min-h-0 rounded-2xl overflow-hidden relative bg-neutral-900 shadow-sm group/media">
+              <img [src]="nivel.imagenes[2]" 
+                   [alt]="nivel.titulo" 
+                   class="w-full h-full object-cover filter brightness-[0.88] group-hover/media:scale-105 transition-transform duration-700">
+            </div>
+            <div class="flex-1 min-h-0 rounded-2xl overflow-hidden relative bg-neutral-900 shadow-sm group/media">
+              <img [src]="nivel.imagenes[3] || nivel.imagenes[0]" 
+                   [alt]="nivel.titulo" 
+                   class="w-full h-full object-cover filter brightness-[0.88] group-hover/media:scale-105 transition-transform duration-700">
+            </div>
+          </div>
+
+        </div>
+
+        <!-- =====================================================
+             CONTENEDOR FLOTANTE DE TEXTO ARQUITECTÓNICO (SIN REDIRECCIÓN)
+             ===================================================== -->
+        <div class="absolute p-8 sm:p-12 lg:p-14 rounded-2xl sm:rounded-3xl max-w-lg sm:max-w-2xl lg:max-w-3xl transition-transform duration-700 shadow-[0_30px_70px_rgba(0,0,0,0.55)] z-20 pointer-events-auto"
+             [ngClass]="[
+               nivel.posicionClases,
+               nivel.tema === 'dark' ? 'bg-black/92 text-white border-2 border-white/25 backdrop-blur-2xl' : 'bg-white/95 text-neutral-900 border-2 border-neutral-300 backdrop-blur-2xl'
+             ]"
+             [attr.data-aos]="nivel.animacionAos"
+             data-aos-duration="1000"
+             data-aos-offset="100"
+             data-aos-easing="ease-out-cubic">
+          
+          <!-- Título de Nivel en Gran Escala -->
+          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold uppercase leading-[1.08] mb-3 sm:mb-4"
+              [ngClass]="nivel.tema === 'dark' ? 'text-white' : 'text-neutral-900'">
+            {{ nivel.titulo }}
           </h2>
-        </div>
 
-        <div class="space-y-3 font-sans text-base text-neutral-600 font-light leading-relaxed">
-          <p>
-            Sysmicon nació con una visión clara: elevar los estándares de la arquitectura residencial en nuestra región, combinando una sensibilidad de diseño internacional con el respeto por las técnicas constructivas locales y los materiales nobles de nuestro entorno.
+          <!-- Texto Descriptivo Refinado -->
+          <p class="font-sans text-base sm:text-xl lg:text-2xl font-light leading-relaxed m-0"
+             [ngClass]="nivel.tema === 'dark' ? 'text-white/85' : 'text-neutral-700'">
+            {{ nivel.texto }}
           </p>
-          <p>
-            A lo largo de 6 años de trayectoria, hemos consolidado una metodología de trabajo que elimina la incertidumbre presupuestal habitual de la construcción tradicional. Operamos con total transparencia, integrando arquitectura, ingeniería civil, diseño interior e interventoría bajo un mismo techo.
-          </p>
+
         </div>
 
-        <!-- Matriz de Estadísticas (Estilo Misión Grid Cards) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
-          <div class="p-6 rounded-[22px] bg-neutral-50 border-2 border-neutral-200/90 space-y-1.5 select-none">
-            <span class="font-serif text-3xl sm:text-4xl font-bold text-neutral-900 block">100%</span>
-            <span class="font-mono text-xs text-neutral-500 tracking-[0.18em] uppercase font-semibold block">Proyectos Entregados a Tiempo</span>
-          </div>
-          <div class="p-6 rounded-[22px] bg-neutral-100/90 border-2 border-neutral-200/90 space-y-1.5 select-none shadow-inner">
-            <span class="font-serif text-3xl sm:text-4xl font-bold text-neutral-900 block">6+ Años</span>
-            <span class="font-mono text-xs text-neutral-500 tracking-[0.18em] uppercase font-semibold block">Garantía y Respaldo Institucional</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Columna Fotografía Marco Misión (Cols 8-12) -->
-      <div class="lg:col-span-5" data-aos="fade-up" data-aos-delay="100">
-        <div class="w-full rounded-[24px] border-2 border-neutral-200 overflow-hidden shadow-sm bg-white p-2">
-          <img src="https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_1000/v1785440099/6c62aa8e-b604-4c3a-a8c2-cb4ac61759a2_czyho0.jpg" 
-               alt="Estudio Sysmicon" 
-               class="w-full h-[420px] sm:h-[480px] object-cover rounded-[18px] filter brightness-[0.98]">
-        </div>
       </div>
 
     </div>
 
-    <!-- Sección Metodología (Ciclo Constructivo Sysmicon) -->
-    <section class="methodology-section mb-14 pb-12 border-b border-neutral-200/80">
+  </section>
+
+  <!-- =====================================================
+       3. METODOLOGÍA (Ciclo Constructivo Sysmicon)
+       ===================================================== -->
+  <div class="w-full max-w-[1800px] mx-auto px-6 sm:px-12 lg:px-16 mt-10 sm:mt-14 lg:mt-16">
+
+    <section class="methodology-section w-full mb-12 sm:mb-16 pb-12 sm:pb-16 border-b border-neutral-200/80">
       
-      <div class="max-w-4xl mb-8 text-left" data-aos="fade-up">
-        <span class="font-mono text-xs tracking-[0.3em] text-neutral-400 font-semibold uppercase block mb-2.5">
-          METODOLOGÍA
+      <!-- Encabezado Editorial Minimalista -->
+      <div class="max-w-4xl mb-8 sm:mb-10 text-left space-y-2"
+           data-aos="fade-up"
+           data-aos-duration="850"
+           data-aos-easing="ease-out-cubic">
+        
+        <span class="font-mono text-xs tracking-[0.3em] text-neutral-600 font-semibold uppercase block">
+          METODOLOGÍA // EL PROCESO SYSMICON
         </span>
-        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-neutral-900 font-bold tracking-tight uppercase leading-[1.08] mb-3">
-          EL CICLO CONSTRUCTIVO <span class="font-serif italic font-normal text-neutral-500">SYSMICON</span>
+        
+        <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl text-neutral-900 font-bold tracking-tight uppercase leading-[1.05]">
+          EL CICLO CONSTRUCTIVO <span class="font-serif italic font-normal text-neutral-500">DE AUTOR</span>
         </h2>
-        <p class="font-sans text-base sm:text-lg text-neutral-600 font-light leading-relaxed">
+
+        <p class="font-sans text-base sm:text-xl text-neutral-600 font-light leading-relaxed max-w-3xl pt-0.5">
           Nuestra metodología paso a paso para garantizar la excelencia desde la primera línea en el plano hasta el momento de habitar tu hogar.
         </p>
+
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <!-- Grilla de Tarjetas de Metodología de Alto Rendimiento -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         <div *ngFor="let m of pilaresMetodologia; let i = index" 
-             class="p-7 sm:p-8 rounded-[24px] border-2 border-neutral-200 bg-white hover:bg-neutral-900 hover:text-white transition-all duration-300 flex flex-col justify-between group shadow-sm cursor-default select-none">
+             class="p-6 sm:p-7 rounded-2xl sm:rounded-3xl border border-neutral-200/90 bg-neutral-50/60 hover:bg-neutral-900 hover:text-white hover:border-neutral-900 transition-all duration-300 flex flex-col justify-between group shadow-2xs cursor-default select-none"
+             data-aos="fade-up"
+             [attr.data-aos-delay]="i * 100"
+             data-aos-duration="850"
+             data-aos-easing="ease-out-cubic">
           
-          <div>
-            <span class="font-mono text-xs tracking-[0.3em] text-neutral-400 group-hover:text-neutral-400 font-bold uppercase block mb-3">
-              ETAPA {{ m.etapa }}
-            </span>
-            <h3 class="font-serif text-lg font-bold uppercase mb-2.5 leading-tight group-hover:text-white text-neutral-900">
+          <div class="space-y-2">
+            
+            <!-- Etiqueta de Fase -->
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <span class="font-mono text-xs tracking-[0.2em] text-neutral-600 group-hover:text-emerald-400 font-bold uppercase">
+                ETAPA {{ m.etapa }}
+              </span>
+              <span class="font-mono text-[10px] tracking-wider text-neutral-600 group-hover:text-neutral-400 font-semibold uppercase">
+                {{ m.tag }}
+              </span>
+            </div>
+
+            <!-- Título -->
+            <h3 class="font-serif text-xl sm:text-2xl font-bold uppercase leading-snug group-hover:text-white text-neutral-900">
               {{ m.titulo }}
             </h3>
-          </div>
 
-          <div class="pt-5 border-t border-neutral-100 group-hover:border-neutral-800 transition-colors mt-5">
+            <!-- Descripción Breve -->
             <p class="font-sans text-xs sm:text-sm text-neutral-600 group-hover:text-neutral-300 font-light leading-relaxed">
               {{ m.desc }}
             </p>
+
+          </div>
+
+          <!-- Pie Técnico -->
+          <div class="pt-4 border-t border-neutral-200/70 group-hover:border-neutral-800 transition-colors mt-5 flex items-center justify-between font-mono text-[10px] text-neutral-600 group-hover:text-neutral-400 uppercase font-semibold">
+            <span>SYS_STAGE // {{ m.etapa }}</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-neutral-400 group-hover:bg-emerald-400"></span>
           </div>
 
         </div>
@@ -100,10 +289,18 @@
 
     </section>
 
-    <!-- DIRECTOR SHOWCASE COMPONENT -->
-    <div class="mb-10">
+    <!-- =====================================================
+         4. DIRECTOR SHOWCASE COMPONENT
+         ===================================================== -->
+    <div class="w-full mb-4 sm:mb-6"
+         data-aos="fade-up"
+         data-aos-duration="900">
       <app-director-showcase></app-director-showcase>
     </div>
 
   </div>
+
 </div>
+
+
+

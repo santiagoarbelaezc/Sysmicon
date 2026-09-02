@@ -4,7 +4,6 @@ import { RouterModule, Router } from '@angular/router';
 import { BRAND_CONFIG, NAV_LINKS } from '../../core/app.constants';
 import { AuthService } from '../../services/auth.service';
 import { PwaService } from '../../services/pwa.service';
-import { CmsService } from '../../services/cms.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +15,6 @@ import { CmsService } from '../../services/cms.service';
 export class NavbarComponent implements OnInit {
   readonly authService = inject(AuthService);
   readonly pwaService = inject(PwaService);
-  readonly cms = inject(CmsService);
   readonly router = inject(Router);
   readonly brandName = BRAND_CONFIG.name;
   readonly navLinks = NAV_LINKS;

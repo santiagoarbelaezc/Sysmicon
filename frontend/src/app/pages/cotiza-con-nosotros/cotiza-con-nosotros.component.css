@@ -20,30 +20,29 @@
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Efectos en Inputs de Formulario */
-input, textarea {
-  font-family: var(--font-sans);
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+/* Inputs y Textareas con bordes 100% visibles y nítidos */
+.cotiza-field {
+  display: block;
+  width: 100%;
+  border: 1.5px solid #cbd5e1 !important;
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+  border-radius: 12px !important;
+  padding: 14px 18px !important;
+  font-size: 15px !important;
+  font-family: inherit;
+  outline: none !important;
+  transition: all 0.25s ease-in-out !important;
 }
 
-input:focus, textarea:focus {
+.cotiza-field:hover {
+  border-color: #94a3b8 !important;
+}
+
+.cotiza-field:focus {
   border-color: #000000 !important;
-  background: #FFFFFF !important;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
-}
-
-/* Botón Principal */
-.btn-primary {
-  font-family: var(--font-sans);
-  font-weight: 800;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  background: #000814;
-  color: #FFFFFF;
-  border: 1px solid #000814;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08) !important;
 }
 
 .btn-primary:hover:not([disabled]) {

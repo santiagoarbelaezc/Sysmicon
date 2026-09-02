@@ -17,8 +17,8 @@
 
   <div class="max-w-[1720px] mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
     
-    <!-- TOP CTA BANNER VIP DE ALTA ELEGANCIA MEJORADO -->
-    <div class="relative overflow-hidden rounded-[32px] bg-gradient-to-r from-neutral-50 via-white to-neutral-50 border border-black/20 hover:border-black/50 shadow-lg p-8 sm:p-12 lg:p-16 mb-16 lg:mb-20 transition-all duration-500 group">
+    <!-- TOP CTA BANNER VIP DE ALTA ELEGANCIA MEJORADO (OCULTO EN PÁGINA COTIZA) -->
+    <div *ngIf="!isCotizaPage" class="relative overflow-hidden rounded-[32px] bg-gradient-to-r from-neutral-50 via-white to-neutral-50 border border-black/20 hover:border-black/50 shadow-lg p-8 sm:p-12 lg:p-16 mb-16 lg:mb-20 transition-all duration-500 group">
       <!-- Líneas de acento top/bottom internas del banner -->
       <div class="absolute top-0 inset-x-8 h-[1px] bg-black/15"></div>
       <div class="absolute bottom-0 inset-x-8 h-[1px] bg-black/15"></div>

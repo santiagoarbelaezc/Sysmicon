@@ -2,13 +2,6 @@
         [ngClass]="{'navbar-hidden': !isNavbarVisible, 'navbar-visible': isNavbarVisible}"
         (mouseenter)="onMouseEnterHeader()"
         (mouseleave)="onMouseLeaveHeader()">
-  
-  <!-- Banner Global de Anuncio / CMS -->
-  <div *ngIf="cms.config().mostrar_banner_alerta === '1' && cms.config().texto_banner_alerta"
-       class="w-full bg-black text-white text-[11px] font-mono py-1 px-4 text-center border-b border-white/10 flex items-center justify-center gap-2 animate-fade">
-    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-    <span class="truncate max-w-4xl tracking-wide">{{ cms.config().texto_banner_alerta }}</span>
-  </div>
 
   <div class="w-full max-w-[1800px] mx-auto px-6 md:px-14 navbar-container flex items-center justify-between">
     <!-- Logo Elegante con Tamaño Equilibrado -->

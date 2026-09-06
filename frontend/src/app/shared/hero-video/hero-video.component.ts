@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy, signal, ElementRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, ElementRef, ViewChild, AfterViewInit, HostListener, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { CmsService } from '../../services/cms.service';
 
 @Component({
   selector: 'app-hero-video',
@@ -12,6 +13,7 @@ import { RouterModule } from '@angular/router';
 export class HeroVideoComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('videoEl') videoRef!: ElementRef<HTMLVideoElement>;
 
+  readonly cmsService = inject(CmsService);
   readonly videoSrc = signal<string>('https://res.cloudinary.com/dsv1gdgya/video/upload/v1785017834/sysmi-0_n3fxgd.mp4');
   readonly isMobile = signal<boolean>(false);
   readonly seekBadgeText = signal<string | null>(null);

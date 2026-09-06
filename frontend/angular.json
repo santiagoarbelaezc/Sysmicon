@@ -38,7 +38,10 @@
               "node_modules/aos/dist/aos.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "externalDependencies": [
+              "assets/images/texture.png"
+            ]
           },
           "configurations": {
             "production": {

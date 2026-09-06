@@ -34,6 +34,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkScroll();
+    this.router.events.subscribe(() => {
+      this.checkScroll();
+    });
   }
 
   @HostListener('window:scroll', [])
@@ -75,7 +78,10 @@ export class NavbarComponent implements OnInit {
       return false;
     }
 
-    if (this.router.url !== '/' && this.router.url !== '') return true;
+    const currentUrl = this.router.url.split('?')[0];
+    const isHeroOrCotiza = currentUrl === '/' || currentUrl === '' || currentUrl === '/cotiza-con-nosotros';
+    if (!isHeroOrCotiza) return true;
+
     return this.isScrolled() || this.isHoveredTop();
   }
 

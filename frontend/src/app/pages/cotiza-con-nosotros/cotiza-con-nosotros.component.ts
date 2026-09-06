@@ -6,11 +6,21 @@ import { HttpClient } from '@angular/common/http';
 import { CONTACT_INFO, BRAND_CONFIG } from '../../core/app.constants';
 import { CmsService } from '../../services/cms.service';
 import { environment } from '../../../environments/environment';
+import { DirectorShowcaseComponent } from '../../components/director-showcase/director-showcase.component';
+import AOS from 'aos';
+
+export interface EtapaCotizacion {
+  etapa: string;
+  tag: string;
+  titulo: string;
+  desc: string;
+  code: string;
+}
 
 @Component({
   selector: 'app-cotiza-con-nosotros',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, DirectorShowcaseComponent],
   templateUrl: './cotiza-con-nosotros.component.html',
   styleUrl: './cotiza-con-nosotros.component.css'
 })
@@ -22,10 +32,15 @@ export class CotizaConNosotrosComponent implements OnInit, AfterViewInit {
   readonly contact = CONTACT_INFO;
   readonly brand = BRAND_CONFIG;
 
-  @ViewChild('videoA') videoA!: ElementRef<HTMLVideoElement>;
-  @ViewChild('videoB') videoB!: ElementRef<HTMLVideoElement>;
+  @ViewChild('casaLVideoRef') casaLVideoRef?: ElementRef<HTMLVideoElement>;
+  @ViewChild('sectionVideoRef') sectionVideoRef?: ElementRef<HTMLVideoElement>;
+  @ViewChild('videoA') videoA?: ElementRef<HTMLVideoElement>;
+  @ViewChild('videoB') videoB?: ElementRef<HTMLVideoElement>;
 
   readonly isMobile = signal<boolean>(false);
+
+  // Video exclusivo para fondo de la sección de formulario
+  readonly sectionVideo = 'https://res.cloudinary.com/dsv1gdgya/video/upload/v1785017819/sysmi-1_mvv1wg.mp4';
 
   // Playlist adaptable para Desktop y Móvil (Hero de alta definición)
   readonly videoPlaylistDesktop = [
@@ -54,9 +69,65 @@ export class CotizaConNosotrosComponent implements OnInit, AfterViewInit {
 
   private isTransitioning = false;
 
+  // Video exclusivo de Casa L para la sección de cotización
+  readonly casaLVideo = 'https://res.cloudinary.com/dsv1gdgya/video/upload/v1785017752/sysmi-5_zakn8v.mp4';
+
+  // Fotografías de autor de Casa L para el collage arquitectónico
+  readonly casaLCollage = [
+    {
+      url: 'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785439880/b2a056c1-0a5b-4aee-ab44-d1f868266cd8_xuvvnz.jpg',
+      label: 'Piscina reflectante & ala social',
+      code: 'REF-01 // CASA L'
+    },
+    {
+      url: 'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785439875/390124c1-e70a-4713-b438-ada6247d4363_adxqt1.jpg',
+      label: 'Celosías motorizadas en madera noble',
+      code: 'DET-02 // MATERIALIDAD'
+    },
+    {
+      url: 'https://res.cloudinary.com/dsv1gdgya/image/upload/v1785439869/0515c974-72ed-4747-a2b4-400fc4a61610_zz7mu0.jpg',
+      label: 'Geometría en L sobre el paisaje',
+      code: 'EXT-03 // ARQUITECTURA'
+    }
+  ];
+
+  // 4 Pilares de la metodología de cotización (Estilo Nosotros)
+  readonly etapasCotizacion: EtapaCotizacion[] = [
+    {
+      etapa: '01',
+      tag: 'CONSULTA TÉCNICA',
+      titulo: 'Visión & Terreno',
+      desc: 'Escuchamos tus requerimientos espaciales, analizamos la topografía del lote y los lineamientos bioclimáticos del predio.',
+      code: 'SYS_STAGE // 01'
+    },
+    {
+      etapa: '02',
+      tag: 'INGENIERÍA & NORMA',
+      titulo: 'Viabilidad & Factibilidad',
+      desc: 'Evaluación de norma urbanística (POT/EOT), accesibilidad de servicios y estimación financiera preliminar.',
+      code: 'SYS_STAGE // 02'
+    },
+    {
+      etapa: '03',
+      tag: 'DISEÑO DE AUTOR',
+      titulo: 'Anteproyecto & Presupuesto',
+      desc: 'Modelado 3D fotorrealista de autor con presupuesto itemizado y blindado bajo cálculo estructural NSR-10.',
+      code: 'SYS_STAGE // 03'
+    },
+    {
+      etapa: '04',
+      tag: 'EJECUCIÓN',
+      titulo: 'Construcción Llave en Mano',
+      desc: 'Dirección técnica residente diaria, control presupuestal riguroso y entrega impecable para habitar.',
+      code: 'SYS_STAGE // 04'
+    }
+  ];
+
   // Form Model
   nombre = signal<string>('');
   correo = signal<string>('');
+  telefono = signal<string>('');
+  servicioInteres = signal<string>('Diseño y Construcción Integral');
   mensaje = signal<string>('');
 
   // UI States
@@ -65,14 +136,27 @@ export class CotizaConNosotrosComponent implements OnInit, AfterViewInit {
   errorMsg = signal<string>('');
 
   get whatsappUrl(): string {
-    const text = `Hola Sysmicon, me gustaría cotizar mi proyecto arquitectónico. Mi nombre es ${this.nombre() || 'un cliente interesado'}. Correo: ${this.correo()}. ${this.mensaje() ? 'Mensaje: ' + this.mensaje() : ''}`;
-    return `https://wa.me/573108459210?text=${encodeURIComponent(text)}`;
+    const wa = (this.cms.config().whatsapp_contacto || '573108459210').replace(/[^0-9]/g, '');
+    const telText = this.telefono() ? ` | Tel: ${this.telefono()}` : '';
+    const servText = this.servicioInteres() ? ` | Interés: ${this.servicioInteres()}` : '';
+    const text = `Hola Sysmicon, me gustaría cotizar mi proyecto arquitectónico. Mi nombre es ${this.nombre() || 'un cliente interesado'}. Correo: ${this.correo()}${telText}${servText}. ${this.mensaje() ? 'Mensaje: ' + this.mensaje() : ''}`;
+    return `https://wa.me/${wa}?text=${encodeURIComponent(text)}`;
   }
 
   get mailtoUrl(): string {
-    const subject = encodeURIComponent('Cotización de proyecto arquitectónico');
-    const body = encodeURIComponent(`Nombre: ${this.nombre()}\nCorreo: ${this.correo()}\n\n${this.mensaje()}`);
-    return `mailto:redes.sysmicon@gmail.com?subject=${subject}&body=${body}`;
+    const email = this.cms.config().email_soporte || 'contacto@sysmicon.com';
+    const subject = encodeURIComponent('Cotización de proyecto arquitectónico | ' + (this.servicioInteres() || 'Sysmicon'));
+    const body = encodeURIComponent(`Nombre: ${this.nombre()}\nCorreo: ${this.correo()}\nTeléfono: ${this.telefono()}\nServicio: ${this.servicioInteres()}\n\nMensaje:\n${this.mensaje()}`);
+    return `mailto:${email}?subject=${subject}&body=${body}`;
+  }
+
+  scrollToCotizador(): void {
+    if (typeof document !== 'undefined') {
+      const el = document.getElementById('formulario-cotizacion');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   }
 
   ngOnInit(): void {
@@ -81,13 +165,28 @@ export class CotizaConNosotrosComponent implements OnInit, AfterViewInit {
       if (params['proyecto']) {
         this.mensaje.set(`Hola, estoy interesado/a en un proyecto arquitectónico con características similares a la obra "${params['proyecto']}". Quisiera agendar una consulta técnica.`);
       }
+      if (params['servicio']) {
+        this.servicioInteres.set(params['servicio']);
+      }
     });
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
+      try {
+        AOS.refresh();
+      } catch (e) {}
+
+      if (this.casaLVideoRef?.nativeElement) {
+        this.casaLVideoRef.nativeElement.muted = true;
+        this.casaLVideoRef.nativeElement.play().catch(() => {});
+      }
+      if (this.sectionVideoRef?.nativeElement) {
+        this.sectionVideoRef.nativeElement.muted = true;
+        this.sectionVideoRef.nativeElement.play().catch(() => {});
+      }
       this.playActiveVideo();
-    }, 100);
+    }, 150);
   }
 
   @HostListener('window:resize', [])
@@ -178,10 +277,11 @@ export class CotizaConNosotrosComponent implements OnInit, AfterViewInit {
     const payload = {
       nombre: this.nombre(),
       email: this.correo(),
-      asunto: 'Cotización Arquitectónica Personalizada',
+      telefono: this.telefono(),
+      asunto: `Cotización: ${this.servicioInteres() || 'Arquitectura Residencial'}`,
       mensaje: this.mensaje() || 'Solicitud de asesoría y cotización arquitectónica personalizada',
       contenido: this.mensaje() || 'Solicitud de asesoría y cotización arquitectónica personalizada',
-      tipo_servicio: 'Arquitectura Residencial / Obra Nueva'
+      tipo_servicio: this.servicioInteres() || 'Arquitectura Residencial / Obra Nueva'
     };
 
     this.http.post(`${this.apiUrl}/cotizacion`, payload).subscribe({
@@ -205,6 +305,7 @@ export class CotizaConNosotrosComponent implements OnInit, AfterViewInit {
   nuevaConsulta(): void {
     this.nombre.set('');
     this.correo.set('');
+    this.telefono.set('');
     this.mensaje.set('');
     this.enviado.set(false);
     this.errorMsg.set('');

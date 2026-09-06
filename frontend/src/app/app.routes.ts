@@ -28,7 +28,7 @@ export const routes: Routes = [
   
   // Rutas de Autenticación (con GuestGuard)
   { path: 'login', component: LoginComponent, canActivate: [guestGuard], title: 'Acceso Privado | Portal Sysmicon' },
-  { path: 'registro', component: LoginComponent, canActivate: [guestGuard], title: 'Crear Cuenta | Portal Sysmicon' },
+  { path: 'registro', redirectTo: 'login', pathMatch: 'full' },
   { path: 'olvide-mi-contrasena', component: OlvideContrasenaComponent, title: 'Recuperar Contraseña | Portal Sysmicon' },
   
   // Ruta Privada de Administración (Protegida estrictamente con AuthGuard)

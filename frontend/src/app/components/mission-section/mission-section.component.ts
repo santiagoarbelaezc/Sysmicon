@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { CmsService } from '../../services/cms.service';
 
 @Component({
   selector: 'app-mission-section',
@@ -10,6 +11,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './mission-section.component.css'
 })
 export class MissionSectionComponent {
+  readonly cmsService = inject(CmsService);
+
   readonly valoresFila1 = [
     { nombre: 'RESPONSABILIDAD', destacado: false },
     { nombre: 'HONESTIDAD', destacado: true },

@@ -43,20 +43,23 @@
 
     <!-- Título Principal con Revelación Cinemática y Letra Más Grande -->
     <h1 class="hero-title-entrance font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tight leading-[1.05] drop-shadow-2xl mb-7">
-      Diseñamos y <span class="font-serif italic font-normal text-[#C2E1FF]">Construimos</span>
+      {{ cmsService.config().hero_title_prefix || 'Diseñamos y' }} 
+      <span class="font-serif italic font-normal text-[#C2E1FF]">
+        {{ cmsService.config().hero_title_highlight || 'Construimos' }}
+      </span>
     </h1>
 
     <!-- Botones de Acción Restaurados y Perfectamente Alineados -->
     <div class="hero-buttons-entrance flex flex-wrap items-center justify-center gap-4 sm:gap-6">
       <a routerLink="/cotiza-con-nosotros" class="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-lg bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-500 font-sans text-xs sm:text-sm font-bold tracking-[0.18em] uppercase shadow-2xl hover:scale-105 whitespace-nowrap">
-        <span class="whitespace-nowrap">Cotiza con nosotros</span>
+        <span class="whitespace-nowrap">{{ cmsService.config().hero_btn_cotizar || 'Cotiza con nosotros' }}</span>
         <svg class="w-4 h-4 shrink-0 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
         </svg>
       </a>
 
       <button (click)="scrollToNext()" class="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/40 backdrop-blur-md transition-all duration-500 font-sans text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase whitespace-nowrap">
-        <span class="whitespace-nowrap">Ver Obras & Proyectos</span>
+        <span class="whitespace-nowrap">{{ cmsService.config().hero_btn_obras || 'Ver Obras & Proyectos' }}</span>
       </button>
     </div>
 
@@ -68,7 +71,7 @@
     
     <!-- Texto animado -->
     <span class="font-mono text-xs tracking-[0.3em] uppercase text-white/80 group-hover:text-[#C2E1FF] transition-colors mb-2">
-      DESLIZA PARA EXPLORAR
+      {{ cmsService.config().hero_scroll_text || 'DESLIZA PARA EXPLORAR' }}
     </span>
 
     <!-- Cápsula animada tipo Mouse VIP con pulso brillante -->

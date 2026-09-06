@@ -27,16 +27,11 @@
 
       <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12 relative z-10">
         <div class="max-w-3xl space-y-4">
-          <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-black/[0.04] border border-black/20 text-[10px] font-mono tracking-[0.25em] text-black uppercase">
-            <span class="w-1.5 h-1.5 rounded-full bg-black animate-pulse"></span>
-            <span>SYSMICON ARCHITECTURAL STUDIO • ASESORÍA SENIOR</span>
-          </div>
-
           <h3 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-neutral-900 font-normal leading-tight tracking-tight">
             ¿Listo para materializar la residencia de tus sueños?
           </h3>
 
-          <p class="font-sans text-sm sm:text-base text-neutral-600 leading-relaxed font-normal max-w-2xl">
+          <p class="font-sans text-base sm:text-lg text-neutral-600 leading-relaxed font-normal max-w-2xl">
             Inicia hoy el diseño arquitectónico de alto nivel con presupuesto optimizado, visualización hiperrealista y ejecución llave en mano.
           </p>
         </div>
@@ -58,7 +53,7 @@
     </div>
 
     <!-- MAIN FOOTER GRID EXPANDIDO A TODO LO ANCHO CON SEPARADORES VERTICALES -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 py-12 border-y border-black/20 relative">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-10 xl:gap-14 py-12 border-y border-black/20 relative">
       
       <!-- COLUMNA 1: MARCA CON LOGO HERO BLANCO Y NEGRO (Cols 1-4) -->
       <div class="lg:col-span-4 space-y-6 lg:pr-6 relative">
@@ -69,47 +64,47 @@
           <img src="assets/icons/logo-hero-blanconegro.png" alt="Sysmicon Logo" class="h-20 sm:h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
         </a>
 
-        <p class="text-neutral-600 text-sm sm:text-base leading-relaxed font-normal max-w-md">
+        <p class="text-neutral-600 text-base sm:text-lg leading-relaxed font-normal max-w-md">
           {{ brand.description }}
         </p>
 
         <!-- Redes Sociales -->
         <div class="flex items-center gap-3 pt-2">
           <a [href]="contact.instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Sysmicon" 
-             class="w-11 h-11 rounded-2xl bg-neutral-100 border border-black/20 hover:border-black hover:bg-black hover:text-white flex items-center justify-center text-neutral-800 transition-all duration-300 group/soc">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="group-hover/soc:scale-110 transition-transform"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+             class="w-12 h-12 rounded-2xl bg-neutral-100 border border-black/20 hover:border-black hover:bg-black hover:text-white flex items-center justify-center text-neutral-800 transition-all duration-300 group/soc">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="group-hover/soc:scale-110 transition-transform"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
           </a>
           <a [href]="contact.linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Sysmicon" 
-             class="w-11 h-11 rounded-2xl bg-neutral-100 border border-black/20 hover:border-black hover:bg-black hover:text-white flex items-center justify-center text-neutral-800 transition-all duration-300 group/soc">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="group-hover/soc:scale-110 transition-transform"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+             class="w-12 h-12 rounded-2xl bg-neutral-100 border border-black/20 hover:border-black hover:bg-black hover:text-white flex items-center justify-center text-neutral-800 transition-all duration-300 group/soc">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
           </a>
           <a [href]="contact.facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Sysmicon" 
-             class="w-11 h-11 rounded-2xl bg-neutral-100 border border-black/20 hover:border-black hover:bg-black hover:text-white flex items-center justify-center text-neutral-800 transition-all duration-300 group/soc">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="group-hover/soc:scale-110 transition-transform"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+             class="w-12 h-12 rounded-2xl bg-neutral-100 border border-black/20 hover:border-black hover:bg-black hover:text-white flex items-center justify-center text-neutral-800 transition-all duration-300 group/soc">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
           </a>
         </div>
       </div>
 
-      <!-- COLUMNA 2: NAVEGACIÓN (Cols 5-7) -->
-      <div class="lg:col-span-3 space-y-5 lg:px-4 relative">
+      <!-- COLUMNA 2: NAVEGACIÓN (Cols 5-6) -->
+      <div class="lg:col-span-2 space-y-5 lg:px-3 relative">
         <!-- Separador vertical derecha para desktop -->
         <div class="hidden lg:block absolute right-0 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-black/15 to-transparent"></div>
 
-        <h4 class="font-serif text-base font-bold uppercase tracking-[0.16em] text-neutral-900 relative pb-3 flex items-center justify-between">
+        <h4 class="font-serif text-lg font-bold uppercase tracking-[0.16em] text-neutral-900 relative pb-3 flex items-center justify-between">
           <span>Navegación</span>
-          <span class="font-mono text-[10px] text-black/30">+01</span>
+          <span class="font-mono text-xs text-black/40 font-semibold">+01</span>
         </h4>
         <div class="w-full h-[1px] bg-black"></div>
 
-        <ul class="space-y-3.5 pt-2">
+        <ul class="space-y-4 pt-2">
           <li *ngFor="let link of navLinks">
-            <a [routerLink]="link.path" class="text-neutral-700 hover:text-black text-sm font-medium flex items-center gap-2.5 group/link transition-all duration-300">
-              <span class="w-1.5 h-1.5 rounded-full bg-black opacity-0 group-hover/link:opacity-100 transition-opacity"></span>
+            <a [routerLink]="link.path" class="text-neutral-700 hover:text-black text-base font-medium flex items-center gap-2.5 group/link transition-all duration-300">
+              <span class="w-2 h-2 rounded-full bg-black opacity-0 group-hover/link:opacity-100 transition-opacity"></span>
               <span class="group-hover/link:translate-x-1.5 transition-transform">{{ link.label }}</span>
             </a>
           </li>
           <li class="pt-2">
-            <a routerLink="/cotiza-con-nosotros" class="text-black font-bold text-sm flex items-center gap-2 group/link transition-all">
+            <a routerLink="/cotiza-con-nosotros" class="text-black font-bold text-base flex items-center gap-2 group/link transition-all">
               <span class="w-2 h-2 rounded-full bg-black animate-pulse"></span>
               <span class="group-hover/link:translate-x-1.5 transition-transform">Cotización Privada</span>
             </a>
@@ -117,57 +112,57 @@
         </ul>
       </div>
 
-      <!-- COLUMNA 3: CONTACTO DIRECTO (Cols 8-10) -->
+      <!-- COLUMNA 3: CONTACTO DIRECTO (Cols 7-9) -->
       <div class="lg:col-span-3 space-y-5 lg:px-4 relative">
         <!-- Separador vertical derecha para desktop -->
         <div class="hidden lg:block absolute right-0 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-black/15 to-transparent"></div>
 
-        <h4 class="font-serif text-base font-bold uppercase tracking-[0.16em] text-neutral-900 relative pb-3 flex items-center justify-between">
+        <h4 class="font-serif text-lg font-bold uppercase tracking-[0.16em] text-neutral-900 relative pb-3 flex items-center justify-between">
           <span>Contacto Directo</span>
-          <span class="font-mono text-[10px] text-black/30">+02</span>
+          <span class="font-mono text-xs text-black/40 font-semibold">+02</span>
         </h4>
         <div class="w-full h-[1px] bg-black"></div>
 
         <ul class="space-y-4 pt-2">
           <li class="group flex items-start gap-3.5">
-            <div class="w-9 h-9 rounded-xl bg-neutral-100 border border-black/20 flex items-center justify-center shrink-0 text-black mt-0.5 group-hover:bg-black group-hover:text-white transition-all">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div class="w-10 h-10 rounded-xl bg-neutral-100 border border-black/20 flex items-center justify-center shrink-0 text-black mt-0.5 group-hover:bg-black group-hover:text-white transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
-            <span class="text-neutral-700 text-xs sm:text-sm leading-relaxed pt-1 group-hover:text-black transition-colors">{{ contact.address }}</span>
+            <span class="text-neutral-700 text-sm sm:text-base leading-relaxed pt-1 group-hover:text-black transition-colors">{{ cmsService.config().direccion_oficina || contact.address }}</span>
           </li>
 
           <li class="group flex items-center gap-3.5">
-            <div class="w-9 h-9 rounded-xl bg-neutral-100 border border-black/20 flex items-center justify-center shrink-0 text-black group-hover:bg-black group-hover:text-white transition-all">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <div class="w-10 h-10 rounded-xl bg-neutral-100 border border-black/20 flex items-center justify-center shrink-0 text-black group-hover:bg-black group-hover:text-white transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             </div>
-            <a [href]="'tel:' + contact.phone" class="text-neutral-700 text-xs sm:text-sm font-medium group-hover:text-black transition-colors">{{ contact.phone }}</a>
+            <a [href]="'tel:' + (cmsService.config().telefono_contacto || contact.phone)" class="text-neutral-700 text-sm sm:text-base font-medium group-hover:text-black transition-colors">{{ cmsService.config().telefono_contacto || contact.phone }}</a>
           </li>
 
           <li class="group flex items-center gap-3.5">
-            <div class="w-9 h-9 rounded-xl bg-neutral-100 border border-black/20 flex items-center justify-center shrink-0 text-black group-hover:bg-black group-hover:text-white transition-all">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <div class="w-10 h-10 rounded-xl bg-neutral-100 border border-black/20 flex items-center justify-center shrink-0 text-black group-hover:bg-black group-hover:text-white transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             </div>
-            <a [href]="'mailto:' + contact.email" class="text-neutral-700 text-xs sm:text-sm group-hover:text-black transition-colors">{{ contact.email }}</a>
+            <a [href]="'mailto:' + (cmsService.config().email_soporte || contact.email)" class="text-neutral-700 text-sm sm:text-base group-hover:text-black transition-colors">{{ cmsService.config().email_soporte || contact.email }}</a>
           </li>
 
           <li class="group flex items-center gap-3.5">
-            <div class="w-9 h-9 rounded-xl bg-neutral-100 border border-black/20 flex items-center justify-center shrink-0 text-black group-hover:bg-black group-hover:text-white transition-all">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            <div class="w-10 h-10 rounded-xl bg-neutral-100 border border-black/20 flex items-center justify-center shrink-0 text-black group-hover:bg-black group-hover:text-white transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
             </div>
-            <a [href]="contact.instagram" target="_blank" class="text-neutral-700 text-xs sm:text-sm group-hover:text-black transition-colors">{{ contact.instagramHandle }}</a>
+            <a [href]="contact.instagram" target="_blank" class="text-neutral-700 text-sm sm:text-base group-hover:text-black transition-colors">{{ cmsService.config().instagram_handle || contact.instagramHandle }}</a>
           </li>
         </ul>
       </div>
 
-      <!-- COLUMNA 4: JOURNAL & NEWSLETTER (Cols 11-12) -->
-      <div class="lg:col-span-2 space-y-5 lg:pl-2">
-        <h4 class="font-serif text-base font-bold uppercase tracking-[0.16em] text-neutral-900 relative pb-3 flex items-center justify-between">
+      <!-- COLUMNA 4: JOURNAL & NEWSLETTER (Cols 10-12) -->
+      <div class="lg:col-span-3 space-y-5 lg:pl-4">
+        <h4 class="font-serif text-lg font-bold uppercase tracking-[0.16em] text-neutral-900 relative pb-3 flex items-center justify-between">
           <span>Journal</span>
-          <span class="font-mono text-[10px] text-black/30">+03</span>
+          <span class="font-mono text-xs text-black/40 font-semibold">+03</span>
         </h4>
         <div class="w-full h-[1px] bg-black"></div>
 
-        <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal pt-2">
+        <p class="text-sm sm:text-base text-neutral-600 leading-relaxed font-normal pt-2">
           Suscríbete para recibir avances de obra y arquitectura contemporánea.
         </p>
         
@@ -178,17 +173,17 @@
                    name="email" 
                    placeholder="Correo electrónico" 
                    required 
-                   class="w-full bg-transparent px-3.5 py-2.5 text-xs text-neutral-900 placeholder-neutral-400 focus:outline-none font-sans">
+                   class="w-full bg-transparent px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none font-sans">
             <button type="submit" 
-                    class="shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-full bg-black text-white transition-all duration-300 hover:bg-neutral-800 cursor-pointer" 
+                    class="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-full bg-black text-white transition-all duration-300 hover:bg-neutral-800 cursor-pointer" 
                     aria-label="Suscribirse">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </button>
           </div>
         </form>
 
-        <div class="mt-4 p-4 rounded-2xl bg-black/5 border border-black/15 text-neutral-900 text-xs flex items-center gap-2.5 font-sans" *ngIf="isSubscribed()">
-          <span class="w-2 h-2 rounded-full bg-black animate-ping shrink-0"></span>
+        <div class="mt-4 p-4 rounded-2xl bg-black/5 border border-black/15 text-neutral-900 text-sm flex items-center gap-2.5 font-sans" *ngIf="isSubscribed()">
+          <span class="w-2.5 h-2.5 rounded-full bg-black animate-ping shrink-0"></span>
           <span>✓ ¡Suscrito con éxito!</span>
         </div>
       </div>
@@ -196,14 +191,14 @@
     </div>
 
     <!-- BOTTOM COPYRIGHT & LEGAL LINKS DE ANCHO COMPLETO CON DIVISOR -->
-    <div class="flex flex-col sm:flex-row items-center justify-between pt-8 text-xs text-neutral-600 gap-4">
+    <div class="flex flex-col sm:flex-row items-center justify-between pt-8 text-sm text-neutral-600 gap-4">
       <div class="font-normal flex items-center gap-3">
-        <span class="font-mono text-black/40 text-[10px]">+ COPYRIGHT</span>
-        <span>&copy; {{ currentYear }} <strong class="text-neutral-900 font-semibold">{{ brand.name }} S.A.S.</strong> Todos los derechos reservados.</span>
+        <span class="font-mono text-black/40 text-xs font-semibold">+ COPYRIGHT</span>
+        <span class="text-sm">&copy; {{ currentYear }} <strong class="text-neutral-900 font-semibold">{{ brand.name }} S.A.S.</strong> Todos los derechos reservados.</span>
       </div>
-      <div class="flex items-center gap-6 font-mono text-[11px]">
+      <div class="flex flex-wrap items-center gap-6 font-mono text-xs sm:text-sm">
         <a *ngFor="let leg of legalLinks" [routerLink]="leg.path" [fragment]="leg.fragment" class="hover:text-black font-medium transition-colors uppercase tracking-wider">{{ leg.label }}</a>
-        <a href="#" (click)="openCookieModal($event)" class="hover:text-black font-medium transition-colors uppercase tracking-wider text-black font-semibold cursor-pointer">Configuración de Cookies</a>
+        <a href="#" (click)="openCookieModal($event)" class="hover:text-black font-semibold transition-colors uppercase tracking-wider text-black cursor-pointer">Configuración de Cookies</a>
       </div>
     </div>
 

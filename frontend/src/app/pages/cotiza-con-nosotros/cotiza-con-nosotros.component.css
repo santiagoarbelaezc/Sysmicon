@@ -1,117 +1,33 @@
-/* ==========================================================================
-   COTIZA CON NOSOTROS - ESTILOS DE LUJO ARQUITECTÓNICO (BLANCO PURO #FFFFFF)
-   ========================================================================== */
-
-.cotiza-page {
-  position: relative;
-  background-color: #FFFFFF;
-  color: #111111;
-}
-
-.glass-panel {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
-}
-
-.video-showcase-card {
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Inputs y Textareas con bordes 100% visibles y nítidos */
-.cotiza-field {
+:host {
   display: block;
   width: 100%;
-  border: 1.5px solid #cbd5e1 !important;
-  background-color: #f8fafc !important;
-  color: #0f172a !important;
-  border-radius: 12px !important;
-  padding: 14px 18px !important;
-  font-size: 15px !important;
-  font-family: inherit;
-  outline: none !important;
-  transition: all 0.25s ease-in-out !important;
+  overflow: visible !important;
 }
 
-.cotiza-field:hover {
-  border-color: #94a3b8 !important;
+.cotiza-page {
+  font-family: var(--font-sans, 'Exo 2', sans-serif);
+  overflow: visible !important;
+  display: flow-root;
 }
 
-.cotiza-field:focus {
-  border-color: #000000 !important;
-  background-color: #ffffff !important;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08) !important;
+/* Transiciones y optimizaciones para el video */
+video {
+  will-change: transform, filter;
+  pointer-events: none;
 }
 
-.btn-primary:hover:not([disabled]) {
-  background: #222222;
-  color: #FFFFFF;
-  border-color: #222222;
-  transform: translateY(-2px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-}
-
-.btn-primary:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.btn-secondary {
-  background: #F3F4F6;
-  color: #111111;
-  border: 1px solid #E5E7EB;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-secondary:hover {
-  background: #E5E7EB;
-  border-color: #111111;
-}
-
-/* Botones de redes sociales */
-.social-btn {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.social-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-}
-
-/* Gradiente en textos */
-.text-gradient {
-  background: linear-gradient(135deg, #FFFFFF 0%, #CCCCCC 50%, #888888 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Animaciones del Modal Desplegable */
-@keyframes slideLeft {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn {
+/* Animaciones sutiles para entrada */
+@keyframes fadeInDown {
   from {
     opacity: 0;
+    transform: translateY(-16px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.animate-slideLeft {
-  animation: slideLeft 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.35s ease forwards;
+.animate-fade-down {
+  animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

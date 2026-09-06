@@ -7,98 +7,111 @@ import { AdminService } from '../../../../services/admin.service';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="space-y-8 animate-fade font-sans">
+    <div class="space-y-10 animate-fade-in font-sans">
       
       <!-- ENCABEZADO DE SECCIÓN -->
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-6 border-b border-neutral-200/80">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-6 border-b border-neutral-200">
         <div>
-          <span class="font-mono text-xs sm:text-sm tracking-[0.3em] text-neutral-400 font-bold uppercase block mb-2">
+          <span class="font-mono text-xs sm:text-sm tracking-ultra text-neutral-400 font-black uppercase block mb-2">
             MÉTRICAS & INTELIGENCIA DEL SISTEMA
           </span>
-          <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-neutral-900 tracking-tight leading-[1.05]">
-            Analíticas & <span class="font-bold">Rendimiento Web</span>
+          <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-black text-neutral-950 uppercase tracking-tight leading-[1.05]">
+            ANALÍTICAS & <span class="font-light">RENDIMIENTO WEB</span>
           </h1>
-          <p class="font-sans text-sm sm:text-base text-neutral-500 font-light leading-relaxed mt-2.5 max-w-2xl">
+          <p class="font-sans text-base sm:text-lg text-neutral-600 font-normal leading-relaxed mt-3 max-w-3xl">
             Monitoreo en tiempo real de tráfico, interacción con el portafolio y embudos de conversión de clientes.
           </p>
         </div>
         
-        <div class="flex items-center gap-3">
-          <span class="text-xs px-4 py-2.5 rounded-xl bg-neutral-100 border border-neutral-200 text-neutral-700 font-mono font-semibold">Últimos 30 días</span>
-          <button (click)="exportarDatos()" class="px-5 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md hover:scale-[1.02] cursor-pointer">
-            Exportar (.CSV)
+        <div class="flex items-center gap-4 shrink-0">
+          <span class="text-xs sm:text-sm px-5 py-3 rounded-2xl bg-neutral-100 border border-neutral-200 text-neutral-800 font-mono font-bold uppercase tracking-wider">ÚLTIMOS 30 DÍAS</span>
+          <button (click)="exportarDatos()" class="admin-btn-primary py-3.5 px-7">
+            <svg class="w-4.5 h-4.5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            EXPORTAR (.CSV)
           </button>
         </div>
       </div>
 
-      <!-- MÉTRICAS CLAVE (3 TARJETAS BLANCAS CON NÚMEROS REALES) -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <!-- MÉTRICAS CLAVE (3 TARJETAS MONOCROMÁTICAS) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        <div class="bg-white border border-neutral-200/90 rounded-3xl p-6 sm:p-7 shadow-2xs">
-          <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-neutral-400 block mb-2.5">Total Visitas Semanales</span>
-          <span class="font-serif text-4xl sm:text-5xl font-extrabold text-neutral-900 tracking-tight">{{ totalVisitasSemana() }}</span>
-          <p class="text-xs text-neutral-500 mt-3 font-mono font-semibold flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Tráfico en vivo
+        <div class="bg-white border border-neutral-200 rounded-3xl p-8 sm:p-9 shadow-xs hover:border-neutral-400 hover:shadow-md transition-all group duration-300">
+          <span class="text-xs sm:text-sm font-mono font-black uppercase tracking-[0.2em] text-neutral-400 block mb-3">TOTAL VISITAS SEMANALES</span>
+          <span class="font-serif text-5xl sm:text-6xl font-black text-neutral-950 tracking-tight">{{ totalVisitasSemana() }}</span>
+          <p class="text-sm text-neutral-600 mt-4 font-mono font-semibold flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span> TRÁFICO EN VIVO
           </p>
         </div>
 
-        <div class="bg-white border border-neutral-200/90 rounded-3xl p-6 sm:p-7 shadow-2xs">
-          <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-neutral-400 block mb-2.5">Cotizaciones Registradas</span>
-          <span class="font-serif text-4xl sm:text-5xl font-extrabold text-neutral-900 tracking-tight">{{ adminService.mensajes().length }}</span>
-          <p class="text-xs text-emerald-700 mt-3 font-mono font-semibold flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Leads en base de datos
+        <div class="bg-white border border-neutral-200 rounded-3xl p-8 sm:p-9 shadow-xs hover:border-neutral-400 hover:shadow-md transition-all group duration-300">
+          <span class="text-xs sm:text-sm font-mono font-black uppercase tracking-[0.2em] text-neutral-400 block mb-3">COTIZACIONES REGISTRADAS</span>
+          <span class="font-serif text-5xl sm:text-6xl font-black text-neutral-950 tracking-tight">{{ adminService.mensajes().length }}</span>
+          <p class="text-sm text-neutral-700 mt-4 font-mono font-semibold flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-neutral-950"></span> LEADS EN BASE DE DATOS
           </p>
         </div>
 
-        <div class="bg-white border border-neutral-200/90 rounded-3xl p-6 sm:p-7 shadow-2xs">
-          <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-neutral-400 block mb-2.5">Tasa de Conversión</span>
-          <span class="font-serif text-4xl sm:text-5xl font-extrabold text-neutral-900 tracking-tight">{{ tasaConversion() }}%</span>
-          <p class="text-xs text-emerald-700 mt-3 font-mono font-semibold flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Leads vs. Sesiones
+        <div class="bg-white border border-neutral-200 rounded-3xl p-8 sm:p-9 shadow-xs hover:border-neutral-400 hover:shadow-md transition-all group duration-300">
+          <span class="text-xs sm:text-sm font-mono font-black uppercase tracking-[0.2em] text-neutral-400 block mb-3">TASA DE CONVERSIÓN</span>
+          <span class="font-serif text-5xl sm:text-6xl font-black text-neutral-950 tracking-tight">{{ tasaConversion() }}%</span>
+          <p class="text-sm text-neutral-700 mt-4 font-mono font-semibold flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> LEADS VS. SESIONES
           </p>
         </div>
 
       </div>
 
       <!-- EMBUDO DE CONVERSIÓN DINÁMICO -->
-      <div class="bg-white border border-neutral-200/90 rounded-3xl p-6 sm:p-8 shadow-2xs space-y-6">
-        <div class="pb-3.5 border-b border-neutral-200/80">
-          <h3 class="font-serif text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight">Embudo de Conversión de Clientes</h3>
-          <p class="text-xs sm:text-sm text-neutral-500 font-light mt-0.5">Recorrido del usuario desde la primera visita hasta la solicitud formal</p>
+      <div class="bg-white border border-neutral-200 rounded-3xl p-8 sm:p-10 shadow-xs space-y-8">
+        <div class="pb-5 border-b border-neutral-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h3 class="font-serif text-2xl sm:text-3xl font-black text-neutral-950 uppercase tracking-tight">EMBUDO DE CONVERSIÓN DE CLIENTES</h3>
+            <p class="text-sm sm:text-base text-neutral-600 font-normal mt-1">Recorrido del usuario desde la primera visita hasta la solicitud formal</p>
+          </div>
+          <span class="text-xs font-mono font-black text-neutral-500 uppercase tracking-widest bg-neutral-100 px-4 py-2 rounded-xl">CONVERSIÓN WEB</span>
         </div>
 
-        <div class="space-y-5 max-w-4xl font-sans pt-1">
+        <div class="space-y-7 max-w-4xl font-sans pt-2">
           
           <!-- Paso 1 -->
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-neutral-900">
-              <span>1. Visitas Totales al Portal</span>
-              <span class="font-mono text-neutral-600">100% ({{ totalVisitasSemana() }} visitas)</span>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-sm sm:text-base font-bold text-neutral-900">
+              <span class="flex items-center gap-3">
+                <span class="w-7 h-7 rounded-xl bg-neutral-100 text-neutral-900 flex items-center justify-center font-mono text-xs font-black">1</span>
+                <span class="uppercase tracking-wide">VISITAS TOTALES AL PORTAL</span>
+              </span>
+              <span class="font-mono text-neutral-600 text-sm font-semibold">100% ({{ totalVisitasSemana() }} visitas)</span>
             </div>
-            <div class="w-full h-3 bg-neutral-100 rounded-full overflow-hidden border border-neutral-200">
-              <div class="w-full h-full bg-black rounded-full"></div>
+            <div class="w-full h-4 bg-neutral-100 rounded-full overflow-hidden border border-neutral-200">
+              <div class="w-full h-full bg-neutral-950 rounded-full"></div>
             </div>
           </div>
 
           <!-- Paso 2 -->
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-neutral-900">
-              <span>2. Exploración de Proyectos y Portafolio</span>
-              <span class="font-mono text-neutral-600">{{ totalVisitasSemana() > 0 ? '65%' : '0%' }}</span>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-sm sm:text-base font-bold text-neutral-900">
+              <span class="flex items-center gap-3">
+                <span class="w-7 h-7 rounded-xl bg-neutral-100 text-neutral-900 flex items-center justify-center font-mono text-xs font-black">2</span>
+                <span class="uppercase tracking-wide">EXPLORACIÓN DE PROYECTOS Y PORTAFOLIO</span>
+              </span>
+              <span class="font-mono text-neutral-600 text-sm font-semibold">{{ totalVisitasSemana() > 0 ? '65%' : '0%' }}</span>
             </div>
-            <div class="w-full h-3 bg-neutral-100 rounded-full overflow-hidden border border-neutral-200">
-              <div class="h-full bg-neutral-800 rounded-full" [style.width.%]="totalVisitasSemana() > 0 ? 65 : 0"></div>
+            <div class="w-full h-4 bg-neutral-100 rounded-full overflow-hidden border border-neutral-200">
+              <div class="h-full bg-neutral-600 rounded-full" [style.width.%]="totalVisitasSemana() > 0 ? 65 : 0"></div>
             </div>
           </div>
 
           <!-- Paso 3 -->
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-neutral-900">
-              <span>3. Solicitudes de Cotización & Mensajes Formales</span>
-              <span class="font-mono text-emerald-800 font-bold">{{ adminService.mensajes().length }} leads</span>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-sm sm:text-base font-bold text-neutral-900">
+              <span class="flex items-center gap-3">
+                <span class="w-7 h-7 rounded-xl bg-neutral-100 text-neutral-900 flex items-center justify-center font-mono text-xs font-black">3</span>
+                <span class="uppercase tracking-wide">SOLICITUDES DE COTIZACIÓN & MENSAJES FORMALES</span>
+              </span>
+              <span class="font-mono text-neutral-950 font-black text-sm sm:text-base">{{ adminService.mensajes().length }} leads ({{ tasaConversion() }}%)</span>
             </div>
-            <div class="w-full h-3 bg-neutral-100 rounded-full overflow-hidden border border-neutral-200">
-              <div class="h-full bg-emerald-600 rounded-full" [style.width.%]="tasaConversion()"></div>
+            <div class="w-full h-4 bg-neutral-100 rounded-full overflow-hidden border border-neutral-200">
+              <div class="h-full bg-neutral-950 rounded-full" [style.width.%]="tasaConversion()"></div>
             </div>
           </div>
 
@@ -106,45 +119,45 @@ import { AdminService } from '../../../../services/admin.service';
       </div>
 
       <!-- DISPOSITIVOS Y REGIONES -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
-        <div class="bg-white border border-neutral-200/90 rounded-3xl p-6 sm:p-8 shadow-2xs space-y-5">
-          <div class="pb-3 border-b border-neutral-200/80">
-            <h3 class="font-serif text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight">Dispositivos de Acceso</h3>
-            <p class="text-xs sm:text-sm text-neutral-500 font-light mt-0.5">Distribución de tráfico por tipo de pantalla</p>
+        <div class="bg-white border border-neutral-200 rounded-3xl p-8 sm:p-10 shadow-xs space-y-6">
+          <div class="pb-5 border-b border-neutral-200">
+            <h3 class="font-serif text-2xl sm:text-3xl font-black text-neutral-950 uppercase tracking-tight">DISPOSITIVOS DE ACCESO</h3>
+            <p class="text-sm text-neutral-600 font-normal mt-1">Distribución de tráfico por tipo de pantalla</p>
           </div>
           
-          <div class="space-y-3.5 font-sans pt-1">
-            <div *ngFor="let disp of adminService.analiticas().dispositivos" class="space-y-1.5">
-              <div class="flex justify-between text-xs sm:text-sm text-neutral-800 font-bold">
+          <div class="space-y-5 font-sans pt-2">
+            <div *ngFor="let disp of adminService.analiticas().dispositivos" class="space-y-2.5">
+              <div class="flex justify-between text-sm sm:text-base text-neutral-900 font-bold uppercase tracking-wider">
                 <span>{{ disp.tipo }}</span>
-                <span class="font-mono text-neutral-500">{{ disp.porcentaje }}%</span>
+                <span class="font-mono text-neutral-600 text-sm font-semibold">{{ disp.porcentaje }}%</span>
               </div>
-              <div class="w-full h-2.5 bg-neutral-100 rounded-full overflow-hidden border border-neutral-200">
-                <div class="h-full bg-black rounded-full" [style.width.%]="disp.porcentaje"></div>
+              <div class="w-full h-3 bg-neutral-100 rounded-full overflow-hidden border border-neutral-200">
+                <div class="h-full bg-neutral-950 rounded-full" [style.width.%]="disp.porcentaje"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="bg-white border border-neutral-200/90 rounded-3xl p-6 sm:p-8 shadow-2xs space-y-5">
-          <div class="pb-3 border-b border-neutral-200/80">
-            <h3 class="font-serif text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight">Regiones Clave de Interés</h3>
-            <p class="text-xs sm:text-sm text-neutral-500 font-light mt-0.5">Procedencia geográfica de los interesados</p>
+        <div class="bg-white border border-neutral-200 rounded-3xl p-8 sm:p-10 shadow-xs space-y-6">
+          <div class="pb-5 border-b border-neutral-200">
+            <h3 class="font-serif text-2xl sm:text-3xl font-black text-neutral-950 uppercase tracking-tight">REGIONES CLAVE DE INTERÉS</h3>
+            <p class="text-sm text-neutral-600 font-normal mt-1">Procedencia geográfica de los interesados</p>
           </div>
 
-          <div class="space-y-2.5 text-xs sm:text-sm font-sans pt-1">
-            <div class="flex justify-between items-center p-3 rounded-2xl bg-neutral-50 border border-neutral-200/80">
-              <span class="text-neutral-900 font-semibold">Oriente Antioqueño (Llanogrande / El Retiro)</span>
-              <span class="text-neutral-900 font-bold font-mono">Principal</span>
+          <div class="space-y-4 text-sm sm:text-base font-sans pt-2">
+            <div class="flex justify-between items-center p-4 rounded-2xl bg-neutral-50 border border-neutral-200 hover:border-neutral-400 transition-colors">
+              <span class="text-neutral-950 font-bold uppercase tracking-wide">ORIENTE ANTIOQUEÑO (LLANOGRANDE / EL RETIRO)</span>
+              <span class="text-neutral-950 font-black font-mono text-xs uppercase bg-white px-3 py-1.5 rounded-lg border border-neutral-200">PRINCIPAL</span>
             </div>
-            <div class="flex justify-between items-center p-3 rounded-2xl bg-neutral-50 border border-neutral-200/80">
-              <span class="text-neutral-900 font-semibold">Medellín & Valle de Aburrá</span>
-              <span class="text-neutral-600 font-mono">Activo</span>
+            <div class="flex justify-between items-center p-4 rounded-2xl bg-neutral-50 border border-neutral-200 hover:border-neutral-400 transition-colors">
+              <span class="text-neutral-900 font-medium uppercase tracking-wide">MEDELLÍN & VALLE DE ABURRÁ</span>
+              <span class="text-neutral-700 font-mono text-xs uppercase font-bold bg-white px-3 py-1.5 rounded-lg border border-neutral-200">ACTIVO</span>
             </div>
-            <div class="flex justify-between items-center p-3 rounded-2xl bg-neutral-50 border border-neutral-200/80">
-              <span class="text-neutral-900 font-semibold">Bogotá D.C. & Inversionistas</span>
-              <span class="text-neutral-600 font-mono">Nacional</span>
+            <div class="flex justify-between items-center p-4 rounded-2xl bg-neutral-50 border border-neutral-200 hover:border-neutral-400 transition-colors">
+              <span class="text-neutral-900 font-medium uppercase tracking-wide">BOGOTÁ D.C. & INVERSIONISTAS</span>
+              <span class="text-neutral-700 font-mono text-xs uppercase font-bold bg-white px-3 py-1.5 rounded-lg border border-neutral-200">NACIONAL</span>
             </div>
           </div>
         </div>

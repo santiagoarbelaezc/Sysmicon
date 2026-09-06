@@ -1,4 +1,11 @@
 <div class="app-layout">
+  <!-- BANNER GLOBAL DE COMUNICADOS (CONFIGURABLE DESDE EL DASHBOARD) -->
+  <div *ngIf="cmsService.config().mostrar_banner_alerta === '1' && cmsService.config().texto_banner_alerta"
+       class="w-full bg-neutral-950 text-white text-xs sm:text-sm font-sans py-2.5 px-4 text-center border-b border-white/10 relative z-50 flex items-center justify-center gap-3 animate-fade-in shadow-md">
+    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+    <span class="font-medium tracking-wide">{{ cmsService.config().texto_banner_alerta }}</span>
+  </div>
+
   <app-navbar *ngIf="showNavbar"></app-navbar>
   <main class="main-content">
     <router-outlet></router-outlet>
@@ -19,11 +26,6 @@
 
   <div class="flex flex-col items-center justify-center max-w-md text-center select-none relative z-10 px-6">
     
-    <!-- Etiqueta superior VIP de Dossier -->
-    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-wood-accent font-mono text-[10px] tracking-[0.3em] uppercase mb-10 shadow-lg">
-      <span class="w-1.5 h-1.5 rounded-full bg-wood-accent animate-ping"></span>
-      <span>SYSMICON PORTAL PRIVADO</span>
-    </div>
 
     <!-- Contenedor Geométrico de Órbitas Arquitectónicas -->
     <div class="relative w-36 h-36 flex items-center justify-center">
@@ -37,20 +39,9 @@
       <img src="assets/icons/logo-sysmico.png" alt="Sysmicon Logo" class="w-16 h-16 object-contain relative z-10 filter drop-shadow-[0_0_20px_rgba(212,175,55,0.6)] animate-pulse" style="animation-duration: 2s;">
     </div>
 
-    <!-- Mensaje Principal y Subtítulo Institucinal -->
-    <div class="mt-9 space-y-4 w-full">
-      <h3 class="font-serif text-xl sm:text-2xl font-light text-white tracking-widest uppercase drop-shadow">
-        {{ loadingService.loadingMessage() }}
-      </h3>
-      
-      <!-- Línea de progreso minimalista y brillante -->
-      <div class="w-56 h-[2px] bg-white/10 rounded-full mx-auto overflow-hidden relative shadow-inner">
-        <div class="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-transparent via-wood-accent to-transparent animate-progress"></div>
-      </div>
-
-      <p class="text-[10px] sm:text-[11px] font-mono text-gray-400 tracking-[0.28em] uppercase font-medium pt-1">
-        ARQUITECTURA • DISEÑO & CONSTRUCCIÓN INTEGRAL
-      </p>
+    <!-- Línea de progreso minimalista y brillante -->
+    <div class="mt-8 w-40 h-[2px] bg-white/10 rounded-full mx-auto overflow-hidden relative shadow-inner">
+      <div class="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-transparent via-wood-accent to-transparent animate-progress"></div>
     </div>
 
   </div>

@@ -28,18 +28,18 @@
 
     <!-- Título Principal -->
     <h2 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-wider leading-[1.05] drop-shadow-2xl mb-4 uppercase">
-      {{ titulo }} <span class="font-serif italic font-normal text-[#C2E1FF]">{{ tituloHighlight }}</span>
+      {{ displayTitulo }} <span class="font-serif italic font-normal text-[#C2E1FF]">{{ displayTituloHighlight }}</span>
     </h2>
 
     <!-- Subtítulo Breve Conciso -->
     <p class="font-sans text-sm sm:text-base md:text-lg text-white/90 max-w-2xl mx-auto font-light leading-relaxed mb-8 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
-      {{ subtitulo }}
+      {{ displaySubtitulo }}
     </p>
 
     <!-- Botones de Acción Estilo Hero -->
     <div *ngIf="showCta" class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
       <button (click)="abrirProyecto($event)" class="group/btn inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-500 font-sans text-xs font-bold tracking-[0.24em] uppercase shadow-2xl hover:scale-105 cursor-pointer">
-        <span>{{ ctaText }}</span>
+        <span>{{ displayCtaText }}</span>
         <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
         </svg>

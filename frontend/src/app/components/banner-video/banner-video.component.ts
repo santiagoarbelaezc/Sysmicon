@@ -2,6 +2,7 @@ import { Component, Input, ViewChild, ElementRef, AfterViewInit, OnDestroy, Inje
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { ProyectosService } from '../../services/proyectos.service';
+import { CmsService } from '../../services/cms.service';
 
 @Component({
   selector: 'app-banner-video',
@@ -13,6 +14,7 @@ import { ProyectosService } from '../../services/proyectos.service';
 export class BannerVideoComponent implements AfterViewInit, OnDestroy {
   private readonly proyectosService = inject(ProyectosService);
   private readonly router = inject(Router);
+  readonly cmsService = inject(CmsService);
 
   @ViewChild('sectionEl') sectionElement?: ElementRef<HTMLElement>;
   @ViewChild('videoEl') videoElement?: ElementRef<HTMLVideoElement>;
@@ -29,6 +31,24 @@ export class BannerVideoComponent implements AfterViewInit, OnDestroy {
   @Input() secondaryCtaLink: string = '/proyectos';
   @Input() showCta: boolean = true;
   @Input() proyectoId: string = 'casaM';
+
+  get displayTitulo(): string {
+    return this.titulo !== 'CASA' ? this.titulo : (this.cmsService.config().casam_title || 'CASA');
+  }
+
+  get displayTituloHighlight(): string {
+    return this.tituloHighlight !== 'M' ? this.tituloHighlight : (this.cmsService.config().casam_highlight || 'M');
+  }
+
+  get displaySubtitulo(): string {
+    return this.subtitulo !== 'Residencia contemporánea donde la arquitectura de autor y la materialidad convergen en perfecta simetría.'
+      ? this.subtitulo
+      : (this.cmsService.config().casam_subtitle || 'Residencia contemporánea donde la arquitectura de autor y la materialidad convergen en perfecta simetría.');
+  }
+
+  get displayCtaText(): string {
+    return this.ctaText !== 'VER PROYECTO' ? this.ctaText : (this.cmsService.config().casam_btn || 'VER PROYECTO');
+  }
 
   private observer?: IntersectionObserver;
 

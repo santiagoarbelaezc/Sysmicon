@@ -1,5 +1,5 @@
 <!-- Director Showcase Section (Estilo Editorial Sobrio & Limpio) -->
-<section class="director-section relative w-full py-6 sm:py-10 lg:py-12 bg-white text-neutral-900 overflow-hidden font-sans border-b border-neutral-200/80">
+<section class="director-section relative w-full py-6 sm:py-10 lg:py-12 bg-white text-neutral-900 overflow-hidden font-sans">
   <div class="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
       
@@ -13,14 +13,18 @@
         <div class="w-full overflow-hidden rounded-2xl shadow-xl bg-neutral-100">
           <img src="assets/images/juanmoreno.jpg" 
                alt="JUAN MORENO - INGENIERO CIVIL" 
-               class="w-full h-[420px] sm:h-[480px] lg:h-[520px] object-cover object-top filter brightness-[0.98] transition-transform duration-700 hover:scale-102"
+               class="w-full h-[500px] sm:h-[580px] lg:h-[680px] object-cover object-top filter brightness-[0.98] transition-transform duration-700 hover:scale-102"
                onerror="this.src='https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_800/v1785440109/243315d3-e0c8-4791-8f0a-b341587e1c70_eshvqt.jpg'">
         </div>
 
         <!-- Pie de foto en Estilo Monospaciado -->
         <div class="mt-3 px-1 space-y-0.5 text-left">
-          <h3 class="font-serif text-xl sm:text-2xl font-bold text-neutral-900 uppercase tracking-tight">JUAN MORENO</h3>
-          <p class="font-mono text-[11px] text-neutral-500 font-semibold tracking-[0.2em] uppercase">INGENIERO CIVIL • FUNDADOR Y DIRECTOR GENERAL</p>
+          <h3 class="font-serif text-xl sm:text-2xl font-bold text-neutral-900 uppercase tracking-tight">
+            {{ cmsService.config().director_name || 'JUAN MORENO' }}
+          </h3>
+          <p class="font-sans text-[13px] text-neutral-500 font-medium tracking-[0.15em] uppercase mt-1">
+            {{ cmsService.config().director_role || 'INGENIERO CIVIL' }}
+          </p>
         </div>
 
       </div>
@@ -35,11 +39,11 @@
              data-aos-easing="ease-out-cubic"
              class="space-y-2.5">
           <span class="font-mono text-xs tracking-[0.3em] text-neutral-400 font-semibold uppercase block">
-            LIDERAZGO & RIGOR TÉCNICO
+            {{ cmsService.config().director_tagline || 'LIDERAZGO & RIGOR TÉCNICO' }}
           </span>
 
           <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-neutral-900 uppercase tracking-tight leading-[1.08]">
-            Ingeniería de Excelencia <span class="font-serif italic font-normal text-neutral-500">sin Concesiones</span>
+            {{ cmsService.config().director_title || 'Ingeniería de Excelencia sin Concesiones' }}
           </h2>
         </div>
 
@@ -50,15 +54,23 @@
              class="flex flex-wrap items-center gap-8 sm:gap-12 py-4 sm:py-5 border-y border-neutral-200">
           
           <div class="space-y-0.5">
-            <span class="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900 block tracking-tight">7+</span>
-            <span class="font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.18em] text-neutral-800 block">AÑOS DE EXPERIENCIA</span>
+            <span class="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900 block tracking-tight">
+              {{ cmsService.config().director_stat1_number || '7+' }}
+            </span>
+            <span class="font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.18em] text-neutral-800 block">
+              {{ cmsService.config().director_stat1_label || 'AÑOS DE EXPERIENCIA' }}
+            </span>
           </div>
 
           <div class="w-[1px] h-10 bg-neutral-200 hidden sm:block"></div>
 
           <div class="space-y-0.5">
-            <span class="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900 block tracking-tight">4+</span>
-            <span class="font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.18em] text-neutral-800 block">OBRAS EJECUTADAS</span>
+            <span class="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900 block tracking-tight">
+              {{ cmsService.config().director_stat2_number || '4+' }}
+            </span>
+            <span class="font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.18em] text-neutral-800 block">
+              {{ cmsService.config().director_stat2_label || 'OBRAS EJECUTADAS' }}
+            </span>
           </div>
 
         </div>

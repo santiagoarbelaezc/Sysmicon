@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { BRAND_CONFIG, CONTACT_INFO, NAV_LINKS, LEGAL_LINKS } from '../../core/app.constants';
 import { CookieConsentService } from '../../services/cookie-consent.service';
 
+import { CmsService } from '../../services/cms.service';
+
 @Component({
   selector: 'app-footer',
   standalone: true,
@@ -13,6 +15,7 @@ import { CookieConsentService } from '../../services/cookie-consent.service';
   styleUrl: './footer.component.css'
 })
 export class FooterComponent {
+  readonly cmsService = inject(CmsService);
   readonly brand = BRAND_CONFIG;
   readonly contact = CONTACT_INFO;
   readonly navLinks = NAV_LINKS;

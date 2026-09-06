@@ -32,7 +32,6 @@
       <div class="auth-links flex items-center gap-5 font-sans">
         <ng-container *ngIf="!authService.isLoggedIn()">
           <a routerLink="/login" class="auth-link-ingresar text-xs md:text-[13.5px] uppercase tracking-[0.16em] transition-colors py-1 font-medium">Ingresar</a>
-          <a routerLink="/registro" class="auth-btn-registro px-5 py-1.5 rounded-full border transition-all duration-300 font-sans text-xs md:text-[13.5px] font-semibold tracking-[0.16em] uppercase shadow-xs">Registrarse</a>
         </ng-container>
 
         <ng-container *ngIf="authService.currentUser() as user">
@@ -76,9 +75,8 @@
         <!-- Mobile Auth -->
         <div class="flex flex-col items-center justify-center gap-4 my-4 font-sans text-base w-full max-w-xs">
           <ng-container *ngIf="!authService.isLoggedIn()">
-            <div class="flex items-center justify-center gap-8 w-full">
-              <a routerLink="/login" (click)="closeMobileMenu()" class="text-xs uppercase tracking-[0.22em] text-white/70 hover:text-white font-medium">Ingresar</a>
-              <a routerLink="/registro" (click)="closeMobileMenu()" class="px-7 py-3 rounded-full border border-white/25 bg-white/[0.04] hover:bg-[#C2E1FF] hover:text-[#000814] text-white font-sans text-xs font-semibold tracking-[0.22em] uppercase transition-all">Registrarse</a>
+            <div class="flex items-center justify-center w-full">
+              <a routerLink="/login" (click)="closeMobileMenu()" class="px-8 py-3 rounded-full border border-white/25 bg-white/[0.06] hover:bg-white hover:text-black text-white font-sans text-xs font-semibold tracking-[0.22em] uppercase transition-all">Ingresar</a>
             </div>
           </ng-container>
 

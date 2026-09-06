@@ -6,6 +6,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { LoadingService } from './services/loading.service';
 import { ProyectosService } from './services/proyectos.service';
 import { AnalyticsService } from './services/analytics.service';
+import { CmsService } from './services/cms.service';
 import AOS from 'aos';
 
 import { PwaInstallModalComponent } from './shared/pwa-install-modal/pwa-install-modal.component';
@@ -20,6 +21,7 @@ import { CookieConsentComponent } from './components/cookie-consent/cookie-conse
 })
 export class AppComponent implements OnInit {
   title = 'Sysmicon';
+  readonly cmsService = inject(CmsService);
   readonly loadingService = inject(LoadingService);
   readonly proyectosService = inject(ProyectosService);
   private readonly analytics = inject(AnalyticsService);

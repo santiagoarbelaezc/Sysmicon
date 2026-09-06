@@ -50,17 +50,17 @@
     </div>
 
     <h1 class="hero-title font-serif text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl drop-shadow-2xl mb-6">
-      {{ cms.config().hero_title || 'Diseñamos y Construimos' }}
+      {{ cms.config().hero_title || (cms.config().hero_title_prefix + ' ' + cms.config().hero_title_highlight) || 'Diseñamos y Construimos' }}
     </h1>
 
-    <p class="hero-subtitle max-w-3xl mx-auto text-white text-base sm:text-lg md:text-xl font-light leading-relaxed mb-8">
+    <p *ngIf="cms.config().hero_subtitle" class="hero-subtitle max-w-3xl mx-auto text-white text-base sm:text-lg md:text-xl font-light leading-relaxed mb-8">
       {{ cms.config().hero_subtitle }}
     </p>
 
     <div class="hero-actions flex flex-wrap items-center justify-center gap-4 my-8">
       <!-- Primary CTA: Cotiza con nosotros -->
       <a routerLink="/cotiza-con-nosotros" class="btn-primary">
-        <span>{{ cms.config().hero_btn_text || 'Cotiza con nosotros' }}</span>
+        <span>{{ cms.config().hero_btn_text || cms.config().hero_btn_cotizar || 'Cotiza con nosotros' }}</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5 12h14" />
@@ -70,7 +70,7 @@
 
       <!-- Secondary CTA: Conócenos -->
       <button (click)="scrollToSection('nosotros-section')" class="btn-secondary">
-        <span>Conócenos</span>
+        <span>{{ cms.config().hero_btn_obras || 'Conócenos' }}</span>
       </button>
     </div>
 

@@ -1,55 +1,71 @@
 <div id="nosotros-section" class="sticky-scroll-wrapper" #stickyWrapper>
-  <section class="banner-container">
+  <section class="banner-container relative w-full h-screen bg-black overflow-hidden flex items-center justify-center border-y border-neutral-900">
     
-    <!-- Background Layers with Native <img> for Bright High-Res Visibility -->
-    <div class="background-layers">
+    <!-- Capas fotográficas cinematográficas de fondo -->
+    <div class="background-layers absolute inset-0 z-0">
       <div 
         *ngFor="let val of slides; let i = index"
         class="bg-layer"
         [class.active]="activeIndex === i">
         <img [src]="val.image" [alt]="val.title" class="bg-img">
         <div class="overlay"></div>
+        <div class="overlay-radial"></div>
       </div>
     </div>
 
-    <!-- Center Content Overlay (Pinnable layout) -->
-    <div class="content-wrapper-pin">
+    <!-- Marcas arquitectónicas de esquina (Estilo Cotiza / Hero) -->
+    <div class="absolute top-8 inset-x-8 sm:inset-x-14 flex justify-between pointer-events-none select-none z-20 text-white/35 font-mono text-xs tracking-[0.25em]">
+      <span>+ SYS_STUDIO</span>
+      <span>FILOSOFÍA // 2026 +</span>
+    </div>
+
+    <div class="absolute bottom-8 inset-x-8 sm:inset-x-14 hidden sm:flex justify-between pointer-events-none select-none z-20 text-white/35 font-mono text-xs tracking-[0.25em]">
+      <span>0{{ activeIndex + 1 }} // 0{{ slides.length }}</span>
+      <span class="animate-pulse">DESLIZA PARA EXPLORAR ↓</span>
+    </div>
+
+    <!-- Contenido Central Pin (Pinnable layout con Letra Gigante y Menos Texto) -->
+    <div class="content-wrapper-pin relative z-10 w-full max-w-[1720px] mx-auto px-6 sm:px-12 flex items-center justify-center">
       <div 
         *ngFor="let val of slides; let i = index"
-        class="value-content-pin"
+        class="value-content-pin w-full"
         [class.active]="activeIndex === i">
         
-        <div class="text-content">
-          <!-- Título Principal en Mayúsculas y Letra Más Grande -->
-          <h2 class="title font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light text-white tracking-tight leading-[1.05] uppercase drop-shadow-2xl mb-8">
-            {{ val.title }} <span class="font-serif italic font-normal text-[#C2E1FF] uppercase">{{ val.titleHighlight }}</span>
+        <div class="text-content max-w-5xl mx-auto text-center space-y-6 sm:space-y-8">
+          
+
+
+          <!-- Título Principal en Mayúsculas y Letra Extra Grande -->
+          <h2 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-light text-white tracking-tight leading-[1.02] uppercase drop-shadow-2xl">
+            {{ val.title }} <br class="hidden sm:inline"/>
+            <span class="font-serif italic font-normal text-neutral-300 uppercase">{{ val.titleHighlight }}</span>
           </h2>
           
-          <!-- Description -->
-          <p *ngIf="val.description" class="description font-sans text-white/90 font-light text-lg sm:text-xl max-w-3xl leading-relaxed mb-8 uppercase">{{ val.description }}</p>
-          
           <!-- Botón de Acción de Lujo Ampliado en Mayúsculas -->
-          <div class="action-wrap" [class.show]="activeIndex === i">
-            <a routerLink="/nosotros" class="group/btn inline-flex items-center justify-center gap-4 px-11 py-5 rounded-full bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-500 font-sans text-xs sm:text-sm font-bold tracking-[0.24em] uppercase shadow-[0_10px_35px_rgba(0,0,0,0.6)] hover:shadow-[0_15px_40px_rgba(194,225,255,0.4)] hover:scale-105 cursor-pointer whitespace-nowrap">
-              <span>CONOCE NUESTRA HISTORIA Y EQUIPO</span>
+          <div class="action-wrap pt-2" [class.show]="activeIndex === i">
+            <a routerLink="/nosotros" 
+               class="group/btn inline-flex items-center justify-center gap-3.5 px-9 sm:px-12 py-4.5 sm:py-5 rounded-full bg-white text-neutral-950 hover:bg-neutral-200 transition-all duration-300 font-sans text-xs sm:text-sm font-bold tracking-[0.2em] uppercase shadow-[0_20px_60px_rgba(0,0,0,0.85)] hover:scale-105 cursor-pointer whitespace-nowrap">
+              <span>CONOCE NUESTRO ESTUDIO</span>
               <svg class="w-4 h-4 shrink-0 transform group-hover/btn:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
               </svg>
             </a>
           </div>
+
         </div>
+
       </div>
     </div>
 
-    <!-- Scroll Indicators / Navigation Dots -->
-    <div class="scroll-dots">
-      <span 
+    <!-- Indicador de Navegación / Barras de Progreso Minimalistas -->
+    <div class="scroll-indicators absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2.5 z-20 select-none">
+      <button 
         *ngFor="let val of slides; let i = index" 
-        class="dot" 
+        class="nav-indicator-bar cursor-pointer" 
         [class.active]="activeIndex === i"
         (click)="scrollToIndex(i)"
-        [attr.title]="val.subtitle">
-      </span>
+        [attr.aria-label]="val.subtitle">
+      </button>
     </div>
 
   </section>

@@ -38,9 +38,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     document.body.style.overflow = 'hidden';
-    if (this.router.url.startsWith('/registro')) {
-      this.tabActiva.set('registro');
-    }
 
     // Verificar si intentó acceder a una ruta protegida
     this.route.queryParams.subscribe(params => {

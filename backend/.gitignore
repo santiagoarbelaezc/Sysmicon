@@ -2,29 +2,78 @@
 # Sysmicon Backend — .gitignore
 # ============================================================
 
-# Variables de entorno (¡NUNCA en git!)
+# --- Variables de entorno y credenciales (¡NUNCA en git!) ---
 .env
+.env.*
+*.env
+*.env.local
+*.env.production
+*.env.staging
+*.env.development
+*.env.backup
+*.env.bak
+*.env.old
+!.env.example
 
-# Dependencias PHP
+# --- Claves privadas, certificados y credenciales sensibles ---
+*.pem
+*.key
+*.pfx
+*.p12
+*.crt
+*.cer
+auth.json
+credentials*.json
+service-account*.json
+
+# --- Dependencias PHP (Composer) ---
 /vendor/
-
-# Logs
-*.log
-/logs/
-
-# Archivos temporales de subida
-/uploads/tmp/
-
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# Composer binaries
 composer.phar
 .tools/
 
-# OS
+# --- Logs y archivos de depuración ---
+*.log
+/logs/
+error_log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- Volcados de base de datos y respaldos ---
+*.sql.gz
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.bak
+/database/dumps/
+/database/backups/
+
+# --- Archivos temporales de subida ---
+/uploads/*
+!/uploads/.gitkeep
+/tmp/
+
+# --- Cachés de pruebas y linters PHP ---
+.phpunit.result.cache
+.php-cs-fixer.cache
+
+# --- IDEs y editores de código ---
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+.fleet/
+
+# --- Archivos del Sistema Operativo ---
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+Desktop.ini

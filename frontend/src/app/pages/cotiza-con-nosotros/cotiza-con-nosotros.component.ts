@@ -144,7 +144,7 @@ export class CotizaConNosotrosComponent implements OnInit, AfterViewInit {
   }
 
   get mailtoUrl(): string {
-    const email = this.cms.config().email_soporte || 'contacto@sysmicon.com';
+    const email = this.cms.config().email_soporte || 'redes.sysmicon@gmail.com';
     const subject = encodeURIComponent('Cotización de proyecto arquitectónico | ' + (this.servicioInteres() || 'Sysmicon'));
     const body = encodeURIComponent(`Nombre: ${this.nombre()}\nCorreo: ${this.correo()}\nTeléfono: ${this.telefono()}\nServicio: ${this.servicioInteres()}\n\nMensaje:\n${this.mensaje()}`);
     return `mailto:${email}?subject=${subject}&body=${body}`;

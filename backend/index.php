@@ -8,6 +8,14 @@
 
 declare(strict_types=1);
 
+// Si se ejecuta con el servidor integrado de PHP y el archivo existe físicamente, servirlo directamente
+if (php_sapi_name() === 'cli-server') {
+    $parsedPath = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
+    if ($parsedPath && $parsedPath !== '/' && file_exists(__DIR__ . $parsedPath) && is_file(__DIR__ . $parsedPath)) {
+        return false;
+    }
+}
+
 // ---- Autoloader y variables de entorno ----
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -67,6 +75,26 @@ if (($pos = strpos($path, '?')) !== false) {
 
 $path   = '/' . trim($path, '/');
 $method = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET');
+
+// ---- Servir archivos estáticos subidos localmente (/uploads/...) ----
+if (str_starts_with($path, '/uploads/')) {
+    $staticFile = __DIR__ . $path;
+    if (file_exists($staticFile) && is_file($staticFile)) {
+        $ext = strtolower(pathinfo($staticFile, PATHINFO_EXTENSION));
+        $mimes = [
+            'jpg'  => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'png'  => 'image/png',
+            'webp' => 'image/webp',
+            'gif'  => 'image/gif',
+        ];
+        header('Content-Type: ' . ($mimes[$ext] ?? 'application/octet-stream'));
+        header('Content-Length: ' . filesize($staticFile));
+        header('Cache-Control: public, max-age=86400');
+        readfile($staticFile);
+        exit;
+    }
+}
 
 // ---- Tabla de rutas ----
 // Formato: [método, patrón regex, controlador, método, parámetros]

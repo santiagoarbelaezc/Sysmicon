@@ -15,7 +15,7 @@ export const BRAND_CONFIG = {
 
 export const CONTACT_INFO = {
   phone: '+57 (310) 845-9210',
-  email: 'contacto@sysmicon.com',
+  email: 'redes.sysmicon@gmail.com',
   address: 'Calle 10A # 36-44, Piso 5, Medellín, Colombia',
   hours: 'Lunes a Viernes: 8:00 AM – 6:00 PM | Sábados: Cita Previa',
   instagram: 'https://www.instagram.com/sysmicon/',

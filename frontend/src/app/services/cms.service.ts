@@ -111,7 +111,7 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
   // 7. Canales de Contacto
   telefono_contacto: '+57 (310) 845-9210',
   whatsapp_contacto: '573108459210',
-  email_soporte: 'contacto@sysmicon.com',
+  email_soporte: 'redes.sysmicon@gmail.com',
   direccion_oficina: 'Calle 10A # 36-44, Piso 5, Medellín, Colombia',
   instagram_handle: '@sysmicon',
 

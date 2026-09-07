@@ -1,17 +1,72 @@
+# ============================================================
 # Sysmicon Root .gitignore
+# ============================================================
+
+# --- Variables de entorno (¡NUNCA en git!) ---
 .env
+.env.*
 *.env
+*.env.local
+*.env.production
+*.env.staging
+*.env.development
+*.env.backup
+*.env.bak
+*.env.old
+!.env.example
+
+# Rutas específicas en backend y frontend
 backend/.env
+backend/.env.*
+backend/*.env
+!backend/.env.example
+frontend/.env
+frontend/.env.*
+
+# --- Claves privadas, certificados y credenciales sensibles ---
+*.pem
+*.key
+*.pfx
+*.p12
+*.crt
+*.cer
+auth.json
+credentials*.json
+service-account*.json
+
+# --- Dependencias ---
+node_modules/
 backend/vendor/
 backend/composer.phar
 backend/.tools/
 
-# Node & Angular
-node_modules/
+# --- Builds y compilados ---
 dist/
 .angular/
 
-# Logs & OS
+# --- Logs y archivos temporales ---
 *.log
+logs/
+backend/logs/
+error_log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- Bases de datos y respaldos ---
+*.sql.gz
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.bak
+
+# --- Archivos del Sistema Operativo e IDEs ---
+.idea/
+.vscode/
 .DS_Store
+.DS_Store?
+._*
 Thumbs.db
+ehthumbs.db
+Desktop.ini

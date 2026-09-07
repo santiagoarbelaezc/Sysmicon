@@ -372,23 +372,59 @@ class ProyectosController
     }
 
     /**
-     * Sube un archivo a Cloudinary y retorna [url, public_id]
+     * Sube un archivo a Cloudinary y retorna [url, public_id].
+     * Si Cloudinary falla por permisos o red, almacena localmente de forma transparente.
      */
     private function uploadToCloudinary(string $tmpPath, string $subfolder): array
     {
-        $folder = trim($_ENV['CLOUDINARY_FOLDER'] ?? 'sysmicon/proyectos', '/');
-        $folder = "{$folder}/{$subfolder}";
+        try {
+            $folder = trim($_ENV['CLOUDINARY_FOLDER'] ?? 'sysmicon/proyectos', '/');
+            $folder = "{$folder}/{$subfolder}";
 
-        $upload = new UploadApi();
-        $result = $upload->upload($tmpPath, [
-            'folder'         => $folder,
-            'transformation' => [
-                ['quality' => 'auto', 'fetch_format' => 'auto'],
-                ['width' => 1920, 'height' => 1080, 'crop' => 'limit'],
-            ],
-        ]);
+            $upload = new UploadApi();
+            $result = $upload->upload($tmpPath, [
+                'folder'         => $folder,
+                'transformation' => [
+                    ['quality' => 'auto', 'fetch_format' => 'auto'],
+                    ['width' => 1920, 'height' => 1080, 'crop' => 'limit'],
+                ],
+            ]);
 
-        return [(string)$result['secure_url'], (string)$result['public_id']];
+            return [(string)$result['secure_url'], (string)$result['public_id']];
+        } catch (\Throwable $e) {
+            error_log('[Cloudinary Fallback] ' . $e->getMessage());
+            return $this->saveLocalUpload($tmpPath, $subfolder);
+        }
+    }
+
+    private function saveLocalUpload(string $tmpPath, string $subfolder): array
+    {
+        $uploadDir = __DIR__ . '/../uploads/' . $subfolder;
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        $extension = 'jpg';
+        if (function_exists('mime_content_type')) {
+            $mime = @mime_content_type($tmpPath);
+            if ($mime === 'image/png') $extension = 'png';
+            if ($mime === 'image/webp') $extension = 'webp';
+            if ($mime === 'image/jpeg') $extension = 'jpg';
+        }
+
+        $filename = uniqid('obra_', true) . '.' . $extension;
+        $destination = $uploadDir . '/' . $filename;
+
+        if (!@move_uploaded_file($tmpPath, $destination)) {
+            @copy($tmpPath, $destination);
+        }
+
+        // Construir URL pública
+        $host = $_SERVER['HTTP_HOST'] ?? 'localhost:8000';
+        $scheme = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
+        $url = "{$scheme}://{$host}/uploads/{$subfolder}/{$filename}";
+
+        return [$url, 'local_' . $filename];
     }
 
     private function deleteFromCloudinary(string $publicId): void

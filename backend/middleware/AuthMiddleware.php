@@ -17,7 +17,19 @@ class AuthMiddleware
      */
     public static function handle(): object
     {
-        $header = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+        $header = $_SERVER['HTTP_AUTHORIZATION']
+            ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION']
+            ?? '';
+
+        if (empty($header) && function_exists('getallheaders')) {
+            $headers = getallheaders();
+            $header = $headers['Authorization'] ?? $headers['authorization'] ?? '';
+        }
+
+        if (empty($header) && function_exists('apache_request_headers')) {
+            $headers = apache_request_headers();
+            $header = $headers['Authorization'] ?? $headers['authorization'] ?? '';
+        }
 
         if (empty($header) || !str_starts_with($header, 'Bearer ')) {
             jsonError('Token de autenticación no proporcionado.', 401);

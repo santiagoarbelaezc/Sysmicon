@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://sysmicon.com/api',
+  apiUrl: 'https://colchonesdistricol.com/api2',
 };

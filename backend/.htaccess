@@ -11,22 +11,28 @@ RewriteEngine On
 RewriteCond %{REQUEST_METHOD} OPTIONS
 RewriteRule ^(.*)$ index.php [QSA,L]
 
-# ---- Redirigir todo al router PHP ----
+# Excepción para el endpoint /config (evitar que Apache lo trate como directorio físico)
+RewriteRule ^config/?$ index.php [QSA,L]
+
+# ---- Redirigir todo al router PHP si no es un archivo o directorio existente ----
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [QSA,L]
 
-# ---- Seguridad: bloquear acceso directo a archivos sensibles ----
+# ---- Seguridad: bloquear acceso directo a archivos y directorios sensibles ----
 <FilesMatch "\.(env|json|lock|md|sql|log|sh)$">
-    Order Allow,Deny
-    Deny from all
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
 </FilesMatch>
 
-# Bloquear acceso a vendor y node_modules
-<DirectoryMatch "^.*(vendor|node_modules).*$">
-    Order Allow,Deny
-    Deny from all
-</DirectoryMatch>
+# Bloquear acceso directo a archivos dentro de carpetas sensibles
+RewriteRule ^(vendor|node_modules|database|helpers|middleware|controllers)(/.*)?$ - [F,L]
+RewriteRule ^config/.+$ - [F,L]
 
 # ---- Caché para assets estáticos (si los hubiera) ----
 <IfModule mod_expires.c>

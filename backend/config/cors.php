@@ -10,13 +10,28 @@ function applyCorsHeaders(): void
 {
     $envOrigins = $_ENV['ALLOWED_ORIGINS'] ?? $_SERVER['ALLOWED_ORIGINS'] ?? getenv('ALLOWED_ORIGINS') ?? '';
     if (empty($envOrigins)) {
-        $envOrigins = 'http://localhost:4200,https://sysmicon.com,https://www.sysmicon.com';
+        $envOrigins = 'http://localhost:4200,https://sysmicon.com,https://www.sysmicon.com,https://sysmicon.vercel.app';
     }
-    $allowedOrigins = array_filter(array_map('trim', explode(',', (string)$envOrigins)));
 
-    $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+    // Normalizar lista de orígenes permitidos (quitar espacios y barras finales '/')
+    $allowedOrigins = array_values(array_filter(array_map(function ($o) {
+        return rtrim(trim($o), '/');
+    }, explode(',', (string)$envOrigins))));
 
-    if (!empty($origin) && (in_array($origin, $allowedOrigins, true) || in_array('*', $allowedOrigins, true))) {
+    // El navegador envía el header Origin sin barra final (ej. https://sysmicon.vercel.app)
+    $origin = rtrim(trim($_SERVER['HTTP_ORIGIN'] ?? ''), '/');
+
+    $isAllowed = false;
+    if (!empty($origin)) {
+        if (in_array($origin, $allowedOrigins, true) || in_array('*', $allowedOrigins, true)) {
+            $isAllowed = true;
+        } elseif (preg_match('/^https:\/\/sysmicon(-[a-z0-9-]+)?\.vercel\.app$/i', $origin)) {
+            // Permitir también subdominios y preview deployments de Vercel para Sysmicon
+            $isAllowed = true;
+        }
+    }
+
+    if ($isAllowed) {
         header("Access-Control-Allow-Origin: {$origin}");
         header('Access-Control-Allow-Credentials: true');
     } elseif (in_array('*', $allowedOrigins, true)) {

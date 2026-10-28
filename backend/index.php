@@ -8,6 +8,9 @@
 
 declare(strict_types=1);
 
+// ---- Headers JSON ----
+header('Content-Type: application/json; charset=utf-8');
+
 // Si se ejecuta con el servidor integrado de PHP y el archivo existe físicamente, servirlo directamente
 if (php_sapi_name() === 'cli-server') {
     $parsedPath = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
@@ -19,12 +22,12 @@ if (php_sapi_name() === 'cli-server') {
 // ---- Autoloader y variables de entorno ----
 require_once __DIR__ . '/vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
+if (file_exists(__DIR__ . '/.env')) {
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
+}
 
-// ---- Headers JSON y CORS ----
-header('Content-Type: application/json; charset=utf-8');
-
+// ---- CORS Headers (resuelve preflights OPTIONS inmediatamente tras cargar .env) ----
 require_once __DIR__ . '/config/cors.php';
 applyCorsHeaders();
 

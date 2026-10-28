@@ -63,6 +63,9 @@ module.exports = {
         'admin-card-hover': '0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04)',
         'admin-floating': '0 20px 35px -10px rgba(0, 0, 0, 0.08)',
       },
+      spacing: {
+        '4.5': '1.125rem',
+      },
       transitionTimingFunction: {
         'smooth': 'cubic-bezier(0.16, 1, 0.3, 1)',
       },

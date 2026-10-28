@@ -50,11 +50,20 @@ import { AdminService, MensajeAdmin } from '../../../../services/admin.service';
 
       <!-- BARRA DE FILTRO Y BÚSQUEDA -->
       <div class="flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
-        <!-- Buscador -->
-        <div class="relative w-full sm:w-96">
-          <svg class="w-4.5 h-4.5 text-neutral-400 absolute left-4 top-1/2 -translate-y-1/2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <!-- Buscador Ultra-Limpio con Icono Fijo -->
+        <div class="relative w-full sm:w-96 group">
+          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-400 group-focus-within:text-neutral-950 transition-colors">
+            <svg class="w-4 h-4 shrink-0" style="width: 16px; height: 16px; min-width: 16px; min-height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.3-4.3"/>
+            </svg>
+          </div>
           <input type="text" [(ngModel)]="busqueda" placeholder="Buscar por cliente, correo o asunto..."
-                 class="w-full pl-11 pr-4 py-3 rounded-2xl bg-white border border-neutral-200 text-neutral-950 text-sm placeholder:text-neutral-400 focus:border-neutral-950 focus:ring-1 focus:ring-neutral-950 outline-none transition-all shadow-xs font-sans">
+                 class="w-full pl-10 pr-9 py-2.5 rounded-xl bg-white border border-neutral-200 text-neutral-950 text-sm placeholder:text-neutral-400 focus:border-neutral-950 focus:ring-1 focus:ring-neutral-950 outline-none transition-all shadow-xs font-sans">
+          <button *ngIf="busqueda" (click)="busqueda = ''" type="button" title="Limpiar búsqueda"
+                  class="absolute inset-y-0 right-0 pr-3 flex items-center text-neutral-400 hover:text-neutral-700 cursor-pointer">
+            <svg class="w-4 h-4 shrink-0" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
         </div>
 
         <!-- Filtros de Tipo Monocromáticos -->

@@ -1,0 +1,84 @@
+<section class="hero-section">
+  <!-- Elegant Background Carousel with dream-like cross-dissolve -->
+  <div class="hero-carousel">
+    <div *ngFor="let slide of slides; let i = index" class="slide-bg" [ngClass]="{'active': currentSlide() === i}"
+      [style.background-image]="'url(' + slide.image + ')'">
+    </div>
+    <div class="hero-overlay"></div>
+  </div>
+
+  <!-- Flechas de navegación minimalistas y elegantes -->
+  <button (click)="prevSlide(); startCarousel()" class="hero-arrow hero-arrow-left group" aria-label="Anterior diapositiva">
+    <svg class="w-5 h-5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-0.5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m15 18-6-6 6-6"/>
+    </svg>
+  </button>
+  <button (click)="nextSlide(); startCarousel()" class="hero-arrow hero-arrow-right group" aria-label="Siguiente diapositiva">
+    <svg class="w-5 h-5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m9 18 6-6-6-6"/>
+    </svg>
+  </button>
+
+  <!-- Elegant Carousel Indicator / Controls (Bottom Right) -->
+  <div class="carousel-controls font-sans">
+    <div class="slide-info-elegant">
+      <!-- Ubicación fina, sutil y espaciada -->
+      <div class="flex items-center justify-end gap-2.5 mb-1.5">
+        <span class="w-4 h-[1px] bg-wood-accent/80"></span>
+        <span class="slide-loc font-mono text-[10px] uppercase tracking-[0.28em] text-white/80">{{ slides[currentSlide()].location }}</span>
+      </div>
+      
+      <!-- Título en Serif ligera y refinada -->
+      <div class="slide-title font-serif text-base md:text-lg font-normal tracking-[0.06em] text-white">
+        {{ slides[currentSlide()].title }}
+      </div>
+    </div>
+
+    <!-- Líneas indicadoras minimalistas ultrafinas -->
+    <div class="carousel-indicators mt-3 justify-end">
+      <button *ngFor="let slide of slides; let i = index" (click)="setSlide(i)"
+        [ngClass]="{'active': currentSlide() === i}" class="indicator-btn" [attr.aria-label]="'Ir a ' + slide.title">
+        <span class="progress-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="container hero-content flex flex-col items-center justify-center text-center relative z-10">
+
+    <div *ngIf="cms.config().hero_tagline" class="inline-block px-4 py-1.5 rounded-full border border-white/20 bg-black/40 backdrop-blur-md text-white text-[11px] font-mono tracking-widest uppercase mb-4 animate-fade">
+      {{ cms.config().hero_tagline }}
+    </div>
+
+    <h1 class="hero-title font-serif text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl drop-shadow-2xl mb-6">
+      {{ cms.config().hero_title || (cms.config().hero_title_prefix + ' ' + cms.config().hero_title_highlight) || 'Diseñamos y Construimos' }}
+    </h1>
+
+    <p *ngIf="cms.config().hero_subtitle" class="hero-subtitle max-w-3xl mx-auto text-white text-base sm:text-lg md:text-xl font-light leading-relaxed mb-8">
+      {{ cms.config().hero_subtitle }}
+    </p>
+
+    <div class="hero-actions flex flex-wrap items-center justify-center gap-4 my-8">
+      <!-- Primary CTA: Cotiza con nosotros -->
+      <a routerLink="/cotiza-con-nosotros" class="btn-primary">
+        <span>{{ cms.config().hero_btn_text || cms.config().hero_btn_cotizar || 'Cotiza con nosotros' }}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14" />
+          <path d="m12 5 7 7-7 7" />
+        </svg>
+      </a>
+
+      <!-- Secondary CTA: Conócenos -->
+      <button (click)="scrollToSection('nosotros-section')" class="btn-secondary">
+        <span>{{ cms.config().hero_btn_obras || 'Conócenos' }}</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Scroll Down indicator -->
+  <div class="scroll-indicator" (click)="scrollToSection('nosotros-section')">
+    <span class="scroll-txt">Explorar</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>

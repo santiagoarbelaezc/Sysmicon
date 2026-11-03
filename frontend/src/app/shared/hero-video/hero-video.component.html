@@ -1,0 +1,88 @@
+<section class="hero-video-section relative w-full h-screen overflow-hidden bg-[#000814] flex items-center justify-center">
+
+  <!-- VIDEO PLAYER RESPONSIVO CON REVEAL CINEMATOGRÁFICO DE ZOOM SUAVE -->
+  <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+    <video #videoEl
+           [src]="videoSrc()"
+           autoplay
+           muted
+           loop
+           playsinline
+           class="hero-bg-video absolute inset-0 w-full h-full object-cover">
+    </video>
+
+    <!-- GRADIENTES & AMBIENTE CINEMATOGRÁFICO DE LUXURY -->
+    <div class="absolute inset-0 bg-black/45"></div>
+    <div class="absolute inset-0 bg-radial-vignette opacity-65"></div>
+  </div>
+
+  <!-- INSIGNIA DE ANIMACIÓN / INDICADOR DE SALTO 15 SEGUNDOS -->
+  <div *ngIf="seekBadgeText() as badge" 
+       class="absolute z-30 inset-0 flex items-center justify-center pointer-events-none animate-fadeIn">
+    <div class="px-6 py-3 rounded-2xl bg-black/70 border border-[#C2E1FF]/50 backdrop-blur-xl shadow-2xl text-center">
+      <span class="font-mono text-xl sm:text-2xl font-bold text-[#C2E1FF] tracking-[0.2em] uppercase">
+        {{ badge }}
+      </span>
+      <span class="block font-sans text-[10px] uppercase tracking-widest text-white/70 mt-0.5">
+        Navegación de Video
+      </span>
+    </div>
+  </div>
+
+  <!-- CONTENIDO CENTRAL DEL HERO CON ORQUESTACIÓN EN CASCADA -->
+  <div class="container relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center justify-center pt-4">
+
+    <!-- Logo Hero Animado -->
+    <div class="mb-3 sm:mb-5 flex justify-center animate-logo-entrance">
+      <img src="assets/icons/logo-hero.png" 
+           alt="Sysmicon Logo" 
+           loading="eager"
+           decoding="async"
+           class="h-24 sm:h-32 md:h-40 lg:h-44 max-h-[200px] w-auto object-contain animate-logo-float drop-shadow-[0_15px_40px_rgba(0,0,0,0.9)]">
+    </div>
+
+    <!-- Título Principal con Revelación Cinemática y Letra Más Grande -->
+    <h1 class="hero-title-entrance font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tight leading-[1.05] drop-shadow-2xl mb-7">
+      {{ cmsService.config().hero_title_prefix || 'Diseñamos y' }} 
+      <span class="font-serif italic font-normal text-[#C2E1FF]">
+        {{ cmsService.config().hero_title_highlight || 'Construimos' }}
+      </span>
+    </h1>
+
+    <!-- Botones de Acción Restaurados y Perfectamente Alineados -->
+    <div class="hero-buttons-entrance flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+      <a routerLink="/cotiza-con-nosotros" class="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-lg bg-white text-[#000814] hover:bg-[#C2E1FF] transition-all duration-500 font-sans text-xs sm:text-sm font-bold tracking-[0.18em] uppercase shadow-2xl hover:scale-105 whitespace-nowrap">
+        <span class="whitespace-nowrap">{{ cmsService.config().hero_btn_cotizar || 'Cotiza con nosotros' }}</span>
+        <svg class="w-4 h-4 shrink-0 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
+        </svg>
+      </a>
+
+      <button (click)="scrollToNext()" class="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/40 backdrop-blur-md transition-all duration-500 font-sans text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase whitespace-nowrap">
+        <span class="whitespace-nowrap">{{ cmsService.config().hero_btn_obras || 'Ver Obras & Proyectos' }}</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- INDICATIVO DEL SCROLL CON REVEAL RETARDADO (CENTRO INFERIOR) -->
+  <div (click)="scrollToNext()"
+       class="hero-scroll-entrance scroll-indicator-enhanced absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center cursor-pointer group">
+    
+    <!-- Texto animado -->
+    <span class="font-mono text-xs tracking-[0.3em] uppercase text-white/80 group-hover:text-[#C2E1FF] transition-colors mb-2">
+      {{ cmsService.config().hero_scroll_text || 'DESLIZA PARA EXPLORAR' }}
+    </span>
+
+    <!-- Cápsula animada tipo Mouse VIP con pulso brillante -->
+    <div class="w-6 h-10 rounded-full border-2 border-white/30 group-hover:border-[#C2E1FF] transition-all duration-300 flex justify-center p-1.5 relative shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_20px_rgba(194,225,255,0.4)]">
+      <div class="w-1.5 h-2.5 rounded-full bg-[#C2E1FF] animate-mouse-wheel"></div>
+    </div>
+
+    <!-- Línea con haz de luz descendente -->
+    <div class="w-[1px] h-8 bg-gradient-to-b from-[#C2E1FF] via-white/30 to-transparent mt-2 overflow-hidden relative">
+      <div class="w-full h-full bg-[#C2E1FF] animate-beam-drop"></div>
+    </div>
+  </div>
+
+</section>

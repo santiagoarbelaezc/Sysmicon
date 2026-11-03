@@ -1,0 +1,78 @@
+# ============================================================
+# Sysmicon Frontend — Apache Configuration (public_html)
+# Soporte para Angular Single Page Application (SPA) y Backend PHP
+# ============================================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # ---- Forzar HTTPS (en producción) ----
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP_HOST} !^localhost [NC]
+  RewriteCond %{HTTP_HOST} !^127\.0\.0\.1
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # ---- Enrutamiento directo al Backend PHP / API Bridge ----
+  RewriteCond %{REQUEST_URI} ^/backend_php(/.*)?$ [NC]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^backend_php/(.*)$ /backend_php/index.php [QSA,L]
+  RewriteRule ^backend_php/?$ /backend_php/index.php [QSA,L]
+
+  RewriteCond %{REQUEST_URI} ^/api(/.*)?$ [NC]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^api/(.*)$ /api/index.php [QSA,L]
+  RewriteRule ^api/?$ /api/index.php [QSA,L]
+
+  # ---- Servir archivos o directorios físicos existentes ----
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # ---- Redirigir todas las demás rutas a /index.html (Angular Router SPA) ----
+  RewriteRule ^ /index.html [L]
+</IfModule>
+
+# Desactivar listado de directorios
+Options -Indexes
+
+# Proteger archivos ocultos y de configuración
+<FilesMatch "^\.">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order Allow,Deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# ---- Compresión GZIP / Deflate ----
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript text/javascript
+  AddOutputFilterByType DEFLATE application/json application/xml application/xhtml+xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ---- Caché de Navegador para Assets ----
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+
+  # HTML nunca se cachea para reflejar nuevos deploys de inmediato
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType application/json "access plus 0 seconds"
+
+  # Assets compilados con hash (Angular genera main.[hash].js)
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+
+  # Imágenes y fuentes
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+</IfModule>

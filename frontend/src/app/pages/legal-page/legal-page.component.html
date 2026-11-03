@@ -1,0 +1,280 @@
+<section class="relative bg-white text-neutral-900 min-h-screen font-sans pt-28 pb-20 overflow-hidden">
+  <!-- Líneas superiores e inferiores principales de plano arquitectónico -->
+  <div class="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-black/30 to-transparent"></div>
+  <div class="absolute bottom-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-black/30 to-transparent"></div>
+
+  <!-- Guías laterales verticales de extremo a extremo con crucetas "+" -->
+  <div class="absolute left-6 md:left-10 top-12 bottom-12 hidden lg:flex flex-col justify-between items-center pointer-events-none select-none z-20">
+    <span class="text-black/40 font-mono text-xs font-bold">+</span>
+    <div class="w-[1px] flex-1 bg-gradient-to-b from-transparent via-black/20 to-transparent my-6"></div>
+    <span class="text-black/40 font-mono text-xs font-bold">+</span>
+  </div>
+  <div class="absolute right-6 md:right-10 top-12 bottom-12 hidden lg:flex flex-col justify-between items-center pointer-events-none select-none z-20">
+    <span class="text-black/40 font-mono text-xs font-bold">+</span>
+    <div class="w-[1px] flex-1 bg-gradient-to-b from-transparent via-black/20 to-transparent my-6"></div>
+    <span class="text-black/40 font-mono text-xs font-bold">+</span>
+  </div>
+
+  <div class="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
+
+    <!-- HEADER DE SECCIÓN / BLUEPRINT VIP BANNER -->
+    <div class="mb-12 border-b border-black/20 pb-8">
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-black/[0.04] border border-black/20 text-[10px] font-mono tracking-[0.25em] text-black uppercase mb-4">
+        <span class="w-1.5 h-1.5 rounded-full bg-black animate-pulse"></span>
+        <span>SYSMICON ARCHITECTURAL STUDIO • MARCO LEGAL & NORMATIVO</span>
+      </div>
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-neutral-900 font-normal leading-tight tracking-tight">
+            Centro de Transparencia Legal
+          </h1>
+          <p class="text-neutral-600 text-sm sm:text-base mt-2 font-normal max-w-2xl">
+            Términos, condiciones y marco de protección de datos personales que rigen nuestros servicios arquitectónicos y plataforma digital.
+          </p>
+        </div>
+        <div class="font-mono text-xs text-black/40 text-right shrink-0">
+          <div>+ REF: SYS-LEG-2026</div>
+          <div>VERSIÓN 2.4 • COLOMBIA</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL: MENÚ LATERAL Y CONTENIDO DINÁMICO -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+      
+      <!-- COLUMNA IZQUIERDA: MENÚ DE NAVEGACIÓN LEGAL (Cols 1-4) -->
+      <div class="lg:col-span-4 sticky top-28 space-y-6">
+        <div class="bg-neutral-50/80 rounded-3xl border border-black/15 p-6 sm:p-8 backdrop-blur-sm shadow-sm relative overflow-hidden">
+          <div class="absolute top-0 inset-x-6 h-[1px] bg-black/10"></div>
+          
+          <h3 class="font-serif text-base font-bold uppercase tracking-[0.16em] text-neutral-900 pb-3 flex items-center justify-between">
+            <span>Documentos Legales</span>
+            <span class="font-mono text-[10px] text-black/30">+NAV</span>
+          </h3>
+          <div class="w-full h-[1px] bg-black mb-6"></div>
+
+          <nav class="space-y-3">
+            <button 
+              *ngFor="let item of sections"
+              (click)="setSection(item.id)"
+              [ngClass]="activeSection() === item.id ? 'bg-black text-white border-black' : 'bg-white text-neutral-700 border-black/20'"
+              class="w-full text-left p-4 rounded-2xl border transition-all duration-300 flex items-center justify-between group hover:border-black shadow-xs cursor-pointer">
+              
+              <div class="flex items-center gap-3">
+                <span 
+                  [ngClass]="activeSection() === item.id ? 'bg-white' : 'bg-black'"
+                  class="w-2 h-2 rounded-full transition-all"></span>
+                <span class="text-sm font-semibold tracking-wide">{{ item.label }}</span>
+              </div>
+
+              <span 
+                [ngClass]="activeSection() === item.id ? 'text-neutral-400' : 'text-black/30'"
+                class="font-mono text-[10px] tracking-wider">{{ item.code }}</span>
+            </button>
+          </nav>
+
+          <!-- INFORMACIÓN ADICIONAL DEL CANAL DE ATENCIÓN LEGAL -->
+          <div class="mt-8 pt-6 border-t border-black/15 space-y-3">
+            <div class="font-mono text-[10px] tracking-widest text-black/50 uppercase">+ ATENCIÓN A TITULARES</div>
+            <p class="text-xs text-neutral-600 leading-relaxed font-normal">
+              Para consultas, solicitudes o peticiones sobre tus datos personales o contratos, contáctanos formalmente:
+            </p>
+            <div class="text-xs font-semibold text-neutral-900 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              <a [href]="'mailto:' + contact.email" class="underline hover:text-black">{{ contact.email }}</a>
+            </div>
+            <div class="text-xs text-neutral-600 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>{{ contact.address }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA: CONTENIDO DETALLADO SELECCIONADO (Cols 5-12) -->
+      <div class="lg:col-span-8 bg-white rounded-3xl border border-black/20 p-8 sm:p-12 shadow-md relative">
+        <div class="absolute top-0 inset-x-8 h-[1px] bg-black/20"></div>
+
+        <!-- ========================================================================= -->
+        <!-- SECCIÓN 1: POLÍTICAS DE PRIVACIDAD -->
+        <!-- ========================================================================= -->
+        <article *ngIf="activeSection() === 'privacidad'" class="space-y-8 animate-fadeIn">
+          <div class="border-b border-black/15 pb-6">
+            <div class="font-mono text-xs text-black/40 mb-1">+ DOCUMENTO LEGAL #01</div>
+            <h2 class="font-serif text-2xl sm:text-3xl text-neutral-900 font-bold">Políticas de Privacidad</h2>
+            <p class="text-xs text-neutral-500 font-mono mt-1">Última actualización: Enero 2026 • Aplicable a medios digitales y presenciales</p>
+          </div>
+
+          <div class="space-y-6 text-sm text-neutral-700 leading-relaxed">
+            <section class="space-y-3">
+              <h3 class="font-serif text-lg text-neutral-900 font-semibold border-l-2 border-black pl-3">1. Declaración de Compromiso y Responsable</h3>
+              <p>
+                <strong>{{ brand.name }} S.A.S.</strong> (en adelante "SYSMICON"), identificada conforme a las leyes de la República de Colombia, reconoce la importancia estratégica y fundamental de la privacidad, confidencialidad y seguridad de la información de sus clientes, proveedores, colaboradores y visitantes web.
+              </p>
+              <p>
+                Esta Política de Privacidad describe exhaustivamente los criterios bajo los cuales recopilamos, procesamos, almacenamos y protegemos la información suministrada a través de nuestros canales digitales, formulario de cotización, consultas de diseño y contratos de consultoría o construcción.
+              </p>
+            </section>
+
+            <section class="space-y-3">
+              <h3 class="font-serif text-lg text-neutral-900 font-semibold border-l-2 border-black pl-3">2. Información Recopilada</h3>
+              <p>SYSMICON recopila información únicamente cuando es estrictamente necesaria para prestar nuestros servicios de arquitectura, ingeniería y construcción:</p>
+              <ul class="list-disc pl-5 space-y-1.5 text-neutral-600">
+                <li><strong>Datos de Identificación y Contacto:</strong> Nombres completos, documento de identidad, correo electrónico, número telefónico y dirección de correspondencia.</li>
+                <li><strong>Información del Proyecto Arquitectónico:</strong> Ubicación del predio, dimensiones del lote, presupuesto estimado, necesidades de diseño y requerimientos técnicos específicos.</li>
+                <li><strong>Información Técnica y de Navegación:</strong> Dirección IP, tipo de navegador, sistema operativo y métricas de interacción con la plataforma web (a través de cookies técnicas esenciales).</li>
+              </ul>
+            </section>
+
+            <section class="space-y-3">
+              <h3 class="font-serif text-lg text-neutral-900 font-semibold border-l-2 border-black pl-3">3. Finalidad del Procesamiento de Datos</h3>
+              <p>Los datos recabados serán destinados de forma exlusiva a los siguientes fines legítimos:</p>
+              <ul class="list-disc pl-5 space-y-1.5 text-neutral-600">
+                <li>Elaboración de propuestas comerciales, cotizaciones técnicas y diseños preliminares personalizados.</li>
+                <li>Ejecución contractual para el desarrollo de proyectos residenciales, comerciales o industriales llave en mano.</li>
+                <li>Gestión de trámites de licencias de construcción, certificaciones o gestiones ante curadurías urbanas.</li>
+                <li>Envío de comunicaciones corporativas, boletines de arquitectura y avances de proyectos previamente autorizados.</li>
+              </ul>
+            </section>
+
+            <section class="space-y-3">
+              <h3 class="font-serif text-lg text-neutral-900 font-semibold border-l-2 border-black pl-3">4. Limitación de Responsabilidad y Enlaces a Terceros</h3>
+              <p>
+                Nuestra plataforma web puede incorporar enlaces a servicios o redes sociales de terceros (tales como Instagram, LinkedIn o herramientas externas de agendamiento). SYSMICON no ejerce control sobre las políticas de privacidad ni sobre la seguridad implementada por dichos sitios independientes, quedando liberada de cualquier eventualidad derivada del uso de servicios ajenos.
+              </p>
+            </section>
+
+            <section class="space-y-3">
+              <h3 class="font-serif text-lg text-neutral-900 font-semibold border-l-2 border-black pl-3">5. Modificaciones a la Política</h3>
+              <p>
+                SYSMICON se reserva el derecho absoluto de actualizar o modificar en cualquier momento la presente política para adaptarla a novedades legislativas o corporativas. Las versiones actualizadas estarán disponibles de forma permanente en este mismo portal.
+              </p>
+            </section>
+          </div>
+        </article>
+
+        <!-- ========================================================================= -->
+        <!-- SECCIÓN 2: TÉRMINOS DE SERVICIO -->
+        <!-- ========================================================================= -->
+        <article *ngIf="activeSection() === 'terminos'" class="space-y-8 animate-fadeIn">
+          <div class="border-b border-black/15 pb-6">
+            <div class="font-mono text-xs text-black/40 mb-1">+ DOCUMENTO LEGAL #02</div>
+            <h2 class="font-serif text-2xl sm:text-3xl text-neutral-900 font-bold">Términos de Servicio</h2>
+            <p class="text-xs text-neutral-500 font-mono mt-1">Regulación de uso del portal web y delimitación de responsabilidad comercial</p>
+          </div>
+
+          <div class="space-y-6 text-sm text-neutral-700 leading-relaxed">
+            <section class="space-y-3">
+              <h3 class="font-serif text-lg text-neutral-900 font-semibold border-l-2 border-black pl-3">1. Aceptación de los Términos</h3>
+              <p>
+                Al acceder, navegar o hacer uso del portal web de <strong>SYSMICON S.A.S.</strong>, el usuario acepta de manera explícita y sin reservas regirse por los presentes Términos de Servicio. En caso de no estar de acuerdo con alguno de los apartados, deberá abstenerse de utilizar este sitio y sus formularios interactivos.
+              </p>
+            </section>
+
+            <section class="space-y-3">
+              <h3 class="font-serif text-lg text-neutral-900 font-semibold border-l-2 border-black pl-3">2. Propiedad Intelectual y Derechos de Autor</h3>
+              <p>
+                Todos los contenidos expuestos en esta plataforma —incluyendo renders, planimetrías, imágenes 3D, proyectos en portafolio, diseño de interfaz, marcas y códigos fuente— son propiedad exclusiva de SYSMICON S.A.S. o se encuentran licenciados debidamente.
+              </p>
+              <p class="bg-neutral-100 p-4 rounded-2xl border border-black/15 font-mono text-xs text-neutral-800">
+                PROHIBICIÓN EXPRESA: Queda prohibida la reproducción parcial o total, distribución, copia o uso comercial de cualquier render o diseño arquitectónico de SYSMICON sin consentimiento previo, expreso y escrito de la compañía.
+              </p>
+            </section>
+
+            <section class="space-y-3">
+              <h3 class="font-serif text-lg text-neutral-900 font-semibold border-l-2 border-black pl-3">3. Alcance del Material Informativo y Cotizaciones</h3>
+              <p>
+                Las representaciones visuales, estimaciones presupuestales o modelos 3D generados en la web tienen carácter meramente orientativo e ilustrativo. Ninguna información desplegada en el portal web constituye por sí sola una oferta contractual vinculante. Todo proyecto formal se regirá de manera independiente mediante contrato escrito de diseño o construcción firmado por las partes.
+              </p>
+            </section>
+
+            <section class="space-y-3">
+              <h3 class="font-serif text-lg text-neutral-900 font-semibold border-l-2 border-black pl-3">4. Exoneración y Liberación Legal de Responsabilidad</h3>
+              <p>
+                SYSMICON no garantiza que el sitio web opere de manera ininterrumpida o libre de errores informáticos causados por proveedores de infraestructura de internet. En la máxima medida permitida por la ley aplicable en Colombia, SYSMICON se exime de responsabilidad por daños directos, indirectos, incidentales o consecuenciales derivados de:
+              </p>
+              <ul class="list-disc pl-5 space-y-1.5 text-neutral-600">
+                <li>Uso indebido de la información o herramientas de simulación por parte del usuario.</li>
+                <li>Fallas técnicas en servidores de alojamiento o interrupciones de conectividad ajenas a nuestro control directivo.</li>
+                <li>Imprecisiones en datos proporcionados por el cliente en formularios web.</li>
+              </ul>
+            </section>
+
+            <section class="space-y-3">
+              <h3 class="font-serif text-lg text-neutral-900 font-semibold border-l-2 border-black pl-3">5. Ley Aplicable y Jurisdicción</h3>
+              <p>
+                Estos términos se interpretan y rigen conforme a las leyes sustantivas y procesales de la República de Colombia. Cualquier controversia será sometida ante los jueces ordinarios del domicilio principal de la sociedad en Medellín, Colombia.
+              </p>
+            </section>
+          </div>
+        </article>
+
+        <!-- ========================================================================= -->
+        <!-- SECCIÓN 3: TRATAMIENTO DE DATOS PERSONALES -->
+        <!-- ========================================================================= -->
+        <article *ngIf="activeSection() === 'datos'" class="space-y-8 animate-fadeIn">
+          <div class="border-b border-black/15 pb-6">
+            <div class="font-mono text-xs text-black/40 mb-1">+ DOCUMENTO LEGAL #03</div>
+            <h2 class="font-serif text-2xl sm:text-3xl text-neutral-900 font-bold">Tratamiento de Datos Personales</h2>
+            <p class="text-xs text-neutral-500 font-mono mt-1">Autorización y Régimen de Protección conforme a la Ley 1581 de 2012 de Colombia</p>
+          </div>
+
+          <div class="space-y-6 text-sm text-neutral-700 leading-relaxed">
+            <section class="space-y-3">
+              <h3 class="font-serif text-lg text-neutral-900 font-semibold border-l-2 border-black pl-3">1. Marco Normativo Aplicable</h3>
+              <p>
+                De acuerdo con la <strong>Ley Estatutaria 1581 de 2012</strong>, el Decreto Reglamentario 1377 de 2013 y demás normas concordantes sobre Hábeas Data en Colombia, <strong>SYSMICON S.A.S.</strong> actúa como Responsable del Tratamiento de los datos personales recolectados en sus bases de datos.
+              </p>
+            </section>
+
+            <section class="space-y-3">
+              <h3 class="font-serif text-lg text-neutral-900 font-semibold border-l-2 border-black pl-3">2. Derechos del Titular (Derechos ARCO)</h3>
+              <p>Como titular de los datos personales suministrados a SYSMICON, tienes los siguientes derechos fundamentales consagrados por la legislación colombiana:</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div class="p-4 rounded-2xl bg-neutral-50 border border-black/15">
+                  <div class="font-mono text-xs font-bold text-neutral-900 uppercase">A • ACCEDER & CONOCER</div>
+                  <p class="text-xs text-neutral-600 mt-1">Conocer, actualizar y rectificar tus datos personales frente a SYSMICON.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-neutral-50 border border-black/15">
+                  <div class="font-mono text-xs font-bold text-neutral-900 uppercase">R • PRUEBA & AUTORIZACIÓN</div>
+                  <p class="text-xs text-neutral-600 mt-1">Solicitar prueba de la autorización otorgada para el tratamiento de tus datos.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-neutral-50 border border-black/15">
+                  <div class="font-mono text-xs font-bold text-neutral-900 uppercase">C • REVOCAR O SUPRIMIR</div>
+                  <p class="text-xs text-neutral-600 mt-1">Revocar la autorización o solicitar la supresión de los datos cuando no exista un deber legal o contractual de permanecer.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-neutral-50 border border-black/15">
+                  <div class="font-mono text-xs font-bold text-neutral-900 uppercase">O • QUEJAS ANTE LA SIC</div>
+                  <p class="text-xs text-neutral-600 mt-1">Presentar ante la Superintendencia de Industria y Comercio (SIC) quejas por infracciones al régimen de protección de datos.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="space-y-3">
+              <h3 class="font-serif text-lg text-neutral-900 font-semibold border-l-2 border-black pl-3">3. Procedimiento para Consultas y Reclamos</h3>
+              <p>
+                Los titulares o sus causahabientes podrán ejercer sus derechos mediante comunicación formal remitida al Oficial de Protección de Datos de SYSMICON:
+              </p>
+              <ul class="list-disc pl-5 space-y-1.5 text-neutral-600">
+                <li><strong>Correo Electrónico:</strong> <a [href]="'mailto:' + contact.email" class="underline font-semibold text-neutral-900">{{ contact.email }}</a></li>
+                <li><strong>Asunto del mensaje:</strong> Hábeas Data - Ejercicio de Derechos Titular</li>
+                <li><strong>Tiempo de respuesta:</strong> Máximo diez (10) días hábiles para consultas y quince (15) días hábiles para reclamos, conforme a los términos legales.</li>
+              </ul>
+            </section>
+
+            <section class="space-y-3">
+              <h3 class="font-serif text-lg text-neutral-900 font-semibold border-l-2 border-black pl-3">4. Seguridad y Confidencialidad de la Información</h3>
+              <p>
+                SYSMICON adopta medidas técnicas, humanas y administrativas necesarias para otorgar seguridad a los registros, evitando su adulteración, pérdida, consulta, uso o acceso no autorizado ni fraudulento.
+              </p>
+            </section>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>

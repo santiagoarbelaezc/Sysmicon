@@ -1,0 +1,57 @@
+name: Backend CI (PHP)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-ci.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-ci.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: backend-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend-quality:
+    name: PHP Quality & Syntax Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo, pdo_mysql, json, curl
+          coverage: none
+
+      - name: Validate composer.json
+        run: composer validate --working-dir=backend
+
+      - name: Cache Composer Dependencies
+        uses: actions/cache@v4
+        with:
+          path: backend/vendor
+          key: composer-${{ runner.os }}-8.3-${{ hashFiles('backend/composer.lock') }}
+          restore-keys: |
+            composer-${{ runner.os }}-8.3-
+
+      - name: Install Composer Dependencies
+        run: |
+          cd backend
+          composer install --prefer-dist --no-progress --optimize-autoloader
+
+      - name: Check PHP Syntax (Lint)
+        run: |
+          find backend -type f -name "*.php" -not -path "backend/vendor/*" -exec php -l {} +
+

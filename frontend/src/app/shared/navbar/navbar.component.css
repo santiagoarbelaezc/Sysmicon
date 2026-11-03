@@ -1,0 +1,274 @@
+/* ==========================================================================
+   SYSMICON NAVBAR - SIEMPRE BLANCO SÓLIDO CON LETRA NEGRA INSTITUCIONAL
+   ========================================================================== */
+
+:host {
+  display: block;
+  position: relative;
+  z-index: 999999 !important;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999999 !important;
+  padding: 0.85rem 0 !important;
+  background: #FFFFFF !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06) !important;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease !important;
+}
+
+.navbar-hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(-100%) !important;
+}
+
+.navbar-visible {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateY(0) !important;
+}
+
+/* ==========================================================================
+   SIEMPRE LETRA NEGRA INSTITUCIONAL, TAMAÑO EQUILIBRADO Y LEGIBLE
+   ========================================================================== */
+.logo-text {
+  font-family: var(--font-serif);
+  font-size: 1.45rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #000000 !important;
+  transition: color 0.35s ease;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  z-index: 1001;
+}
+
+.desktop-nav {
+  display: block;
+}
+
+@media (max-width: 992px) {
+  .desktop-nav, .desktop-actions {
+    display: none;
+  }
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 2.75rem;
+}
+
+.nav-link {
+  position: relative;
+  font-family: var(--font-sans);
+  font-size: 0.84rem !important;
+  font-weight: 500 !important;
+  color: #111111 !important;
+  padding: 0.35rem 0.15rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #000000 !important;
+  font-weight: 600 !important;
+}
+
+.link-underline {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #000000 !important;
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover .link-underline, .nav-link.active .link-underline {
+  width: 100%;
+}
+
+/* Auth Links Fino y Letra Negra */
+.auth-link-ingresar {
+  color: #111111 !important;
+  font-size: 0.84rem !important;
+  font-weight: 500 !important;
+  transition: color 0.3s ease;
+}
+.auth-link-ingresar:hover {
+  color: #000000 !important;
+}
+
+.auth-btn-registro {
+  border-color: rgba(0, 0, 0, 0.7) !important;
+  background: transparent !important;
+  color: #000000 !important;
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease;
+}
+.auth-btn-registro:hover {
+  background: #000000 !important;
+  color: #FFFFFF !important;
+  border-color: #000000 !important;
+}
+
+.auth-btn-admin {
+  background: #f0f2f5 !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  color: #000000 !important;
+}
+.auth-user-name {
+  color: #000000 !important;
+  font-weight: 600 !important;
+}
+.auth-logout-btn {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+.auth-logout-btn:hover {
+  color: #dc2626 !important;
+}
+
+.bar {
+  width: 100%;
+  height: 2px;
+  background-color: #000000 !important;
+  transition: all var(--transition-smooth);
+  border-radius: 2px;
+}
+
+/* Mobile Toggle */
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 32px;
+  height: 22px;
+  z-index: 1001;
+  padding: 0;
+}
+
+@media (max-width: 992px) {
+  .mobile-toggle {
+    display: flex;
+  }
+}
+
+.bar {
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-primary);
+  transition: all var(--transition-smooth);
+  border-radius: 2px;
+}
+
+.mobile-toggle.open .bar-1 {
+  transform: translateY(10px) rotate(45deg);
+  background-color: var(--wood-light);
+}
+
+.mobile-toggle.open .bar-2 {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.mobile-toggle.open .bar-3 {
+  transform: translateY(-10px) rotate(-45deg);
+  background-color: var(--wood-light);
+}
+
+/* Mobile Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg-dark);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-smooth);
+}
+
+.mobile-menu-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-menu-content {
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+}
+
+.mobile-nav-link {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  display: inline-block;
+}
+
+.mobile-nav-link:hover, .mobile-nav-link.active {
+  color: #FFFFFF;
+  transform: scale(1.05);
+}
+
+.mobile-menu-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  border-top: 1px solid var(--glass-border);
+  padding-top: 2rem;
+}
+
+.mobile-cta-btn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--wood-accent);
+  color: var(--text-primary);
+  font-weight: 600;
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
+
+.mobile-socials a {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  text-decoration: underline;
+}
+
+.mobile-socials a:hover {
+  color: var(--wood-light);
+}

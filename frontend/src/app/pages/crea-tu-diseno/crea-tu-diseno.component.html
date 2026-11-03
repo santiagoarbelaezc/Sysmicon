@@ -1,0 +1,623 @@
+<div class="config-page min-h-screen bg-[#002345] text-white py-16 font-sans">
+  
+  <!-- PANTALLA DE CARGA ELEGANTE STUDIO CAD 2D -->
+  <div *ngIf="isLoadingScreen()" class="fixed inset-0 z-[9999] bg-[#001A33] text-white flex flex-col items-center justify-center px-6 font-sans overflow-hidden animate-fade">
+    
+    <!-- Trazos y ejes de plano arquitectónico de precisión en el fondo -->
+    <div class="absolute top-0 bottom-0 left-[8%] w-[1px] bg-white/[0.04] pointer-events-none"></div>
+    <div class="absolute top-0 bottom-0 right-[8%] w-[1px] bg-white/[0.04] pointer-events-none"></div>
+    <div class="absolute left-0 right-0 top-[20%] h-[1px] bg-white/[0.04] pointer-events-none"></div>
+    <div class="absolute left-0 right-0 bottom-[20%] h-[1px] bg-white/[0.04] pointer-events-none"></div>
+    
+    <!-- Cruces técnicas de intersección de ejes -->
+    <div class="absolute top-[20%] left-[8%] -translate-x-1/2 -translate-y-1/2 text-white/20 font-mono text-[10px] select-none pointer-events-none">+</div>
+    <div class="absolute top-[20%] right-[8%] translate-x-1/2 -translate-y-1/2 text-white/20 font-mono text-[10px] select-none pointer-events-none">+</div>
+    <div class="absolute bottom-[20%] left-[8%] -translate-x-1/2 translate-y-1/2 text-white/20 font-mono text-[10px] select-none pointer-events-none">+</div>
+    <div class="absolute bottom-[20%] right-[8%] translate-x-1/2 translate-y-1/2 text-white/20 font-mono text-[10px] select-none pointer-events-none">+</div>
+
+    <!-- Trazos esquineros técnicos (Plano Offset) -->
+    <div class="absolute top-8 left-8 w-12 h-12 border-t border-l border-white/15 pointer-events-none"></div>
+    <div class="absolute top-8 right-8 w-12 h-12 border-t border-r border-white/15 pointer-events-none"></div>
+    <div class="absolute bottom-8 left-8 w-12 h-12 border-b border-l border-white/15 pointer-events-none"></div>
+    <div class="absolute bottom-8 right-8 w-12 h-12 border-b border-r border-white/15 pointer-events-none"></div>
+
+    <!-- Marcadores técnicos y cotas -->
+    <div class="absolute top-10 left-24 text-[8px] font-mono text-white/15 select-none pointer-events-none tracking-widest">CAD_CORE_INITIALIZATION</div>
+    <div class="absolute bottom-10 left-24 text-[8px] font-mono text-white/15 select-none pointer-events-none tracking-widest">SYS_READY_V2.0</div>
+    <div class="absolute bottom-10 right-24 text-[8px] font-mono text-white/15 select-none pointer-events-none tracking-widest">WAIT_TIMEOUT: 2500ms</div>
+
+    <!-- Iluminación ambiental arquitectónica de fondo -->
+    <div class="absolute w-[600px] h-[600px] rounded-full bg-white/[0.02] blur-[180px] pointer-events-none"></div>
+
+    <!-- Contenedor del video (Centrado, blanco y negro con filtro grayscale) -->
+    <div class="w-72 h-72 sm:w-80 sm:h-80 md:w-90 md:h-90 rounded-3xl overflow-hidden shadow-[0_20px_70px_rgba(0,0,0,0.95)] border border-white/10 relative bg-[#002345] z-10 flex items-center justify-center">
+      <video autoplay loop muted [muted]="true" playsinline class="w-full h-full object-cover filter grayscale" style="filter: grayscale(100%); opacity: 0.9;">
+        <source src="assets/videos/video-sysmicon.mp4" type="video/mp4">
+        <source src="videos/video-sysmicon.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Contenido de Texto Elegante con espaciado equilibrado -->
+    <div class="mt-6 text-center space-y-3 max-w-md z-10">
+      
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-300 text-[11px] font-sans tracking-widest uppercase shadow-sm">
+        <img src="assets/icons/logo-sysmico.png" alt="Sysmicon" class="w-4 h-4 object-contain">
+        <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+        <span>Entorno Interactivo en Vivo</span>
+      </div>
+
+      <h2 class="font-serif text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
+        Evaluación de Lote & Proyecto <br/>
+        <span class="text-gray-400 font-serif italic font-normal">Sysmicon Arquitectura</span>
+      </h2>
+
+      <p class="text-xs text-gray-400 font-sans max-w-xs mx-auto leading-relaxed">
+        Preparando fichas técnicas, parámetros urbanísticos y costos por metro cuadrado.
+      </p>
+
+      <!-- Barra de progreso animada (Blanca Minimalista) -->
+      <div class="w-64 h-[2px] bg-white/10 rounded-full mx-auto overflow-hidden mt-5 relative">
+        <div class="absolute top-0 left-0 h-full bg-white animate-progress w-full origin-left"></div>
+      </div>
+
+      <!-- Opción sutil para saltar la carga -->
+      <div class="pt-3">
+        <button type="button" (click)="saltarCarga()" class="text-[11px] text-gray-500 hover:text-white transition-colors underline decoration-white/20 cursor-pointer font-sans">
+          Saltar introducción →
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="w-full max-w-[1750px] mx-auto px-4 md:px-10">
+    
+    <!-- HEADER ARQUITECTÓNICO CAD -->
+    <div class="text-center mb-8" *ngIf="!isSubmitted()">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-wood-accent/15 border border-wood-accent/30 text-wood-light font-sans text-xs font-bold tracking-widest uppercase mb-3 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Estudio CAD 2D — Diseño Libre por Bloques</span>
+      </div>
+      <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-none">
+        Diseña tu Plano <span class="text-wood-light underline decoration-wood-accent decoration-2 underline-offset-8">2D Interactivo</span>
+      </h1>
+      <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto mt-4 leading-relaxed">
+        Selecciona bloques arquitectónicos de nuestro catálogo CAD, arrástralos sobre el lienzo negro, rótalos y ajusta tu distribución libremente.
+      </p>
+    </div>
+
+    <!-- PANTALLA PRINCIPAL DE ESTUDIO CAD 2D -->
+    <div id="cad-canvas-wrapper" 
+         [ngClass]="isFullscreen() ? 'flex flex-row w-full h-full bg-[#002345] overflow-hidden' : 'grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch mb-16'"
+         class="relative" *ngIf="!isSubmitted()">
+      
+      <!-- COLUMNA IZQUIERDA: MENÚ Y CATÁLOGO DE BLOQUES -->
+      <!-- En pantalla completa se convierte en sidebar flotante colapsable -->
+      <div [ngClass]="isFullscreen() ? 
+          (catalogoAbierto() ? 'w-72 flex-shrink-0 h-full' : 'w-0 overflow-hidden') : 
+          'lg:col-span-3 h-[700px] md:h-[760px]'"
+           class="flex flex-col bg-[#001A33] border-r border-white/10 overflow-hidden shadow-2xl transition-all duration-300 ease-in-out">
+        
+        <!-- Cabecera del menú -->
+        <div class="p-4 border-b border-white/10 bg-[#002345] flex items-center justify-between">
+          <span class="font-serif font-bold text-base text-white flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-wood-accent"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span>Categorías CAD</span>
+          </span>
+          <span class="text-[10px] bg-wood-accent/20 text-wood-light font-bold px-2 py-0.5 rounded-full border border-wood-accent/30">
+            8 Módulos
+          </span>
+        </div>
+
+        <!-- Pestañas de Categorías -->
+        <div class="flex xl:grid xl:grid-cols-2 gap-1.5 p-2.5 overflow-x-auto xl:overflow-visible border-b border-white/10 bg-[#001A33] scrollbar-thin">
+          <button *ngFor="let cat of categorias"
+                  (click)="setCategoria(cat.id)"
+                  [ngClass]="{'bg-wood-accent text-[#002345] font-extrabold shadow-md scale-[1.02]': categoriaSeleccionada() === cat.id, 'bg-[#242424] text-gray-300 hover:text-white hover:bg-[#4C7AA6]/40': categoriaSeleccionada() !== cat.id}"
+                  class="flex items-center gap-2 px-3 py-2.5 rounded-lg text-xs font-sans transition-all duration-200 cursor-pointer flex-shrink-0 text-left border border-transparent">
+            <div [ngSwitch]="cat.id" class="flex-shrink-0">
+              <svg *ngSwitchCase="'alcobas'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/></svg>
+              <svg *ngSwitchCase="'area-comun'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H6v-2a2 2 0 0 0-4 0z"/></svg>
+              <svg *ngSwitchCase="'bano'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="10" y1="5" x2="8" y2="7"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+              <svg *ngSwitchCase="'cocina'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><circle cx="15" cy="10" r="2"/><circle cx="12" cy="16" r="2"/></svg>
+              <svg *ngSwitchCase="'columnas'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M4 4h16M6 4v16M10 4v16M14 4v16M18 4v16"/></svg>
+              <svg *ngSwitchCase="'estacionamiento'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+              <svg *ngSwitchCase="'muro'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM12 3v18M3 9h9M12 15h9"/></svg>
+              <svg *ngSwitchCase="'piscina'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>
+            </div>
+            <span class="truncate">{{ cat.nombre }}</span>
+          </button>
+        </div>
+
+        <!-- Lista de Bloques en la categoría seleccionada -->
+        <div class="flex-1 overflow-y-auto p-3 space-y-3 scrollbar-thin bg-[#001A33]">
+          <div class="text-[11px] text-gray-500 uppercase tracking-wider font-bold mb-1 px-1">
+            Selecciona para añadir al plano:
+          </div>
+
+          <div *ngFor="let b of getBloquesPorCategoria()" 
+               (click)="agregarBloqueAlLienzo(b)"
+               class="group relative bg-[#242424] hover:bg-[#4C7AA6]/30 border border-white/10 hover:border-wood-accent/60 rounded-xl p-3 transition-all duration-300 cursor-pointer flex flex-col items-center justify-between gap-2 shadow-sm">
+            
+            <!-- Contenedor del bloque en blanco sobre transparente -->
+            <div class="w-full h-24 bg-[#080808] rounded-lg p-2 flex items-center justify-center border border-white/5 relative overflow-hidden group-hover:scale-105 transition-transform">
+              <img [src]="b.imagen" [alt]="b.nombre" class="max-w-full max-h-full object-contain">
+              
+              <!-- Botón rápido Añadir -->
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <span class="bg-wood-accent text-[#111] font-bold text-xs px-3 py-1.5 rounded-full shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
+                  + Añadir al Plano
+                </span>
+              </div>
+            </div>
+
+            <!-- Información del bloque -->
+            <div class="w-full text-left">
+              <div class="font-serif font-bold text-xs text-white truncate">{{ b.nombre }}</div>
+              <div class="flex items-center justify-between mt-1 text-[11px] text-gray-400 font-sans">
+                <span class="flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                  {{ b.areaM2 }} m²
+                </span>
+                <span class="text-wood-light font-bold">${{ b.precioUSD / 1000 | number:'1.0-1' }}k COP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pie del catálogo -->
+        <div class="p-3 bg-[#002345] border-t border-white/10 text-center text-[11px] text-gray-400 flex items-center justify-center gap-1.5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-wood-accent"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span class="text-white font-medium">Tip:</span> Haz clic en un bloque para colocarlo en el centro del lienzo.
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA: EL LIENZO NEGRO CAD 2D (Cols 4-12) -->
+      <div [ngClass]="isFullscreen() ? 'flex-1 h-full min-w-0' : 'lg:col-span-9 h-[700px] md:h-[760px]'" 
+           class="flex flex-col bg-[#001A33] rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
+        
+        <!-- BARRA SUPERIOR DE HERRAMIENTAS DEL LIENZO -->
+        <div class="p-3 bg-[#002345] border-b border-white/10 flex flex-wrap items-center justify-between gap-3">
+          
+          <!-- Lado Izquierdo: Historial, Cuadrícula y Limpiar -->
+          <div class="flex flex-wrap items-center gap-2">
+
+            <!-- Botón de toggle catálogo (solo visible en fullscreen) -->
+            <button *ngIf="isFullscreen()" (click)="toggleCatalogo()"
+                    [title]="catalogoAbierto() ? 'Cerrar catálogo' : 'Abrir catálogo de bloques'"
+                    [ngClass]="{'bg-wood-accent/20 text-wood-light border-wood-accent/40': catalogoAbierto(), 'bg-[#242424] text-gray-300 border-white/10 hover:text-white hover:bg-[#4C7AA6]/40': !catalogoAbierto()}"
+                    class="px-2.5 py-1.5 rounded-lg border text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+              <span>{{ catalogoAbierto() ? 'Cerrar' : 'Catálogo' }}</span>
+            </button>
+            <div *ngIf="isFullscreen()" class="h-4 w-[1px] bg-white/10 mx-0.5"></div>
+
+            <button (click)="deshacer()" [disabled]="historialPasos.length === 0"
+                    [ngClass]="{'opacity-40 cursor-not-allowed': historialPasos.length === 0, 'hover:bg-[#4C7AA6]/40 text-white': historialPasos.length > 0}"
+                    title="Deshacer último cambio (Ctrl+Z)"
+                    class="px-2.5 py-1.5 rounded-lg bg-[#242424] border border-white/10 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/></svg>
+              <span>Deshacer</span>
+            </button>
+
+            <button (click)="rehacer()" [disabled]="historialRehacer.length === 0"
+                    [ngClass]="{'opacity-40 cursor-not-allowed': historialRehacer.length === 0, 'hover:bg-[#4C7AA6]/40 text-white': historialRehacer.length > 0}"
+                    title="Rehacer cambio (Ctrl+Y)"
+                    class="px-2.5 py-1.5 rounded-lg bg-[#242424] border border-white/10 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5A5.5 5.5 0 0 0 4 14.5A5.5 5.5 0 0 0 9.5 20H13"/></svg>
+              <span>Rehacer</span>
+            </button>
+
+            <div class="h-4 w-[1px] bg-white/10 mx-1 hidden sm:block"></div>
+
+            <button (click)="toggleCuadricula()" 
+                    [ngClass]="{'bg-wood-accent/20 text-wood-light border-wood-accent/40': mostrarCuadricula(), 'bg-[#242424] text-gray-300 border-white/10': !mostrarCuadricula()}"
+                    class="px-2.5 py-1.5 rounded-lg border text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+              <span>Cuadrícula</span>
+            </button>
+
+            <button (click)="limpiarTodoElLienzo()" *ngIf="elementosLienzo().length > 0"
+                    class="px-2.5 py-1.5 rounded-lg bg-red-950/40 hover:bg-red-900/60 text-red-300 border border-red-800/50 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+              <span>Limpiar</span>
+            </button>
+
+            <!-- Botón Imprimir Plano (Nuevo) -->
+            <button (click)="imprimirPlano()" *ngIf="elementosLienzo().length > 0"
+                    class="px-2.5 py-1.5 rounded-lg bg-white hover:bg-gray-200 text-black border border-white text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
+                    class="px-2.5 py-1.5 rounded-lg bg-white hover:bg-gray-200 text-[#002345] border border-white text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              <span>Imprimir Plano</span>
+            </button>
+
+            <!-- Separador -->
+            <div class="h-4 w-[1px] bg-white/10 mx-1 hidden sm:block"></div>
+
+            <!-- Botón Pantalla Completa -->
+            <button (click)="toggleFullscreen()"
+                    [title]="isFullscreen() ? 'Salir de pantalla completa (Esc)' : 'Ver en pantalla completa'"
+                    [ngClass]="{'bg-wood-accent/20 text-wood-light border-wood-accent/40': isFullscreen(), 'bg-[#242424] text-gray-300 border-white/10 hover:text-white hover:bg-[#4C7AA6]/40': !isFullscreen()}"
+                    class="px-2.5 py-1.5 rounded-lg border text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer">
+              <!-- Icono Entrar Pantalla Completa -->
+              <svg *ngIf="!isFullscreen()" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+              <!-- Icono Salir Pantalla Completa -->
+              <svg *ngIf="isFullscreen()" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/></svg>
+              <span>{{ isFullscreen() ? 'Comprimir' : 'Full Screen' }}</span>
+            </button>
+          </div>
+
+          <!-- Lado Derecho: Controles del Elemento Seleccionado o Guía Rápida -->
+          <div *ngIf="bloqueSeleccionadoObj() as sel" class="flex flex-wrap items-center gap-1.5 bg-[#001A33] px-3 py-1 rounded-xl border border-wood-accent/40 animate-fade">
+            <span class="text-[11px] text-wood-light font-bold truncate max-w-[130px] mr-1 flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              {{ sel.bloque.nombre }}:
+            </span>
+            
+            <button (click)="rotarElemento(45)" title="Rotar 45°" class="px-2 py-1.5 rounded-lg bg-[#242424] hover:bg-wood-accent hover:text-[#002345] text-white transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+              +45°
+            </button>
+            <button (click)="rotarElemento(90)" title="Rotar 90°" class="px-2 py-1.5 rounded-lg bg-[#242424] hover:bg-wood-accent hover:text-[#002345] text-white transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+              +90°
+            </button>
+            <button (click)="escalarElemento(0.1)" title="Agrandar (+10%)" class="px-2 py-1.5 rounded-lg bg-[#242424] hover:bg-wood-accent hover:text-[#002345] text-white transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <button (click)="escalarElemento(-0.1)" title="Reducir (-10%)" class="px-2 py-1.5 rounded-lg bg-[#242424] hover:bg-wood-accent hover:text-[#002345] text-white transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <button (click)="duplicarElemento()" title="Duplicar Bloque (Atajo: Ctrl+D o Ctrl+C y Ctrl+V)" class="px-2 py-1.5 rounded-lg bg-blue-950/60 hover:bg-blue-800/80 text-blue-300 border border-blue-800/40 transition-all text-xs cursor-pointer font-bold ml-1 flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Clonar
+            </button>
+            <button (click)="eliminarElemento()" title="Eliminar del plano (Atajo: Tecla Suprimir / Backspace)" class="px-2 py-1.5 rounded-lg bg-red-950/60 hover:bg-red-800/80 text-red-300 border border-red-800/40 transition-all text-xs cursor-pointer font-bold flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <div *ngIf="!bloqueSeleccionadoObj()" class="text-[11px] text-gray-400 flex items-center gap-3 font-sans">
+            <span class="hidden md:inline flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-wood-accent"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Haz clic en un módulo del lienzo para ver herramientas.
+            </span>
+            <span class="bg-[#242424] px-2 py-0.5 rounded text-[10px] text-gray-300 border border-white/5"><strong>Supr</strong> Eliminar</span>
+            <span class="bg-[#242424] px-2 py-0.5 rounded text-[10px] text-gray-300 border border-white/5 hidden lg:inline"><strong>Flechas</strong> Mover Precisión</span>
+          </div>
+
+        </div>
+
+        <!-- EL LIENZO CAD NEGRO INTERACTIVO (Viewport) -->
+        <div class="flex-1 relative bg-[#001A33] overflow-hidden select-none cursor-crosshair"
+             [ngClass]="{'cad-grid': mostrarCuadricula()}"
+             (mousemove)="onCanvasMouseMove($event)"
+             (touchmove)="onCanvasMouseMove($event)"
+             (mouseup)="onCanvasMouseUp()"
+             (touchend)="onCanvasMouseUp()"
+             (click)="onDeseleccionarLienzo($event)">
+
+          <!-- BRÚJULA ARQUITECTÓNICA (Norte N 🧭) en esquina superior derecha -->
+          <div class="absolute top-5 right-5 z-30 pointer-events-none flex flex-col items-center justify-center p-3 rounded-xl bg-black/80 backdrop-blur-md border border-white/20 shadow-2xl">
+            <span class="font-serif font-bold text-wood-light text-base leading-none">N</span>
+            <div class="w-6 h-8 my-1 flex items-center justify-center relative">
+              <div class="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[24px] border-b-red-600 drop-shadow-[0_0_6px_rgba(239,68,68,0.8)]"></div>
+            </div>
+            <span class="text-[9px] uppercase tracking-widest text-gray-400 font-bold">Brújula CAD</span>
+          </div>
+
+          <!-- REGLA DE MEDIDAS ARQUITECTÓNICA (Escala 0m - 15m) en esquina inferior izquierda -->
+          <div class="absolute bottom-5 left-5 z-30 pointer-events-none bg-black/85 backdrop-blur-md px-4 py-2 rounded-xl border border-white/20 shadow-2xl flex flex-col items-start gap-1">
+            <div class="flex items-center justify-between w-48 text-[9px] font-bold text-gray-300 font-mono">
+              <span>0m</span>
+              <span>5m</span>
+              <span>10m</span>
+              <span>15m</span>
+            </div>
+            <div class="w-48 h-2 bg-gradient-to-r from-white via-gray-400 to-wood-accent rounded-full relative border border-white/40">
+              <div class="absolute top-0 left-0 bottom-0 w-1/3 bg-white border-r border-black"></div>
+              <div class="absolute top-0 left-1/3 bottom-0 w-1/3 bg-gray-600 border-r border-black"></div>
+            </div>
+            <span class="text-[9px] text-wood-light font-bold tracking-widest uppercase">Escala Referencial 1:100</span>
+          </div>
+
+          <!-- MENSAJE DE LIENZO VACÍO -->
+          <div *ngIf="elementosLienzo().length === 0" class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center p-6 opacity-40">
+            <div class="w-20 h-20 rounded-full border-2 border-dashed border-white/30 flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-white/60"><path d="M15 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9z"/><polyline points="15 3 15 9 21 9"/><line x1="9" y1="14" x2="15" y2="14"/><line x1="12" y1="11" x2="12" y2="17"/></svg>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-white">Lienzo CAD 2D en Blanco</h3>
+            <p class="text-sm text-gray-400 max-w-md mt-1">
+              Elige una alcoba, sala o piscina en el menú de la izquierda y haz clic en "+ Añadir al Plano" para comenzar a diseñar.
+            </p>
+          </div>
+
+          <!-- ELEMENTOS COLOCADOS EN EL LIENZO -->
+          <div *ngFor="let el of elementosLienzo()"
+               [style.left.px]="el.x"
+               [style.top.px]="el.y"
+               [style.z-index]="el.zIndex"
+               (mousedown)="seleccionarElemento($event, el)"
+               (touchstart)="seleccionarElemento($event, el)"
+               class="absolute cursor-move transition-shadow duration-150 p-2 rounded-lg group"
+               [ngClass]="{'border border-dashed border-wood-accent z-50': selectedElementId() === el.instanceId, 'border border-transparent': selectedElementId() !== el.instanceId}">
+
+            <!-- Contenedor transformable rotado y escalado -->
+            <div [style.transform]="'rotate(' + el.rotacion + 'deg) scale(' + el.escala + ')'"
+                 class="transition-transform duration-150 transform-gpu flex flex-col items-center justify-center relative">
+              
+              <!-- Imagen del bloque blanco CAD sobre transparente -->
+              <img [src]="el.bloque.imagen" [alt]="el.bloque.nombre" 
+                   class="max-w-[180px] md:max-w-[220px] max-h-[180px] md:max-h-[220px] object-contain pointer-events-none">
+              
+              <!-- Etiqueta del bloque al pasar el mouse o seleccionar -->
+              <div class="absolute -bottom-6 whitespace-nowrap px-2 py-0.5 rounded bg-black/90 border border-white/20 text-[10px] font-bold text-white tracking-wide shadow-md pointer-events-none"
+                   [ngClass]="{'opacity-100 text-wood-light border-wood-accent': selectedElementId() === el.instanceId, 'opacity-0 group-hover:opacity-100': selectedElementId() !== el.instanceId}">
+                {{ el.bloque.nombre }} ({{ el.rotacion }}°)
+              </div>
+            </div>
+
+            <!-- Manija de rotación visual cuando está seleccionado -->
+            <div *ngIf="selectedElementId() === el.instanceId" 
+                 (click)="rotarElemento(45); $event.stopPropagation()"
+                 title="Clic para rotar 45°"
+                 class="absolute -top-3 -right-3 w-7 h-7 rounded-full bg-wood-accent text-[#002345] font-bold text-xs flex items-center justify-center shadow-lg border-2 border-white cursor-pointer hover:scale-125 transition-transform z-50">
+              ↻
+            </div>
+          </div>
+
+        </div>
+
+        <!-- BARRA INFERIOR DE RESUMEN EN VIVO Y BOTÓN DE COTIZACIÓN -->
+        <div class="p-4 bg-[#002345] border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          
+          <div class="flex items-center gap-6 text-sm font-sans">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-wood-accent"></span>
+              <span class="text-gray-400">Bloques:</span>
+              <strong class="text-white font-mono text-base">{{ elementosLienzo().length }}</strong>
+            </div>
+            
+            <div class="flex items-center gap-2 border-l border-white/10 pl-6">
+              <span class="text-gray-400">Área Estimada:</span>
+              <strong class="text-white font-mono text-base">{{ totalAreaM2() }} m²</strong>
+            </div>
+
+            <div class="flex items-center gap-2 border-l border-white/10 pl-6">
+              <span class="text-gray-400">Presupuesto Ref:</span>
+              <strong class="text-wood-light font-mono text-lg">${{ totalPrecioUSD() | number }} COP*</strong>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 w-full md:w-auto">
+            <button (click)="abrirCotizacion()" 
+                    class="w-full md:w-auto py-3 px-8 rounded-xl bg-white hover:bg-gray-200 text-[#002345] font-sans font-bold text-xs tracking-widest uppercase shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer border border-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              <span>Formalizar este Plano en Propuesta</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SECCIÓN MODAL / FORMULARIO DE FORMALIZACIÓN DE PROPUESTA -->
+    <div *ngIf="modoCotizacion() && !isSubmitted()" class="max-w-4xl mx-auto bg-[#001A33] rounded-2xl border border-wood-accent/40 p-6 md:p-10 shadow-2xl animate-fade mb-20">
+      <div class="flex items-center justify-between border-b border-white/10 pb-5 mb-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-wood-light bg-wood-accent/15 px-3 py-1 rounded-full border border-wood-accent/30">Paso Final</span>
+          <h2 class="font-serif text-3xl font-bold text-white mt-2">Formalizar Solicitud con Plano 2D Personalizado</h2>
+          <p class="text-sm text-gray-400 mt-1">Un arquitecto director revisará la geometría de tu distribución de {{ totalAreaM2() }} m² y se contactará contigo.</p>
+        </div>
+        <button (click)="modoCotizacion.set(false)" class="text-gray-400 hover:text-white font-bold text-lg p-2">✕</button>
+      </div>
+
+      <div class="bg-[#002345] p-4 rounded-xl border border-white/5 mb-6 flex flex-wrap items-center justify-between gap-4 text-xs font-sans">
+        <div>
+          <span class="text-gray-400 block">Resumen de tu plano 2D:</span>
+          <span class="text-white font-bold">{{ elementosLienzo().length }} módulos CAD estructurados en lienzo.</span>
+        </div>
+        <div>
+          <span class="text-gray-400 block">Área construible proyectada:</span>
+          <span class="text-wood-light font-bold text-sm">{{ totalAreaM2() }} m²</span>
+        </div>
+        <div>
+          <span class="text-gray-400 block">Valor referencial estimado:</span>
+          <span class="text-emerald-400 font-bold text-sm">${{ totalPrecioUSD() | number }} COP*</span>
+        </div>
+      </div>
+
+      <form (submit)="enviarPropuesta($event)" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-gray-300 mb-1.5 font-serif">Nombre Completo *</label>
+            <input type="text" [(ngModel)]="nombre" name="nombre" required placeholder="Ej: Carlos Alberto Rodríguez" 
+                   class="w-full px-4 py-3 rounded-xl bg-[#001A33] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-gray-300 mb-1.5 font-serif">Correo Electrónico *</label>
+            <input type="email" [(ngModel)]="email" name="email" required placeholder="carlos@correo.com" 
+                   class="w-full px-4 py-3 rounded-xl bg-[#001A33] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-gray-300 mb-1.5 font-serif">Teléfono / WhatsApp *</label>
+            <input type="tel" [(ngModel)]="telefono" name="telefono" required placeholder="+57 310 000 0000" 
+                   class="w-full px-4 py-3 rounded-xl bg-[#001A33] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-gray-300 mb-1.5 font-serif">Ciudad de Construcción *</label>
+            <input type="text" [(ngModel)]="ciudad" name="ciudad" required placeholder="Ej: Llanogrande, Medellín, Bogotá..." 
+                   class="w-full px-4 py-3 rounded-xl bg-[#001A33] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-gray-300 mb-1.5 font-serif">Notas Adicionales para el Arquitecto (Opcional)</label>
+          <textarea [(ngModel)]="notas" name="notas" rows="3" placeholder="Indícanos si ya cuentas con lote propio, orientación solar preferida o requerimientos especiales..." 
+                    class="w-full px-4 py-3 rounded-xl bg-[#001A33] border border-white/15 text-white placeholder-gray-600 focus:border-wood-accent focus:outline-none transition-colors text-sm"></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-wood-accent to-[#002345] hover:brightness-110 text-[#002345] font-sans font-bold text-sm tracking-widest uppercase shadow-2xl transition-all cursor-pointer mt-4 flex items-center justify-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          <span>Enviar mi Plano 2D y Solicitar Cita con Director Arquitectónico</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- PANTALLA DE ÉXITO DE PROPUESTA -->
+    <div *ngIf="isSubmitted()" class="max-w-3xl mx-auto bg-[#001A33] rounded-2xl border border-wood-accent p-8 md:p-12 text-center shadow-2xl animate-fade my-16">
+      <div class="w-16 h-16 rounded-full bg-wood-accent/15 border border-wood-accent/40 flex items-center justify-center mx-auto mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-wood-light"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2 class="font-serif text-3xl md:text-4xl font-bold text-white">¡Plano 2D Recibido con <span class="text-wood-light">Éxito</span>!</h2>
+      <div class="w-24 h-0.5 bg-wood-accent mx-auto my-5"></div>
+      
+      <p class="text-gray-300 text-base leading-relaxed max-w-xl mx-auto">
+        Estimado/a <strong class="text-white">{{ nombre }}</strong>, hemos registrado tu distribución arquitectónica de 
+        <strong class="text-wood-light">{{ totalAreaM2() }} m²</strong> con <strong>{{ elementosLienzo().length }} módulos CAD</strong>.
+      </p>
+
+      <div class="bg-[#002345] border border-white/10 rounded-xl p-6 max-w-md mx-auto my-6">
+        <div class="text-xs uppercase tracking-widest text-gray-400 font-bold">Código Referencial de tu Plano:</div>
+        <div class="font-serif font-bold text-2xl text-wood-light my-1">CAD-{{ currentYear }}-{{ totalAreaM2() }}M</div>
+        <div class="text-xs text-gray-400">Presupuesto estimado: <strong class="text-emerald-400">${{ totalPrecioUSD() | number }} COP*</strong></div>
+      </div>
+
+      <p class="text-sm text-gray-400 max-w-lg mx-auto mb-8">
+        Hemos enviado una copia del dossier y del esquema vectorial a <strong class="text-white">{{ email }}</strong>. Uno de nuestros arquitectos senior estudiará la viabilidad técnica y se comunicará a tu WhatsApp a la brevedad.
+      </p>
+
+      <div class="flex justify-center gap-4">
+        <button (click)="reiniciarProyecto()" class="px-6 py-3 rounded-xl bg-[#242424] hover:bg-[#333] text-white font-sans text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border border-white/10 flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+          <span>Diseñar Otro Plano 2D</span>
+        </button>
+        <button (click)="solicitarSalida('/')" class="px-6 py-3 rounded-xl bg-wood-accent hover:brightness-110 text-[#002345] font-sans text-xs font-bold uppercase tracking-wider transition-all cursor-pointer">
+          <span>Volver al Inicio</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== MODAL: ACCESO REQUERIDO — CAD 2D ===== -->
+<div *ngIf="mostrarModalAuth()"
+     class="fixed inset-0 z-[99999] flex items-center justify-center"
+     style="background: rgba(0, 26, 51, 0.92); backdrop-filter: blur(18px) saturate(0.4);">
+
+  <!-- Tarjeta principal -->
+  <div class="relative w-full max-w-lg mx-4 overflow-hidden"
+       style="background: #001A33; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 48px 120px rgba(0,0,0,0.95);"> style="background: #080808; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 48px 120px rgba(0,0,0,0.95);">
+
+    <!-- Esquinas de plano arquitectónico -->
+    <div class="absolute top-0 left-0 w-8 h-8 pointer-events-none" style="border-top: 1px solid rgba(232,213,163,0.5); border-left: 1px solid rgba(232,213,163,0.5);"></div>
+    <div class="absolute top-0 right-0 w-8 h-8 pointer-events-none" style="border-top: 1px solid rgba(232,213,163,0.5); border-right: 1px solid rgba(232,213,163,0.5);"></div>
+    <div class="absolute bottom-0 left-0 w-8 h-8 pointer-events-none" style="border-bottom: 1px solid rgba(232,213,163,0.5); border-left: 1px solid rgba(232,213,163,0.5);"></div>
+    <div class="absolute bottom-0 right-0 w-8 h-8 pointer-events-none" style="border-bottom: 1px solid rgba(232,213,163,0.5); border-right: 1px solid rgba(232,213,163,0.5);"></div>
+
+    <!-- Ejes de plano verticales sutiles -->
+    <div class="absolute top-0 bottom-0 left-[12%] w-[1px] pointer-events-none" style="background: rgba(255,255,255,0.025);"></div>
+    <div class="absolute top-0 bottom-0 right-[12%] w-[1px] pointer-events-none" style="background: rgba(255,255,255,0.025);"></div>
+    <div class="absolute left-0 right-0 top-[30%] h-[1px] pointer-events-none" style="background: rgba(255,255,255,0.025);"></div>
+
+    <!-- Etiqueta técnica superior -->
+    <div class="flex items-center justify-between px-6 pt-4 pb-0">
+      <span class="font-mono text-[9px] tracking-[0.2em] uppercase" style="color: rgba(232,213,163,0.4);">SYS-CAD-2D / AUTH_REQUIRED</span>
+      <span class="font-mono text-[9px] tracking-[0.15em]" style="color: rgba(255,255,255,0.15);">REV 01</span>
+    </div>
+
+    <!-- Línea divisora dorada -->
+    <div class="mx-6 mt-3 mb-0 h-[1px]" style="background: linear-gradient(90deg, transparent, rgba(232,213,163,0.6), transparent);"></div>
+
+    <!-- Cuerpo del modal -->
+    <div class="px-10 pt-8 pb-10">
+
+      <!-- Cabecera: ícono + título -->
+      <div class="flex items-start gap-5 mb-7">
+        <!-- Ícono en marco de plano -->
+        <div class="flex-shrink-0 w-14 h-14 flex items-center justify-center relative"
+             style="border: 1px solid rgba(232,213,163,0.2); background: rgba(232,213,163,0.04);">
+          <!-- Marcas de cruz técnica en las esquinas del ícono -->
+          <div class="absolute -top-[3px] -left-[3px] w-2 h-2" style="border-top: 1px solid rgba(232,213,163,0.6); border-left: 1px solid rgba(232,213,163,0.6);"></div>
+          <div class="absolute -top-[3px] -right-[3px] w-2 h-2" style="border-top: 1px solid rgba(232,213,163,0.6); border-right: 1px solid rgba(232,213,163,0.6);"></div>
+          <div class="absolute -bottom-[3px] -left-[3px] w-2 h-2" style="border-bottom: 1px solid rgba(232,213,163,0.6); border-left: 1px solid rgba(232,213,163,0.6);"></div>
+          <div class="absolute -bottom-[3px] -right-[3px] w-2 h-2" style="border-bottom: 1px solid rgba(232,213,163,0.6); border-right: 1px solid rgba(232,213,163,0.6);"></div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8d5a3" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="1"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            <circle cx="12" cy="16" r="1" fill="#e8d5a3" stroke="none"/>
+          </svg>
+        </div>
+
+        <!-- Título y subtítulo -->
+        <div class="flex-1 pt-1">
+          <div class="font-mono text-[9px] tracking-[0.25em] uppercase mb-1.5" style="color: rgba(232,213,163,0.5);">Acceso Restringido</div>
+          <h2 class="text-white font-bold leading-tight mb-1" style="font-size: 1.25rem; letter-spacing: -0.01em;">
+            Necesitas una cuenta<br>para usar CAD 2D
+          </h2>
+          <p class="text-xs leading-relaxed" style="color: rgba(255,255,255,0.35);">
+            El simulador de planos Sysmicon requiere registro para guardar tu trabajo y recibir una propuesta personalizada.
+          </p>
+        </div>
+      </div>
+
+      <!-- Separador con marcas de cota -->
+      <div class="flex items-center gap-3 mb-6">
+        <div class="flex-1 h-[1px]" style="background: rgba(255,255,255,0.06);"></div>
+        <div class="font-mono text-[8px] tracking-[0.2em]" style="color: rgba(255,255,255,0.2);">BENEFICIOS</div>
+        <div class="flex-1 h-[1px]" style="background: rgba(255,255,255,0.06);"></div>
+      </div>
+
+      <!-- Beneficios en formato de lista técnica -->
+      <div class="space-y-3 mb-8">
+        <div class="flex items-center gap-4">
+          <span class="font-mono text-[9px] w-6 text-right flex-shrink-0" style="color: rgba(232,213,163,0.4);">01</span>
+          <div class="flex-1 h-[1px]" style="background: rgba(255,255,255,0.05);"></div>
+          <span class="text-xs" style="color: rgba(255,255,255,0.45);">Guarda y exporta tus planos en PDF</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="font-mono text-[9px] w-6 text-right flex-shrink-0" style="color: rgba(232,213,163,0.4);">02</span>
+          <div class="flex-1 h-[1px]" style="background: rgba(255,255,255,0.05);"></div>
+          <span class="text-xs" style="color: rgba(255,255,255,0.45);">Cotización personalizada por m²</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="font-mono text-[9px] w-6 text-right flex-shrink-0" style="color: rgba(232,213,163,0.4);">03</span>
+          <div class="flex-1 h-[1px]" style="background: rgba(255,255,255,0.05);"></div>
+          <span class="text-xs" style="color: rgba(255,255,255,0.45);">Acceso al equipo de arquitectos Sysmicon</span>
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="flex flex-col gap-3">
+        <!-- CTA principal -->
+        <button (click)="irARegistro()"
+                class="w-full py-4 text-sm font-bold tracking-widest uppercase transition-all duration-200 cursor-pointer relative overflow-hidden group"
+                style="background: #C2E1FF; color: #002345; letter-spacing: 0.12em;">
+          <!-- Línea de brillo en hover -->
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200" style="background: rgba(255,255,255,0.15);"></div>
+          <span class="relative">Crear cuenta — Es gratis</span>
+        </button>
+
+        <!-- Secundario: continuar sin cuenta -->
+        <button (click)="cerrarModalAuth()"
+                class="w-full py-3 text-xs font-mono tracking-[0.15em] uppercase transition-all duration-200 cursor-pointer"
+                style="background: transparent; border: 1px solid rgba(255,255,255,0.07); color: rgba(255,255,255,0.28);">
+          Explorar sin cuenta
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Pie técnico -->
+    <div class="px-6 pb-4 flex items-center justify-between">
+      <span class="font-mono text-[8px]" style="color: rgba(255,255,255,0.12);">SYSMICON ARQUITECTURA © {{ currentYear }}</span>
+      <span class="font-mono text-[8px]" style="color: rgba(255,255,255,0.12);">CAD-2D v2.1</span>
+    </div>
+
+  </div>
+</div>

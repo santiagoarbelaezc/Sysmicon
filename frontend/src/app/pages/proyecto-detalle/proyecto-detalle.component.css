@@ -1,0 +1,45 @@
+/* Animaciones del visualizador independiente */
+@keyframes visualizerCard {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes visualizerImg {
+  0% {
+    opacity: 0.2;
+    transform: scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-visualizer-card {
+  animation: visualizerCard 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-visualizer-img {
+  animation: visualizerImg 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom scrollbar para miniaturas */
+.custom-modal-scrollbar::-webkit-scrollbar {
+  height: 4px;
+}
+.custom-modal-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+.custom-modal-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(194, 225, 255, 0.3);
+  border-radius: 4px;
+}
+.custom-modal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(194, 225, 255, 0.6);
+}

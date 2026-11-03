@@ -1,0 +1,27 @@
+/* ==========================================================================
+   SYSMICON - DIRECTOR SHOWCASE COMPONENT (ESTILO VIP EDITORIAL)
+   ========================================================================== */
+
+.director-section {
+  font-family: var(--font-sans, 'Exo 2', sans-serif);
+}
+
+.director-section img {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Optimización para animaciones laterales súper fluidas */
+[data-aos="fade-right"],
+[data-aos="fade-left"] {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+@media (max-width: 640px) {
+  .director-section {
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+  }
+}
+

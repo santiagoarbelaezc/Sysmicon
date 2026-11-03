@@ -1,0 +1,48 @@
+<div class="app-layout">
+  <!-- BANNER GLOBAL DE COMUNICADOS (CONFIGURABLE DESDE EL DASHBOARD) -->
+  <div *ngIf="cmsService.config().mostrar_banner_alerta === '1' && cmsService.config().texto_banner_alerta"
+       class="w-full bg-neutral-950 text-white text-xs sm:text-sm font-sans py-2.5 px-4 text-center border-b border-white/10 relative z-50 flex items-center justify-center gap-3 animate-fade-in shadow-md">
+    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+    <span class="font-medium tracking-wide">{{ cmsService.config().texto_banner_alerta }}</span>
+  </div>
+
+  <app-navbar *ngIf="showNavbar"></app-navbar>
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+  <app-footer *ngIf="showFooter"></app-footer>
+</div>
+
+<app-pwa-install-modal></app-pwa-install-modal>
+<app-cookie-consent></app-cookie-consent>
+
+<!-- PANTALLA DE CARGA ELEGANTE SYSMICON -->
+<div *ngIf="loadingService.isLoading()" class="fixed inset-0 bg-[#060606]/98 backdrop-blur-2xl flex flex-col items-center justify-center z-[999999] animate-fade">
+  <!-- Rejilla arquitectónica sutil en el fondo -->
+  <div class="absolute inset-0 pointer-events-none opacity-[0.03]" style="background-image: radial-gradient(#FFF 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+  <!-- Luces ambientales de fondo -->
+  <div class="absolute w-[450px] h-[450px] rounded-full bg-wood-accent/10 blur-[130px] pointer-events-none animate-pulse" style="animation-duration: 4s;"></div>
+
+  <div class="flex flex-col items-center justify-center max-w-md text-center select-none relative z-10 px-6">
+    
+
+    <!-- Contenedor Geométrico de Órbitas Arquitectónicas -->
+    <div class="relative w-36 h-36 flex items-center justify-center">
+      <!-- Anillo exterior giratorio con acento dorado -->
+      <div class="absolute inset-0 rounded-full border border-white/10 border-t-wood-accent animate-spin" style="animation-duration: 2s;"></div>
+      <!-- Anillo intermedio punteado técnico -->
+      <div class="absolute w-28 h-28 rounded-full border border-dashed border-white/15 animate-spin" style="animation-duration: 5s; animation-direction: reverse;"></div>
+      <!-- Halo central suave -->
+      <div class="absolute w-20 h-20 rounded-full bg-wood-accent/15 animate-pulse" style="animation-duration: 2.5s;"></div>
+      <!-- Logo central iluminado -->
+      <img src="assets/icons/logo-sysmico.png" alt="Sysmicon Logo" class="w-16 h-16 object-contain relative z-10 filter drop-shadow-[0_0_20px_rgba(212,175,55,0.6)] animate-pulse" style="animation-duration: 2s;">
+    </div>
+
+    <!-- Línea de progreso minimalista y brillante -->
+    <div class="mt-8 w-40 h-[2px] bg-white/10 rounded-full mx-auto overflow-hidden relative shadow-inner">
+      <div class="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-transparent via-wood-accent to-transparent animate-progress"></div>
+    </div>
+
+  </div>
+</div>

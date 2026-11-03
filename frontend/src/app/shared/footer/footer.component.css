@@ -1,0 +1,17 @@
+/* Estilos VIP de Alta Elegancia para el Footer Arquitectónico */
+:host {
+  display: block;
+}
+
+/* Resplandor suave en enlaces y tarjetas */
+.group\/soc:hover svg {
+  filter: drop-shadow(0 0 6px rgba(194, 225, 255, 0.6));
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff;
+  -webkit-box-shadow: 0 0 0px 1000px #001A33 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}

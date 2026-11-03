@@ -1,0 +1,117 @@
+<!-- Director Showcase Section (Estilo Editorial Sobrio & Limpio) -->
+<section class="director-section relative w-full py-6 sm:py-10 lg:py-12 bg-white text-neutral-900 overflow-hidden font-sans">
+  <div class="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+      
+      <!-- COLUMNA IZQUIERDA: FOTO DEL DIRECTOR (Cols 1-5) -->
+      <div class="lg:col-span-5 flex flex-col items-start" 
+           data-aos="fade-right" 
+           data-aos-duration="1000" 
+           data-aos-easing="ease-out-cubic">
+        
+        <!-- Fotografía Limpia Sin Contenedores Pesados -->
+        <div class="w-full overflow-hidden rounded-2xl shadow-xl bg-neutral-100">
+          <img src="assets/images/juanmoreno.jpg" 
+               alt="JUAN MORENO - INGENIERO CIVIL" 
+               class="w-full h-[500px] sm:h-[580px] lg:h-[680px] object-cover object-top filter brightness-[0.98] transition-transform duration-700 hover:scale-102"
+               onerror="this.src='https://res.cloudinary.com/dsv1gdgya/image/upload/f_auto,q_auto,w_800/v1785440109/243315d3-e0c8-4791-8f0a-b341587e1c70_eshvqt.jpg'">
+        </div>
+
+        <!-- Pie de foto en Estilo Monospaciado -->
+        <div class="mt-3 px-1 space-y-0.5 text-left">
+          <h3 class="font-serif text-xl sm:text-2xl font-bold text-neutral-900 uppercase tracking-tight">
+            {{ cmsService.config().director_name || 'JUAN MORENO' }}
+          </h3>
+          <p class="font-sans text-[13px] text-neutral-500 font-medium tracking-[0.15em] uppercase mt-1">
+            {{ cmsService.config().director_role || 'INGENIERO CIVIL' }}
+          </p>
+        </div>
+
+      </div>
+
+      <!-- COLUMNA DERECHA: TITULAR, VALORES & BOTONES (Cols 6-12) -->
+      <div class="lg:col-span-7 flex flex-col justify-center space-y-6 sm:space-y-7 text-left">
+        
+        <!-- Encabezado Editorial -->
+        <div data-aos="fade-left" 
+             data-aos-duration="900" 
+             data-aos-delay="100"
+             data-aos-easing="ease-out-cubic"
+             class="space-y-2.5">
+          <span class="font-mono text-xs tracking-[0.3em] text-neutral-400 font-semibold uppercase block">
+            {{ cmsService.config().director_tagline || 'LIDERAZGO & RIGOR TÉCNICO' }}
+          </span>
+
+          <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-neutral-900 uppercase tracking-tight leading-[1.08]">
+            {{ cmsService.config().director_title || 'Ingeniería de Excelencia sin Concesiones' }}
+          </h2>
+        </div>
+
+        <!-- MÉTRICAS CLAVE (7+ Años de Experiencia y 4+ Obras Ejecutadas con Poco Texto) -->
+        <div data-aos="fade-left"
+             data-aos-duration="1000"
+             data-aos-delay="200"
+             class="flex flex-wrap items-center gap-8 sm:gap-12 py-4 sm:py-5 border-y border-neutral-200">
+          
+          <div class="space-y-0.5">
+            <span class="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900 block tracking-tight">
+              {{ cmsService.config().director_stat1_number || '7+' }}
+            </span>
+            <span class="font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.18em] text-neutral-800 block">
+              {{ cmsService.config().director_stat1_label || 'AÑOS DE EXPERIENCIA' }}
+            </span>
+          </div>
+
+          <div class="w-[1px] h-10 bg-neutral-200 hidden sm:block"></div>
+
+          <div class="space-y-0.5">
+            <span class="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900 block tracking-tight">
+              {{ cmsService.config().director_stat2_number || '4+' }}
+            </span>
+            <span class="font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.18em] text-neutral-800 block">
+              {{ cmsService.config().director_stat2_label || 'OBRAS EJECUTADAS' }}
+            </span>
+          </div>
+
+        </div>
+
+        <!-- BOTONES DE ACCIÓN INCLUYENDO LINKEDIN -->
+        <div data-aos="fade-left" 
+             data-aos-duration="1100" 
+             data-aos-delay="300"
+             data-aos-easing="ease-out-cubic"
+             class="pt-2 flex flex-wrap items-center gap-4">
+          
+          <!-- Botón LinkedIn -->
+          <a href="https://www.linkedin.com/company/sysmicon/" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#0A66C2] hover:bg-[#084e96] text-white font-sans text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-md hover:scale-105 cursor-pointer whitespace-nowrap">
+            <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+            </svg>
+            <span>LINKEDIN</span>
+          </a>
+
+          <!-- Botón Cotizar Proyecto -->
+          <a routerLink="/cotiza-con-nosotros"
+             class="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-black hover:bg-neutral-800 text-white font-sans text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-md hover:scale-105 cursor-pointer whitespace-nowrap">
+            <span>COTIZAR PROYECTO</span>
+            <svg class="w-4 h-4 shrink-0 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/>
+            </svg>
+          </a>
+
+          <!-- Botón Ver Proyectos -->
+          <a routerLink="/proyectos"
+             class="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-neutral-100 hover:bg-black text-neutral-900 hover:text-white font-sans text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-xs hover:scale-105 cursor-pointer whitespace-nowrap">
+            <span>VER PROYECTOS</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>

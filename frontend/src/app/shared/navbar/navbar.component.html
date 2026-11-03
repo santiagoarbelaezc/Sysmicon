@@ -1,0 +1,114 @@
+<header class="navbar always-white-scrolled" 
+        [ngClass]="{'navbar-hidden': !isNavbarVisible, 'navbar-visible': isNavbarVisible}"
+        (mouseenter)="onMouseEnterHeader()"
+        (mouseleave)="onMouseLeaveHeader()">
+
+  <div class="w-full max-w-[1800px] mx-auto px-6 md:px-14 navbar-container flex items-center justify-between">
+    <!-- Logo Elegante con Tamaño Equilibrado -->
+    <a routerLink="/" class="navbar-logo group flex items-center gap-3 z-[1001]" (click)="closeMobileMenu()">
+      <img src="assets/icons/logo-sysmico-navbar.png" alt="Sysmicon" class="w-9 h-9 md:w-10 md:h-10 object-contain transition-transform duration-500 group-hover:scale-105">
+      <span class="logo-text font-serif tracking-[0.2em] text-lg md:text-xl font-medium uppercase">{{ brandName }}</span>
+    </a>
+
+    <!-- Desktop Nav Links (Tamaño Equilibrado) -->
+    <nav class="desktop-nav">
+      <ul class="nav-list flex items-center gap-8 lg:gap-11">
+        <li *ngFor="let link of navLinks">
+          <a [routerLink]="link.path" 
+             routerLinkActive="active" 
+             [routerLinkActiveOptions]="{exact: link.path === '/'}"
+             (click)="onNavLinkClick(link)"
+             class="nav-link font-sans text-xs md:text-[13.5px] tracking-[0.16em] uppercase font-medium">
+            <span>{{ link.label }}</span>
+            <span class="link-underline"></span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Desktop Right Actions (Acciones Equilibradas) -->
+    <div class="desktop-actions flex items-center gap-5">
+      <!-- Auth Links / User Profile -->
+      <div class="auth-links flex items-center gap-5 font-sans">
+        <ng-container *ngIf="!authService.isLoggedIn()">
+          <a routerLink="/login" class="auth-link-ingresar text-xs md:text-[13.5px] uppercase tracking-[0.16em] transition-colors py-1 font-medium">Ingresar</a>
+        </ng-container>
+
+        <ng-container *ngIf="authService.currentUser() as user">
+          <a routerLink="/admin" title="Ir al Portal Admin" class="auth-btn-admin flex items-center gap-2 px-3.5 py-1 rounded-full border shadow-sm transition-all cursor-pointer">
+            <span class="auth-user-avatar w-6 h-6 rounded-full font-bold text-[10px] flex items-center justify-center">{{ user.nombre.charAt(0) }}</span>
+            <span class="auth-user-name font-sans text-xs tracking-wider truncate max-w-[110px]">{{ user.nombre }}</span>
+            <span class="auth-user-badge text-[9px] font-mono tracking-widest px-2 py-0.5 rounded uppercase">ADMIN</span>
+            <button (click)="authService.logout(); $event.stopPropagation(); $event.preventDefault()" title="Cerrar sesión" class="auth-logout-btn font-bold ml-1 transition-colors cursor-pointer relative z-10 text-xs">✕</button>
+          </a>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- Mobile Hamburger Trigger -->
+    <button class="mobile-toggle flex flex-col justify-between w-8 h-[20px] z-[1001]" 
+            (click)="toggleMobileMenu()" 
+            [ngClass]="{'open': isMobileMenuOpen()}"
+            aria-label="Abrir menú de navegación">
+      <span class="bar bar-1"></span>
+      <span class="bar bar-2"></span>
+      <span class="bar bar-3"></span>
+    </button>
+  </div>
+
+  <!-- Fullscreen Mobile Menu Overlay (Sobrio y de Alta Joyería Arquitectónica) -->
+  <div class="mobile-menu-overlay" [ngClass]="{'active': isMobileMenuOpen()}">
+    <div class="mobile-menu-content">
+      <ul class="mobile-nav-list">
+        <li *ngFor="let link of navLinks; let i = index" [style.transition-delay]="(i * 90) + 'ms'">
+          <a [routerLink]="link.path" 
+             routerLinkActive="active" 
+             [routerLinkActiveOptions]="{exact: link.path === '/'}"
+             (click)="onNavLinkClick(link)"
+             class="mobile-nav-link font-serif text-3xl font-light uppercase tracking-[0.15em]">
+            {{ link.label }}
+          </a>
+        </li>
+      </ul>
+
+      <div class="mobile-menu-footer">
+        <!-- Mobile Auth -->
+        <div class="flex flex-col items-center justify-center gap-4 my-4 font-sans text-base w-full max-w-xs">
+          <ng-container *ngIf="!authService.isLoggedIn()">
+            <div class="flex items-center justify-center w-full">
+              <a routerLink="/login" (click)="closeMobileMenu()" class="px-8 py-3 rounded-full border border-white/25 bg-white/[0.06] hover:bg-white hover:text-black text-white font-sans text-xs font-semibold tracking-[0.22em] uppercase transition-all">Ingresar</a>
+            </div>
+          </ng-container>
+
+          <!-- Botón Guia Instalar PWA -->
+          <button (click)="abrirGuiaPwa()" class="w-full py-3.5 px-6 rounded-full bg-[#C2E1FF]/10 hover:bg-[#C2E1FF] text-white hover:text-[#000814] border border-[#C2E1FF]/40 font-mono text-xs font-bold tracking-[0.2em] uppercase flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg mt-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span>INSTALAR APP MÓVIL</span>
+          </button>
+          <ng-container *ngIf="authService.currentUser() as user">
+            <div class="flex flex-col gap-3 bg-[#000814] px-5 py-4 rounded-2xl border border-[#C2E1FF]/30 w-full shadow-2xl">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-7 h-7 rounded-full bg-[#C2E1FF] text-[#000814] font-bold text-xs flex items-center justify-center">{{ user.nombre.charAt(0) }}</span>
+                  <span class="font-sans text-xs tracking-wider text-white truncate max-w-[130px]">{{ user.nombre }}</span>
+                </div>
+                <button (click)="authService.logout(); closeMobileMenu()" class="text-[10px] bg-red-950/60 text-red-300 border border-red-800/40 px-2.5 py-1 rounded-md uppercase tracking-wider">Salir</button>
+              </div>
+              <a routerLink="/admin" (click)="closeMobileMenu()" class="w-full text-center py-2 rounded-xl bg-[#C2E1FF] text-[#000814] font-semibold text-xs tracking-[0.18em] uppercase transition-all">
+                Portal Admin
+              </a>
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="mobile-socials mt-4">
+          <a href="https://www.instagram.com/sysmicon/" target="_blank" rel="noopener noreferrer" class="font-mono text-[10px] tracking-[0.3em] uppercase text-white/40 hover:text-[#C2E1FF] transition-colors">INSTAGRAM • &#64;SYSMICON</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

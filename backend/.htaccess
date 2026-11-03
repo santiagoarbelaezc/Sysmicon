@@ -1,0 +1,46 @@
+# ============================================================
+# Sysmicon Backend — Apache Configuration
+# ============================================================
+
+Options -Indexes
+RewriteEngine On
+RewriteBase /backend_php/
+
+# ---- CORS pre-flight (OPTIONS) ----
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# ---- Excepción para el endpoint /config de la API ----
+# Redirigir a index.php para evitar colisión con el directorio físico config/
+RewriteRule ^config(/.*)?$ index.php [QSA,L]
+
+# ---- Redirigir todo al router PHP si no es un archivo físico existente ----
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# ---- Seguridad: bloquear acceso directo a archivos sensibles ----
+<FilesMatch "\.(env|json|lock|md|sql|log|sh)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Bloquear acceso directo a archivos de código dentro de carpetas sensibles
+RewriteRule ^(vendor|node_modules|database|helpers|middleware|controllers)(/.*)?$ - [F,L]
+RewriteRule ^config/.*\.(php|json|env|sql)$ - [F,L]
+
+# ---- Caché para assets estáticos ----
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType application/json "access plus 0 seconds"
+</IfModule>
+
+# ---- Comprimir respuestas ----
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE text/plain
+</IfModule>

@@ -72,3 +72,8 @@ ehthumbs.db
 Desktop.ini
 
 despliegue_produccion/
+
+# --- Archivos comprimidos ---
+*.zip
+*.tar.gz
+*.rar

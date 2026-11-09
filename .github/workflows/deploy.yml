@@ -1,13 +1,8 @@
 name: Continuous Deployment (Hostinger)
 
+# NOTA: Despliegue automático en push temporalmente desactivado a petición del desarrollador.
+# Para desplegar, ejecutar manualmente desde la pestaña Actions con workflow_dispatch.
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'frontend/**'
-      - 'backend/**'
-      - '.github/workflows/deploy.yml'
   workflow_dispatch:
     inputs:
       target:

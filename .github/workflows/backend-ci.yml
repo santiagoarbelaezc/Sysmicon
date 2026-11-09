@@ -1,18 +1,7 @@
 name: Backend CI (PHP)
 
+# NOTA: CI automático en push temporalmente desactivado a petición del desarrollador.
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'backend/**'
-      - '.github/workflows/backend-ci.yml'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'backend/**'
-      - '.github/workflows/backend-ci.yml'
   workflow_dispatch:
 
 concurrency:

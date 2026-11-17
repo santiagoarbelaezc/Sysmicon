@@ -58,7 +58,7 @@
    Preserva 'Exo 2' en todo el sitio público y fuerza 'Inter Tight' en el admin.
    ========================================================================== */
 .admin-dashboard-bento,
-.admin-dashboard-bento *,
+.admin-dashboard-bento *:not(.material-symbols-rounded):not(.material-symbols-outlined):not(.material-symbols-sharp):not(.material-icons):not(.font-mono):not(code):not(pre),
 .admin-dashboard-bento .font-sans,
 .admin-dashboard-bento .font-serif,
 .admin-dashboard-bento input,
@@ -74,6 +74,26 @@
 .admin-dashboard-bento code,
 .admin-dashboard-bento pre {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+}
+
+/* Blindaje de iconos Material Symbols */
+.admin-dashboard-bento .material-symbols-rounded,
+.admin-dashboard-bento .material-symbols-outlined,
+.admin-dashboard-bento .material-symbols-sharp,
+.admin-dashboard-bento .material-icons {
+  font-family: 'Material Symbols Rounded' !important;
+  font-weight: normal !important;
+  font-style: normal !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24 !important;
+  vertical-align: middle;
 }
 
 /* ── SIDEBAR OSCURA (#0a0a0a) ── */

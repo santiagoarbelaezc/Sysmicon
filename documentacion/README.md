@@ -17,6 +17,7 @@
 | Documento | Descripción | Estado |
 | :--- | :--- | :---: |
 | [Arquitectura Frontend React 18](file:///c:/Users/Santiago/OneDrive/Escritorio/Repositorios/Sysmicon/documentacion/arquitectura_frontend_react.md) | Especificación de la migración a React 18 + Vite 6 + TypeScript, gestión reactiva con Signals, cliente HTTP con auto-refresh de JWT y autoprotección de Admin. | ✅ Activo |
+| [Arquitectura Backend Laravel 12 + CRM](file:///c:/Users/Santiago/OneDrive/Escritorio/Repositorios/Sysmicon/documentacion/arquitectura_backend_laravel.md) | Arquitectura empresarial Laravel 12, sesión segura de 12 horas con cookie HttpOnly y rotación de tokens, doble guard (Staff vs Clientes), CRM completo, pipeline Kanban, radicación PQR y comando de migración desde PHP puro. | ✅ Activo |
 
 ---
 

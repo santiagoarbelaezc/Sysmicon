@@ -32,21 +32,22 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
   };
 
   const countSinLeer = mensajes.filter((m) => !m.leido).length;
+  const totalVisitas = analiticas.visitasDiarias.reduce((acc, d) => acc + d.visitas, 0) || 1280;
 
   return (
     <div className="space-y-8 animate-fade-in font-sans">
       
-      {/* ── ENCABEZADO MINIMALISTA BENTO ── */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#e4e4e7]">
+      {/* ── ENCABEZADO MONOCROMÁTICO CON TIPOGRAFÍA ARQUITECTÓNICA ── */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-[#e4e4e7]">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="text-[0.68rem] font-extrabold uppercase tracking-[0.1em] text-[#71717a]">
-              SISTEMA INTEGRAL DE GESTIÓN &amp; CRM
+          <div className="flex items-center gap-2.5">
+            <span className="w-2 h-2 rounded-full bg-[#09090b]"></span>
+            <span className="text-[0.68rem] font-mono font-bold uppercase tracking-[0.16em] text-[#71717a]">
+              CONSOLA PRINCIPAL &bull; SYSMICON ARCHITECTURE CRM
             </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-[#16a34a]"></span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-[#09090b] tracking-tight mt-1">
-            Panel de Control <span className="font-light text-[#71717a]">Operativo</span>
+          <h1 className="text-xl sm:text-2xl font-black text-[#09090b] uppercase tracking-[0.14em] mt-1.5 leading-tight">
+            PANEL DE CONTROL <span className="text-[#a1a1aa] font-medium">&bull; RESUMEN GENERAL</span>
           </h1>
         </div>
 
@@ -54,43 +55,44 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
           <button
             onClick={() => crmService.cargarTodo()}
             disabled={cargando}
-            className="btn-secondary-white text-xs"
+            className="btn-secondary-white font-mono text-xs uppercase tracking-[0.12em] font-bold"
             title="Sincronizar datos"
           >
             <span className={`material-symbols-rounded text-base ${cargando ? 'animate-spin' : ''}`}>
               sync
             </span>
-            <span>{cargando ? 'Sincronizando...' : 'Actualizar'}</span>
+            <span>{cargando ? 'SINCRONIZANDO...' : 'ACTUALIZAR'}</span>
           </button>
+
           {onNavigateSection && (
             <button
               onClick={() => onNavigateSection('pipeline')}
-              className="btn-primary-black text-xs"
+              className="btn-primary-black font-mono text-xs uppercase tracking-[0.12em] font-bold"
             >
               <span className="material-symbols-rounded text-base">view_kanban</span>
-              <span>Ver Pipeline</span>
+              <span>VER PIPELINE</span>
             </button>
           )}
         </div>
       </div>
 
-      {/* ── 4 STAT CARDS BENTO CON BORDES IZQUIERDOS TEMÁTICOS ── */}
+      {/* ── 4 STAT CARDS BENTO 100% MONOCROMÁTICAS ── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         
         {/* KPI 1: Clientes Totales */}
         <div 
           onClick={() => onNavigateSection && onNavigateSection('clientes')}
-          className="stat-card stat-accent-blue"
+          className="stat-card"
         >
           <div className="stat-card-top">
             <span className="stat-card-label">CLIENTES REGISTRADOS</span>
-            <div className="stat-card-icon-box stat-icon-blue">
+            <div className="stat-card-icon-box">
               <span className="material-symbols-rounded text-lg">group</span>
             </div>
           </div>
           <div className="stat-number">{kpis.clientes_totales}</div>
           <div className="stat-card-footer">
-            <span className="stat-footer-text">{kpis.leads_ultimos_30_dias} leads en los últimos 30 días</span>
+            <span className="stat-footer-text">{kpis.leads_ultimos_30_dias} LEADS (ÚLTIMOS 30 DÍAS)</span>
             <span className="stat-footer-arrow">→</span>
           </div>
         </div>
@@ -98,11 +100,11 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
         {/* KPI 2: Valor Estimado del Pipeline */}
         <div 
           onClick={() => onNavigateSection && onNavigateSection('pipeline')}
-          className="stat-card stat-accent-green"
+          className="stat-card"
         >
           <div className="stat-card-top">
-            <span className="stat-card-label">PIPELINE COMERCIAL</span>
-            <div className="stat-card-icon-box stat-icon-green">
+            <span className="stat-card-label">VALOR ESTIMADO PIPELINE</span>
+            <div className="stat-card-icon-box">
               <span className="material-symbols-rounded text-lg">payments</span>
             </div>
           </div>
@@ -110,25 +112,25 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
             {formatearMoneda(kpis.pipeline_valor_estimado)}
           </div>
           <div className="stat-card-footer">
-            <span className="stat-footer-text">{kpis.pipeline_oportunidades_activas} oportunidades en negociación</span>
+            <span className="stat-footer-text">{kpis.pipeline_oportunidades_activas} EN NEGOCIACIÓN</span>
             <span className="stat-footer-arrow">→</span>
           </div>
         </div>
 
-        {/* KPI 3: Proyectos de Obra Activos */}
+        {/* KPI 3: Obras de Construcción Activas */}
         <div 
           onClick={() => onNavigateSection && onNavigateSection('proyectos-crm')}
-          className="stat-card stat-accent-amber"
+          className="stat-card"
         >
           <div className="stat-card-top">
             <span className="stat-card-label">OBRAS EN EJECUCIÓN</span>
-            <div className="stat-card-icon-box stat-icon-amber">
-              <span className="material-symbols-rounded text-lg">construction</span>
+            <div className="stat-card-icon-box">
+              <span className="material-symbols-rounded text-lg">foundation</span>
             </div>
           </div>
           <div className="stat-number">{kpis.proyectos_activos}</div>
           <div className="stat-card-footer">
-            <span className="stat-footer-text">Tasa de éxito: {kpis.tasa_conversion_ganadas}%</span>
+            <span className="stat-footer-text">CONVERSIÓN: {kpis.tasa_conversion_ganadas}%</span>
             <span className="stat-footer-arrow">→</span>
           </div>
         </div>
@@ -136,17 +138,17 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
         {/* KPI 4: Solicitudes Web Sin Leer */}
         <div 
           onClick={() => onNavigateSection && onNavigateSection('mensajes')}
-          className="stat-card stat-accent-red"
+          className="stat-card"
         >
           <div className="stat-card-top">
             <span className="stat-card-label">SOLICITUDES WEB</span>
-            <div className="stat-card-icon-box stat-icon-red">
+            <div className="stat-card-icon-box">
               <span className="material-symbols-rounded text-lg">mark_email_unread</span>
             </div>
           </div>
           <div className="stat-number">{countSinLeer}</div>
           <div className="stat-card-footer">
-            <span className="stat-footer-text">{mensajes.length} cotizaciones totales recibidas</span>
+            <span className="stat-footer-text">{mensajes.length} COTIZACIONES TOTALES</span>
             <span className="stat-footer-arrow">→</span>
           </div>
         </div>
@@ -155,17 +157,21 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
 
       {/* ── BENTO HERO CARD OSCURO (#0a0a0a) ── */}
       <div className="bento-welcome">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 relative z-10">
           <div>
-            <span className="bento-badge">
-              <span className="status-dot"></span> EN VIVO &bull; SYSMICON ARCHITECTURE CRM
-            </span>
+            <div className="bento-badge">
+              <span className="status-dot"></span>
+              <span>SISTEMA EN VIVO &bull; SYSMICON ARCHITECTURE</span>
+            </div>
+            
             <h2 className="bento-title">
-              Centro de Mando <span className="bento-title-accent">Directivo</span>
+              CONSOLA DIRECTIVA <span className="bento-title-accent">&bull; CONTROL OPERATIVO</span>
             </h2>
+            
             <p className="bento-desc">
-              Supervisa el ciclo de vida completo de cada proyecto: desde la prospección del lead comercial hasta la entrega física de la obra, con seguimiento riguroso de hitos, tareas y cronogramas.
+              Supervisión integral de cada obra y oportunidad: prospección comercial de leads, control arquitectónico riguroso y seguimiento cronológico de hitos, tareas y bitácora técnica.
             </p>
+
             <div className="flex flex-wrap items-center gap-3">
               {onNavigateSection && (
                 <>
@@ -173,99 +179,125 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
                     onClick={() => onNavigateSection('pipeline')}
                     className="btn-primary-white"
                   >
-                    <span className="material-symbols-rounded text-base">rocket_launch</span>
-                    <span>Gestionar Pipeline Kanban</span>
+                    <span className="material-symbols-rounded text-base">view_kanban</span>
+                    <span>GESTIONAR PIPELINE</span>
                   </button>
+
                   <button
                     onClick={() => onNavigateSection('clientes')}
-                    className="px-4 py-2.5 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 text-white font-bold text-xs uppercase tracking-wider transition-all inline-flex items-center gap-2 cursor-pointer"
+                    className="px-4 py-2.5 rounded-xl border border-[#27272a] bg-[#141416] hover:bg-[#1f1f23] text-white font-bold text-xs uppercase tracking-[0.12em] transition-all inline-flex items-center gap-2 cursor-pointer shadow-xs"
                   >
                     <span className="material-symbols-rounded text-base">person_add</span>
-                    <span>Directorio de Clientes</span>
+                    <span>DIRECTORIO DE CLIENTES</span>
                   </button>
                 </>
               )}
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 lg:w-72 shrink-0">
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-              <span className="text-[0.68rem] font-bold uppercase tracking-wider text-white/50 block">CONVERSIÓN</span>
-              <span className="text-2xl font-black text-white mt-1 block">{kpis.tasa_conversion_ganadas}%</span>
-              <span className="text-[0.7rem] text-emerald-400 mt-1 block">Oportunidades ganadas</span>
-            </div>
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-              <span className="text-[0.68rem] font-bold uppercase tracking-wider text-white/50 block">VISITAS WEB</span>
-              <span className="text-2xl font-black text-white mt-1 block">
-                {analiticas.visitasDiarias.reduce((acc, d) => acc + d.visitas, 0) || 1280}
+          {/* Métricas Monocromáticas del Hero */}
+          <div className="grid grid-cols-2 gap-3.5 lg:w-80 shrink-0">
+            <div className="p-4 rounded-xl bg-[#141416] border border-[#27272a]">
+              <span className="text-[0.65rem] font-mono font-bold uppercase tracking-[0.14em] text-[#a1a1aa] block">
+                CONVERSIÓN
               </span>
-              <span className="text-[0.7rem] text-white/70 mt-1 block">Tráfico registrado</span>
+              <span className="text-2xl font-mono font-black text-white mt-1 block">
+                {kpis.tasa_conversion_ganadas}%
+              </span>
+              <span className="text-[0.68rem] font-mono text-[#71717a] mt-1 block uppercase">
+                Oportunidades ganadas
+              </span>
+            </div>
+
+            <div className="p-4 rounded-xl bg-[#141416] border border-[#27272a]">
+              <span className="text-[0.65rem] font-mono font-bold uppercase tracking-[0.14em] text-[#a1a1aa] block">
+                TRÁFICO WEB
+              </span>
+              <span className="text-2xl font-mono font-black text-white mt-1 block">
+                {totalVisitas}
+              </span>
+              <span className="text-[0.68rem] font-mono text-[#71717a] mt-1 block uppercase">
+                Visitas registradas
+              </span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* ── CUADRÍCULA ASIMÉTRICA BENTO (2/3 + 1/3) ── */}
+      {/* ── CUADRÍCULA ASIMÉTRICA BENTO (8 cols + 4 cols) ── */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        {/* Columna Izquierda: Obras en Curso con Hitos (8 cols) */}
+        {/* Columna Izquierda: Obras y Proyectos en Curso (8 cols) */}
         <div className="lg:col-span-8 bento-card">
           <div className="bento-card-header">
             <div>
-              <h3 className="bento-card-title">Obras y Proyectos en Curso</h3>
+              <h3 className="bento-card-title">OBRAS Y PROYECTOS EN CURSO</h3>
               <p className="bento-card-subtitle">Seguimiento de fases arquitectónicas y porcentaje de hitos completados</p>
             </div>
             {onNavigateSection && (
               <button
                 onClick={() => onNavigateSection('proyectos-crm')}
-                className="text-xs font-bold text-[#09090b] hover:underline uppercase tracking-wider inline-flex items-center gap-1 cursor-pointer"
+                className="text-xs font-mono font-bold text-[#09090b] hover:text-[#71717a] uppercase tracking-[0.12em] inline-flex items-center gap-1.5 cursor-pointer transition-colors"
               >
-                <span>Ver todos</span>
+                <span>VER TODOS</span>
                 <span className="material-symbols-rounded text-sm">arrow_forward</span>
               </button>
             )}
           </div>
 
           {proyectos.length === 0 ? (
-            <div className="text-center py-12 border border-dashed border-[#e4e4e7] rounded-2xl">
-              <span className="material-symbols-rounded text-4xl text-[#a1a1aa] mb-2">apartment</span>
-              <p className="text-sm font-semibold text-[#71717a]">No hay obras activas en este momento</p>
-              <p className="text-xs text-[#a1a1aa] mt-1">Las oportunidades ganadas en el CRM se convertirán automáticamente en obras aquí.</p>
+            <div className="text-center py-14 border border-dashed border-[#e4e4e7] rounded-xl bg-[#fafafa]">
+              <span className="material-symbols-rounded text-4xl text-[#a1a1aa] mb-2 block">apartment</span>
+              <p className="text-xs font-mono font-bold uppercase tracking-[0.12em] text-[#09090b]">
+                NO HAY OBRAS ACTIVAS EN ESTE MOMENTO
+              </p>
+              <p className="text-xs text-[#71717a] mt-1 max-w-sm mx-auto">
+                Las oportunidades marcadas como "Ganadas" en el Pipeline se convertirán automáticamente en obras en ejecución.
+              </p>
             </div>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-3.5">
               {proyectos.slice(0, 5).map((p: ProyectoCrm) => (
                 <div 
                   key={p.id}
-                  className="p-4 rounded-xl border border-[#e4e4e7] hover:border-[#a1a1aa] transition-all bg-[#fafafa]"
+                  className="p-4 rounded-xl border border-[#e4e4e7] hover:border-[#09090b] transition-all bg-white hover:shadow-xs group"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2.5">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-2.5">
                     <div>
-                      <div className="flex items-center gap-2">
-                        <h4 className="font-bold text-sm text-[#09090b]">{p.nombre}</h4>
-                        <span className="status-badge info text-[0.65rem] uppercase">
+                      <div className="flex items-center gap-2.5 flex-wrap">
+                        <h4 className="font-black text-sm uppercase tracking-wide text-[#09090b]">
+                          {p.nombre}
+                        </h4>
+                        <span className="bg-[#09090b] text-white font-mono text-[0.62rem] font-bold uppercase tracking-wider px-2 py-0.5 rounded">
                           FASE: {p.fase}
                         </span>
                       </div>
-                      <span className="text-xs text-[#71717a] font-medium mt-0.5 block">
-                        Cliente: <strong>{p.cliente?.nombre || 'Particular'}</strong> &bull; Responsable: {p.responsable?.nombre || 'Sin asignar'}
+                      <span className="text-[0.72rem] text-[#71717a] font-medium mt-1 block">
+                        Cliente: <strong className="text-[#09090b]">{p.cliente?.nombre || 'Particular'}</strong> &bull; Responsable: {p.responsable?.nombre || 'Sin asignar'}
                       </span>
                     </div>
+
                     <div className="text-right shrink-0">
-                      <span className="text-xs font-mono font-bold text-[#09090b]">
+                      <span className="text-sm font-mono font-black text-[#09090b] block">
                         {formatearMoneda(p.presupuesto)}
                       </span>
-                      <span className="text-[0.7rem] text-[#71717a] block">Presupuesto</span>
+                      <span className="text-[0.65rem] font-mono uppercase tracking-wider text-[#71717a] block">
+                        PRESUPUESTO TOTAL
+                      </span>
                     </div>
                   </div>
 
                   {/* Barra de progreso de Hitos */}
-                  <div className="space-y-1 mt-3">
-                    <div className="flex items-center justify-between text-xs font-semibold">
-                      <span className="text-[#71717a] text-[0.7rem]">Avance por hitos</span>
-                      <span className="font-mono text-[#09090b]">{p.progreso_porcentaje || 0}%</span>
+                  <div className="space-y-1.5 mt-3 pt-2.5 border-t border-[#f4f5f7]">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-[#71717a] font-mono text-[0.68rem] uppercase tracking-wider">
+                        AVANCE DE HITOS
+                      </span>
+                      <span className="font-mono font-bold text-[#09090b] text-xs">
+                        {p.progreso_porcentaje || 0}%
+                      </span>
                     </div>
-                    <div className="w-full h-2 bg-[#e4e4e7] rounded-full overflow-hidden">
+                    <div className="w-full h-1.5 bg-[#e4e4e7] rounded-full overflow-hidden">
                       <div 
                         className="h-full bg-[#09090b] rounded-full transition-all duration-500"
                         style={{ width: `${Math.min(100, Math.max(0, p.progreso_porcentaje || 0))}%` }}
@@ -278,31 +310,36 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
           )}
         </div>
 
-        {/* Columna Derecha: Tareas Pendientes & Agenda (4 cols) */}
+        {/* Columna Derecha: Tareas Prioritarias (4 cols) */}
         <div className="lg:col-span-4 bento-card flex flex-col justify-between">
           <div>
             <div className="bento-card-header">
               <div>
-                <h3 className="bento-card-title">Tareas Prioritarias</h3>
+                <h3 className="bento-card-title">TAREAS PRIORITARIAS</h3>
                 <p className="bento-card-subtitle">Pendientes de gestión y obra</p>
               </div>
-              <span className="status-badge warning text-[0.65rem]">
+              <span className="bg-[#09090b] text-white font-mono text-[0.62rem] font-bold uppercase tracking-wider px-2 py-0.5 rounded">
                 {tareas.filter((t) => !t.completada).length} PENDIENTES
               </span>
             </div>
 
             {tareas.length === 0 ? (
-              <div className="text-center py-8 text-[#a1a1aa]">
-                <span className="material-symbols-rounded text-3xl mb-1">check_circle</span>
-                <p className="text-xs font-semibold">Todo al día. No hay tareas pendientes.</p>
+              <div className="text-center py-10 text-[#a1a1aa] border border-dashed border-[#e4e4e7] rounded-xl bg-[#fafafa]">
+                <span className="material-symbols-rounded text-3xl mb-1 text-[#09090b] block">check_circle</span>
+                <p className="text-xs font-mono font-bold uppercase tracking-wider text-[#09090b]">
+                  TODO AL DÍA
+                </p>
+                <p className="text-[0.72rem] text-[#71717a] mt-1">
+                  No hay tareas pendientes en la agenda.
+                </p>
               </div>
             ) : (
-              <div className="space-y-2.5 max-h-[360px] overflow-y-auto pr-1">
+              <div className="space-y-2.5 max-h-[380px] overflow-y-auto pr-1">
                 {tareas.slice(0, 7).map((t: TareaCrm) => (
                   <div
                     key={t.id}
                     onClick={() => handleToggleTarea(t.id)}
-                    className="p-3 rounded-xl border border-[#e4e4e7] bg-white hover:bg-[#fafafa] transition-all cursor-pointer flex items-start gap-3 group"
+                    className="p-3 rounded-xl border border-[#e4e4e7] bg-white hover:border-[#09090b] transition-all cursor-pointer flex items-start gap-3 group"
                   >
                     <div className="pt-0.5">
                       <input
@@ -310,7 +347,7 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
                         checked={t.completada}
                         onChange={() => {}}
                         disabled={tareaSeleccionada === t.id}
-                        className="rounded border-[#a1a1aa] text-[#09090b] focus:ring-0 cursor-pointer"
+                        className="rounded border-[#a1a1aa] text-[#09090b] focus:ring-0 cursor-pointer accent-[#09090b]"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -336,10 +373,10 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
             {onNavigateSection && (
               <button
                 onClick={() => onNavigateSection('pipeline')}
-                className="w-full btn-secondary-white text-xs justify-center"
+                className="w-full btn-secondary-white font-mono text-xs uppercase tracking-[0.12em] font-bold justify-center"
               >
                 <span className="material-symbols-rounded text-base">add_task</span>
-                <span>Nueva Tarea Comercial</span>
+                <span>NUEVA TAREA COMERCIAL</span>
               </button>
             )}
           </div>
@@ -347,48 +384,54 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
 
       </div>
 
-      {/* ── BITÁCORA Y ACTIVIDADES RECIENTES (TABLA LIMPIA BENTO) ── */}
+      {/* ── BITÁCORA Y ACTIVIDADES RECIENTES (TABLA MONOCROMÁTICA BENTO) ── */}
       <div className="bento-card">
         <div className="bento-card-header">
           <div>
-            <h3 className="bento-card-title">Bitácora de Actividades Recientes</h3>
-            <p className="bento-card-subtitle">Registro cronológico de llamadas, visitas de obra, reuniones y notas del equipo</p>
+            <h3 className="bento-card-title">BITÁCORA DE ACTIVIDADES RECIENTES</h3>
+            <p className="bento-card-subtitle">Registro cronológico de llamadas, visitas de obra, reuniones y notas técnicas del equipo</p>
           </div>
-          <span className="status-badge neutral text-[0.68rem]">
+          <span className="border border-[#e4e4e7] bg-[#f4f5f7] text-[#09090b] font-mono text-[0.65rem] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md">
             {actividades.length} REGISTROS
           </span>
         </div>
 
         {actividades.length === 0 ? (
-          <div className="text-center py-10 text-[#a1a1aa]">
-            <span className="material-symbols-rounded text-3xl mb-1">history</span>
-            <p className="text-xs font-semibold">Sin actividades registradas recientemente.</p>
+          <div className="text-center py-12 border border-dashed border-[#e4e4e7] rounded-xl bg-[#fafafa]">
+            <span className="material-symbols-rounded text-3xl mb-1 text-[#a1a1aa] block">history</span>
+            <p className="text-xs font-mono font-bold uppercase tracking-wider text-[#09090b]">
+              SIN ACTIVIDADES REGISTRADAS RECIENTEMENTE
+            </p>
           </div>
         ) : (
           <div className="data-table-container">
             <table className="data-table">
               <thead>
                 <tr>
-                  <th>TIPO</th>
-                  <th>DESCRIPCIÓN</th>
-                  <th>CLIENTE / PROYECTO</th>
-                  <th>RESPONSABLE</th>
-                  <th>FECHA</th>
+                  <th className="font-black tracking-[0.14em]">TIPO</th>
+                  <th className="font-black tracking-[0.14em]">DESCRIPCIÓN</th>
+                  <th className="font-black tracking-[0.14em]">CLIENTE / PROYECTO</th>
+                  <th className="font-black tracking-[0.14em]">RESPONSABLE</th>
+                  <th className="font-black tracking-[0.14em]">FECHA</th>
                 </tr>
               </thead>
               <tbody>
                 {actividades.slice(0, 8).map((act: ActividadCrm) => (
                   <tr key={act.id}>
                     <td>
-                      <span className={`status-badge uppercase text-[0.65rem] ${
-                        act.tipo === 'visita' ? 'success' :
-                        act.tipo === 'reunion' ? 'info' :
-                        act.tipo === 'llamada' ? 'warning' : 'neutral'
+                      <span className={`font-mono text-[0.62rem] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
+                        act.tipo === 'visita'
+                          ? 'bg-[#09090b] text-white'
+                          : act.tipo === 'reunion'
+                          ? 'bg-[#f4f5f7] text-[#09090b] border border-[#e4e4e7]'
+                          : act.tipo === 'llamada'
+                          ? 'border border-[#27272a] text-[#09090b]'
+                          : 'bg-[#fafafa] text-[#71717a] border border-[#e4e4e7]'
                       }`}>
                         {act.tipo}
                       </span>
                     </td>
-                    <td className="font-semibold text-[#09090b]">{act.descripcion}</td>
+                    <td className="font-bold text-[#09090b]">{act.descripcion}</td>
                     <td className="text-[#71717a]">
                       {act.cliente?.nombre || act.proyecto?.nombre || 'General'}
                     </td>

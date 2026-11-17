@@ -109,31 +109,26 @@
   padding: 0 32px;
 }
 
-/* ── STAT CARDS (Bento KPIs) ── */
+/* ── STAT CARDS BENTO MONOCROMÁTICAS ── */
 .stat-card {
-  background: #ffffff;
+  background: var(--dash-card-bg);
   border: 1.5px solid var(--dash-card-border);
-  border-left: 4px solid var(--dash-accent-dark);
   border-radius: var(--radius-lg);
-  padding: 20px 22px;
+  padding: 22px 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 130px;
-  transition: all 0.2s ease;
+  min-height: 140px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  position: relative;
 }
 
 .stat-card:hover {
-  box-shadow: 0 8px 24px rgba(9, 9, 11, 0.06);
+  border-color: #09090b;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   transform: translateY(-2px);
 }
-
-.stat-card.stat-accent-red { border-left-color: var(--dash-accent-red); }
-.stat-card.stat-accent-green { border-left-color: var(--dash-accent-green); }
-.stat-card.stat-accent-amber { border-left-color: var(--dash-accent-amber); }
-.stat-card.stat-accent-blue { border-left-color: var(--dash-accent-blue); }
-.stat-card.stat-accent-purple { border-left-color: var(--dash-accent-purple); }
 
 .stat-card-top {
   display: flex;
@@ -142,36 +137,37 @@
 }
 
 .stat-card-label {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
   color: var(--dash-text-muted);
 }
 
 .stat-card-icon-box {
-  width: 34px;
-  height: 34px;
-  border-radius: var(--radius-sm);
-  background: #f4f5f7;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background: #09090b;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--dash-text-dark);
+  color: #ffffff;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
-.stat-card-icon-box.stat-icon-red { background: rgba(220, 38, 38, 0.1); color: var(--dash-accent-red); }
-.stat-card-icon-box.stat-icon-green { background: rgba(22, 163, 74, 0.1); color: var(--dash-accent-green); }
-.stat-card-icon-box.stat-icon-amber { background: rgba(245, 158, 11, 0.1); color: var(--dash-accent-amber); }
-.stat-card-icon-box.stat-icon-blue { background: rgba(37, 99, 235, 0.1); color: var(--dash-accent-blue); }
-.stat-card-icon-box.stat-icon-purple { background: rgba(124, 58, 237, 0.1); color: var(--dash-accent-purple); }
+.stat-card:hover .stat-card-icon-box {
+  transform: scale(1.06);
+}
 
 .stat-number {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 2.1rem;
   font-weight: 900;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.03em;
   color: var(--dash-text-dark);
-  margin: 10px 0 4px 0;
+  margin: 12px 0 4px 0;
   line-height: 1;
 }
 
@@ -179,26 +175,29 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 8px;
-  padding-top: 8px;
+  margin-top: 10px;
+  padding-top: 10px;
   border-top: 1px solid #f4f5f7;
 }
 
 .stat-footer-text {
-  font-size: 0.75rem;
-  font-weight: 500;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--dash-text-muted);
 }
 
 .stat-footer-arrow {
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--dash-text-dark);
   transition: transform 0.2s ease;
 }
 
 .stat-card:hover .stat-footer-arrow {
-  transform: translateX(3px);
+  transform: translateX(4px);
 }
 
 /* ── BENTO HERO CARD (Fondo Oscuro con Gradiente) ── */
@@ -228,36 +227,38 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 4px 12px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 5px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-full);
-  font-size: 0.72rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.68rem;
   font-weight: 700;
-  color: #e4e4e7;
-  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #d4d4d8;
+  letter-spacing: 0.14em;
 }
 
 .bento-title {
-  font-size: 2.1rem;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1.15;
+  font-size: 1.55rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  line-height: 1.25;
   margin: 14px 0 8px 0;
 }
 
 .bento-title-accent {
-  background: linear-gradient(135deg, #ffffff 30%, #a1a1aa 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #a1a1aa;
+  font-weight: 900;
 }
 
 .bento-desc {
-  font-size: 0.88rem;
-  color: var(--dash-text-subtle);
-  max-width: 600px;
-  line-height: 1.5;
-  margin-bottom: 20px;
+  font-size: 0.85rem;
+  color: #a1a1aa;
+  max-width: 620px;
+  line-height: 1.6;
+  margin-bottom: 22px;
 }
 
 .btn-primary-white {
@@ -265,10 +266,10 @@
   color: #09090b;
   padding: 10px 22px;
   border-radius: var(--radius-md);
-  font-weight: 700;
-  font-size: 0.8rem;
+  font-weight: 800;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -278,9 +279,9 @@
 }
 
 .btn-primary-white:hover {
-  background: #f4f4f5;
+  background: #e4e4e7;
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.18);
 }
 
 /* ── STATUS DOT ANIMADO ── */
@@ -288,8 +289,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--dash-accent-green);
-  box-shadow: 0 0 8px rgba(22, 163, 74, 0.6);
+  background: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
   animation: pulse-dot 2s infinite ease-in-out;
   display: inline-block;
 }
@@ -317,21 +318,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .bento-card-title {
-  font-size: 1.05rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
   color: var(--dash-text-dark);
 }
 
 .bento-card-subtitle {
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 500;
   color: var(--dash-text-muted);
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 /* ── BOTÓN NEGRO DE ACCIÓN ── */

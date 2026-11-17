@@ -114,7 +114,7 @@ export const DashPqr: React.FC = () => {
             className="btn-secondary-white text-xs"
           >
             <span className={`material-symbols-rounded text-base ${cargando ? 'animate-spin' : ''}`}>sync</span>
-            <span>Refrescar</span>
+            <span>Actualizar</span>
           </button>
         </div>
       </div>

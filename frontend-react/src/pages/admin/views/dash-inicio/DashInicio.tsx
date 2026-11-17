@@ -8,7 +8,7 @@ interface DashInicioProps {
 
 export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => {
   const { kpis, pipelineKanban, proyectos, tareas, actividades, cargando } = useCrmService();
-  const { mensajes, analiticas } = useAdminService();
+  const { mensajes } = useAdminService();
 
   const [tareaSeleccionada, setTareaSeleccionada] = useState<number | null>(null);
 
@@ -46,135 +46,90 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
   return (
     <div className="space-y-6 animate-fade-in font-sans">
       
-      {/* ── 1. ENCABEZADO DE CONTROL OPERATIVO ── */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-[#e4e4e7]">
+      {/* ── HEADER DE SECCIÓN NORMALIZADO ── */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#e4e4e7]">
         <div>
-          <div className="flex items-center gap-2.5">
-            <span className="w-2 h-2 rounded-full bg-[#09090b]"></span>
-            <span className="text-[0.68rem] font-mono font-bold uppercase tracking-[0.16em] text-[#71717a]">
-              SISTEMA DIRECTIVO &bull; SYSMICON ARCHITECTURE CRM
-            </span>
-          </div>
-          <h1 className="text-xl sm:text-2xl font-black text-[#09090b] uppercase tracking-[0.14em] mt-1.5 leading-tight">
-            PANEL DE CONTROL <span className="text-[#a1a1aa] font-medium">&bull; RESUMEN EJECUTIVO</span>
+          <span className="text-[0.68rem] font-extrabold uppercase tracking-[0.1em] text-[#71717a]">
+            SISTEMA INTEGRAL &bull; PANEL EJECUTIVO
+          </span>
+          <h1 className="text-2xl sm:text-3xl font-black text-[#09090b] tracking-tight mt-1">
+            Panel de <span className="font-light text-[#71717a]">Control</span>
           </h1>
+          <p className="text-xs text-[#71717a] mt-1 font-medium">
+            Resumen general del estado comercial, obras arquitectónicas en ejecución y solicitudes web.
+          </p>
         </div>
 
-        <div className="flex items-center gap-2.5 flex-wrap">
+        <div className="flex items-center gap-3">
           <button
             onClick={() => crmService.cargarTodo()}
             disabled={cargando}
-            className="btn-secondary-white font-mono text-xs uppercase tracking-[0.12em] font-bold"
-            title="Sincronizar datos"
+            className="btn-secondary-white text-xs"
           >
-            <span className={`material-symbols-rounded text-base ${cargando ? 'animate-spin' : ''}`}>
-              sync
-            </span>
-            <span>{cargando ? 'SINCRONIZANDO...' : 'ACTUALIZAR'}</span>
+            <span className={`material-symbols-rounded text-base ${cargando ? 'animate-spin' : ''}`}>sync</span>
+            <span>Actualizar</span>
           </button>
 
           {onNavigateSection && (
-            <>
-              <button
-                onClick={() => onNavigateSection('pipeline')}
-                className="btn-primary-black font-mono text-xs uppercase tracking-[0.12em] font-bold"
-              >
-                <span className="material-symbols-rounded text-base">view_kanban</span>
-                <span>PIPELINE KANBAN</span>
-              </button>
-
-              <button
-                onClick={() => onNavigateSection('clientes')}
-                className="btn-secondary-white font-mono text-xs uppercase tracking-[0.12em] font-bold hidden sm:inline-flex"
-              >
-                <span className="material-symbols-rounded text-base">contacts</span>
-                <span>CLIENTES</span>
-              </button>
-            </>
+            <button
+              onClick={() => onNavigateSection('pipeline')}
+              className="btn-primary-black text-xs"
+            >
+              <span className="material-symbols-rounded text-base">view_kanban</span>
+              <span>Ver Pipeline</span>
+            </button>
           )}
         </div>
       </div>
 
-      {/* ── 2. FILA DE 4 STAT CARDS BENTO CLAVE ── */}
+      {/* ── BENTO STATS SUMMARY NORMALIZADO ── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
         {/* KPI 1: Pipeline Comercial */}
         <div 
           onClick={() => onNavigateSection && onNavigateSection('pipeline')}
-          className="stat-card"
+          className="stat-card stat-accent-blue py-4"
         >
-          <div className="stat-card-top">
-            <span className="stat-card-label">VALOR ESTIMADO PIPELINE</span>
-            <div className="stat-card-icon-box">
-              <span className="material-symbols-rounded text-lg">payments</span>
-            </div>
-          </div>
-          <div className="stat-number text-xl sm:text-2xl truncate" title={formatearMoneda(kpis.pipeline_valor_estimado)}>
+          <span className="stat-card-label">VALOR ESTIMADO PIPELINE</span>
+          <div className="stat-number text-2xl sm:text-3xl my-2 truncate" title={formatearMoneda(kpis.pipeline_valor_estimado)}>
             {formatearMoneda(kpis.pipeline_valor_estimado)}
           </div>
-          <div className="stat-card-footer">
-            <span className="stat-footer-text">{kpis.pipeline_oportunidades_activas} EN NEGOCIACIÓN</span>
-            <span className="stat-footer-arrow">→</span>
-          </div>
+          <span className="stat-footer-text">{kpis.pipeline_oportunidades_activas} oportunidades en negociación</span>
         </div>
 
         {/* KPI 2: Obras en Ejecución */}
         <div 
           onClick={() => onNavigateSection && onNavigateSection('proyectos-crm')}
-          className="stat-card"
+          className="stat-card stat-accent-green py-4"
         >
-          <div className="stat-card-top">
-            <span className="stat-card-label">OBRAS EN EJECUCIÓN</span>
-            <div className="stat-card-icon-box">
-              <span className="material-symbols-rounded text-lg">foundation</span>
-            </div>
-          </div>
-          <div className="stat-number">{kpis.proyectos_activos}</div>
-          <div className="stat-card-footer">
-            <span className="stat-footer-text">TASA ÉXITO: {kpis.tasa_conversion_ganadas}%</span>
-            <span className="stat-footer-arrow">→</span>
-          </div>
+          <span className="stat-card-label">OBRAS EN EJECUCIÓN</span>
+          <div className="stat-number text-2xl sm:text-3xl my-2">{kpis.proyectos_activos}</div>
+          <span className="stat-footer-text">Tasa de éxito comercial: {kpis.tasa_conversion_ganadas}%</span>
         </div>
 
         {/* KPI 3: Clientes Registrados */}
         <div 
           onClick={() => onNavigateSection && onNavigateSection('clientes')}
-          className="stat-card"
+          className="stat-card stat-accent-purple py-4"
         >
-          <div className="stat-card-top">
-            <span className="stat-card-label">CLIENTES &amp; LEADS</span>
-            <div className="stat-card-icon-box">
-              <span className="material-symbols-rounded text-lg">group</span>
-            </div>
-          </div>
-          <div className="stat-number">{kpis.clientes_totales}</div>
-          <div className="stat-card-footer">
-            <span className="stat-footer-text">{kpis.leads_ultimos_30_dias} EN ÚLTIMOS 30 DÍAS</span>
-            <span className="stat-footer-arrow">→</span>
-          </div>
+          <span className="stat-card-label">CLIENTES &amp; LEADS</span>
+          <div className="stat-number text-2xl sm:text-3xl my-2">{kpis.clientes_totales}</div>
+          <span className="stat-footer-text">{kpis.leads_ultimos_30_dias} registrados en los últimos 30 días</span>
         </div>
 
         {/* KPI 4: Solicitudes Web */}
         <div 
           onClick={() => onNavigateSection && onNavigateSection('mensajes')}
-          className="stat-card"
+          className="stat-card stat-accent-red py-4"
         >
-          <div className="stat-card-top">
-            <span className="stat-card-label">SOLICITUDES WEB</span>
-            <div className="stat-card-icon-box">
-              <span className="material-symbols-rounded text-lg">mark_email_unread</span>
-            </div>
-          </div>
-          <div className="stat-number">{countSinLeer}</div>
-          <div className="stat-card-footer">
-            <span className="stat-footer-text">{mensajes.length} COTIZACIONES TOTALES</span>
-            <span className="stat-footer-arrow">→</span>
-          </div>
+          <span className="stat-card-label">SOLICITUDES WEB</span>
+          <div className="stat-number text-2xl sm:text-3xl my-2">{countSinLeer}</div>
+          <span className="stat-footer-text">{mensajes.length} cotizaciones totales recibidas</span>
         </div>
 
       </div>
 
-      {/* ── 3. CUADRÍCULA BENTO PRINCIPAL (8 COLS OPERACIONES + 4 COLS GESTIÓN INMEDIATA) ── */}
+      {/* ── CUADRÍCULA BENTO PRINCIPAL (8 COLS OPERACIONES + 4 COLS GESTIÓN INMEDIATA) ── */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* ════════════════════════════════════════════════════
@@ -186,15 +141,15 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
           <div className="bento-card">
             <div className="bento-card-header">
               <div>
-                <h3 className="bento-card-title">OBRAS Y PROYECTOS EN CURSO</h3>
+                <h3 className="bento-card-title">Obras y Proyectos en Curso</h3>
                 <p className="bento-card-subtitle">Seguimiento de fases arquitectónicas, hitos constructivos y presupuesto</p>
               </div>
               {onNavigateSection && (
                 <button
                   onClick={() => onNavigateSection('proyectos-crm')}
-                  className="text-xs font-mono font-bold text-[#09090b] hover:text-[#71717a] uppercase tracking-[0.12em] inline-flex items-center gap-1.5 cursor-pointer transition-colors"
+                  className="text-xs font-bold text-[#09090b] hover:underline uppercase tracking-wider inline-flex items-center gap-1 cursor-pointer"
                 >
-                  <span>VER TODAS</span>
+                  <span>Ver todas</span>
                   <span className="material-symbols-rounded text-sm">arrow_forward</span>
                 </button>
               )}
@@ -203,8 +158,8 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
             {proyectos.length === 0 ? (
               <div className="text-center py-12 border border-dashed border-[#e4e4e7] rounded-xl bg-[#fafafa]">
                 <span className="material-symbols-rounded text-4xl text-[#a1a1aa] mb-2 block">foundation</span>
-                <p className="text-xs font-mono font-bold uppercase tracking-[0.12em] text-[#09090b]">
-                  NO HAY OBRAS ACTIVAS EN ESTE MOMENTO
+                <p className="text-sm font-semibold text-[#09090b]">
+                  No hay obras activas en este momento
                 </p>
                 <p className="text-xs text-[#71717a] mt-1 max-w-sm mx-auto">
                   Las oportunidades ganadas en el Pipeline Comercial se convertirán automáticamente en obras aquí.
@@ -215,44 +170,40 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
                 {proyectos.slice(0, 4).map((p: ProyectoCrm) => (
                   <div 
                     key={p.id}
-                    className="p-4 rounded-xl border border-[#e4e4e7] hover:border-[#09090b] transition-all bg-white hover:shadow-xs group"
+                    className="p-4 rounded-xl border border-[#e4e4e7] hover:border-[#a1a1aa] transition-all bg-[#fafafa] hover:bg-white"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-2.5">
                       <div>
                         <div className="flex items-center gap-2.5 flex-wrap">
-                          <h4 className="font-black text-sm uppercase tracking-wide text-[#09090b]">
+                          <h4 className="font-bold text-sm text-[#09090b]">
                             {p.nombre}
                           </h4>
-                          <span className="bg-[#09090b] text-white font-mono text-[0.62rem] font-bold uppercase tracking-wider px-2 py-0.5 rounded">
+                          <span className="status-badge info text-[0.65rem] uppercase">
                             FASE: {p.fase}
                           </span>
                         </div>
-                        <span className="text-[0.72rem] text-[#71717a] font-medium mt-1 block">
+                        <span className="text-xs text-[#71717a] font-medium mt-1 block">
                           Cliente: <strong className="text-[#09090b]">{p.cliente?.nombre || 'Particular'}</strong> &bull; Responsable: {p.responsable?.nombre || 'Sin asignar'}
                         </span>
                       </div>
 
                       <div className="text-right shrink-0">
-                        <span className="text-sm font-mono font-black text-[#09090b] block">
+                        <span className="text-sm font-mono font-bold text-[#09090b] block">
                           {formatearMoneda(p.presupuesto)}
                         </span>
-                        <span className="text-[0.65rem] font-mono uppercase tracking-wider text-[#71717a] block">
-                          PRESUPUESTO TOTAL
+                        <span className="text-[0.68rem] text-[#71717a] block">
+                          Presupuesto
                         </span>
                       </div>
                     </div>
 
                     {/* Barra de progreso de Hitos */}
-                    <div className="space-y-1.5 mt-3 pt-2.5 border-t border-[#f4f5f7]">
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-[#71717a] font-mono text-[0.68rem] uppercase tracking-wider">
-                          AVANCE DE HITOS CONSTRUCTIVOS
-                        </span>
-                        <span className="font-mono font-bold text-[#09090b] text-xs">
-                          {p.progreso_porcentaje || 0}%
-                        </span>
+                    <div className="space-y-1 mt-3 pt-2.5 border-t border-[#e4e4e7]">
+                      <div className="flex items-center justify-between text-xs font-semibold">
+                        <span className="text-[#71717a] text-[0.7rem]">Avance por hitos</span>
+                        <span className="font-mono text-[#09090b]">{p.progreso_porcentaje || 0}%</span>
                       </div>
-                      <div className="w-full h-1.5 bg-[#e4e4e7] rounded-full overflow-hidden">
+                      <div className="w-full h-2 bg-[#e4e4e7] rounded-full overflow-hidden">
                         <div 
                           className="h-full bg-[#09090b] rounded-full transition-all duration-500"
                           style={{ width: `${Math.min(100, Math.max(0, p.progreso_porcentaje || 0))}%` }}
@@ -269,10 +220,10 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
           <div className="bento-card">
             <div className="bento-card-header">
               <div>
-                <h3 className="bento-card-title">BITÁCORA TÉCNICA Y OPERATIVA</h3>
-                <p className="bento-card-subtitle">Historial cronológico de visitas a obra, llamadas con clientes y reuniones del equipo</p>
+                <h3 className="bento-card-title">Bitácora de Actividades Recientes</h3>
+                <p className="bento-card-subtitle">Registro cronológico de llamadas, visitas de obra, reuniones y notas técnicas del equipo</p>
               </div>
-              <span className="border border-[#e4e4e7] bg-[#f4f5f7] text-[#09090b] font-mono text-[0.65rem] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md">
+              <span className="status-badge neutral text-[0.68rem]">
                 {actividades.length} REGISTROS
               </span>
             </div>
@@ -280,8 +231,8 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
             {actividades.length === 0 ? (
               <div className="text-center py-10 border border-dashed border-[#e4e4e7] rounded-xl bg-[#fafafa]">
                 <span className="material-symbols-rounded text-3xl mb-1 text-[#a1a1aa] block">history</span>
-                <p className="text-xs font-mono font-bold uppercase tracking-wider text-[#09090b]">
-                  SIN ACTIVIDADES REGISTRADAS RECIENTEMENTE
+                <p className="text-xs font-semibold text-[#71717a]">
+                  Sin actividades registradas recientemente.
                 </p>
               </div>
             ) : (
@@ -289,30 +240,26 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
                 <table className="data-table">
                   <thead>
                     <tr>
-                      <th className="font-black tracking-[0.14em]">TIPO</th>
-                      <th className="font-black tracking-[0.14em]">DESCRIPCIÓN</th>
-                      <th className="font-black tracking-[0.14em]">CLIENTE / PROYECTO</th>
-                      <th className="font-black tracking-[0.14em]">RESPONSABLE</th>
-                      <th className="font-black tracking-[0.14em]">FECHA</th>
+                      <th>TIPO</th>
+                      <th>DESCRIPCIÓN</th>
+                      <th>CLIENTE / PROYECTO</th>
+                      <th>RESPONSABLE</th>
+                      <th>FECHA</th>
                     </tr>
                   </thead>
                   <tbody>
                     {actividades.slice(0, 6).map((act: ActividadCrm) => (
                       <tr key={act.id}>
                         <td>
-                          <span className={`font-mono text-[0.62rem] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
-                            act.tipo === 'visita'
-                              ? 'bg-[#09090b] text-white'
-                              : act.tipo === 'reunion'
-                              ? 'bg-[#f4f5f7] text-[#09090b] border border-[#e4e4e7]'
-                              : act.tipo === 'llamada'
-                              ? 'border border-[#27272a] text-[#09090b]'
-                              : 'bg-[#fafafa] text-[#71717a] border border-[#e4e4e7]'
+                          <span className={`status-badge uppercase text-[0.65rem] ${
+                            act.tipo === 'visita' ? 'success' :
+                            act.tipo === 'reunion' ? 'info' :
+                            act.tipo === 'llamada' ? 'warning' : 'neutral'
                           }`}>
                             {act.tipo}
                           </span>
                         </td>
-                        <td className="font-bold text-[#09090b]">{act.descripcion}</td>
+                        <td className="font-semibold text-[#09090b]">{act.descripcion}</td>
                         <td className="text-[#71717a]">
                           {act.cliente?.nombre || act.proyecto?.nombre || 'General'}
                         </td>
@@ -341,10 +288,10 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
           <div className="bento-card">
             <div className="bento-card-header">
               <div>
-                <h3 className="bento-card-title">TAREAS PRIORITARIAS</h3>
+                <h3 className="bento-card-title">Tareas Prioritarias</h3>
                 <p className="bento-card-subtitle">Pendientes de gestión y obra</p>
               </div>
-              <span className="bg-[#09090b] text-white font-mono text-[0.62rem] font-bold uppercase tracking-wider px-2 py-0.5 rounded">
+              <span className="status-badge warning text-[0.65rem]">
                 {tareasPendientes.length} PENDIENTES
               </span>
             </div>
@@ -352,11 +299,8 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
             {tareas.length === 0 ? (
               <div className="text-center py-10 text-[#a1a1aa] border border-dashed border-[#e4e4e7] rounded-xl bg-[#fafafa]">
                 <span className="material-symbols-rounded text-3xl mb-1 text-[#09090b] block">check_circle</span>
-                <p className="text-xs font-mono font-bold uppercase tracking-wider text-[#09090b]">
-                  TODO AL DÍA
-                </p>
-                <p className="text-[0.72rem] text-[#71717a] mt-1">
-                  No hay tareas pendientes en la agenda.
+                <p className="text-xs font-semibold text-[#09090b]">
+                  Todo al día. No hay tareas pendientes.
                 </p>
               </div>
             ) : (
@@ -365,7 +309,7 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
                   <div
                     key={t.id}
                     onClick={() => handleToggleTarea(t.id)}
-                    className="p-3 rounded-xl border border-[#e4e4e7] bg-white hover:border-[#09090b] transition-all cursor-pointer flex items-start gap-3 group"
+                    className="p-3 rounded-xl border border-[#e4e4e7] bg-white hover:bg-[#fafafa] transition-all cursor-pointer flex items-start gap-3 group"
                   >
                     <div className="pt-0.5">
                       <input
@@ -373,7 +317,7 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
                         checked={t.completada}
                         onChange={() => {}}
                         disabled={tareaSeleccionada === t.id}
-                        className="rounded border-[#a1a1aa] text-[#09090b] focus:ring-0 cursor-pointer accent-[#09090b]"
+                        className="rounded border-[#a1a1aa] text-[#09090b] focus:ring-0 cursor-pointer"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -398,10 +342,10 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
               {onNavigateSection && (
                 <button
                   onClick={() => onNavigateSection('pipeline')}
-                  className="w-full btn-secondary-white font-mono text-xs uppercase tracking-[0.12em] font-bold justify-center"
+                  className="w-full btn-secondary-white text-xs justify-center"
                 >
                   <span className="material-symbols-rounded text-base">add_task</span>
-                  <span>NUEVA TAREA COMERCIAL</span>
+                  <span>Nueva Tarea Comercial</span>
                 </button>
               )}
             </div>
@@ -411,7 +355,7 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
           <div className="bento-card">
             <div className="bento-card-header">
               <div>
-                <h3 className="bento-card-title">EMBUDO COMERCIAL</h3>
+                <h3 className="bento-card-title">Embudo Comercial</h3>
                 <p className="bento-card-subtitle">Distribución de oportunidades activas</p>
               </div>
               <span className="text-xs font-mono font-bold text-[#09090b]">
@@ -419,7 +363,7 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
               </span>
             </div>
 
-            <div className="space-y-2.5">
+            <div className="space-y-2">
               {[
                 { key: 'contacto', label: '1. Contacto Inicial', count: conteoPorEtapa.contacto },
                 { key: 'visita', label: '2. Visita Técnica', count: conteoPorEtapa.visita },
@@ -427,9 +371,9 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
                 { key: 'negociacion', label: '4. Negociación', count: conteoPorEtapa.negociacion },
                 { key: 'ganado', label: '5. Oportunidades Ganadas', count: conteoPorEtapa.ganado },
               ].map((etapa) => (
-                <div key={etapa.key} className="flex items-center justify-between text-xs p-2 rounded-lg bg-[#f8f9fa] border border-[#e4e4e7]">
-                  <span className="font-bold text-[#09090b]">{etapa.label}</span>
-                  <span className="font-mono font-black text-[#09090b] px-2 py-0.5 rounded bg-white border border-[#e4e4e7]">
+                <div key={etapa.key} className="flex items-center justify-between text-xs p-2 rounded-lg bg-[#fafafa] border border-[#e4e4e7]">
+                  <span className="font-semibold text-[#09090b]">{etapa.label}</span>
+                  <span className="font-mono font-bold text-[#09090b] px-2 py-0.5 rounded bg-white border border-[#e4e4e7]">
                     {etapa.count}
                   </span>
                 </div>
@@ -440,10 +384,10 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
               <div className="pt-3 mt-3 border-t border-[#f4f5f7]">
                 <button
                   onClick={() => onNavigateSection('pipeline')}
-                  className="w-full btn-primary-black font-mono text-xs uppercase tracking-[0.12em] font-bold justify-center"
+                  className="w-full btn-primary-black text-xs justify-center"
                 >
                   <span className="material-symbols-rounded text-base">view_kanban</span>
-                  <span>VER KANBAN COMPLETO</span>
+                  <span>Ver Kanban Completo</span>
                 </button>
               </div>
             )}
@@ -453,11 +397,11 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
           <div className="bento-card">
             <div className="bento-card-header">
               <div>
-                <h3 className="bento-card-title">SOLICITUDES RECIENTES</h3>
+                <h3 className="bento-card-title">Solicitudes Recientes</h3>
                 <p className="bento-card-subtitle">Consultas y cotizaciones recibidas</p>
               </div>
               {countSinLeer > 0 && (
-                <span className="bg-[#09090b] text-white font-mono text-[0.62rem] font-bold uppercase tracking-wider px-2 py-0.5 rounded">
+                <span className="status-badge danger text-[0.65rem]">
                   {countSinLeer} SIN LEER
                 </span>
               )}
@@ -465,8 +409,8 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
 
             {mensajes.length === 0 ? (
               <div className="text-center py-6 text-[#a1a1aa]">
-                <p className="text-xs font-mono font-bold uppercase tracking-wider text-[#71717a]">
-                  SIN MENSAJES RECIBIDOS
+                <p className="text-xs font-semibold text-[#71717a]">
+                  Sin mensajes recibidos.
                 </p>
               </div>
             ) : (
@@ -475,10 +419,10 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
                   <div
                     key={m.id}
                     onClick={() => onNavigateSection && onNavigateSection('mensajes')}
-                    className="p-3 rounded-xl border border-[#e4e4e7] hover:border-[#09090b] transition-all cursor-pointer bg-white"
+                    className="p-3 rounded-xl border border-[#e4e4e7] hover:border-[#a1a1aa] transition-all cursor-pointer bg-white"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-black text-xs text-[#09090b] truncate">{m.remitente || 'Contacto'}</span>
+                      <span className="font-bold text-xs text-[#09090b] truncate">{m.remitente || 'Contacto'}</span>
                       <span className="font-mono text-[0.65rem] text-[#71717a]">
                         {m.created_at || m.fecha ? new Date(m.created_at || m.fecha || '').toLocaleDateString() : 'Hoy'}
                       </span>
@@ -493,10 +437,10 @@ export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => 
               <div className="pt-3 mt-3 border-t border-[#f4f5f7]">
                 <button
                   onClick={() => onNavigateSection('mensajes')}
-                  className="w-full btn-secondary-white font-mono text-xs uppercase tracking-[0.12em] font-bold justify-center"
+                  className="w-full btn-secondary-white text-xs justify-center"
                 >
                   <span className="material-symbols-rounded text-base">mail</span>
-                  <span>IR A LA BANDEJA DE MENSAJES</span>
+                  <span>Ir a Mensajes</span>
                 </button>
               </div>
             )}

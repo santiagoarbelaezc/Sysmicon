@@ -259,38 +259,31 @@ export const DashPersonalizar: React.FC = () => {
   return (
     <div className="space-y-10 animate-fade-in font-sans pb-28 max-w-[1650px] mx-auto">
       
-      {/* =====================================================
-           ENCABEZADO DE SECCIÓN
-           ===================================================== */}
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b-2 border-neutral-200">
-        <div className="max-w-3xl">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-100 border border-neutral-300 font-mono text-xs tracking-widest text-neutral-800 font-bold uppercase mb-4">
-            <svg width="14" height="14" style={{ width: '14px', height: '14px' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-            SISTEMA DE GESTIÓN &amp; CONTENIDOS
+      {/* ── HEADER DE SECCIÓN NORMALIZADO ── */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#e4e4e7]">
+        <div>
+          <span className="text-[0.68rem] font-extrabold uppercase tracking-[0.1em] text-[#71717a]">
+            CONFIGURACIÓN &bull; CONTENIDO DEL SITIO
           </span>
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-black text-neutral-950 uppercase tracking-tight leading-tight">
-            Personalización del Sitio
+          <h1 className="text-2xl sm:text-3xl font-black text-[#09090b] tracking-tight mt-1">
+            Personalizar <span className="font-light text-[#71717a]">Web</span>
           </h1>
-          <p className="font-sans text-lg text-neutral-600 font-normal mt-3">
-            Publica obras con galerías de alta resolución (hasta 30 fotos), edita los textos editoriales y gestiona los canales del estudio.
+          <p className="text-xs text-[#71717a] mt-1 font-medium">
+            Editor de portadas, textos institucionales, showcase del director, canales de contacto y avisos visibles en la web pública.
           </p>
         </div>
         
-        <div className="flex items-center gap-4 shrink-0">
+        <div className="flex items-center gap-3 shrink-0">
           {tabActiva !== 'proyectos' && (
             <button
               onClick={guardarConfiguracion}
               disabled={guardando}
-              className="admin-btn-primary py-4 px-8 text-sm font-bold uppercase tracking-wider flex items-center gap-3 shadow-lg hover:shadow-xl transition-all cursor-pointer"
+              className="btn-primary-black text-xs"
             >
-              {!guardando ? (
-                <span>Guardar Cambios</span>
-              ) : (
-                <span className="flex items-center gap-2">
-                  <span className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin"></span>
-                  Guardando...
-                </span>
-              )}
+              <span className={`material-symbols-rounded text-base ${guardando ? 'animate-spin' : ''}`}>
+                {guardando ? 'sync' : 'save'}
+              </span>
+              <span>{guardando ? 'Guardando...' : 'Guardar Cambios'}</span>
             </button>
           )}
         </div>

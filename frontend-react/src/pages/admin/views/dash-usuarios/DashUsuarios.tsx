@@ -164,7 +164,7 @@ export const DashUsuarios: React.FC = () => {
             className="btn-secondary-white text-xs"
           >
             <span className="material-symbols-rounded text-base">sync</span>
-            <span>Refrescar</span>
+            <span>Actualizar</span>
           </button>
           <button
             onClick={() => setModalAbierto(true)}

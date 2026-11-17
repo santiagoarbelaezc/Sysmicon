@@ -341,6 +341,16 @@ export const AdminLayout: React.FC = () => {
                   {sidebarAbierto && <span>Portafolio Web</span>}
                 </button>
 
+                {/* 2.4 Personalizar Web */}
+                <button
+                  onClick={() => setSeccion('personalizar')}
+                  className={`bento-sidebar-item ${seccionActiva === 'personalizar' ? 'active' : ''}`}
+                  title="Editor de Textos, Portadas y Contenidos del Sitio Web"
+                >
+                  <span className="material-symbols-rounded text-base">palette</span>
+                  {sidebarAbierto && <span>Personalizar Web</span>}
+                </button>
+
               </div>
             )}
           </div>
@@ -397,14 +407,14 @@ export const AdminLayout: React.FC = () => {
                   )}
                 </button>
 
-                {/* 3.3 Configuración */}
+                {/* 3.3 Personalizar Web / Configuración */}
                 <button
                   onClick={() => setSeccion('personalizar')}
                   className={`bento-sidebar-item ${seccionActiva === 'personalizar' ? 'active' : ''}`}
-                  title="Configuración General del Sitio"
+                  title="Editor de Textos, Portadas y Configuración del Sitio Web"
                 >
-                  <span className="material-symbols-rounded text-base">settings</span>
-                  {sidebarAbierto && <span>Configuración</span>}
+                  <span className="material-symbols-rounded text-base">tune</span>
+                  {sidebarAbierto && <span>Personalizar Web</span>}
                 </button>
 
               </div>
@@ -608,6 +618,10 @@ export const AdminLayout: React.FC = () => {
                       <span className="material-symbols-rounded text-base">collections</span>
                       <span>Portafolio Web</span>
                     </button>
+                    <button onClick={() => { setSeccion('personalizar'); toggleMenuMovil(); }} className={`bento-sidebar-item ${seccionActiva === 'personalizar' ? 'active' : ''}`}>
+                      <span className="material-symbols-rounded text-base">palette</span>
+                      <span>Personalizar Web</span>
+                    </button>
                   </div>
                 )}
               </div>
@@ -632,8 +646,8 @@ export const AdminLayout: React.FC = () => {
                       <span>Usuarios Staff</span>
                     </button>
                     <button onClick={() => { setSeccion('personalizar'); toggleMenuMovil(); }} className={`bento-sidebar-item ${seccionActiva === 'personalizar' ? 'active' : ''}`}>
-                      <span className="material-symbols-rounded text-base">settings</span>
-                      <span>Configuración</span>
+                      <span className="material-symbols-rounded text-base">tune</span>
+                      <span>Personalizar Web</span>
                     </button>
                   </div>
                 )}

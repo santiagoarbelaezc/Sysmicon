@@ -131,45 +131,35 @@ export const DashMensajes: React.FC = () => {
   return (
     <div className="h-full flex flex-col min-h-0 space-y-6 animate-fade-in font-sans overflow-hidden">
       
-      {/* =====================================================
-           ENCABEZADO DE ALTA GAMA (SIN SCROLL)
-           ===================================================== */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-neutral-200 shrink-0">
+      {/* ── HEADER DE SECCIÓN NORMALIZADO ── */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#e4e4e7] shrink-0">
         <div>
-          <span className="font-mono text-xs tracking-ultra text-neutral-400 font-black uppercase block mb-1">
-            BANDEJA DE ENTRADA &amp; COTIZACIONES
+          <span className="text-[0.68rem] font-extrabold uppercase tracking-[0.1em] text-[#71717a]">
+            ATENCIÓN AL CLIENTE &bull; BANDEJA DE ENTRADA
           </span>
-          <h1 className="font-serif text-3xl sm:text-4xl font-black text-neutral-950 uppercase tracking-tight leading-tight">
-            BANDEJA DE MENSAJES &amp; <span className="font-light">COTIZACIONES</span>
+          <h1 className="text-2xl sm:text-3xl font-black text-[#09090b] tracking-tight mt-1">
+            Bandeja de <span className="font-light text-[#71717a]">Mensajes</span>
           </h1>
+          <p className="text-xs text-[#71717a] mt-1 font-medium">
+            Consultas recibidas desde el formulario web, agendamiento de citas y solicitudes de presupuesto.
+          </p>
         </div>
-        
+
         <div className="flex items-center gap-3">
-          {/* Botón Sincronizar */}
           <button
             onClick={recargarMensajes}
-            title="Sincronizar con la base de datos"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white border border-neutral-200 text-neutral-800 hover:text-neutral-950 hover:border-neutral-950 transition-all shadow-xs cursor-pointer font-mono text-xs sm:text-sm font-bold uppercase tracking-wider"
+            disabled={cargando}
+            className="btn-secondary-white text-xs"
           >
-            <svg
-              className={`w-4 h-4 text-neutral-700 ${cargando ? 'animate-spin' : ''}`}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
-            </svg>
-            <span>SINCRONIZAR</span>
+            <span className={`material-symbols-rounded text-base ${cargando ? 'animate-spin' : ''}`}>sync</span>
+            <span>Actualizar</span>
           </button>
 
-          {/* Contador Sin Leer */}
-          <div className="flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-white border border-neutral-200 font-mono text-xs sm:text-sm font-bold text-neutral-950 shadow-xs uppercase tracking-wider">
-            <svg className="w-4 h-4 text-neutral-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            <span>SIN LEER: <span className="text-neutral-950 font-black">{countSinLeer}</span></span>
-          </div>
+          {countSinLeer > 0 && (
+            <div className="status-badge danger text-xs font-mono font-bold">
+              <span>{countSinLeer} SIN LEER</span>
+            </div>
+          )}
         </div>
       </div>
 
@@ -388,40 +378,42 @@ export const DashMensajes: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Botones de Acción */}
+                  {/* Botones de Acción Normalizados */}
                   <div className="flex items-center gap-2.5">
                     <button
                       onClick={() => handleConvertirLead(mensajeSeleccionado)}
                       title="Convertir esta solicitud web en un Lead y Oportunidad del CRM"
-                      className="px-3.5 py-2 rounded-xl bg-neutral-950 text-white hover:bg-neutral-800 text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors cursor-pointer inline-flex items-center gap-1.5 shadow-xs"
+                      className="btn-primary-black text-xs"
                     >
                       <span className="material-symbols-rounded text-sm">rocket_launch</span>
-                      <span>Convertir en Lead CRM</span>
+                      <span>Convertir en Lead</span>
                     </button>
 
                     <button
                       onClick={() => alternarLeido(mensajeSeleccionado)}
                       title={mensajeSeleccionado.leido ? 'Marcar como no leído' : 'Marcar como leído'}
-                      className="px-4 py-2 rounded-xl border border-neutral-200 text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-neutral-800 hover:bg-neutral-50 hover:text-neutral-950 transition-colors cursor-pointer inline-flex items-center gap-2"
+                      className="btn-secondary-white text-xs"
                     >
-                      <span className={`w-2 h-2 rounded-full ${mensajeSeleccionado.leido ? 'bg-neutral-400' : 'bg-emerald-500'}`}></span>
-                      <span>{mensajeSeleccionado.leido ? 'LEÍDO' : 'NUEVO'}</span>
+                      <span className="material-symbols-rounded text-sm">
+                        {mensajeSeleccionado.leido ? 'mark_email_unread' : 'mark_email_read'}
+                      </span>
+                      <span>{mensajeSeleccionado.leido ? 'Marcar no leído' : 'Marcar leído'}</span>
                     </button>
                     
                     <button
                       onClick={() => eliminarMensaje(mensajeSeleccionado)}
                       title="Eliminar mensaje permanentemente"
-                      className="px-4 py-2 rounded-xl border border-neutral-200 text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-500 hover:text-red-600 hover:bg-red-50 hover:border-red-200 transition-colors cursor-pointer inline-flex items-center gap-1.5"
+                      className="px-3 py-1.5 rounded-xl border border-red-200 text-red-600 hover:bg-red-50 text-xs font-bold uppercase tracking-wider inline-flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
-                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                      <span>ELIMINAR</span>
+                      <span className="material-symbols-rounded text-sm">delete</span>
+                      <span>Eliminar</span>
                     </button>
                   </div>
                 </div>
 
-                {/* Título / Asunto Monumental */}
+                {/* Título / Asunto Normalizado */}
                 <div>
-                  <h2 className="font-serif text-2xl sm:text-3xl font-black text-neutral-950 uppercase tracking-tight leading-snug">
+                  <h2 className="text-xl sm:text-2xl font-black text-[#09090b] tracking-tight leading-snug">
                     {mensajeSeleccionado.asunto}
                   </h2>
                 </div>

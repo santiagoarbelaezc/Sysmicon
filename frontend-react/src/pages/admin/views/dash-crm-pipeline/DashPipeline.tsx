@@ -155,7 +155,7 @@ export const DashPipeline: React.FC = () => {
             className="btn-secondary-white text-xs"
           >
             <span className={`material-symbols-rounded text-base ${cargando ? 'animate-spin' : ''}`}>sync</span>
-            <span>Refrescar</span>
+            <span>Actualizar</span>
           </button>
           <button
             onClick={() => setModalAbierto(true)}

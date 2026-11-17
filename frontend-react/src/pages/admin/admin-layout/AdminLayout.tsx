@@ -63,15 +63,15 @@ export const AdminLayout: React.FC = () => {
   const [sidebarAbierto, setSidebarAbierto] = useState<boolean>(true);
   const [menuMovilAbierto, setMenuMovilAbierto] = useState<boolean>(false);
 
-  // Estados de acordeones desplegables para grupos de navegación
+  // Estados de acordeones desplegables para grupos de navegación (inician cerrados por defecto)
   const [gruposAbiertos, setGruposAbiertos] = useState<{
     crm: boolean;
     web: boolean;
     admin: boolean;
   }>({
-    crm: true,
-    web: true,
-    admin: true,
+    crm: false,
+    web: false,
+    admin: false,
   });
 
   useEffect(() => {
@@ -94,15 +94,6 @@ export const AdminLayout: React.FC = () => {
 
   const setSeccion = (seccion: AdminSection) => {
     setSeccionActiva(seccion);
-
-    // Asegurar que el grupo contenedor de la sección esté abierto
-    if (['pipeline', 'clientes', 'proyectos-crm'].includes(seccion)) {
-      setGruposAbiertos((prev) => ({ ...prev, crm: true }));
-    } else if (['mensajes', 'pqr', 'portafolio'].includes(seccion)) {
-      setGruposAbiertos((prev) => ({ ...prev, web: true }));
-    } else if (['analiticas', 'usuarios', 'personalizar'].includes(seccion)) {
-      setGruposAbiertos((prev) => ({ ...prev, admin: true }));
-    }
 
     try {
       localStorage.setItem('sysmicon_admin_section', seccion);

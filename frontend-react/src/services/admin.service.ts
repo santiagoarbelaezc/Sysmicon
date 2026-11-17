@@ -18,7 +18,7 @@ export interface UsuarioAdmin {
   nombre: string;
   email: string;
   telefono: string;
-  rol: 'propietario' | 'arquitecto' | 'inversionista' | 'admin' | 'usuario';
+  rol: 'propietario' | 'arquitecto' | 'inversionista' | 'admin' | 'usuario' | 'comercial';
   estado: 'activo' | 'suspendido' | 'pendiente';
   fechaRegistro?: string;
   created_at?: string;

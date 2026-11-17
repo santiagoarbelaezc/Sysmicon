@@ -56,20 +56,54 @@ function getInitialSection(): AdminSection {
 export const AdminLayout: React.FC = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuthService();
-  const { mensajes } = useAdminService();
+  const { mensajes, usuarios } = useAdminService();
   const { kpis, pqrs } = useCrmService();
 
   const [seccionActiva, setSeccionActiva] = useState<AdminSection>(getInitialSection);
   const [sidebarAbierto, setSidebarAbierto] = useState<boolean>(true);
   const [menuMovilAbierto, setMenuMovilAbierto] = useState<boolean>(false);
 
+  // Estados de acordeones desplegables para grupos de navegación
+  const [gruposAbiertos, setGruposAbiertos] = useState<{
+    crm: boolean;
+    web: boolean;
+    admin: boolean;
+  }>({
+    crm: true,
+    web: true,
+    admin: true,
+  });
+
   useEffect(() => {
     adminService.cargarDatosReales();
     crmService.cargarTodo();
   }, []);
 
+  const toggleGrupo = (grupo: 'crm' | 'web' | 'admin') => {
+    // Si la barra está colapsada y hacen clic en un grupo, expandirla
+    if (!sidebarAbierto) {
+      setSidebarAbierto(true);
+      setGruposAbiertos((prev) => ({ ...prev, [grupo]: true }));
+      return;
+    }
+    setGruposAbiertos((prev) => ({
+      ...prev,
+      [grupo]: !prev[grupo],
+    }));
+  };
+
   const setSeccion = (seccion: AdminSection) => {
     setSeccionActiva(seccion);
+
+    // Asegurar que el grupo contenedor de la sección esté abierto
+    if (['pipeline', 'clientes', 'proyectos-crm'].includes(seccion)) {
+      setGruposAbiertos((prev) => ({ ...prev, crm: true }));
+    } else if (['mensajes', 'pqr', 'portafolio'].includes(seccion)) {
+      setGruposAbiertos((prev) => ({ ...prev, web: true }));
+    } else if (['analiticas', 'usuarios', 'personalizar'].includes(seccion)) {
+      setGruposAbiertos((prev) => ({ ...prev, admin: true }));
+    }
+
     try {
       localStorage.setItem('sysmicon_admin_section', seccion);
     } catch {}
@@ -107,7 +141,7 @@ export const AdminLayout: React.FC = () => {
     <div className="admin-dashboard-bento flex min-h-screen overflow-hidden selection:bg-black selection:text-white">
       
       {/* =====================================================
-           SIDEBAR OSCURO BENTO (#0a0a0a)
+           SIDEBAR OSCURO BENTO (#0a0a0a) CON GRUPOS DESPLEGABLES
            ===================================================== */}
       <aside
         className={`bento-sidebar ${
@@ -142,17 +176,11 @@ export const AdminLayout: React.FC = () => {
           </button>
         </div>
 
-        {/* Navegación Modular Bento */}
-        <nav className="flex-1 py-5 px-3 space-y-6 overflow-y-auto scrollbar-thin">
+        {/* Navegación Modular Bento con Acordeones Desplegables */}
+        <nav className="flex-1 py-5 px-3 space-y-4 overflow-y-auto scrollbar-thin">
           
-          {/* GRUPO 1: CONSOLA PRINCIPAL */}
-          <div className="space-y-1">
-            {sidebarAbierto && (
-              <span className="px-3 text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[#71717a] block mb-2">
-                CONSOLA
-              </span>
-            )}
-
+          {/* BOTÓN DIRECTO: INICIO & RESUMEN */}
+          <div>
             <button
               onClick={() => setSeccion('inicio')}
               className={`bento-sidebar-item ${seccionActiva === 'inicio' ? 'active' : ''}`}
@@ -163,148 +191,233 @@ export const AdminLayout: React.FC = () => {
             </button>
           </div>
 
-          {/* GRUPO 2: CRM & OPERACIONES */}
+          {/* ══════════════════════════════════════════════════
+               GRUPO DESPLEGABLE 1: CRM & OPERACIONES (3 OPCIONES)
+               ══════════════════════════════════════════════════ */}
           <div className="space-y-1">
-            {sidebarAbierto && (
-              <span className="px-3 text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[#71717a] block mb-2">
-                CRM &amp; OPERACIONES
-              </span>
+            <button
+              onClick={() => toggleGrupo('crm')}
+              className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-[#a1a1aa] hover:text-white hover:bg-[#141416] transition-all cursor-pointer font-bold text-xs uppercase tracking-wider group"
+              title="CRM y Operaciones"
+            >
+              <div className="flex items-center gap-2.5">
+                <span className="material-symbols-rounded text-lg text-[#71717a] group-hover:text-white">
+                  business_center
+                </span>
+                {sidebarAbierto && <span>CRM &amp; Operaciones</span>}
+              </div>
+              {sidebarAbierto && (
+                <span className={`material-symbols-rounded text-base text-[#71717a] transition-transform duration-200 ${gruposAbiertos.crm ? 'rotate-180 text-white' : ''}`}>
+                  expand_more
+                </span>
+              )}
+            </button>
+
+            {gruposAbiertos.crm && (
+              <div className={`space-y-1 ${sidebarAbierto ? 'ml-3 pl-2.5 border-l border-[#27272a]' : ''} animate-fade-in`}>
+                
+                {/* 1.1 Pipeline Kanban */}
+                <button
+                  onClick={() => setSeccion('pipeline')}
+                  className={`bento-sidebar-item ${seccionActiva === 'pipeline' ? 'active' : ''}`}
+                  title="Pipeline Kanban Comercial"
+                >
+                  <span className="material-symbols-rounded text-base">view_kanban</span>
+                  {sidebarAbierto && (
+                    <span className="flex items-center justify-between w-full">
+                      <span>Pipeline Kanban</span>
+                      {kpis.pipeline_oportunidades_activas > 0 && (
+                        <span className="text-[0.65rem] px-2 py-0.5 rounded-full font-mono font-bold bg-[#141416] border border-[#27272a] text-[#a1a1aa]">
+                          {kpis.pipeline_oportunidades_activas}
+                        </span>
+                      )}
+                    </span>
+                  )}
+                </button>
+
+                {/* 1.2 Clientes & Leads */}
+                <button
+                  onClick={() => setSeccion('clientes')}
+                  className={`bento-sidebar-item ${seccionActiva === 'clientes' ? 'active' : ''}`}
+                  title="Directorio de Clientes CRM"
+                >
+                  <span className="material-symbols-rounded text-base">contacts</span>
+                  {sidebarAbierto && (
+                    <span className="flex items-center justify-between w-full">
+                      <span>Clientes &amp; Leads</span>
+                      {kpis.clientes_totales > 0 && (
+                        <span className="text-[0.65rem] px-2 py-0.5 rounded-full font-mono font-bold bg-[#141416] border border-[#27272a] text-[#a1a1aa]">
+                          {kpis.clientes_totales}
+                        </span>
+                      )}
+                    </span>
+                  )}
+                </button>
+
+                {/* 1.3 Obras en Ejecución */}
+                <button
+                  onClick={() => setSeccion('proyectos-crm')}
+                  className={`bento-sidebar-item ${seccionActiva === 'proyectos-crm' ? 'active' : ''}`}
+                  title="Proyectos de Construcción CRM"
+                >
+                  <span className="material-symbols-rounded text-base">foundation</span>
+                  {sidebarAbierto && (
+                    <span className="flex items-center justify-between w-full">
+                      <span>Obras en Ejecución</span>
+                      {kpis.proyectos_activos > 0 && (
+                        <span className="text-[0.65rem] px-2 py-0.5 rounded-full font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                          {kpis.proyectos_activos}
+                        </span>
+                      )}
+                    </span>
+                  )}
+                </button>
+
+              </div>
             )}
-
-            <button
-              onClick={() => setSeccion('pipeline')}
-              className={`bento-sidebar-item ${seccionActiva === 'pipeline' ? 'active' : ''}`}
-              title="Pipeline Kanban Comercial"
-            >
-              <span className="material-symbols-rounded text-lg">view_kanban</span>
-              {sidebarAbierto && (
-                <span className="flex items-center justify-between w-full">
-                  <span>Pipeline Kanban</span>
-                  {kpis.pipeline_oportunidades_activas > 0 && (
-                    <span className="text-[0.65rem] px-2 py-0.5 rounded-full font-mono font-bold bg-[#141416] border border-[#27272a] text-[#a1a1aa]">
-                      {kpis.pipeline_oportunidades_activas}
-                    </span>
-                  )}
-                </span>
-              )}
-            </button>
-
-            <button
-              onClick={() => setSeccion('clientes')}
-              className={`bento-sidebar-item ${seccionActiva === 'clientes' ? 'active' : ''}`}
-              title="Directorio de Clientes CRM"
-            >
-              <span className="material-symbols-rounded text-lg">contacts</span>
-              {sidebarAbierto && <span>Clientes &amp; Leads</span>}
-            </button>
-
-            <button
-              onClick={() => setSeccion('proyectos-crm')}
-              className={`bento-sidebar-item ${seccionActiva === 'proyectos-crm' ? 'active' : ''}`}
-              title="Proyectos de Construcción CRM"
-            >
-              <span className="material-symbols-rounded text-lg">foundation</span>
-              {sidebarAbierto && (
-                <span className="flex items-center justify-between w-full">
-                  <span>Obras en Ejecución</span>
-                  {kpis.proyectos_activos > 0 && (
-                    <span className="text-[0.65rem] px-2 py-0.5 rounded-full font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                      {kpis.proyectos_activos}
-                    </span>
-                  )}
-                </span>
-              )}
-            </button>
           </div>
 
-          {/* GRUPO 3: ATENCIÓN AL CLIENTE & LEADS */}
+          {/* ══════════════════════════════════════════════════
+               GRUPO DESPLEGABLE 2: ATENCIÓN & WEB (3 OPCIONES)
+               ══════════════════════════════════════════════════ */}
           <div className="space-y-1">
-            {sidebarAbierto && (
-              <span className="px-3 text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[#71717a] block mb-2">
-                ATENCIÓN &amp; WEB
-              </span>
+            <button
+              onClick={() => toggleGrupo('web')}
+              className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-[#a1a1aa] hover:text-white hover:bg-[#141416] transition-all cursor-pointer font-bold text-xs uppercase tracking-wider group"
+              title="Atención y Web"
+            >
+              <div className="flex items-center gap-2.5">
+                <span className="material-symbols-rounded text-lg text-[#71717a] group-hover:text-white">
+                  public
+                </span>
+                {sidebarAbierto && <span>Atención &amp; Web</span>}
+              </div>
+              {sidebarAbierto && (
+                <span className={`material-symbols-rounded text-base text-[#71717a] transition-transform duration-200 ${gruposAbiertos.web ? 'rotate-180 text-white' : ''}`}>
+                  expand_more
+                </span>
+              )}
+            </button>
+
+            {gruposAbiertos.web && (
+              <div className={`space-y-1 ${sidebarAbierto ? 'ml-3 pl-2.5 border-l border-[#27272a]' : ''} animate-fade-in`}>
+                
+                {/* 2.1 Mensajes Web */}
+                <button
+                  onClick={() => setSeccion('mensajes')}
+                  className={`bento-sidebar-item ${seccionActiva === 'mensajes' ? 'active' : ''}`}
+                  title="Bandeja de Mensajes y Cotizaciones"
+                >
+                  <span className="material-symbols-rounded text-base">mail</span>
+                  {sidebarAbierto && (
+                    <span className="flex items-center justify-between w-full">
+                      <span>Mensajes Web</span>
+                      {countMensajesSinLeer > 0 && (
+                        <span className="text-[0.65rem] px-2 py-0.5 rounded-full font-mono font-bold bg-red-600 text-white">
+                          {countMensajesSinLeer}
+                        </span>
+                      )}
+                    </span>
+                  )}
+                </button>
+
+                {/* 2.2 Sistema PQR */}
+                <button
+                  onClick={() => setSeccion('pqr')}
+                  className={`bento-sidebar-item ${seccionActiva === 'pqr' ? 'active' : ''}`}
+                  title="Peticiones, Quejas y Reclamos"
+                >
+                  <span className="material-symbols-rounded text-base">support_agent</span>
+                  {sidebarAbierto && (
+                    <span className="flex items-center justify-between w-full">
+                      <span>Sistema PQR</span>
+                      {countPqrPendientes > 0 && (
+                        <span className="text-[0.65rem] px-2 py-0.5 rounded-full font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                          {countPqrPendientes}
+                        </span>
+                      )}
+                    </span>
+                  )}
+                </button>
+
+                {/* 2.3 Portafolio Web */}
+                <button
+                  onClick={() => setSeccion('portafolio')}
+                  className={`bento-sidebar-item ${seccionActiva === 'portafolio' ? 'active' : ''}`}
+                  title="Portafolio de Obras Web"
+                >
+                  <span className="material-symbols-rounded text-base">collections</span>
+                  {sidebarAbierto && <span>Portafolio Web</span>}
+                </button>
+
+              </div>
             )}
-
-            <button
-              onClick={() => setSeccion('mensajes')}
-              className={`bento-sidebar-item ${seccionActiva === 'mensajes' ? 'active' : ''}`}
-              title="Bandeja de Mensajes y Cotizaciones"
-            >
-              <span className="material-symbols-rounded text-lg">mail</span>
-              {sidebarAbierto && (
-                <span className="flex items-center justify-between w-full">
-                  <span>Mensajes Web</span>
-                  {countMensajesSinLeer > 0 && (
-                    <span className="text-[0.65rem] px-2 py-0.5 rounded-full font-mono font-bold bg-red-600 text-white">
-                      {countMensajesSinLeer}
-                    </span>
-                  )}
-                </span>
-              )}
-            </button>
-
-            <button
-              onClick={() => setSeccion('pqr')}
-              className={`bento-sidebar-item ${seccionActiva === 'pqr' ? 'active' : ''}`}
-              title="Peticiones, Quejas y Reclamos"
-            >
-              <span className="material-symbols-rounded text-lg">support_agent</span>
-              {sidebarAbierto && (
-                <span className="flex items-center justify-between w-full">
-                  <span>Sistema PQR</span>
-                  {countPqrPendientes > 0 && (
-                    <span className="text-[0.65rem] px-2 py-0.5 rounded-full font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                      {countPqrPendientes}
-                    </span>
-                  )}
-                </span>
-              )}
-            </button>
-
-            <button
-              onClick={() => setSeccion('portafolio')}
-              className={`bento-sidebar-item ${seccionActiva === 'portafolio' ? 'active' : ''}`}
-              title="Portafolio de Obras Web"
-            >
-              <span className="material-symbols-rounded text-lg">collections</span>
-              {sidebarAbierto && <span>Portafolio Web</span>}
-            </button>
           </div>
 
-          {/* GRUPO 4: ANÁLISIS & ADMINISTRACIÓN */}
+          {/* ══════════════════════════════════════════════════
+               GRUPO DESPLEGABLE 3: ADMINISTRACIÓN (3 OPCIONES)
+               ══════════════════════════════════════════════════ */}
           <div className="space-y-1">
-            {sidebarAbierto && (
-              <span className="px-3 text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[#71717a] block mb-2">
-                ADMINISTRACIÓN
-              </span>
+            <button
+              onClick={() => toggleGrupo('admin')}
+              className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-[#a1a1aa] hover:text-white hover:bg-[#141416] transition-all cursor-pointer font-bold text-xs uppercase tracking-wider group"
+              title="Administración"
+            >
+              <div className="flex items-center gap-2.5">
+                <span className="material-symbols-rounded text-lg text-[#71717a] group-hover:text-white">
+                  admin_panel_settings
+                </span>
+                {sidebarAbierto && <span>Administración</span>}
+              </div>
+              {sidebarAbierto && (
+                <span className={`material-symbols-rounded text-base text-[#71717a] transition-transform duration-200 ${gruposAbiertos.admin ? 'rotate-180 text-white' : ''}`}>
+                  expand_more
+                </span>
+              )}
+            </button>
+
+            {gruposAbiertos.admin && (
+              <div className={`space-y-1 ${sidebarAbierto ? 'ml-3 pl-2.5 border-l border-[#27272a]' : ''} animate-fade-in`}>
+                
+                {/* 3.1 Analíticas */}
+                <button
+                  onClick={() => setSeccion('analiticas')}
+                  className={`bento-sidebar-item ${seccionActiva === 'analiticas' ? 'active' : ''}`}
+                  title="Analíticas de Tráfico Web"
+                >
+                  <span className="material-symbols-rounded text-base">analytics</span>
+                  {sidebarAbierto && <span>Analíticas</span>}
+                </button>
+
+                {/* 3.2 Usuarios Staff */}
+                <button
+                  onClick={() => setSeccion('usuarios')}
+                  className={`bento-sidebar-item ${seccionActiva === 'usuarios' ? 'active' : ''}`}
+                  title="Directorio de Usuarios Staff"
+                >
+                  <span className="material-symbols-rounded text-base">manage_accounts</span>
+                  {sidebarAbierto && (
+                    <span className="flex items-center justify-between w-full">
+                      <span>Usuarios Staff</span>
+                      <span className="text-[0.65rem] px-2 py-0.5 rounded-full font-mono font-bold bg-[#141416] border border-[#27272a] text-[#a1a1aa]">
+                        {usuarios.length}
+                      </span>
+                    </span>
+                  )}
+                </button>
+
+                {/* 3.3 Configuración */}
+                <button
+                  onClick={() => setSeccion('personalizar')}
+                  className={`bento-sidebar-item ${seccionActiva === 'personalizar' ? 'active' : ''}`}
+                  title="Configuración General del Sitio"
+                >
+                  <span className="material-symbols-rounded text-base">settings</span>
+                  {sidebarAbierto && <span>Configuración</span>}
+                </button>
+
+              </div>
             )}
-
-            <button
-              onClick={() => setSeccion('analiticas')}
-              className={`bento-sidebar-item ${seccionActiva === 'analiticas' ? 'active' : ''}`}
-              title="Analíticas de Tráfico Web"
-            >
-              <span className="material-symbols-rounded text-lg">analytics</span>
-              {sidebarAbierto && <span>Analíticas</span>}
-            </button>
-
-            <button
-              onClick={() => setSeccion('usuarios')}
-              className={`bento-sidebar-item ${seccionActiva === 'usuarios' ? 'active' : ''}`}
-              title="Directorio de Usuarios Staff"
-            >
-              <span className="material-symbols-rounded text-lg">manage_accounts</span>
-              {sidebarAbierto && <span>Usuarios Staff</span>}
-            </button>
-
-            <button
-              onClick={() => setSeccion('personalizar')}
-              className={`bento-sidebar-item ${seccionActiva === 'personalizar' ? 'active' : ''}`}
-              title="Configuración General del Sitio"
-            >
-              <span className="material-symbols-rounded text-lg">settings</span>
-              {sidebarAbierto && <span>Configuración</span>}
-            </button>
           </div>
 
           {/* ACCIONES Y SALIDA */}
@@ -434,7 +547,7 @@ export const AdminLayout: React.FC = () => {
 
       </div>
 
-      {/* DRAWER MÓVIL */}
+      {/* DRAWER MÓVIL CON ACORDEONES */}
       {menuMovilAbierto && (
         <div className="fixed inset-0 z-50 lg:hidden flex animate-fade-in">
           <div onClick={toggleMenuMovil} className="fixed inset-0 bg-black/60 backdrop-blur-xs"></div>
@@ -444,77 +557,97 @@ export const AdminLayout: React.FC = () => {
               <button onClick={toggleMenuMovil} className="text-[#a1a1aa] hover:text-white p-2">✕</button>
             </div>
 
-            <nav className="flex-1 py-4 px-3 space-y-1.5 overflow-y-auto text-xs">
+            <nav className="flex-1 py-4 px-3 space-y-3 overflow-y-auto text-xs">
+              
               <button
                 onClick={() => { setSeccion('inicio'); toggleMenuMovil(); }}
                 className={`bento-sidebar-item ${seccionActiva === 'inicio' ? 'active' : ''}`}
               >
                 <span className="material-symbols-rounded text-lg">dashboard</span>
-                <span>Inicio</span>
+                <span>Inicio &amp; Resumen</span>
               </button>
-              <button
-                onClick={() => { setSeccion('pipeline'); toggleMenuMovil(); }}
-                className={`bento-sidebar-item ${seccionActiva === 'pipeline' ? 'active' : ''}`}
-              >
-                <span className="material-symbols-rounded text-lg">view_kanban</span>
-                <span>Pipeline Kanban</span>
-              </button>
-              <button
-                onClick={() => { setSeccion('clientes'); toggleMenuMovil(); }}
-                className={`bento-sidebar-item ${seccionActiva === 'clientes' ? 'active' : ''}`}
-              >
-                <span className="material-symbols-rounded text-lg">contacts</span>
-                <span>Clientes CRM</span>
-              </button>
-              <button
-                onClick={() => { setSeccion('proyectos-crm'); toggleMenuMovil(); }}
-                className={`bento-sidebar-item ${seccionActiva === 'proyectos-crm' ? 'active' : ''}`}
-              >
-                <span className="material-symbols-rounded text-lg">foundation</span>
-                <span>Obras en Ejecución</span>
-              </button>
-              <button
-                onClick={() => { setSeccion('pqr'); toggleMenuMovil(); }}
-                className={`bento-sidebar-item ${seccionActiva === 'pqr' ? 'active' : ''}`}
-              >
-                <span className="material-symbols-rounded text-lg">support_agent</span>
-                <span>Sistema PQR</span>
-              </button>
-              <button
-                onClick={() => { setSeccion('mensajes'); toggleMenuMovil(); }}
-                className={`bento-sidebar-item ${seccionActiva === 'mensajes' ? 'active' : ''}`}
-              >
-                <span className="material-symbols-rounded text-lg">mail</span>
-                <span>Mensajes Web</span>
-              </button>
-              <button
-                onClick={() => { setSeccion('portafolio'); toggleMenuMovil(); }}
-                className={`bento-sidebar-item ${seccionActiva === 'portafolio' ? 'active' : ''}`}
-              >
-                <span className="material-symbols-rounded text-lg">collections</span>
-                <span>Portafolio Web</span>
-              </button>
-              <button
-                onClick={() => { setSeccion('analiticas'); toggleMenuMovil(); }}
-                className={`bento-sidebar-item ${seccionActiva === 'analiticas' ? 'active' : ''}`}
-              >
-                <span className="material-symbols-rounded text-lg">analytics</span>
-                <span>Analíticas</span>
-              </button>
-              <button
-                onClick={() => { setSeccion('usuarios'); toggleMenuMovil(); }}
-                className={`bento-sidebar-item ${seccionActiva === 'usuarios' ? 'active' : ''}`}
-              >
-                <span className="material-symbols-rounded text-lg">manage_accounts</span>
-                <span>Usuarios Staff</span>
-              </button>
-              <button
-                onClick={() => { setSeccion('personalizar'); toggleMenuMovil(); }}
-                className={`bento-sidebar-item ${seccionActiva === 'personalizar' ? 'active' : ''}`}
-              >
-                <span className="material-symbols-rounded text-lg">settings</span>
-                <span>Configuración</span>
-              </button>
+
+              {/* Acordeón Móvil CRM */}
+              <div>
+                <button
+                  onClick={() => toggleGrupo('crm')}
+                  className="w-full flex items-center justify-between px-3 py-2 text-[#a1a1aa] font-bold uppercase text-[0.7rem]"
+                >
+                  <span>CRM &amp; Operaciones</span>
+                  <span className={`material-symbols-rounded text-sm ${gruposAbiertos.crm ? 'rotate-180' : ''}`}>expand_more</span>
+                </button>
+                {gruposAbiertos.crm && (
+                  <div className="ml-2 pl-2 border-l border-[#27272a] space-y-1">
+                    <button onClick={() => { setSeccion('pipeline'); toggleMenuMovil(); }} className={`bento-sidebar-item ${seccionActiva === 'pipeline' ? 'active' : ''}`}>
+                      <span className="material-symbols-rounded text-base">view_kanban</span>
+                      <span>Pipeline Kanban</span>
+                    </button>
+                    <button onClick={() => { setSeccion('clientes'); toggleMenuMovil(); }} className={`bento-sidebar-item ${seccionActiva === 'clientes' ? 'active' : ''}`}>
+                      <span className="material-symbols-rounded text-base">contacts</span>
+                      <span>Clientes &amp; Leads</span>
+                    </button>
+                    <button onClick={() => { setSeccion('proyectos-crm'); toggleMenuMovil(); }} className={`bento-sidebar-item ${seccionActiva === 'proyectos-crm' ? 'active' : ''}`}>
+                      <span className="material-symbols-rounded text-base">foundation</span>
+                      <span>Obras en Ejecución</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Acordeón Móvil Atención & Web */}
+              <div>
+                <button
+                  onClick={() => toggleGrupo('web')}
+                  className="w-full flex items-center justify-between px-3 py-2 text-[#a1a1aa] font-bold uppercase text-[0.7rem]"
+                >
+                  <span>Atención &amp; Web</span>
+                  <span className={`material-symbols-rounded text-sm ${gruposAbiertos.web ? 'rotate-180' : ''}`}>expand_more</span>
+                </button>
+                {gruposAbiertos.web && (
+                  <div className="ml-2 pl-2 border-l border-[#27272a] space-y-1">
+                    <button onClick={() => { setSeccion('mensajes'); toggleMenuMovil(); }} className={`bento-sidebar-item ${seccionActiva === 'mensajes' ? 'active' : ''}`}>
+                      <span className="material-symbols-rounded text-base">mail</span>
+                      <span>Mensajes Web</span>
+                    </button>
+                    <button onClick={() => { setSeccion('pqr'); toggleMenuMovil(); }} className={`bento-sidebar-item ${seccionActiva === 'pqr' ? 'active' : ''}`}>
+                      <span className="material-symbols-rounded text-base">support_agent</span>
+                      <span>Sistema PQR</span>
+                    </button>
+                    <button onClick={() => { setSeccion('portafolio'); toggleMenuMovil(); }} className={`bento-sidebar-item ${seccionActiva === 'portafolio' ? 'active' : ''}`}>
+                      <span className="material-symbols-rounded text-base">collections</span>
+                      <span>Portafolio Web</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Acordeón Móvil Administración */}
+              <div>
+                <button
+                  onClick={() => toggleGrupo('admin')}
+                  className="w-full flex items-center justify-between px-3 py-2 text-[#a1a1aa] font-bold uppercase text-[0.7rem]"
+                >
+                  <span>Administración</span>
+                  <span className={`material-symbols-rounded text-sm ${gruposAbiertos.admin ? 'rotate-180' : ''}`}>expand_more</span>
+                </button>
+                {gruposAbiertos.admin && (
+                  <div className="ml-2 pl-2 border-l border-[#27272a] space-y-1">
+                    <button onClick={() => { setSeccion('analiticas'); toggleMenuMovil(); }} className={`bento-sidebar-item ${seccionActiva === 'analiticas' ? 'active' : ''}`}>
+                      <span className="material-symbols-rounded text-base">analytics</span>
+                      <span>Analíticas</span>
+                    </button>
+                    <button onClick={() => { setSeccion('usuarios'); toggleMenuMovil(); }} className={`bento-sidebar-item ${seccionActiva === 'usuarios' ? 'active' : ''}`}>
+                      <span className="material-symbols-rounded text-base">manage_accounts</span>
+                      <span>Usuarios Staff</span>
+                    </button>
+                    <button onClick={() => { setSeccion('personalizar'); toggleMenuMovil(); }} className={`bento-sidebar-item ${seccionActiva === 'personalizar' ? 'active' : ''}`}>
+                      <span className="material-symbols-rounded text-base">settings</span>
+                      <span>Configuración</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+
             </nav>
 
             <div className="p-4 border-t border-[#1a1a1a]">

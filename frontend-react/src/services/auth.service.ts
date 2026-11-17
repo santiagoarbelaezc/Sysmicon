@@ -8,7 +8,7 @@ export interface Usuario {
   nombre: string;
   email: string;
   telefono?: string;
-  rol: 'admin' | 'usuario' | 'propietario' | 'arquitecto' | 'inversionista';
+  rol: 'admin' | 'usuario' | 'propietario' | 'arquitecto' | 'inversionista' | 'comercial';
   estado: string;
   avatar_url?: string;
   created_at?: string;

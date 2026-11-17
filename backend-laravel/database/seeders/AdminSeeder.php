@@ -15,7 +15,7 @@ class AdminSeeder extends Seeder
         $password = env('ADMIN_PASSWORD');
 
         if (! $email || ! $password) {
-            $this->command?->warn('ADMIN_EMAIL / ADMIN_PASSWORD no definidos en .env: se omite la creaciÛn del admin.');
+            $this->command?->warn('ADMIN_EMAIL / ADMIN_PASSWORD no definidos en .env: se omite la creaci√≥n del admin.');
 
             return;
         }

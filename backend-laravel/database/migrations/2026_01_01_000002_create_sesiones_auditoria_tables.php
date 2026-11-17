@@ -8,11 +8,11 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // Se crea después de `clientes` (ver migración crm) para la FK; aquí solo sesiones y auditoría.
+        // Se crea despuÃ©s de `clientes` (ver migraciÃ³n crm) para la FK; aquÃ­ solo sesiones y auditorÃ­a.
         Schema::create('sesiones', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('guard', 10)->index();
-            $table->unsignedBigInteger('sujeto_id')->index(); // usuarios.id o cuentas_clientes.id según guard
+            $table->unsignedBigInteger('sujeto_id')->index(); // usuarios.id o cuentas_clientes.id segÃºn guard
             $table->string('refresh_hash', 64)->unique();
             $table->uuid('familia_id')->index();
             $table->string('ip', 45)->nullable();

@@ -348,8 +348,8 @@ export const DashMensajes: React.FC = () => {
                     <path d="m16 9-4 4-4-4"/>
                   </svg>
                 </div>
-                <h5 className="font-serif font-black text-neutral-900 text-base uppercase tracking-wider">BANDEJA AL DÍA</h5>
-                <p className="text-xs sm:text-sm text-neutral-500 max-w-[240px] font-normal leading-relaxed">
+                <h5 className="font-bold text-[#09090b] text-sm tracking-tight">Bandeja al Día</h5>
+                <p className="text-xs text-[#71717a] max-w-[240px] font-medium leading-relaxed">
                   No hay cotizaciones pendientes. Las nuevas solicitudes web se mostrarán en vivo.
                 </p>
               </div>
@@ -498,8 +498,8 @@ export const DashMensajes: React.FC = () => {
                   <rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>
                 </svg>
               </div>
-              <h4 className="font-serif text-2xl font-black text-neutral-950 uppercase tracking-tight">BANDEJA DE CONSULTAS</h4>
-              <p className="text-sm sm:text-base text-neutral-600 max-w-md font-normal leading-relaxed">
+              <h4 className="text-xl font-black text-[#09090b] tracking-tight">Bandeja de Consultas</h4>
+              <p className="text-xs sm:text-sm text-[#71717a] max-w-md font-medium leading-relaxed">
                 Selecciona cualquier mensaje en la columna izquierda para revisar el detalle completo del presupuesto y responder directamente al cliente.
               </p>
             </div>

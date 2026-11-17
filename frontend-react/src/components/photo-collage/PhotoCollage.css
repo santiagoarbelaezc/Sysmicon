@@ -1,0 +1,195 @@
+/* ===================================================
+   PHOTO COLLAGE COMPONENT — Sysmicon Editorial Gallery
+   Layout asimétrico tipo revista de arquitectura de lujo
+   =================================================== */
+
+.collage-section {
+  position: relative;
+}
+
+/* ===== FILAS DEL COLLAGE ===== */
+.collage-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.collage-row {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+}
+
+/* Fila 1: Grande(2) + Normal + Normal = 4 cols */
+.row-1 {
+  grid-template-columns: 2fr 1fr 1fr;
+  height: 380px;
+}
+
+/* Fila 2: Pequeño + Grande(2) + Normal = 4 cols */
+.row-2 {
+  grid-template-columns: 1fr 2fr 1fr;
+  height: 340px;
+}
+
+/* Fila 3: Normal + Normal + Grande(2) = 4 cols */
+.row-3 {
+  grid-template-columns: 1fr 1fr 2fr;
+  height: 380px;
+}
+
+/* Fila 4: Pequeño + Grande(2) + Normal = 4 cols */
+.row-4 {
+  grid-template-columns: 1fr 2fr 1fr;
+  height: 340px;
+}
+
+/* ===== ITEMS DEL COLLAGE ===== */
+.collage-item {
+  position: relative;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.collage-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* ===== IMAGEN ===== */
+.collage-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.75s cubic-bezier(0.25, 1, 0.5, 1),
+              filter 0.5s ease;
+  filter: brightness(0.88);
+  will-change: transform;
+}
+
+.collage-link:hover .collage-img {
+  transform: scale(1.06);
+  filter: brightness(0.7);
+}
+
+/* ===== OVERLAY AL HOVER ===== */
+.collage-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 20px 22px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 8, 20, 0.88) 0%,
+    rgba(0, 8, 20, 0.3) 40%,
+    rgba(0, 8, 20, 0) 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+}
+
+.collage-link:hover .collage-overlay {
+  opacity: 1;
+}
+
+/* ===== LABEL DEL PROYECTO ===== */
+.collage-label {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(194, 225, 255, 0.95);
+  margin-bottom: 6px;
+  transform: translateY(8px);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.collage-link:hover .collage-label {
+  transform: translateY(0);
+}
+
+/* ===== FLECHA DE NAVEGACIÓN ===== */
+.collage-arrow {
+  width: 18px;
+  height: 18px;
+  color: #ffffff;
+  transform: translateX(-4px);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.collage-link:hover .collage-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ===== BORDE INTERIOR SUTIL EN HOVER ===== */
+.collage-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(194, 225, 255, 0);
+  transition: border-color 0.4s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.collage-item:hover::after {
+  border-color: rgba(194, 225, 255, 0.25);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .row-1, .row-2, .row-3, .row-4 {
+    height: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .collage-row {
+    grid-template-columns: 1fr 1fr !important;
+    height: auto !important;
+  }
+
+  .collage-item {
+    height: 220px;
+  }
+
+  .row-1 .collage-item:first-child,
+  .row-2 .collage-item:nth-child(2),
+  .row-3 .collage-item:last-child,
+  .row-4 .collage-item:nth-child(2) {
+    grid-column: span 2;
+    height: 260px;
+  }
+}
+
+@media (max-width: 480px) {
+  .collage-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  .collage-item {
+    height: 200px;
+  }
+
+  .row-1 .collage-item:first-child,
+  .row-2 .collage-item:nth-child(2),
+  .row-3 .collage-item:last-child,
+  .row-4 .collage-item:nth-child(2) {
+    grid-column: span 1;
+    height: 240px;
+  }
+}

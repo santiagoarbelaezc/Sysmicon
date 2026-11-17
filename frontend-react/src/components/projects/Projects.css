@@ -1,0 +1,255 @@
+/* === PORTAFOLIO SPLIT RESPONSIVE (MÓVIL & DESKTOP ACCORDION) === */
+
+.portfolio-section {
+  position: relative;
+  z-index: 5;
+  isolation: isolate;
+  overflow: hidden;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.portfolio-section [data-aos] {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Carrusel Hero Móvil */
+.hero-carousel-mobile {
+  position: relative;
+  width: 100%;
+  height: 85vh;
+  overflow: hidden;
+  background: #0A0A0A;
+  z-index: 5;
+}
+
+.carousel-track-container {
+  height: 100%;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.carousel-track-container::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-slide {
+  scroll-snap-align: center;
+}
+
+.slide-img {
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  filter: brightness(1) !important;
+}
+
+.slide-content {
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideUpFade 0.8s forwards 0.2s;
+}
+
+@keyframes slideUpFade {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.dot-btn {
+  border: none;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+
+.dot-btn.active {
+  background: var(--wood-accent) !important;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+}
+
+/* Desktop Accordion Panels */
+.portfolio-desktop-section {
+  display: flex;
+  width: 100%;
+  height: 95vh; /* Aumentado a 95vh */
+  align-items: stretch;
+  overflow: hidden;
+  background: #001A33;
+  transform: translateZ(0);
+}
+
+.box {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: flex 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+  min-width: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  background: #001A33;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.box:hover {
+  flex: 1.9;
+}
+
+.bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+  filter: brightness(1) !important; /* Brillo al 100% normal sin sombras */
+  background: #001A33;
+}
+
+.box:hover .bg-img {
+  transform: scale(1.05);
+}
+
+/* Contenedor del nombre de la casa (Limpio, sin tarjeta oscura) */
+.content {
+  position: absolute;
+  z-index: 2;
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+.content h3 {
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-weight: 300 !important; /* Letra muy delgada y elegante */
+  color: white;
+  line-height: 1;
+  /* Sombra de texto suave para lectura perfecta en fondos claros */
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.7), 0 2px 4px rgba(0, 0, 0, 0.9);
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  opacity: 0.95;
+}
+
+.box:hover .content h3 {
+  color: var(--wood-light);
+  letter-spacing: 0.28em;
+  text-shadow: 0 6px 24px rgba(0, 0, 0, 0.9);
+}
+
+/* Keyframes y Clases de Animación Premium para la Galería */
+.animate-backdrop-reveal {
+  animation: backdropReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes backdropReveal {
+  from {
+    background-color: rgba(8, 8, 8, 0);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  to {
+    background-color: rgba(8, 8, 8, 0.98);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+}
+
+.animate-slide-left-fade {
+  animation: slideLeftFade 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideLeftFade {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-up-fade {
+  animation: slideUpFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Transiciones Premium para el Lightbox */
+.animate-lightbox-backdrop {
+  animation: lightboxBackdrop 0.4s ease-out forwards;
+}
+
+@keyframes lightboxBackdrop {
+  from { background-color: rgba(0, 0, 0, 0); }
+  to { background-color: rgba(0, 0, 0, 0.98); }
+}
+
+.animate-lightbox-image {
+  animation: lightboxImageReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes lightboxImageReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Lightbox & Gallery animations fallback */
+.animate-fade {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Efecto Cinematográfico de Cambio de Diapositiva (Slide Change Effect) */
+@keyframes imageFadeScale {
+  0% {
+    opacity: 0;
+    transform: scale(1.08) translateY(12px);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.animate-slide-change {
+  animation: imageFadeScale 0.68s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-change-delay {
+  animation: imageFadeScale 0.68s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.1s;
+  opacity: 0;
+}

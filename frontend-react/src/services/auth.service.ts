@@ -20,7 +20,7 @@ interface LoginResponse {
   data: {
     user: Usuario;
     access_token: string;
-    refresh_token: string;
+    refresh_token?: string;
     expires_in: number;
   };
 }
@@ -131,10 +131,14 @@ class AuthService {
     return localStorage.getItem(this.REFRESH_TOKEN_KEY);
   }
 
-  private saveSession(user: Usuario, accessToken: string, refreshToken: string): void {
-    localStorage.setItem(this.ACCESS_TOKEN_KEY,  accessToken);
-    localStorage.setItem(this.REFRESH_TOKEN_KEY, refreshToken);
-    localStorage.setItem(this.USER_KEY,          JSON.stringify(user));
+  private saveSession(user: Usuario, accessToken: string, refreshToken?: string): void {
+    localStorage.setItem(this.ACCESS_TOKEN_KEY, accessToken);
+    if (refreshToken) {
+      localStorage.setItem(this.REFRESH_TOKEN_KEY, refreshToken);
+    } else {
+      localStorage.removeItem(this.REFRESH_TOKEN_KEY);
+    }
+    localStorage.setItem(this.USER_KEY, JSON.stringify(user));
     this.currentUser.set(user);
   }
 

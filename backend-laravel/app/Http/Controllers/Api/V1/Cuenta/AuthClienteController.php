@@ -52,6 +52,10 @@ class AuthClienteController extends Controller
             return $this->fail('Tu cuenta se encuentra inactiva.', 401);
         }
 
+        if (Hash::needsRehash($cuenta->password)) {
+            $cuenta->forceFill(['password' => Hash::make($request->input('password'))])->save();
+        }
+
         $this->bloqueos->limpiar($cuenta);
         [$sesion, $refresh] = $this->sesiones->crear($request, self::GUARD, $cuenta->id);
         $this->auditoria->registrar($request, 'login_ok', self::GUARD, $cuenta->id, $email);

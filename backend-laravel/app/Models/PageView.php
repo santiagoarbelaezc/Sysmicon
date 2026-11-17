@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PageView extends Model
 {
-    public $timestamps = false;
+    public const UPDATED_AT = null;
 
     protected $table = 'page_views';
 

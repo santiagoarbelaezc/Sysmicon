@@ -49,6 +49,10 @@ class AuthController extends Controller
             return $this->fallo($request, $usuario);
         }
 
+        if (Hash::needsRehash($usuario->password)) {
+            $usuario->forceFill(['password' => Hash::make($password)])->save();
+        }
+
         if (! $usuario->activo) {
             $this->auditoria->registrar($request, 'login_inactivo', self::GUARD, $usuario->id, $email);
 
@@ -84,7 +88,7 @@ class AuthController extends Controller
 
     public function refresh(Request $request): JsonResponse
     {
-        $plano = (string) $request->cookie(config('sysmicon.auth.refresh_cookie'));
+        $plano = (string) ($request->cookie(config('sysmicon.auth.refresh_cookie')) ?: $request->input('refresh_token', ''));
         $sesion = $plano !== '' ? $this->sesiones->buscarPorRefresh($plano) : null;
 
         if (! $sesion || $sesion->guard !== self::GUARD) {

@@ -67,9 +67,6 @@ let isRefreshing = false;
 let refreshWaiters: Array<(token: string | null) => void> = [];
 
 async function tryRefreshToken(): Promise<string | null> {
-  const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
-  if (!refreshToken) return null;
-
   if (isRefreshing) {
     return new Promise((resolve) => {
       refreshWaiters.push(resolve);
@@ -78,11 +75,12 @@ async function tryRefreshToken(): Promise<string | null> {
 
   isRefreshing = true;
   try {
+    const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
     const resp = await fetch(`${environment.apiUrl}/auth/refresh`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
-      body: JSON.stringify({ refresh_token: refreshToken }),
+      body: JSON.stringify(refreshToken ? { refresh_token: refreshToken } : {}),
     });
     const data = await resp.json();
     if (resp.ok && data?.success && data?.data?.access_token) {

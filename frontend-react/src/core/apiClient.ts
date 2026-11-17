@@ -81,6 +81,7 @@ async function tryRefreshToken(): Promise<string | null> {
     const resp = await fetch(`${environment.apiUrl}/auth/refresh`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({ refresh_token: refreshToken }),
     });
     const data = await resp.json();
@@ -141,6 +142,7 @@ async function rawRequest<T>(
   let response = await fetch(fullUrl, {
     method,
     headers: makeHeaders(token),
+    credentials: 'include',
     body: isFormData ? body : body !== undefined ? JSON.stringify(body) : undefined,
   });
 

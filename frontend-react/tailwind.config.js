@@ -45,6 +45,7 @@ export default {
       fontFamily: {
         serif: ['"Exo 2"', '"Inter Tight"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         sans: ['"Exo 2"', '"Inter Tight"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        dashboard: ['"Inter Tight"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
       },
       letterSpacing: {

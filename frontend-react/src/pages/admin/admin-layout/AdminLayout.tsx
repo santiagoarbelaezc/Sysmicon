@@ -1,22 +1,53 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { authService } from '../../../services/auth.service';
+import { authService, useAuthService } from '../../../services/auth.service';
 import { adminService, useAdminService } from '../../../services/admin.service';
+import { crmService, useCrmService } from '../../../services/crm.service';
 
-// Importación de las 5 vistas activas
+// Estilos del Bento Grid Design System
+import '../dashboard-bento.css';
+
+// Importación de las vistas
 import { DashInicio } from '../views/dash-inicio/DashInicio';
+import { DashPipeline } from '../views/dash-crm-pipeline/DashPipeline';
+import { DashClientes } from '../views/dash-crm-clientes/DashClientes';
+import { DashProyectosCrm } from '../views/dash-crm-proyectos/DashProyectosCrm';
+import { DashPqr } from '../views/dash-pqr/DashPqr';
+import { DashPortafolio } from '../views/dash-portafolio/DashPortafolio';
 import { DashAnaliticas } from '../views/dash-analiticas/DashAnaliticas';
 import { DashPersonalizar } from '../views/dash-personalizar/DashPersonalizar';
 import { DashUsuarios } from '../views/dash-usuarios/DashUsuarios';
 import { DashMensajes } from '../views/dash-mensajes/DashMensajes';
 
-export type AdminSection = 'inicio' | 'analiticas' | 'personalizar' | 'usuarios' | 'mensajes';
+export type AdminSection =
+  | 'inicio'
+  | 'pipeline'
+  | 'clientes'
+  | 'proyectos-crm'
+  | 'pqr'
+  | 'mensajes'
+  | 'portafolio'
+  | 'analiticas'
+  | 'usuarios'
+  | 'personalizar';
+
+const VALID_SECTIONS: AdminSection[] = [
+  'inicio',
+  'pipeline',
+  'clientes',
+  'proyectos-crm',
+  'pqr',
+  'mensajes',
+  'portafolio',
+  'analiticas',
+  'usuarios',
+  'personalizar',
+];
 
 function getInitialSection(): AdminSection {
   try {
     const saved = localStorage.getItem('sysmicon_admin_section') as AdminSection;
-    const validSections: AdminSection[] = ['inicio', 'analiticas', 'personalizar', 'usuarios', 'mensajes'];
-    return validSections.includes(saved) ? saved : 'inicio';
+    return VALID_SECTIONS.includes(saved) ? saved : 'inicio';
   } catch {
     return 'inicio';
   }
@@ -24,7 +55,9 @@ function getInitialSection(): AdminSection {
 
 export const AdminLayout: React.FC = () => {
   const navigate = useNavigate();
-  const { usuarios, mensajes } = useAdminService();
+  const { currentUser } = useAuthService();
+  const { mensajes } = useAdminService();
+  const { kpis, pqrs } = useCrmService();
 
   const [seccionActiva, setSeccionActiva] = useState<AdminSection>(getInitialSection);
   const [sidebarAbierto, setSidebarAbierto] = useState<boolean>(true);
@@ -32,6 +65,7 @@ export const AdminLayout: React.FC = () => {
 
   useEffect(() => {
     adminService.cargarDatosReales();
+    crmService.cargarTodo();
   }, []);
 
   const setSeccion = (seccion: AdminSection) => {
@@ -61,109 +95,147 @@ export const AdminLayout: React.FC = () => {
     return mensajes.filter((m) => !m.leido).length;
   }, [mensajes]);
 
+  const countPqrPendientes = useMemo(() => {
+    return pqrs.filter((p) => p.estado === 'radicado' || p.estado === 'en_tramite').length;
+  }, [pqrs]);
+
   const cerrarSesionAdmin = async () => {
     await authService.logout(() => navigate('/'));
   };
 
   return (
-    <div className="admin-theme private-portal min-h-screen flex overflow-hidden font-sans bg-[#fafafa] text-neutral-900 selection:bg-neutral-950 selection:text-white">
+    <div className="admin-dashboard-bento flex min-h-screen overflow-hidden selection:bg-black selection:text-white">
       
       {/* =====================================================
-           SIDEBAR MONOCROMÁTICO (TIPOGRAFÍA AMPLIA Y MAYÚSCULAS)
+           SIDEBAR OSCURO BENTO (#0a0a0a)
            ===================================================== */}
       <aside
-        className={`${
-          sidebarAbierto ? 'w-72' : 'w-24'
-        } hidden lg:flex flex-col bg-white border-r border-neutral-200 transition-all duration-300 z-30 shrink-0 select-none relative font-sans`}
+        className={`bento-sidebar ${
+          sidebarAbierto ? 'w-[250px]' : 'w-[72px]'
+        } hidden lg:flex flex-col shrink-0 select-none relative z-30 transition-all duration-300`}
       >
-        {/* Header del Sidebar con Logo Institucional */}
-        <div className="h-24 border-b border-neutral-200 flex items-center justify-between px-6">
-          <Link to="/" className="flex items-center gap-3.5 overflow-hidden group">
-            <div className="w-12 h-12 rounded-2xl bg-neutral-950 flex items-center justify-center text-white shrink-0 font-serif font-black text-xl shadow-md group-hover:scale-105 transition-transform">
+        {/* Header del Sidebar */}
+        <div className="h-[74px] border-b border-[#1a1a1a] flex items-center justify-between px-5">
+          <Link to="/" className="flex items-center gap-3 overflow-hidden group">
+            <div className="w-10 h-10 rounded-xl bg-white text-black flex items-center justify-center font-black text-base shrink-0 group-hover:scale-105 transition-transform shadow-xs">
               S
             </div>
             {sidebarAbierto && (
               <div className="flex flex-col animate-fade-in">
-                <span className="font-serif font-black text-xl tracking-[0.18em] text-neutral-950 uppercase leading-none">SYSMICON</span>
-                <span className="text-xs uppercase tracking-[0.25em] font-mono font-bold text-neutral-400 mt-1.5">STUDIO ADMIN</span>
+                <span className="font-black text-sm tracking-[0.14em] text-white uppercase leading-none">
+                  SYSMICON
+                </span>
+                <span className="text-[0.62rem] uppercase tracking-[0.2em] font-mono font-bold text-[#a1a1aa] mt-1">
+                  STUDIO CRM
+                </span>
               </div>
             )}
           </Link>
           <button
             onClick={toggleSidebar}
-            className="p-2.5 rounded-xl transition-colors text-neutral-400 hover:text-neutral-950 hover:bg-neutral-100 cursor-pointer"
-            title={sidebarAbierto ? 'Colapsar menú' : 'Expandir menú'}
+            className="p-1.5 rounded-lg text-[#71717a] hover:text-white hover:bg-[#141416] transition-colors cursor-pointer"
+            title={sidebarAbierto ? 'Colapsar barra lateral' : 'Expandir barra lateral'}
           >
-            <svg
-              className={`w-5 h-5 transition-transform ${!sidebarAbierto ? 'rotate-180' : ''}`}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
+            <span className={`material-symbols-rounded text-lg transition-transform ${!sidebarAbierto ? 'rotate-180' : ''}`}>
+              keyboard_double_arrow_left
+            </span>
           </button>
         </div>
 
-        {/* Menú de Navegación Organizado */}
-        <nav className="flex-1 py-8 px-4 space-y-7 overflow-y-auto scrollbar-thin">
+        {/* Navegación Modular Bento */}
+        <nav className="flex-1 py-5 px-3 space-y-6 overflow-y-auto scrollbar-thin">
           
-          {/* SECCIÓN: NAVEGACIÓN PRINCIPAL */}
-          <div className="space-y-2">
+          {/* GRUPO 1: CONSOLA PRINCIPAL */}
+          <div className="space-y-1">
             {sidebarAbierto && (
-              <span className="px-3.5 font-mono text-xs font-black tracking-[0.25em] uppercase block mb-3 text-neutral-400">
-                CONSOLA DE CONTROL
+              <span className="px-3 text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[#71717a] block mb-2">
+                CONSOLA
               </span>
             )}
 
-            {/* 1. Inicio */}
             <button
               onClick={() => setSeccion('inicio')}
-              className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-sm transition-all cursor-pointer group ${
-                seccionActiva === 'inicio'
-                  ? 'bg-neutral-950 text-white shadow-sm font-bold'
-                  : 'text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 font-semibold'
-              }`}
+              className={`bento-sidebar-item ${seccionActiva === 'inicio' ? 'active' : ''}`}
+              title="Panel de Control General"
             >
-              <svg className="w-5 h-5 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              {sidebarAbierto && <span className="truncate tracking-wider uppercase">INICIO</span>}
+              <span className="material-symbols-rounded text-lg">dashboard</span>
+              {sidebarAbierto && <span>Inicio &amp; Resumen</span>}
             </button>
+          </div>
 
-            {/* 2. Analíticas */}
+          {/* GRUPO 2: CRM & OPERACIONES */}
+          <div className="space-y-1">
+            {sidebarAbierto && (
+              <span className="px-3 text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[#71717a] block mb-2">
+                CRM &amp; OPERACIONES
+              </span>
+            )}
+
             <button
-              onClick={() => setSeccion('analiticas')}
-              className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-sm transition-all cursor-pointer group ${
-                seccionActiva === 'analiticas'
-                  ? 'bg-neutral-950 text-white shadow-sm font-bold'
-                  : 'text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 font-semibold'
-              }`}
+              onClick={() => setSeccion('pipeline')}
+              className={`bento-sidebar-item ${seccionActiva === 'pipeline' ? 'active' : ''}`}
+              title="Pipeline Kanban Comercial"
             >
-              <svg className="w-5 h-5 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-              {sidebarAbierto && <span className="truncate tracking-wider uppercase">ANALÍTICAS</span>}
+              <span className="material-symbols-rounded text-lg">view_kanban</span>
+              {sidebarAbierto && (
+                <span className="flex items-center justify-between w-full">
+                  <span>Pipeline Kanban</span>
+                  {kpis.pipeline_oportunidades_activas > 0 && (
+                    <span className="text-[0.65rem] px-2 py-0.5 rounded-full font-mono font-bold bg-[#141416] border border-[#27272a] text-[#a1a1aa]">
+                      {kpis.pipeline_oportunidades_activas}
+                    </span>
+                  )}
+                </span>
+              )}
             </button>
 
-            {/* 3. Mensajes & Cotizaciones */}
+            <button
+              onClick={() => setSeccion('clientes')}
+              className={`bento-sidebar-item ${seccionActiva === 'clientes' ? 'active' : ''}`}
+              title="Directorio de Clientes CRM"
+            >
+              <span className="material-symbols-rounded text-lg">contacts</span>
+              {sidebarAbierto && <span>Clientes &amp; Leads</span>}
+            </button>
+
+            <button
+              onClick={() => setSeccion('proyectos-crm')}
+              className={`bento-sidebar-item ${seccionActiva === 'proyectos-crm' ? 'active' : ''}`}
+              title="Proyectos de Construcción CRM"
+            >
+              <span className="material-symbols-rounded text-lg">foundation</span>
+              {sidebarAbierto && (
+                <span className="flex items-center justify-between w-full">
+                  <span>Obras en Ejecución</span>
+                  {kpis.proyectos_activos > 0 && (
+                    <span className="text-[0.65rem] px-2 py-0.5 rounded-full font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                      {kpis.proyectos_activos}
+                    </span>
+                  )}
+                </span>
+              )}
+            </button>
+          </div>
+
+          {/* GRUPO 3: ATENCIÓN AL CLIENTE & LEADS */}
+          <div className="space-y-1">
+            {sidebarAbierto && (
+              <span className="px-3 text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[#71717a] block mb-2">
+                ATENCIÓN &amp; WEB
+              </span>
+            )}
+
             <button
               onClick={() => setSeccion('mensajes')}
-              className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-sm transition-all cursor-pointer group ${
-                seccionActiva === 'mensajes'
-                  ? 'bg-neutral-950 text-white shadow-sm font-bold'
-                  : 'text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 font-semibold'
-              }`}
+              className={`bento-sidebar-item ${seccionActiva === 'mensajes' ? 'active' : ''}`}
+              title="Bandeja de Mensajes y Cotizaciones"
             >
-              <svg className="w-5 h-5 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span className="material-symbols-rounded text-lg">mail</span>
               {sidebarAbierto && (
-                <span className="truncate flex items-center justify-between w-full tracking-wider uppercase">
-                  <span>MENSAJES</span>
+                <span className="flex items-center justify-between w-full">
+                  <span>Mensajes Web</span>
                   {countMensajesSinLeer > 0 && (
-                    <span
-                      className={`text-xs font-bold px-2.5 py-0.5 rounded-full font-mono transition-colors shadow-xs ${
-                        seccionActiva === 'mensajes' ? 'bg-white text-neutral-950' : 'bg-neutral-950 text-white'
-                      }`}
-                    >
+                    <span className="text-[0.65rem] px-2 py-0.5 rounded-full font-mono font-bold bg-red-600 text-white">
                       {countMensajesSinLeer}
                     </span>
                   )}
@@ -171,258 +243,283 @@ export const AdminLayout: React.FC = () => {
               )}
             </button>
 
-            {/* 4. Usuarios */}
             <button
-              onClick={() => setSeccion('usuarios')}
-              className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-sm transition-all cursor-pointer group ${
-                seccionActiva === 'usuarios'
-                  ? 'bg-neutral-950 text-white shadow-sm font-bold'
-                  : 'text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 font-semibold'
-              }`}
+              onClick={() => setSeccion('pqr')}
+              className={`bento-sidebar-item ${seccionActiva === 'pqr' ? 'active' : ''}`}
+              title="Peticiones, Quejas y Reclamos"
             >
-              <svg className="w-5 h-5 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span className="material-symbols-rounded text-lg">support_agent</span>
               {sidebarAbierto && (
-                <span className="truncate flex items-center justify-between w-full tracking-wider uppercase">
-                  <span>USUARIOS</span>
-                  <span
-                    className={`text-xs px-2.5 py-0.5 rounded-md font-mono font-bold ${
-                      seccionActiva === 'usuarios'
-                        ? 'bg-white/20 text-white'
-                        : 'bg-neutral-100 text-neutral-700 border border-neutral-200'
-                    }`}
-                  >
-                    {usuarios.length}
-                  </span>
+                <span className="flex items-center justify-between w-full">
+                  <span>Sistema PQR</span>
+                  {countPqrPendientes > 0 && (
+                    <span className="text-[0.65rem] px-2 py-0.5 rounded-full font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                      {countPqrPendientes}
+                    </span>
+                  )}
                 </span>
               )}
             </button>
 
-            {/* 5. Configuración (Personalizar) */}
             <button
-              onClick={() => setSeccion('personalizar')}
-              className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-sm transition-all cursor-pointer group ${
-                seccionActiva === 'personalizar'
-                  ? 'bg-neutral-950 text-white shadow-sm font-bold'
-                  : 'text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 font-semibold'
-              }`}
+              onClick={() => setSeccion('portafolio')}
+              className={`bento-sidebar-item ${seccionActiva === 'portafolio' ? 'active' : ''}`}
+              title="Portafolio de Obras Web"
             >
-              <svg className="w-5 h-5 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-              {sidebarAbierto && <span className="truncate tracking-wider uppercase">CONFIGURACIÓN</span>}
+              <span className="material-symbols-rounded text-lg">collections</span>
+              {sidebarAbierto && <span>Portafolio Web</span>}
             </button>
-
           </div>
 
-          {/* SECCIÓN: ACCIONES Y SALIDA */}
-          <div className="space-y-2 pt-6 border-t border-neutral-200">
+          {/* GRUPO 4: ANÁLISIS & ADMINISTRACIÓN */}
+          <div className="space-y-1">
             {sidebarAbierto && (
-              <span className="px-3.5 font-mono text-xs font-black tracking-[0.25em] uppercase block mb-3 text-neutral-400">
-                SITIO PÚBLICO
+              <span className="px-3 text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[#71717a] block mb-2">
+                ADMINISTRACIÓN
               </span>
             )}
 
+            <button
+              onClick={() => setSeccion('analiticas')}
+              className={`bento-sidebar-item ${seccionActiva === 'analiticas' ? 'active' : ''}`}
+              title="Analíticas de Tráfico Web"
+            >
+              <span className="material-symbols-rounded text-lg">analytics</span>
+              {sidebarAbierto && <span>Analíticas</span>}
+            </button>
+
+            <button
+              onClick={() => setSeccion('usuarios')}
+              className={`bento-sidebar-item ${seccionActiva === 'usuarios' ? 'active' : ''}`}
+              title="Directorio de Usuarios Staff"
+            >
+              <span className="material-symbols-rounded text-lg">manage_accounts</span>
+              {sidebarAbierto && <span>Usuarios Staff</span>}
+            </button>
+
+            <button
+              onClick={() => setSeccion('personalizar')}
+              className={`bento-sidebar-item ${seccionActiva === 'personalizar' ? 'active' : ''}`}
+              title="Configuración General del Sitio"
+            >
+              <span className="material-symbols-rounded text-lg">settings</span>
+              {sidebarAbierto && <span>Configuración</span>}
+            </button>
+          </div>
+
+          {/* ACCIONES Y SALIDA */}
+          <div className="pt-4 border-t border-[#1a1a1a] space-y-1">
             <Link
               to="/"
-              className="w-full flex items-center gap-4 px-4 py-3 rounded-2xl text-sm font-semibold text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 transition-all group uppercase tracking-wider"
+              className="bento-sidebar-item hover:text-white"
+              title="Ir al sitio público"
             >
-              <svg className="w-5 h-5 shrink-0 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              {sidebarAbierto && <span className="truncate">VER SITIO WEB</span>}
+              <span className="material-symbols-rounded text-lg">open_in_new</span>
+              {sidebarAbierto && <span>Ver Sitio Web</span>}
             </Link>
 
             <button
               onClick={cerrarSesionAdmin}
-              className="w-full flex items-center gap-4 px-4 py-3 rounded-2xl text-sm font-semibold text-neutral-500 hover:text-red-600 hover:bg-red-50/80 transition-all group cursor-pointer uppercase tracking-wider"
+              className="bento-sidebar-item text-red-400 hover:text-red-300 hover:bg-red-950/30"
+              title="Cerrar Sesión Segura"
             >
-              <svg className="w-5 h-5 shrink-0 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-              {sidebarAbierto && <span className="truncate">CERRAR SESIÓN</span>}
+              <span className="material-symbols-rounded text-lg">logout</span>
+              {sidebarAbierto && <span>Cerrar Sesión</span>}
             </button>
           </div>
 
         </nav>
 
-        {/* Footer Sidebar con Versión */}
+        {/* Footer del Sidebar */}
         {sidebarAbierto && (
-          <div className="p-5 border-t border-neutral-200 text-center font-mono text-xs uppercase tracking-widest text-neutral-400 font-bold">
-            SYSMICON PORTAL • v2.4
+          <div className="p-4 border-t border-[#1a1a1a] text-center font-mono text-[0.65rem] uppercase tracking-widest text-[#71717a] font-bold">
+            SYSMICON &bull; LARAVEL 12 CRM
           </div>
         )}
-
       </aside>
 
       {/* =====================================================
-           CONTENEDOR PRINCIPAL DERECHA (HEADER + VISTAS)
+           CONTENEDOR CENTRAL: HEADER STICKY + CANVAS CLARO
            ===================================================== */}
       <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         
-        {/* TOP NAVBAR ADMIN (BREADCRUMB & ACCIONES TOP) */}
-        <header className="h-24 border-b border-neutral-200 bg-white px-6 sm:px-12 flex items-center justify-between gap-6 shrink-0 z-20 relative font-sans">
+        {/* HEADER STICKY (74px, Blanco Puro, Borde 1.5px) */}
+        <header className="bento-header shrink-0">
           
-          {/* Migas de Pan (Breadcrumbs) & Botón Móvil */}
-          <div className="flex items-center gap-5">
+          {/* Breadcrumbs y Toggle Móvil */}
+          <div className="flex items-center gap-4">
             <button
               onClick={toggleMenuMovil}
-              className="lg:hidden p-3 rounded-xl text-lg border border-neutral-200 bg-neutral-50 text-neutral-900 cursor-pointer hover:bg-neutral-100"
+              className="lg:hidden p-2 rounded-lg border border-[#e4e4e7] bg-[#f4f5f7] text-[#09090b] cursor-pointer"
             >
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+              <span className="material-symbols-rounded text-xl">menu</span>
             </button>
 
-            {/* Breadcrumbs Estilo Arquitectónico con Letras Claras */}
-            <div className="flex items-center gap-3 font-mono text-sm font-bold uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider font-mono">
               <span
-                className="flex items-center gap-2 cursor-pointer text-neutral-400 hover:text-neutral-950 transition-colors"
                 onClick={() => setSeccion('inicio')}
+                className="text-[#71717a] hover:text-[#09090b] transition-colors cursor-pointer"
               >
-                <span>CONSOLA</span>
+                CONSOLA
               </span>
-              <span className="text-neutral-300 font-light">/</span>
-              <span className="text-neutral-950 font-black tracking-widest text-sm sm:text-base">
-                {seccionActiva === 'personalizar' ? 'CONFIGURACIÓN Y CMS' : seccionActiva.toUpperCase()}
+              <span className="text-[#a1a1aa]">/</span>
+              <span className="text-[#09090b] font-black">
+                {seccionActiva.replace('-', ' ').toUpperCase()}
               </span>
             </div>
           </div>
 
-          {/* Acciones Derecha (Ver Sitio en Vivo + Perfil) */}
-          <div className="flex items-center gap-5">
-            
-            {/* Botón Destacado: VER SITIO EN VIVO */}
+          {/* Acciones Derecha */}
+          <div className="flex items-center gap-4">
             <Link
               to="/"
-              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-neutral-950 hover:bg-black text-white font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-all shadow-sm hover:scale-105 cursor-pointer whitespace-nowrap"
+              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-black hover:bg-neutral-800 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-xs"
             >
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span>VER SITIO EN VIVO</span>
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+              <span className="status-dot"></span>
+              <span>SITIO EN VIVO</span>
             </Link>
 
-            {/* Perfil Admin Monocromático */}
-            <div className="flex items-center gap-3.5 pl-5 border-l border-neutral-200">
-              <div className="w-12 h-12 rounded-2xl bg-neutral-950 text-white flex items-center justify-center font-serif font-black text-base shadow-sm">
-                AD
+            {/* Perfil de Staff */}
+            <div className="flex items-center gap-3 pl-4 border-l border-[#e4e4e7]">
+              <div className="w-9 h-9 rounded-xl bg-[#09090b] text-white flex items-center justify-center font-bold text-xs uppercase shadow-xs">
+                {currentUser?.nombre ? currentUser.nombre.slice(0, 2).toUpperCase() : 'AD'}
               </div>
               <div className="hidden sm:block text-left">
-                <span className="text-sm font-black text-neutral-950 block leading-tight uppercase tracking-wider">ADMINISTRADOR</span>
-                <span className="text-xs font-mono font-bold text-neutral-400 block mt-0.5 uppercase tracking-wider">DIRECTOR GENERAL</span>
+                <span className="text-xs font-black text-[#09090b] block leading-tight uppercase">
+                  {currentUser?.nombre || 'Administrador'}
+                </span>
+                <span className="text-[0.65rem] font-mono font-bold text-[#71717a] block uppercase">
+                  ROL: {currentUser?.rol || 'admin'}
+                </span>
               </div>
             </div>
-
           </div>
 
         </header>
 
-        {/* ÁREA DE CONTENIDO (ADAPTABLE SIN SCROLL EXTERNO EN MENSAJES) */}
+        {/* CANVAS PRINCIPAL (Fondo #f4f5f7, max-w 1600px) */}
         <main
           className={
             seccionActiva === 'mensajes'
-              ? 'flex-1 overflow-hidden p-6 sm:p-8 lg:p-10 flex flex-col min-h-0 bg-[#fafafa]'
-              : 'flex-1 overflow-y-auto p-8 sm:p-12 lg:p-16 scrollbar-thin bg-[#fafafa]'
+              ? 'flex-1 overflow-hidden p-5 sm:p-7 flex flex-col min-h-0 bg-[#f4f5f7]'
+              : 'flex-1 overflow-y-auto p-6 sm:p-10 scrollbar-thin bg-[#f4f5f7]'
           }
         >
           <div
             className={
               seccionActiva === 'mensajes'
-                ? 'max-w-[1750px] w-full mx-auto h-full flex flex-col flex-1 min-h-0'
-                : 'max-w-[1750px] mx-auto pb-20'
+                ? 'max-w-[1600px] w-full mx-auto h-full flex flex-col flex-1 min-h-0'
+                : 'max-w-[1600px] mx-auto pb-16'
             }
           >
-            {/* RENDER DE LAS 5 SECCIONES ACTIVAS */}
-            {seccionActiva === 'inicio' && <DashInicio />}
-            {seccionActiva === 'analiticas' && <DashAnaliticas />}
-            {seccionActiva === 'personalizar' && <DashPersonalizar />}
-            {seccionActiva === 'usuarios' && <DashUsuarios />}
+            {/* RENDER DE LA SECCIÓN ACTIVA */}
+            {seccionActiva === 'inicio' && (
+              <DashInicio onNavigateSection={(sec) => setSeccion(sec as AdminSection)} />
+            )}
+            {seccionActiva === 'pipeline' && <DashPipeline />}
+            {seccionActiva === 'clientes' && <DashClientes />}
+            {seccionActiva === 'proyectos-crm' && <DashProyectosCrm />}
+            {seccionActiva === 'pqr' && <DashPqr />}
+            {seccionActiva === 'portafolio' && <DashPortafolio />}
             {seccionActiva === 'mensajes' && (
               <div className="h-full flex flex-col flex-1 min-h-0">
                 <DashMensajes />
               </div>
             )}
+            {seccionActiva === 'analiticas' && <DashAnaliticas />}
+            {seccionActiva === 'usuarios' && <DashUsuarios />}
+            {seccionActiva === 'personalizar' && <DashPersonalizar />}
           </div>
         </main>
 
       </div>
 
-      {/* DRAWER MÓVIL MONOCROMÁTICO */}
+      {/* DRAWER MÓVIL */}
       {menuMovilAbierto && (
         <div className="fixed inset-0 z-50 lg:hidden flex animate-fade-in">
           <div onClick={toggleMenuMovil} className="fixed inset-0 bg-black/60 backdrop-blur-xs"></div>
-          <aside className="w-72 border-r border-neutral-200 bg-white z-10 flex flex-col h-full relative font-sans">
-            
-            <div className="h-24 border-b border-neutral-200 flex items-center justify-between px-6">
-              <div className="flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-neutral-950 text-white flex items-center justify-center font-bold text-base">S</div>
-                <span className="font-serif font-black text-base text-neutral-950 uppercase tracking-widest">SYSMICON ADMIN</span>
-              </div>
-              <button onClick={toggleMenuMovil} className="text-neutral-400 hover:text-neutral-950 font-bold text-xl p-2">✕</button>
+          <aside className="w-72 bg-[#0a0a0a] border-r border-[#1a1a1a] z-10 flex flex-col h-full relative text-white">
+            <div className="h-[74px] border-b border-[#1a1a1a] flex items-center justify-between px-5">
+              <span className="font-black text-sm text-white uppercase tracking-wider">SYSMICON CRM</span>
+              <button onClick={toggleMenuMovil} className="text-[#a1a1aa] hover:text-white p-2">✕</button>
             </div>
 
-            <nav className="flex-1 py-6 px-4 space-y-2 overflow-y-auto">
+            <nav className="flex-1 py-4 px-3 space-y-1.5 overflow-y-auto text-xs">
               <button
-                onClick={() => {
-                  setSeccion('inicio');
-                  toggleMenuMovil();
-                }}
-                className={`w-full text-left px-5 py-3.5 rounded-2xl text-sm flex items-center gap-3.5 transition-colors uppercase tracking-wider ${
-                  seccionActiva === 'inicio'
-                    ? 'bg-neutral-950 text-white font-bold'
-                    : 'text-neutral-600 hover:bg-neutral-100 font-semibold'
-                }`}
+                onClick={() => { setSeccion('inicio'); toggleMenuMovil(); }}
+                className={`bento-sidebar-item ${seccionActiva === 'inicio' ? 'active' : ''}`}
               >
-                <span>INICIO</span>
+                <span className="material-symbols-rounded text-lg">dashboard</span>
+                <span>Inicio</span>
               </button>
               <button
-                onClick={() => {
-                  setSeccion('analiticas');
-                  toggleMenuMovil();
-                }}
-                className={`w-full text-left px-5 py-3.5 rounded-2xl text-sm flex items-center gap-3.5 transition-colors uppercase tracking-wider ${
-                  seccionActiva === 'analiticas'
-                    ? 'bg-neutral-950 text-white font-bold'
-                    : 'text-neutral-600 hover:bg-neutral-100 font-semibold'
-                }`}
+                onClick={() => { setSeccion('pipeline'); toggleMenuMovil(); }}
+                className={`bento-sidebar-item ${seccionActiva === 'pipeline' ? 'active' : ''}`}
               >
-                <span>ANALÍTICAS</span>
+                <span className="material-symbols-rounded text-lg">view_kanban</span>
+                <span>Pipeline Kanban</span>
               </button>
               <button
-                onClick={() => {
-                  setSeccion('mensajes');
-                  toggleMenuMovil();
-                }}
-                className={`w-full text-left px-5 py-3.5 rounded-2xl text-sm flex items-center gap-3.5 transition-colors uppercase tracking-wider ${
-                  seccionActiva === 'mensajes'
-                    ? 'bg-neutral-950 text-white font-bold'
-                    : 'text-neutral-600 hover:bg-neutral-100 font-semibold'
-                }`}
+                onClick={() => { setSeccion('clientes'); toggleMenuMovil(); }}
+                className={`bento-sidebar-item ${seccionActiva === 'clientes' ? 'active' : ''}`}
               >
-                <span>MENSAJES</span>
+                <span className="material-symbols-rounded text-lg">contacts</span>
+                <span>Clientes CRM</span>
               </button>
               <button
-                onClick={() => {
-                  setSeccion('usuarios');
-                  toggleMenuMovil();
-                }}
-                className={`w-full text-left px-5 py-3.5 rounded-2xl text-sm flex items-center gap-3.5 transition-colors uppercase tracking-wider ${
-                  seccionActiva === 'usuarios'
-                    ? 'bg-neutral-950 text-white font-bold'
-                    : 'text-neutral-600 hover:bg-neutral-100 font-semibold'
-                }`}
+                onClick={() => { setSeccion('proyectos-crm'); toggleMenuMovil(); }}
+                className={`bento-sidebar-item ${seccionActiva === 'proyectos-crm' ? 'active' : ''}`}
               >
-                <span>USUARIOS</span>
+                <span className="material-symbols-rounded text-lg">foundation</span>
+                <span>Obras en Ejecución</span>
               </button>
               <button
-                onClick={() => {
-                  setSeccion('personalizar');
-                  toggleMenuMovil();
-                }}
-                className={`w-full text-left px-5 py-3.5 rounded-2xl text-sm flex items-center gap-3.5 transition-colors uppercase tracking-wider ${
-                  seccionActiva === 'personalizar'
-                    ? 'bg-neutral-950 text-white font-bold'
-                    : 'text-neutral-600 hover:bg-neutral-100 font-semibold'
-                }`}
+                onClick={() => { setSeccion('pqr'); toggleMenuMovil(); }}
+                className={`bento-sidebar-item ${seccionActiva === 'pqr' ? 'active' : ''}`}
               >
-                <span>CONFIGURACIÓN</span>
+                <span className="material-symbols-rounded text-lg">support_agent</span>
+                <span>Sistema PQR</span>
+              </button>
+              <button
+                onClick={() => { setSeccion('mensajes'); toggleMenuMovil(); }}
+                className={`bento-sidebar-item ${seccionActiva === 'mensajes' ? 'active' : ''}`}
+              >
+                <span className="material-symbols-rounded text-lg">mail</span>
+                <span>Mensajes Web</span>
+              </button>
+              <button
+                onClick={() => { setSeccion('portafolio'); toggleMenuMovil(); }}
+                className={`bento-sidebar-item ${seccionActiva === 'portafolio' ? 'active' : ''}`}
+              >
+                <span className="material-symbols-rounded text-lg">collections</span>
+                <span>Portafolio Web</span>
+              </button>
+              <button
+                onClick={() => { setSeccion('analiticas'); toggleMenuMovil(); }}
+                className={`bento-sidebar-item ${seccionActiva === 'analiticas' ? 'active' : ''}`}
+              >
+                <span className="material-symbols-rounded text-lg">analytics</span>
+                <span>Analíticas</span>
+              </button>
+              <button
+                onClick={() => { setSeccion('usuarios'); toggleMenuMovil(); }}
+                className={`bento-sidebar-item ${seccionActiva === 'usuarios' ? 'active' : ''}`}
+              >
+                <span className="material-symbols-rounded text-lg">manage_accounts</span>
+                <span>Usuarios Staff</span>
+              </button>
+              <button
+                onClick={() => { setSeccion('personalizar'); toggleMenuMovil(); }}
+                className={`bento-sidebar-item ${seccionActiva === 'personalizar' ? 'active' : ''}`}
+              >
+                <span className="material-symbols-rounded text-lg">settings</span>
+                <span>Configuración</span>
               </button>
             </nav>
 
-            <div className="p-6 border-t border-neutral-200">
-              <Link to="/" className="flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl bg-neutral-950 text-white font-bold text-sm uppercase tracking-wider">
-                <span>REGRESAR AL SITIO WEB</span>
+            <div className="p-4 border-t border-[#1a1a1a]">
+              <Link to="/" className="w-full btn-primary-white justify-center text-xs">
+                <span>Ir al Sitio Web</span>
               </Link>
             </div>
           </aside>

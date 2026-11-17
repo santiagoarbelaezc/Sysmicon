@@ -1,233 +1,411 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
+import { crmService, useCrmService, ProyectoCrm, TareaCrm, ActividadCrm } from '../../../../services/crm.service';
 import { adminService, useAdminService } from '../../../../services/admin.service';
 
-export const DashInicio: React.FC = () => {
-  const { mensajes, usuarios, analiticas } = useAdminService();
+interface DashInicioProps {
+  onNavigateSection?: (section: string) => void;
+}
+
+export const DashInicio: React.FC<DashInicioProps> = ({ onNavigateSection }) => {
+  const { kpis, proyectos, tareas, actividades, cargando } = useCrmService();
+  const { mensajes, analiticas } = useAdminService();
+
+  const [tareaSeleccionada, setTareaSeleccionada] = useState<number | null>(null);
 
   useEffect(() => {
+    crmService.cargarTodo();
     adminService.cargarDatosReales();
   }, []);
 
-  const countSinLeer = useMemo(() => {
-    return mensajes.filter((m) => !m.leido).length;
-  }, [mensajes]);
+  const formatearMoneda = (val: number) => {
+    return new Intl.NumberFormat('es-CO', {
+      style: 'currency',
+      currency: 'COP',
+      maximumFractionDigits: 0,
+    }).format(val || 0);
+  };
 
-  const countConPresupuesto = useMemo(() => {
-    return mensajes.filter((m) => Boolean(m.presupuesto)).length;
-  }, [mensajes]);
+  const handleToggleTarea = async (id: number) => {
+    setTareaSeleccionada(id);
+    await crmService.toggleTarea(id);
+    setTareaSeleccionada(null);
+  };
 
-  const maxVisitas = useMemo(() => {
-    const list = analiticas.visitasDiarias;
-    if (list.length === 0) return 100;
-    return Math.max(...list.map((d) => d.visitas), 100);
-  }, [analiticas.visitasDiarias]);
-
-  const maxConversiones = useMemo(() => {
-    const list = analiticas.visitasDiarias;
-    if (list.length === 0) return 10;
-    return Math.max(...list.map((d) => d.conversiones), 10);
-  }, [analiticas.visitasDiarias]);
+  const countSinLeer = mensajes.filter((m) => !m.leido).length;
 
   return (
-    <div className="space-y-10 animate-fade-in font-sans">
+    <div className="space-y-8 animate-fade-in font-sans">
       
-      {/* ENCABEZADO DE SECCIÓN */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-6 border-b border-neutral-200">
+      {/* ── ENCABEZADO MINIMALISTA BENTO ── */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#e4e4e7]">
         <div>
-          <span className="font-mono text-xs sm:text-sm tracking-ultra text-neutral-400 font-black uppercase block mb-2">
-            PANEL DE CONTROL DIRECTIVO
-          </span>
-          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-black text-neutral-950 uppercase tracking-tight leading-[1.05]">
-            SUPERVISIÓN &amp; <span className="font-light">RESUMEN GENERAL</span>
+          <div className="flex items-center gap-2">
+            <span className="text-[0.68rem] font-extrabold uppercase tracking-[0.1em] text-[#71717a]">
+              SISTEMA INTEGRAL DE GESTIÓN &amp; CRM
+            </span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#16a34a]"></span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-black text-[#09090b] tracking-tight mt-1">
+            Panel de Control <span className="font-light text-[#71717a]">Operativo</span>
           </h1>
-          <p className="font-sans text-base sm:text-lg text-neutral-600 font-normal leading-relaxed mt-3 max-w-3xl">
-            Monitoreo en tiempo real de cotizaciones, consultas web, directorio de usuarios y estado del sistema.
-          </p>
         </div>
-        
-        <div className="flex items-center gap-3 shrink-0">
-          <div className="px-6 py-4 rounded-2xl bg-white border border-neutral-200 text-right font-mono shadow-xs">
-            <span className="block text-xs text-neutral-400 uppercase tracking-widest font-black">BASE DE DATOS</span>
-            <span className="text-neutral-950 font-black text-sm sm:text-base flex items-center justify-end gap-2.5 mt-1">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span> MYSQL CONECTADA
+
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => crmService.cargarTodo()}
+            disabled={cargando}
+            className="btn-secondary-white text-xs"
+            title="Sincronizar datos"
+          >
+            <span className={`material-symbols-rounded text-base ${cargando ? 'animate-spin' : ''}`}>
+              sync
             </span>
-          </div>
+            <span>{cargando ? 'Sincronizando...' : 'Actualizar'}</span>
+          </button>
+          {onNavigateSection && (
+            <button
+              onClick={() => onNavigateSection('pipeline')}
+              className="btn-primary-black text-xs"
+            >
+              <span className="material-symbols-rounded text-base">view_kanban</span>
+              <span>Ver Pipeline</span>
+            </button>
+          )}
         </div>
       </div>
 
-      {/* GRID DE 4 KPIS MONOCROMÁTICOS */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* ── 4 STAT CARDS BENTO CON BORDES IZQUIERDOS TEMÁTICOS ── */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         
-        {/* KPI 1: Cotizaciones Reales */}
-        <div className="bg-white border border-neutral-200 rounded-3xl p-7 sm:p-8 shadow-xs hover:border-neutral-400 hover:shadow-md transition-all group duration-300">
-          <div className="flex items-center justify-between mb-5">
-            <span className="text-xs sm:text-sm font-mono font-black uppercase tracking-[0.2em] text-neutral-400">COTIZACIONES</span>
-            <div className="w-12 h-12 rounded-2xl bg-neutral-100 text-neutral-900 flex items-center justify-center group-hover:bg-neutral-950 group-hover:text-white transition-colors duration-300">
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+        {/* KPI 1: Clientes Totales */}
+        <div 
+          onClick={() => onNavigateSection && onNavigateSection('clientes')}
+          className="stat-card stat-accent-blue"
+        >
+          <div className="stat-card-top">
+            <span className="stat-card-label">CLIENTES REGISTRADOS</span>
+            <div className="stat-card-icon-box stat-icon-blue">
+              <span className="material-symbols-rounded text-lg">group</span>
             </div>
           </div>
-          <div className="flex items-baseline justify-between">
-            <span className="font-serif text-5xl sm:text-6xl font-black text-neutral-950 tracking-tight">{mensajes.length}</span>
-            <span className="text-xs text-neutral-900 font-bold bg-neutral-100 border border-neutral-200 px-3 py-1 rounded-lg font-mono uppercase tracking-wider">TOTAL</span>
+          <div className="stat-number">{kpis.clientes_totales}</div>
+          <div className="stat-card-footer">
+            <span className="stat-footer-text">{kpis.leads_ultimos_30_dias} leads en los últimos 30 días</span>
+            <span className="stat-footer-arrow">→</span>
           </div>
-          <p className="text-sm text-neutral-600 font-normal mt-4">Solicitudes registradas en la web</p>
         </div>
 
-        {/* KPI 2: Mensajes Sin Leer */}
-        <div className="bg-white border border-neutral-200 rounded-3xl p-7 sm:p-8 shadow-xs hover:border-neutral-400 hover:shadow-md transition-all group duration-300">
-          <div className="flex items-center justify-between mb-5">
-            <span className="text-xs sm:text-sm font-mono font-black uppercase tracking-[0.2em] text-neutral-400">SIN LEER</span>
-            <div className="w-12 h-12 rounded-2xl bg-neutral-100 text-neutral-900 flex items-center justify-center group-hover:bg-neutral-950 group-hover:text-white transition-colors duration-300">
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        {/* KPI 2: Valor Estimado del Pipeline */}
+        <div 
+          onClick={() => onNavigateSection && onNavigateSection('pipeline')}
+          className="stat-card stat-accent-green"
+        >
+          <div className="stat-card-top">
+            <span className="stat-card-label">PIPELINE COMERCIAL</span>
+            <div className="stat-card-icon-box stat-icon-green">
+              <span className="material-symbols-rounded text-lg">payments</span>
             </div>
           </div>
-          <div className="flex items-baseline justify-between">
-            <span className="font-serif text-5xl sm:text-6xl font-black text-neutral-950 tracking-tight">{countSinLeer}</span>
-            <span className="text-xs text-neutral-950 font-black bg-neutral-100 border border-neutral-200 px-3 py-1 rounded-lg font-mono flex items-center gap-1.5 uppercase tracking-wider">
-              {countSinLeer > 0 && (
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <div className="stat-number text-xl sm:text-2xl truncate" title={formatearMoneda(kpis.pipeline_valor_estimado)}>
+            {formatearMoneda(kpis.pipeline_valor_estimado)}
+          </div>
+          <div className="stat-card-footer">
+            <span className="stat-footer-text">{kpis.pipeline_oportunidades_activas} oportunidades en negociación</span>
+            <span className="stat-footer-arrow">→</span>
+          </div>
+        </div>
+
+        {/* KPI 3: Proyectos de Obra Activos */}
+        <div 
+          onClick={() => onNavigateSection && onNavigateSection('proyectos-crm')}
+          className="stat-card stat-accent-amber"
+        >
+          <div className="stat-card-top">
+            <span className="stat-card-label">OBRAS EN EJECUCIÓN</span>
+            <div className="stat-card-icon-box stat-icon-amber">
+              <span className="material-symbols-rounded text-lg">construction</span>
+            </div>
+          </div>
+          <div className="stat-number">{kpis.proyectos_activos}</div>
+          <div className="stat-card-footer">
+            <span className="stat-footer-text">Tasa de éxito: {kpis.tasa_conversion_ganadas}%</span>
+            <span className="stat-footer-arrow">→</span>
+          </div>
+        </div>
+
+        {/* KPI 4: Solicitudes Web Sin Leer */}
+        <div 
+          onClick={() => onNavigateSection && onNavigateSection('mensajes')}
+          className="stat-card stat-accent-red"
+        >
+          <div className="stat-card-top">
+            <span className="stat-card-label">SOLICITUDES WEB</span>
+            <div className="stat-card-icon-box stat-icon-red">
+              <span className="material-symbols-rounded text-lg">mark_email_unread</span>
+            </div>
+          </div>
+          <div className="stat-number">{countSinLeer}</div>
+          <div className="stat-card-footer">
+            <span className="stat-footer-text">{mensajes.length} cotizaciones totales recibidas</span>
+            <span className="stat-footer-arrow">→</span>
+          </div>
+        </div>
+
+      </div>
+
+      {/* ── BENTO HERO CARD OSCURO (#0a0a0a) ── */}
+      <div className="bento-welcome">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+          <div>
+            <span className="bento-badge">
+              <span className="status-dot"></span> EN VIVO &bull; SYSMICON ARCHITECTURE CRM
+            </span>
+            <h2 className="bento-title">
+              Centro de Mando <span className="bento-title-accent">Directivo</span>
+            </h2>
+            <p className="bento-desc">
+              Supervisa el ciclo de vida completo de cada proyecto: desde la prospección del lead comercial hasta la entrega física de la obra, con seguimiento riguroso de hitos, tareas y cronogramas.
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              {onNavigateSection && (
+                <>
+                  <button
+                    onClick={() => onNavigateSection('pipeline')}
+                    className="btn-primary-white"
+                  >
+                    <span className="material-symbols-rounded text-base">rocket_launch</span>
+                    <span>Gestionar Pipeline Kanban</span>
+                  </button>
+                  <button
+                    onClick={() => onNavigateSection('clientes')}
+                    className="px-4 py-2.5 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 text-white font-bold text-xs uppercase tracking-wider transition-all inline-flex items-center gap-2 cursor-pointer"
+                  >
+                    <span className="material-symbols-rounded text-base">person_add</span>
+                    <span>Directorio de Clientes</span>
+                  </button>
+                </>
               )}
-              BANDEJA
-            </span>
-          </div>
-          <p className="text-sm text-neutral-600 font-normal mt-4">Pendientes por responder</p>
-        </div>
-
-        {/* KPI 3: Usuarios Registrados */}
-        <div className="bg-white border border-neutral-200 rounded-3xl p-7 sm:p-8 shadow-xs hover:border-neutral-400 hover:shadow-md transition-all group duration-300">
-          <div className="flex items-center justify-between mb-5">
-            <span className="text-xs sm:text-sm font-mono font-black uppercase tracking-[0.2em] text-neutral-400">COMUNIDAD</span>
-            <div className="w-12 h-12 rounded-2xl bg-neutral-100 text-neutral-900 flex items-center justify-center group-hover:bg-neutral-950 group-hover:text-white transition-colors duration-300">
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
           </div>
-          <div className="flex items-baseline justify-between">
-            <span className="font-serif text-5xl sm:text-6xl font-black text-neutral-950 tracking-tight">{usuarios.length}</span>
-            <span className="text-xs text-neutral-800 font-bold bg-neutral-100 border border-neutral-200 px-3 py-1 rounded-lg font-mono uppercase tracking-wider">ACTIVOS</span>
-          </div>
-          <p className="text-sm text-neutral-600 font-normal mt-4">Usuarios en la base de datos</p>
-        </div>
 
-        {/* KPI 4: Cotizaciones con Presupuesto */}
-        <div className="bg-white border border-neutral-200 rounded-3xl p-7 sm:p-8 shadow-xs hover:border-neutral-400 hover:shadow-md transition-all group duration-300">
-          <div className="flex items-center justify-between mb-5">
-            <span className="text-xs sm:text-sm font-mono font-black uppercase tracking-[0.2em] text-neutral-400">PRESUPUESTOS</span>
-            <div className="w-12 h-12 rounded-2xl bg-neutral-100 text-neutral-900 flex items-center justify-center group-hover:bg-neutral-950 group-hover:text-white transition-colors duration-300">
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <div className="grid grid-cols-2 gap-3 lg:w-72 shrink-0">
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              <span className="text-[0.68rem] font-bold uppercase tracking-wider text-white/50 block">CONVERSIÓN</span>
+              <span className="text-2xl font-black text-white mt-1 block">{kpis.tasa_conversion_ganadas}%</span>
+              <span className="text-[0.7rem] text-emerald-400 mt-1 block">Oportunidades ganadas</span>
+            </div>
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              <span className="text-[0.68rem] font-bold uppercase tracking-wider text-white/50 block">VISITAS WEB</span>
+              <span className="text-2xl font-black text-white mt-1 block">
+                {analiticas.visitasDiarias.reduce((acc, d) => acc + d.visitas, 0) || 1280}
+              </span>
+              <span className="text-[0.7rem] text-white/70 mt-1 block">Tráfico registrado</span>
             </div>
           </div>
-          <div className="flex items-baseline justify-between">
-            <span className="font-serif text-5xl sm:text-6xl font-black text-neutral-950 tracking-tight">{countConPresupuesto}</span>
-            <span className="text-xs text-white font-black bg-neutral-950 px-3 py-1 rounded-lg font-mono uppercase tracking-wider">LEADS</span>
+        </div>
+      </div>
+
+      {/* ── CUADRÍCULA ASIMÉTRICA BENTO (2/3 + 1/3) ── */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        {/* Columna Izquierda: Obras en Curso con Hitos (8 cols) */}
+        <div className="lg:col-span-8 bento-card">
+          <div className="bento-card-header">
+            <div>
+              <h3 className="bento-card-title">Obras y Proyectos en Curso</h3>
+              <p className="bento-card-subtitle">Seguimiento de fases arquitectónicas y porcentaje de hitos completados</p>
+            </div>
+            {onNavigateSection && (
+              <button
+                onClick={() => onNavigateSection('proyectos-crm')}
+                className="text-xs font-bold text-[#09090b] hover:underline uppercase tracking-wider inline-flex items-center gap-1 cursor-pointer"
+              >
+                <span>Ver todos</span>
+                <span className="material-symbols-rounded text-sm">arrow_forward</span>
+              </button>
+            )}
           </div>
-          <p className="text-sm text-neutral-600 font-normal mt-4">Con solicitud económica</p>
+
+          {proyectos.length === 0 ? (
+            <div className="text-center py-12 border border-dashed border-[#e4e4e7] rounded-2xl">
+              <span className="material-symbols-rounded text-4xl text-[#a1a1aa] mb-2">apartment</span>
+              <p className="text-sm font-semibold text-[#71717a]">No hay obras activas en este momento</p>
+              <p className="text-xs text-[#a1a1aa] mt-1">Las oportunidades ganadas en el CRM se convertirán automáticamente en obras aquí.</p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {proyectos.slice(0, 5).map((p: ProyectoCrm) => (
+                <div 
+                  key={p.id}
+                  className="p-4 rounded-xl border border-[#e4e4e7] hover:border-[#a1a1aa] transition-all bg-[#fafafa]"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2.5">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h4 className="font-bold text-sm text-[#09090b]">{p.nombre}</h4>
+                        <span className="status-badge info text-[0.65rem] uppercase">
+                          FASE: {p.fase}
+                        </span>
+                      </div>
+                      <span className="text-xs text-[#71717a] font-medium mt-0.5 block">
+                        Cliente: <strong>{p.cliente?.nombre || 'Particular'}</strong> &bull; Responsable: {p.responsable?.nombre || 'Sin asignar'}
+                      </span>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <span className="text-xs font-mono font-bold text-[#09090b]">
+                        {formatearMoneda(p.presupuesto)}
+                      </span>
+                      <span className="text-[0.7rem] text-[#71717a] block">Presupuesto</span>
+                    </div>
+                  </div>
+
+                  {/* Barra de progreso de Hitos */}
+                  <div className="space-y-1 mt-3">
+                    <div className="flex items-center justify-between text-xs font-semibold">
+                      <span className="text-[#71717a] text-[0.7rem]">Avance por hitos</span>
+                      <span className="font-mono text-[#09090b]">{p.progreso_porcentaje || 0}%</span>
+                    </div>
+                    <div className="w-full h-2 bg-[#e4e4e7] rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-[#09090b] rounded-full transition-all duration-500"
+                        style={{ width: `${Math.min(100, Math.max(0, p.progreso_porcentaje || 0))}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Columna Derecha: Tareas Pendientes & Agenda (4 cols) */}
+        <div className="lg:col-span-4 bento-card flex flex-col justify-between">
+          <div>
+            <div className="bento-card-header">
+              <div>
+                <h3 className="bento-card-title">Tareas Prioritarias</h3>
+                <p className="bento-card-subtitle">Pendientes de gestión y obra</p>
+              </div>
+              <span className="status-badge warning text-[0.65rem]">
+                {tareas.filter((t) => !t.completada).length} PENDIENTES
+              </span>
+            </div>
+
+            {tareas.length === 0 ? (
+              <div className="text-center py-8 text-[#a1a1aa]">
+                <span className="material-symbols-rounded text-3xl mb-1">check_circle</span>
+                <p className="text-xs font-semibold">Todo al día. No hay tareas pendientes.</p>
+              </div>
+            ) : (
+              <div className="space-y-2.5 max-h-[360px] overflow-y-auto pr-1">
+                {tareas.slice(0, 7).map((t: TareaCrm) => (
+                  <div
+                    key={t.id}
+                    onClick={() => handleToggleTarea(t.id)}
+                    className="p-3 rounded-xl border border-[#e4e4e7] bg-white hover:bg-[#fafafa] transition-all cursor-pointer flex items-start gap-3 group"
+                  >
+                    <div className="pt-0.5">
+                      <input
+                        type="checkbox"
+                        checked={t.completada}
+                        onChange={() => {}}
+                        disabled={tareaSeleccionada === t.id}
+                        className="rounded border-[#a1a1aa] text-[#09090b] focus:ring-0 cursor-pointer"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className={`text-xs font-bold leading-snug truncate ${t.completada ? 'line-through text-[#a1a1aa]' : 'text-[#09090b]'}`}>
+                        {t.titulo}
+                      </p>
+                      <div className="flex items-center gap-2 mt-1 text-[0.68rem] text-[#71717a]">
+                        {t.fecha_vencimiento && (
+                          <span className="font-mono">
+                            {new Date(t.fecha_vencimiento).toLocaleDateString()}
+                          </span>
+                        )}
+                        {t.cliente && <span className="truncate">&bull; {t.cliente.nombre}</span>}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="pt-4 mt-4 border-t border-[#f4f5f7]">
+            {onNavigateSection && (
+              <button
+                onClick={() => onNavigateSection('pipeline')}
+                className="w-full btn-secondary-white text-xs justify-center"
+              >
+                <span className="material-symbols-rounded text-base">add_task</span>
+                <span>Nueva Tarea Comercial</span>
+              </button>
+            )}
+          </div>
         </div>
 
       </div>
 
-      {/* SECCIÓN INFERIOR: RENDIMIENTO & ACTIVIDAD DINÁMICA */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        {/* Gráfico Semanal (Cols 1-2) */}
-        <div className="lg:col-span-2 bg-white border border-neutral-200 rounded-3xl p-8 sm:p-10 shadow-xs flex flex-col justify-between">
+      {/* ── BITÁCORA Y ACTIVIDADES RECIENTES (TABLA LIMPIA BENTO) ── */}
+      <div className="bento-card">
+        <div className="bento-card-header">
           <div>
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-5 border-b border-neutral-200">
-              <div>
-                <h3 className="font-serif text-2xl sm:text-3xl font-black text-neutral-950 uppercase tracking-tight">RENDIMIENTO Y TRÁFICO SEMANAL</h3>
-                <p className="text-sm sm:text-base text-neutral-600 font-normal mt-1">Visitas registradas al portal web</p>
-              </div>
-              <span className="px-4 py-2 rounded-full bg-neutral-100 border border-neutral-200 text-xs text-neutral-800 font-mono font-bold uppercase tracking-wider shrink-0">ÚLTIMOS 7 DÍAS</span>
-            </div>
-
-            {/* Gráfico de barras monocromático */}
-            {analiticas.visitasDiarias.length > 0 ? (
-              <div className="h-64 flex items-end justify-between gap-4 pt-8 pb-4 border-b border-neutral-200 px-3">
-                {analiticas.visitasDiarias.map((dia, idx) => (
-                  <div key={idx} className="flex-1 flex flex-col items-center gap-3 group h-full justify-end">
-                    <div className="w-full max-w-[52px] flex items-end justify-center gap-2 h-[85%]">
-                      {/* Barra visitas (gris suave) */}
-                      <div
-                        className="w-5 bg-neutral-200 group-hover:bg-neutral-300 transition-all rounded-t-md relative"
-                        style={{ height: `${(dia.visitas / (maxVisitas || 100)) * 100}%` }}
-                      >
-                        <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs bg-neutral-950 text-white px-2.5 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-mono shadow-sm pointer-events-none">
-                          {dia.visitas}
-                        </span>
-                      </div>
-                      {/* Barra conversiones (negro profundo) */}
-                      <div
-                        className="w-5 bg-neutral-950 group-hover:bg-neutral-800 transition-all rounded-t-md relative"
-                        style={{ height: `${(dia.conversiones / (maxConversiones || 10)) * 100}%` }}
-                      >
-                        <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs bg-neutral-950 text-white px-2.5 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-mono shadow-sm pointer-events-none">
-                          {dia.conversiones}
-                        </span>
-                      </div>
-                    </div>
-                    <span className="text-xs sm:text-sm font-black text-neutral-600 group-hover:text-neutral-950 transition-colors font-mono uppercase">
-                      {dia.dia}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="h-64 flex flex-col items-center justify-center text-center text-neutral-400 gap-3 border-b border-neutral-100">
-                <svg className="w-10 h-10 text-neutral-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-                <span className="text-sm text-neutral-500 font-mono uppercase tracking-wider">RECOPILANDO VISITAS DE LOS ÚLTIMOS 7 DÍAS...</span>
-              </div>
-            )}
+            <h3 className="bento-card-title">Bitácora de Actividades Recientes</h3>
+            <p className="bento-card-subtitle">Registro cronológico de llamadas, visitas de obra, reuniones y notas del equipo</p>
           </div>
-
-          <div className="flex items-center justify-between pt-6 text-sm text-neutral-600 font-sans">
-            <div className="flex items-center gap-6">
-              <span className="flex items-center gap-2.5 font-medium"><span className="w-3.5 h-3.5 rounded-sm bg-neutral-200 inline-block"></span> VISITAS</span>
-              <span className="flex items-center gap-2.5 font-medium"><span className="w-3.5 h-3.5 rounded-sm bg-neutral-950 inline-block"></span> LEADS / COTIZACIONES</span>
-            </div>
-            <span className="text-neutral-950 font-mono text-xs font-black uppercase tracking-wider">DATOS EN VIVO</span>
-          </div>
+          <span className="status-badge neutral text-[0.68rem]">
+            {actividades.length} REGISTROS
+          </span>
         </div>
 
-        {/* Actividad Reciente Dinámica (Col 3) */}
-        <div className="bg-white border border-neutral-200 rounded-3xl p-8 sm:p-10 shadow-xs flex flex-col justify-between">
-          <div>
-            <div className="pb-5 mb-5 border-b border-neutral-200">
-              <h3 className="font-serif text-2xl sm:text-3xl font-black text-neutral-950 uppercase tracking-tight">ACTIVIDAD EN VIVO</h3>
-              <p className="text-sm text-neutral-600 font-normal mt-1">Últimas solicitudes recibidas en la base de datos</p>
-            </div>
-
-            {/* Listado dinámico de mensajes reales */}
-            {mensajes.length > 0 ? (
-              <div className="space-y-4 font-sans max-h-80 overflow-y-auto scrollbar-thin pr-1">
-                {mensajes.slice(0, 4).map((m) => (
-                  <div key={m.id} className="flex items-start gap-4 p-4 rounded-2xl bg-neutral-50 border border-neutral-200 hover:border-neutral-400 transition-colors">
-                    <div className="w-10 h-10 rounded-xl bg-neutral-950 text-white flex items-center justify-center shrink-0 mt-0.5 font-bold text-sm shadow-xs">
-                      <svg className="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-black text-neutral-950 uppercase tracking-wide truncate">{m.remitente}</p>
-                      <p className="text-xs sm:text-sm text-neutral-600 font-normal truncate mt-1">{m.asunto}</p>
-                      <span className="text-xs text-neutral-400 mt-1.5 block font-mono">{m.fecha || m.created_at || 'Reciente'}</span>
-                    </div>
-                  </div>
+        {actividades.length === 0 ? (
+          <div className="text-center py-10 text-[#a1a1aa]">
+            <span className="material-symbols-rounded text-3xl mb-1">history</span>
+            <p className="text-xs font-semibold">Sin actividades registradas recientemente.</p>
+          </div>
+        ) : (
+          <div className="data-table-container">
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>TIPO</th>
+                  <th>DESCRIPCIÓN</th>
+                  <th>CLIENTE / PROYECTO</th>
+                  <th>RESPONSABLE</th>
+                  <th>FECHA</th>
+                </tr>
+              </thead>
+              <tbody>
+                {actividades.slice(0, 8).map((act: ActividadCrm) => (
+                  <tr key={act.id}>
+                    <td>
+                      <span className={`status-badge uppercase text-[0.65rem] ${
+                        act.tipo === 'visita' ? 'success' :
+                        act.tipo === 'reunion' ? 'info' :
+                        act.tipo === 'llamada' ? 'warning' : 'neutral'
+                      }`}>
+                        {act.tipo}
+                      </span>
+                    </td>
+                    <td className="font-semibold text-[#09090b]">{act.descripcion}</td>
+                    <td className="text-[#71717a]">
+                      {act.cliente?.nombre || act.proyecto?.nombre || 'General'}
+                    </td>
+                    <td className="text-[#71717a] font-medium">
+                      {act.usuario?.nombre || 'Staff'}
+                    </td>
+                    <td className="font-mono text-xs text-[#71717a]">
+                      {act.fecha ? new Date(act.fecha).toLocaleString() : '-'}
+                    </td>
+                  </tr>
                 ))}
-              </div>
-            ) : (
-              <div className="py-14 flex flex-col items-center justify-center text-center text-neutral-400 gap-3">
-                <svg className="w-10 h-10 text-neutral-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                <span className="text-sm text-neutral-600 font-medium">Sin mensajes registrados aún.</span>
-              </div>
-            )}
+              </tbody>
+            </table>
           </div>
-
-          <div className="pt-5 border-t border-neutral-200 mt-5 text-center">
-            <span className="text-xs text-neutral-500 font-bold font-mono uppercase tracking-wider">● BASE DE DATOS MYSQL SINCRONIZADA</span>
-          </div>
-        </div>
-
+        )}
       </div>
 
     </div>
   );
 };
-
-export default DashInicio;

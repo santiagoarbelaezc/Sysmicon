@@ -145,6 +145,26 @@ export const DashUsuarios: React.FC = () => {
             ARQUITECTOS
           </button>
           <button
+            onClick={() => setFiltroRol('comercial')}
+            className={`px-5 py-3 rounded-xl text-xs sm:text-sm uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap ${
+              filtroRol === 'comercial'
+                ? 'bg-neutral-950 text-white font-black shadow-xs'
+                : 'bg-neutral-100 text-neutral-700 hover:text-neutral-950 hover:bg-neutral-200/80 font-bold'
+            }`}
+          >
+            COMERCIALES
+          </button>
+          <button
+            onClick={() => setFiltroRol('admin')}
+            className={`px-5 py-3 rounded-xl text-xs sm:text-sm uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap ${
+              filtroRol === 'admin'
+                ? 'bg-neutral-950 text-white font-black shadow-xs'
+                : 'bg-neutral-100 text-neutral-700 hover:text-neutral-950 hover:bg-neutral-200/80 font-bold'
+            }`}
+          >
+            ADMINS
+          </button>
+          <button
             onClick={() => setFiltroRol('inversionista')}
             className={`px-5 py-3 rounded-xl text-xs sm:text-sm uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap ${
               filtroRol === 'inversionista'

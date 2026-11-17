@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { adminService, useAdminService, MensajeAdmin } from '../../../../services/admin.service';
+import { crmService } from '../../../../services/crm.service';
 
 export const DashMensajes: React.FC = () => {
   const { mensajes } = useAdminService();
@@ -93,6 +94,17 @@ export const DashMensajes: React.FC = () => {
       setNotificacionTexto(`Mensaje de "${m.remitente}" eliminado con éxito.`);
       setTimeout(() => setNotificacionTexto(''), 3000);
     }
+  };
+
+  const handleConvertirLead = async (m: MensajeAdmin) => {
+    const exito = await crmService.convertirMensajeEnLead(m.id);
+    if (exito) {
+      setNotificacionTexto(`¡Mensaje convertido en Lead y Oportunidad CRM para ${m.remitente}!`);
+      adminService.marcarMensajeLeido(m.id);
+    } else {
+      setNotificacionTexto('No fue posible convertir el mensaje en lead.');
+    }
+    setTimeout(() => setNotificacionTexto(''), 4000);
   };
 
   const formatearFechaCorta = (fecha?: string): string => {
@@ -378,6 +390,15 @@ export const DashMensajes: React.FC = () => {
 
                   {/* Botones de Acción */}
                   <div className="flex items-center gap-2.5">
+                    <button
+                      onClick={() => handleConvertirLead(mensajeSeleccionado)}
+                      title="Convertir esta solicitud web en un Lead y Oportunidad del CRM"
+                      className="px-3.5 py-2 rounded-xl bg-neutral-950 text-white hover:bg-neutral-800 text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors cursor-pointer inline-flex items-center gap-1.5 shadow-xs"
+                    >
+                      <span className="material-symbols-rounded text-sm">rocket_launch</span>
+                      <span>Convertir en Lead CRM</span>
+                    </button>
+
                     <button
                       onClick={() => alternarLeido(mensajeSeleccionado)}
                       title={mensajeSeleccionado.leido ? 'Marcar como no leído' : 'Marcar como leído'}

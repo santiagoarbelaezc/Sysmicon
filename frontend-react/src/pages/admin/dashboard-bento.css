@@ -1,0 +1,536 @@
+/* ==========================================================================
+   SYSMICON - DASHBOARD BENTO GRID & DARK MINIMAL DESIGN SYSTEM
+   Basado en la Guía de Estilo Oficial (guia_estilo_dashboard_bento.md)
+   ========================================================================== */
+
+.admin-dashboard-bento {
+  /* ── Superficies y Fondos ── */
+  --dash-dark-surface: #0a0a0a;
+  --dash-dark-surface-2: #141416;
+  --dash-bg-canvas: #f4f5f7;
+  --dash-card-bg: #ffffff;
+
+  /* ── Bordes y Separadores ── */
+  --dash-dark-border: #1a1a1a;
+  --dash-dark-border-subtle: #27272a;
+  --dash-card-border: #e4e4e7;
+  --dash-card-border-alt: #e2e8f0;
+
+  /* ── Tipografía y Textos ── */
+  --dash-text-dark: #09090b;
+  --dash-text-muted: #71717a;
+  --dash-text-light: #ffffff;
+  --dash-text-subtle: #a1a1aa;
+
+  /* ── Colores de Acento y Estados ── */
+  --dash-accent-dark: #09090b;
+  --dash-accent-red: #dc2626;
+  --dash-accent-red-glow: rgba(220, 38, 38, 0.45);
+  --dash-accent-green: #16a34a;
+  --dash-accent-green-bg: #dcfce7;
+  --dash-accent-amber: #f59e0b;
+  --dash-accent-amber-bg: #fef3c7;
+  --dash-accent-blue: #2563eb;
+  --dash-accent-blue-bg: #dbeafe;
+  --dash-accent-purple: #7c3aed;
+  --dash-accent-purple-bg: #ede9fe;
+
+  /* ── Dimensiones y Geometría ── */
+  --sidebar-w: 240px;
+  --sidebar-w-collapsed: 64px;
+  --header-h: 74px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 18px;
+  --radius-full: 9999px;
+
+  /* ── Animaciones y Curvas ── */
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--dash-bg-canvas);
+  color: var(--dash-text-dark);
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR OSCURA (#0a0a0a) ── */
+.bento-sidebar {
+  background-color: var(--dash-dark-surface);
+  border-right: 1.5px solid var(--dash-dark-border);
+  color: var(--dash-text-light);
+  transition: width var(--transition);
+}
+
+.bento-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  color: var(--dash-text-subtle);
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  transition: all var(--transition);
+  cursor: pointer;
+  border: 1px solid transparent;
+  width: 100%;
+  text-align: left;
+}
+
+.bento-sidebar-item:hover {
+  background: var(--dash-dark-surface-2);
+  color: var(--dash-text-light);
+  border-color: var(--dash-dark-border-subtle);
+}
+
+.bento-sidebar-item.active {
+  background: #ffffff;
+  color: #09090b;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+}
+
+.bento-sidebar-item.active .material-symbols-rounded {
+  color: #09090b;
+}
+
+/* ── HEADER STICKY (74px, Blanco, Borde 1.5px) ── */
+.bento-header {
+  height: var(--header-h);
+  background: #ffffff;
+  border-bottom: 1.5px solid var(--dash-card-border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+}
+
+/* ── STAT CARDS (Bento KPIs) ── */
+.stat-card {
+  background: #ffffff;
+  border: 1.5px solid var(--dash-card-border);
+  border-left: 4px solid var(--dash-accent-dark);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 130px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.stat-card:hover {
+  box-shadow: 0 8px 24px rgba(9, 9, 11, 0.06);
+  transform: translateY(-2px);
+}
+
+.stat-card.stat-accent-red { border-left-color: var(--dash-accent-red); }
+.stat-card.stat-accent-green { border-left-color: var(--dash-accent-green); }
+.stat-card.stat-accent-amber { border-left-color: var(--dash-accent-amber); }
+.stat-card.stat-accent-blue { border-left-color: var(--dash-accent-blue); }
+.stat-card.stat-accent-purple { border-left-color: var(--dash-accent-purple); }
+
+.stat-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-card-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--dash-text-muted);
+}
+
+.stat-card-icon-box {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: #f4f5f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dash-text-dark);
+}
+
+.stat-card-icon-box.stat-icon-red { background: rgba(220, 38, 38, 0.1); color: var(--dash-accent-red); }
+.stat-card-icon-box.stat-icon-green { background: rgba(22, 163, 74, 0.1); color: var(--dash-accent-green); }
+.stat-card-icon-box.stat-icon-amber { background: rgba(245, 158, 11, 0.1); color: var(--dash-accent-amber); }
+.stat-card-icon-box.stat-icon-blue { background: rgba(37, 99, 235, 0.1); color: var(--dash-accent-blue); }
+.stat-card-icon-box.stat-icon-purple { background: rgba(124, 58, 237, 0.1); color: var(--dash-accent-purple); }
+
+.stat-number {
+  font-size: 2.1rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--dash-text-dark);
+  margin: 10px 0 4px 0;
+  line-height: 1;
+}
+
+.stat-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #f4f5f7;
+}
+
+.stat-footer-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--dash-text-muted);
+}
+
+.stat-footer-arrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--dash-text-dark);
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover .stat-footer-arrow {
+  transform: translateX(3px);
+}
+
+/* ── BENTO HERO CARD (Fondo Oscuro con Gradiente) ── */
+.bento-welcome {
+  background: var(--dash-dark-surface);
+  border-radius: var(--radius-xl);
+  padding: 32px 36px;
+  border: 1.5px solid var(--dash-dark-border);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.bento-welcome::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.bento-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #e4e4e7;
+  letter-spacing: 0.06em;
+}
+
+.bento-title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  margin: 14px 0 8px 0;
+}
+
+.bento-title-accent {
+  background: linear-gradient(135deg, #ffffff 30%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bento-desc {
+  font-size: 0.88rem;
+  color: var(--dash-text-subtle);
+  max-width: 600px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.btn-primary-white {
+  background: #ffffff;
+  color: #09090b;
+  padding: 10px 22px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary-white:hover {
+  background: #f4f4f5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
+}
+
+/* ── STATUS DOT ANIMADO ── */
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--dash-accent-green);
+  box-shadow: 0 0 8px rgba(22, 163, 74, 0.6);
+  animation: pulse-dot 2s infinite ease-in-out;
+  display: inline-block;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.85); }
+}
+
+/* ── TARJETAS Y CONTENEDORES BENTO CLAROS ── */
+.bento-card {
+  background: #ffffff;
+  border: 1.5px solid var(--dash-card-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: all 0.2s ease;
+}
+
+.bento-card:hover {
+  border-color: #d4d4d8;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.bento-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.bento-card-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--dash-text-dark);
+}
+
+.bento-card-subtitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--dash-text-muted);
+  margin-top: 2px;
+}
+
+/* ── BOTÓN NEGRO DE ACCIÓN ── */
+.btn-primary-black {
+  background: #000000;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary-black:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary-white {
+  background: #ffffff;
+  color: #09090b;
+  padding: 9px 18px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 0.8rem;
+  border: 1.5px solid var(--dash-card-border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-secondary-white:hover {
+  background: #f4f5f7;
+  border-color: #d4d4d8;
+}
+
+/* ── INPUT MINIMALISTA ── */
+.input-minimal-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-minimal-wrapper .input-icon {
+  position: absolute;
+  left: 14px;
+  color: #71717a;
+  font-size: 20px;
+  pointer-events: none;
+}
+
+.input-minimal {
+  width: 100%;
+  padding: 10px 16px 10px 42px;
+  background: #f9f9f9;
+  border: 1px solid #eeeeee;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  outline: none;
+  transition: all 0.2s ease;
+  color: var(--dash-text-dark);
+}
+
+.input-minimal:focus {
+  background: #ffffff;
+  border-color: #000000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.04);
+}
+
+/* ── TABLA DE DATOS LIMPIA CON BADGES SEMÁNTICOS ── */
+.data-table-container {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--dash-card-border);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.data-table th {
+  background: #fcfcfd;
+  padding: 12px 16px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--dash-text-muted);
+  border-bottom: 1.5px solid var(--dash-card-border);
+}
+
+.data-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f4f5f7;
+  color: var(--dash-text-dark);
+  font-size: 0.82rem;
+}
+
+.data-table tr:hover td {
+  background: #fafafa;
+}
+
+/* ── BADGES SEMÁNTICOS ── */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.status-badge.success { background: #dcfce7; color: #166534; }
+.status-badge.warning { background: #fef3c7; color: #92400e; }
+.status-badge.danger  { background: #fee2e2; color: #991b1b; }
+.status-badge.info    { background: #dbeafe; color: #1e40af; }
+.status-badge.neutral { background: #f4f4f5; color: #3f3f46; }
+.status-badge.purple  { background: #ede9fe; color: #5b21b6; }
+
+/* ── KANBAN PIPELINE COLUMNS ── */
+.kanban-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+
+.kanban-column {
+  background: #f8fafc;
+  border: 1.5px solid var(--dash-card-border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 480px;
+}
+
+.kanban-column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--dash-card-border);
+}
+
+.kanban-column-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--dash-text-dark);
+}
+
+.kanban-column-count {
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: #ffffff;
+  border: 1px solid var(--dash-card-border);
+  padding: 2px 7px;
+  border-radius: 9999px;
+  color: var(--dash-text-muted);
+}
+
+.kanban-card {
+  background: #ffffff;
+  border: 1.5px solid var(--dash-card-border);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+  cursor: grab;
+}
+
+.kanban-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  border-color: #cbd5e1;
+}
+
+/* Material symbol styling within bento */
+.material-symbols-rounded {
+  font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
